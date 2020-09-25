@@ -58,8 +58,6 @@ display(halftime_musicians.head())
       <th>combined_pts</th>
       <th>difference_pts</th>
     </tr>
-  </thead>
-  <tbody>
     <tr>
       <th>0</th>
       <td>2018-02-04</td>
