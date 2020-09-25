@@ -417,8 +417,7 @@ display(super_bowls[super_bowls['combined_pts'] > 70])
 display(super_bowls[super_bowls['combined_pts'] < 25])
 ```
 
-
-![png](notebook_files/notebook_5_0.png)
+<img src="{{ site.url }}{{ site.baseurl }}/images/TV, Halftime Shows, and the Big Game/graph1.png" alt="Super Bowls with the highest and lowest combined scores">
 
 
 
@@ -636,7 +635,7 @@ display(super_bowls[super_bowls['difference_pts'] >= 35])
 ```
 
 
-![png](notebook_files/notebook_7_0.png)
+<img src="{{ site.url }}{{ site.baseurl }}/images/TV, Halftime Shows, and the Big Game/graph2.png" alt="closest game(s) and biggest blowouts">
 
 
 
@@ -858,7 +857,7 @@ sns.regplot(x='difference_pts', y='share_household', data=games_tv)
 
 
 
-![png](notebook_files/notebook_9_1.png)
+<img src="{{ site.url }}{{ site.baseurl }}/images/TV, Halftime Shows, and the Big Game/graph3.png" alt="scatter plot with a linear regression model fit">
 
 
 ## 6. Viewership and the ad industry over time
@@ -888,8 +887,9 @@ plt.tight_layout()
 ```
 
 
-![png](notebook_files/notebook_11_0.png)
-
+<img src="{{ site.url }}{{ site.baseurl }}/images/TV, Halftime Shows, and the Big Game/graph4.png">
+<img src="{{ site.url }}{{ site.baseurl }}/images/TV, Halftime Shows, and the Big Game/graph5.png">
+<img src="{{ site.url }}{{ site.baseurl }}/images/TV, Halftime Shows, and the Big Game/graph6.png">
 
 ## 7. Halftime shows weren't always this great
 <p>We can see viewers increased before ad costs did. Maybe the networks weren't very data savvy and were slow to react? Makes sense since DataCamp didn't exist back then.</p>
@@ -1409,8 +1409,7 @@ display(no_bands.head(15))
 ```
 
 
-![png](notebook_files/notebook_17_0.png)
-
+<img src="{{ site.url }}{{ site.baseurl }}/images/TV, Halftime Shows, and the Big Game/graph9.png" alt="histogram of number of songs per performance">
 
 
 <div>
