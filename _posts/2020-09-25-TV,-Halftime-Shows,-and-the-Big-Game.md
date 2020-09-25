@@ -186,7 +186,7 @@ display(halftime_musicians.head())
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -282,7 +282,7 @@ display(halftime_musicians.head())
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -422,7 +422,7 @@ display(super_bowls[super_bowls['combined_pts'] < 25])
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -509,7 +509,7 @@ display(super_bowls[super_bowls['combined_pts'] < 25])
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -640,7 +640,7 @@ display(super_bowls[super_bowls['difference_pts'] >= 35])
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -706,7 +706,7 @@ display(super_bowls[super_bowls['difference_pts'] >= 35])
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -909,7 +909,7 @@ halftime_musicians[halftime_musicians.super_bowl <= 27]
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1280,7 +1280,7 @@ halftime_appearances[halftime_appearances.super_bowl > 1]
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1412,7 +1412,7 @@ display(no_bands.head(15))
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
