@@ -162,8 +162,6 @@ display(halftime_musicians.head())
       <td>John Fox</td>
       <td>51</td>
       <td>35</td>
-    </tr>
-  </tbody>
 </table>
 </div>
 
@@ -171,21 +169,6 @@ display(halftime_musicians.head())
 
 <div style="overflow-x:auto;">
   <table>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
       <th></th>
       <th>super_bowl</th>
       <th>network</th>
@@ -197,8 +180,6 @@ display(halftime_musicians.head())
       <th>share_18_49</th>
       <th>ad_cost</th>
     </tr>
-  </thead>
-  <tbody>
     <tr>
       <th>0</th>
       <td>52</td>
@@ -258,8 +239,6 @@ display(halftime_musicians.head())
       <td>39.3</td>
       <td>77.0</td>
       <td>4000000</td>
-    </tr>
-  </tbody>
 </table>
 </div>
 
@@ -267,28 +246,11 @@ display(halftime_musicians.head())
 
 <div style="overflow-x:auto;">
   <table>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
       <th></th>
       <th>super_bowl</th>
       <th>musician</th>
       <th>num_songs</th>
     </tr>
-  </thead>
-  <tbody>
     <tr>
       <th>0</th>
       <td>52</td>
@@ -318,8 +280,6 @@ display(halftime_musicians.head())
       <td>50</td>
       <td>Beyoncé</td>
       <td>3.0</td>
-    </tr>
-  </tbody>
 </table>
 </div>
 
@@ -406,21 +366,6 @@ display(super_bowls[super_bowls['combined_pts'] < 25])
 
 <div style="overflow-x:auto;">
   <table>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
       <th></th>
       <th>date</th>
       <th>super_bowl</th>
@@ -441,8 +386,6 @@ display(super_bowls[super_bowls['combined_pts'] < 25])
       <th>combined_pts</th>
       <th>difference_pts</th>
     </tr>
-  </thead>
-  <tbody>
     <tr>
       <th>0</th>
       <td>2018-02-04</td>
@@ -484,8 +427,6 @@ display(super_bowls[super_bowls['combined_pts'] < 25])
       <td>Bobby Ross</td>
       <td>75</td>
       <td>23</td>
-    </tr>
-  </tbody>
 </table>
 </div>
 
@@ -493,21 +434,6 @@ display(super_bowls[super_bowls['combined_pts'] < 25])
 
 <div style="overflow-x:auto;">
   <table>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
       <th></th>
       <th>date</th>
       <th>super_bowl</th>
@@ -528,8 +454,6 @@ display(super_bowls[super_bowls['combined_pts'] < 25])
       <th>combined_pts</th>
       <th>difference_pts</th>
     </tr>
-  </thead>
-  <tbody>
     <tr>
       <th>43</th>
       <td>1975-01-12</td>
@@ -592,8 +516,6 @@ display(super_bowls[super_bowls['combined_pts'] < 25])
       <td>Don Shula</td>
       <td>23</td>
       <td>9</td>
-    </tr>
-  </tbody>
 </table>
 </div>
 
@@ -623,22 +545,6 @@ display(super_bowls[super_bowls['difference_pts'] >= 35])
 
 
 <div style="overflow-x:auto;">
-  <table>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
       <th></th>
       <th>date</th>
       <th>super_bowl</th>
@@ -659,8 +565,6 @@ display(super_bowls[super_bowls['difference_pts'] >= 35])
       <th>combined_pts</th>
       <th>difference_pts</th>
     </tr>
-  </thead>
-  <tbody>
     <tr>
       <th>27</th>
       <td>1991-01-27</td>
@@ -681,8 +585,6 @@ display(super_bowls[super_bowls['difference_pts'] >= 35])
       <td>Marv Levy</td>
       <td>39</td>
       <td>1</td>
-    </tr>
-  </tbody>
 </table>
 </div>
 
@@ -690,22 +592,7 @@ display(super_bowls[super_bowls['difference_pts'] >= 35])
 
 <div style="overflow-x:auto;">
   <table>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
+    <th></th>
       <th>date</th>
       <th>super_bowl</th>
       <th>venue</th>
@@ -725,8 +612,6 @@ display(super_bowls[super_bowls['difference_pts'] >= 35])
       <th>combined_pts</th>
       <th>difference_pts</th>
     </tr>
-  </thead>
-  <tbody>
     <tr>
       <th>4</th>
       <td>2014-02-02</td>
@@ -810,8 +695,6 @@ display(super_bowls[super_bowls['difference_pts'] >= 35])
       <td>Raymond Berry</td>
       <td>56</td>
       <td>36</td>
-    </tr>
-  </tbody>
 </table>
 </div>
 
@@ -893,28 +776,11 @@ halftime_musicians[halftime_musicians.super_bowl <= 27]
 
 <div style="overflow-x:auto;">
   <table>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
       <th></th>
       <th>super_bowl</th>
       <th>musician</th>
       <th>num_songs</th>
     </tr>
-  </thead>
-  <tbody>
     <tr>
       <th>80</th>
       <td>27</td>
@@ -1238,8 +1104,6 @@ halftime_musicians[halftime_musicians.super_bowl <= 27]
       <td>1</td>
       <td>Al Hirt</td>
       <td>NaN</td>
-    </tr>
-  </tbody>
 </table>
 </div>
 
@@ -1264,27 +1128,10 @@ halftime_appearances[halftime_appearances.super_bowl > 1]
 
 <div style="overflow-x:auto;">
   <table>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
       <th></th>
       <th>musician</th>
       <th>super_bowl</th>
     </tr>
-  </thead>
-  <tbody>
     <tr>
       <th>28</th>
       <td>Grambling State University Tiger Marching Band</td>
@@ -1354,8 +1201,6 @@ halftime_appearances[halftime_appearances.super_bowl > 1]
       <th>44</th>
       <td>Los Angeles Unified School District All City H...</td>
       <td>2</td>
-    </tr>
-  </tbody>
 </table>
 </div>
 
@@ -1395,28 +1240,11 @@ display(no_bands.head(15))
 
 <div style="overflow-x:auto;">
   <table>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
       <th></th>
       <th>super_bowl</th>
       <th>musician</th>
       <th>num_songs</th>
     </tr>
-  </thead>
-  <tbody>
     <tr>
       <th>0</th>
       <td>52</td>
@@ -1506,8 +1334,6 @@ display(no_bands.head(15))
       <td>39</td>
       <td>Paul McCartney</td>
       <td>4.0</td>
-    </tr>
-  </tbody>
 </table>
 </div>
 
