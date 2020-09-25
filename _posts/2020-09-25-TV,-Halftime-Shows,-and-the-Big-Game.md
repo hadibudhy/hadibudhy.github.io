@@ -35,8 +35,9 @@ display(tv.head())
 display(halftime_musicians.head())
 ```
 
-<div class="p-Widget jp-RenderedHTMLCommon jp-RenderedHTML jp-mod-trusted jp-OutputArea-output" data-mime-type="text/html">
-<style scoped="">
+
+<div style="overflow-x:auto;">
+  <table>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -185,8 +186,8 @@ display(halftime_musicians.head())
 
 
 
-<div>
-<style scoped>
+<div style="overflow-x:auto;">
+  <table>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -281,8 +282,8 @@ display(halftime_musicians.head())
 
 
 
-<div>
-<style scoped>
+<div style="overflow-x:auto;">
+  <table>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -420,8 +421,8 @@ display(super_bowls[super_bowls['combined_pts'] < 25])
 
 
 
-<div>
-<style scoped>
+<div style="overflow-x:auto;">
+  <table>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -507,8 +508,8 @@ display(super_bowls[super_bowls['combined_pts'] < 25])
 
 
 
-<div>
-<style scoped>
+<div style="overflow-x:auto;">
+  <table>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -638,8 +639,8 @@ display(super_bowls[super_bowls['difference_pts'] >= 35])
 
 
 
-<div>
-<style scoped>
+<div style="overflow-x:auto;">
+  <table>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -704,8 +705,8 @@ display(super_bowls[super_bowls['difference_pts'] >= 35])
 
 
 
-<div>
-<style scoped>
+<div style="overflow-x:auto;">
+  <table>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -907,8 +908,8 @@ halftime_musicians[halftime_musicians.super_bowl <= 27]
 
 
 
-<div>
-<style scoped>
+<div style="overflow-x:auto;">
+  <table>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -1278,8 +1279,8 @@ halftime_appearances[halftime_appearances.super_bowl > 1]
 
 
 
-<div>
-<style scoped>
+<div style="overflow-x:auto;">
+  <table>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -1409,8 +1410,8 @@ display(no_bands.head(15))
 <img src="{{ site.url }}{{ site.baseurl }}/images/TV, Halftime Shows, and the Big Game/graph9.png" alt="histogram of number of songs per performance">
 
 
-<div>
-<style scoped>
+<div style="overflow-x:auto;">
+  <table>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
