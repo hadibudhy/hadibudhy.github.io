@@ -888,8 +888,6 @@ plt.tight_layout()
 
 
 <img src="{{ site.url }}{{ site.baseurl }}/images/TV, Halftime Shows, and the Big Game/graph4.png">
-<img src="{{ site.url }}{{ site.baseurl }}/images/TV, Halftime Shows, and the Big Game/graph5.png">
-<img src="{{ site.url }}{{ site.baseurl }}/images/TV, Halftime Shows, and the Big Game/graph6.png">
 
 ## 7. Halftime shows weren't always this great
 <p>We can see viewers increased before ad costs did. Maybe the networks weren't very data savvy and were slow to react? Makes sense since DataCamp didn't exist back then.</p>
