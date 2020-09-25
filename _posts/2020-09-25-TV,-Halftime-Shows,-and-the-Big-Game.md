@@ -35,9 +35,8 @@ display(tv.head())
 display(halftime_musicians.head())
 ```
 
-
-<div>
-<style scoped>
+<div class="p-Widget jp-RenderedHTMLCommon jp-RenderedHTML jp-mod-trusted jp-OutputArea-output" data-mime-type="text/html">
+<style scoped="">
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -50,7 +49,7 @@ display(halftime_musicians.head())
         text-align: right;
     }
 </style>
-<table border="3" class="dataframe">
+<table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
