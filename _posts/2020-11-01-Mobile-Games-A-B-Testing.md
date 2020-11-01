@@ -212,7 +212,7 @@ ax.set_xlabel('Mean 1-Day Retention');
 ```
 
 
-<img src="{{ site.url }}{{ site.baseurl }}/images/2020-11-01-Mobile-Games-A-B-Testing/output_11_0.png>
+<img src="{{ site.url }}{{ site.baseurl }}/images/2020-11-01-Mobile-Games-A-B-Testing/output_11_0.png">
 
 
 ## 7. Zooming in on the difference
@@ -232,7 +232,7 @@ ax.set_title('Bootstrap % Difference in 1-Day Retention Means');
 ```
 
 
-<img src="{{ site.url }}{{ site.baseurl }}/images/2020-11-01-Mobile-Games-A-B-Testing/output_13_0.png>
+<img src="{{ site.url }}{{ site.baseurl }}/images/2020-11-01-Mobile-Games-A-B-Testing/output_13_0.png">
 
 
 ## 8. The probability of a difference
@@ -316,7 +316,7 @@ prob = (boot_7d['diff'] > 0).mean()
 
 
 
-<img src="{{ site.url }}{{ site.baseurl }}/images/2020-11-01-Mobile-Games-A-B-Testing/output_19_1.png>
+<img src="{{ site.url }}{{ site.baseurl }}/images/2020-11-01-Mobile-Games-A-B-Testing/output_19_1.png">
 
 
 ## 11.  The conclusion
