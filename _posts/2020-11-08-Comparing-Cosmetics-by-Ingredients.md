@@ -333,7 +333,7 @@ plot.add_tools(hover)
 ```python
 # Plot the map
 show(plot)
-{% include /cosmetics-bokeh.html %}
+
 ```
 
 
@@ -343,7 +343,7 @@ show(plot)
 
 
 
-<div class="bk-root" id="40b022fb-9dec-494e-9d9e-36069ae8768d" data-root-id="1003"></div>
+<div class={% include /cosmetics-bokeh.html %}></div>
 
 
 
