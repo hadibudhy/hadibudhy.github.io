@@ -343,7 +343,7 @@ show(plot)
 
 
 
-<div class={% include /cosmetics-bokeh.html %}></div>
+<{% include /cosmetics-bokeh.html %}>
 
 
 
