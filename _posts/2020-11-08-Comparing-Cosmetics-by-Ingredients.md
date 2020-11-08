@@ -332,7 +332,9 @@ plot.add_tools(hover)
 
 ```python
 # Plot the map
+output_file('./html/comparing_cosmetic.html')
 show(plot)
+HTML('./html/comparing_cosmetic.html')
 ```
 
 
