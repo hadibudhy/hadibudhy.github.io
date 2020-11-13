@@ -1,4 +1,11 @@
-## 1. Dr. John Snow
+---
+title: "Comparing Cosmetics by Ingredients"
+date: 2020-11-08
+tags: [data manipulation, data visualization, machine learning, importing and cleaning]
+header:
+excerpt: "Data Manipulation, Data Visualization, Machine Learning, Importing and Cleaning"
+mathjax: "true"
+---## 1. Dr. John Snow
 <p><img style="float: left;margin:5px 20px 5px 1px" src="https://assets.datacamp.com/production/project_132/img/johnsnow_final1.png"></p>
 <p>Dr. John Snow (1813-1858) was a famous British physician and is widely recognized as a legendary figure in the history of public health and a leading pioneer in the development of anesthesia. Some even say one of the greatest physicians of all time.</p>
 <p>As a leading advocate of both anesthesia and hygienic practices in medicine, he not only experimented with ether and chloroform but also designed a mask and method how to administer it. He personally administered chloroform to Queen Victoria during the births of her eighth and ninth children, in 1853 and 1857, which assured a growing public acceptance of the use of anesthetics during childbirth.</p>
