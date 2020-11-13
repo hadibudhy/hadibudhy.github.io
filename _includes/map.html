@@ -1,3 +1,11 @@
+{% extends "post.html" %}
+{% block title %}Test{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+**<div>
+    
 <!DOCTYPE html>
 <head>    
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -3147,3 +3155,6 @@
         
     
 </script>
+    
+    {{ folium_map }}</div>**
+{% endblock %}
