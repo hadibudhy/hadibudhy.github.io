@@ -200,7 +200,9 @@ map
 
 
 
-<{% include /map.html %}>
+
+
+<img src="{{ site.url }}{{ site.baseurl }}/images/2020-11-13-John-Snow's-Ghost-Map/map.png">
 
 
 ## 5. It's the pump!
@@ -231,7 +233,7 @@ map1
 
 
 
-<{% include /map1.html %}>
+<img src="{{ site.url }}{{ site.baseurl }}/images/2020-11-13-John-Snow's-Ghost-Map/map1.png">
 
 
 ## 6.  You know nothing, John Snow! (again)
