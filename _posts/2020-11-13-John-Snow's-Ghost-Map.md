@@ -200,7 +200,7 @@ map
 
 
 
-<{% include /map.html %}>
+<{% includes /map.html %}>
 
 
 
@@ -232,7 +232,7 @@ map1
 
 
 
-<{% include /map1.html %}>
+<{% includes /map1.html %}>
 
 
 
@@ -357,7 +357,7 @@ show(p)
 
 
 
-<{% include /john_bokeh.html %}>
+<{% includes /john_bokeh.html %}>
 
 
 
