@@ -200,7 +200,7 @@ map
 
 
 
-<{% include /map.html %}>
+<{% include /john-map.html %}>
 
 
 ## 5. It's the pump!
@@ -231,7 +231,7 @@ map1
 
 
 
-<{% include /map1.html %}>
+<{% include /johnmap1.html %}>
 
 
 ## 6.  You know nothing, John Snow! (again)
