@@ -49,6 +49,11 @@ print("\n", "US trends:")
 print(json.dumps(US_trends, indent=1))
 ```
 
+<style>
+pre {
+  overflow-y: scroll !important;
+  height: 50vh !important;
+}
     WW trends:
     [
      {
@@ -414,7 +419,13 @@ print(json.dumps(US_trends, indent=1))
       ]
      }
     ]
+</style>
 
+     <style>
+pre {
+  overflow-y: scroll !important;
+  height: 50vh !important;
+}
      US trends:
     [
      {
@@ -780,6 +791,7 @@ print(json.dumps(US_trends, indent=1))
       ]
      }
     ]
+</style>
 
 
 ## 3.  Finding common trends
