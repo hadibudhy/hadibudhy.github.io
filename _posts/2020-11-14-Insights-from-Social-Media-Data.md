@@ -52,7 +52,7 @@ print(json.dumps(US_trends, indent=1))
 <style>
 pre code, pre, code {
   height: auto ;
-  max-height: 720px ;
+  max-height: 360px ;
   white-space: pre ;
   overflow-y: scroll ;
   word-break: keep-all ;
@@ -1227,7 +1227,7 @@ df.style.background_gradient()
 
 <style>
   table thead { display:block; }
-  table tbody { height:480px; overflow-y:scroll; display:block; }
+  table tbody { height:360px; overflow-y:scroll; display:block; }
   </style>
 
 
@@ -3952,22 +3952,12 @@ plt.hist(tweets_languages)
 <li>Polish, Italian and Spanish were the next runner-ups. </li>
 <li>There were a lot of tweets with a language alien to Twitter (lang = 'und'). </li>
 </ul>
-<p>Why is this sort of information useful? Because it can allow us to get an understanding of the "category" of people interested in this topic (clustering). We could also analyze the device type used by the Twitteratis, <code>tweet['source']</code>, to answer questions like, <strong>"Does owning an Apple compared to Andorid influences people's propensity towards this trend?"</strong>. I will leave that as a <strong>further exercise</strong> for you!</p>
+<p>Why is this sort of information useful? Because it can allow us to get an understanding of the "category" of people interested in this topic (clustering). We could also analyze the device type used by the Twitteratis, <code>tweet['source']</code>, to answer questions like, <strong>"Does owning an Apple compared to Andorid influences people's propensity towards this trend?"</strong>. </p>
 <p><img src="https://assets.datacamp.com/production/project_760/img/languages_world_map.png" style="width: 500px"></p>
 <hr>
 <p><span style="color:#41859e">
 What an exciting journey it has been! We started almost clueless, and here we are.. rich in insights. </span></p>
-<p><span style="color:#41859e">
-From location based comparisons to analyzing the activity around a tweet to finding patterns from languages and devices, we have covered a lot today — let's give ourselves <b>a well-deserved pat on the back!</b> ✋
-</span>
+
 <br><br></p>
 <div style="text-align: center;color:#41859e"><b><i>Magic Formula = Data + Python + Creativity + Curiosity</i></b></div>
 <p><img src="https://assets.datacamp.com/production/project_760/img/finish_line.jpg" style="width: 500px"></p>
-
-
-```python
-# Congratulations!
-print("High Five!!!")
-```
-
-    High Five!!!
