@@ -52,7 +52,7 @@ print(json.dumps(US_trends, indent=1))
 <style>
 pre code, pre, code {
   height: auto ;
-  max-height: 720px ;
+  max-height: 480px ;
   white-space: pre ;
   overflow-y: scroll ;
   word-break: keep-all ;
