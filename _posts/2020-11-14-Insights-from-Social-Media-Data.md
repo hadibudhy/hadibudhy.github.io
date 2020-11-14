@@ -52,7 +52,7 @@ print(json.dumps(US_trends, indent=1))
 <style>
 pre {
   overflow: auto;
-  height: 720px;
+  height: auto;
   padding: 15px;
   margin-bottom: 0;
   font-size: 14px;
