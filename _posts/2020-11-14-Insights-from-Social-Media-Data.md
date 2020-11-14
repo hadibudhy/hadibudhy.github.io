@@ -1222,7 +1222,9 @@ df = pd.DataFrame(
 
 df.style.background_gradient()
 ```
-
+pre {
+  overflow-y: auto;
+}
 <style  type="text/css" >
     overflow-y: scroll;height: 100 px
     #T_42256c6f_2636_11eb_9f50_f0038c426f1brow0_col0 {
