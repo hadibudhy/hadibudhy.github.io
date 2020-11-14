@@ -3941,7 +3941,7 @@ plt.hist(tweets_languages)
 
 
 
-
+<img src="{{ site.url }}{{ site.baseurl }}/images/2020-11-13-John-Snow's-Ghost-Map/map.png">
 <img src="{{ site.url }}{{ site.baseurl }}/images/2020-11-14-Insights-from-Social-Media-Data/output_17_1.png">
 
 
