@@ -52,8 +52,10 @@ print(json.dumps(US_trends, indent=1))
      <style>
 pre {
   overflow-y: scroll !important;
-  height: 75vh !important;
+  height: 50vh !important;
 }
+</style>
+
     WW trends:
     [
      {
@@ -419,13 +421,9 @@ pre {
       ]
      }
     ]
-</style>
 
-     <style>
-pre {
-  overflow-y: scroll !important;
-  height: 75vh !important;
-}
+
+   
      US trends:
     [
      {
@@ -791,7 +789,6 @@ pre {
       ]
      }
     ]
-</style>
 
 
 ## 3.  Finding common trends
@@ -1228,7 +1225,7 @@ df.style.background_gradient()
 
 
 
-<div style="overflow-y:auto;">
+
 <style  type="text/css" >
     #T_42256c6f_2636_11eb_9f50_f0038c426f1brow0_col0 {
             background-color:  #fdf5fa;
@@ -2424,7 +2421,15 @@ df.style.background_gradient()
         }    #T_42256c6f_2636_11eb_9f50_f0038c426f1brow198_col1 {
             background-color:  #fff7fb;
             color:  #000000;
-        }</style><table id="T_42256c6f_2636_11eb_9f50_f0038c426f1b" ><thead>    <tr>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Retweets</th>        <th class="col_heading level0 col1" >Favorites</th>    </tr>    <tr>        <th class="index_name level0" >ScreenName</th>        <th class="index_name level1" >Text</th>        <th class="index_name level2" >Followers</th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
+        }
+         .ScrollStyle
+{
+    max-height: 150px;
+    overflow-y: scroll;
+}
+
+<div class="ScrollStyle">
+         </style><table id="T_42256c6f_2636_11eb_9f50_f0038c426f1b" ><thead>    <tr>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Retweets</th>        <th class="col_heading level0 col1" >Favorites</th>    </tr>    <tr>        <th class="index_name level0" >ScreenName</th>        <th class="index_name level1" >Text</th>        <th class="index_name level2" >Followers</th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
                 <tr>
                         <th id="T_42256c6f_2636_11eb_9f50_f0038c426f1blevel0_row0" class="row_heading level0 row0" rowspan=2>katyperry</th>
                         <th id="T_42256c6f_2636_11eb_9f50_f0038c426f1blevel1_row0" class="row_heading level1 row0" rowspan=2>RT @katyperry: Sure, the Mueller report is out, but @lildickytweets’ "Earth" but will be too tonight. Don't say I never tried to save the w…</th>
@@ -3902,7 +3907,7 @@ Lil Dicky : *hold my beer*
                         <td id="T_42256c6f_2636_11eb_9f50_f0038c426f1brow198_col1" class="data row198 col1" >208</td>
             </tr>
     </tbody></table>
-
+</div>
 
 
 ## 9. Analyzing used languages
