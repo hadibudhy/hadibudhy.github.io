@@ -51,8 +51,10 @@ print(json.dumps(US_trends, indent=1))
 
 <style>
 pre {
-  overflow-y: scroll !important;
-  height: 50vh !important;
+  overflow: auto;
+  padding: 15px;
+  margin-bottom: 0;
+  font-size: 14px;
 }
 </style>
 
@@ -1222,12 +1224,15 @@ df = pd.DataFrame(
 
 df.style.background_gradient()
 ```
+<style>
 pre {
   overflow: auto;
   padding: 15px;
   margin-bottom: 0;
   font-size: 14px;
 }
+</style>
+
 <style  type="text/css" >
     #T_42256c6f_2636_11eb_9f50_f0038c426f1brow0_col0 {
             background-color:  #fdf5fa;
