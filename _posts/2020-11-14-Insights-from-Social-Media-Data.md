@@ -52,6 +52,7 @@ print(json.dumps(US_trends, indent=1))
 <style>
 pre {
   overflow: auto;
+  height: 100px;
   padding: 15px;
   margin-bottom: 0;
   font-size: 14px;
@@ -1227,6 +1228,7 @@ df.style.background_gradient()
 <style>
 pre {
   overflow: auto;
+  max-height: 100px;
   padding: 15px;
   margin-bottom: 0;
   font-size: 14px;
