@@ -3942,7 +3942,7 @@ plt.hist(tweets_languages)
 
 
 
-<img src="{{ site.url }}{{ site.baseurl }}/images/2020-11-14-Insights-from-Social-Media-Data/output_17_1.png.png">
+<img src="{{ site.url }}{{ site.baseurl }}/images/2020-11-14-Insights-from-Social-Media-Data/output_17_1.png">
 
 
 ## 10. Final thoughts
