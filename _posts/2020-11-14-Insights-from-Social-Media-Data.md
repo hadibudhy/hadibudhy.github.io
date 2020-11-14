@@ -49,10 +49,10 @@ print("\n", "US trends:")
 print(json.dumps(US_trends, indent=1))
 ```
 
-<style>
+     <style>
 pre {
   overflow-y: scroll !important;
-  height: 50vh !important;
+  height: 75vh !important;
 }
     WW trends:
     [
@@ -424,7 +424,7 @@ pre {
      <style>
 pre {
   overflow-y: scroll !important;
-  height: 50vh !important;
+  height: 75vh !important;
 }
      US trends:
     [
@@ -1228,7 +1228,7 @@ df.style.background_gradient()
 
 
 
-
+<div style="overflow-y:auto;">
 <style  type="text/css" >
     #T_42256c6f_2636_11eb_9f50_f0038c426f1brow0_col0 {
             background-color:  #fdf5fa;
