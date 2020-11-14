@@ -1224,7 +1224,13 @@ df.style.background_gradient()
 ```
 
 
+         .ScrollStyle
+{
+    max-height: 150px;
+    overflow-y: scroll;
+}
 
+<div class="ScrollStyle">
 
 <style  type="text/css" >
     #T_42256c6f_2636_11eb_9f50_f0038c426f1brow0_col0 {
@@ -2422,13 +2428,9 @@ df.style.background_gradient()
             background-color:  #fff7fb;
             color:  #000000;
         }
-         .ScrollStyle
-{
-    max-height: 150px;
-    overflow-y: scroll;
-}
 
-<div class="ScrollStyle">
+<div style="overflow-y:auto;">
+
          </style><table id="T_42256c6f_2636_11eb_9f50_f0038c426f1b" ><thead>    <tr>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Retweets</th>        <th class="col_heading level0 col1" >Favorites</th>    </tr>    <tr>        <th class="index_name level0" >ScreenName</th>        <th class="index_name level1" >Text</th>        <th class="index_name level2" >Followers</th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
                 <tr>
                         <th id="T_42256c6f_2636_11eb_9f50_f0038c426f1blevel0_row0" class="row_heading level0 row0" rowspan=2>katyperry</th>
