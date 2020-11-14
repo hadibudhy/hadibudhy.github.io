@@ -1225,6 +1225,7 @@ df = pd.DataFrame(
 df.style.background_gradient()
 ```
 <style>
+ table thead { display:block; }
   table tbody { height:480px; overflow-y:scroll; display:block; }
   </style>
 
