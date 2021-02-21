@@ -32,10 +32,11 @@ anyone.
 one to appear.
 4. It's okay if the recommendation generates an empty list because the closest distance has rated the same musician.
 5. It's okay if the recommendation produces an empty list because it doesn't have any distance to anyone.
+
 ---
 **Euclidean Distance Formula:**
 
-$d(x,y) = \sqrt{\sum \limits_{k=1} ^{n}(x_{k} - y_{k})^{2}}$
+<img src="{{ site.url }}{{ site.baseurl }}/images/euclidean.png">
 
 
 ## Functional Programming
