@@ -5,4 +5,4 @@ header:
   image: "/images/zakim.jpg"
 ---
 
-I'm a Biostatistician and Data Science Enthusiast who interested with data wrangling, machine learning, exploratory analysis, and data visualizations.
+A professional with over 3 years of experience in the field of business intelligence and data analytics. Experienced in developing and implementing data-driven strategies that have led to significant improvements in organizational efficiency and profitability. Skilled in communicating insights and collaborating with cross-functional teams.
