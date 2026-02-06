@@ -1,0 +1,486 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@charset "utf-8";
+
+// Import Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+// Custom color overrides for dark theme
+$background-color: #0d1117 !default;
+$text-color: #c9d1d9 !default;
+$muted-text-color: #8b949e !default;
+$primary-color: #58a6ff !default;
+$border-color: #30363d !default;
+$code-background-color: #161b22 !default;
+$link-color: #58a6ff !default;
+$masthead-link-color: #c9d1d9 !default;
+$masthead-link-color-hover: #58a6ff !default;
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
+@import "minimal-mistakes"; // main partials
+
+/* ================================================
+   Custom Portfolio Styles - Modern Dark Mode
+   ================================================ */
+
+// Base typography
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+  min-height: 100vh;
+}
+
+// Headers
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+// Page title
+.page__title {
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, #58a6ff 0%, #a371f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Hero/Splash section
+.page__hero {
+  &--overlay {
+    padding: 6em 0;
+    background: linear-gradient(135deg, rgba(13, 17, 23, 0.9) 0%, rgba(22, 27, 34, 0.85) 100%);
+    
+    .page__title {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff 0%, #c9d1d9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5em;
+    }
+    
+    .page__lead {
+      font-size: 1.5rem;
+      color: #8b949e;
+      max-width: 600px;
+      margin: 0 auto 2em;
+    }
+  }
+}
+
+// Hero Button
+.page__hero-action {
+  .btn {
+    font-size: 1.1rem !important;
+    padding: 0.9em 2em !important;
+    font-weight: 600;
+    background: linear-gradient(135deg, #238636 0%, #2ea043 100%);
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(46, 160, 67, 0.3);
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(46, 160, 67, 0.4);
+      background: linear-gradient(135deg, #2ea043 0%, #3fb950 100%);
+    }
+  }
+}
+
+// Section subtitles
+.archive__subtitle {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #c9d1d9;
+  margin: 2em 0 1em;
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid #30363d;
+  
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 1.2em;
+    background: linear-gradient(135deg, #58a6ff, #a371f7);
+    margin-right: 0.75em;
+    vertical-align: middle;
+    border-radius: 2px;
+  }
+}
+
+// Feature Row Icons
+.feature__wrapper {
+  margin: 3em 0;
+  padding: 2em 0;
+}
+
+.feature__item {
+  text-align: center;
+  padding: 2em 1.5em;
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid #30363d;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    border-color: #58a6ff;
+    box-shadow: 0 8px 30px rgba(88, 166, 255, 0.15);
+  }
+  
+  .archive__item-title {
+    font-size: 1.25rem;
+    color: #c9d1d9;
+    margin-top: 1em;
+  }
+  
+  .archive__item-excerpt {
+    color: #8b949e;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
+  .archive__item-teaser {
+    max-height: 100px;
+    margin-bottom: 1em;
+    
+    img {
+      max-height: 80px;
+      width: auto;
+      margin: 0 auto;
+    }
+  }
+  
+  // Font Awesome icons
+  .fa, .fab, .fas {
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, #58a6ff 0%, #a371f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5em;
+  }
+}
+
+// Project Grid - Glassmorphism Cards
+.grid__wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2em;
+  margin: 2em 0;
+}
+
+.grid__item {
+  margin-bottom: 0;
+  
+  .archive__item {
+    height: 100%;
+    background: rgba(22, 27, 34, 0.8);
+    border: 1px solid #30363d;
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    
+    &:hover {
+      transform: translateY(-8px);
+      border-color: #58a6ff;
+      box-shadow: 0 12px 40px rgba(88, 166, 255, 0.2);
+      
+      .archive__item-teaser img {
+        transform: scale(1.05);
+      }
+    }
+  }
+  
+  .archive__item-teaser {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: linear-gradient(transparent, rgba(13, 17, 23, 0.8));
+    }
+  }
+  
+  .archive__item-title {
+    padding: 1.25em 1.25em 0.5em;
+    margin: 0;
+    font-size: 1.2rem;
+    
+    a {
+      color: #c9d1d9;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      
+      &:hover {
+        color: #58a6ff;
+      }
+    }
+  }
+  
+  .archive__item-excerpt {
+    padding: 0 1.25em 1em;
+    flex-grow: 1;
+    
+    p {
+      color: #8b949e;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+  
+  .archive__item-tags {
+    padding: 0 1.25em 1.25em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.25em 0.75em;
+      background: rgba(88, 166, 255, 0.15);
+      color: #58a6ff;
+      border-radius: 20px;
+      border: 1px solid rgba(88, 166, 255, 0.3);
+    }
+  }
+}
+
+// View All Button
+.view-all-btn {
+  text-align: center;
+  margin: 3em 0;
+  
+  .btn {
+    font-weight: 600;
+    padding: 0.9em 2.5em;
+    border-radius: 8px;
+    background: transparent;
+    border: 2px solid #58a6ff;
+    color: #58a6ff;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: #58a6ff;
+      color: #0d1117;
+      box-shadow: 0 4px 14px rgba(88, 166, 255, 0.3);
+    }
+  }
+}
+
+// Masthead/Navigation
+.masthead {
+  background: rgba(13, 17, 23, 0.95);
+  border-bottom: 1px solid #30363d;
+  backdrop-filter: blur(10px);
+  
+  &__inner-wrap {
+    padding: 0.75em 1em;
+  }
+}
+
+.greedy-nav {
+  background: transparent;
+  
+  a {
+    color: #c9d1d9;
+    font-weight: 500;
+    
+    &:hover {
+      color: #58a6ff;
+    }
+  }
+  
+  .visible-links a {
+    &::before {
+      background: #58a6ff;
+    }
+  }
+}
+
+.site-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+// Author Profile Sidebar
+.author__avatar {
+  img {
+    border-radius: 50%;
+    border: 3px solid #30363d;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-color: #58a6ff;
+      box-shadow: 0 0 20px rgba(88, 166, 255, 0.3);
+    }
+  }
+}
+
+.author__name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #c9d1d9;
+}
+
+.author__bio {
+  color: #8b949e;
+  font-size: 0.9rem;
+}
+
+.author__urls-wrapper {
+  .author__urls {
+    background: rgba(22, 27, 34, 0.9);
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    
+    a {
+      color: #c9d1d9;
+      
+      &:hover {
+        color: #58a6ff;
+      }
+    }
+  }
+}
+
+// Social icons
+.social-icons {
+  .fa, .fab, .fas {
+    color: #8b949e;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: #58a6ff;
+    }
+  }
+}
+
+// Page content
+.page__content {
+  h2 {
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 0.5em;
+  }
+  
+  a {
+    color: #58a6ff;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+    
+    &:hover {
+      border-bottom-color: #58a6ff;
+    }
+  }
+  
+  // Code blocks
+  pre, code {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+  }
+  
+  pre {
+    padding: 1.25em;
+    overflow-x: auto;
+  }
+  
+  code {
+    padding: 0.2em 0.4em;
+    font-size: 0.9em;
+  }
+}
+
+// Footer
+.page__footer {
+  background: #0d1117;
+  border-top: 1px solid #30363d;
+  
+  footer {
+    color: #8b949e;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .page__hero--overlay {
+    padding: 4em 1em;
+    
+    .page__title {
+      font-size: 2rem;
+    }
+    
+    .page__lead {
+      font-size: 1.1rem;
+    }
+  }
+  
+  .grid__wrapper {
+    grid-template-columns: 1fr;
+    gap: 1.5em;
+  }
+  
+  .feature__item {
+    padding: 1.5em 1em;
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.grid__item {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+  
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+}
+
+.feature__item {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+  
+  @for $i from 1 through 3 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.15}s;
+    }
+  }
+}

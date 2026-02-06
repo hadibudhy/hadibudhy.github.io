@@ -1,0 +1,63 @@
+---
+layout: splash
+permalink: /
+hidden: true
+header:
+  overlay_color: "#1a1a2e"
+  overlay_image: /images/waterfront.jpg
+  overlay_filter: 0.7
+  actions:
+    - label: "View Projects"
+      url: /data-projects/
+excerpt: "Turning Complex Data into Actionable Insights."
+feature_row:
+  - icon: "fab fa-python"
+    alt: "Python"
+    title: "Python Development"
+    excerpt: "Data analysis, automation, and backend development using Python."
+  - icon: "fas fa-database"
+    alt: "SQL"
+    title: "SQL & Databases"
+    excerpt: "Complex querying, data modeling, and performance optimization."
+  - icon: "fas fa-brain"
+    alt: "Machine Learning"
+    title: "Machine Learning"
+    excerpt: "Building predictive models and data-driven solutions."
+---
+
+{% include feature_row %}
+
+<div class="archive">
+  <h2 class="archive__subtitle">Recent Projects</h2>
+
+  <div class="grid__wrapper">
+    {% for post in site.posts limit:3 %}
+    <div class="grid__item">
+      <article class="archive__item">
+        <div class="archive__item-teaser">
+          {% if post.header.teaser %}
+            <img src="{{ post.header.teaser }}" alt="{{ post.title }}">
+          {% else %}
+            <img src="/images/waterfront.jpg" alt="{{ post.title }}">
+          {% endif %}
+        </div>
+        <h2 class="archive__item-title">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h2>
+        <div class="archive__item-excerpt">
+          <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
+        </div>
+        <div class="archive__item-tags">
+          {% for tag in post.tags limit:3 %}
+            <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </article>
+    </div>
+    {% endfor %}
+  </div>
+  
+  <div class="view-all-btn">
+    <a href="/data-projects/" class="btn btn--primary btn--large">View All Projects</a>
+  </div>
+</div>
