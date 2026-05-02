@@ -1,29 +1,33 @@
 ---
-layout: splash
+layout: home
 permalink: /
-hidden: true
-header:
-  overlay_color: "#0f172a"
-  actions:
-    - label: "View Projects"
-      url: /data-projects/
-excerpt: "Turning Complex Data into Actionable Insights."
-feature_row:
-  - icon: "fab fa-python"
-    alt: "Python"
-    title: "Python Development"
-    excerpt: "Data analysis, automation, and backend development using Python."
-  - icon: "fas fa-database"
-    alt: "SQL"
-    title: "SQL & Databases"
-    excerpt: "Complex querying, data modeling, and performance optimization."
-  - icon: "fas fa-brain"
-    alt: "Machine Learning"
-    title: "Machine Learning"
-    excerpt: "Building predictive models and data-driven solutions."
 ---
 
-{% include feature_row %}
+<div class="page__hero--overlay" style="padding: 5rem 1.5rem; text-align: center; border-radius: 16px; margin: 2rem 0;">
+  <h1 class="page__title">Turning Complex Data into Actionable Insights.</h1>
+  <p class="page__lead">Data Science, Analytics, and Engineering.</p>
+  <div class="page__hero-action" style="margin-top: 2rem;">
+    <a href="/data-projects/" class="btn btn--primary">View Projects</a>
+  </div>
+</div>
+
+<div class="feature__wrapper" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; margin-bottom: 4rem;">
+  <div class="feature__item">
+    <i class="fab fa-python"></i>
+    <h3 class="archive__item-title">Python Development</h3>
+    <p class="archive__item-excerpt">Data analysis, automation, and backend development using Python.</p>
+  </div>
+  <div class="feature__item">
+    <i class="fas fa-database"></i>
+    <h3 class="archive__item-title">SQL & Databases</h3>
+    <p class="archive__item-excerpt">Complex querying, data modeling, and performance optimization.</p>
+  </div>
+  <div class="feature__item">
+    <i class="fas fa-brain"></i>
+    <h3 class="archive__item-title">Machine Learning</h3>
+    <p class="archive__item-excerpt">Building predictive models and data-driven solutions.</p>
+  </div>
+</div>
 
 <div class="archive">
   <h2 class="archive__subtitle">Recent Projects</h2>

@@ -1,13 +1,13 @@
 ---
-layout: archive
+layout: default
 permalink: /data-projects/
 title: "Data Projects"
-author_profile: true
-header:
-  overlay_color: "#0f172a"
 ---
 
-Explore my data science and engineering projects, from ETL pipelines to machine learning models.
+<div class="page__hero--overlay" style="padding: 3rem 1.5rem; text-align: center; border-radius: 16px; margin: 2rem 0;">
+  <h1 class="page__title">{{ page.title }}</h1>
+  <p class="page__lead">Explore my data science and engineering projects, from ETL pipelines to machine learning models.</p>
+</div>
 
 <div class="filter-controls">
   <button class="filter-btn active" data-filter="all">All</button>

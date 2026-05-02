@@ -21,31 +21,119 @@ $footer-background-color: #020617; // Slate 950
 // Typography
 $global-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
-@import "minimal-mistakes";
-
 /* ================================================
    MODERN PORTFOLIO STYLING
    Clean, Professional, Data Science Focused
    ================================================ */
 
-// General
-html, body {
-  background-color: $background-color;
-  color: $text-color;
+// CSS Reset & Structural
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-// Masthead / Navigation
-.masthead {
+body {
+  font-family: $global-font-family;
+  line-height: 1.6;
+  background-color: $background-color;
+  color: $text-color;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.site-header {
   background-color: rgba(15, 23, 42, 0.95);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid $border-color;
+  padding: 1rem 0;
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .site-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $text-color;
+    letter-spacing: -0.02em;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .site-nav {
+    ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+    a {
+      color: $text-color;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      &:hover {
+        color: $primary-color;
+        text-decoration: none;
+      }
+    }
+  }
 }
 
-.site-title {
-  font-weight: 700;
-  letter-spacing: -0.02em;
+.page-content {
+  flex: 1;
+  padding: 3rem 0;
+}
+
+.site-footer {
+  background-color: $footer-background-color;
+  border-top: 1px solid $border-color;
+  padding: 2rem 0;
+  text-align: center;
+  color: $muted-text-color;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .social-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    
+    a {
+      color: $muted-text-color;
+      &:hover {
+        color: $text-color;
+      }
+    }
+  }
 }
 
 // Hero Section (CSS Gradient instead of image)
