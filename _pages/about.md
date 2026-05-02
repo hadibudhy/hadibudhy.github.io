@@ -40,14 +40,3 @@ permalink: /about/
   <span class="skill-badge">REST API Integration</span>
 </div>
 
-<h2>Work History</h2>
-<div class="about-timeline">
-  <div class="timeline-item">
-    <h3>Data Analyst &mdash; BukuWarung, Jakarta</h3>
-    <span class="timeline-meta">Oct 2024 &ndash; Present</span>
-    <ul>
-      <li>Reduced incident response time from hours to &lt;10 minutes by building event-driven alerting via n8n webhooks + REST APIs monitoring 80K+ daily active merchants.</li>
-      <li>Increased marketing engagement 12&ndash;18% by building K-Means customer segmentation on 10M+ rows (Python/scikit-learn).</li>
-    </ul>
-  </div>
-</div>
