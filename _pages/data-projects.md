@@ -4,9 +4,7 @@ permalink: /data-projects/
 title: "Data Projects"
 author_profile: true
 header:
-  overlay_color: "#1a1a2e"
-  overlay_image: "/images/waterfront.jpg"
-  overlay_filter: 0.7
+  overlay_color: "#0f172a"
 ---
 
 Explore my data science and engineering projects, from ETL pipelines to machine learning models.
@@ -20,7 +18,9 @@ Explore my data science and engineering projects, from ETL pipelines to machine 
         {% if post.header.teaser %}
           <img src="{{ post.header.teaser }}" alt="{{ post.title }}">
         {% else %}
-          <img src="/images/waterfront.jpg" alt="{{ post.title }}">
+          <div class="fallback-pattern">
+            <i class="fas fa-chart-network"></i>
+          </div>
         {% endif %}
       </div>
       <h2 class="archive__item-title">

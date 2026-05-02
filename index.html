@@ -3,9 +3,7 @@ layout: splash
 permalink: /
 hidden: true
 header:
-  overlay_color: "#1a1a2e"
-  overlay_image: /images/waterfront.jpg
-  overlay_filter: 0.7
+  overlay_color: "#0f172a"
   actions:
     - label: "View Projects"
       url: /data-projects/
@@ -38,7 +36,9 @@ feature_row:
           {% if post.header.teaser %}
             <img src="{{ post.header.teaser }}" alt="{{ post.title }}">
           {% else %}
-            <img src="/images/waterfront.jpg" alt="{{ post.title }}">
+            <div class="fallback-pattern">
+              <i class="fas fa-chart-network"></i>
+            </div>
           {% endif %}
         </div>
         <h2 class="archive__item-title">
