@@ -148,6 +148,8 @@ html, body {
 
 .grid__item {
   margin: 0;
+  width: 100% !important;
+  float: none !important;
 
   .archive__item {
     height: 100%;
