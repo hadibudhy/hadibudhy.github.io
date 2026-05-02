@@ -12,7 +12,7 @@ locale: "en-US"
 title: "Hadi Budhy Portfolio"
 title_separator: "-"
 name: "Hadi Budhy"
-description: "Data Science Portfolio"
+description: "Data analyst and engineer who turns messy pipelines into business decisions — at scale"
 url: "https://hadibudhy.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl: "" # the subpath of your site, e.g. "/blog"
 repository: hadibudhy/hadibudhy.github.io
@@ -87,7 +87,7 @@ analytics:
 author:
   name: "Hadi Budhy"
   avatar: "/images/bio-pic-2.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio: "Data Science Portfolio"
+  bio: "Data analyst and engineer who turns messy pipelines into business decisions — at scale"
   location: "Jakarta, Indonesia"
   email: "hadi.budhy@gmail.com"
   uri:
