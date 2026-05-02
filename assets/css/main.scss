@@ -305,3 +305,35 @@ blockquote {
   padding: 1em;
   border-radius: 0 6px 6px 0;
 }
+
+// Filter Controls
+.filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+  justify-content: center;
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid $border-color;
+    color: $muted-text-color;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: $primary-color;
+      color: $text-color;
+    }
+
+    &.active {
+      background: $primary-color;
+      border-color: $primary-color;
+      color: #fff;
+    }
+  }
+}

@@ -9,10 +9,17 @@ header:
 
 Explore my data science and engineering projects, from ETL pipelines to machine learning models.
 
+<div class="filter-controls">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="data-engineering">Data Engineering</button>
+  <button class="filter-btn" data-filter="machine-learning">Machine Learning</button>
+  <button class="filter-btn" data-filter="analytics">Analytics</button>
+</div>
+
 <div class="grid__wrapper">
   
   {% for post in site.posts %}
-  <div class="grid__item">
+  <div class="grid__item project-item" data-tags="{% for cat in post.categories %}{{ cat | downcase | replace: ' ', '-' }} {% endfor %}{% for tag in post.tags %}{{ tag | downcase | replace: ' ', '-' }} {% endfor %}">
     <article class="archive__item">
       <div class="archive__item-teaser">
         {% if post.header.teaser %}
@@ -39,3 +46,33 @@ Explore my data science and engineering projects, from ETL pipelines to machine 
   {% endfor %}
 
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const items = document.querySelectorAll('.project-item');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterValue = btn.getAttribute('data-filter');
+
+      items.forEach(item => {
+        if (filterValue === 'all') {
+          item.style.display = 'block';
+        } else {
+          const tags = item.getAttribute('data-tags') || '';
+          if (tags.includes(filterValue)) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        }
+      });
+    });
+  });
+});
+</script>
