@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem "jekyll"
 gem "jekyll-include-cache"
-gem "jekyll-remote-theme"
+gem "jekyll-seo-tag"
 gem "jekyll-paginate"
 gem "jekyll-sitemap"
 gem "jekyll-gist"
