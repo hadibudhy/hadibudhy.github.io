@@ -164,3 +164,7 @@ The full workflow:
 Netflix's US acquisition strategy is not in trouble — it has bifurcated deliberately. The failure mode is measurement: two opposite strategies tracked as a single KPI produces false alarms and misdirected organizational pressure.
 
 The three adjacent structural risks — split KPIs, UK pipeline governance, Documentary director relationships — are the actual intervention surface.
+
+---
+
+**Code:** [github.com/hadibudhy/hadibudhy.github.io/tree/master/scripts/netflix](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/scripts/netflix)
