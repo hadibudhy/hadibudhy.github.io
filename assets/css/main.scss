@@ -428,6 +428,116 @@ blockquote {
   }
 }
 
+// ================================================
+// POST CONTENT STYLING
+// ================================================
+
+.post-content {
+  max-width: 780px;
+  margin: 0 auto;
+
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin: 2.5rem 0 1rem;
+    border-bottom: 1px solid $border-color;
+    padding-bottom: 0.5rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin: 2rem 0 0.75rem;
+  }
+
+  p {
+    color: $text-color;
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  // Images — constrained, centered
+  img {
+    display: block;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 8px;
+    border: 1px solid $border-color;
+  }
+
+  // Tables
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    display: block;
+
+    th {
+      background-color: #1e293b;
+      color: #f1f5f9;
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 2px solid $primary-color;
+    }
+
+    td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid $border-color;
+      color: $muted-text-color;
+    }
+
+    tr:hover td {
+      background-color: rgba(30, 41, 59, 0.5);
+    }
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid $border-color;
+    margin: 2.5rem 0;
+  }
+
+  ul, ol {
+    margin: 1rem 0 1.5rem 1.5rem;
+    color: $text-color;
+
+    li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+  }
+
+  code {
+    background-color: $code-background-color;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.875em;
+    color: #93c5fd;
+  }
+
+  strong {
+    color: #f1f5f9;
+    font-weight: 600;
+  }
+
+  em {
+    color: $muted-text-color;
+    font-style: italic;
+  }
+}
+
+// ================================================
+// ABOUT PAGE STYLES
+// ================================================
+
 // About Page Styles
 .about-metrics {
   display: grid;
