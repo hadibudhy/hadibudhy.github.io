@@ -116,4 +116,4 @@ Freedom and low corruption matter, but less than the top three. Material and soc
 - All factors verified to sum to the happiness score (max rounding error: 0.003).
 - Self-reported Cantril ladder scale, not objective wellbeing measure.
 
-**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/projects)
+**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/scripts/world-happiness)

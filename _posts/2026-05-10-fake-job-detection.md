@@ -186,4 +186,4 @@ Both are valid choices depending on the product decision: prioritize catching mo
 - SHAP values computed on a 200-sample stratified subset of the test set.
 - Keyword log-odds computed on full training corpus using CountVectorizer bigrams.
 
-**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/projects)
+**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/scripts/fake-job-detection)
