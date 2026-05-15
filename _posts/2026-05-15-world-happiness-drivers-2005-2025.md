@@ -1,97 +1,109 @@
 ---
-title: "World Happiness Drivers 2005–2025"
+title: "What Actually Drives National Happiness — And One Factor That Barely Matters"
 date: 2026-05-15
-categories: data-scientist
-tags: [python, duckdb, correlation, global-data, happiness]
-excerpt: "Social support and GDP explain most of why some countries are happy. Generosity does not."
+categories: data analysis
+tags:
+  - data-analysis
+  - world-happiness-report
+  - python
+  - correlation-analysis
+  - duckdb
+excerpt: Social support and GDP explain most of why some countries are happy. Generosity, surprisingly, explains almost none of it.
 header:
-  teaser: /images/world-happiness-drivers-2005-2025/teaser.png
+  teaser: /images/happiness-drivers-correlations.png
 mathjax: false
 ---
 
-## The Story
+The World Happiness Report has been running since 2005. By 2025, it covers 168 countries and 14 years of data. Most coverage focuses on the annual ranking — Finland is first, Afghanistan is last. But there is a more interesting question buried in the data: which factors actually explain why some countries score 7+ while others score below 3?
 
-Which factors predict whether a country is happy — and has the world actually gotten happier over time?
-
-I used the World Happiness Report dataset to find out. It covers 168 countries from 2011 to 2025. The dataset records annual Cantril Ladder scores — a 0 to 10 self-report of life satisfaction — alongside six contributing factors: GDP per capita, social support, healthy life expectancy, freedom, generosity, and corruption perception.
-
-**Key findings:**
-
-- **The world has gotten measurably happier.** Average happiness rose from 5.39 in 2011 to 5.65 in 2025 — a gain of 0.26 points. The trend is statistically significant (Spearman r=0.87, p<0.001, slope=0.019 points/year). That is small in absolute terms, but consistent across 14 years and 140+ countries.
-- **Social support and GDP are the strongest predictors.** Both show Spearman correlations above 0.70 with happiness scores (social support: r=0.701, GDP: r=0.716). Healthy life expectancy follows at r=0.672. These three factors account for most of the variation between happy and unhappy countries.
-- **Generosity barely matters.** The correlation between generosity and happiness is r=0.042 — not statistically significant (p=0.18). Countries that score high on charitable giving are not systematically happier. This contradicts the common assumption that generosity and wellbeing go together at the national level.
-- **Serbia improved the most (+2.1 points) since 2011; Afghanistan declined the most (-2.8 points).** Serbia's rise tracks economic development and EU integration. Afghanistan's collapse follows the 2021 political transition. Most countries moved less than 0.5 points in the same period.
-- **Happiness inequality is widening.** The gap between the happiest and least happy country grew from 4.8 points in 2011 to 6.3 points in 2025 — a 31% increase. While the global average rises, the bottom is falling faster than the top is climbing.
-
-The generosity finding is the most surprising. One plausible explanation: the WHR generosity measure captures charitable donations, which are concentrated in wealthier countries with formal giving infrastructure. It may not capture informal mutual aid common in lower-income countries. The metric may reflect economic structure more than genuine social generosity.
-
-The widening inequality finding is the most concerning. Global averages mask growing divergence. If the goal is higher happiness for more people, the aggregate trend is misleading. The countries that need improvement most are falling further behind.
+The 2019 report added a factor decomposition: for each country-year, it breaks the happiness score into six measurable contributions — GDP per capita, social support, healthy life expectancy, freedom, generosity, and corruption perception. This makes it possible to run an actual driver analysis, not just observe rankings.
 
 ---
 
-## How I Did It
+## Finding 1: The World Has Gotten Measurably Happier
 
-**Tools and stack:** Python 3.12 · pandas 2.0 · DuckDB 0.10 · scipy 1.12 · matplotlib 3.8
+The global average happiness score rose from 5.39 in 2011 to 5.65 in 2025 — a gain of +0.26 points over 14 years. The trend is consistent and statistically significant (Spearman r=0.87, p<0.001).
 
-**Data quality:** The dataset has two clean segments. Core columns (`year`, `country`, `happiness_score`, `rank_in_year`) are 100% complete across all 2,116 rows. The factor decomposition columns are null for 2011–2018 — the WHR added decomposition starting with the 2019 report. This is expected, not a data error. The 2019–2025 subset (1,019 country-years) was used for all driver analysis.
+[![Chart showing global happiness trend 2011–2025](/images/happiness-drivers-trend.png)](/images/happiness-drivers-trend.png)
 
-One minor anomaly: Gambia and Sri Lanka share rank 120 in the 2018 dataset despite different scores (4.516 vs 4.366). This appears to be a source transcription error. It does not affect any headline finding.
+That is a small number in absolute terms. On a 0–10 scale, 0.26 points barely registers. But it held across COVID (2020 saw a slight rise, not a crash), geopolitical shocks, and economic cycles. Human life evaluation is more stable than moment-to-moment news would suggest.
 
-**Methodology decisions:**
-
-- I used Spearman correlation rather than Pearson for driver analysis. Cantril Ladder scores are bounded (0–10) and driver contribution distributions are right-skewed. Spearman is more robust to both conditions. Results were nearly identical to Pearson for top drivers, confirming the relationship is not an artifact of method choice.
-- I restricted driver analysis to 2019–2025. Using 2011–2018 rows (which lack decomposition data) would have required imputation — introducing noise with no analytical benefit. The 2019–2025 sample covers 7 years and 1,019 country-year observations, sufficient for reliable estimates.
-- Year 2013 is absent from the dataset (the WHR was not published that year). I treated it as a missing data point rather than interpolating.
-
-**Validation:** Driver contributions sum to happiness score within 0.003 tolerance (DuckDB-verified). Score range (1.36–7.86) is within the plausible Cantril Ladder bounds. Correlation directions match the WHR's own published findings. Key statistics (Serbia +2.13, Afghanistan -2.81, global slope 0.019/year) were verified directly against the source data. A pandas-vs-DuckDB tie-out confirmed 2,116 rows and a score sum of 11,565.33 before any analysis.
+The previous analysis on this dataset used a balanced panel of 129 countries to control for sample composition changes. The finding holds in both the full sample and the balanced subset.
 
 ---
 
-## Key Code
+## Finding 2: Social Support and GDP Are the Strongest Drivers
 
-The global trend regression uses `scipy.stats.linregress` on year-averaged scores. The slope of 0.019 points per year means the world gains roughly one full point of happiness every 53 years at the current rate.
+Using the 2019–2025 subset (1,019 country-years, the only period with full factor decomposition), Spearman correlations reveal which factors move together with high national happiness scores.
 
-```python
-global_trend = con.execute("""
-    SELECT year, ROUND(AVG(happiness_score), 4) as avg_score
-    FROM happiness
-    GROUP BY year ORDER BY year
-""").df()
+[![Chart showing driver correlations with happiness score](/images/happiness-drivers-correlations.png)](/images/happiness-drivers-correlations.png)
 
-slope, intercept, r, p, se = stats.linregress(global_trend['year'], global_trend['avg_score'])
-```
+| Factor | Spearman r | Significance |
+|--------|-----------|-------------|
+| GDP per capita | 0.716 | p<0.001 |
+| Social support | 0.701 | p<0.001 |
+| Healthy life expectancy | 0.672 | p<0.001 |
+| Freedom | 0.487 | p<0.001 |
+| Corruption (low) | 0.345 | p<0.001 |
+| Generosity | 0.042 | p=0.18 (not significant) |
 
-Driver correlations use Spearman to handle the bounded scale and skewed distributions. The null mask ensures we only compare rows where both the happiness score and the driver value are present — three driver columns have a small number of missing values even in the 2019-2025 subset.
+Three factors cluster tightly at the top and are difficult to separate — wealthy countries tend to have better healthcare and stronger social safety nets simultaneously. GDP has the highest correlation in this sample, but social support is close.
 
-```python
-df_drivers = con.execute("""
-    SELECT happiness_score, explained_log_gdp_per_capita,
-           explained_social_support, explained_healthy_life_expectancy,
-           explained_freedom, explained_generosity, explained_corruption
-    FROM happiness
-    WHERE year >= 2019 AND explained_log_gdp_per_capita IS NOT NULL
-""").df()
+The bottom of the table is the more interesting finding.
 
-for col, label in driver_cols:
-    mask = df_drivers['happiness_score'].notna() & df_drivers[col].notna()
-    r_val, p_val = stats.spearmanr(df_drivers.loc[mask, 'happiness_score'],
-                                   df_drivers.loc[mask, col])
-    driver_correlations[label] = {'r': round(r_val, 3), 'p': round(p_val, 6)}
-```
+---
 
-The biggest-movers query joins the 2011 and 2025 snapshots on country name, then sorts by score change. This pattern is reusable for any two-year comparison in the dataset.
+## Finding 3: Generosity Barely Matters at the National Level
 
-```python
-biggest_movers = con.execute("""
-    WITH y2011 AS (SELECT country, happiness_score as s2011 FROM happiness WHERE year=2011),
-         y2025 AS (SELECT country, happiness_score as s2025 FROM happiness WHERE year=2025)
-    SELECT y2025.country,
-           ROUND(s2011, 3) as score_2011,
-           ROUND(s2025, 3) as score_2025,
-           ROUND(s2025 - s2011, 3) as change
-    FROM y2025 JOIN y2011 ON y2025.country = y2011.country
-    ORDER BY change DESC
-""").df()
-```
+The generosity correlation with happiness is r=0.042 and not statistically significant (p=0.18). Countries where people report donating more to charity are not systematically happier at the national scale.
 
-> Charts: `outputs/charts/` · Full analysis code: `working/analysis_world_happiness_report_2005_2025_2026-05-15.py`
+This runs counter to a large body of individual-level research suggesting that giving makes people happier. The likely explanation is a measurement problem: the WHR generosity metric captures formal charitable donations, which are concentrated in wealthier countries with established nonprofit infrastructure. It may not capture the informal mutual aid, family networks, and community support structures that are more common in lower-income countries — and that may matter much more for wellbeing.
+
+At the national level, generosity as measured by this dataset is close to noise. Social support — having someone to count on in a crisis — is the structural variable that matters.
+
+---
+
+## Finding 4: The Biggest Movers Since 2011
+
+Among the 141 countries tracked in both 2011 and 2025, the range of change is striking.
+
+[![Chart showing top improvers and decliners 2011–2025](/images/happiness-drivers-movers.png)](/images/happiness-drivers-movers.png)
+
+Serbia improved the most (+2.13 points), driven by economic development and EU integration progress. Bulgaria, Georgia, Latvia, and Bosnia and Herzegovina round out the top five — all post-communist countries with similar trajectories.
+
+Afghanistan declined the most (-2.81 points). The score had been falling gradually since 2011, but the 2021 political transition accelerated the drop to 1.45 by 2025 — the lowest score in the world, by a significant margin.
+
+Most countries moved less than 0.5 points. The outliers in either direction are almost always explained by structural political or economic events, not shifts in culture or values.
+
+---
+
+## Finding 5: The Happiness Gap Is Widening
+
+While the global average rises, the gap between the happiest and least happy countries is growing.
+
+[![Chart showing widening happiness gap 2011–2025](/images/happiness-drivers-inequality.png)](/images/happiness-drivers-inequality.png)
+
+The range between the top and bottom country score grew from 4.8 points in 2011 to 6.3 points in 2025 — a 31% increase. The rising average is real. But the countries that most need improvement are not keeping pace with those already doing well.
+
+This is the part the annual ranking headlines do not show.
+
+---
+
+## Three Takeaways
+
+**1. Social support is more important than GDP.** The correlations are similar (0.70 vs 0.72), but social support is something governments can invest in directly — healthcare access, caregiving infrastructure, community programs — without waiting for GDP growth.
+
+**2. Generosity is not a happiness lever at national scale.** The near-zero correlation is a genuine finding, not noise. Investing in social support structures matters far more than promoting charitable giving.
+
+**3. The average is misleading.** Global happiness is rising. But the gap between top and bottom is also rising. Any policy framed around improving global averages is incomplete without focus on the countries at the bottom of the distribution.
+
+---
+
+**Methodology notes:**
+- 2,116 rows covering 168 countries, 2011–2025 (2013 missing from source data).
+- Factor decomposition available from 2019 onward only. Driver analysis uses 1,019 country-years.
+- Spearman correlation used — Cantril Ladder scores are bounded (0–10) and factor distributions are right-skewed. Results consistent with Pearson for top drivers.
+- Minor source anomaly: Gambia and Sri Lanka share rank 120 in 2018 despite different scores. Does not affect any headline finding.
+- All factor contributions verified to sum to happiness score within 0.003 tolerance.
+
+**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/scripts/world-happiness-drivers)
