@@ -106,4 +106,4 @@ This is the part the annual ranking headlines do not show.
 - Minor source anomaly: Gambia and Sri Lanka share rank 120 in 2018 despite different scores. Does not affect any headline finding.
 - All factor contributions verified to sum to happiness score within 0.003 tolerance.
 
-**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/scripts/world-happiness-drivers)
+**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/scripts/world-happiness)

@@ -131,4 +131,4 @@ The 75 `cycle_*.py` files in the repo are a visible record of the research proce
 - Calibration: Platt scaling (sklearn CalibratedClassifierCV, sigmoid method).
 - Cost model: 100 bps round-trip, max YES price $0.50.
 
-**Code:** [View the pipeline here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/scripts/polymarket-pipeline)
+**Code:** Available on request — pipeline lives in a private repository.
