@@ -100,6 +100,18 @@ Freedom and low corruption matter, but less than the top three. Material and soc
 
 ---
 
+## Finding 5: The Happiness Gap Is Widening
+
+While the global average rises, the gap between the happiest and least happy countries is growing.
+
+[![Chart showing widening happiness gap 2011-2025](/images/happiness-drivers-inequality.png)](/images/happiness-drivers-inequality.png)
+
+The range between the top and bottom country score grew from 4.8 points in 2011 to 6.3 points in 2025 -- a 31% increase. The rising average is real. But the countries that need improvement most are not keeping pace with the countries already at the top.
+
+This matters for how we read the headline trend. A world where the average rises because the top keeps climbing is a different story from a world where the bottom catches up. The data shows the former.
+
+---
+
 ## Three Takeaways
 
 **1. Resilience is real.** The data does not support the narrative that COVID caused a global happiness crash. The decline was minor and short-lived. Human wellbeing is more durable than crisis headlines suggest.

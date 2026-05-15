@@ -13,7 +13,7 @@ excerpt: Four engineering decisions that separate a production-grade prediction 
 mathjax: false
 ---
 
-Polymarket is a prediction market where you bet YES or NO on real-world outcomes. Every contract has a price between $0.01 and $0.99 that reflects the crowd's implied probability of YES resolving. The edge — if any — comes from finding contracts where that price is wrong.
+Polymarket is a prediction market where you bet YES or NO on real-world outcomes. Every contract has a price between $0.01 and $0.99 that reflects the crowd's implied probability of YES resolving. The edge -- if any -- comes from finding contracts where that price is wrong.
 
 The problem: there are dozens of active contracts at any given time, each requiring OHLCV pattern recognition, position sizing, and constant monitoring. That is not a manual workflow.
 
@@ -27,7 +27,7 @@ Here are the four engineering decisions that made the difference between a pipel
 
 The naive approach is to label each bar +1 if the next return is positive and 0 if it is negative. This sounds reasonable and is completely wrong.
 
-Most bars have ambiguous outcomes. A +0.02% return 30 minutes later carries no real signal — it is noise. Labeling it as a "correct long prediction" adds garbage to the training set.
+Most bars have ambiguous outcomes. A +0.02% return 30 minutes later carries no real signal -- it is noise. Labeling it as a "correct long prediction" adds garbage to the training set.
 
 Triple-barrier labeling only assigns a label when the outcome is clear: the price moved a full ATR multiple upward (label: 1) or downward (label: 0) before the time limit expired. Bars that hit the time limit without a definitive resolution are labeled NaN and excluded from training.
 
@@ -43,7 +43,7 @@ def build_triple_barrier_target(
     """
 ```
 
-The labeled dataset is smaller — roughly 40–60% of bars get a clean label. But the signal-to-noise ratio is much better.
+The labeled dataset is smaller -- roughly 40-60% of bars get a clean label. But the signal-to-noise ratio is much better.
 
 ---
 
@@ -73,7 +73,7 @@ The cost is more computation. Each ticker runs multiple folds instead of one. Th
 
 Standard Sharpe ratio ignores trading costs. A strategy that generates many small wins can have a strong Sharpe on paper and lose money in practice once fees are included.
 
-Polymarket charges roughly 2% on winnings — about 100 basis points round-trip. The pipeline deducts this from every simulated trade's return before computing the Sharpe-like objective that Optuna optimizes.
+Polymarket charges roughly 2% on winnings, about 100 basis points round-trip. The pipeline deducts this from every simulated trade's return before computing the Sharpe-like objective that Optuna optimizes.
 
 A second guard: the pipeline skips any bar where the market already implies >50% probability for YES. At a $0.50 YES price, the breakeven win rate after costs is above 50%. The model would need to be more confident than the market already is, in the right direction, to generate edge. That bar is rarely cleared.
 
@@ -81,7 +81,7 @@ A second guard: the pipeline skips any bar where the market already implies >50%
 
 ## Decision 4: Checkpoint-Based Resumability
 
-Each Optuna study runs 60 trials. On CPU, a single ticker takes 20–30 minutes. Four tickers is 2+ hours. A crash halfway through without a checkpoint means restarting everything.
+Each Optuna study runs 60 trials. On CPU, a single ticker takes 20-30 minutes. Four tickers is 2+ hours. A crash halfway through without a checkpoint means restarting everything.
 
 The pipeline writes a JSON checkpoint after each completed ticker. On restart, finished tickers are loaded from the checkpoint and skipped. Only incomplete work is re-run.
 
@@ -91,7 +91,7 @@ with open(checkpoint_path, "w") as f:
     json.dump(checkpoint, f, indent=2, default=str)
 ```
 
-The JSON is human-readable. If a run fails mid-ticker, the checkpoint shows exactly what completed successfully and what needs to be re-run — useful for diagnosing whether the failure was a data issue or a code issue.
+The JSON is human-readable. If a run fails mid-ticker, the checkpoint shows exactly what completed and what needs to be re-run. Useful for diagnosing whether the failure was a data issue or a code issue.
 
 ---
 
@@ -105,7 +105,7 @@ After a full run across all four tickers:
 | Best hyperparameters | `source/best_models_summary_1h.csv` |
 | Run state | `source/checkpoint_1h.json` |
 
-Each model is a calibrated XGBoost classifier — raw probabilities passed through Platt scaling so the 0.6 output actually means roughly 60% confidence, not just "higher than 0.5."
+Each model is a calibrated XGBoost classifier. Raw probabilities pass through Platt scaling so a 0.6 output actually means roughly 60% confidence, not just "higher than 0.5."
 
 ---
 
@@ -113,13 +113,13 @@ Each model is a calibrated XGBoost classifier — raw probabilities passed throu
 
 This pipeline has three significant gaps that would need to be addressed before treating any live results as reliable.
 
-**No data versioning.** The `source/*.parquet` files are overwritten by the download scripts. There is no record of which data version trained which model. A model trained on corrupted or incomplete data would show no obvious failure — it would just perform poorly in live use.
+**No data versioning.** The `source/*.parquet` files are overwritten by the download scripts. There is no record of which data version trained which model. A model trained on corrupted or incomplete data would show no obvious failure -- it would just perform poorly in live use.
 
 **No logging framework.** All status output is `print()`. Silent failures are possible in long runs. A proper logger with timestamps and error capture would make debugging much faster.
 
 **Manual OOS evaluation.** The out-of-sample evaluation script (`eval_april2026.py`) is run manually after training. It is not triggered automatically. It is easy to forget, or to selectively run it only when you expect good results.
 
-The 75 `cycle_*.py` files in the repo are a visible record of the research process — each file is one iteration of trying to improve the labeling, features, or objective. They show what was attempted and abandoned. That trail is intentional.
+The 75 `cycle_*.py` files in the repo are a visible record of the research process. Each file is one iteration of trying to improve the labeling, features, or objective. They show what was attempted and abandoned. That trail is intentional.
 
 ---
 
@@ -131,4 +131,4 @@ The 75 `cycle_*.py` files in the repo are a visible record of the research proce
 - Calibration: Platt scaling (sklearn CalibratedClassifierCV, sigmoid method).
 - Cost model: 100 bps round-trip, max YES price $0.50.
 
-**Code:** Available on request — pipeline lives in a private repository.
+**Code:** Available on request. The pipeline lives in a private repository.
