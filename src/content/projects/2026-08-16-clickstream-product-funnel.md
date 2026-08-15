@@ -7,6 +7,8 @@ excerpt: "A product decision study that separates browsing volume from journey p
 problem: "The store had many browsing events but could not identify which transition in the journey deserved product investment."
 result: "The validated file contains 24,026 sessions and 165,474 events; 79.0% of sessions contain more than one event, while event volume falls from 93,452 at stage 1 to 2,823 at stage 5."
 featured: false
+header:
+  teaser: /images/clickstream-stage-volume.png
 ---
 
 ## Executive summary
@@ -28,6 +30,10 @@ The current file supports stage events, not a trustworthy completed-purchase KPI
 ## Evidence and root-cause view
 
 The event counts are **93,452 → 41,037 → 19,301 → 8,861 → 2,823** across page stages. This establishes where activity thins out, but not why. Possible explanations include weaker content, navigation friction, product availability, or tracking loss. The data cannot distinguish them.
+
+![Browsing volume falls sharply after the first page stage](/images/clickstream-stage-volume.png)
+
+![Most sessions contain several events](/images/clickstream-session-depth.png)
 
 The source has 165,474 rows, 14 fields, no missing values, and no duplicate rows. The unit is an event, not a customer or order. Country and product-model fields also require session-level aggregation to avoid overstating value.
 

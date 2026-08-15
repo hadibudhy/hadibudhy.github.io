@@ -7,6 +7,8 @@ excerpt: "A public-filing analysis that separates reported growth from profitabi
 problem: "Revenue growth can hide margin pressure, while profit growth can be distorted by mix, accounting, or one-off items."
 result: "For Microsoft, SEC Company Facts reports FY2023 revenue of $211.9B and net income of $72.4B, rising to $281.7B and $101.8B in FY2025; reported net margin moved from about 34.1% to 36.1%."
 featured: false
+header:
+  teaser: /images/sec-revenue-net-income.png
 ---
 
 ## Executive summary
@@ -28,6 +30,10 @@ featured: false
 The SEC Company Facts API provides structured filing facts, periods, forms, and filing dates. The Microsoft comparison uses reported annual revenue and net income facts. Revenue rose from **$211.9B to $281.7B**, while net income rose from **$72.4B to $101.8B**. The margin movement is directionally positive, but net income is not the same as operating contribution.
 
 This is evidence of reported improvement, not causal proof. Fiscal periods, amended filings, accounting tags, and restatements must remain visible. The next diagnostic layer is segment revenue, gross margin, operating expense, and cash conversion.
+
+![Revenue and net income both increased across the reported periods](/images/sec-revenue-net-income.png)
+
+![Reported net margin improved, but segment drivers still need review](/images/sec-net-margin.png)
 
 ## Opportunity, trade-offs, and scenarios
 

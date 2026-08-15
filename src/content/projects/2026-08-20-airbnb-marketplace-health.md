@@ -7,6 +7,8 @@ excerpt: "A supply-side marketplace analysis that separates listing growth from 
 problem: "A large listing count does not prove healthy demand, fair choice, or resilient supply."
 result: "The June 2026 snapshot has 30,555 listings; 24.7% of listings belong to the top 1% of observed hosts, and the filtered median listed price is $171."
 featured: false
+header:
+  teaser: /images/airbnb-room-supply.png
 ---
 
 ## Executive summary
@@ -28,6 +30,10 @@ featured: false
 The validated snapshot contains **30,555 listings, 19 columns, and no duplicate rows**. It includes **16,808 entire-home** and **13,009 private-room** listings. After restricting price to $20–$1,000, 21,138 listings remained and the median listed price was **$171**.
 
 The top 1% of observed hosts account for **24.7% of listings**. This is a concentration risk, not proof that these hosts create most bookings. Missing price and license values also require separate treatment; missing license is not evidence of non-compliance.
+
+![Entire homes and private rooms make up almost all visible supply](/images/airbnb-room-supply.png)
+
+![A small host group controls a large share of visible supply](/images/airbnb-host-concentration.png)
 
 ## Opportunity, trade-offs, and scenarios
 

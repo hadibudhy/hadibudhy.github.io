@@ -7,6 +7,8 @@ excerpt: "A commercial decision framework that separates nominal fare movement f
 problem: "A higher average fare can reflect real pricing power, inflation, route mix, or passenger mix; acting on the wrong explanation can reduce demand or margin."
 result: "The official BTS series provides annual and quarterly domestic fares in current and inflation-adjusted dollars, making it possible to separate market context from route-level pricing action."
 featured: false
+header:
+  teaser: /images/airfare-current-adjusted.png
 ---
 
 ## Executive summary
@@ -28,6 +30,8 @@ featured: false
 The [BTS national fare series](https://www.bts.gov/content/national-level-domestic-average-fare-series) publishes current-dollar and inflation-adjusted fare measures, with annual history from 1995 and quarterly releases. Current dollars describe what passengers paid; constant dollars provide a more comparable purchasing-power view.
 
 The national series cannot explain a route-level change. It combines carriers, markets, itinerary lengths, and fare types. A shift in the average may therefore be mix, not a price decision.
+
+![Nominal fare rose slightly while the inflation-adjusted comparison fell](/images/airfare-current-adjusted.png)
 
 ## Driver decomposition and scenario analysis
 

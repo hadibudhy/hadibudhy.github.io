@@ -7,6 +7,8 @@ excerpt: "A workforce decision framework that distinguishes open roles, complete
 problem: "Leaders can misread staffing pressure when openings, hires, and exits are treated as one workforce signal."
 result: "In the BLS December 2025 aggregate series, openings were 6.55 million, hires were 3.3%, quits were 2.0%, and total separations were 5.203 million."
 featured: false
+header:
+  teaser: /images/jolts-december-signals.png
 ---
 
 ## Executive summary
@@ -28,6 +30,10 @@ featured: false
 The BLS API returned December 2025 values of **6.55m openings**, **3.3% hires**, **2.0% quits**, and **5.203m total separations**. Openings measure employer demand; hires measure people starting; quits measure employee-initiated exits; total separations include other exit types.
 
 The data cannot identify a company, team, manager, or role causing turnover. It is also an aggregate estimate that can be revised. Any internal diagnosis must preserve that distinction.
+
+![Openings, hires, quits, and separations are different workforce signals](/images/jolts-december-signals.png)
+
+![Workforce pressure reflects both demand for workers and employee exits](/images/jolts-openings-separations.png)
 
 ## Opportunity, trade-offs, and scenarios
 

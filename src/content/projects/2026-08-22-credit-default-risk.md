@@ -7,6 +7,8 @@ excerpt: "A transparent risk-prioritization study that combines repayment histor
 problem: "A lender needs to focus attention where repayment risk and potential exposure are higher without turning a historical score into an automatic lending decision."
 result: "The validated UCI archive contains 30,000 clients and 24 fields covering credit limits, repayment status, bills, payments, and the observed default outcome."
 featured: false
+header:
+  teaser: /images/credit-default-balance.png
 ---
 
 ## Executive summary
@@ -28,6 +30,10 @@ featured: false
 The official file has **30,000 rows and 24 fields**. The useful business decomposition is **risk signal × exposure**: two accounts with similar observed default risk can create different potential losses when their balances or credit limits differ.
 
 Repayment history should be the first diagnostic layer. Age, education, and other demographic fields may help describe segments, but they should not become a shortcut for a lending decision. The data is observational and historical, so association is not causation.
+
+![Default is a minority outcome, so review capacity must be targeted](/images/credit-default-balance.png)
+
+![Risk review should consider observed default and credit exposure together](/images/credit-default-by-exposure.png)
 
 ## Opportunity, trade-offs, and validation
 

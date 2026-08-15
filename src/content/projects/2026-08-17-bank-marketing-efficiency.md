@@ -7,6 +7,8 @@ excerpt: "A campaign decision study that identifies the strongest response signa
 problem: "The bank made 45,211 contacts, but broad response rates hid the difference between audience quality, channel coverage, and prior campaign history."
 result: "The overall positive-response rate is 11.7%; cellular contacts respond at 14.9%, unknown contact types at 4.1%, and previously successful contacts at 64.7%."
 featured: false
+header:
+  teaser: /images/bank-channel-response.png
 ---
 
 ## Executive summary
@@ -28,6 +30,10 @@ featured: false
 The validated archive has **45,211 rows, 17 fields, no missing values, and no duplicates**. Positive outcomes are 11.7% overall. Cellular response is 14.9%, telephone 13.4%, and unknown contact type 4.1%. Previous successful outcomes respond at 64.7%, while unknown previous outcomes respond at 9.2%.
 
 The channel pattern is associated evidence, not causality. Channel may proxy for data quality or customer selection. The dataset also lacks profit, so optimizing response alone could increase cost without improving value.
+
+![Response differs sharply by recorded contact channel](/images/bank-channel-response.png)
+
+![Previous campaign success is the strongest observed response signal](/images/bank-prior-outcome-response.png)
 
 ## Quantified opportunity and trade-off
 
