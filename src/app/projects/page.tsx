@@ -3,19 +3,19 @@ import { getAllProjects } from "@/lib/mdx";
 
 export const metadata = {
   title: "Case Studies & Projects",
-  description: "Deep dives into my data science and engineering projects.",
+  description: "Business-focused case studies covering data quality, fraud detection, product analytics, and long-term trends.",
   alternates: { canonical: "/projects" },
   openGraph: {
     type: "website",
     url: "https://hadibudhy.github.io/projects",
     title: "Case Studies & Projects | Hadi Budhy",
-    description: "Deep dives into my data science and engineering projects.",
+    description: "Business-focused case studies covering data quality, fraud detection, product analytics, and long-term trends.",
     siteName: "Hadi Budhy",
   },
   twitter: {
     card: "summary",
     title: "Case Studies & Projects | Hadi Budhy",
-    description: "Deep dives into my data science and engineering projects.",
+    description: "Business-focused case studies covering data quality, fraud detection, product analytics, and long-term trends.",
   },
 };
 
@@ -29,8 +29,8 @@ export default function ProjectsPage() {
       <section className="border-b border-white/[0.08]">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
           <p className="section-kicker">Case studies</p>
-          <h1 className="mt-5 max-w-4xl break-words text-[2.7rem] font-black tracking-[-0.05em] text-foreground sm:text-5xl md:text-7xl">The decisions behind the dashboards, models, and pipelines.</h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground">A selection of work across data engineering, predictive modeling, and product analytics—organized around the problem, the approach, and what changed.</p>
+          <h1 className="mt-5 max-w-4xl break-words text-[2.7rem] font-black tracking-[-0.05em] text-foreground sm:text-5xl md:text-7xl">The evidence behind better business decisions.</h1>
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground">A selection of work across data quality, fraud detection, product analytics, and long-term trends. Each case study explains the problem, the evidence, and why the finding matters.</p>
         </div>
       </section>
       <section>

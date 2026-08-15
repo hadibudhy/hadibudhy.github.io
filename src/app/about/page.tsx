@@ -6,19 +6,19 @@ import { careerArc, impactStats, skills } from "@/lib/profile";
 
 export const metadata = {
   title: "About",
-  description: "About Hadi Budhy - Senior Data Analyst & Analytics Engineer",
+  description: "How Hadi Budhy uses data analysis and reliable data systems to support better business decisions.",
   alternates: { canonical: "/about" },
   openGraph: {
     type: "website",
     url: "https://hadibudhy.github.io/about",
     title: "About | Hadi Budhy",
-    description: "About Hadi Budhy - Senior Data Analyst & Analytics Engineer",
+    description: "How Hadi Budhy uses data analysis and reliable data systems to support better business decisions.",
     siteName: "Hadi Budhy",
   },
   twitter: {
     card: "summary",
     title: "About | Hadi Budhy",
-    description: "About Hadi Budhy - Senior Data Analyst & Analytics Engineer",
+    description: "How Hadi Budhy uses data analysis and reliable data systems to support better business decisions.",
   },
 };
 
@@ -31,10 +31,10 @@ export default function AboutPage() {
           <h1 className="mt-5 max-w-4xl break-words text-[2.7rem] font-black tracking-[-0.05em] text-foreground sm:text-5xl md:text-7xl">I make the path from messy data to a better decision shorter.</h1>
           <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
             <div className="space-y-5 text-lg leading-8 text-muted-foreground">
-              <p>I am a Senior Data Analyst and Analytics Engineer with ~6 years of experience based in Jakarta, Indonesia.</p>
-              <p>I started in Business Intelligence and grew into full-stack data work, driven by a desire to turn fragmented pipelines into cohesive business decisions at scale.</p>
+              <p>I am a Senior Data Analyst and Analytics Engineer with about six years of experience, based in Jakarta, Indonesia.</p>
+              <p>I started in Business Intelligence and grew into data analysis and data engineering. My goal is simple: turn scattered information into evidence that helps teams make better decisions.</p>
             </div>
-            <div className="border-l border-primary/50 pl-6 text-sm leading-7 text-slate-300">My work spans data engineering, dimensional modeling, predictive machine learning, and dashboards that help teams act with more confidence.</div>
+            <div className="border-l border-primary/50 pl-6 text-sm leading-7 text-slate-300">My work spans reliable data pipelines, forecasting and classification models, and dashboards that help teams understand what is happening and what to do next.</div>
           </div>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <Button size="lg" asChild><a href="mailto:hadi.budhy@gmail.com"><Mail className="mr-2 h-4 w-4" aria-hidden="true" /> Get in Touch</a></Button>
@@ -58,7 +58,7 @@ export default function AboutPage() {
 
       <section className="border-b border-white/[0.08]">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.7fr_1.3fr] lg:gap-10 md:py-24">
-          <div><p className="section-kicker">Skills</p><h2 className="section-title mt-4">A practical toolkit for the full lifecycle.</h2></div>
+          <div><p className="section-kicker">Skills</p><h2 className="section-title mt-4">A practical toolkit for clear answers.</h2></div>
           <div className="flex flex-wrap content-start gap-3">{skills.map((skill) => <Badge key={skill} variant="secondary" className="px-3 py-1.5 text-sm font-normal text-slate-200">{skill}</Badge>)}</div>
         </div>
       </section>

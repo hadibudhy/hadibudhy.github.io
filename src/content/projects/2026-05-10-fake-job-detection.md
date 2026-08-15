@@ -1,5 +1,5 @@
 ---
-title: "Fake Job Postings: How Machine Learning Can Protect Job Seekers"
+title: "Detecting Fake Job Posts Before They Reach Job Seekers"
 date: 2026-05-10
 categories: machine learning
 tags:
@@ -8,185 +8,112 @@ tags:
   - lightgbm
   - sentence-transformers
   - imbalanced-data
-excerpt: Training three ML models to detect fraudulent job postings -- and finding that the words in a posting matter far more than any metadata field.
-problem: "Fake job postings hide behind a 19:1 class imbalance, making accuracy a misleading success metric."
-result: "The tuned model reached 0.850 F1, 75% recall, and 98% precision at a 0.10 threshold."
+excerpt: "A fraud-detection study showing why the language in a job post is more useful than surface-level profile details."
+problem: "Fake job posts were rare, so a system could appear accurate while missing every scam."
+result: "The best balance caught 75% of fake posts and was correct 98% of the time when it raised an alert."
 featured: true
 header:
   teaser: /images/fake-job-all-models.png
-mathjax: true
 ---
 
-Every year, thousands of people fall victim to fake job postings. Scammers impersonate real companies, promise high pay for "data entry" or "work from home" roles, and collect personal information or upfront fees from job seekers who are genuinely trying to find work.
+## Business context
 
-The dataset used here contains 17,880 job postings from a real employment platform. Only 866 of them are fraudulent -- about 1 in 20. The goal: build a model that can flag fake postings automatically, before a real person gets hurt.
+Fake job posts can harm both job seekers and employment platforms. Scammers may use attractive job titles to collect personal information, request fees, or impersonate real companies.
 
----
+This project uses 17,880 job postings from the Employment Scam Aegean Dataset. Only 866 posts were fraudulent, so fake posts made up about 1 in 20 records.
 
-## The Challenge: Extreme Imbalance
+## Business question
 
-The biggest problem with this dataset is not complexity -- it is proportion. There are **19.6 real postings for every 1 fake posting**. A model that simply labels everything as "real" would be correct 95% of the time. That sounds good, but it would miss every single fraud case.
+Can a platform identify suspicious job posts early enough to protect users, while avoiding too many false alarms for legitimate employers?
 
-This is why accuracy is the wrong metric here. Instead, we track:
-- **Recall:** Of all actual fake postings, how many did we catch?
-- **Precision:** Of the postings we flagged as fake, how many actually were?
-- **F1 score:** The balance between the two.
-- **PR-AUC:** The overall quality of the model across all decision thresholds.
+## How I approached it
 
-To handle the imbalance, every model was trained with a class weight of 19.6 -- making each fake posting count as much as 19.6 real ones during training.
+I compared three ways to identify fraud:
 
----
+1. Read the words and phrases in the posting.
+2. Use profile details such as industry, education, or whether the company had a logo.
+3. Combine the posting's meaning with those profile details.
 
-## The Data: What We Know About Each Posting
+The goal was to compare the signals, not to choose a complex model for its own sake.
 
-Each job posting includes both **text fields** (title, company profile, description, requirements, benefits) and **metadata** (whether the company has a logo, whether questions are asked, employment type, industry, required education).
+## Why accuracy was not enough
 
-From these, 19 features were engineered:
+There were about 19.6 real job posts for every fake post. A system that marked every post as real would be about 95% accurate while missing every scam.
 
-| Type | Examples |
-|------|---------|
-| Text stats | Word count, text length, caps ratio, exclamation count |
-| Presence flags | Has salary listed, has company profile, has department |
-| Suspicious signals | Contains URL, contains phone number pattern |
-| Categorical | Industry, function, required experience, education |
+For this problem, two questions matter more:
 
-All text fields were also combined into a single document per posting for the NLP models.
+- **Recall:** How many of the fake posts did the system catch?
+- **Precision:** When the system flagged a post, how often was it actually fake?
 
----
+The F1 score combines those two measures. It helps show whether the system catches enough fraud without creating too many unnecessary reviews.
 
-## Three Models, Three Approaches
+## Finding 1: The words in the post mattered most
 
-### Model 1: Logistic Regression on TF-IDF
+The model that used profile details without reading the post had the weakest overall F1 score. Adding the text improved performance significantly.
 
-The simplest approach: convert each posting's full text into a matrix of 15,000 word and phrase frequencies, then train a logistic regression with balanced class weights.
+![Text-based signals outperformed profile details when identifying fake job posts](/images/fake-job-all-models.png)
 
-This is a strong baseline. It reads the actual words and phrases in a posting and learns which ones are statistically more common in fake postings versus real ones.
+Scammers can easily add a logo, choose a credible industry, or select “full-time” as the employment type. Their wording is harder to disguise. Phrases such as “earn money from home,” “no experience needed,” and “tax free income” appeared more often in fake posts.
 
-### Model 2: LightGBM on Tabular Features
+**Business meaning:** Content review should be part of a fraud-screening process. Surface-level profile checks alone can create a false sense of security.
 
-A gradient-boosted tree model trained only on the 19 engineered metadata features -- no text. This tests whether we even need to read the posting content to detect fraud.
+## Finding 2: The decision threshold needed to be lower
 
-### Model 3: Sentence Transformers + LightGBM
+The model normally labels a post as fake when its score is above 0.50. That setting was too cautious for a problem where fake posts were rare.
 
-The most advanced approach. Instead of counting words, a pre-trained transformer model (`all-MiniLM-L6-v2`) reads each posting and converts it into a 384-dimensional vector that captures meaning, not just frequency. These semantic embeddings are then combined with the 19 tabular features and fed into LightGBM.
+Testing different thresholds showed that 0.10 gave the best balance for the sentence-based model:
 
----
+- F1 increased from 0.831 to **0.850**.
+- Recall increased from 71% to **75%**.
+- Precision stayed high at **98%**.
 
-## Finding 1: Text Beats Metadata
+In plain terms, the tuned system caught about 75 of every 100 fake posts. When it flagged a post, it was correct about 98 times out of 100 in this test.
 
-The tabular-only model (no text) scored the lowest F1 of all three approaches. Metadata alone -- whether a company has a logo, what employment type is listed, what industry is selected -- is not enough to reliably detect fraud.
+![The best balance between catching fraud and avoiding false alarms appeared at a 0.10 threshold](/images/fake-job-threshold-cv.png)
 
-The moment we add text, performance jumps. Both the TF-IDF logistic regression and the sentence transformer model significantly outperform the metadata-only approach.
+The right threshold is a product decision. A platform that wants to catch more scams may accept more human reviews. A platform that wants fewer reviews may choose a stricter threshold and miss more cases.
 
-[![Chart showing PR curves and metric comparison for all models](/images/fake-job-all-models.png)](/images/fake-job-all-models.png)
+## Finding 3: Fake posts used recognizable language
 
-**Why?** Scammers can easily fake metadata. They can create a profile with a logo, select "Full-time" and "Engineering," and pick a legitimate-sounding industry. But the language they use in the actual job description -- "earn money from home," "no experience needed," "tax free income" -- is much harder to disguise.
+Fake posts often used emotional or aspirational phrases such as “work from home,” “earn,” “tax free,” “typing,” and “data entry.” Some groups appeared to imitate energy companies or promise international opportunities.
 
----
+Real posts were more specific about location, qualifications, and job structure. This difference gives reviewers and future models useful signals to investigate.
 
-## Finding 2: The Default Threshold is Wrong
+![The language patterns that appeared more often in fake and real job posts](/images/fake-job-keywords.png)
 
-Every classifier outputs a probability between 0 and 1. By default, anything above 0.5 is labeled "fake." But with a 19:1 imbalance, the model learns to output very low probabilities for most postings. The default threshold of 0.5 is too conservative.
+## Finding 4: Profile details still added useful context
 
-By testing every threshold from 0.10 to 0.90, the optimal point for the sentence transformer model was found at **threshold = 0.10**.
+Feature contribution analysis showed that industry, the presence of a company profile, required education, text length, capitalization, and exclamation marks all influenced the prediction.
 
-[![Chart showing F1, precision, and recall vs threshold, and 5-fold CV results](/images/fake-job-threshold-cv.png)](/images/fake-job-threshold-cv.png)
+Having a company logo was not the strongest signal. It ranked 11th, which supports the earlier finding: a logo alone is not a reliable sign that a posting is legitimate.
 
-At this threshold:
-- F1 improved from 0.831 to **0.850**
-- Recall improved from 71% to **75%**
-- Precision remained very high at **98%**
+![The profile and writing features that influenced fraud predictions](/images/fake-job-shap.png)
 
-In plain terms: at the tuned threshold, when the model flags a posting as fake, it is correct 98% of the time. And it catches 75 out of every 100 actual fake postings.
+## How stable were the results?
 
----
-
-## Finding 3: Fake Postings Have a Distinctive Language
-
-Using log-odds analysis on unigrams and bigrams, we can identify the words that appear disproportionately in fake versus real postings.
-
-[![Chart showing keyword log-odds for fake vs real postings](/images/fake-job-keywords.png)](/images/fake-job-keywords.png)
-
-**Words that signal fake postings:**
-- "work home," "earn," "tax free," "typing," "data entry," "clerk"
-- "oil gas," "petroleum," "gas industry" -- a cluster of postings impersonating energy companies
-- "30 countries," "solutions global," "duration" -- vague promises of international reach
-
-**Words more common in real postings:**
-- Specific locations: "athens," "berlin," "greece"
-- Academic language: "university degree," "teaching experience"
-- Legitimate operational terms: "permanent positions," "large companies"
-
-The pattern is clear: fake postings use emotional and aspirational language ("earn," "tax free," "work from home"), while real postings are specific about place, qualifications, and structure.
-
----
-
-## Finding 4: What the Model Uses to Decide
-
-SHAP (SHapley Additive exPlanations) values show how much each tabular feature contributes to the model's prediction. Higher values mean the feature has a larger effect on whether a posting is flagged.
-
-[![Chart showing SHAP feature importance for the tabular LightGBM model](/images/fake-job-shap.png)](/images/fake-job-shap.png)
-
-The top drivers:
-
-1. **Industry** -- the industry category selected for the posting is the strongest signal. Fake postings cluster in specific industries that scammers impersonate.
-2. **Has company profile** -- real companies almost always fill in their profile. Missing profile is a strong fraud indicator.
-3. **Required education** -- fake postings often skip this or set it to "unspecified."
-4. **Word count and text length** -- fraudulent postings tend to be shorter or use padding differently from real ones.
-5. **Caps ratio and exclamation count** -- excessive capitalization and exclamation marks are a measurable red flag.
-
-`has_company_logo` -- often cited as the key signal in fraud detection -- ranked only 11th. The richer context from text and structural features matters more.
-
----
-
-## Cross-Validation: Results Hold Across Folds
-
-To confirm the results are not a product of one lucky train/test split, 5-fold stratified cross-validation was run on the full dataset using the tuned sentence transformer model.
-
-| Fold | F1 | ROC-AUC |
-|------|----|---------|
-| 1 | 0.842 | 0.986 |
-| 2 | 0.838 | 0.987 |
-| 3 | 0.838 | 0.988 |
-| 4 | 0.822 | 0.989 |
-| 5 | 0.786 | 0.980 |
-| **Mean** | **0.825 ± 0.021** | **0.986 ± 0.003** |
-
-The ROC-AUC is remarkably stable across all five folds (0.003 standard deviation). F1 varies slightly more, which is expected given the small number of positive examples in each fold (~173 per test set). The model is not overfit.
-
----
-
-## Final Model Comparison
+I tested the tuned model across five different data splits. The average F1 score was **0.825 +/- 0.021**, and the average ROC-AUC was **0.986 +/- 0.003**. The results were consistent enough to support the main findings, although the F1 score varied more because each test split contained only about 173 fake posts.
 
 | Model | F1 | Recall | PR-AUC |
 |-------|----|--------|--------|
-| LR (TF-IDF text only) | 0.819 | **0.913** | **0.927** |
-| LightGBM (metadata only) | 0.828 | 0.723 | 0.915 |
-| ST + LightGBM (default threshold) | 0.831 | 0.711 | 0.901 |
-| **ST + LightGBM (tuned threshold)** | **0.850** | 0.751 | 0.901 |
+| Logistic regression using text | 0.819 | **0.913** | **0.927** |
+| LightGBM using profile details | 0.828 | 0.723 | 0.915 |
+| Sentence model + LightGBM, default threshold | 0.831 | 0.711 | 0.901 |
+| **Sentence model + LightGBM, tuned threshold** | **0.850** | 0.751 | 0.901 |
 
-If the goal is to **catch as many fakes as possible** (highest recall), the simple TF-IDF logistic regression wins -- it catches 91% of fraudulent postings. If the goal is **highest overall F1**, the tuned sentence transformer model wins.
+The simple text model caught the most fake posts, with 91.3% recall. The tuned combined model had the highest F1 score and very high precision. The best choice depends on whether the platform values maximum fraud detection or fewer false alarms.
 
-Both are valid choices depending on the product decision: prioritize catching more fraud at the cost of more false alarms, or flag less but with very high confidence.
+## Recommendation
 
----
+Use text as the first line of screening, combine it with profile details, and set the threshold according to the cost of missed scams and manual reviews. Any production system should also keep human review in the loop and monitor how performance changes as scam language evolves.
 
-## Three Takeaways
+## Takeaway
 
-**1. Read the text.** Metadata fields (logo, questions, employment type) are easy for scammers to fake. The actual language used in a job description is far harder to disguise. Any fraud detection system that ignores text is leaving most of the signal on the table.
+The strongest fraud signal was not whether a company had a logo. It was the language and structure of the job post. A practical screening system should read the content, tune its decision threshold, and make the trade-off between protection and review effort explicit.
 
-**2. Set your threshold deliberately.** The default 0.5 threshold is wrong for any severely imbalanced problem. In this case, 0.10 was optimal. This is a business decision -- how much do you weigh the cost of missing a fake posting versus the cost of wrongly flagging a real one?
+## Supporting technical detail
 
-**3. Scammers cluster around recognizable patterns.** "Oil and gas," "data entry," "work from home," "earn money" -- these are not random. Scammer communities share templates. A model trained on historical fraud will generalize well because the playbook does not change quickly.
+The study compared logistic regression using TF-IDF word and phrase counts, LightGBM using 19 profile features, and a sentence-embedding model combined with LightGBM. The embedding model represented the meaning of each post in 384 dimensions. Feature contribution values were calculated on a 200-sample stratified test subset.
 
----
+**Dataset:** 17,880 job postings, including 866 fraudulent records. The train/test split was 80/20 and stratified by the target label.
 
-**Methodology notes:**
-- Dataset: 17,880 job postings, 866 fraudulent (4.8%). Source: Employment Scam Aegean Dataset (EMSCAD).
-- Train/test split: 80/20 stratified by target.
-- Class imbalance handled via `scale_pos_weight=19.6` (LightGBM) and `class_weight='balanced'` (Logistic Regression).
-- Sentence embeddings: `all-MiniLM-L6-v2` via sentence-transformers, 384 dimensions.
-- SHAP values computed on a 200-sample stratified subset of the test set.
-- Keyword log-odds computed on full training corpus using CountVectorizer bigrams.
-
-**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/legacy_jekyll/scripts/fake-job-detection)
+**Code and data:** [View the analysis scripts](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/legacy_jekyll/scripts/fake-job-detection)

@@ -1,5 +1,5 @@
 ---
-title: "World Happiness: What 14 Years of Data Actually Shows"
+title: "What 14 Years of Happiness Data Really Shows"
 date: 2026-05-10
 categories: product analytics
 tags:
@@ -7,46 +7,43 @@ tags:
   - world-happiness-report
   - python
   - exploratory-analysis
-excerpt: Using a balanced panel of 129 countries to find out what drives national happiness -- and what the numbers get wrong.
+excerpt: "A long-term view of national happiness that separates real trends from changes in the countries being measured."
 problem: "Single-year rankings obscure how happiness changes across countries and over time."
-result: "A balanced panel of 129 countries across 14 years exposed the trend, risers, fallers, and strongest correlates."
+result: "The same 129 countries were compared across 14 years, revealing the biggest gains, losses, and relationships."
 featured: true
 header:
   teaser: /images/happiness-beat01.png
-mathjax: true
 ---
 
-Every year, the World Happiness Report ranks countries by how happy their citizens feel on a 0–10 scale. The headlines are usually the same: Finland is number one, Afghanistan is last, and the Nordic countries dominate the top 10.
+## Business context
 
-But what happens when you look at 14 years of data instead of just one year? The trends tell a more interesting story -- one about resilience, shifting regions, and a factor that barely matters at all.
+The World Happiness Report is often discussed as a yearly ranking: Finland is near the top, Afghanistan is near the bottom, and the Nordic countries often lead.
 
----
+Rankings are easy to share, but they can hide the longer story. A country may appear to move up or down because the set of countries being measured has changed. A multi-year view is more useful for understanding progress, risk, and where conditions are improving or deteriorating.
 
-## The Setup: Why a Balanced Panel Matters
+## Business question
 
-The dataset covers 168 countries from 2011 to 2025 (2013 is missing). But a simple average across all countries each year is misleading. As lower-scoring countries drop in and out of the survey, the average moves for the wrong reasons.
+How has national happiness changed over 14 years, which countries are moving most, and which conditions are most closely connected with higher scores?
 
-To fix this, I used a **balanced panel**: the 129 countries that appear in all 14 measured years. Any trend in this subset is real -- not a side effect of changing sample composition.
+## How I approached it
 
----
+The source covers 168 countries from 2011 to 2025, with no measurement for 2013. I focused on the 129 countries that appear in all 14 measured years. This balanced group makes year-to-year comparisons more consistent because the same countries are being compared each time.
 
-## Finding 1: The World Is Getting Happier -- Even Through COVID
+The happiness score is a self-reported 0-to-10 life evaluation. It measures how people rate their lives overall, not their mood at a particular moment.
 
-The balanced panel average rose from **5.47 in 2011 to 5.74 in 2025**, a gain of +0.26 points over 14 years.
+## Finding 1: The global average rose, even through COVID
 
-What is surprising is what happened in 2020. The first year of COVID lockdowns, when most people expected global wellbeing to crash, the average actually rose slightly. There was a small dip in 2021 and 2022, then a full recovery by 2023 and a 14-year high by 2025.
+The average score for the balanced group increased from **5.47 in 2011 to 5.74 in 2025**, a gain of 0.26 points.
 
-[![Chart showing global happiness trend 2011-2025](/images/happiness-beat01.png)](/images/happiness-beat01.png)
+The average rose slightly in 2020, dipped in 2021 and 2022, then recovered by 2023 and reached a 14-year high in 2025.
 
-**Why might this be?** The happiness measure used here is the Cantril ladder -- "imagine a ladder from 0 at the bottom to 10 at the top, where would you stand today?" It captures overall life evaluation, not moment-to-moment mood. People who kept their jobs, their families, and their health during COVID may have re-evaluated their lives positively. The structural factors that predict happiness -- social support networks, trust in institutions, personal freedom -- were not destroyed by the pandemic.
+![The average happiness score rose over time and recovered after the 2021-2022 dip](/images/happiness-beat01.png)
 
-**Important caveat:** This is self-reported and survey-based. It may not capture grief, economic hardship, or anxiety that people did not connect to their overall life rating.
+**What this means:** The data does not show a long global happiness collapse during COVID. That does not remove the pain, loss, or anxiety caused by the pandemic. It shows that an overall life evaluation can behave differently from short-term mood or daily stress.
 
----
+## Finding 2: Eastern Europe showed the strongest gains
 
-## Finding 2: Eastern Europe Is the World's Fastest-Rising Region
-
-Looking at the top 8 risers from 2011 to 2025, 7 of the 8 are post-Soviet or Balkan countries. China is the exception.
+Seven of the eight largest risers were post-Soviet or Balkan countries. China was the exception.
 
 | Country | 2011 Score | 2025 Score | Change |
 |---------|-----------|-----------|--------|
@@ -59,76 +56,60 @@ Looking at the top 8 risers from 2011 to 2025, 7 of the 8 are post-Soviet or Bal
 | Romania | 5.18 | 6.63 | +1.45 |
 | China | 4.68 | 6.07 | +1.39 |
 
-These countries started from very low baselines in 2011. The gains reflect rising living standards and institutional development across the post-communist world. Serbia gained more happiness in 14 years than many wealthy nations have accumulated over generations.
+These countries started from relatively low scores. Their gains are consistent with improving living standards and institutions, although this analysis does not prove that one specific policy caused the improvement.
 
-The fallers tell a different story -- mostly conflict, economic collapse, or governance failure:
+The largest decline was in Afghanistan: **-2.81 points**, from 4.26 in 2011 to 1.45 in 2025. Lebanon, Malawi, and Jordan also experienced large falls. Conflict, economic collapse, and governance problems are important context for these results.
 
-[![Chart showing top risers and fallers 2011-2025](/images/happiness-beat02.png)](/images/happiness-beat02.png)
+![The largest risers and fallers show how quickly national conditions can change](/images/happiness-beat02.png)
 
-Afghanistan's decline is the sharpest in the dataset: **-2.81 points** over 14 years. The score had been falling gradually since 2011 (from 4.26 to 2.57 by 2019), but the Taliban takeover in 2021 accelerated the drop to 1.45 by 2025 -- the lowest score in the world.
+## Finding 3: The gap is not about money alone
 
-Lebanon (-1.33), Malawi (-1.34), and Jordan (-1.23) show how economic collapse and regional instability erode wellbeing over time.
+In 2025, the top 10 countries averaged **7.33**, while the bottom 10 averaged **3.36**. That is a four-point difference on a 10-point scale.
 
----
+The largest gaps between the groups were:
 
-## Finding 3: The Gap Is Not About Money Alone
+- **GDP per person:** 0.83 points.
+- **Social support:** 0.82 points.
+- **Life expectancy:** 0.62 points.
 
-In 2025, the top 10 happiest countries (Finland, Iceland, Denmark, Costa Rica, Sweden, Norway, Netherlands, Israel, Luxembourg, Switzerland) score an average of **7.33**. The bottom 10 score **3.36** -- a 4-point divide.
+![The largest differences between the happiest and least happy countries include money, support, and health](/images/happiness-beat03.png)
 
-Each happiness score is built from six measured factors plus a baseline component. When you stack those factors for the two groups, the gap becomes visible:
+**Business meaning:** Economic resources matter, but they are not the whole story. Access to support and the ability to live a healthy life are nearly as important in the group comparison.
 
-[![Chart showing factor decomposition for top 10 vs bottom 10](/images/happiness-beat03.png)](/images/happiness-beat03.png)
+## Finding 4: Social support, income, and health had the strongest relationships with happiness
 
-The biggest raw gaps between the two groups:
+Using factor data from 2019 to 2025, the strongest relationships with the final happiness score were:
 
-- **GDP per capita:** 1.96 (top 10) vs 1.13 (bottom 10) -- gap of **0.83 points**
-- **Social support:** 1.58 vs 0.76 -- gap of **0.82 points**
-- **Life expectancy:** 0.95 vs 0.32 -- gap of **0.62 points**
+- Social support: **r = 0.71**
+- GDP per person: **r = 0.68**
+- Life expectancy: **r = 0.66**
 
-GDP has the largest absolute gap, but social support is close. The bottom 10 are not only poorer -- they also score significantly lower on having people to count on in a crisis, and on living long enough to accumulate life satisfaction. These structural deficits compound each other.
+These factors are also related to each other. Wealthier countries often have better healthcare and stronger safety nets, so this analysis cannot separate the individual effect of each factor.
 
----
+Generosity had almost no relationship with the national happiness score (**r = 0.03**). This does not mean generosity has no value for individuals. It means charitable giving alone did not explain differences between countries in this dataset.
 
-## Finding 4: What Actually Predicts National Happiness
+![Social support, income, and health showed the strongest relationships with happiness](/images/happiness-beat04.png)
 
-Using factor data from 2019 to 2025 (1,013 country-years), I measured the correlation of each factor with the final happiness score:
+## Finding 5: The gap between countries widened
 
-[![Chart showing factor correlations with happiness score](/images/happiness-beat04.png)](/images/happiness-beat04.png)
+The range between the highest and lowest country scores grew from 4.8 points in 2011 to 6.3 points in 2025, an increase of 31%.
 
-Three factors cluster tightly at the top: **social support (r=0.71), GDP per capita (r=0.68), and life expectancy (r=0.66)**. They are all strongly correlated with each other -- wealthier countries tend to have better healthcare and stronger safety nets -- so separating their individual effects is difficult.
+So the global average rose, but the countries at the bottom did not keep pace with the countries at the top. That is a more important signal than the average alone because it shows that progress was uneven.
 
-The outlier finding: **generosity has a near-zero correlation (r=0.03) with national happiness**. Countries where people report giving more to charity are not systematically happier at the national level. This does not mean generosity is meaningless for individuals -- but it does not move the needle at country scale.
+![The gap between the highest and lowest country scores widened over time](/images/happiness-drivers-inequality.png)
 
-Freedom and low corruption matter, but less than the top three. Material and social security appears to have a larger effect than political conditions alone.
+## Recommendations
 
----
+1. **Track progress over time, not only rankings.** A single yearly position can hide meaningful improvement or decline.
+2. **Look beyond income.** Social support and health deserve equal attention when evaluating wellbeing and development.
+3. **Focus on the bottom of the distribution.** A rising average does not mean that the countries with the lowest scores are improving at the same pace.
 
-## Finding 5: The Happiness Gap Is Widening
+## Takeaway
 
-While the global average rises, the gap between the happiest and least happy countries is growing.
+National happiness improved on average over these 14 years, but progress was uneven. The strongest relationships were linked to social support, income, and health, while generosity alone did not explain country-level differences.
 
-[![Chart showing widening happiness gap 2011-2025](/images/happiness-drivers-inequality.png)](/images/happiness-drivers-inequality.png)
+## Supporting technical detail
 
-The range between the top and bottom country score grew from 4.8 points in 2011 to 6.3 points in 2025 -- a 31% increase. The rising average is real. But the countries that need improvement most are not keeping pace with the countries already at the top.
+The analysis uses a balanced panel of 129 countries across all 14 measured years. Factor data is available from 2019 onward, and all factors were checked against the reported happiness score with a maximum rounding difference of 0.003. The results use a self-reported life-evaluation scale, not an objective measure of wellbeing.
 
-This matters for how we read the headline trend. A world where the average rises because the top keeps climbing is a different story from a world where the bottom catches up. The data shows the former.
-
----
-
-## Three Takeaways
-
-**1. Resilience is real.** The data does not support the narrative that COVID caused a global happiness crash. The decline was minor and short-lived. Human wellbeing is more durable than crisis headlines suggest.
-
-**2. Post-communist countries are the biggest comeback story.** A decade of institutional development and rising living standards has driven some of the largest happiness gains ever recorded. This pattern is worth watching over the next decade.
-
-**3. Generosity is not what you think.** At the national level, how much people donate has almost no relationship with how happy they are. Social support -- having someone to count on -- matters far more. The difference: generosity is an act; social support is a structure.
-
----
-
-**Methodology notes:**
-- Balanced panel of 129 countries (all 14 measured years). Year 2013 missing from source data.
-- Factor data (explained components) available from 2019 onward only.
-- All factors verified to sum to the happiness score (max rounding error: 0.003).
-- Self-reported Cantril ladder scale, not objective wellbeing measure.
-
-**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/legacy_jekyll/scripts/world-happiness)
+**Code and data:** [View the analysis scripts](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/legacy_jekyll/scripts/world-happiness)

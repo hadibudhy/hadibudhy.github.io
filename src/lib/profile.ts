@@ -20,7 +20,7 @@ export const skills = [
 export const impactStats = [
   { value: "<10 min", label: "incident response time" },
   { value: "10M+", label: "rows clustered" },
-  { value: "12–18%", label: "marketing engagement increase" },
+  { value: "12-18%", label: "marketing engagement increase" },
 ];
 
 export const careerArc = [
@@ -31,12 +31,12 @@ export const careerArc = [
   },
   {
     index: "02",
-    title: "Full-stack data work",
-    description: "Expanded into engineering, dimensional modeling, predictive modeling, and the systems behind trustworthy analysis.",
+    title: "Broader data work",
+    description: "Expanded from reporting into data pipelines, predictive models, and the systems behind trustworthy analysis.",
   },
   {
     index: "03",
     title: "Decision systems",
-    description: "Now focused on the connection between reliable pipelines, actionable models, and decisions that move the business forward.",
+    description: "Now focused on connecting reliable data with clear recommendations and better business decisions.",
   },
 ];

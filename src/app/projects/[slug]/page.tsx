@@ -126,10 +126,10 @@ export default async function ProjectPage({ params }: Props) {
           )}
         </header>
 
-        {/* TL;DR Section - A strong addition for recruiters */}
+        {/* Short summary for readers who are scanning the case study */}
         {project.meta.excerpt && (
           <div className="mb-12 rounded-2xl border border-primary/20 bg-primary/5 p-5 sm:mb-16 sm:p-6 md:p-8">
-            <h3 className="text-lg font-bold text-primary mb-3 uppercase tracking-wider text-sm">TL;DR Impact</h3>
+            <h3 className="text-lg font-bold text-primary mb-3 uppercase tracking-wider text-sm">In brief</h3>
             <p className="text-lg text-slate-200 leading-relaxed font-medium">
               {project.meta.excerpt}
             </p>

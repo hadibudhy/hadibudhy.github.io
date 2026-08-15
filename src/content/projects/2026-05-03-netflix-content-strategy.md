@@ -1,80 +1,73 @@
 ---
-title: "Netflix Strategy: Why 'Older' Content Is Actually a Smart Business Decision"
+title: "Netflix: Why Older Movies Can Support Growth"
 date: 2026-05-03
 categories: [product analytics]
 tags: [business-strategy, data-analysis, netflix, content-growth]
-excerpt: "Analyzing Netflix's content trends to reveal two hidden strategies and how to fix the risks behind the numbers."
+excerpt: "A catalog analysis showing why one freshness score can hide different strategies for shows and movies."
 header:
   teaser: "/images/netflix-beat01.png"
-mathjax: "true"
 ---
 
-The leadership team at Netflix had a concern: the content in the US catalog seemed to be getting "older." Between 2015 and 2021, the amount of brand-new content fell from 72% to just 28%. At first glance, this looked like a failure to keep the platform fresh. 
+## Business context
 
-However, after looking closer at the data, we discovered that this wasn't a mistake—it was a deliberate business move. 
+Netflix's US catalog appeared to be getting older. From 2015 to 2021, the share of brand-new content fell from 72% to 28%. If freshness is treated as the main goal, that looks like a warning sign.
 
----
+But a catalog is not one product. New TV shows and older movies can serve different customer needs. I reviewed the data to understand whether the overall decline in freshness represented a real problem or a change in strategy.
 
-## The Hidden Truth in the Numbers
+## Business question
 
-When we look at the big picture, the numbers can be misleading. To understand what was really happening, we had to split the data into two main groups: **TV Shows** and **Movies**.
+Is Netflix becoming less attractive because its catalog is older, or is the company using new shows and older movies for different purposes?
 
-The results showed two completely different stories:
-- **TV Shows are getting fresher:** The number of new shows added to Netflix actually **increased** by 21% (from 40% to 61% fresh content).
-- **Movies are getting older:** Netflix has intentionally started adding more "classic" or older movies to build a deep library.
+## How I approached it
 
-Because there are many more movies than TV shows in the catalog, the "older movies" trend made the whole platform look like it was failing, even though TV shows were performing better than ever.
+I separated the catalog into TV shows and movies, then compared freshness by content category. I also reviewed repeat director partnerships and the completeness of content information in the UK catalog. This made it possible to look beyond one headline number and find the business decisions behind the trend.
 
-![Chart showing TV vs Movie trends](/images/netflix-beat01.png)
+## Finding 1: TV shows became fresher while movies became older
 
-**The Business Lesson:** Tracking everything with one single number can hide the truth. You need different goals for different types of products.
+The two content types moved in opposite directions:
 
----
+- The share of new TV shows increased by 21%, from 40% to 61%.
+- Movies became older overall, which increased the depth of the library.
 
-## Targeted Growth in Specific Areas
+Because the catalog contains many more movies than TV shows, the movie trend made the whole platform look less fresh. The combined number hid the fact that Netflix was investing in new shows while building a library of movies that could keep attracting viewers over time.
 
-The shift toward older content isn't happening everywhere. By grouping titles into categories, we found that Netflix is focusing its "library-building" strategy on two specific areas:
-1. **International Dramas:** Older titles in this category jumped from 6% to 47%.
-2. **Family & Kids Movies:** Older titles here grew from 16% to 48%.
+![TV shows became fresher while the movie library grew older](/images/netflix-beat01.png)
 
-This shows that Netflix is being very specific about where they want to own "classic" content versus where they want "brand-new" content.
+**Why it matters:** A single freshness target could encourage the wrong decision. Shows and movies need separate goals because they play different roles in the product.
 
-![Chart showing library growth by category](/images/netflix-beat03.png)
+## Finding 2: The library strategy was focused
 
----
+Older content did not grow equally across every category. The largest increases appeared in:
 
-## The Partnership Problem with Documentaries
+- **International dramas:** older titles rose from 6% to 47%.
+- **Family and kids movies:** older titles rose from 16% to 48%.
 
-We also looked at how often Netflix works with the same directors. Working with the same people usually makes business faster and cheaper.
-- In **Family Content**, Netflix has strong, repeat partnerships.
-- In **Documentaries**, almost every project is with a new director.
+This suggests a focused library-building strategy rather than a general decline in quality or investment. Netflix appears to be building depth where a strong collection can continue to serve viewers.
 
-This means every documentary requires a new contract, new negotiations, and new relationships from scratch. This is a missed opportunity for better efficiency and lower costs.
+![Library growth was concentrated in international dramas and family movies](/images/netflix-beat03.png)
 
----
+## Finding 3: Documentary partnerships may be less efficient
 
-## The Quality Risk: Missing Information
+Family content showed strong repeat partnerships with directors. Documentaries, however, were usually made with a new director each time.
 
-A real problem we found is in the **UK catalog**. For content added in the 2020s, about 13% of the titles are missing important information (like descriptions or tags).
+The data does not prove that repeat partnerships would improve documentary performance. It does show a possible efficiency opportunity: every new partnership requires fresh negotiations, contracts, and relationship-building.
 
-Surprisingly, older content has much better information than the new content. This isn't just a backlog of work; it’s a failure in how new content is added to the system. Missing information makes it harder for users to find what they want to watch.
+## Finding 4: Missing information creates a customer experience risk
 
-![Chart showing missing metadata trends](/images/netflix-beat05.png)
+In the UK catalog, about 13% of titles added in the 2020s were missing important information, such as descriptions or tags. Older content had more complete information than newer content.
 
----
+This points to a process problem in how new titles are added. Missing descriptions and tags make content harder to find and harder to evaluate, even when the underlying catalog strategy is sound.
 
-## Three Recommendations for the Future
+![Newer UK titles were more likely to have missing content information](/images/netflix-beat05.png)
 
-To keep growing successfully, Netflix should focus on these three business goals:
+## Recommendations
 
-1. **Use Separate Metrics:** Stop tracking "freshness" as one number. Create one goal for new TV shows and a different goal for the movie library.
-2. **Fix the Data Pipeline:** Ensure that every new title has complete information before it goes live. This is especially important for the UK market.
-3. **Build Long-Term Partnerships:** Create "first-look" deals with documentary directors to save time and money on negotiations.
+1. **Use separate freshness goals.** Track new TV shows and the depth of the movie library separately so one trend does not hide the other.
+2. **Check content information before launch.** Require descriptions and tags to be complete before a new title goes live, especially in the UK catalog.
+3. **Test repeat partnerships in documentaries.** Explore longer-term relationships where they could reduce negotiation effort without limiting creative choice.
 
-### Final Thought
+## Takeaway
 
-Netflix isn't "getting old" by accident. It is building a powerful library of movies while keeping its TV shows fresh. The real risk isn't the strategy—it’s how we measure it and how we manage the details like data quality and partner relationships.
+The catalog was not simply getting worse. Netflix appeared to be keeping TV shows fresh while building a deeper movie library. The bigger risks were using one metric to judge both strategies and allowing new content to launch with incomplete information.
 
----
-
-**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/legacy_jekyll/scripts/netflix)
+**Code and data:** [View the analysis scripts](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/legacy_jekyll/scripts/netflix)

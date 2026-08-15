@@ -19,14 +19,14 @@ export default function Home() {
           <div className="min-w-0">
             <div className="mb-7 flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">
               <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_16px_rgba(59,130,246,0.9)]" />
-              Senior Data Analyst · Analytics Engineer
+              Senior Data Analyst / Analytics Engineer
               <span className="text-muted-foreground">/ Jakarta, ID</span>
             </div>
             <h1 className="max-w-4xl break-words text-[2.7rem] font-black leading-[0.98] tracking-[-0.055em] text-foreground sm:text-6xl lg:text-7xl">
               I turn unreliable data into <span className="text-primary">decisions people can act on.</span>
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground md:text-xl">
-              I build the pipelines, models, and analytics that make messy business data trustworthy—and useful.
+              I turn messy business data into clear evidence, useful recommendations, and better decisions.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button size="lg" asChild className="w-full sm:w-auto">
@@ -39,7 +39,7 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
               <a href="https://github.com/hadibudhy" target="_blank" rel="noreferrer" className="transition-colors hover:text-foreground">GitHub ↗</a>
               <a href="https://linkedin.com/in/hadibudhy" target="_blank" rel="noreferrer" className="transition-colors hover:text-foreground">LinkedIn ↗</a>
-              <span>~6 years across the data lifecycle</span>
+              <span>~6 years turning data into decisions</span>
             </div>
           </div>
 
@@ -49,18 +49,18 @@ export default function Home() {
               <ArrowDownRight className="h-5 w-5 text-primary" aria-hidden="true" />
             </div>
             <div className="space-y-7">
-              {["Reliable data foundations", "Predictive models with intent", "Decision-ready analytics"].map((item, index) => (
+              {["Reliable data foundations", "Models built for a clear question", "Decision-ready analytics"].map((item, index) => (
                 <div key={item} className="flex gap-4">
                   <span className="font-mono text-sm text-primary">0{index + 1}</span>
                   <div>
                     <h2 className="text-lg font-bold text-foreground">{item}</h2>
-                    <p className="mt-1 text-sm leading-6 text-muted-foreground">{["From extraction and modeling to quality checks and ownership.", "From segmentation and churn to NLP classification and fraud signals.", "From dashboards and experiments to a clearer next decision."][index]}</p>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground">{["Clean, tested data that teams can use with confidence.", "Models that answer a clear question instead of adding complexity.", "Dashboards and analysis that make the next action easier to see."][index]}</p>
                   </div>
                 </div>
               ))}
             </div>
             <div className="mt-10 border-t border-white/[0.1] pt-5 text-sm text-muted-foreground">
-              <span className="text-primary">Available for thoughtful data work.</span> Let&apos;s make the numbers useful.
+              <span className="text-primary">Available for practical data work.</span> Let&apos;s make the numbers useful.
             </div>
           </aside>
         </div>
@@ -83,7 +83,7 @@ export default function Home() {
             <div>
               <p className="section-kicker">Career arc</p>
               <h2 className="section-title mt-4">A career built across the data lifecycle.</h2>
-              <p className="mt-5 leading-7 text-muted-foreground">From BI foundations to full-stack data work, my focus has stayed consistent: make complex information easier to trust and act on.</p>
+              <p className="mt-5 leading-7 text-muted-foreground">From reporting foundations to data systems, my focus has stayed consistent: make complex information easier to trust and act on.</p>
             </div>
             <div className="space-y-0">
               {careerArc.map((item) => (
@@ -106,7 +106,7 @@ export default function Home() {
             <div>
               <p className="section-kicker">Selected work</p>
               <h2 className="section-title mt-4">Proof, not just promises.</h2>
-              <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">Case studies that show the problem, the decisions behind the approach, and what the analysis surfaced.</p>
+              <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">Case studies that explain the problem, the evidence, the business meaning, and what to consider next.</p>
             </div>
             <Link href="/projects" className="inline-flex items-center text-sm font-bold text-primary transition-colors hover:text-foreground">View all projects <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" /></Link>
           </div>
@@ -125,7 +125,7 @@ export default function Home() {
           <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.7fr_1.3fr] lg:gap-10 md:py-24">
           <div>
             <p className="section-kicker">Toolkit</p>
-            <h2 className="section-title mt-4">The tools behind the work.</h2>
+            <h2 className="section-title mt-4">Skills that support better decisions.</h2>
           </div>
           <div className="flex content-start flex-wrap gap-3">
             {skills.map((skill) => <span key={skill} className="rounded-full border border-white/[0.12] bg-card px-4 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:border-primary/60 hover:text-primary">{skill}</span>)}
@@ -141,7 +141,7 @@ export default function Home() {
               <div>
                 <p className="section-kicker">Next conversation</p>
                 <h2 className="mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground md:text-5xl">Have a messy data problem worth making clear?</h2>
-                <p className="mt-5 max-w-xl leading-7 text-muted-foreground">I&apos;m open to conversations about analytics, data engineering, and decision systems that create practical leverage.</p>
+                <p className="mt-5 max-w-xl leading-7 text-muted-foreground">I&apos;m open to conversations about analytics, data work, and decisions that need clearer evidence.</p>
               </div>
               <Button size="lg" asChild className="w-full sm:w-auto"><a href="mailto:hadi.budhy@gmail.com">Let&apos;s talk <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" /></a></Button>
             </div>
