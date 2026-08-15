@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hadi Budhy Portfolio
 
-## Getting Started
+Static Next.js portfolio for Hadi Budhy, built with the App Router, TypeScript, Tailwind CSS, and Markdown case studies.
 
-First, run the development server:
+## Development
+
+Requirements: Node.js 20 or newer.
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Project case studies live in `src/content/projects/`. Images and other static assets live in `public/`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Validation
 
-## Learn More
+```bash
+npm run lint
+npx tsc --noEmit --incremental false
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+The production build is a static export written to `out/`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+GitHub Actions deploys `out/` to GitHub Pages when changes are pushed to `master`. See `.github/workflows/nextjs.yml`.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The navigation Contact button uses email until a real resume PDF is added to `public/resume.pdf`.

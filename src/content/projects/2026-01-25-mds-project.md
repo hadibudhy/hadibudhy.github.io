@@ -6,6 +6,7 @@ tags: [data engineering, sql, dbt, databricks]
 excerpt: "From ad-hoc SQL to a versioned, tested Modern Data Stack pipeline"
 problem: "Ad-hoc SQL queries lacked version control, testing, and scalability."
 result: "Built an automated pipeline with dbt and Databricks."
+featured: true
 header:
   teaser: "/images/mds-project.png"
 mathjax: "true"

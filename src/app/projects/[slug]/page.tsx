@@ -5,7 +5,8 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft, Calendar, Tag } from "lucide-react";
 import Link from "next/link";
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
+import type { ComponentProps } from "react";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -26,33 +27,50 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: project.meta.title,
     description: project.meta.excerpt,
+    alternates: { canonical: `/projects/${project.slug}` },
+    openGraph: {
+      type: "article",
+      url: `https://hadibudhy.github.io/projects/${project.slug}`,
+      title: project.meta.title,
+      description: project.meta.excerpt,
+      siteName: "Hadi Budhy",
+    },
+    twitter: {
+      card: "summary",
+      title: project.meta.title,
+      description: project.meta.excerpt,
+    },
   };
 }
 
+type MDXImageProps = ComponentProps<"img">;
+
 // Custom components for MDX
 const components = {
-  h2: (props: any) => <h2 className="text-2xl font-bold mt-12 mb-6 tracking-tight text-slate-100 border-b border-border pb-2" {...props} />,
-  h3: (props: any) => <h3 className="text-xl font-bold mt-8 mb-4 tracking-tight text-slate-200" {...props} />,
-  p: (props: any) => <p className="leading-7 [&:not(:first-child)]:mt-6 text-muted-foreground" {...props} />,
-  ul: (props: any) => <ul className="my-6 ml-6 list-disc [&>li]:mt-2 text-muted-foreground" {...props} />,
-  ol: (props: any) => <ol className="my-6 ml-6 list-decimal [&>li]:mt-2 text-muted-foreground" {...props} />,
-  li: (props: any) => <li className="leading-7" {...props} />,
-  blockquote: (props: any) => (
+  h2: (props: ComponentProps<"h2">) => <h2 className="text-2xl font-bold mt-12 mb-6 tracking-tight text-slate-100 border-b border-border pb-2" {...props} />,
+  h3: (props: ComponentProps<"h3">) => <h3 className="text-xl font-bold mt-8 mb-4 tracking-tight text-slate-200" {...props} />,
+  p: (props: ComponentProps<"p">) => <p className="leading-7 [&:not(:first-child)]:mt-6 text-muted-foreground" {...props} />,
+  ul: (props: ComponentProps<"ul">) => <ul className="my-6 ml-6 list-disc [&>li]:mt-2 text-muted-foreground" {...props} />,
+  ol: (props: ComponentProps<"ol">) => <ol className="my-6 ml-6 list-decimal [&>li]:mt-2 text-muted-foreground" {...props} />,
+  li: (props: ComponentProps<"li">) => <li className="leading-7" {...props} />,
+  blockquote: (props: ComponentProps<"blockquote">) => (
     <blockquote className="mt-6 border-l-4 border-primary pl-6 italic text-slate-300 bg-slate-900/50 py-4 pr-4 rounded-r-lg" {...props} />
   ),
-  img: (props: any) => (
+  img: ({ alt = "", ...props }: MDXImageProps) => (
     <div className="my-10 rounded-xl overflow-hidden border border-border/50 bg-slate-900/50 shadow-lg">
-      <img className="w-full h-auto object-cover" loading="lazy" {...props} />
+      {/* MDX images have author-provided dimensions and are served from the static export. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="w-full h-auto object-cover" loading="lazy" decoding="async" alt={alt} {...props} />
     </div>
   ),
-  a: (props: any) => <a className="font-medium text-primary underline underline-offset-4 hover:text-primary/80" {...props} />,
-  table: (props: any) => (
+  a: (props: ComponentProps<"a">) => <a className="font-medium text-primary underline underline-offset-4 hover:text-primary/80" {...props} />,
+  table: (props: ComponentProps<"table">) => (
     <div className="my-8 w-full overflow-y-auto rounded-lg border border-border">
       <table className="w-full overflow-hidden text-sm" {...props} />
     </div>
   ),
-  th: (props: any) => <th className="border-b border-border bg-slate-900 px-4 py-3 text-left font-bold text-slate-200" {...props} />,
-  td: (props: any) => <td className="border-b border-border/50 px-4 py-3 text-muted-foreground" {...props} />,
+  th: (props: ComponentProps<"th">) => <th className="border-b border-border bg-slate-900 px-4 py-3 text-left font-bold text-slate-200" {...props} />,
+  td: (props: ComponentProps<"td">) => <td className="border-b border-border/50 px-4 py-3 text-muted-foreground" {...props} />,
 };
 
 export default async function ProjectPage({ params }: Props) {
@@ -63,11 +81,7 @@ export default async function ProjectPage({ params }: Props) {
     notFound();
   }
 
-  const formattedDate = project.meta.date 
-    ? (typeof project.meta.date === 'string' 
-        ? format(parseISO(project.meta.date), 'MMMM yyyy')
-        : format(new Date(project.meta.date), 'MMMM yyyy'))
-    : '';
+  const formattedDate = format(project.meta.date, 'MMMM yyyy');
 
   return (
     <article className="py-16 md:py-24">
@@ -93,7 +107,7 @@ export default async function ProjectPage({ params }: Props) {
             {project.meta.categories && (
               <div className="flex items-center capitalize">
                 <Tag className="mr-2 h-4 w-4" />
-                {project.meta.categories}
+                {project.meta.categories.join(', ')}
               </div>
             )}
           </div>

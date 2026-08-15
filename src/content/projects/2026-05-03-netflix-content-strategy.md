@@ -77,4 +77,4 @@ Netflix isn't "getting old" by accident. It is building a powerful library of mo
 
 ---
 
-**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/scripts/netflix)
+**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/legacy_jekyll/scripts/netflix)

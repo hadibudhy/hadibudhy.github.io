@@ -8,6 +8,9 @@ tags:
   - python
   - exploratory-analysis
 excerpt: Using a balanced panel of 129 countries to find out what drives national happiness -- and what the numbers get wrong.
+problem: "Single-year rankings obscure how happiness changes across countries and over time."
+result: "A balanced panel of 129 countries across 14 years exposed the trend, risers, fallers, and strongest correlates."
+featured: true
 header:
   teaser: /images/happiness-beat01.png
 mathjax: true
@@ -128,4 +131,4 @@ This matters for how we read the headline trend. A world where the average rises
 - All factors verified to sum to the happiness score (max rounding error: 0.003).
 - Self-reported Cantril ladder scale, not objective wellbeing measure.
 
-**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/scripts/world-happiness)
+**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/legacy_jekyll/scripts/world-happiness)

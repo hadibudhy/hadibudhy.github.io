@@ -9,6 +9,9 @@ tags:
   - sentence-transformers
   - imbalanced-data
 excerpt: Training three ML models to detect fraudulent job postings -- and finding that the words in a posting matter far more than any metadata field.
+problem: "Fake job postings hide behind a 19:1 class imbalance, making accuracy a misleading success metric."
+result: "The tuned model reached 0.850 F1, 75% recall, and 98% precision at a 0.10 threshold."
+featured: true
 header:
   teaser: /images/fake-job-all-models.png
 mathjax: true
@@ -186,4 +189,4 @@ Both are valid choices depending on the product decision: prioritize catching mo
 - SHAP values computed on a 200-sample stratified subset of the test set.
 - Keyword log-odds computed on full training corpus using CountVectorizer bigrams.
 
-**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/scripts/fake-job-detection)
+**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/legacy_jekyll/scripts/fake-job-detection)

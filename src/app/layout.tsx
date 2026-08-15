@@ -11,6 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://hadibudhy.github.io"),
   title: {
     default: "Hadi Budhy | Data Analyst & Analytics Engineer",
     template: "%s | Hadi Budhy"
@@ -19,6 +20,22 @@ export const metadata: Metadata = {
   keywords: ["Data Analyst", "Data Engineer", "Analytics Engineer", "Machine Learning", "Python", "SQL"],
   authors: [{ name: "Hadi Budhy" }],
   creator: "Hadi Budhy",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "https://hadibudhy.github.io",
+    title: "Hadi Budhy | Data Analyst & Analytics Engineer",
+    description: "Data analyst and engineer who turns messy pipelines into business decisions at scale.",
+    siteName: "Hadi Budhy",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary",
+    title: "Hadi Budhy | Data Analyst & Analytics Engineer",
+    description: "Data analyst and engineer who turns messy pipelines into business decisions at scale.",
+  },
 };
 
 export default function RootLayout({
@@ -38,6 +55,17 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <script id="person-jsonld" type="application/ld+json">
+          {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Hadi Budhy",
+              url: "https://hadibudhy.github.io",
+              jobTitle: "Data Analyst & Analytics Engineer",
+              address: { "@type": "PostalAddress", addressLocality: "Jakarta", addressCountry: "ID" },
+              sameAs: ["https://github.com/hadibudhy", "https://linkedin.com/in/hadibudhy"],
+            })}
+        </script>
       </body>
     </html>
   );

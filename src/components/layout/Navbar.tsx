@@ -1,32 +1,44 @@
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import Link from "next/link";
+import { Mail } from "lucide-react";
+
+const links = [
+  { label: "About", href: "/about" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Work", href: "/#work" },
+  { label: "Skills", href: "/#skills" },
+];
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 max-w-5xl items-center justify-between px-4 md:px-8">
-        <Link href="/" className="flex items-center space-x-2 transition-opacity hover:opacity-80">
-          <span className="font-bold tracking-tight text-foreground text-lg">Hadi Budhy</span>
+    <header className="sticky top-0 z-50 border-b border-white/[0.08] bg-background/85 backdrop-blur-xl">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 lg:px-8">
+        <Link href="/" className="group flex items-center gap-3" aria-label="Hadi Budhy home">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-sm font-black text-primary-foreground transition-transform group-hover:rotate-6">HB</span>
+          <span className="hidden text-sm font-bold tracking-[0.18em] text-foreground sm:inline">HADI BUDHY</span>
         </Link>
-        <nav className="flex items-center space-x-6 text-sm font-medium">
-          <Link href="/projects" className="text-muted-foreground hover:text-primary transition-colors">
+        <nav aria-label="Primary navigation" className="flex items-center gap-4 text-sm font-medium sm:gap-6">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="hidden text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:inline"
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link
+            href="/projects"
+            className="text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          >
             Projects
           </Link>
-          <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">
-            About
-          </Link>
-          <Link 
-            href="/resume.pdf" 
-            className={cn(
-              "hidden md:inline-flex items-center justify-center rounded-md text-sm font-medium",
-              "bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2 transition-all",
-              "shadow-sm hover:shadow-primary/25"
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
+          <a
+            href="mailto:hadi.budhy@gmail.com"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-3.5 py-2 text-sm font-semibold text-primary-foreground shadow-[0_0_24px_rgba(59,130,246,0.2)] transition-all hover:-translate-y-0.5 hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:px-4"
           >
-            Resume
-          </Link>
+            <Mail className="h-4 w-4 sm:hidden" aria-hidden="true" />
+            <span>Contact<span className="hidden sm:inline"> Me</span></span>
+          </a>
         </nav>
       </div>
     </header>
