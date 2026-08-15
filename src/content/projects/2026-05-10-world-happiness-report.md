@@ -8,6 +8,9 @@ tags:
   - python
   - exploratory-analysis
 excerpt: Using a balanced panel of 129 countries to find out what drives national happiness -- and what the numbers get wrong.
+problem: "Single-year rankings obscure how happiness changes across countries and over time."
+result: "A balanced panel of 129 countries across 14 years exposed the trend, risers, fallers, and strongest correlates."
+featured: true
 header:
   teaser: /images/happiness-beat01.png
 mathjax: true

@@ -10,6 +10,10 @@ export interface ProjectMeta {
   date: Date;
   tags: string[];
   categories: string[];
+  teaser?: string;
+  problem?: string;
+  result?: string;
+  featured?: boolean;
 }
 
 export interface Project {
@@ -38,6 +42,12 @@ function normalizeMeta(data: Record<string, unknown>): ProjectMeta | null {
     date,
     tags: toStringArray(data.tags),
     categories: toStringArray(data.categories),
+    teaser: typeof data.header === 'object' && data.header !== null && 'teaser' in data.header && typeof data.header.teaser === 'string'
+      ? data.header.teaser
+      : undefined,
+    problem: typeof data.problem === 'string' ? data.problem : undefined,
+    result: typeof data.result === 'string' ? data.result : undefined,
+    featured: data.featured === true,
   };
 }
 
