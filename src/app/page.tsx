@@ -100,7 +100,7 @@ export default function Home() {
             <div>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Featured Work</h2>
               <p className="text-muted-foreground max-w-2xl">
-                Deep dives into real-world problems I've solved using data science and engineering.
+                Deep dives into real-world problems I&apos;ve solved using data science and engineering.
               </p>
             </div>
             <Button variant="outline" asChild className="shrink-0">
@@ -109,12 +109,11 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredProjects.map((project, idx) => (
+            {featuredProjects.map((project) => (
               <ProjectCard 
                 key={project.slug} 
                 slug={project.slug} 
-                meta={project.meta as any} 
-                index={idx} 
+                meta={project.meta}
               />
             ))}
           </div>

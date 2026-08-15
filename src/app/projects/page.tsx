@@ -4,6 +4,19 @@ import { getAllProjects } from "@/lib/mdx";
 export const metadata = {
   title: "Case Studies & Projects",
   description: "Deep dives into my data science and engineering projects.",
+  alternates: { canonical: "/projects" },
+  openGraph: {
+    type: "website",
+    url: "https://hadibudhy.github.io/projects",
+    title: "Case Studies & Projects | Hadi Budhy",
+    description: "Deep dives into my data science and engineering projects.",
+    siteName: "Hadi Budhy",
+  },
+  twitter: {
+    card: "summary",
+    title: "Case Studies & Projects | Hadi Budhy",
+    description: "Deep dives into my data science and engineering projects.",
+  },
 };
 
 export default function ProjectsPage() {
@@ -23,12 +36,11 @@ export default function ProjectsPage() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, idx) => (
+          {projects.map((project) => (
             <ProjectCard 
               key={project.slug} 
               slug={project.slug} 
-              meta={project.meta as any} 
-              index={idx} 
+              meta={project.meta}
             />
           ))}
         </div>

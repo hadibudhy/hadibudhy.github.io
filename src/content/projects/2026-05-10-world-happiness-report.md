@@ -128,4 +128,4 @@ This matters for how we read the headline trend. A world where the average rises
 - All factors verified to sum to the happiness score (max rounding error: 0.003).
 - Self-reported Cantril ladder scale, not objective wellbeing measure.
 
-**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/scripts/world-happiness)
+**Code & Data:** [View the analysis scripts here](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/legacy_jekyll/scripts/world-happiness)

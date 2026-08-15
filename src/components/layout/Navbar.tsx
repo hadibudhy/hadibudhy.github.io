@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
 
 export function Navbar() {
   return (
@@ -8,25 +7,19 @@ export function Navbar() {
         <Link href="/" className="flex items-center space-x-2 transition-opacity hover:opacity-80">
           <span className="font-bold tracking-tight text-foreground text-lg">Hadi Budhy</span>
         </Link>
-        <nav className="flex items-center space-x-6 text-sm font-medium">
-          <Link href="/projects" className="text-muted-foreground hover:text-primary transition-colors">
+        <nav aria-label="Primary navigation" className="flex items-center space-x-6 text-sm font-medium">
+          <Link href="/projects" className="text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
             Projects
           </Link>
-          <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">
+          <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
             About
           </Link>
-          <Link 
-            href="/resume.pdf" 
-            className={cn(
-              "hidden md:inline-flex items-center justify-center rounded-md text-sm font-medium",
-              "bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2 transition-all",
-              "shadow-sm hover:shadow-primary/25"
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
+          <a
+            href="mailto:hadi.budhy@gmail.com"
+            className="hidden md:inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-primary/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
-            Resume
-          </Link>
+            Contact
+          </a>
         </nav>
       </div>
     </header>

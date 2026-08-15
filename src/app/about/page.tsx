@@ -1,11 +1,24 @@
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { Mail, FileText, ArrowRight } from "lucide-react";
+import { Mail, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
   title: "About",
   description: "About Hadi Budhy - Senior Data Analyst & Analytics Engineer",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    type: "website",
+    url: "https://hadibudhy.github.io/about",
+    title: "About | Hadi Budhy",
+    description: "About Hadi Budhy - Senior Data Analyst & Analytics Engineer",
+    siteName: "Hadi Budhy",
+  },
+  twitter: {
+    card: "summary",
+    title: "About | Hadi Budhy",
+    description: "About Hadi Budhy - Senior Data Analyst & Analytics Engineer",
+  },
 };
 
 export default function AboutPage() {
