@@ -15,7 +15,7 @@ export default function Home() {
       <section className="relative border-b border-white/[0.08]">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(59,130,246,0.16),transparent_32%),radial-gradient(circle_at_15%_55%,rgba(14,165,233,0.08),transparent_28%)]" />
         <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.08)_1px,transparent_1px)] [background-size:4rem_4rem] [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />
-        <div className="relative mx-auto grid max-w-6xl gap-10 px-4 pb-16 pt-12 sm:gap-12 sm:px-5 sm:pb-24 sm:pt-16 md:grid-cols-[1.15fr_0.85fr] md:items-center md:gap-16 md:px-8 md:pb-32 md:pt-24">
+          <div className="relative mx-auto grid max-w-6xl gap-10 px-4 pb-16 pt-12 sm:gap-12 sm:px-5 sm:pb-24 sm:pt-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-16 md:px-8 md:pb-32 md:pt-24">
           <div className="min-w-0">
             <div className="mb-7 flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">
               <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_16px_rgba(59,130,246,0.9)]" />
@@ -43,7 +43,7 @@ export default function Home() {
             </div>
           </div>
 
-          <aside className="relative min-w-0 rounded-3xl border border-white/[0.12] bg-slate-950/65 p-5 shadow-2xl shadow-blue-950/20 backdrop-blur-sm sm:p-6 md:p-8">
+          <aside className="relative min-w-0 rounded-3xl border border-white/[0.12] bg-slate-950/65 p-5 shadow-2xl shadow-blue-950/20 backdrop-blur-sm sm:p-6 lg:p-8">
             <div className="mb-10 flex items-center justify-between text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
               <span>What I bring</span>
               <ArrowDownRight className="h-5 w-5 text-primary" aria-hidden="true" />
@@ -110,11 +110,11 @@ export default function Home() {
             </div>
             <Link href="/projects" className="inline-flex items-center text-sm font-bold text-primary transition-colors hover:text-foreground">View all projects <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" /></Link>
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 lg:grid-cols-2">
             {featuredProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} featured />)}
           </div>
           {supportingProjects.length > 0 && (
-            <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <div className="mt-6 grid gap-6 lg:grid-cols-2">
               {supportingProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} />)}
             </div>
           )}
@@ -137,7 +137,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
           <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-primary/[0.08] p-6 sm:p-8 md:p-14">
             <div className="pointer-events-none absolute -right-16 -top-24 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
-            <div className="relative grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+          <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
               <div>
                 <p className="section-kicker">Next conversation</p>
                 <h2 className="mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground md:text-5xl">Have a messy data problem worth making clear?</h2>

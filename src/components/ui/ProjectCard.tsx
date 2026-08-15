@@ -12,10 +12,10 @@ interface ProjectCardProps {
 
 export function ProjectCard({ slug, meta, featured = false }: ProjectCardProps) {
   return (
-    <Link href={`/projects/${slug}`} className={`group block h-full min-w-0 ${featured ? "md:col-span-2" : ""}`}>
-      <article className={`relative flex h-full min-w-0 overflow-hidden rounded-2xl border border-white/[0.1] bg-card/70 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-card hover:shadow-[0_18px_60px_rgba(2,6,23,0.45)] ${featured ? "md:grid md:grid-cols-[1.1fr_0.9fr]" : "flex-col"}`}>
+    <Link href={`/projects/${slug}`} className={`group block h-full min-w-0 ${featured ? "lg:col-span-2" : ""}`}>
+      <article className={`relative flex h-full min-w-0 overflow-hidden rounded-2xl border border-white/[0.1] bg-card/70 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-card hover:shadow-[0_18px_60px_rgba(2,6,23,0.45)] ${featured ? "lg:grid lg:grid-cols-[1.1fr_0.9fr]" : "flex-col"}`}>
         {meta.teaser && (
-          <div className={`relative overflow-hidden bg-slate-950 ${featured ? "aspect-[16/10] md:aspect-auto md:min-h-full" : "aspect-[16/9]"}`}>
+          <div className={`relative overflow-hidden bg-slate-950 ${featured ? "aspect-[16/10] lg:aspect-auto lg:min-h-full" : "aspect-[16/9]"}`}>
             <Image
               src={meta.teaser}
               alt=""

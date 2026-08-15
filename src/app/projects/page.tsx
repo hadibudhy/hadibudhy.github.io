@@ -35,10 +35,10 @@ export default function ProjectsPage() {
       </section>
       <section>
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-8 sm:py-20 md:py-24">
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 lg:grid-cols-2">
             {featuredProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} featured />)}
           </div>
-          {supportingProjects.length > 0 && <div className="mt-16"><p className="section-kicker mb-6">More work</p><div className="grid gap-6 md:grid-cols-2">{supportingProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} />)}</div></div>}
+          {supportingProjects.length > 0 && <div className="mt-16"><p className="section-kicker mb-6">More work</p><div className="grid gap-6 lg:grid-cols-2">{supportingProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} />)}</div></div>}
         </div>
       </section>
     </div>
