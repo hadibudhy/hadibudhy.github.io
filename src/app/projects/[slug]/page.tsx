@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { ArrowLeft, Calendar, Tag } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
+import remarkGfm from "remark-gfm";
 import type { ComponentProps } from "react";
 
 interface Props {
@@ -137,7 +138,11 @@ export default async function ProjectPage({ params }: Props) {
         )}
 
         <div className="prose prose-invert max-w-none">
-          <MDXRemote source={project.content} components={components} />
+          <MDXRemote
+            source={project.content}
+            components={components}
+            options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+          />
         </div>
       </div>
     </article>
