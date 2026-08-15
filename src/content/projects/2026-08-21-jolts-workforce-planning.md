@@ -1,51 +1,50 @@
 ---
-title: "Workforce Planning: Reading Openings, Hires, and Quits Together"
+title: "Workforce Planning: Separating Hiring Pressure From Turnover"
 date: 2026-08-21
 categories: [workforce analytics]
 tags: [workforce planning, hiring, retention, BLS]
-excerpt: "A workforce planning view that separates employer demand for workers from completed hiring and employee separations."
-problem: "Hiring pressure is easy to misread when job openings, hires, and quits are shown separately or treated as the same signal."
-result: "The BLS JOLTS API provides a consistent monthly view of openings, hires, quits, and separations, supporting workforce planning without pretending that aggregate data explains individual employee behavior."
+excerpt: "A workforce decision framework that distinguishes open roles, completed hiring, voluntary quits, and total separations."
+problem: "Leaders can misread staffing pressure when openings, hires, and exits are treated as one workforce signal."
+result: "In the BLS December 2025 aggregate series, openings were 6.55 million, hires were 3.3%, quits were 2.0%, and total separations were 5.203 million."
 featured: false
 ---
 
-## Business context
+## Executive summary
 
-Leaders need to know whether staffing pressure comes from growth, difficulty hiring, or employees leaving. The response is different in each case: recruiting capacity, workforce design, pay review, or retention work.
+**Business problem:** determine whether workforce pressure comes from growth, hiring friction, or employees leaving.
 
-## Business question
+**Key findings:** open roles are demand rather than completed hiring; quits are different from total separations; and the December 2025 U.S. aggregate shows 6.55m openings alongside 5.203m total separations.
 
-What does the relationship between openings, hires, and quits suggest about workforce pressure, and what should management investigate next?
+**Business impact:** the same headline “staffing problem” can require recruiting, retention, workforce-design, or cost action.
 
-## Approach
+**Recommended action:** use JOLTS as external context and connect it to internal vacancy age, time-to-fill, tenure, and exit data.
 
-I used the [BLS Job Openings and Labor Turnover Survey](https://www.bls.gov/jlt/) and its public API. I compared monthly openings, hires, quits, and total separations over time. The data is an aggregate labor-market indicator; it is not an employee-level explanation of turnover.
+## Decision frame and KPI tree
 
-## Key findings
+**Decision owner:** Chief People Officer. **Decision:** where should workforce investment go first? **North-star KPI:** critical-role coverage. **Drivers:** openings, hires, time-to-fill, quits, separations, tenure, and productivity. **Guardrails:** labor cost, overtime, quality, burnout, and regretted attrition.
 
-### Openings are demand, not completed hiring
+## Baseline and diagnostic logic
 
-An open role shows that an employer is seeking workers. A hire shows that a person joined during the period. Comparing the two helps distinguish persistent hiring pressure from a period when recruiting successfully converted demand into staffing.
+The BLS API returned December 2025 values of **6.55m openings**, **3.3% hires**, **2.0% quits**, and **5.203m total separations**. Openings measure employer demand; hires measure people starting; quits measure employee-initiated exits; total separations include other exit types.
 
-### Quits and total separations answer different questions
+The data cannot identify a company, team, manager, or role causing turnover. It is also an aggregate estimate that can be revised. Any internal diagnosis must preserve that distinction.
 
-Quits are employee-initiated separations, while total separations also include layoffs, discharges, and other exits. A rise in total separations should not automatically be described as voluntary turnover.
+## Opportunity, trade-offs, and scenarios
 
-### Aggregate trends need company evidence
+The conservative scenario is to improve vacancy visibility and recruiting throughput in critical roles. The expected scenario combines that with targeted retention work where internal quits exceed the external benchmark. The ambitious scenario redesigns roles or staffing models. Faster hiring can improve coverage but increase cost or reduce selection quality; retention programs can add cost without reducing regretted exits.
 
-JOLTS can provide external context for a workforce plan, but it cannot identify which team, manager, pay band, or role is driving a company’s retention problem. Internal headcount, time-to-fill, tenure, and exit data are needed for action.
+## Prioritized plan and measurement
 
-## Recommendations
+- **P0 — Act now:** build one scorecard for openings, hires, time-to-fill, quits, and regretted exits.
+- **P1 — Test:** pilot a retention or recruiting intervention in one role family with a comparable control group.
+- **P2 — Investigate:** join internal HR data to pay, tenure, manager, location, and workload measures.
 
-1. Track openings, hires, quits, and total separations on one workforce scorecard.
-2. Compare internal hiring and exit trends with the external labor-market context.
-3. Investigate role, location, tenure, and manager patterns before launching broad retention programs.
-4. Use time-to-fill and vacancy age to separate recruiting capacity issues from demand growth.
+Primary metric is critical-role coverage; guardrails are quality, overtime, labor cost, employee experience, and regretted attrition. Repeat with revised BLS data and alternative time windows.
 
 ## Takeaway
 
-Workforce decisions improve when leaders separate demand for workers from actual hiring and employee-initiated exits. JOLTS gives the context; internal people data must explain the local problem.
+JOLTS does not explain a company’s people problem. It improves the decision by separating labor-market context from internal root causes, so management can act on the drivers it can control.
 
 ## Supporting detail
 
-The BLS publishes JOLTS monthly indicators through a public API. The series are estimates and may be revised. They should support planning and benchmarking, not individual employment decisions.
+Source: [BLS JOLTS](https://www.bls.gov/jlt/). The series is an aggregate U.S. labor-market indicator and should not be used for individual employment decisions.

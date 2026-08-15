@@ -1,51 +1,50 @@
 ---
-title: "Company Performance: Reading Growth and Profit Together"
+title: "Company Performance: Explaining Growth Before Calling It Healthy"
 date: 2026-08-19
 categories: [financial performance]
 tags: [financial analysis, revenue, profitability, SEC]
-excerpt: "A public-filing analysis that keeps revenue growth, profit, and reporting context together so business performance is not reduced to one headline number."
-problem: "Management and investors can see revenue growth while missing changes in profitability, reporting periods, or the quality of the comparison."
-result: "SEC Company Facts provides structured reported measures by company, period, and filing, creating a repeatable base for comparing revenue and net income without predicting stock prices."
+excerpt: "A public-filing analysis that separates reported growth from profitability and turns divergence into management questions."
+problem: "Revenue growth can hide margin pressure, while profit growth can be distorted by mix, accounting, or one-off items."
+result: "For Microsoft, SEC Company Facts reports FY2023 revenue of $211.9B and net income of $72.4B, rising to $281.7B and $101.8B in FY2025; reported net margin moved from about 34.1% to 36.1%."
 featured: false
 ---
 
-## Business context
+## Executive summary
 
-Business performance is not one number. Revenue growth can be attractive while profit falls, or profit can improve while the business is shrinking. A useful review needs both the result and the context around how it was reported.
+**Business problem:** determine whether reported growth is also improving profitability.
 
-## Business question
+**Key findings:** Microsoft’s reported revenue increased about 32.9% from FY2023 to FY2025; net income increased about 40.7%; and net margin improved from approximately 34.1% to 36.1%.
 
-Is the company growing in a way that also improves reported profitability, and what should management investigate next?
+**Business impact:** the observed result is healthy at the reported-company level, but it does not identify whether growth came from volume, price, mix, acquisitions, or cost control.
 
-## Approach
+**Recommended action:** use the margin improvement as a starting point for segment and cost-driver review, not as proof that every business line improved.
 
-I used the [SEC Company Facts API](https://www.sec.gov/data-research/sec-api-documentation), which publishes structured facts from company filings. I compared reported revenue and net income by fiscal period, checked filing dates, and kept fiscal-year definitions visible. This is a reporting analysis, not a stock-price forecast.
+## Decision frame and KPI tree
 
-## Key findings
+**Decision owner:** Finance Leader. **Decision:** where should management invest, control cost, or investigate performance quality? **North-star KPI:** sustainable operating contribution. **Drivers:** revenue growth, gross margin, operating expense, tax, mix, and recurring demand. **Guardrails:** cash flow, customer concentration, and one-off items.
 
-### Revenue and profit must be read as a pair
+## Baseline and driver analysis
 
-The core view compares revenue, net income, and net margin. Revenue answers how much business was recorded; net income shows what remained after reported expenses. A strong recommendation requires the direction of both measures, not revenue growth alone.
+The SEC Company Facts API provides structured filing facts, periods, forms, and filing dates. The Microsoft comparison uses reported annual revenue and net income facts. Revenue rose from **$211.9B to $281.7B**, while net income rose from **$72.4B to $101.8B**. The margin movement is directionally positive, but net income is not the same as operating contribution.
 
-### Filing periods are a data-quality issue
+This is evidence of reported improvement, not causal proof. Fiscal periods, amended filings, accounting tags, and restatements must remain visible. The next diagnostic layer is segment revenue, gross margin, operating expense, and cash conversion.
 
-Companies use different fiscal year ends, and SEC facts may contain amended filings or multiple facts for similar tags. The comparison therefore keeps fiscal period, filing date, form, and accounting tag in the working table.
+## Opportunity, trade-offs, and scenarios
 
-### Reported performance is a starting point for questions
+The conservative case is to preserve the FY2025 margin while growth slows; the expected case tests whether the current margin can hold as mix changes; the ambitious case identifies controllable cost or mix drivers that improve contribution without reducing product investment. No incremental profit is claimed because segment costs and intervention effects are not established.
 
-The data can identify a change in growth or margin, but it cannot by itself explain whether the driver was price, volume, cost, acquisition, or accounting classification. Those drivers require management commentary and the underlying statements.
+## Prioritized plan and measurement
 
-## Recommendations
+- **P0 — Act now:** monitor revenue growth, net margin, operating expense, and cash flow together.
+- **P1 — Test:** investigate one segment or cost category where growth and margin direction diverge.
+- **P2 — Investigate:** reconcile SEC facts to the filing statements and notes when tags or periods change.
 
-1. Use revenue and net margin together in quarterly performance reviews.
-2. Flag periods where revenue direction and profit direction diverge.
-3. Validate unusual changes against the filing, notes, and management discussion.
-4. Keep restatements and fiscal-year differences visible before comparing companies.
+Success means durable contribution and cash conversion, not one strong annual ratio. Repeat the analysis using filing date, fiscal period, amended filings, and alternative revenue tags as sensitivity checks.
 
 ## Takeaway
 
-Financial analysis is most useful when it turns a headline change into a management question. SEC data makes that comparison repeatable, but the filing context is essential before acting on it.
+Senior financial analysis turns growth into a question about quality and durability. SEC data makes the baseline repeatable; the filing context explains what management can actually control.
 
 ## Supporting detail
 
-SEC Company Facts is built from public XBRL filing data. Values can differ across companies because of fiscal calendars, tags, restatements, and reporting choices. The case study does not claim causation or investment performance.
+Source: [SEC Company Facts](https://www.sec.gov/data-research/sec-api-documentation). Values come from public XBRL filings and can reflect restatements, taxonomy changes, and different fiscal calendars. This is not stock-price analysis or investment advice.

@@ -15,6 +15,10 @@ header:
   teaser: /images/restaurant-grades.png
 ---
 
+## Executive summary
+
+**Business problem:** focus food-safety preparation and follow-up where repeat risk is highest. **Key findings:** the selected inspection base has a 77.3% critical-violation rate; Staten Island and the Bronx are above the city rate; and many records have no grade. **Business impact:** borough averages can prioritize attention but do not prove cause. **Recommended action:** target repeat critical findings while protecting inspection coverage and data quality.
+
 ## Business context
 
 Food quality is both a customer trust issue and an operating risk. A restaurant group cannot act on a raw list of violation records alone because one inspection may create several rows, grades may be missing, and some records contain placeholder dates.
@@ -59,6 +63,26 @@ These differences are useful for prioritization, but they do not prove that a bo
 ## Takeaway
 
 Public inspection data can support a useful quality-prioritization system, but only after the business changes the unit of analysis from violation rows to inspections and treats missing outcomes as a follow-up queue rather than a clean result.
+
+## Senior decision frame
+
+**Decision owner:** Director of Restaurant Operations. **Decision:** where should inspection-preparation and follow-up resources go first? **North-star KPI:** share of inspections with a critical violation. **Drivers:** borough, inspection type, restaurant, and repeat inspection history. **Guardrails:** inspection coverage, time since last inspection, and the rate of missing grades.
+
+### What is driving the result?
+
+The 2022–2025 inspection-level base has a **77.3% critical-violation rate** after rolling violation rows up to restaurant, inspection date, and inspection type. The rate is highest in Staten Island (**81.6%**) and the Bronx (**79.7%**) and lowest in Manhattan (**75.9%**). This is a prioritization signal, not proof that borough causes risk: inspection mix, restaurant type, and reporting completeness may differ.
+
+The outcome is also incomplete. Only 35,700 inspection records have an A grade, while 30,129 have no grade in the selected period. A missing grade must not be treated as a pass.
+
+### Opportunity, trade-offs, and validation
+
+The immediate opportunity is to focus review on the **two boroughs above the city rate**, then test whether risk falls after targeted education or follow-up. No financial impact is estimated because the data has no sales, closure cost, or customer-complaint fields. A lower violation rate could also reflect changed inspection coverage, so coverage is a guardrail.
+
+- **P0 — Act now:** review restaurants and inspection types in Staten Island and the Bronx with repeat critical findings.
+- **P1 — Test:** compare a targeted food-safety support group with similar restaurants receiving standard communication.
+- **P2 — Investigate:** add restaurant type, inspection schedule, closure outcomes, and complaint data.
+
+Success means a lower repeat-critical rate without reducing inspection coverage. Sensitivity checks should exclude placeholder dates, separate inspection types, and report graded records separately from missing grades.
 
 ## Supporting technical detail
 

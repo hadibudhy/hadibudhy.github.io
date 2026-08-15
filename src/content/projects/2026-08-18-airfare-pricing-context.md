@@ -1,51 +1,52 @@
 ---
-title: "Airfare Pricing: Separating Fare Growth from Real Purchasing Power"
+title: "Airfare Pricing: Making Revenue Decisions With the Right Benchmark"
 date: 2026-08-18
 categories: [pricing and revenue]
-tags: [pricing, revenue, time series, business context]
-excerpt: "A long-term fare review using official transportation data to show why revenue teams should track both current-dollar fares and inflation-adjusted movement."
-problem: "A rising ticket price can reflect higher airline revenue, inflation, or a change in the mix of journeys, so a single fare series can mislead pricing decisions."
-result: "The official series provides annual and quarterly domestic average fares in current and constant dollars, allowing commercial teams to separate nominal price movement from inflation-adjusted change."
+tags: [pricing, revenue, demand, scenario planning]
+excerpt: "A commercial decision framework that separates nominal fare movement from inflation and shows what additional evidence is needed before changing route prices."
+problem: "A higher average fare can reflect real pricing power, inflation, route mix, or passenger mix; acting on the wrong explanation can reduce demand or margin."
+result: "The official BTS series provides annual and quarterly domestic fares in current and inflation-adjusted dollars, making it possible to separate market context from route-level pricing action."
 featured: false
 ---
 
-## Business context
+## Executive summary
 
-Airline pricing teams need to understand whether customers are paying more because the product became more expensive, because the cost environment changed, or because travelers are taking different kinds of trips. That distinction affects pricing, promotion, and revenue planning.
+**Business problem:** interpret fare movement before changing prices or discount rules.
 
-## Business question
+**Key findings:** current-dollar and constant-dollar fares answer different questions; the national average is a benchmark, not a route diagnosis; and demand, margin, and booking-window data are required for a commercial decision.
 
-How should a commercial team interpret changes in average domestic airfare before changing prices or discount policy?
+**Business impact:** the main risk is overreacting to a nominal price movement that does not represent real pricing power.
 
-## Approach
+**Recommended action:** use the BTS series as a guardrail, then validate a route-level test with ticket and demand data.
 
-I used the [Bureau of Transportation Statistics national fare series](https://www.bts.gov/content/national-level-domestic-average-fare-series), including the current-dollar and inflation-adjusted measures. I checked the annual workbook and its latest quarterly release. This is an official national benchmark, not a route-level pricing model.
+## Decision frame and KPI tree
 
-## Key findings
+**Decision owner:** Commercial Director. **Decision:** where should price or discount policy change? **North-star KPI:** contribution per available seat. **Drivers:** fare, passengers, load factor, route mix, and variable cost. **Guardrails:** conversion, cancellation, customer complaints, and competitor fare position.
 
-### One fare number cannot answer a pricing question
+## Baseline and diagnostic logic
 
-The source reports both current-dollar and constant-dollar fares. Current dollars describe what passengers paid at the time; constant dollars help compare purchasing power across years. A commercial review should show both before calling a movement a true price increase.
+The [BTS national fare series](https://www.bts.gov/content/national-level-domestic-average-fare-series) publishes current-dollar and inflation-adjusted fare measures, with annual history from 1995 and quarterly releases. Current dollars describe what passengers paid; constant dollars provide a more comparable purchasing-power view.
 
-### The series is useful for context, not individual price decisions
+The national series cannot explain a route-level change. It combines carriers, markets, itinerary lengths, and fare types. A shift in the average may therefore be mix, not a price decision.
 
-The national average combines routes, carriers, journey lengths, and fare types. It can show the market environment, but it cannot identify which route, customer segment, or discount caused the movement.
+## Driver decomposition and scenario analysis
 
-### The next decision needs richer ticket data
+For a route, revenue should be decomposed as **passengers × average fare** and contribution as revenue minus variable cost. The conservative scenario is a fare change with no volume response; the expected scenario uses observed route elasticity; the ambitious scenario includes mix improvement. None should be published as a forecast until route-level demand and cost are available.
 
-For route-level action, the team should join the national benchmark with [BTS Origin and Destination Survey data](https://www.bts.gov/topics/airlines-and-airports/origin-and-destination-survey-data), which includes ticket price and itinerary details. The benchmark prevents a local pricing change from being judged without market context.
+The important trade-off is clear: higher fare can improve revenue per passenger but reduce passenger volume. A price decision that improves revenue but lowers contribution or load factor is not a success.
 
-## Recommendations
+## Prioritized plan and measurement
 
-1. Track current-dollar and inflation-adjusted fares together in commercial reviews.
-2. Use the national series as a market benchmark, not as a direct price recommendation.
-3. Add route, cabin, booking-window, and competitor data before changing discount rules.
-4. Investigate whether fare movement comes with changes in passenger volume and route mix.
+- **P0 — Act now:** add the BTS current/constant-dollar benchmark to commercial reviews.
+- **P1 — Test:** run a controlled price or discount change on comparable routes and booking windows.
+- **P2 — Investigate:** join [BTS Origin and Destination Survey data](https://www.bts.gov/topics/airlines-and-airports/origin-and-destination-survey-data) with internal bookings, costs, and competitor fares.
+
+Primary metric is contribution per seat; guardrails are bookings, load factor, cancellation, and complaint rate. Repeat by route, season, cabin, and booking window. If the conclusion changes when incomplete quarters or mix-shifted routes are excluded, treat it as weak evidence.
 
 ## Takeaway
 
-Pricing decisions become safer when the business separates the price customers paid from the purchasing power of that price. The official fare series is a strong context measure, but route-level action needs more detailed ticket data.
+The senior pricing decision is not “did fares rise?” It is whether the business can separate price, inflation, and mix well enough to act without trading away demand or contribution.
 
 ## Supporting detail
 
-The source publishes an annual series from 1995 onward and a current quarterly release. The data is from the U.S. Department of Transportation’s Bureau of Transportation Statistics. It does not provide airline margin, demand elasticity, or promotional cost.
+Source: [Bureau of Transportation Statistics](https://www.bts.gov/content/national-level-domestic-average-fare-series). The national data does not contain airline margin, route-level elasticity, promotional cost, or customer-level willingness to pay.

@@ -1,51 +1,50 @@
 ---
-title: "New York Short-Term Rentals: Where Marketplace Supply Is Concentrated"
+title: "New York Short-Term Rentals: Finding Marketplace Concentration"
 date: 2026-08-20
 categories: [marketplace analysis]
-tags: [marketplace, supply and demand, pricing, segmentation]
-excerpt: "A listing-level marketplace review showing how room type, location, price, availability, and host concentration shape the supply side of New York’s rental market."
-problem: "A marketplace can look large while supply is concentrated among a small group of hosts or unavailable at the times guests need it."
-result: "The June 2026 snapshot contains 30,555 listings; after restricting price to $20–$1,000, 21,138 listings remained for a more credible price comparison, with a median listed price of $171."
+tags: [marketplace, supply and demand, pricing, concentration]
+excerpt: "A supply-side marketplace analysis that separates listing growth from marketplace health and identifies where concentration creates risk."
+problem: "A large listing count does not prove healthy demand, fair choice, or resilient supply."
+result: "The June 2026 snapshot has 30,555 listings; 24.7% of listings belong to the top 1% of observed hosts, and the filtered median listed price is $171."
 featured: false
 ---
 
-## Business context
+## Executive summary
 
-Two-sided marketplaces must balance the needs of buyers and suppliers. Guests need choice, clear prices, and availability. Hosts need demand and a workable return. Platform teams should understand where supply is concentrated before treating listing growth as marketplace health.
+**Business problem:** protect marketplace choice and resilience while balancing hosts and guests.
 
-## Business question
+**Key findings:** supply is dominated by entire homes and private rooms; 24.7% of listings are controlled by the top 1% of observed hosts; 8,758 listings have missing prices; and listings are not bookings.
 
-Where does New York marketplace supply sit, and which segments deserve closer attention from a platform team?
+**Business impact:** platform policy can have an outsized effect if professional hosts control a large share of visible supply, but demand and revenue cannot be inferred from listings alone.
 
-## Approach
+**Recommended action:** monitor concentration and availability, then add booking data before changing marketplace investment.
 
-I used the [Inside Airbnb New York City snapshot](https://insideairbnb.com/get-the-data/) dated 14 June 2026. I reviewed 30,555 listings by room type, borough, listed price, availability, reviews, and host listing count. Prices outside $20–$1,000 were excluded from the comparison; this is a quality filter, not a claim that those listings are impossible.
+## Decision frame and KPI tree
 
-## Key findings
+**Decision owner:** Marketplace GM. **Decision:** where should the platform invest in supply, trust, or demand? **North-star KPI:** successful booked nights with acceptable guest experience. **Drivers:** active supply, availability, price, demand, host quality, and location. **Guardrails:** cancellations, complaints, regulatory risk, and host concentration.
 
-### Entire homes and private rooms dominate supply
+## Baseline, segmentation, and driver analysis
 
-The snapshot contains **16,808 entire-home listings** and **13,009 private-room listings**. Hotel and shared-room supply is much smaller. That mix matters because these segments serve different guest needs and may respond differently to fees, rules, and demand changes.
+The validated snapshot contains **30,555 listings, 19 columns, and no duplicate rows**. It includes **16,808 entire-home** and **13,009 private-room** listings. After restricting price to $20–$1,000, 21,138 listings remained and the median listed price was **$171**.
 
-### Listed prices are incomplete, not observed booking prices
+The top 1% of observed hosts account for **24.7% of listings**. This is a concentration risk, not proof that these hosts create most bookings. Missing price and license values also require separate treatment; missing license is not evidence of non-compliance.
 
-Among the filtered listings, the median listed price was **$171**. Price is missing for 8,758 rows, and the file does not record booking revenue. The number is therefore a supply-side price reference, not an average paid by guests.
+## Opportunity, trade-offs, and scenarios
 
-### Host concentration can affect marketplace resilience
+The conservative opportunity is to reduce supply concentration risk without removing productive hosts: improve onboarding and visibility for smaller hosts. The expected case adds booking and occupancy data by neighbourhood and room type. The ambitious case tests targeted supply incentives. The trade-off is that incentives can add supply but reduce platform contribution or increase regulatory exposure.
 
-The largest observed hosts listed hundreds of properties, including one with 292 listings. A platform should monitor whether a small group controls a large share of supply, because policy or availability changes affecting those hosts could have an outsized marketplace effect.
+## Prioritized plan and measurement
 
-## Recommendations
+- **P0 — Act now:** add host concentration, active availability, price coverage, and cancellation to the marketplace scorecard.
+- **P1 — Test:** run a smaller-host activation experiment in a high-demand, low-choice segment.
+- **P2 — Investigate:** join bookings, reviews, response time, and regulatory status before claiming customer or revenue impact.
 
-1. Report supply by room type, borough, price band, and availability together.
-2. Track host concentration as a marketplace-health measure.
-3. Add booking, occupancy, cancellation, and guest-quality data before claiming demand or revenue effects.
-4. Design host policies separately for professional multi-listing hosts and smaller hosts.
+Primary metric is booked nights per active listing; guardrails are cancellation, complaints, guest rating, host retention, and contribution. Repeat concentration using top 0.5%, 1%, and 5% definitions.
 
 ## Takeaway
 
-New York supply is large but not uniform. Marketplace decisions should protect choice across room types and locations while monitoring concentration and the difference between listed supply and actual bookings.
+Marketplace health is not listing count. It is reliable choice, demand conversion, and resilient supply. The current data identifies concentration clearly and shows exactly which missing measures must be added before making a commercial decision.
 
 ## Supporting detail
 
-Inside Airbnb states that its data is collected from public Airbnb information and that accuracy is not guaranteed. The snapshot has 19 columns, no duplicate rows, 8,758 missing prices, and 25,269 missing license values. It is licensed CC BY 4.0; the analysis does not infer illegal or compliant status from missing license fields.
+Source: [Inside Airbnb](https://insideairbnb.com/get-the-data/), New York snapshot dated 14 June 2026, CC BY 4.0. The source describes public listing data and warns that accuracy is not guaranteed. No bookings, occupancy, revenue, or causal policy effect is available.

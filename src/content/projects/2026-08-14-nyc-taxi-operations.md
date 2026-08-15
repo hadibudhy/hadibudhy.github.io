@@ -15,6 +15,10 @@ header:
   teaser: /images/taxi-demand-by-hour.png
 ---
 
+## Executive summary
+
+**Business problem:** match vehicle capacity to demand and trip economics. **Key findings:** valid trips peak at 18:00; Manhattan contains about 89% of valid trips; and airport-linked trips are longer and higher-fare. **Business impact:** one all-day operating plan will miss the most valuable demand differences. **Recommended action:** protect the evening peak and test a separate airport operating lane.
+
 ## Business context
 
 Taxi operators have to make decisions about where to position vehicles, when to add capacity, and which trips deserve a different service plan. A monthly trip file can answer those questions if the analysis separates demand volume from trip economics.
@@ -59,6 +63,26 @@ The raw file contains **3,475,226 rows**, but **90,893** have non-positive trip 
 ## Takeaway
 
 The biggest operational opportunity is not simply adding more taxis. It is matching capacity and service rules to two different patterns: high-volume evening demand in Manhattan and longer, higher-value airport-linked trips.
+
+## Senior decision frame
+
+**Decision owner:** Operations Director. **Decision:** where should vehicles and dispatch capacity be concentrated? **North-star KPI:** completed trips per available vehicle-hour. **Drivers:** demand by hour, pickup geography, trip duration, and fare. **Guardrails:** passenger experience, deadhead time, safety, and driver utilization, which are not measured in this extract.
+
+### What is driving the result?
+
+The problem is concentrated rather than city-wide. Manhattan provides **2.96m of 3.31m valid trips**, while Queens trips average **32.0 minutes and $72.12**, compared with **12.8 minutes and $22.34** in Manhattan. JFK alone contributes **133,337 trips** at an average **$81.11**. This supports separate peak-city and airport operating lanes; it does not prove that moving vehicles will create incremental demand.
+
+### Opportunity scenarios and trade-offs
+
+If an airport service test created only **1% more JFK-linked trips** at the observed average fare, gross fare exposure would be about **$108,000** (`133,337 × 1% × $81.11`) before vehicle cost. The conservative case should use 0.5%, the expected case 1%, and the ambitious case 2%. The trade-off is that airport trips consume more time, so higher fare per trip may not mean higher fare per vehicle-hour.
+
+### Prioritized action and measurement
+
+- **P0 — Act now:** protect 17:00–19:00 Manhattan coverage and track trips per vehicle-hour.
+- **P1 — Test:** run an airport-positioning pilot near JFK with a matched comparison period. Measure airport trips, fare per vehicle-hour, deadhead time, and cancellations.
+- **P2 — Investigate:** add driver supply, vehicle availability, and route-level traffic data before claiming a capacity cause.
+
+Repeat the result using 30-minute peak windows and excluding extreme-duration trips. The data is a January snapshot, so seasonality remains a material uncertainty.
 
 ## Supporting technical detail
 

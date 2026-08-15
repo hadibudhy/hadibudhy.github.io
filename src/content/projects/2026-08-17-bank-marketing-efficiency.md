@@ -1,51 +1,50 @@
 ---
-title: "Bank Marketing: Which Contacts Deserve More Attention?"
+title: "Bank Marketing: Targeting Response Without Confusing It With Profit"
 date: 2026-08-17
 categories: [marketing performance]
-tags: [campaigns, customer segments, response rate, python]
-excerpt: "A campaign review that compares contact channels, prior outcomes, and customer groups to support better targeting decisions."
-problem: "The bank made many campaign contacts, but response varied sharply by channel, timing, and customer history."
-result: "Among 45,211 contacts, 5,289 resulted in a positive outcome; cellular contacts responded at 14.9% versus 4.1% for records with an unknown contact type."
+tags: [campaigns, customer segments, response rate, experimentation]
+excerpt: "A campaign decision study that identifies the strongest response signals, quantifies the addressable audience, and defines the missing economics needed for budget allocation."
+problem: "The bank made 45,211 contacts, but broad response rates hid the difference between audience quality, channel coverage, and prior campaign history."
+result: "The overall positive-response rate is 11.7%; cellular contacts respond at 14.9%, unknown contact types at 4.1%, and previously successful contacts at 64.7%."
 featured: false
 ---
 
-## Business context
+## Executive summary
 
-Marketing teams need to balance reach with customer attention and campaign cost. A high response rate can be useful, but only if the channel and audience can be reached efficiently and the offer remains commercially valuable.
+**Business problem:** reduce low-value outreach while protecting response.
 
-## Business question
+**Key findings:** 5,289 of 45,211 contacts were positive; the unknown-contact group contains 13,020 contacts and trails cellular response; prior success is the strongest observed signal; and the dataset lacks contact cost and deposit value.
 
-Which audiences and contact methods should the bank prioritize for future term-deposit campaigns?
+**Business impact:** improving data coverage could address a large contact pool, but response uplift is not yet a profit case.
 
-## Approach
+**Recommended action:** run a controlled targeting test and add cost/value fields before reallocating budget.
 
-I validated the [UCI Bank Marketing dataset](https://archive.ics.uci.edu/dataset/222/bank%5C%5C%2Bmarketing), then compared campaign outcomes by contact type, month, job group, and previous campaign result. I used response rate as the main measure because the file does not include campaign cost, deposit value, or customer lifetime value.
+## Decision frame and KPI tree
 
-## Key findings
+**Decision owner:** Head of Marketing. **Decision:** which audiences and channels should receive incremental campaign capacity? **North-star KPI:** incremental contribution per contact. **Drivers:** response rate, contact cost, deposit value, and repeat response. **Guardrails:** complaint rate, contact frequency, and customer fatigue.
 
-### The campaign produced a minority response
+## Baseline, segmentation, and driver analysis
 
-There were **5,289 positive outcomes out of 45,211 contacts**, or **11.7%**. Most contacts did not convert, so broad outreach should be treated as a starting point for better targeting rather than a finished growth strategy.
+The validated archive has **45,211 rows, 17 fields, no missing values, and no duplicates**. Positive outcomes are 11.7% overall. Cellular response is 14.9%, telephone 13.4%, and unknown contact type 4.1%. Previous successful outcomes respond at 64.7%, while unknown previous outcomes respond at 9.2%.
 
-### Contact channel was strongly associated with response
+The channel pattern is associated evidence, not causality. Channel may proxy for data quality or customer selection. The dataset also lacks profit, so optimizing response alone could increase cost without improving value.
 
-The response rate was **14.9% for cellular contacts**, **13.4% for telephone contacts**, and **4.1% where contact type was unknown**. The pattern supports improving contact data and testing channel mix. It does not prove that channel alone caused the difference.
+## Quantified opportunity and trade-off
 
-### Previous success was the clearest audience signal
+If the **13,020 unknown-contact records** reached the observed cellular rate, the arithmetic upside would be about **1,410 additional positive outcomes**. This is a scenario, not a forecast: it assumes the group is reachable and comparable. The trade-off is that more contact may increase complaints or cost.
 
-Customers whose previous campaign outcome was recorded as successful responded at **64.7%**, compared with **9.2%** for customers with an unknown previous outcome. This is a strong reason to treat campaign history as a priority signal, while avoiding repeated contact that may create fatigue.
+## Prioritized plan and experiment
 
-## Recommendations
+- **P0 — Act now:** repair contact-type completeness and add contact cost, deposit value, and complaint fields.
+- **P1 — Test:** randomize a targeted follow-up among customers with prior success; compare incremental contribution, not raw response.
+- **P2 — Investigate:** test whether the channel gap remains after controlling for customer history and month.
 
-1. Prioritize customers with a documented positive prior outcome for a controlled follow-up test.
-2. Improve contact-type completeness before comparing channel performance at scale.
-3. Use response rate together with contact cost, deposit value, and complaints before reallocating budget.
-4. Set a contact-frequency rule so high-propensity customers are not over-contacted.
+Treatment is a targeted offer; control is the current campaign; primary metric is contribution per contacted customer; guardrails are complaints, opt-outs, and contact frequency. Repeat using alternative definitions of “prior success” and exclude months with unusual campaign mix.
 
 ## Takeaway
 
-The bank’s strongest targeting signal was prior campaign success, supported by a clear difference between known and unknown contact channels. Better targeting and measurement can reduce low-value outreach without assuming every positive response is equally profitable.
+The bank has a clear targeting signal, but senior budget judgment requires economics. Response rate should open the investigation; incremental contribution should close it.
 
 ## Supporting detail
 
-The archive contains 45,211 rows and 17 fields with no missing or duplicate rows in the validated `bank-full.csv`. The data covers a Portuguese bank’s direct-marketing campaign from 2008–2010 and is licensed CC BY 4.0. It does not prove profitability or causal lift.
+Source: [UCI Bank Marketing](https://archive.ics.uci.edu/dataset/222/bank%5C%5C%2Bmarketing), CC BY 4.0. The data covers a Portuguese bank’s direct-marketing campaign from 2008–2010 and does not prove causal channel lift or profitability.
