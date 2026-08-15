@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
@@ -36,6 +36,11 @@ export const metadata: Metadata = {
     title: "Hadi Budhy | Data Analyst & Analytics Engineer",
     description: "Data analyst and engineer who turns messy pipelines into business decisions at scale.",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
