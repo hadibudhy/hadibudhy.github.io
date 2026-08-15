@@ -1,0 +1,8 @@
+[
+  {"complaint_id":"e1","text":"The credit bureau will not correct my credit report.","label":"credit_reporting"},
+  {"complaint_id":"e2","text":"I do not recognize this credit card charge.","label":"card_payments"},
+  {"complaint_id":"e3","text":"My mortgage escrow payment is wrong.","label":"mortgages"},
+  {"complaint_id":"e4","text":"The bank froze my checking account.","label":"banking"},
+  {"complaint_id":"e5","text":"Please explain this unfamiliar service issue.","label":"other"},
+  {"complaint_id":"e6","text":"Call me at 555-010-2020 about my credit report.","label":"credit_reporting"}
+]
