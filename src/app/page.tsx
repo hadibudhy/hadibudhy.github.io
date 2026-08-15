@@ -79,7 +79,7 @@ export default function Home() {
 
       <section id="experience" className="scroll-mt-20 border-b border-white/[0.08]">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
-          <div className="grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:gap-20">
+          <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
             <div>
               <p className="section-kicker">Career arc</p>
               <h2 className="section-title mt-4">A career built across the data lifecycle.</h2>
@@ -122,7 +122,7 @@ export default function Home() {
       </section>
 
       <section id="skills" className="scroll-mt-20 border-b border-white/[0.08] bg-slate-900/35">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-8 sm:py-20 md:grid-cols-[0.7fr_1.3fr] md:gap-10 md:py-24">
+          <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.7fr_1.3fr] lg:gap-10 md:py-24">
           <div>
             <p className="section-kicker">Toolkit</p>
             <h2 className="section-title mt-4">The tools behind the work.</h2>

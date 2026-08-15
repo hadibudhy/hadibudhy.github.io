@@ -29,7 +29,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
           <p className="section-kicker">About the work</p>
           <h1 className="mt-5 max-w-4xl break-words text-[2.7rem] font-black tracking-[-0.05em] text-foreground sm:text-5xl md:text-7xl">I make the path from messy data to a better decision shorter.</h1>
-          <div className="mt-8 grid gap-8 md:grid-cols-[1fr_0.8fr] md:gap-20">
+          <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
             <div className="space-y-5 text-lg leading-8 text-muted-foreground">
               <p>I am a Senior Data Analyst and Analytics Engineer with ~6 years of experience based in Jakarta, Indonesia.</p>
               <p>I started in Business Intelligence and grew into full-stack data work, driven by a desire to turn fragmented pipelines into cohesive business decisions at scale.</p>
@@ -50,14 +50,14 @@ export default function AboutPage() {
       </section>
 
       <section className="border-b border-white/[0.08]">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-8 sm:py-20 md:grid-cols-[0.75fr_1.25fr] md:gap-12 md:py-28">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.75fr_1.25fr] lg:gap-12 md:py-28">
           <div><p className="section-kicker">How I got here</p><h2 className="section-title mt-4">From reporting questions to data systems.</h2></div>
           <div>{careerArc.map((item) => <div key={item.index} className="grid grid-cols-[3rem_1fr] gap-5 border-t border-white/[0.1] py-6 first:border-t-0 first:pt-0"><span className="font-mono text-sm text-primary">{item.index}</span><div><h3 className="text-xl font-bold text-foreground">{item.title}</h3><p className="mt-2 leading-7 text-muted-foreground">{item.description}</p></div></div>)}</div>
         </div>
       </section>
 
       <section className="border-b border-white/[0.08]">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-8 sm:py-20 md:grid-cols-[0.7fr_1.3fr] md:gap-10 md:py-24">
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.7fr_1.3fr] lg:gap-10 md:py-24">
           <div><p className="section-kicker">Skills</p><h2 className="section-title mt-4">A practical toolkit for the full lifecycle.</h2></div>
           <div className="flex flex-wrap content-start gap-3">{skills.map((skill) => <Badge key={skill} variant="secondary" className="px-3 py-1.5 text-sm font-normal text-slate-200">{skill}</Badge>)}</div>
         </div>

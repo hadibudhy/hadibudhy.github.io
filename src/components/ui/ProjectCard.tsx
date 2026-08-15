@@ -20,7 +20,7 @@ export function ProjectCard({ slug, meta, featured = false }: ProjectCardProps) 
               src={meta.teaser}
               alt=""
               fill
-              sizes={featured ? "(max-width: 768px) 100vw, 55vw" : "(max-width: 768px) 100vw, 33vw"}
+              sizes={featured ? "(max-width: 1024px) 100vw, 55vw" : "(max-width: 1024px) 100vw, 33vw"}
               className="object-contain transition-transform duration-500 group-hover:scale-105 lg:object-cover"
               unoptimized
             />

@@ -47,8 +47,8 @@ type MDXImageProps = ComponentProps<"img">;
 
 // Custom components for MDX
 const components = {
-  h2: (props: ComponentProps<"h2">) => <h2 className="text-2xl font-bold mt-12 mb-6 tracking-tight text-slate-100 border-b border-border pb-2" {...props} />,
-  h3: (props: ComponentProps<"h3">) => <h3 className="text-xl font-bold mt-8 mb-4 tracking-tight text-slate-200" {...props} />,
+  h2: (props: ComponentProps<"h2">) => <h2 className="mt-10 mb-5 break-words border-b border-border pb-2 text-xl font-bold tracking-tight text-slate-100 sm:mt-12 sm:mb-6 sm:text-2xl" {...props} />,
+  h3: (props: ComponentProps<"h3">) => <h3 className="mt-7 mb-4 break-words text-lg font-bold tracking-tight text-slate-200 sm:mt-8 sm:text-xl" {...props} />,
   p: (props: ComponentProps<"p">) => <p className="leading-7 [&:not(:first-child)]:mt-6 text-muted-foreground" {...props} />,
   ul: (props: ComponentProps<"ul">) => <ul className="my-6 ml-6 list-disc [&>li]:mt-2 text-muted-foreground" {...props} />,
   ol: (props: ComponentProps<"ol">) => <ol className="my-6 ml-6 list-decimal [&>li]:mt-2 text-muted-foreground" {...props} />,
@@ -64,9 +64,12 @@ const components = {
     </div>
   ),
   a: (props: ComponentProps<"a">) => <a className="font-medium text-primary underline underline-offset-4 hover:text-primary/80" {...props} />,
+  pre: (props: ComponentProps<"pre">) => (
+    <pre className="my-6 max-w-full overflow-x-auto rounded-xl border border-border bg-slate-950 p-4 text-sm leading-6" {...props} />
+  ),
   table: (props: ComponentProps<"table">) => (
-    <div className="my-8 w-full overflow-y-auto rounded-lg border border-border">
-      <table className="w-full overflow-hidden text-sm" {...props} />
+    <div className="my-8 w-full max-w-full overflow-x-auto rounded-lg border border-border">
+      <table className="min-w-full text-sm" {...props} />
     </div>
   ),
   th: (props: ComponentProps<"th">) => <th className="border-b border-border bg-slate-900 px-4 py-3 text-left font-bold text-slate-200" {...props} />,
