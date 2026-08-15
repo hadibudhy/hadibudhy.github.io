@@ -13,9 +13,9 @@ interface ProjectCardProps {
 export function ProjectCard({ slug, meta, featured = false }: ProjectCardProps) {
   return (
     <Link href={`/projects/${slug}`} className={`group block h-full min-w-0 ${featured ? "lg:col-span-2" : ""}`}>
-      <article className={`relative flex h-full min-w-0 overflow-hidden rounded-2xl border border-white/[0.1] bg-card/70 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-card hover:shadow-[0_18px_60px_rgba(2,6,23,0.45)] ${featured ? "lg:grid lg:grid-cols-[1.1fr_0.9fr]" : "flex-col"}`}>
+      <article className={`relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-white/[0.1] bg-card/70 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-card hover:shadow-[0_18px_60px_rgba(2,6,23,0.45)] ${featured ? "lg:grid lg:grid-cols-[1.1fr_0.9fr]" : ""}`}>
         {meta.teaser && (
-          <div className={`relative overflow-hidden bg-slate-950 ${featured ? "aspect-[16/10] lg:aspect-auto lg:min-h-full" : "aspect-[16/9]"}`}>
+          <div className={`relative w-full overflow-hidden bg-slate-950 ${featured ? "aspect-[16/10] lg:aspect-auto lg:min-h-full" : "aspect-[16/9]"}`}>
             <Image
               src={meta.teaser}
               alt=""
@@ -27,7 +27,7 @@ export function ProjectCard({ slug, meta, featured = false }: ProjectCardProps) 
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
           </div>
         )}
-        <div className="flex min-w-0 flex-1 flex-col justify-between p-5 sm:p-6 lg:p-7">
+        <div className="flex min-w-0 w-full flex-1 flex-col justify-between p-5 sm:p-6 lg:p-7">
           <div>
             <div className="mb-5 flex flex-wrap items-center gap-2">
               {meta.categories.slice(0, 1).map((category) => (
