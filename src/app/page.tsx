@@ -15,14 +15,14 @@ export default function Home() {
       <section className="relative border-b border-white/[0.08]">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(59,130,246,0.16),transparent_32%),radial-gradient(circle_at_15%_55%,rgba(14,165,233,0.08),transparent_28%)]" />
         <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.08)_1px,transparent_1px)] [background-size:4rem_4rem] [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />
-        <div className="relative mx-auto grid max-w-6xl gap-12 px-5 pb-20 pt-16 sm:pb-24 md:grid-cols-[1.15fr_0.85fr] md:items-center md:gap-16 md:px-8 md:pb-32 md:pt-24">
-          <div>
+        <div className="relative mx-auto grid max-w-6xl gap-10 px-4 pb-16 pt-12 sm:gap-12 sm:px-5 sm:pb-24 sm:pt-16 md:grid-cols-[1.15fr_0.85fr] md:items-center md:gap-16 md:px-8 md:pb-32 md:pt-24">
+          <div className="min-w-0">
             <div className="mb-7 flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">
               <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_16px_rgba(59,130,246,0.9)]" />
               Senior Data Analyst · Analytics Engineer
               <span className="text-muted-foreground">/ Jakarta, ID</span>
             </div>
-            <h1 className="max-w-4xl text-5xl font-black leading-[0.98] tracking-[-0.055em] text-foreground sm:text-6xl lg:text-7xl">
+            <h1 className="max-w-4xl break-words text-[2.7rem] font-black leading-[0.98] tracking-[-0.055em] text-foreground sm:text-6xl lg:text-7xl">
               I turn unreliable data into <span className="text-primary">decisions people can act on.</span>
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground md:text-xl">
@@ -43,7 +43,7 @@ export default function Home() {
             </div>
           </div>
 
-          <aside className="relative rounded-3xl border border-white/[0.12] bg-slate-950/65 p-6 shadow-2xl shadow-blue-950/20 backdrop-blur-sm md:p-8">
+          <aside className="relative min-w-0 rounded-3xl border border-white/[0.12] bg-slate-950/65 p-5 shadow-2xl shadow-blue-950/20 backdrop-blur-sm sm:p-6 md:p-8">
             <div className="mb-10 flex items-center justify-between text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
               <span>What I bring</span>
               <ArrowDownRight className="h-5 w-5 text-primary" aria-hidden="true" />
@@ -67,7 +67,7 @@ export default function Home() {
       </section>
 
       <section aria-label="Selected impact" className="border-b border-white/[0.08] bg-slate-900/35">
-        <div className="mx-auto grid max-w-6xl gap-px px-5 sm:grid-cols-3 sm:px-8">
+        <div className="mx-auto grid max-w-6xl gap-px px-4 sm:grid-cols-3 sm:px-8">
           {impactStats.map((stat) => (
             <div key={stat.label} className="border-white/[0.08] py-8 sm:border-r sm:px-8 sm:first:border-l">
               <div className="text-3xl font-black tracking-tight text-foreground md:text-4xl">{stat.value}</div>
@@ -78,8 +78,8 @@ export default function Home() {
       </section>
 
       <section id="experience" className="scroll-mt-20 border-b border-white/[0.08]">
-        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-          <div className="grid gap-12 md:grid-cols-[0.75fr_1.25fr] md:gap-20">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
+          <div className="grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:gap-20">
             <div>
               <p className="section-kicker">Career arc</p>
               <h2 className="section-title mt-4">A career built across the data lifecycle.</h2>
@@ -87,7 +87,7 @@ export default function Home() {
             </div>
             <div className="space-y-0">
               {careerArc.map((item) => (
-                <div key={item.index} className="group grid grid-cols-[3rem_1fr] gap-5 border-t border-white/[0.1] py-6 first:border-t-0 first:pt-0">
+                <div key={item.index} className="group grid grid-cols-[2.5rem_1fr] gap-3 border-t border-white/[0.1] py-5 first:border-t-0 first:pt-0 sm:grid-cols-[3rem_1fr] sm:gap-5 sm:py-6">
                   <span className="font-mono text-sm text-primary">{item.index}</span>
                   <div>
                     <h3 className="text-xl font-bold text-foreground transition-colors group-hover:text-primary">{item.title}</h3>
@@ -101,7 +101,7 @@ export default function Home() {
       </section>
 
       <section id="work" className="scroll-mt-20 border-b border-white/[0.08]">
-        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
           <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="section-kicker">Selected work</p>
@@ -122,7 +122,7 @@ export default function Home() {
       </section>
 
       <section id="skills" className="scroll-mt-20 border-b border-white/[0.08] bg-slate-900/35">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 sm:px-8 md:grid-cols-[0.7fr_1.3fr] md:py-24">
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-8 sm:py-20 md:grid-cols-[0.7fr_1.3fr] md:gap-10 md:py-24">
           <div>
             <p className="section-kicker">Toolkit</p>
             <h2 className="section-title mt-4">The tools behind the work.</h2>
@@ -134,8 +134,8 @@ export default function Home() {
       </section>
 
       <section id="contact" className="scroll-mt-20">
-        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-          <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-primary/[0.08] p-8 md:p-14">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
+          <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-primary/[0.08] p-6 sm:p-8 md:p-14">
             <div className="pointer-events-none absolute -right-16 -top-24 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
             <div className="relative grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
               <div>

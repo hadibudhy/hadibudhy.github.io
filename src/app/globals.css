@@ -45,6 +45,12 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 ::selection {
   background: color-mix(in srgb, var(--primary) 35%, transparent);
   color: var(--foreground);

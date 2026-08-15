@@ -12,8 +12,8 @@ interface ProjectCardProps {
 
 export function ProjectCard({ slug, meta, featured = false }: ProjectCardProps) {
   return (
-    <Link href={`/projects/${slug}`} className={`group block h-full ${featured ? "md:col-span-2" : ""}`}>
-      <article className={`relative flex h-full overflow-hidden rounded-2xl border border-white/[0.1] bg-card/70 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-card hover:shadow-[0_18px_60px_rgba(2,6,23,0.45)] ${featured ? "md:grid md:grid-cols-[1.1fr_0.9fr]" : "flex-col"}`}>
+    <Link href={`/projects/${slug}`} className={`group block h-full min-w-0 ${featured ? "md:col-span-2" : ""}`}>
+      <article className={`relative flex h-full min-w-0 overflow-hidden rounded-2xl border border-white/[0.1] bg-card/70 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-card hover:shadow-[0_18px_60px_rgba(2,6,23,0.45)] ${featured ? "md:grid md:grid-cols-[1.1fr_0.9fr]" : "flex-col"}`}>
         {meta.teaser && (
           <div className={`relative overflow-hidden bg-slate-950 ${featured ? "aspect-[16/10] md:aspect-auto md:min-h-full" : "aspect-[16/9]"}`}>
             <Image
@@ -27,7 +27,7 @@ export function ProjectCard({ slug, meta, featured = false }: ProjectCardProps) 
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
           </div>
         )}
-        <div className="flex flex-1 flex-col justify-between p-6 lg:p-7">
+        <div className="flex min-w-0 flex-1 flex-col justify-between p-5 sm:p-6 lg:p-7">
           <div>
             <div className="mb-5 flex flex-wrap items-center gap-2">
               {meta.categories.slice(0, 1).map((category) => (
@@ -37,16 +37,16 @@ export function ProjectCard({ slug, meta, featured = false }: ProjectCardProps) 
                 <Badge key={tag} variant="secondary" className="text-[10px] uppercase tracking-wider">{tag}</Badge>
               ))}
             </div>
-            <h3 className={`${featured ? "text-2xl lg:text-3xl" : "text-xl"} mb-3 font-bold tracking-tight text-foreground transition-colors group-hover:text-primary`}>{meta.title}</h3>
+            <h3 className={`${featured ? "text-xl sm:text-2xl lg:text-3xl" : "text-lg sm:text-xl"} mb-3 break-words font-bold tracking-tight text-foreground transition-colors group-hover:text-primary`}>{meta.title}</h3>
             <p className="mb-5 text-sm leading-6 text-muted-foreground">{meta.excerpt}</p>
             {meta.result && (
-              <div className="border-l-2 border-primary/70 pl-4 text-sm leading-6 text-slate-200">
+              <div className="break-words border-l-2 border-primary/70 pl-4 text-sm leading-6 text-slate-200">
                 <span className="mb-1 block text-[10px] font-bold uppercase tracking-[0.18em] text-primary">Result</span>
                 {meta.result}
               </div>
             )}
           </div>
-          <div className="mt-7 flex items-center justify-between border-t border-white/[0.08] pt-5 text-sm font-semibold text-primary">
+          <div className="mt-6 flex items-center justify-between gap-3 border-t border-white/[0.08] pt-5 text-sm font-semibold text-primary sm:mt-7">
             <span>{featured ? "Explore the case study" : "Read case study"}</span>
             <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" aria-hidden="true" />
           </div>

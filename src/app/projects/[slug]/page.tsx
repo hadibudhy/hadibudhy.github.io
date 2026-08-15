@@ -84,20 +84,20 @@ export default async function ProjectPage({ params }: Props) {
   const formattedDate = format(project.meta.date, 'MMMM yyyy');
 
   return (
-    <article className="py-16 md:py-24">
-      <div className="container mx-auto max-w-3xl px-4 md:px-8">
-        <Button variant="ghost" asChild className="mb-10 -ml-4 text-muted-foreground hover:text-foreground">
+    <article className="py-12 sm:py-16 md:py-24">
+      <div className="container mx-auto min-w-0 max-w-3xl px-4 sm:px-6 md:px-8">
+        <Button variant="ghost" asChild className="mb-8 -ml-3 text-muted-foreground hover:text-foreground sm:mb-10 sm:-ml-4">
           <Link href="/projects">
             <ArrowLeft className="mr-2 h-4 w-4" /> Back to projects
           </Link>
         </Button>
 
-        <header className="mb-16">
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 leading-tight">
+        <header className="mb-12 sm:mb-16">
+          <h1 className="break-words text-3xl font-extrabold tracking-tight leading-tight sm:text-4xl md:text-5xl">
             {project.meta.title}
           </h1>
           
-          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-8">
+          <div className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
             {formattedDate && (
               <div className="flex items-center">
                 <Calendar className="mr-2 h-4 w-4" />
@@ -125,7 +125,7 @@ export default async function ProjectPage({ params }: Props) {
 
         {/* TL;DR Section - A strong addition for recruiters */}
         {project.meta.excerpt && (
-          <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 md:p-8 mb-16">
+          <div className="mb-12 rounded-2xl border border-primary/20 bg-primary/5 p-5 sm:mb-16 sm:p-6 md:p-8">
             <h3 className="text-lg font-bold text-primary mb-3 uppercase tracking-wider text-sm">TL;DR Impact</h3>
             <p className="text-lg text-slate-200 leading-relaxed font-medium">
               {project.meta.excerpt}
