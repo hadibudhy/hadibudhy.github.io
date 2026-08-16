@@ -31,9 +31,9 @@ The BLS API returned December 2025 values of **6.55m openings**, **3.3% hires**,
 
 The data cannot identify a company, team, manager, or role causing turnover. It is also an aggregate estimate that can be revised. Any internal diagnosis must preserve that distinction.
 
-![Openings, hires, quits, and separations are different workforce signals](/images/jolts-december-signals.png)
+![U.S. BLS JOLTS, December 2025: 6.55M openings, 3.3% hires, 2.0% quits, and 5.203M total separations measure different workforce signals](/images/jolts-december-signals.png)
 
-![Workforce pressure reflects both demand for workers and employee exits](/images/jolts-openings-separations.png)
+![U.S. BLS JOLTS, December 2025: Workforce pressure reflects both demand for workers and employee exits](/images/jolts-openings-separations.png)
 
 ## Opportunity, trade-offs, and scenarios
 

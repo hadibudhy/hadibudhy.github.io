@@ -31,9 +31,9 @@ The current file supports stage events, not a trustworthy completed-purchase KPI
 
 The event counts are **93,452 → 41,037 → 19,301 → 8,861 → 2,823** across page stages. This establishes where activity thins out, but not why. Possible explanations include weaker content, navigation friction, product availability, or tracking loss. The data cannot distinguish them.
 
-![Browsing volume falls sharply after the first page stage](/images/clickstream-stage-volume.png)
+![UCI online-shopping clickstream, five-month 2008 sample: Event volume fell from 93,452 at stage 1 to 2,823 at stage 5](/images/clickstream-stage-volume.png)
 
-![Most sessions contain several events](/images/clickstream-session-depth.png)
+![UCI online-shopping clickstream, 24,026 sessions: 79.0% of sessions contained more than one event](/images/clickstream-session-depth.png)
 
 The source has 165,474 rows, 14 fields, no missing values, and no duplicate rows. The unit is an event, not a customer or order. Country and product-model fields also require session-level aggregation to avoid overstating value.
 

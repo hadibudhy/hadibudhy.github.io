@@ -58,11 +58,12 @@ const components = {
     <blockquote className="mt-6 border-l-4 border-primary pl-6 italic text-slate-300 bg-slate-900/50 py-4 pr-4 rounded-r-lg" {...props} />
   ),
   img: ({ alt = "", ...props }: MDXImageProps) => (
-    <div className="my-10 rounded-xl overflow-hidden border border-border/50 bg-slate-900/50 shadow-lg">
+    <span role="figure" aria-label={alt || undefined} className="my-10 block overflow-hidden rounded-xl border border-border/50 bg-slate-900/50 shadow-lg">
       {/* MDX images have author-provided dimensions and are served from the static export. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="w-full h-auto object-cover" loading="lazy" decoding="async" alt={alt} {...props} />
-    </div>
+      {alt && <span className="block border-t border-border/50 px-4 py-3 text-sm leading-6 text-slate-300 sm:px-5"><span className="font-semibold text-slate-100">Chart takeaway:</span> {alt}</span>}
+    </span>
   ),
   a: (props: ComponentProps<"a">) => <a className="font-medium text-primary underline underline-offset-4 hover:text-primary/80" {...props} />,
   pre: (props: ComponentProps<"pre">) => (

@@ -31,9 +31,9 @@ The official file has **30,000 rows and 24 fields**. The useful business decompo
 
 Repayment history should be the first diagnostic layer. Age, education, and other demographic fields may help describe segments, but they should not become a shortcut for a lending decision. The data is observational and historical, so association is not causation.
 
-![Default is a minority outcome, so review capacity must be targeted](/images/credit-default-balance.png)
+![UCI Taiwan credit-client sample, 30,000 accounts from 2005: Default is a minority outcome, so review capacity must be targeted](/images/credit-default-balance.png)
 
-![Risk review should consider observed default and credit exposure together](/images/credit-default-by-exposure.png)
+![UCI Taiwan credit-client sample, 30,000 accounts from 2005: Risk review should consider observed default and credit exposure together](/images/credit-default-by-exposure.png)
 
 ## Opportunity, trade-offs, and validation
 

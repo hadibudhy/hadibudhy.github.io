@@ -41,7 +41,7 @@ The extract also includes **150,141 missing grades**, **160,467 missing grade da
 
 Among the inspection records with an A, B, or C grade, **85.8% were A**, **9.3% were B**, and **4.9% were C**. However, 30,129 rolled-up inspection records had no grade in this extract.
 
-![Most recorded inspections received an A, but a smaller group needs closer follow-up](/images/restaurant-grades.png)
+![73,478 NYC inspections from 2022–2025: Most recorded grades were A, but 30,129 inspections had no grade for follow-up](/images/restaurant-grades.png)
 
 **Business meaning:** A strong A-grade share does not mean every location is low risk. The ungraded group needs a separate workflow because it may represent inspections before a grade was assigned or records where the current extract does not contain the final outcome.
 
@@ -49,7 +49,7 @@ Among the inspection records with an A, B, or C grade, **85.8% were A**, **9.3% 
 
 In the 2022-2025 inspection-level roll-up, **77.3%** of records included at least one violation marked critical. The rate ranged from **75.9% in Manhattan** to **81.6% in Staten Island**. The Bronx was next at **79.7%**, followed by Queens at **78.2%** and Brooklyn at **77.1%**.
 
-![The share of inspections with a critical violation varied by borough](/images/restaurant-risk-by-borough.png)
+![73,478 NYC inspections from 2022–2025: Critical-violation rates ranged from 75.9% in Manhattan to 81.6% in Staten Island](/images/restaurant-risk-by-borough.png)
 
 These differences are useful for prioritization, but they do not prove that a borough causes worse performance. Restaurant mix, inspection timing, location, and reporting practices may all contribute.
 

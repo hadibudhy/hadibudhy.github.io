@@ -39,13 +39,13 @@ The cleaned data contains **4,338 identifiable customers**, **18,532 orders**, a
 
 The highest-value 10% of customers generated **61.3% of revenue**. This is a concentration risk and an opportunity: keeping a small group of valuable customers engaged could protect a large share of sales, while losing them would have an outsized effect.
 
-![Revenue grew into the 2011 holiday season while returning orders became a larger part of demand](/images/retail-growth-patterns.png)
+![Cleaned UCI Online Retail orders, December 2010–December 2011: Revenue rose into the holiday season while returning orders became a larger share of demand](/images/retail-growth-patterns.png)
 
 ## Finding 2: The UK was the core market, but nearby countries added visible opportunity
 
 The UK generated **£7.31 million**, or about **82% of cleaned revenue**. The next markets were the Netherlands, EIRE, Germany, and France. These markets were much smaller than the UK, but they were large enough to support focused tests around product selection, shipping, and repeat-purchase offers.
 
-![The UK generated most revenue, while nearby European markets were the clearest expansion candidates](/images/retail-market-opportunity.png)
+![Cleaned UCI Online Retail revenue, December 2010–December 2011: The UK generated most revenue, while nearby European markets were the clearest expansion candidates](/images/retail-market-opportunity.png)
 
 ## Finding 3: Growth became more dependent on returning orders as the period progressed
 

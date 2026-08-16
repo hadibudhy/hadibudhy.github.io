@@ -35,7 +35,7 @@ I used the January 2025 yellow taxi trip file and joined pickup location IDs to 
 
 Valid trips peaked at **241,585 pickups at 18:00**, with demand also high at 17:00 and 19:00. Manhattan accounted for **2.96 million of 3.31 million valid trips**, or about **89%** of the cleaned sample.
 
-![Taxi demand peaked between 17:00 and 19:00](/images/taxi-demand-by-hour.png)
+![January 2025 NYC yellow-taxi trips: Demand peaked at 18:00, with the strongest operating window from 17:00 to 19:00](/images/taxi-demand-by-hour.png)
 
 **Business meaning:** A broad, all-day capacity plan would miss the most important window. Vehicle availability and dispatch coverage should be strongest before and during the evening peak.
 
@@ -43,7 +43,7 @@ Valid trips peaked at **241,585 pickups at 18:00**, with demand also high at 17:
 
 Queens pickups averaged **32.0 minutes** and **$72.12 per trip**, compared with **12.8 minutes** and **$22.34** in Manhattan. The JFK Airport pickup zone alone recorded **133,337 valid trips**, with an average duration of **38.4 minutes** and an average fare of **$81.11**.
 
-![Airport-linked areas had longer, higher-value trips while Manhattan carried most of the volume](/images/taxi-zone-economics.png)
+![January 2025 valid NYC yellow-taxi trips: Manhattan carried most volume, while airport-linked areas had longer, higher-fare trips](/images/taxi-zone-economics.png)
 
 These trips are not directly comparable with short Manhattan trips. They use vehicles for longer periods, involve different pickup patterns, and create different revenue per trip. Treating every zone as the same operating problem would hide that difference.
 

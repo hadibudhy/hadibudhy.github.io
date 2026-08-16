@@ -31,9 +31,9 @@ The validated archive has **45,211 rows, 17 fields, no missing values, and no du
 
 The channel pattern is associated evidence, not causality. Channel may proxy for data quality or customer selection. The dataset also lacks profit, so optimizing response alone could increase cost without improving value.
 
-![Response differs sharply by recorded contact channel](/images/bank-channel-response.png)
+![Bank Marketing campaign archive, 45,211 contacts: Positive response was 14.9% for cellular, 13.4% for telephone, and 4.1% for unknown contact type](/images/bank-channel-response.png)
 
-![Previous campaign success is the strongest observed response signal](/images/bank-prior-outcome-response.png)
+![Bank Marketing campaign archive, 45,211 contacts: Previous campaign success had a 64.7% positive response versus 9.2% for unknown prior outcomes](/images/bank-prior-outcome-response.png)
 
 ## Quantified opportunity and trade-off
 

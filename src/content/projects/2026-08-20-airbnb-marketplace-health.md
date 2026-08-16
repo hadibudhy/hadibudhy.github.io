@@ -31,9 +31,9 @@ The validated snapshot contains **30,555 listings, 19 columns, and no duplicate 
 
 The top 1% of observed hosts account for **24.7% of listings**. This is a concentration risk, not proof that these hosts create most bookings. Missing price and license values also require separate treatment; missing license is not evidence of non-compliance.
 
-![Entire homes and private rooms make up almost all visible supply](/images/airbnb-room-supply.png)
+![Inside Airbnb New York snapshot, June 14 2026: Entire homes and private rooms made up almost all of 30,555 visible listings](/images/airbnb-room-supply.png)
 
-![A small host group controls a large share of visible supply](/images/airbnb-host-concentration.png)
+![Inside Airbnb New York snapshot, June 14 2026: The top 1% of observed hosts controlled 24.7% of visible listings](/images/airbnb-host-concentration.png)
 
 ## Opportunity, trade-offs, and scenarios
 

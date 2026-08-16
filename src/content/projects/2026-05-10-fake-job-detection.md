@@ -55,7 +55,7 @@ The F1 score combines those two measures. It helps show whether the system catch
 
 The model that used profile details without reading the post had the weakest overall F1 score. Adding the text improved performance significantly.
 
-![Text-based signals outperformed profile details when identifying fake job posts](/images/fake-job-all-models.png)
+![Employment Scam Aegean Dataset, 17,880 job posts: Text-based signals outperformed profile details when identifying fake posts](/images/fake-job-all-models.png)
 
 Scammers can easily add a logo, choose a credible industry, or select “full-time” as the employment type. Their wording is harder to disguise. Phrases such as “earn money from home,” “no experience needed,” and “tax free income” appeared more often in fake posts.
 
@@ -73,7 +73,7 @@ Testing different thresholds showed that 0.10 gave the best balance for the sent
 
 In plain terms, the tuned system caught about 75 of every 100 fake posts. When it flagged a post, it was correct about 98 times out of 100 in this test.
 
-![The best balance between catching fraud and avoiding false alarms appeared at a 0.10 threshold](/images/fake-job-threshold-cv.png)
+![Held-out test set of fake job posts: The best F1 balance appeared at a 0.10 threshold, while a simpler text model caught more scams](/images/fake-job-threshold-cv.png)
 
 The right threshold is a product decision. A platform that wants to catch more scams may accept more human reviews. A platform that wants fewer reviews may choose a stricter threshold and miss more cases.
 
@@ -83,7 +83,7 @@ Fake posts often used emotional or aspirational phrases such as “work from hom
 
 Real posts were more specific about location, qualifications, and job structure. This difference gives reviewers and future models useful signals to investigate.
 
-![The language patterns that appeared more often in fake and real job posts](/images/fake-job-keywords.png)
+![Employment Scam Aegean Dataset: Phrases such as work-from-home and tax-free income appeared more often in fake posts](/images/fake-job-keywords.png)
 
 ## Finding 4: Profile details still added useful context
 
@@ -91,7 +91,7 @@ Feature contribution analysis showed that industry, the presence of a company pr
 
 Having a company logo was not the strongest signal. It ranked 11th, which supports the earlier finding: a logo alone is not a reliable sign that a posting is legitimate.
 
-![The profile and writing features that influenced fraud predictions](/images/fake-job-shap.png)
+![Fake-job model features: Post language and profile details influenced fraud predictions, with content signals providing the strongest context](/images/fake-job-shap.png)
 
 ## How stable were the results?
 

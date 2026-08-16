@@ -41,7 +41,7 @@ The average score for the balanced group increased from **5.47 in 2011 to 5.74 i
 
 The average rose slightly in 2020, dipped in 2021 and 2022, then recovered by 2023 and reached a 14-year high in 2025.
 
-![The average happiness score rose over time and recovered after the 2021-2022 dip](/images/happiness-beat01.png)
+![Balanced panel of 129 countries, 2011–2025: Average happiness rose and recovered after the 2021–2022 dip](/images/happiness-beat01.png)
 
 **What this means:** The data does not show a long global happiness collapse during COVID. That does not remove the pain, loss, or anxiety caused by the pandemic. It shows that an overall life evaluation can behave differently from short-term mood or daily stress.
 
@@ -64,7 +64,7 @@ These countries started from relatively low scores. Their gains are consistent w
 
 The largest decline was in Afghanistan: **-2.81 points**, from 4.26 in 2011 to 1.45 in 2025. Lebanon, Malawi, and Jordan also experienced large falls. Conflict, economic collapse, and governance problems are important context for these results.
 
-![The largest risers and fallers show how quickly national conditions can change](/images/happiness-beat02.png)
+![Balanced panel of 129 countries, 2011–2025: The largest risers and fallers show how quickly national scores can change](/images/happiness-beat02.png)
 
 ## Finding 3: The gap is not about money alone
 
@@ -76,7 +76,7 @@ The largest gaps between the groups were:
 - **Social support:** 0.82 points.
 - **Life expectancy:** 0.62 points.
 
-![The largest differences between the happiest and least happy countries include money, support, and health](/images/happiness-beat03.png)
+![Top 10 versus bottom 10 countries in 2025: The largest happiness-score differences include income, social support, and health](/images/happiness-beat03.png)
 
 **Business meaning:** Economic resources matter, but they are not the whole story. Access to support and the ability to live a healthy life are nearly as important in the group comparison.
 
@@ -92,7 +92,7 @@ These factors are also related to each other. Wealthier countries often have bet
 
 Generosity had almost no relationship with the national happiness score (**r = 0.03**). This does not mean generosity has no value for individuals. It means charitable giving alone did not explain differences between countries in this dataset.
 
-![Social support, income, and health showed the strongest relationships with happiness](/images/happiness-beat04.png)
+![Countries measured from 2019–2025: Social support, income, and health showed the strongest associations with happiness](/images/happiness-beat04.png)
 
 ## Finding 5: The gap between countries widened
 
@@ -100,7 +100,7 @@ The range between the highest and lowest country scores grew from 4.8 points in 
 
 So the global average rose, but the countries at the bottom did not keep pace with the countries at the top. That is a more important signal than the average alone because it shows that progress was uneven.
 
-![The gap between the highest and lowest country scores widened over time](/images/happiness-drivers-inequality.png)
+![Balanced panel of 129 countries, 2011–2025: The gap between the highest and lowest country scores widened over time](/images/happiness-drivers-inequality.png)
 
 ## Recommendations
 

@@ -31,7 +31,7 @@ The [BTS national fare series](https://www.bts.gov/content/national-level-domest
 
 The national series cannot explain a route-level change. It combines carriers, markets, itinerary lengths, and fare types. A shift in the average may therefore be mix, not a price decision.
 
-![Nominal fare rose slightly while the inflation-adjusted comparison fell](/images/airfare-current-adjusted.png)
+![BTS national average domestic fare, 2024 versus 2025: Nominal fare rose slightly while the inflation-adjusted comparison fell](/images/airfare-current-adjusted.png)
 
 ## Driver decomposition and scenario analysis
 

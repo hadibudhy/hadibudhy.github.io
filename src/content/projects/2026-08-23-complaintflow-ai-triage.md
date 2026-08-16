@@ -44,7 +44,7 @@ That limitation shapes the system. ComplaintFlow helps with routing and evidence
 
 ## 03 — How it works
 
-![ComplaintFlow uses a bounded AI workflow with a baseline, approved retrieval, validation, escalation, and audit logging.](/images/complaintflow-architecture.svg)
+![ComplaintFlow reference architecture: A bounded AI workflow validates input, redacts PII, retrieves approved guidance, escalates uncertainty, and records each decision.](/images/complaintflow-architecture.svg)
 
 1. **Validate:** reject missing IDs and overlong text.
 2. **Protect:** redact obvious email, phone, and account-like values before provider use.

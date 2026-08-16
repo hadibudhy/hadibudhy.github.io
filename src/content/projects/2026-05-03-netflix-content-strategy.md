@@ -37,7 +37,7 @@ The two content types moved in opposite directions:
 
 Because the catalog contains many more movies than TV shows, the movie trend made the whole platform look less fresh. The combined number hid the fact that Netflix was investing in new shows while building a library of movies that could keep attracting viewers over time.
 
-![TV shows became fresher while the movie library grew older](/images/netflix-beat01.png)
+![Netflix catalog, 2015–2021: TV shows became fresher while the movie library grew older](/images/netflix-beat01.png)
 
 **Why it matters:** A single freshness target could encourage the wrong decision. Shows and movies need separate goals because they play different roles in the product.
 
@@ -50,7 +50,7 @@ Older content did not grow equally across every category. The largest increases 
 
 This suggests a focused library-building strategy rather than a general decline in quality or investment. Netflix appears to be building depth where a strong collection can continue to serve viewers.
 
-![Library growth was concentrated in international dramas and family movies](/images/netflix-beat03.png)
+![Netflix catalog, 2015–2021: Library growth was concentrated in international dramas and family movies](/images/netflix-beat03.png)
 
 ## Finding 3: Documentary partnerships may be less efficient
 
@@ -64,7 +64,7 @@ In the UK catalog, about 13% of titles added in the 2020s were missing important
 
 This points to a process problem in how new titles are added. Missing descriptions and tags make content harder to find and harder to evaluate, even when the underlying catalog strategy is sound.
 
-![Newer UK titles were more likely to have missing content information](/images/netflix-beat05.png)
+![Netflix UK titles added in the 2020s: Newer titles were more likely to have missing descriptions or tags](/images/netflix-beat05.png)
 
 ## Recommendations
 
