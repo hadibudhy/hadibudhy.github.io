@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Mail } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { careerArc, education, experience, impactStats, skills } from "@/lib/profile";
+import { careerArc, education, experience, skills } from "@/lib/profile";
 
 export const metadata = {
   title: "About",
@@ -40,12 +40,6 @@ export default function AboutPage() {
             <Button size="lg" asChild><a href="mailto:hadi.budhy@gmail.com"><Mail className="mr-2 h-4 w-4" aria-hidden="true" /> Get in Touch</a></Button>
             <Button size="lg" variant="outline" asChild><Link href="/projects">Explore the Work <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" /></Link></Button>
           </div>
-        </div>
-      </section>
-
-      <section className="border-b border-white/[0.08] bg-slate-900/35">
-        <div className="mx-auto grid max-w-6xl gap-px px-4 sm:grid-cols-3 sm:px-8">
-          {impactStats.map((stat) => <div key={stat.label} className="py-8 sm:border-r sm:border-white/[0.08] sm:px-8 sm:first:border-l"><div className="text-3xl font-black text-foreground">{stat.value}</div><div className="mt-2 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">{stat.label}</div></div>)}
         </div>
       </section>
 
