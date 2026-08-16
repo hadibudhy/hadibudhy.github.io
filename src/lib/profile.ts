@@ -19,6 +19,11 @@ export const skills = [
   "LLM Evaluation",
   "Retrieval Systems",
   "SQLite",
+  "XGBoost",
+  "scikit-learn",
+  "n8n",
+  "Mixpanel",
+  "Git",
 ];
 
 export const impactStats = [
@@ -26,6 +31,8 @@ export const impactStats = [
   { value: "541K", label: "retail rows cleaned" },
   { value: "15", label: "case studies in the library" },
 ];
+
+export const education = "Bachelor of Public Health (Biostatistics), Universitas Indonesia";
 
 export const careerArc = [
   {
@@ -42,5 +49,32 @@ export const careerArc = [
     index: "03",
     title: "Decision systems",
     description: "Now focused on connecting reliable data with clear recommendations and better business decisions.",
+  },
+];
+
+export const experience = [
+  {
+    period: "Oct 2024 — present",
+    role: "Data Analyst",
+    setting: "Consumer commerce platform",
+    description: "Build event-driven alerting, warehouse pipelines, and live dashboards that help support and product teams respond to changes in customer activity.",
+  },
+  {
+    period: "Mar 2023 — Oct 2024",
+    role: "Data & Automation Consultant",
+    setting: "Independent consulting",
+    description: "Turn complex survey and campaign data into reusable analytical models, automated warehouse workflows, and leadership-ready reporting.",
+  },
+  {
+    period: "Jul 2022 — Mar 2023",
+    role: "Senior Business Intelligence Analyst",
+    setting: "E-commerce platform",
+    description: "Connected churn analysis, customer segmentation, cohort analysis, and KPI governance to retention and marketing decisions.",
+  },
+  {
+    period: "Apr 2021 — Jun 2022",
+    role: "Business Intelligence Analyst",
+    setting: "E-commerce platform",
+    description: "Used product, customer, and commercial analysis to improve reporting, identify engagement patterns, and support roadmap decisions.",
   },
 ];

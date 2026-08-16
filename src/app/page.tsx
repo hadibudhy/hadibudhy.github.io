@@ -39,7 +39,7 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
               <a href="https://github.com/hadibudhy" target="_blank" rel="noreferrer" className="transition-colors hover:text-foreground">GitHub ↗</a>
               <a href="https://linkedin.com/in/hadibudhy" target="_blank" rel="noreferrer" className="transition-colors hover:text-foreground">LinkedIn ↗</a>
-              <span>About 6 years across BI, analytics, and data engineering</span>
+              <span>5+ years across BI, analytics, and data engineering</span>
             </div>
           </div>
 
