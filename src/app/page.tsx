@@ -3,7 +3,7 @@ import { ArrowDownRight, ArrowRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { getAllProjects } from "@/lib/mdx";
-import { careerArc, impactStats, skills } from "@/lib/profile";
+import { careerArc, skills } from "@/lib/profile";
 
 export default function Home() {
   const projects = getAllProjects();
@@ -23,17 +23,17 @@ export default function Home() {
               <span className="text-muted-foreground">/ Jakarta, ID</span>
             </div>
             <h1 className="max-w-4xl break-words text-[2.7rem] font-black leading-[0.98] tracking-[-0.055em] text-foreground sm:text-6xl lg:text-7xl">
-              I turn unreliable data into <span className="text-primary">decisions people can act on.</span>
+              Turning unreliable data into <span className="text-primary">decisions people can act on.</span>
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground md:text-xl">
-              I help teams improve growth, operations, and risk by turning messy data into clear evidence, practical recommendations, and measurable next steps.
+              Hadi Budhy helps teams improve growth, operations, and risk by turning messy data into clear evidence, practical recommendations, and measurable next steps.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button size="lg" asChild className="w-full sm:w-auto">
-                <Link href="#work">View My Work <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" /></Link>
+                <Link href="#work">View the Work <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" /></Link>
               </Button>
               <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
-                <a href="mailto:hadi.budhy@gmail.com"><Mail className="mr-2 h-4 w-4" aria-hidden="true" /> Contact Me</a>
+                <a href="mailto:hadi.budhy@gmail.com"><Mail className="mr-2 h-4 w-4" aria-hidden="true" /> Contact</a>
               </Button>
             </div>
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
@@ -45,7 +45,7 @@ export default function Home() {
 
           <aside className="relative min-w-0 rounded-3xl border border-white/[0.12] bg-slate-950/65 p-5 shadow-2xl shadow-blue-950/20 backdrop-blur-sm sm:p-6 lg:p-8">
             <div className="mb-10 flex items-center justify-between text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
-              <span>What I bring</span>
+              <span>What the work brings</span>
               <ArrowDownRight className="h-5 w-5 text-primary" aria-hidden="true" />
             </div>
             <div className="space-y-7">
@@ -66,24 +66,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-label="Selected impact" className="border-b border-white/[0.08] bg-slate-900/35">
-        <div className="mx-auto grid max-w-6xl gap-px px-4 sm:grid-cols-3 sm:px-8">
-          {impactStats.map((stat) => (
-            <div key={stat.label} className="border-white/[0.08] py-8 sm:border-r sm:px-8 sm:first:border-l">
-              <div className="text-3xl font-black tracking-tight text-foreground md:text-4xl">{stat.value}</div>
-              <div className="mt-2 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section id="experience" className="scroll-mt-20 border-b border-white/[0.08]">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
           <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
             <div>
               <p className="section-kicker">Career arc</p>
               <h2 className="section-title mt-4">A career built across the data lifecycle.</h2>
-              <p className="mt-5 leading-7 text-muted-foreground">From reporting foundations to data systems, my focus has stayed consistent: make complex information easier to trust and act on.</p>
+              <p className="mt-5 leading-7 text-muted-foreground">From reporting foundations to data systems, the focus has stayed consistent: make complex information easier to trust and act on.</p>
             </div>
             <div className="space-y-0">
               {careerArc.map((item) => (
@@ -144,7 +133,7 @@ export default function Home() {
               <div>
                 <p className="section-kicker">Next conversation</p>
                 <h2 className="mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground md:text-5xl">Have a messy data problem worth making clear?</h2>
-                <p className="mt-5 max-w-xl leading-7 text-muted-foreground">I&apos;m open to conversations about analytics, data work, and decisions that need clearer evidence.</p>
+                <p className="mt-5 max-w-xl leading-7 text-muted-foreground">Available for conversations about analytics, data work, and decisions that need clearer evidence.</p>
               </div>
               <Button size="lg" asChild className="w-full sm:w-auto"><a href="mailto:hadi.budhy@gmail.com">Let&apos;s talk <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" /></a></Button>
             </div>

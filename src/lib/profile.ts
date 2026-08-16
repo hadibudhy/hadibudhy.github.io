@@ -26,12 +26,6 @@ export const skills = [
   "Git",
 ];
 
-export const impactStats = [
-  { value: "3.31M", label: "taxi trips validated" },
-  { value: "541K", label: "retail rows cleaned" },
-  { value: "15", label: "case studies in the library" },
-];
-
 export const education = "Bachelor of Public Health (Biostatistics), Universitas Indonesia";
 
 export const careerArc = [
