@@ -16,6 +16,10 @@ header:
   teaser: /images/fake-job-all-models.png
 ---
 
+## Executive summary
+
+**Business problem:** rare fake job posts could be missed by an apparently accurate classifier. **Decision:** how should a platform balance scam detection against manual review? **Key finding:** text signals were strongest; a tuned threshold reached 75% recall and 98% precision in the test. **Recommended action:** use text-first screening with human review and monitor drift.
+
 ## Business context
 
 Fake job posts can harm both job seekers and employment platforms. Scammers may use attractive job titles to collect personal information, request fees, or impersonate real companies.

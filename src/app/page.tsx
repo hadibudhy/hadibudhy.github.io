@@ -19,14 +19,14 @@ export default function Home() {
           <div className="min-w-0">
             <div className="mb-7 flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">
               <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_16px_rgba(59,130,246,0.9)]" />
-              Senior Data Analyst / Analytics Engineer
+              Senior Data Analyst / Analytics Engineer <span className="text-muted-foreground">• Applied AI</span>
               <span className="text-muted-foreground">/ Jakarta, ID</span>
             </div>
             <h1 className="max-w-4xl break-words text-[2.7rem] font-black leading-[0.98] tracking-[-0.055em] text-foreground sm:text-6xl lg:text-7xl">
               I turn unreliable data into <span className="text-primary">decisions people can act on.</span>
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground md:text-xl">
-              I turn messy business data into clear evidence, useful recommendations, and better decisions.
+              I help teams improve growth, operations, and risk by turning messy data into clear evidence, practical recommendations, and measurable next steps.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button size="lg" asChild className="w-full sm:w-auto">
@@ -39,7 +39,7 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
               <a href="https://github.com/hadibudhy" target="_blank" rel="noreferrer" className="transition-colors hover:text-foreground">GitHub ↗</a>
               <a href="https://linkedin.com/in/hadibudhy" target="_blank" rel="noreferrer" className="transition-colors hover:text-foreground">LinkedIn ↗</a>
-              <span>~6 years turning data into decisions</span>
+              <span>About 6 years across BI, analytics, and data engineering</span>
             </div>
           </div>
 
@@ -106,7 +106,7 @@ export default function Home() {
             <div>
               <p className="section-kicker">Selected work</p>
               <h2 className="section-title mt-4">Proof, not just promises.</h2>
-              <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">Case studies that explain the problem, the evidence, the business meaning, and what to consider next.</p>
+              <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">Five featured case studies show the strongest evidence first. The full library covers growth, operations, risk, finance, marketplaces, workforce, and applied AI.</p>
             </div>
             <Link href="/projects" className="inline-flex items-center text-sm font-bold text-primary transition-colors hover:text-foreground">View all projects <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" /></Link>
           </div>
@@ -114,8 +114,11 @@ export default function Home() {
             {featuredProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} featured />)}
           </div>
           {supportingProjects.length > 0 && (
-            <div className="mt-6 grid gap-6 lg:grid-cols-2">
-              {supportingProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} />)}
+            <div className="mt-16">
+              <p className="section-kicker mb-6">More analysis</p>
+              <div className="grid gap-6 lg:grid-cols-2">
+                {supportingProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} />)}
+              </div>
             </div>
           )}
         </div>

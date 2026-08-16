@@ -15,12 +15,16 @@ export const skills = [
   "Tableau",
   "Power BI",
   "REST APIs",
+  "FastAPI",
+  "LLM Evaluation",
+  "Retrieval Systems",
+  "SQLite",
 ];
 
 export const impactStats = [
-  { value: "<10 min", label: "incident response time" },
-  { value: "10M+", label: "rows clustered" },
-  { value: "12-18%", label: "marketing engagement increase" },
+  { value: "3.31M", label: "taxi trips validated" },
+  { value: "541K", label: "retail rows cleaned" },
+  { value: "10", label: "business case studies" },
 ];
 
 export const careerArc = [

@@ -6,10 +6,14 @@ tags: [data engineering, sql, dbt, databricks]
 excerpt: "Turning a manual customer value calculation into a repeatable, tested data process."
 problem: "A manual customer value calculation was difficult to review, test, and reuse."
 result: "Built a repeatable data process with automated checks using dbt and Databricks."
-featured: true
+featured: false
 header:
   teaser: "/images/mds-project.png"
 ---
+
+## Executive summary
+
+**Business problem:** customer value was calculated in a fragile personal query. **Decision:** can the team trust and reuse the metric for customer and marketing decisions? **Key finding:** a versioned raw-to-business pipeline with checks is more dependable than an unreviewed query. **Recommended action:** keep important metrics in shared, tested transformations.
 
 ## Business context
 

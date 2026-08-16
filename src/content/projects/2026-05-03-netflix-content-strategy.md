@@ -4,9 +4,15 @@ date: 2026-05-03
 categories: [product analytics]
 tags: [business-strategy, data-analysis, netflix, content-growth]
 excerpt: "A catalog analysis showing why one freshness score can hide different strategies for shows and movies."
+problem: "A falling overall freshness measure made it unclear whether Netflix was weakening the catalog or building different roles for shows and movies."
+result: "TV freshness increased while movies became older; about 13% of newer UK titles were missing important descriptions or tags."
 header:
   teaser: "/images/netflix-beat01.png"
 ---
+
+## Executive summary
+
+**Business problem:** a falling overall freshness measure could be mistaken for a weaker catalog. **Decision:** should content investment be judged by one freshness target? **Key finding:** TV became fresher while movies became older, and newer UK titles had more missing metadata. **Recommended action:** use separate content goals and enforce metadata quality before launch.
 
 ## Business context
 

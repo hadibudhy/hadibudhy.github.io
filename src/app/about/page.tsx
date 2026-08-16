@@ -32,7 +32,7 @@ export default function AboutPage() {
           <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
             <div className="space-y-5 text-lg leading-8 text-muted-foreground">
               <p>I am a Senior Data Analyst and Analytics Engineer with about six years of experience, based in Jakarta, Indonesia.</p>
-              <p>I started in Business Intelligence and grew into data analysis and data engineering. My goal is simple: turn scattered information into evidence that helps teams make better decisions.</p>
+              <p>I started in Business Intelligence and grew into data analysis, data engineering, and applied AI workflows. My goal is simple: turn scattered information into evidence that helps teams make better decisions.</p>
             </div>
             <div className="border-l border-primary/50 pl-6 text-sm leading-7 text-slate-300">My work spans reliable data pipelines, forecasting and classification models, and dashboards that help teams understand what is happening and what to do next.</div>
           </div>

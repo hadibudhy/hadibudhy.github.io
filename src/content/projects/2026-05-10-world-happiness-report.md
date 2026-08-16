@@ -10,10 +10,14 @@ tags:
 excerpt: "A long-term view of national happiness that separates real trends from changes in the countries being measured."
 problem: "Single-year rankings obscure how happiness changes across countries and over time."
 result: "The same 129 countries were compared across 14 years, revealing the biggest gains, losses, and relationships."
-featured: true
+featured: false
 header:
   teaser: /images/happiness-beat01.png
 ---
+
+## Executive summary
+
+**Business problem:** yearly rankings hide long-term progress and widening gaps. **Decision:** where should a development or policy team focus attention? **Key finding:** the balanced 129-country average rose from 5.47 to 5.74, but the gap between the highest and lowest scores widened. **Recommended action:** track distributional progress and treat social support, income, and health as connected factors rather than causal levers.
 
 ## Business context
 
