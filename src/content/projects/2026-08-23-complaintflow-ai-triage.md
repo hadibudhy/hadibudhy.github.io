@@ -71,17 +71,18 @@ SQLite is enough to demonstrate persistence and audit fields without adding an o
 
 ## 05 — Evaluation
 
-The repository includes a labeled fixture and an evaluation script that compares the transparent keyword baseline with the service. It measures macro-F1, escalation recall for unknown cases, citation coverage, latency, and local/fallback behavior.
+The repository includes a labeled fixture and an evaluation script that compares the transparent keyword baseline with the service. It measures macro-F1, recall by queue, escalation recall for unknown cases, citation coverage, latency, fallback behavior, and performance on standard, paraphrase, short, unknown, and PII slices.
 
-On the six-case reference fixture, both baseline and local service achieved **1.00 macro-F1**. The service also achieved **1.00 escalation recall for the unknown case**, **83.3% citation coverage**, and a mean local latency of about **0.08 ms**. These results show the contract works; they are not production performance claims because the fixture is small and synthetic.
+On the expanded **20-case reference fixture**, the local service achieved **1.00 macro-F1**, **1.00 recall for each supported queue**, **1.00 escalation recall for unknown cases**, and **100% citation coverage for routed cases**. It also reports slice-level accuracy and escalation count so a perfect aggregate score cannot hide a failure on short or redacted inputs. These results show that the checked-in contract works; they are not production performance claims because the fixture is small, synthetic, and built from hand-written examples.
 
 ## 06 — Reliability and failure handling
 
 - Provider failures retry twice with backoff.
 - If retries fail, the service returns transparent baseline routing instead of an invented answer.
+- Unsupported provider queues are rejected and use the same transparent fallback.
 - Empty narratives escalate without a model call.
 - Unknown queues and low confidence escalate.
-- Tests cover correct routing, missing text, PII redaction, unknown issues, deterministic baseline behavior, and retry handling.
+- The test suite covers correct routing, missing text, PII redaction, unknown issues, deterministic baseline behavior, retry handling, invalid provider output, fallback routing, and audit persistence.
 
 ## 07 — Cost and latency
 
@@ -92,6 +93,8 @@ The local reference provider has no API cost and measured sub-millisecond fixtur
 Complaint narratives may contain personal information. Redaction is applied before provider use, but it is not a complete privacy guarantee. Production controls must include encryption, least-privilege access, retention limits, provider data-use review, audit monitoring, and a process for correcting or deleting records.
 
 The system must not make lending, refund, legal, or regulatory decisions. It assists a human support workflow and makes uncertainty visible.
+
+The privacy evidence is also deliberately limited. The tests prove that common email, phone, and account-like patterns are redacted before the local summary is created. They do not prove that every identifier, free-text indirect identifier, attachment, log, provider, or database backup is safe. That requires a privacy review, representative red-team examples, retention checks, and provider contract review.
 
 ## 09 — Rollout and measurement plan
 

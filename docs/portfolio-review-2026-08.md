@@ -70,3 +70,28 @@ The portfolio now shows stronger judgment through explicit limitations, KPI fram
 **Recommend an interview for a senior Data Analyst / Analytics Engineer role, with a focused discussion of the retail, taxi, fake-job, and ComplaintFlow projects.**
 
 I would not yet treat the portfolio alone as proof of approximately ten years of production ownership. I would use the interview to test real stakeholder experience, shipped systems, SQL depth, trade-off decisions, and how the candidate moved from analysis to measured business change.
+
+## Iteration 2: senior-evidence upgrade
+
+The next pass addressed the specific weaknesses that kept the first review below 8.5:
+
+- The fake-job study now converts the threshold metrics into approximate review-volume counts, compares the high-F1 and high-recall operating points, and defines a rollout scorecard for missed scams, false alerts, review effort, appeals, and drift.
+- ComplaintFlow now evaluates 20 labeled cases across standard, paraphrase, short, unknown, and PII slices. The evaluator reports recall by queue, slice accuracy, escalation count, citation coverage, and latency. The test suite now covers invalid provider output, fallback routing, and reading back an audit record.
+- Project cards and the projects index now expose the business question before the result and label the five flagship studies separately from the supporting library.
+- The homepage library metric now accurately reflects 15 published case studies.
+
+## Final re-review after iteration 2
+
+### Recruiter score: 8.6 / 10
+
+The first 30 seconds now provide a clear identity, business value proposition, five flagship studies, and a visible question/result pair for each card. The supporting work is still available, but it no longer competes with the strongest evidence. I would shortlist the candidate for a senior analytics screen. The remaining deduction is for missing resume-level employment evidence, which the portfolio cannot create without the candidate supplying it.
+
+### Data/Analytics Manager score: 8.5 / 10
+
+The flagship set now demonstrates a full decision pattern: baseline, diagnostic segmentation, driver interpretation, opportunity or risk sizing, trade-offs, validation limits, and measurement plans. The fraud project makes the threshold decision operational; the AI project demonstrates evaluation slices, fallback behavior, privacy boundaries, and auditable persistence. The score is for the quality of the portfolio evidence, not proof of ten years of production ownership.
+
+### Final gate
+
+No justified P0 issues remain. No material solvable P1 issues remain in the current codebase. The remaining limitations are evidence boundaries that require external inputs: a real employment history or resume, a privacy-reviewed real complaint sample, a hosted-model comparison, and completed experiments with observed business outcomes. Those limitations are stated explicitly rather than presented as completed results.
+
+**Final recommendation: recommend an interview.** The portfolio is now credible for a senior Data Analyst / Analytics Engineer screening. In the interview, I would focus on whether the candidate has personally influenced decisions, shipped the proposed interventions, and owned measurement after launch.

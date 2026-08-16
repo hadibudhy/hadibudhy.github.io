@@ -62,3 +62,31 @@ def test_provider_retries_transient_failure():
     result = RetryingProvider(provider, attempts=2).triage(Complaint("6", "bank account"), [])
     assert result[0] == "banking"
     assert provider.calls == 2
+
+
+def test_invalid_provider_queue_uses_transparent_baseline():
+    class InvalidProvider:
+        name = "invalid"
+
+        def triage(self, complaint, playbooks):
+            return "unsupported_queue", "unsafe answer", 0.99
+
+    service = TriageService(PlaybookStore(ROOT / "data" / "playbooks.json"), DecisionStore(), InvalidProvider())
+    result = service.triage(Complaint("7", "My checking account transfer is missing."))
+    assert result.queue == "banking"
+    assert result.summary == "Provider unavailable; returned transparent baseline routing."
+
+
+def test_provider_failure_uses_baseline_without_losing_audit_record():
+    class BrokenProvider:
+        name = "broken"
+
+        def triage(self, complaint, playbooks):
+            raise ProviderError("gateway unavailable")
+
+    store = DecisionStore()
+    service = TriageService(PlaybookStore(ROOT / "data" / "playbooks.json"), store, BrokenProvider())
+    result = service.triage(Complaint("8", "The bank froze my checking account."))
+    assert result.queue == "banking"
+    assert result.summary == "Provider unavailable; returned transparent baseline routing."
+    assert store.get("8") == result

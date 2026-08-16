@@ -24,7 +24,7 @@ export const skills = [
 export const impactStats = [
   { value: "3.31M", label: "taxi trips validated" },
   { value: "541K", label: "retail rows cleaned" },
-  { value: "10", label: "business case studies" },
+  { value: "15", label: "case studies in the library" },
 ];
 
 export const careerArc = [

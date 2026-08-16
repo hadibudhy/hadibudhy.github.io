@@ -38,4 +38,4 @@ python -m evaluation.evaluate
 pytest -q
 ```
 
-The evaluation compares the keyword baseline with the structured service on a labeled fixture. Metrics include macro-F1, escalation recall, citation coverage, latency, and fallback behavior. The fixture is intentionally small and synthetic; it demonstrates the evaluation contract, not production performance.
+The evaluation compares the keyword baseline with the structured service on a labeled fixture. Metrics include macro-F1, recall by queue, escalation recall, citation coverage, latency, fallback behavior, and accuracy on standard, paraphrase, short, unknown, and PII slices. The fixture is still synthetic and intentionally small; it demonstrates the evaluation contract and failure boundaries, not production performance.

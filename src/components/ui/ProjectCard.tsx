@@ -39,6 +39,12 @@ export function ProjectCard({ slug, meta, featured = false }: ProjectCardProps) 
             </div>
             <h3 className={`${featured ? "text-xl sm:text-2xl lg:text-3xl" : "text-lg sm:text-xl"} mb-3 break-words font-bold tracking-tight text-foreground transition-colors group-hover:text-primary`}>{meta.title}</h3>
             <p className="mb-5 text-sm leading-6 text-muted-foreground">{meta.excerpt}</p>
+            {meta.problem && (
+              <div className="mb-4 break-words border-l-2 border-white/20 pl-4 text-sm leading-6 text-muted-foreground">
+                <span className="mb-1 block text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">Business question</span>
+                {meta.problem}
+              </div>
+            )}
             {meta.result && (
               <div className="break-words border-l-2 border-primary/70 pl-4 text-sm leading-6 text-slate-200">
                 <span className="mb-1 block text-[10px] font-bold uppercase tracking-[0.18em] text-primary">Result</span>

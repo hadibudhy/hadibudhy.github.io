@@ -35,3 +35,24 @@ class DecisionStore:
                  decision.escalation_reason, decision.provider, decision.latency_ms),
             )
             self.connection.commit()
+
+    def get(self, complaint_id: str) -> TriageDecision | None:
+        with self.lock:
+            row = self.connection.execute(
+                "SELECT complaint_id, queue, confidence, summary, playbook_id, citations, escalated, escalation_reason, provider, latency_ms FROM triage_decisions WHERE complaint_id = ?",
+                (complaint_id,),
+            ).fetchone()
+        if row is None:
+            return None
+        return TriageDecision(
+            complaint_id=row[0],
+            queue=row[1],
+            confidence=row[2],
+            summary=row[3],
+            playbook_id=row[4],
+            citations=json.loads(row[5]),
+            escalated=bool(row[6]),
+            escalation_reason=row[7],
+            provider=row[8],
+            latency_ms=row[9],
+        )

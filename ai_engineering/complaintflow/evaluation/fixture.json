@@ -1,8 +1,22 @@
 [
-  {"complaint_id":"e1","text":"The credit bureau will not correct my credit report.","label":"credit_reporting"},
-  {"complaint_id":"e2","text":"I do not recognize this credit card charge.","label":"card_payments"},
-  {"complaint_id":"e3","text":"My mortgage escrow payment is wrong.","label":"mortgages"},
-  {"complaint_id":"e4","text":"The bank froze my checking account.","label":"banking"},
-  {"complaint_id":"e5","text":"Please explain this unfamiliar service issue.","label":"other"},
-  {"complaint_id":"e6","text":"Call me at 555-010-2020 about my credit report.","label":"credit_reporting"}
+  {"complaint_id":"e1","text":"The credit bureau will not correct my credit report.","label":"credit_reporting","slice":"standard"},
+  {"complaint_id":"e2","text":"I do not recognize this credit card charge.","label":"card_payments","slice":"standard"},
+  {"complaint_id":"e3","text":"My mortgage escrow payment is wrong.","label":"mortgages","slice":"standard"},
+  {"complaint_id":"e4","text":"The bank froze my checking account.","label":"banking","slice":"standard"},
+  {"complaint_id":"e5","text":"Please explain this unfamiliar service issue.","label":"other","slice":"unknown"},
+  {"complaint_id":"e6","text":"Call me at 555-010-2020 about my credit report.","label":"credit_reporting","slice":"pii"},
+  {"complaint_id":"e7","text":"Experian still shows the wrong balance on my report.","label":"credit_reporting","slice":"paraphrase"},
+  {"complaint_id":"e8","text":"There is a debit card transaction I never made.","label":"card_payments","slice":"paraphrase"},
+  {"complaint_id":"e9","text":"The lender applied my escrow amount incorrectly.","label":"mortgages","slice":"paraphrase"},
+  {"complaint_id":"e10","text":"My savings account deposit has not arrived.","label":"banking","slice":"paraphrase"},
+  {"complaint_id":"e11","text":"I need help with an issue that is not listed here.","label":"other","slice":"unknown"},
+  {"complaint_id":"e12","text":"Email me at person@example.com about my credit bureau dispute.","label":"credit_reporting","slice":"pii"},
+  {"complaint_id":"e13","text":"A payment on my card appears twice.","label":"card_payments","slice":"short"},
+  {"complaint_id":"e14","text":"My home loan foreclosure notice is confusing.","label":"mortgages","slice":"short"},
+  {"complaint_id":"e15","text":"The bank account wire transfer is missing.","label":"banking","slice":"short"},
+  {"complaint_id":"e16","text":"Something unusual happened and I need a person.","label":"other","slice":"unknown"},
+  {"complaint_id":"e17","text":"TransUnion has not removed an incorrect account.","label":"credit_reporting","slice":"paraphrase"},
+  {"complaint_id":"e18","text":"I want to dispute an unfamiliar credit card payment.","label":"card_payments","slice":"paraphrase"},
+  {"complaint_id":"e19","text":"My mortgage home loan payment was recorded incorrectly.","label":"mortgages","slice":"paraphrase"},
+  {"complaint_id":"e20","text":"My checking account transfer is missing.","label":"banking","slice":"paraphrase"}
 ]

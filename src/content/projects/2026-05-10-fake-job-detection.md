@@ -106,6 +106,34 @@ I tested the tuned model across five different data splits. The average F1 score
 
 The simple text model caught the most fake posts, with 91.3% recall. The tuned combined model had the highest F1 score and very high precision. The best choice depends on whether the platform values maximum fraud detection or fewer false alarms.
 
+### What the threshold means for a review team
+
+The test split contained about **3,576 posts**, including about **173 fake posts**. Using the rounded test metrics, the tuned threshold would catch roughly **130 fake posts**, miss about **43**, and create about **3 false alerts**. These are approximate counts because the published percentages are rounded, but they make the operating trade-off easier to see:
+
+| Decision view | Tuned combined model | Simple text model |
+| --- | ---: | ---: |
+| Fake posts caught | About 130 of 173 | About 158 of 173 |
+| Fake posts missed | About 43 | About 15 |
+| Precision when flagging | About 98% | Not the selected operating point |
+| Best fit | Fewer unnecessary reviews | Maximum scam capture |
+
+**Business meaning:** the highest-F1 model is not automatically the right production choice. If protecting job seekers is the priority, the higher-recall text model may be preferable even if it sends more legitimate posts to review. The platform should choose the threshold with an explicit cost for missed scams, review capacity, and employer friction.
+
+### Opportunity scenarios and measurement
+
+As an illustration, if **100,000 future posts** had the same fraud rate as this dataset, about **4,800** would be fraudulent. Applying the tuned model's test recall would identify roughly **3,600** of them; applying the text model's recall would identify roughly **4,400**. This is a sensitivity scenario, not a forecast. Scam prevalence and language can change after launch.
+
+The rollout scorecard should include:
+
+- fake-post recall on a time-based, manually reviewed sample;
+- false-alert rate by employer and posting category;
+- review minutes per 1,000 posts;
+- appeals or removals for legitimate employers;
+- recall by language, industry, and new scam pattern; and
+- drift in the most common fraud phrases.
+
+The first release should use shadow scoring and human review. A lower threshold should be tested only when the review team can absorb the additional queue and the false-alert guardrail remains acceptable.
+
 ## Recommendation
 
 Use text as the first line of screening, combine it with profile details, and set the threshold according to the cost of missed scams and manual reviews. Any production system should also keep human review in the loop and monitor how performance changes as scam language evolves.

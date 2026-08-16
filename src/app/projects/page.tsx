@@ -35,10 +35,14 @@ export default function ProjectsPage() {
       </section>
       <section>
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-8 sm:py-20 md:py-24">
+          <div className="mb-8">
+            <p className="section-kicker">Flagship work</p>
+            <p className="mt-3 max-w-2xl leading-7 text-muted-foreground">Five studies show the clearest evidence of business judgment, analytical depth, and production-minded delivery.</p>
+          </div>
           <div className="grid gap-6 lg:grid-cols-2">
             {featuredProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} featured />)}
           </div>
-          {supportingProjects.length > 0 && <div className="mt-16"><p className="section-kicker mb-6">More work</p><div className="grid gap-6 lg:grid-cols-2">{supportingProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} />)}</div></div>}
+          {supportingProjects.length > 0 && <div className="mt-16"><p className="section-kicker mb-2">Supporting library</p><p className="mb-6 max-w-2xl leading-7 text-muted-foreground">Additional analyses demonstrate breadth across product, marketing, pricing, finance, marketplaces, workforce, and risk.</p><div className="grid gap-6 lg:grid-cols-2">{supportingProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} />)}</div></div>}
         </div>
       </section>
     </div>
