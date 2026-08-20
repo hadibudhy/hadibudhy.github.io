@@ -16,27 +16,22 @@
 }
 
 :root {
-  /* Slate 950 as base */
-  --background: #020617;
-  --foreground: #f8fafc;
-  
-  --primary: #3b82f6; /* Blue 500 */
-  --primary-foreground: #ffffff;
-  
-  --muted: #0f172a; /* Slate 900 */
-  --muted-foreground: #94a3b8; /* Slate 400 */
-  
-  --card: #0f172a; /* Slate 900 */
-  --card-foreground: #f8fafc;
-  
-  --border: #1e293b; /* Slate 800 */
-  --ring: #3b82f6;
+  --background: #f4f0e8;
+  --foreground: #202321;
+  --primary: #b9553d;
+  --primary-foreground: #fffaf2;
+  --muted: #e9e3d8;
+  --muted-foreground: #68706b;
+  --card: #fbf9f4;
+  --card-foreground: #202321;
+  --border: #d8d1c5;
+  --ring: #b9553d;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-sans), "Trebuchet MS", "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -52,22 +47,24 @@ body {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--primary) 35%, transparent);
+  background: color-mix(in srgb, var(--primary) 24%, transparent);
   color: var(--foreground);
 }
 
 @layer components {
   .section-kicker {
-    @apply text-xs font-bold uppercase tracking-[0.2em] text-primary;
+    @apply text-[0.68rem] font-bold uppercase tracking-[0.18em] text-primary;
   }
 
   .section-title {
-    @apply max-w-xl text-3xl font-black tracking-[-0.04em] text-foreground md:text-5xl;
+    @apply max-w-xl text-3xl font-bold tracking-[-0.035em] text-foreground md:text-5xl;
   }
-}
 
-@layer utilities {
-  .glass {
-    @apply bg-slate-900/40 backdrop-blur-md border border-slate-800/50;
+  .surface {
+    @apply border border-border bg-card;
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
 }
