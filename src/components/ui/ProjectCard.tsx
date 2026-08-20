@@ -8,8 +8,8 @@ interface ProjectCardProps { slug: string; meta: ProjectMeta; featured?: boolean
 export function ProjectCard({ slug, meta, featured = false }: ProjectCardProps) {
   return (
     <Link href={`/projects/${slug}`} className="group block h-full min-w-0 focus-ring">
-      <article className={`surface flex h-full min-w-0 flex-col overflow-hidden transition-colors hover:border-primary ${featured ? "lg:grid lg:grid-cols-[1.08fr_0.92fr]" : ""}`}>
-        {meta.teaser && <div className={`relative w-full overflow-hidden bg-muted ${featured ? "aspect-[16/10] lg:aspect-auto lg:min-h-full" : "aspect-[16/9]"}`}><Image src={meta.teaser} alt="" fill sizes={featured ? "(max-width: 1024px) 100vw, 55vw" : "(max-width: 1024px) 100vw, 33vw"} className="object-contain" unoptimized /></div>}
+      <article className="surface flex h-full min-w-0 flex-col overflow-hidden transition-colors hover:border-primary">
+        {meta.teaser && <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted"><Image src={meta.teaser} alt="" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-contain" unoptimized /></div>}
         <div className="flex min-w-0 w-full flex-1 flex-col justify-between p-5 sm:p-7">
           <div>
             <div className="mb-5 flex flex-wrap items-center gap-2">{meta.categories.slice(0, 1).map((category) => <span key={category} className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-primary">{category}</span>)}{meta.tags.slice(0, featured ? 4 : 3).map((tag) => <Badge key={tag} variant="secondary">{tag}</Badge>)}</div>
