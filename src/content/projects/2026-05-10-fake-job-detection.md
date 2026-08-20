@@ -12,6 +12,7 @@ excerpt: "A fraud-detection study showing why the language in a job post is more
 problem: "Fake job posts were rare, so a system could appear accurate while missing every scam."
 result: "The best balance caught 75% of fake posts and was correct 98% of the time when it raised an alert."
 featured: true
+published: false
 header:
   teaser: /images/fake-job-all-models.png
 ---

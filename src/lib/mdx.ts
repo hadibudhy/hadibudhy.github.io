@@ -14,6 +14,7 @@ export interface ProjectMeta {
   problem?: string;
   result?: string;
   featured?: boolean;
+  published?: boolean;
 }
 
 export interface Project {
@@ -48,6 +49,7 @@ function normalizeMeta(data: Record<string, unknown>): ProjectMeta | null {
     problem: typeof data.problem === 'string' ? data.problem : undefined,
     result: typeof data.result === 'string' ? data.result : undefined,
     featured: data.featured === true,
+    published: data.published !== false,
   };
 }
 
@@ -68,6 +70,8 @@ export function getProjectBySlug(slug: string): Project | null {
     throw new Error(`Invalid project front matter in ${fullPath}: title, excerpt, and a valid date are required.`);
   }
   
+  if (meta.published === false) return null;
+
   return {
     slug: realSlug,
     meta,

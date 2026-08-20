@@ -7,6 +7,7 @@ excerpt: "Turning a manual customer value calculation into a repeatable, tested 
 problem: "A manual customer value calculation was difficult to review, test, and reuse."
 result: "Built a repeatable data process with automated checks using dbt and Databricks."
 featured: false
+published: false
 header:
   teaser: "/images/mds-project.png"
 ---

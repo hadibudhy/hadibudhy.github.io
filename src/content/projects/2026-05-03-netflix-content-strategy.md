@@ -6,6 +6,7 @@ tags: [business-strategy, data-analysis, netflix, content-growth]
 excerpt: "A catalog analysis showing why one freshness score can hide different strategies for shows and movies."
 problem: "A falling overall freshness measure made it unclear whether Netflix was weakening the catalog or building different roles for shows and movies."
 result: "TV freshness increased while movies became older; about 13% of newer UK titles were missing important descriptions or tags."
+published: false
 header:
   teaser: "/images/netflix-beat01.png"
 ---

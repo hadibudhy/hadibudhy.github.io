@@ -7,6 +7,7 @@ excerpt: "A commercial decision framework that separates nominal fare movement f
 problem: "A higher average fare can reflect real pricing power, inflation, route mix, or passenger mix; acting on the wrong explanation can reduce demand or margin."
 result: "The official BTS series provides annual and quarterly domestic fares in current and inflation-adjusted dollars, making it possible to separate market context from route-level pricing action."
 featured: false
+published: false
 header:
   teaser: /images/airfare-current-adjusted.png
 ---
