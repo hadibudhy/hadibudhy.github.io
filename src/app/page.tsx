@@ -23,7 +23,7 @@ export default function Home() {
               Turning unreliable data into <span className="text-primary">decisions people can act on.</span>
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground md:text-xl">
-              Hadi Budhy helps teams improve growth, operations, and risk by turning messy data into clear evidence, practical recommendations, and measurable next steps.
+              Hadi Budhy works across growth, operations, and risk, using messy data to clarify what is happening and what could happen next.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button size="lg" asChild className="w-full sm:w-auto">
