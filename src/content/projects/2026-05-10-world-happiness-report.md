@@ -31,7 +31,7 @@ How has national happiness changed over 14 years, which countries are moving mos
 
 ## How I approached it
 
-The source covers 168 countries from 2011 to 2025, with no measurement for 2013. I focused on the 129 countries that appear in all 14 measured years. This balanced group makes year-to-year comparisons more consistent because the same countries are being compared each time.
+The 2026 World Happiness Report workbook covers 168 countries from 2011 to 2025, with no measurement for 2013. I focused on the 129 countries that appear in all 14 measured years. This balanced group makes year-to-year comparisons more consistent because the same countries are being compared each time.
 
 The happiness score is a self-reported 0-to-10 life evaluation. It measures how people rate their lives overall, not their mood at a particular moment.
 
@@ -114,6 +114,6 @@ National happiness improved on average over these 14 years, but progress was une
 
 ## Supporting technical detail
 
-The analysis uses a balanced panel of 129 countries across all 14 measured years. Factor data is available from 2019 onward, and all factors were checked against the reported happiness score with a maximum rounding difference of 0.003. The results use a self-reported life-evaluation scale, not an objective measure of wellbeing.
+The analysis uses the 2026 release and a balanced panel of 129 countries across all 14 measured years. Factor data is available from 2019 onward, and all factors were checked against the reported happiness score with a maximum rounding difference of 0.003. The results use a self-reported life-evaluation scale, not an objective measure of wellbeing.
 
 **Code and data:** [View the analysis scripts](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/legacy_jekyll/scripts/world-happiness)

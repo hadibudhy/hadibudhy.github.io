@@ -5,7 +5,7 @@ categories: [risk analytics]
 tags: [credit risk, loss prevention, prioritization, governance]
 excerpt: "A transparent risk-prioritization study that combines repayment history and exposure while keeping fairness, drift, and support outcomes visible."
 problem: "A lender needs to focus attention where repayment risk and potential exposure are higher without turning a historical score into an automatic lending decision."
-result: "The validated UCI archive contains 30,000 clients and 24 fields covering credit limits, repayment status, bills, payments, and the observed default outcome."
+result: "The validated UCI archive contains 30,000 clients, 6,636 observed defaults, and 24 measured credit and repayment fields; the default rate is 22.1% in this historical sample."
 featured: false
 header:
   teaser: /images/credit-default-balance.png
@@ -15,7 +15,7 @@ header:
 
 **Business problem:** prioritize early support and monitoring across a credit portfolio.
 
-**Key findings:** repayment history is closer to the risk decision than demographics alone; exposure changes the size of a potential loss; and the 2005 Taiwan sample lacks current economics, fairness fields, collection cost, and hardship outcomes.
+**Key findings:** 6,636 of 30,000 clients defaulted in the following month; repayment history is closer to the risk decision than demographics alone; exposure changes the size of a potential loss; and the 2005 Taiwan sample lacks current economics, fairness fields, collection cost, and hardship outcomes.
 
 **Business impact:** a transparent review queue could focus limited support capacity, but a model could create customer harm if used without current validation and governance.
 
@@ -27,7 +27,7 @@ header:
 
 ## Baseline, segmentation, and root-cause logic
 
-The official file has **30,000 rows and 24 fields**. The useful business decomposition is **risk signal × exposure**: two accounts with similar observed default risk can create different potential losses when their balances or credit limits differ.
+The official file has **30,000 rows**, no missing values, no duplicate rows, and **24 measured fields** in addition to the record ID. **6,636 clients, or 22.1%, defaulted in the following month.** The useful business decomposition is **risk signal × exposure**: two accounts with similar observed default risk can create different potential losses when their balances or credit limits differ.
 
 Repayment history should be the first diagnostic layer. Age, education, and other demographic fields may help describe segments, but they should not become a shortcut for a lending decision. The data is observational and historical, so association is not causation.
 

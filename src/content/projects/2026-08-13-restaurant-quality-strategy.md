@@ -9,7 +9,7 @@ tags:
   - python
 excerpt: "A messy inspection-data analysis showing how a restaurant group could prioritize quality support without treating every location as the same risk."
 problem: "Restaurant inspection records were detailed but repeated across violations, making it difficult to compare quality risk fairly."
-result: "After rolling 228,315 recent violation rows into 73,478 inspection records, the analysis found meaningful differences in critical-violation rates across boroughs."
+result: "After rolling 227,520 recent violation rows into 73,211 inspection records, the analysis found meaningful differences in critical-violation rates across boroughs."
 featured: true
 header:
   teaser: /images/restaurant-grades.png
@@ -17,7 +17,7 @@ header:
 
 ## Executive summary
 
-**Business problem:** focus food-safety preparation and follow-up where repeat risk is highest. **Key findings:** the selected inspection base has a 77.3% critical-violation rate; Staten Island and the Bronx are above the city rate; and many records have no grade. **Business impact:** borough averages can prioritize attention but do not prove cause. **Recommended action:** target repeat critical findings while protecting inspection coverage and data quality.
+**Business problem:** focus food-safety preparation and follow-up where repeat risk is highest. **Key findings:** the selected inspection base has a 77.3% critical-violation rate; Staten Island and the Bronx are above the city rate; and 30,037 records have no grade. **Business impact:** borough averages can prioritize attention but do not prove cause. **Recommended action:** target repeat critical findings while protecting inspection coverage and data quality.
 
 ## Business context
 
@@ -33,15 +33,15 @@ I used the current NYC Open Data extract, kept inspections from 2022 through 202
 
 ## Finding 1: The raw data needed an inspection-level view
 
-The public extract contains **295,256 violation records**, but they are not the same as 295,256 inspections. After filtering to 2022-2025 and rolling rows up, the analysis produced **73,478 inspection records**.
+The public extract contains **295,473 violation records**, but they are not the same as 295,473 inspections. After filtering to 2022-2025 and rolling rows up, the analysis produced **73,211 inspection records**.
 
-The extract also includes **150,141 missing grades**, **160,467 missing grade dates**, and **17,159 missing scores**, plus placeholder dates such as 1900-01-01. These are not small technical details: using raw row counts would overstate inspection volume and missing grades would make a simple grade ranking misleading.
+The extract also includes **150,352 missing grades**, **160,593 missing grade dates**, and **17,179 missing scores**, plus placeholder dates such as 1900-01-01. These are not small technical details: using raw row counts would overstate inspection volume and missing grades would make a simple grade ranking misleading.
 
 ## Finding 2: Most recorded grades were A, but the ungraded cases still matter
 
-Among the inspection records with an A, B, or C grade, **85.8% were A**, **9.3% were B**, and **4.9% were C**. However, 30,129 rolled-up inspection records had no grade in this extract.
+Among the inspection records with an A, B, or C grade, **85.8% were A**, **9.3% were B**, and **4.9% were C**. However, 30,037 rolled-up inspection records had no grade in this extract.
 
-![73,478 NYC inspections from 2022–2025: Most recorded grades were A, but 30,129 inspections had no grade for follow-up](/images/restaurant-grades.png)
+![73,211 NYC inspections from 2022–2025: Most recorded grades were A, but 30,037 inspections had no grade for follow-up](/images/restaurant-grades.png)
 
 **Business meaning:** A strong A-grade share does not mean every location is low risk. The ungraded group needs a separate workflow because it may represent inspections before a grade was assigned or records where the current extract does not contain the final outcome.
 
@@ -49,7 +49,7 @@ Among the inspection records with an A, B, or C grade, **85.8% were A**, **9.3% 
 
 In the 2022-2025 inspection-level roll-up, **77.3%** of records included at least one violation marked critical. The rate ranged from **75.9% in Manhattan** to **81.6% in Staten Island**. The Bronx was next at **79.7%**, followed by Queens at **78.2%** and Brooklyn at **77.1%**.
 
-![73,478 NYC inspections from 2022–2025: Critical-violation rates ranged from 75.9% in Manhattan to 81.6% in Staten Island](/images/restaurant-risk-by-borough.png)
+![73,211 NYC inspections from 2022–2025: Critical-violation rates ranged from 75.9% in Manhattan to 81.6% in Staten Island](/images/restaurant-risk-by-borough.png)
 
 These differences are useful for prioritization, but they do not prove that a borough causes worse performance. Restaurant mix, inspection timing, location, and reporting practices may all contribute.
 
@@ -72,7 +72,7 @@ Public inspection data can support a useful quality-prioritization system, but o
 
 The 2022–2025 inspection-level base has a **77.3% critical-violation rate** after rolling violation rows up to restaurant, inspection date, and inspection type. The rate is highest in Staten Island (**81.6%**) and the Bronx (**79.7%**) and lowest in Manhattan (**75.9%**). This is a prioritization signal, not proof that borough causes risk: inspection mix, restaurant type, and reporting completeness may differ.
 
-The outcome is also incomplete. Only 35,700 inspection records have an A grade, while 30,129 have no grade in the selected period. A missing grade must not be treated as a pass.
+The outcome is also incomplete. Only 35,555 inspection records have an A grade, while 30,037 have no grade in the selected period. A missing grade must not be treated as a pass.
 
 ### Opportunity, trade-offs, and validation
 
