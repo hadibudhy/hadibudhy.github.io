@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     default: "Hadi Budhy | Data Analyst & Analytics Engineer",
     template: "%s | Hadi Budhy"
   },
-  description: "Data analyst and analytics engineer who turns messy business data into clear decisions.",
+  description: "Data analyst and analytics engineer who works with messy business data to clarify decisions.",
   keywords: ["Data Analyst", "Data Engineer", "Analytics Engineer", "Machine Learning", "Python", "SQL"],
   authors: [{ name: "Hadi Budhy" }],
   creator: "Hadi Budhy",
@@ -21,14 +21,14 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://hadibudhy.github.io",
     title: "Hadi Budhy | Data Analyst & Analytics Engineer",
-    description: "Data analyst and analytics engineer who turns messy business data into clear decisions.",
+    description: "Data analyst and analytics engineer who works with messy business data to clarify decisions.",
     siteName: "Hadi Budhy",
     locale: "en_US",
   },
   twitter: {
     card: "summary",
     title: "Hadi Budhy | Data Analyst & Analytics Engineer",
-    description: "Data analyst and analytics engineer who turns messy business data into clear decisions.",
+    description: "Data analyst and analytics engineer who works with messy business data to clarify decisions.",
   },
 };
 

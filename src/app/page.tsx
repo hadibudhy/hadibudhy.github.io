@@ -20,7 +20,7 @@ export default function Home() {
               <span className="text-muted-foreground">/ Jakarta, ID</span>
             </div>
             <h1 className="max-w-4xl break-words text-[2.7rem] font-black leading-[0.98] tracking-[-0.055em] text-foreground sm:text-6xl lg:text-7xl">
-              Turning unreliable data into <span className="text-primary">decisions people can act on.</span>
+              Making unreliable data easier to use for <span className="text-primary">better decisions.</span>
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground md:text-xl">
               Hadi Budhy works across growth, operations, and risk, using messy data to clarify what is happening and what could happen next.
@@ -57,7 +57,7 @@ export default function Home() {
               ))}
             </div>
             <div className="mt-10 border-t border-border pt-5 text-sm text-muted-foreground">
-              <span className="text-primary">Available for practical data work.</span> Let&apos;s make the numbers useful.
+              <span className="text-primary">Available for practical data work.</span> Making the numbers useful starts with a clear question.
             </div>
           </aside>
         </div>
@@ -91,8 +91,8 @@ export default function Home() {
           <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="section-kicker">Selected work</p>
-              <h2 className="section-title mt-4">Proof, not just promises.</h2>
-              <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">Five featured case studies show the strongest evidence first. The full library covers growth, operations, risk, finance, marketplaces, workforce, and applied AI.</p>
+              <h2 className="section-title mt-4">Selected case studies and analysis.</h2>
+              <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">Five featured case studies put the questions, evidence, and trade-offs first. The full library covers growth, operations, risk, finance, marketplaces, workforce, and applied AI.</p>
             </div>
             <Link href="/projects" className="focus-ring inline-flex items-center text-sm font-bold text-primary transition-colors hover:text-foreground">View all projects <span className="ml-2 text-lg" aria-hidden="true">→</span></Link>
           </div>
@@ -114,7 +114,7 @@ export default function Home() {
           <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.7fr_1.3fr] lg:gap-10 md:py-24">
           <div>
             <p className="section-kicker">Toolkit</p>
-            <h2 className="section-title mt-4">Skills that support better decisions.</h2>
+            <h2 className="section-title mt-4">Skills for useful analysis.</h2>
           </div>
           <div className="flex content-start flex-wrap gap-3">
             {skills.map((skill) => <span key={skill} className="border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary">{skill}</span>)}

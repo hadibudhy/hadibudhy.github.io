@@ -15,11 +15,11 @@ export default function AboutPage() {
       <section className="border-b border-border">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
           <p className="section-kicker">About the work</p>
-          <h1 className="mt-5 max-w-4xl break-words text-[2.7rem] font-bold tracking-[-0.05em] text-foreground sm:text-5xl md:text-7xl">Hadi Budhy makes the path from messy data to a better decision shorter.</h1>
+          <h1 className="mt-5 max-w-4xl break-words text-[2.7rem] font-bold tracking-[-0.05em] text-foreground sm:text-5xl md:text-7xl">Hadi Budhy works from messy data toward a clearer decision.</h1>
           <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
             <div className="space-y-5 text-lg leading-8 text-muted-foreground">
               <p>Hadi Budhy is a Data Analyst and Analytics Engineer with 5+ years of experience across business intelligence, customer analytics, data automation, and applied AI, based in Jakarta, Indonesia.</p>
-              <p>His work began in Business Intelligence and grew into data analysis, data engineering, and applied AI workflows. The goal is simple: turn scattered information into evidence that helps teams make better decisions.</p>
+              <p>His work began in Business Intelligence and grew into data analysis, data engineering, and applied AI workflows. The goal is simple: turn scattered information into evidence that supports a more informed decision.</p>
             </div>
             <div className="border-l border-primary/50 pl-6 text-sm leading-7 text-muted-foreground">His work spans reliable data pipelines, forecasting and classification models, and dashboards that help teams understand what is happening and what to do next. This public summary keeps employer, client, and operational details intentionally high level.<p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-primary">{education}</p></div>
           </div>
@@ -48,7 +48,7 @@ export default function AboutPage() {
 
       <section className="border-b border-border">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.7fr_1.3fr] lg:gap-10 md:py-24">
-          <div><p className="section-kicker">Skills</p><h2 className="section-title mt-4">A practical toolkit for clear answers.</h2></div>
+          <div><p className="section-kicker">Skills</p><h2 className="section-title mt-4">A practical toolkit for careful analysis.</h2></div>
           <div className="flex flex-wrap content-start gap-3">{skills.map((skill) => <Badge key={skill} variant="secondary" className="px-3 py-1.5 text-sm font-normal">{skill}</Badge>)}</div>
         </div>
       </section>
