@@ -34,6 +34,8 @@ The preferred design is a difference-in-differences event study. Policy exposure
 
 The parallel-trends assumption must be inspected before the policy date. Placebo intervention dates should produce no comparable step change. Spillovers are expected: trips may move to border zones, drivers may reposition, and riders may substitute modes. Those effects are part of the business result, not noise to hide.
 
+As an additional sensitivity check, the complete TLC monthly High Volume FHV subset from January 2015 through May 2026 was analyzed as an aggregate interrupted series. It contains **137 monthly observations** with reported trips per day, unique drivers, unique vehicles, and average hours. The model estimates a post-policy level change of **-0.257 log points** (HAC p = **0.034**) and a post-policy trend change of **-0.007 log points per month** (p = **0.110**). These are diagnostic associations, not congestion-pricing effects, because the series has no untreated market and no route-level toll exposure.
+
 ## Evidence and current boundary
 
 The January yellow file confirms that the fee field is populated and that positive fee observations exist after the policy date. It does not supply the pre-policy HVFHV comparison needed for the requested causal claim. Therefore this project reports **no estimated policy effect** yet. That is the correct decision under insufficient identification.

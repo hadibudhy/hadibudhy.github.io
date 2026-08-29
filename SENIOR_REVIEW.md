@@ -4,7 +4,7 @@ Review date: 29 August 2026. Sol independently reviewed the project files, publi
 
 ## Executive verdict
 
-The Criteo project is now the strongest artifact: it has a real randomized source, a reproducible streaming ITT calculation, explicit data validation, uncertainty, and a narrower transport claim. The TLC marketplace project is now a triangulated limited-data diagnostic using trip records, monthly drivers/vehicles/hours, aggregate wait context, and official external sources. The congestion project remains intentionally unpublished because the complete pre/post HVFHV panel and route-level exposure are not yet available, although the official geofence is now validated.
+The Criteo project is now the strongest artifact: it has a real randomized source, a reproducible streaming ITT calculation, explicit data validation, uncertainty, and a narrower transport claim. The TLC marketplace project is now a triangulated limited-data diagnostic using trip records, monthly drivers/vehicles/hours, aggregate wait context, and official external sources. The congestion project remains intentionally unpublished because route-level pre/post HVFHV exposure is not yet available, although the official geofence, traffic-entry data, and aggregate monthly interrupted-series diagnostic are now validated.
 
 ## Project 1: Campaign incrementality
 
@@ -54,7 +54,7 @@ The historical one-week API slice cannot establish current zone persistence, unm
 
 ## Project 3: Congestion-pricing causal impact
 
-**Original Sol score:** 4.0/10. **Current score:** 6.5/10 for causal-design readiness; **not published**.
+**Original Sol score:** 4.0/10. **Current score:** 7.0/10 for causal-design readiness; **not published**.
 
 | Area | Original | Current | Review |
 |---|---:|---:|---|
@@ -66,7 +66,7 @@ The historical one-week API slice cannot establish current zone persistence, unm
 | Econometrics | 4 | 7 | Fixed effects, event time, placebo/pre-trend requirements |
 | SQL | 1 | 7 | Integer event time and policy flag are explicit |
 | Python | 1 | 7 | Validated zone-day event-study estimator added |
-| Visualization | 1 | 3 | Boundary mapping is validated; no causal effect chart until the panel exists |
+| Visualization | 1 | 6 | Aggregate policy-period chart and validated boundary mapping; no causal effect chart until the panel exists |
 | Communication | 5 | 7 | Correctly reports no identified effect |
 | Decision quality | 4 | 7 | No policy change from insufficient evidence |
 | Interview strength | 4 | 8 | Strong discussion of assumptions and failure modes |
@@ -89,6 +89,7 @@ TLC fee exposure applies to trips to, from, within, or through the charge zone. 
 - Replaced “completed” with “recorded” where the public data only supports submitted-trip wording.
 - Rejected pickup-only congestion treatment and post-treatment composition controls.
 - Added a validated Python event-study estimator and integer event-time SQL.
+- Added an aggregate TLC monthly interrupted-series analysis with HAC uncertainty and sensitivity boundary.
 - Kept the congestion article unpublished until the required data and exposure map exist.
 - Added `DATA_GAP_RESEARCH.md` and `CONGESTION_ZONE_VALIDATION.md` with sources checked and remaining reconstructability limits.
 

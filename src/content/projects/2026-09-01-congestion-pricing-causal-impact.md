@@ -36,6 +36,10 @@ Before estimating an effect, check parallel trends and placebo dates. Measure tr
 
 The January 2025 yellow file confirms **3,475,226 trips** and **2,246,495 positive CBD-fee rows**. These figures validate the field and show that fee exposure is observable in the post-policy source. They do **not** show that congestion pricing caused a change in demand or supply.
 
+The complete TLC monthly High Volume FHV subset adds **137 observations from January 2015 through May 2026**, including reported trips per day, unique drivers, unique vehicles, and average hours. An aggregate interrupted-series check estimates a post-policy level change of **-0.257 log points** (HAC p = **0.034**) but no statistically clear post-policy trend change (p = **0.110**). It is a broad-market diagnostic, not a causal policy estimate, because it has no untreated market or route-level exposure.
+
+![TLC monthly High Volume FHV activity, January 2015–May 2026: the post-policy series shows a level shift, but this aggregate view cannot establish causality](/images/growth-hvf-monthly-its.png)
+
 ## Decision and Next Step
 
 Do not change pricing or incentives from the current evidence. **P0:** complete 2024–2025 HVFHV monthly data and validate coverage. **P1:** run the event study and placebo tests. **P2:** evaluate pricing, incentive, airport, and border-zone actions only when estimates are stable and the substitution guardrail is understood.

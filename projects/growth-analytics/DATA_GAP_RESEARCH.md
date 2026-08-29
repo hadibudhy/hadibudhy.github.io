@@ -20,7 +20,7 @@ Research date: 29 August 2026. The goal was to find real public evidence for req
 
 ## Sources that materially improve the project
 
-- [TLC Aggregated Reports](https://www.nyc.gov/site/tlc/about/aggregated-reports.page) publishes monthly trips per day, unique drivers, unique vehicles, vehicles per day, average hours, and average trip minutes. The downloaded report has 896 rows from 2010-01 through 2026-05 and 137 High Volume FHV rows.
+- [TLC Aggregated Reports](https://www.nyc.gov/site/tlc/about/aggregated-reports.page) publishes monthly trips per day, unique drivers, unique vehicles, vehicles per day, average hours, and average trip minutes. The downloaded report has 896 rows from 2010-01 through 2026-05 and 137 High Volume FHV rows from 2015-01 through 2026-05.
 - [TLC FHV License Review](https://a860-gpp.nyc.gov/downloads/vh53x103h?locale=en) reports aggregate wait context. The January 2025 review reports 4.8 minutes average citywide HVF wait versus 4.25 minutes in January 2024, while warning that full congestion-pricing impact could not yet be determined.
 - [MTA Congestion Relief Zone Vehicle Entries](https://data.ny.gov/) provides hourly and 10-minute traffic-entry counts by detection crossing and vehicle class. It is a triangulation source, not a substitute for HVFHV requests.
 - [MTA Central Business District Geofence](https://data.ny.gov/widgets/srxy-5nxn?mobile_redirect=true) provides a machine-readable polygon collection.
