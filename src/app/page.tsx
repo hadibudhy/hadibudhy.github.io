@@ -65,7 +65,7 @@ export default function Home() {
             <div>
               <p className="section-kicker">Selected work</p>
               <h2 className="section-title mt-4">Selected case studies and analysis.</h2>
-              <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">Four featured case studies put the questions, evidence, and trade-offs first. The full library covers growth, operations, risk, finance, marketplaces, workforce, and applied AI.</p>
+              <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">{featuredProjects.length} featured case studies put the questions, evidence, and trade-offs first. The full library covers growth, operations, risk, finance, marketplaces, workforce, and applied AI.</p>
             </div>
             <Link href="/projects" className="focus-ring inline-flex items-center text-sm font-bold text-primary transition-colors hover:text-foreground">View all projects <span className="ml-2 text-lg" aria-hidden="true">→</span></Link>
           </div>

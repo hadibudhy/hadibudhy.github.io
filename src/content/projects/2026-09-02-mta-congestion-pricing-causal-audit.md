@@ -6,7 +6,7 @@ tags: [econometrics, causal inference, mobility, decision quality]
 excerpt: "An event-study audit of NYC bridge and tunnel traffic that shows why a plausible policy story is not enough for a causal business decision."
 problem: "Leadership wants to know whether congestion pricing changed traffic, but treated and comparison crossings may already have been on different paths."
 result: "The official MTA panel contains 27,080 facility-day observations from 2019 to May 2026; pre-policy event differences fail the parallel-trends check, so no causal effect is reported."
-featured: false
+featured: true
 header:
   teaser: /images/growth-mta-event-study.png
 ---
