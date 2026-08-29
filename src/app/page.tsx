@@ -25,9 +25,9 @@ export default function Home() {
             </div>
           </div>
           <div className="space-y-5 sm:space-y-6">
-            <h1 className="max-w-full text-[1.8rem] font-normal leading-tight tracking-tight text-foreground sm:text-[2.3rem]">Making unreliable data easier to use for better decisions.</h1>
-            <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">I help product, growth, and operations teams turn messy data into clear evidence, useful metrics, and safer next steps.</p>
-            <p className="text-sm font-medium leading-6 text-primary">Open to Senior Data Analyst, Growth Analytics, Product Analytics, and Analytics Engineering roles.</p>
+            <h1 className="max-w-full text-[1.8rem] font-normal leading-tight tracking-tight text-foreground sm:text-[2.3rem]">Decision-ready analysis for growth, product, and operations teams.</h1>
+            <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">I turn messy data into evidence for what to invest in, what to test, and what to stop—while keeping uncertainty visible.</p>
+            <p className="text-sm font-medium leading-6 text-primary">Primary target: Senior Data Analyst · Growth &amp; Decision Analytics. Secondary strengths: experimentation, product analytics, marketplace operations, and analytics engineering.</p>
             <p className="max-w-2xl text-base leading-7 text-foreground"><span className="font-semibold">Why hire me:</span> I connect analysis to implementation—from trustworthy pipelines and dashboards to experiments and decision systems that make uncertainty visible.</p>
             <div className="flex flex-wrap gap-3 pt-2">
               <Button size="lg" asChild><Link href="#work">View the work <span className="ml-3" aria-hidden="true">→</span></Link></Button>

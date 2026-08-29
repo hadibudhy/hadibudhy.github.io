@@ -98,9 +98,9 @@ If a future airport service test created **1% more JFK-linked trips** at the obs
 
 ### Prioritized action and measurement
 
-- **P0 — Act now:** instrument 17:00–19:00 Manhattan coverage and track trips per available vehicle-hour before changing capacity.
-- **P1 — Test:** run an airport-positioning pilot near JFK with a matched comparison period. Measure airport trips, fare per vehicle-hour, deadhead time, and cancellations.
-- **P2 — Investigate:** add driver supply, vehicle availability, and route-level traffic data before claiming a capacity cause.
+- **First:** instrument 17:00–19:00 Manhattan coverage and track trips per available vehicle-hour before changing capacity.
+- **Then test:** run an airport-positioning pilot near JFK with a matched comparison period. Measure airport trips, fare per vehicle-hour, deadhead time, and cancellations.
+- **To decide later:** add driver supply, vehicle availability, and route-level traffic data before claiming a capacity cause.
 
 Repeat the result using 30-minute peak windows and excluding extreme-duration trips. The data is a January snapshot, so seasonality remains a material uncertainty.
 

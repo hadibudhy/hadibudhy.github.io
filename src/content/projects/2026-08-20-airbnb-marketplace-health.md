@@ -57,9 +57,9 @@ The conservative opportunity is to reduce supply concentration risk without remo
 
 ## Recommendation
 
-- **P0 — Act now:** add host concentration, active availability, price coverage, and cancellation to the marketplace scorecard.
-- **P1 — Test:** run a smaller-host activation experiment in a high-demand, low-choice segment.
-- **P2 — Investigate:** join bookings, reviews, response time, and regulatory status before claiming customer or revenue impact.
+- **First:** add host concentration, active availability, price coverage, and cancellation to the marketplace scorecard.
+- **Then test:** run a smaller-host activation experiment in a high-demand, low-choice segment.
+- **To decide later:** join bookings, reviews, response time, and regulatory status before claiming customer or revenue impact.
 
 Primary metric is booked nights per active listing; guardrails are cancellation, complaints, guest rating, host retention, and contribution. Repeat concentration using top 0.5%, 1%, and 5% definitions.
 

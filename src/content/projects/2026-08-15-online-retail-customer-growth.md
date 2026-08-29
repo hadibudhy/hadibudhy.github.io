@@ -100,9 +100,9 @@ If a retention test increased revenue from the top 10% customer group by **5%**,
 
 ### Prioritized action and measurement
 
-- **P0 — Act now:** create a protected high-value customer cohort and monitor repeat revenue, order frequency, and cancellations monthly.
-- **P1 — Test:** run country-specific repeat-purchase offers in the Netherlands, Ireland, Germany, and France against a control group. Measure repeat-order rate and contribution after shipping cost.
-- **P2 — Investigate:** improve CustomerID capture and cancellation reason fields before using the portfolio as a complete retention view.
+- **First:** create a protected high-value customer cohort and monitor repeat revenue, order frequency, and cancellations monthly.
+- **Then test:** run country-specific repeat-purchase offers in the Netherlands, Ireland, Germany, and France against a control group. Measure repeat-order rate and contribution after shipping cost.
+- **To decide later:** improve CustomerID capture and cancellation reason fields before using the portfolio as a complete retention view.
 
 The test succeeds only if repeat revenue rises without increasing cancellations or reducing contribution. Sensitivity checks should repeat the result with the top 5% and top 20% definitions, and exclude the incomplete December 2011 period.
 

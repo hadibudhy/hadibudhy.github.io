@@ -59,9 +59,9 @@ Do not attach revenue to the stage counts until order linkage is fixed. The cons
 
 ## Recommendation
 
-- **P0 — Act now:** add a funnel-quality dashboard and reconcile event counts with confirmed orders.
-- **P1 — Test:** improve the first high-volume transition for a randomly selected treatment group.
-- **P2 — Investigate:** compare the transition by country, category, and product model.
+- **First:** add a measurement-quality dashboard and reconcile event counts with confirmed orders.
+- **Then test:** improve the first high-volume transition for a randomly selected treatment group.
+- **To decide later:** compare the transition by country, category, and product model.
 
 **Experiment:** target multi-page sessions; treatment changes one journey element; control keeps the current experience; primary metric is completed purchase rate; guardrails are order value, page errors, and return rate. Success requires a stable lift across countries and a sensitivity check excluding sessions with incomplete event coverage.
 

@@ -57,9 +57,9 @@ If the **13,020 unknown-contact records** reached the observed cellular rate, th
 
 ## Recommendation
 
-- **P0 — Act now:** repair contact-type completeness and add contact cost, deposit value, and complaint fields.
-- **P1 — Test:** randomize a targeted follow-up among customers with prior success; compare incremental contribution, not raw response.
-- **P2 — Investigate:** test whether the channel gap remains after controlling for customer history and month.
+- **First:** repair contact-type completeness and add contact cost, deposit value, and complaint fields.
+- **Then test:** randomize a targeted follow-up among customers with prior success; compare incremental contribution, not raw response.
+- **To decide later:** test whether the channel gap remains after controlling for customer history and month.
 
 Treatment is a targeted offer; control is the current campaign; primary metric is contribution per contacted customer; guardrails are complaints, opt-outs, and contact frequency. Repeat using alternative definitions of “prior success” and exclude months with unusual campaign mix.
 

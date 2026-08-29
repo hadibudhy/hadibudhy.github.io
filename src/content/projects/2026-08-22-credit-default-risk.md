@@ -47,9 +47,9 @@ Repayment history should be the first diagnostic layer. Age, education, and othe
 
 The conservative scenario is a manual review queue for accounts with recent repayment stress and meaningful current balance or utilization. The expected scenario adds early payment support and measures avoided delinquency. The ambitious scenario adds current income, hardship, collection cost, and outcome data. Removing risky customers may reduce loss but also reduce revenue and access to credit.
 
-- **P0 — Act now:** define transparent risk tiers and review outcomes.
-- **P1 — Test:** offer support to a randomized eligible group against standard treatment.
-- **P2 — Investigate:** validate current performance, fairness, drift, and cost before any automated decision.
+- **First:** define transparent risk tiers and review outcomes.
+- **Then test:** offer support to a randomized eligible group against standard treatment.
+- **Before any decision:** validate current performance, fairness, drift, and cost before any automated decision.
 
 Primary metric is net loss after support cost; guardrails are false-positive rate, approval/access outcomes, complaints, and fairness by protected group. Do not deploy automated lending decisions until current, representative, fairness-reviewed validation is complete. Repeat with alternative balance and utilization definitions and excluding extreme limits.
 

@@ -63,7 +63,7 @@ Among the inspection records with an A, B, or C grade, **85.8% were A**, **9.3% 
 
 ### Finding 3: Critical-violation rates differed by borough
 
-In the 2022-2025 inspection-level roll-up, **77.3%** of records included at least one violation marked critical. The borough comparison excludes **102 records with an unknown borough**, leaving **73,109 inspections**: **75.9% in Manhattan (n=27,825; 95% normal-approximation CI 75.4–76.4%)**, **81.7% in Staten Island (n=2,470; CI 80.1–83.2%)**, **79.7% in the Bronx (n=6,771; CI 78.8–80.7%)**, **78.2% in Queens (n=17,285; CI 77.6–78.8%)**, and **77.1% in Brooklyn (n=18,758; CI 76.5–77.7%)**. These are unadjusted rates; inspection type, restaurant mix, repeated inspections per restaurant, and reporting completeness may differ, so the comparisons are triage signals rather than a causal ranking.
+In the 2022-2025 inspection-level roll-up, **77.3%** of records included at least one violation marked critical. The borough comparison excludes **102 records with an unknown borough**, leaving **73,109 inspections**: **75.9% in Manhattan (n=27,825)**, **81.7% in Staten Island (n=2,470)**, **79.7% in the Bronx (n=6,771)**, **78.2% in Queens (n=17,285)**, and **77.1% in Brooklyn (n=18,758)**. The chart shows 95% intervals from a restaurant-cluster bootstrap. These are unadjusted rates; inspection type, restaurant mix, repeated inspections per restaurant, and reporting completeness may differ, so the comparisons are triage signals rather than a causal ranking.
 
 ![73,211 NYC inspections from 2022–2025: Unadjusted critical-violation rates differed by borough, with Staten Island highest and Manhattan lowest; inspection mix may explain part of the difference](/images/restaurant-risk-by-borough.png)
 
@@ -98,9 +98,9 @@ The outcome is also incomplete. Only 35,555 inspection records have an A grade, 
 
 The immediate opportunity is to focus review on the **two boroughs above the city rate**, then test whether risk falls after targeted education or follow-up. No financial impact is estimated because the data has no sales, closure cost, or customer-complaint fields. A lower violation rate could also reflect changed inspection coverage, so coverage is a guardrail.
 
-- **P0 — Act now:** review restaurant-level repeat critical findings and treat Staten Island and the Bronx as priority areas for triage, not as proof of borough cause.
-- **P1 — Test:** compare targeted food-safety support with standard communication after matching or stratifying by restaurant type and inspection type.
-- **P2 — Investigate:** add restaurant type, inspection schedule, closure outcomes, and complaint data.
+- **First:** review restaurant-level repeat critical findings and treat Staten Island and the Bronx as priority areas for triage, not as proof of borough cause.
+- **Then test:** compare targeted food-safety support with standard communication after matching or stratifying by restaurant type and inspection type.
+- **To decide later:** add restaurant type, inspection schedule, closure outcomes, and complaint data.
 
 Success means a lower repeat-critical rate without reducing inspection coverage. Sensitivity checks should exclude placeholder dates, separate inspection types, and report graded records separately from missing grades.
 

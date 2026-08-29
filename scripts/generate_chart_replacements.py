@@ -165,11 +165,14 @@ def save_restaurant_risk_by_borough() -> None:
     ).reset_index()
     grouped = grouped[grouped["borough"].isin(["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"])]
     summary = []
+    rng = np.random.default_rng(42)
     for borough, frame in grouped.groupby("borough"):
         n = len(frame)
         rate = frame["critical"].mean()
-        margin = 1.96 * np.sqrt(rate * (1 - rate) / n)
-        summary.append((borough, rate * 100, n, max(0, rate - margin) * 100, min(1, rate + margin) * 100))
+        clusters = [cluster["critical"].to_numpy() for _, cluster in frame.groupby("CAMIS")]
+        draws = [np.concatenate([clusters[index] for index in rng.integers(0, len(clusters), len(clusters))]).mean() for _ in range(2000)]
+        lower, upper = np.quantile(draws, [0.025, 0.975]) * 100
+        summary.append((borough, rate * 100, n, lower, upper))
     summary.sort(key=lambda row: row[1])
     labels = [row[0] for row in summary]
     rates = [row[1] for row in summary]
@@ -182,12 +185,12 @@ def save_restaurant_risk_by_borough() -> None:
         ax.errorbar(rate, index, xerr=[[rate - lower], [upper - rate]], fmt="none", ecolor="#f3f6fb", capsize=5, linewidth=2)
         ax.text(rate + 1.0, index, f"{rate:.1f}%  | n={n:,} | 95% CI {lower:.1f}–{upper:.1f}%", va="center", color="#e5edf8", fontsize=10)
     ax.set_title("Borough differences are descriptive, not a ranking", color="#f3f6fb", fontsize=20, fontweight="bold", pad=24)
-    ax.text(0.5, 1.025, "NYC restaurant inspections | 2022–2025 | inspection-level roll-up | normal-approximation intervals",
+    ax.text(0.5, 1.025, "NYC restaurant inspections | 2022–2025 | inspection-level roll-up | restaurant-cluster bootstrap intervals",
             transform=ax.transAxes, ha="center", color="#9fb0c6", fontsize=12)
     ax.set_xlabel("Inspections with at least one critical violation (%)")
     ax.set_yticks(y, labels)
     ax.set_xlim(0, 100)
-    fig.text(0.5, 0.04, "Unknown borough records excluded; repeated inspections and inspection mix may affect uncertainty",
+    fig.text(0.5, 0.04, "Unknown borough records excluded; 95% intervals resample restaurants, not individual inspection rows",
              ha="center", color="#9fb0c6", fontsize=12)
     fig.savefig(OUT / "restaurant-risk-by-borough.png", dpi=120, facecolor=fig.get_facecolor())
     plt.close(fig)

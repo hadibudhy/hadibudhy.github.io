@@ -57,9 +57,9 @@ The reported margin improvement is modest—about **2.0 percentage points** over
 
 ## Recommendation
 
-- **P0 — Act now:** monitor revenue growth, net margin, operating expense, and cash flow together.
-- **P1 — Test:** investigate one segment or cost category where growth and margin direction diverge.
-- **P2 — Investigate:** reconcile SEC facts to the filing statements and notes when tags or periods change.
+- **First:** monitor revenue growth, net margin, operating expense, and cash flow together.
+- **Then test:** investigate one segment or cost category where growth and margin direction diverge.
+- **To decide later:** reconcile SEC facts to the filing statements and notes when tags or periods change.
 
 Success means durable contribution and cash conversion, not one strong annual ratio. Repeat the analysis using filing date, fiscal period, amended filings, and alternative revenue tags as sensitivity checks.
 
