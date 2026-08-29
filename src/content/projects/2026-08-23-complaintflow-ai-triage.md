@@ -10,7 +10,7 @@ tags:
   - FastAPI
 excerpt: "A production-oriented AI service that routes financial complaints, retrieves approved support playbooks, escalates uncertainty, and records enough evidence to evaluate every decision."
 problem: "Support teams need to route complaints quickly, but an unreliable AI response can send a customer to the wrong queue or invent guidance."
-result: "ComplaintFlow combines a transparent baseline, approved-playbook retrieval, provider retries, PII redaction, schema checks, human escalation, and an auditable SQLite decision log."
+result: "Portfolio reference implementation: ComplaintFlow combines a transparent baseline, approved-playbook retrieval, provider retries, PII redaction, schema checks, human escalation, and an auditable SQLite decision log."
 featured: true
 header:
   teaser: /images/complaintflow-architecture.svg
@@ -20,7 +20,7 @@ header:
 
 **Business problem:** support operations spends time reading and routing complaints, while incorrect or unsupported AI guidance creates customer, compliance, and trust risk.
 
-**AI solution:** ComplaintFlow recommends a support queue and retrieves an approved playbook. It does not make refunds, credit, legal, or regulatory decisions.
+**AI solution:** ComplaintFlow is a portfolio reference implementation, not a production deployment. It recommends a support queue and retrieves an approved playbook. It does not make refunds, credit, legal, or regulatory decisions.
 
 **Engineering result:** the system has a FastAPI endpoint, input validation, PII redaction, a transparent baseline, retrieval, retries, fallback routing, SQLite persistence, and automated tests.
 

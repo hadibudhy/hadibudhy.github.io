@@ -17,7 +17,7 @@ header:
 
 **Key findings:** open roles are demand rather than completed hiring; quits are different from total separations; and the December 2025 U.S. aggregate shows 6.55m openings alongside 5.203m total separations.
 
-**Business impact:** the same headline “staffing problem” can require recruiting, retention, workforce-design, or cost action.
+**Decision implication:** the same headline “staffing problem” can require recruiting, retention, workforce-design, or cost action.
 
 **Recommended action:** use JOLTS as external context and connect it to internal vacancy age, time-to-fill, tenure, and exit data.
 
@@ -35,15 +35,17 @@ The BLS API returned December 2025 values of **6.55m openings**, **3.3% hires**,
 
 The data cannot identify a company, team, manager, or role causing turnover. It is also an aggregate estimate that can be revised. Any internal diagnosis must preserve that distinction.
 
-![U.S. BLS JOLTS, December 2025: 6.55M openings, 3.3% hires, 2.0% quits, and 5.203M total separations measure different workforce signals](/images/jolts-december-signals.png)
-
-![U.S. BLS JOLTS, December 2025: Workforce pressure reflects both demand for workers and employee exits](/images/jolts-openings-separations.png)
+![U.S. BLS JOLTS, December 2025: Openings are a point-in-time stock, separations are a monthly flow, and hires and quits are rates](/images/jolts-december-signals.png)
 
 ## Approach
 
 The conservative scenario is to improve vacancy visibility and recruiting throughput in critical roles. The expected scenario combines that with targeted retention work where internal quits exceed the external benchmark. The ambitious scenario redesigns roles or staffing models. Faster hiring can improve coverage but increase cost or reduce selection quality; retention programs can add cost without reducing regretted exits.
 
 ## Key findings
+
+- December 2025 openings were **6.55 million**; this is a point-in-time stock, not completed hiring.
+- Hires (**3.3%**) and quits (**2.0%**) are rates, while total separations were **5.203 million** in the month.
+- The aggregate series provides labor-market context, not a diagnosis of a company, team, or role.
 
 ## Recommendation
 

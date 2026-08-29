@@ -3,12 +3,11 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { getAllProjects } from "@/lib/mdx";
-import { careerArc, skills } from "@/lib/profile";
+import { capabilities, careerArc } from "@/lib/profile";
 
 export default function Home() {
   const projects = getAllProjects();
   const featuredProjects = projects.filter((project) => project.meta.featured);
-  const supportingProjects = projects.filter((project) => !project.meta.featured);
 
   return (
     <div>
@@ -27,7 +26,8 @@ export default function Home() {
           </div>
           <div className="space-y-5 sm:space-y-6">
             <h1 className="max-w-full text-[1.8rem] font-normal leading-tight tracking-tight text-foreground sm:text-[2.3rem]">Making unreliable data easier to use for better decisions.</h1>
-            <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">I work across growth, operations, and risk, using messy data to make business questions easier to answer and next steps easier to discuss.</p>
+            <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">I help product, growth, and operations teams turn messy data into clear evidence, useful metrics, and safer next steps.</p>
+            <p className="max-w-2xl text-base leading-7 text-foreground"><span className="font-semibold">Why hire me:</span> I connect analysis to implementation—from trustworthy pipelines and dashboards to experiments and decision systems that make uncertainty visible.</p>
             <div className="flex flex-wrap gap-3 pt-2">
               <Button size="lg" asChild><Link href="#work">View the work <span className="ml-3" aria-hidden="true">→</span></Link></Button>
               <Button size="lg" variant="outline" asChild><a href="mailto:hadi.budhy@gmail.com">Get in touch</a></Button>
@@ -72,14 +72,6 @@ export default function Home() {
           <div className="grid gap-5 sm:grid-cols-2">
             {featuredProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} featured />)}
           </div>
-          {supportingProjects.length > 0 && (
-            <div className="mt-16">
-              <p className="section-kicker mb-6">More analysis</p>
-              <div className="grid gap-5 sm:grid-cols-2">
-                {supportingProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} />)}
-              </div>
-            </div>
-          )}
         </div>
       </section>
 
@@ -87,10 +79,10 @@ export default function Home() {
           <div className="mx-auto grid w-full max-w-3xl gap-8 px-4 py-14 sm:px-6 sm:py-16 lg:grid-cols-[0.7fr_1.3fr] lg:gap-10 md:py-20">
           <div>
             <p className="section-kicker">Toolkit</p>
-            <h2 className="section-title mt-4">Skills for useful analysis.</h2>
+            <h2 className="section-title mt-4">Capabilities backed by case studies.</h2>
           </div>
-          <div className="flex content-start flex-wrap gap-3">
-            {skills.map((skill) => <span key={skill} className="border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary">{skill}</span>)}
+          <div className="space-y-5">
+            {capabilities.map((capability) => <div key={capability.title} className="border-t border-border pt-4 first:border-t-0 first:pt-0"><h3 className="font-semibold text-foreground">{capability.title}</h3><p className="mt-1 text-sm leading-6 text-muted-foreground">{capability.evidence}</p></div>)}
           </div>
         </div>
       </section>

@@ -1,6 +1,6 @@
 ---
 title: "Campaign Incrementality: Did Advertising Create New Customers?"
-date: 2026-08-30
+date: 2026-08-29
 categories: [growth analytics]
 tags: [experimentation, causal inference, incrementality, Python]
 excerpt: "A randomized advertising analysis that separates additional conversions from customers who would have converted anyway."

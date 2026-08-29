@@ -10,14 +10,14 @@ tags:
 excerpt: "A transaction analysis showing where repeat revenue comes from and which markets deserve closer growth attention."
 problem: "The retailer had many transactions, but it was not clear which customers and markets created repeat revenue."
 result: "After cleaning 541,909 transactions, the analysis found 4,338 identifiable customers and a strong concentration of revenue among the highest-value customers."
-featured: true
+featured: false
 header:
   teaser: /images/retail-growth-patterns.png
 ---
 
 ## Executive summary
 
-**Business problem:** grow repeat revenue without increasing dependence on one-off orders or a small customer group. **Key findings:** the cleaned data contains 4,338 identifiable customers; the top 10% generate 61.3% of revenue; and the UK contributes about 82% of revenue. **Business impact:** retention is valuable but concentrated. **Recommended action:** protect high-value customers and run measured repeat-purchase tests in nearby European markets.
+**Business problem:** grow repeat revenue without increasing dependence on one-off orders or a small customer group. **Key findings:** the cleaned data contains 4,338 identifiable customers; the top 10% generate 61.3% of revenue; and the UK contributes about 82% of revenue. **Decision implication:** retention is valuable but concentrated. **Recommended action:** protect high-value customers and validate repeat-purchase tests in nearby European markets.
 
 ## Business context
 
@@ -49,19 +49,19 @@ The cleaned data contains **4,338 identifiable customers**, **18,532 orders**, a
 
 The highest-value 10% of customers generated **61.3% of revenue**. This is a concentration risk and an opportunity: keeping a small group of valuable customers engaged could protect a large share of sales, while losing them would have an outsized effect.
 
-![Cleaned UCI Online Retail orders, December 2010–December 2011: Revenue rose into the holiday season while returning orders became a larger share of demand](/images/retail-growth-patterns.png)
+![Cleaned UCI Online Retail orders, December 2010–December 2011: Recorded revenue rose into the holiday season while returning orders became a larger share of orders](/images/retail-growth-patterns.png)
 
 ### Finding 2: The UK was the core market, but nearby countries added visible opportunity
 
 The UK generated **£7.31 million**, or about **82% of cleaned revenue**. The next markets were the Netherlands, EIRE, Germany, and France. These markets were much smaller than the UK, but they were large enough to support focused tests around product selection, shipping, and repeat-purchase offers.
 
-![Cleaned UCI Online Retail revenue, December 2010–December 2011: The UK generated most revenue, while nearby European markets were the clearest expansion candidates](/images/retail-market-opportunity.png)
+![Cleaned UCI Online Retail revenue, December 2010–December 2011: The UK generated most revenue, while nearby European markets require validation before expansion](/images/retail-market-opportunity.png)
 
 ### Finding 3: Growth became more dependent on returning orders as the period progressed
 
-Returning orders became a much larger part of monthly demand as the customer base matured. Revenue also rose sharply in September, October, and November 2011, with November reaching **£1.16 million**. December is only partially covered in the source data, so it should not be compared with a complete holiday month.
+Returning orders became a much larger part of monthly orders as the customer base matured. Revenue also rose sharply in September, October, and November 2011, with November reaching **£1.16 million**. December is only partially covered in the source data, so it should not be compared with a complete holiday month.
 
-**Business meaning:** The retailer appears to have a useful repeat-purchase engine, but the value is unevenly distributed. Growth planning should protect the strongest customer relationships while testing whether successful UK offers can travel to nearby markets.
+**Business meaning:** The retailer appears to have a useful repeat-purchase pattern, but the value is unevenly distributed. Growth planning should protect the strongest customer relationships while testing whether successful UK offers can travel to nearby markets; the data does not establish market attractiveness.
 
 ## Recommendation
 
@@ -90,7 +90,7 @@ This is evidence of concentration, not proof that high-value customers will resp
 
 ### Opportunity scenarios
 
-If a retention test increased revenue from the top 10% customer group by **5%**, the arithmetic opportunity would be about **£27,300** (`£8.91m × 61.3% × 5%`) before cost. That is a scenario, not a forecast. A conservative test should start below this level and compare against a holdout group.
+If a retention test increased revenue from the top 10% customer group by **5%**, the arithmetic opportunity would be about **£273,000** (`£8.91m × 61.3% × 5%`) before cost. That is a scenario, not a forecast. A conservative test should start below this level and compare against a holdout group.
 
 ### Prioritized action and measurement
 

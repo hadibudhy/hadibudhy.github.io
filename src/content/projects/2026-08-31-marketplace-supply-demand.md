@@ -1,12 +1,12 @@
 ---
 title: "Marketplace Supply and Demand: What Can the Public Data Tell Us?"
-date: 2026-08-31
+date: 2026-08-29
 categories: [growth analytics]
 tags: [marketplace, supply and demand, experimentation, SQL]
 excerpt: "A limited-data marketplace diagnosis that separates recorded trips from the requests and driver hours needed to measure imbalance."
 problem: "A citywide incentive can be expensive when the real problem is concentrated in a few time and location windows."
 result: "Official TLC data shows when recorded trips and observed driver coverage move, but it cannot directly show all ride requests or unserved customers."
-featured: false
+featured: true
 ---
 
 ## Business question
@@ -27,6 +27,8 @@ I used two official TLC sources:
 - TLC's monthly report for High Volume FHV activity, including reported trips per day, unique drivers, unique vehicles, and average hours.
 
 The trip table contains **4,965,012 recorded rows**. It shows activity that was submitted by licensed high-volume services. It does not show every request, rejected match, cancellation, true wait time, or driver who was online but did not receive a trip.
+
+These sources cover different periods: the hourly slice is **1–7 February 2019**, while the monthly report compares **2024 with 2025**. They are complementary descriptions, not a single continuous time series, so the 2019 peak cannot be treated as the cause of the later monthly pattern.
 
 ## Approach
 
@@ -52,7 +54,7 @@ TLC's monthly report gives a broader view. Average reported trips per day rose f
 
 ![TLC monthly High Volume FHV reports: reported trips rose in 2025 while average unique drivers stayed broadly flat](/images/growth-hvf-monthly-supply.png)
 
-**Business meaning:** the system recorded more activity without a comparable increase in reported driver coverage. This is a useful pressure signal, but it is not an hourly supply count and cannot show whether the extra trips were profitable or fulfilled all demand.
+**Business meaning:** the system recorded more activity without a comparable increase in reported driver coverage in the separate 2024–2025 monthly comparison. This is a useful pressure signal, but it is not an hourly supply count and cannot show whether the extra trips were profitable or fulfilled all demand.
 
 ### The data supports a measurement plan, not a citywide subsidy
 

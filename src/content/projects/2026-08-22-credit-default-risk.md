@@ -17,13 +17,13 @@ header:
 
 **Key findings:** 6,636 of 30,000 clients defaulted in the following month; repayment history is closer to the risk decision than demographics alone; exposure changes the size of a potential loss; and the 2005 Taiwan sample lacks current economics, fairness fields, collection cost, and hardship outcomes.
 
-**Business impact:** a transparent review queue could focus limited support capacity, but a model could create customer harm if used without current validation and governance.
+**Decision implication:** a transparent review queue could focus limited support capacity, but a model could create customer harm if used without current validation and governance.
 
 **Recommended action:** use group-level risk tiers for review and support experiments, not automatic approval or rejection.
 
 ## Business question
 
-**Decision owner:** Credit Risk Director. **Decision:** which accounts or groups need earlier review or support? **North-star KPI:** avoidable loss after support cost. **Drivers:** repayment history, balance, credit limit, utilization, and payment behavior. **Guardrails:** approval rate, false positives, fairness, customer hardship, and complaints.
+**Decision owner:** Credit Risk Director. **Decision:** which accounts or groups need earlier review or support? **North-star KPI:** avoidable loss after support cost. **Drivers:** repayment history, current balance, utilization, and payment behavior. **Guardrails:** approval rate, false positives, fairness, customer hardship, and complaints.
 
 ## Why it matters
 
@@ -31,17 +31,15 @@ Early support can reduce avoidable loss, but an unchecked risk score can deny ac
 
 ## Data used
 
-The official file has **30,000 rows**, no missing values, no duplicate rows, and **24 measured fields** in addition to the record ID. **6,636 clients, or 22.1%, defaulted in the following month.** The useful business decomposition is **risk signal × exposure**: two accounts with similar observed default risk can create different potential losses when their balances or credit limits differ.
+The official file has **30,000 rows**, no missing values, no duplicate rows, and **24 measured fields** in addition to the record ID. **6,636 clients, or 22.1%, defaulted in the following month.** The useful business decomposition is **observed risk signal × balance/use measure**: two accounts with similar observed default risk can create different potential losses when their current balances or utilization differ. Credit limit is available capacity, not exposure at default.
 
 Repayment history should be the first diagnostic layer. Age, education, and other demographic fields may help describe segments, but they should not become a shortcut for a lending decision. The data is observational and historical, so association is not causation.
 
 ![UCI Taiwan credit-client sample, 30,000 accounts from 2005: Default is a minority outcome, so review capacity must be targeted](/images/credit-default-balance.png)
 
-![UCI Taiwan credit-client sample, 30,000 accounts from 2005: Risk review should consider observed default and credit exposure together](/images/credit-default-by-exposure.png)
-
 ## Approach
 
-The conservative scenario is a manual review queue for high-risk/high-exposure accounts. The expected scenario adds early payment support and measures avoided delinquency. The ambitious scenario adds current income, hardship, collection cost, and outcome data. Removing risky customers may reduce loss but also reduce revenue and access to credit.
+The conservative scenario is a manual review queue for accounts with recent repayment stress and meaningful current balance or utilization. The expected scenario adds early payment support and measures avoided delinquency. The ambitious scenario adds current income, hardship, collection cost, and outcome data. Removing risky customers may reduce loss but also reduce revenue and access to credit.
 
 - **P0 — Act now:** define transparent risk tiers and review outcomes.
 - **P1 — Test:** offer support to a randomized eligible group against standard treatment.
@@ -50,6 +48,10 @@ The conservative scenario is a manual review queue for high-risk/high-exposure a
 Primary metric is net loss after support cost; guardrails are false-positive rate, approval/access outcomes, complaints, and fairness by protected group. Do not deploy automated lending decisions until current, representative, fairness-reviewed validation is complete. Repeat with alternative exposure definitions and excluding extreme limits.
 
 ## Key findings
+
+- **6,636 of 30,000 clients (22.1%)** defaulted in the following month in this historical sample.
+- Repayment history is a nearer risk signal than demographics alone, but the analysis does not claim validated predictive-model performance.
+- Credit limit describes available capacity; it is not exposure at default. Current balance, utilization, loss severity, and support cost are still needed.
 
 ## Recommendation
 

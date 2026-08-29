@@ -10,14 +10,14 @@ tags:
 excerpt: "A messy inspection-data analysis showing how a restaurant group could prioritize quality support without treating every location as the same risk."
 problem: "Restaurant inspection records were detailed but repeated across violations, making it difficult to compare quality risk fairly."
 result: "After rolling 227,520 recent violation rows into 73,211 inspection records, the analysis found meaningful differences in critical-violation rates across boroughs."
-featured: true
+featured: false
 header:
   teaser: /images/restaurant-grades.png
 ---
 
 ## Executive summary
 
-**Business problem:** focus food-safety preparation and follow-up where repeat risk is highest. **Key findings:** the selected inspection base has a 77.3% critical-violation rate; Staten Island and the Bronx are above the city rate; and 30,037 records have no grade. **Business impact:** borough averages can prioritize attention but do not prove cause. **Recommended action:** target repeat critical findings while protecting inspection coverage and data quality.
+**Business problem:** focus food-safety preparation and follow-up where repeat risk is highest. **Key findings:** the selected inspection base has a 77.3% critical-violation rate; Staten Island and the Bronx are above the city rate; and 30,037 records have no grade. **Decision implication:** borough averages can prioritize attention but do not prove cause. **Recommended action:** target repeat critical findings while protecting inspection coverage and data quality.
 
 ## Business context
 
@@ -57,9 +57,9 @@ Among the inspection records with an A, B, or C grade, **85.8% were A**, **9.3% 
 
 ### Finding 3: Critical-violation rates differed by borough
 
-In the 2022-2025 inspection-level roll-up, **77.3%** of records included at least one violation marked critical. The rate ranged from **75.9% in Manhattan** to **81.6% in Staten Island**. The Bronx was next at **79.7%**, followed by Queens at **78.2%** and Brooklyn at **77.1%**.
+In the 2022-2025 inspection-level roll-up, **77.3%** of records included at least one violation marked critical. The borough comparison excludes **102 records with an unknown borough**, leaving **73,109 inspections**: **75.9% in Manhattan (n=27,825; 95% normal-approximation CI 75.4–76.4%)**, **81.7% in Staten Island (n=2,470; CI 80.1–83.2%)**, **79.7% in the Bronx (n=6,771; CI 78.8–80.7%)**, **78.2% in Queens (n=17,285; CI 77.6–78.8%)**, and **77.1% in Brooklyn (n=18,758; CI 76.5–77.7%)**. These are unadjusted rates; inspection type, restaurant mix, repeated inspections per restaurant, and reporting completeness may differ, so the comparisons are triage signals rather than a causal ranking.
 
-![73,211 NYC inspections from 2022–2025: Critical-violation rates ranged from 75.9% in Manhattan to 81.6% in Staten Island](/images/restaurant-risk-by-borough.png)
+![73,211 NYC inspections from 2022–2025: Unadjusted critical-violation rates differed by borough, with Staten Island highest and Manhattan lowest; inspection mix may explain part of the difference](/images/restaurant-risk-by-borough.png)
 
 These differences are useful for prioritization, but they do not prove that a borough causes worse performance. Restaurant mix, inspection timing, location, and reporting practices may all contribute.
 
@@ -84,7 +84,7 @@ Public inspection data can support a useful quality-prioritization system, but o
 
 ### What is driving the result?
 
-The 2022–2025 inspection-level base has a **77.3% critical-violation rate** after rolling violation rows up to restaurant, inspection date, and inspection type. The rate is highest in Staten Island (**81.6%**) and the Bronx (**79.7%**) and lowest in Manhattan (**75.9%**). This is a prioritization signal, not proof that borough causes risk: inspection mix, restaurant type, and reporting completeness may differ.
+The 2022–2025 inspection-level base has a **77.3% critical-violation rate** after rolling violation rows up to restaurant, inspection date, and inspection type. The rate is highest in Staten Island (**81.7%**) and the Bronx (**79.7%**) and lowest in Manhattan (**75.9%**). This is a prioritization signal, not proof that borough causes risk: inspection mix, restaurant type, repeated inspections, and reporting completeness may differ.
 
 The outcome is also incomplete. Only 35,555 inspection records have an A grade, while 30,037 have no grade in the selected period. A missing grade must not be treated as a pass.
 

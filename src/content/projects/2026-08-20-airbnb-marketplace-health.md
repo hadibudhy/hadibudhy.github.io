@@ -17,7 +17,7 @@ header:
 
 **Key findings:** supply is dominated by entire homes and private rooms; 24.7% of listings are controlled by the top 1% of observed hosts; 8,758 listings have missing prices; and listings are not bookings.
 
-**Business impact:** platform policy can have an outsized effect if professional hosts control a large share of visible supply, but demand and revenue cannot be inferred from listings alone.
+**Decision implication:** platform policy can have an outsized effect if professional hosts control a large share of visible supply, but demand and revenue cannot be inferred from listings alone.
 
 **Recommended action:** monitor concentration and availability, then add booking data before changing marketplace investment.
 
@@ -44,6 +44,10 @@ The top 1% of observed hosts account for **24.7% of listings**. This is a concen
 The conservative opportunity is to reduce supply concentration risk without removing productive hosts: improve onboarding and visibility for smaller hosts. The expected case adds booking and occupancy data by neighbourhood and room type. The ambitious case tests targeted supply incentives. The trade-off is that incentives can add supply but reduce platform contribution or increase regulatory exposure.
 
 ## Key findings
+
+- The June 2026 snapshot contains **30,555 visible listings**, mostly entire homes and private rooms.
+- The top 1% of observed hosts account for **24.7% of listings**, a concentration signal rather than a booking share.
+- Listings are not bookings; occupancy, revenue, demand, and customer choice remain unmeasured.
 
 ## Recommendation
 

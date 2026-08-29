@@ -17,7 +17,7 @@ header:
 
 **Key findings:** 5,289 of 45,211 contacts were positive; the unknown-contact group contains 13,020 contacts and trails cellular response; prior success is the strongest observed signal; and the dataset lacks contact cost and deposit value.
 
-**Business impact:** improving data coverage could address a large contact pool, but response uplift is not yet a profit case.
+**Decision implication:** improving data coverage could address a large contact pool, but response uplift is not yet a profit case.
 
 **Recommended action:** run a controlled targeting test and add cost/value fields before reallocating budget.
 
@@ -44,6 +44,10 @@ The channel pattern is associated evidence, not causality. Channel may proxy for
 If the **13,020 unknown-contact records** reached the observed cellular rate, the arithmetic upside would be about **1,410 additional positive outcomes**. This is a scenario, not a forecast: it assumes the group is reachable and comparable. The trade-off is that more contact may increase complaints or cost.
 
 ## Key findings
+
+- Positive response is **11.7% overall**, **14.9% for cellular**, and **4.1% for unknown contact type**.
+- Previous campaign success is a strong observed signal: **64.7%** positive response versus **9.2%** for unknown prior outcomes.
+- These are associations in a historical archive; they do not establish channel lift or profit.
 
 ## Recommendation
 

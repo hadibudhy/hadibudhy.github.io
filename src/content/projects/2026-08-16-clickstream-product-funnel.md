@@ -1,9 +1,9 @@
 ---
-title: "Online Shopping Clickstream: Finding the First Product Friction"
+title: "Online Shopping Clickstream: Where Browsing Activity Thins Out"
 date: 2026-08-16
 categories: [product analytics]
 tags: [funnel analysis, user behavior, conversion, experimentation]
-excerpt: "A product decision study that separates browsing volume from journey progress and defines the instrumentation needed before a conversion experiment."
+excerpt: "An observational clickstream audit that shows where browsing activity thins out and what must be measured before calling it product friction."
 problem: "The store had many browsing events but could not identify which transition in the journey deserved product investment."
 result: "The validated file contains 24,026 sessions and 165,474 events; 79.0% of sessions contain more than one event, while event volume falls from 93,452 at stage 1 to 2,823 at stage 5."
 featured: false
@@ -17,7 +17,7 @@ header:
 
 **Key findings:** the median session has four events; 79.0% continue beyond the first event; stage volume falls sharply from 93,452 to 2,823; and the file cannot prove completed purchases.
 
-**Business impact:** the largest immediate risk is making a conversion decision without reliable session-to-order measurement.
+**Decision implication:** the largest immediate risk is making a conversion decision without reliable session-to-order measurement.
 
 **Recommended action:** instrument the journey first, then test the largest observed transition with a holdout group.
 
@@ -46,6 +46,10 @@ The source has 165,474 rows, 14 fields, no missing values, and no duplicate rows
 Do not attach revenue to the stage counts until order linkage is fixed. The conservative opportunity is measurement coverage: define one session ID, one checkout event, and one confirmed order ID. The expected case is a controlled experiment on the first high-volume transition; the ambitious case adds product availability and search-result data to explain the drop.
 
 ## Key findings
+
+- Event volume falls from **93,452 at stage 1 to 2,823 at stage 5**, showing where activity thins out, not why.
+- **79.0%** of sessions contain more than one event, but the file has no confirmed order outcome.
+- The decision is to fix session-to-order measurement before calling any stage a product friction point.
 
 ## Recommendation
 

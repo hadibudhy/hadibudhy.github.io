@@ -17,7 +17,7 @@ header:
 
 **Key findings:** Microsoft’s reported revenue increased about 32.9% from FY2023 to FY2025; net income increased about 40.7%; and net margin improved from approximately 34.1% to 36.1%.
 
-**Business impact:** the observed result is healthy at the reported-company level, but it does not identify whether growth came from volume, price, mix, acquisitions, or cost control.
+**Decision implication:** the observed result is healthy at the reported-company level, but it does not identify whether growth came from volume, price, mix, acquisitions, or cost control.
 
 **Recommended action:** use the margin improvement as a starting point for segment and cost-driver review, not as proof that every business line improved.
 
@@ -37,13 +37,17 @@ This is evidence of reported improvement, not causal proof. Fiscal periods, amen
 
 ![Microsoft reported results, FY2023–FY2025: Revenue rose from $211.9B to $281.7B while net income rose from $72.4B to $101.8B](/images/sec-revenue-net-income.png)
 
-![Microsoft reported results, FY2023–FY2025: Net margin improved from about 34.1% to 36.1%, but segment drivers still need review](/images/sec-net-margin.png)
+![Microsoft reported results, FY2023–FY2025: Net margin improved from about 34.1% to 36.1% on a full percentage scale, but segment drivers still need review](/images/sec-net-margin.png)
 
 ## Approach
 
 The conservative case is to preserve the FY2025 margin while growth slows; the expected case tests whether the current margin can hold as mix changes; the ambitious case identifies controllable cost or mix drivers that improve contribution without reducing product investment. No incremental profit is claimed because segment costs and intervention effects are not established.
 
 ## Key findings
+
+- Reported revenue rose from **$211.9B to $281.7B** and net income from **$72.4B to $101.8B** between FY2023 and FY2025.
+- Reported net margin rose from about **34.1% to 36.1%**, calculated as net income divided by revenue; the result is company-level reporting, not a segment diagnosis.
+- SEC facts cannot show whether volume, price, mix, or cost control caused the improvement.
 
 ## Recommendation
 

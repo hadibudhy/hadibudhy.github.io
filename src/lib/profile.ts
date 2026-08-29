@@ -1,30 +1,12 @@
-export const skills = [
-  "SQL",
-  "Python",
-  "BigQuery",
-  "dbt",
-  "Airflow",
-  "ELT Pipelines",
-  "Dimensional Modeling",
-  "Predictive Modeling",
-  "NLP",
-  "K-Means",
-  "A/B Testing",
-  "Cohort Analysis",
-  "Looker Studio",
-  "Tableau",
-  "Power BI",
-  "REST APIs",
-  "FastAPI",
-  "LLM Evaluation",
-  "Retrieval Systems",
-  "SQLite",
-  "XGBoost",
-  "scikit-learn",
-  "n8n",
-  "Mixpanel",
-  "Git",
+export const capabilities = [
+  { title: "Product and growth analytics", evidence: "Funnels, retention, campaign incrementality, and decision-ready experiments." },
+  { title: "Experimentation and causal inference", evidence: "Holdouts, event studies, uncertainty, and clear limits on causal claims." },
+  { title: "Marketplace and operations analytics", evidence: "Supply signals, trip economics, quality risk, and operational pilots." },
+  { title: "Analytics engineering", evidence: "Warehouse pipelines, dimensional models, APIs, and reliable reporting systems." },
+  { title: "Decision systems", evidence: "Auditable AI workflows, evaluation, escalation, and governance." },
 ];
+
+export const skills = ["SQL", "Python", "BigQuery", "dbt", "Airflow", "A/B testing", "Cohort analysis", "FastAPI", "LLM evaluation", "Git"];
 
 export const education = "Bachelor of Public Health (Biostatistics), Universitas Indonesia";
 

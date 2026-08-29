@@ -1,6 +1,6 @@
 ---
 title: "Congestion Pricing: When the Causal Design Fails the Test"
-date: 2026-09-02
+date: 2026-08-29
 categories: [growth analytics]
 tags: [econometrics, causal inference, mobility, decision quality]
 excerpt: "An event-study audit of NYC bridge and tunnel traffic that shows why a plausible policy story is not enough for a causal business decision."

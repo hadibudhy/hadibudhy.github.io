@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { careerArc, education, experience, skills } from "@/lib/profile";
+import { capabilities, careerArc, education, experience, skills } from "@/lib/profile";
 
 export const metadata = {
   title: "About",
@@ -19,7 +19,7 @@ export default function AboutPage() {
           <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
             <div className="space-y-5 text-lg leading-8 text-muted-foreground">
               <p>Hadi Budhy is a Data Analyst and Analytics Engineer with 5+ years of experience across business intelligence, customer analytics, data automation, and applied AI, based in Jakarta, Indonesia.</p>
-              <p>His work began in Business Intelligence and grew into data analysis, data engineering, and applied AI workflows. The goal is simple: turn scattered information into evidence that supports a more informed decision.</p>
+              <p>He helps teams turn scattered information into evidence they can trust, decisions they can explain, and workflows they can operate.</p>
             </div>
             <div className="border-l border-primary/50 pl-6 text-sm leading-7 text-muted-foreground">His work spans reliable data pipelines, forecasting and classification models, and dashboards that help teams understand what is happening and what to do next. This public summary keeps employer, client, and operational details intentionally high level.<p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-primary">{education}</p></div>
           </div>
@@ -48,8 +48,8 @@ export default function AboutPage() {
 
       <section className="border-b border-border">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.7fr_1.3fr] lg:gap-10 md:py-24">
-          <div><p className="section-kicker">Skills</p><h2 className="section-title mt-4">A practical toolkit for careful analysis.</h2></div>
-          <div className="flex flex-wrap content-start gap-3">{skills.map((skill) => <Badge key={skill} variant="secondary" className="px-3 py-1.5 text-sm font-normal">{skill}</Badge>)}</div>
+            <div><p className="section-kicker">Capabilities</p><h2 className="section-title mt-4">A practical toolkit for careful analysis.</h2></div>
+          <div className="space-y-5">{capabilities.map((capability) => <div key={capability.title} className="border-t border-border pt-4 first:border-t-0 first:pt-0"><h3 className="font-semibold text-foreground">{capability.title}</h3><p className="mt-1 text-sm leading-6 text-muted-foreground">{capability.evidence}</p></div>)}<div className="flex flex-wrap gap-2 pt-2">{skills.map((skill) => <Badge key={skill} variant="secondary" className="px-3 py-1.5 text-sm font-normal">{skill}</Badge>)}</div></div>
         </div>
       </section>
     </div>
