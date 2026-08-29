@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { getAllProjects } from "@/lib/mdx";
@@ -12,59 +13,31 @@ export default function Home() {
   return (
     <div>
       <section className="border-b border-border">
-          <div className="mx-auto grid max-w-6xl gap-10 px-4 pb-16 pt-12 sm:gap-12 sm:px-8 sm:pb-24 sm:pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-16 md:pb-32">
-          <div className="min-w-0">
-            <div className="mb-7 flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">
-              <span className="h-2 w-2 bg-primary" />
-              Senior Data Analyst / Analytics Engineer <span className="text-muted-foreground">• Applied AI</span>
-              <span className="text-muted-foreground">/ Jakarta, ID</span>
-            </div>
-            <h1 className="max-w-4xl break-words text-[2.7rem] font-black leading-[0.98] tracking-[-0.055em] text-foreground sm:text-6xl lg:text-7xl">
-              Making unreliable data easier to use for <span className="text-primary">better decisions.</span>
-            </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground md:text-xl">
-              Hadi Budhy works across growth, operations, and risk, using messy data to clarify what is happening and what could happen next.
-            </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button size="lg" asChild className="w-full sm:w-auto">
-                <Link href="#work">View the Work <span className="ml-3 text-lg" aria-hidden="true">→</span></Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
-                <a href="mailto:hadi.budhy@gmail.com">Contact</a>
-              </Button>
-            </div>
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-              <a href="https://github.com/hadibudhy" target="_blank" rel="noreferrer" className="transition-colors hover:text-foreground">GitHub ↗</a>
-              <a href="https://linkedin.com/in/hadibudhy" target="_blank" rel="noreferrer" className="transition-colors hover:text-foreground">LinkedIn ↗</a>
-              <span>5+ years across BI, analytics, and data engineering</span>
+        <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 pb-12 pt-8 sm:gap-10 sm:px-6 sm:pb-16 sm:pt-14">
+          <div className="flex items-center gap-4 sm:gap-6">
+            <Image src="/images/bio-pic-2.jpg" alt="Hadi Budhy" width={160} height={160} className="h-24 w-24 shrink-0 rounded-full border border-border object-cover sm:h-32 sm:w-32" priority />
+            <div className="flex flex-col gap-2">
+              <p className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">Hadi Budhy</p>
+              <p className="text-sm text-muted-foreground">Data Analyst and Analytics Engineer</p>
+              <div className="flex gap-4 text-sm text-muted-foreground">
+                <a href="https://github.com/hadibudhy" target="_blank" rel="noreferrer" className="hover:text-foreground">GitHub</a>
+                <a href="https://linkedin.com/in/hadibudhy" target="_blank" rel="noreferrer" className="hover:text-foreground">LinkedIn</a>
+              </div>
             </div>
           </div>
-
-          <aside className="surface min-w-0 p-5 sm:p-7 lg:p-8">
-            <div className="mb-10 flex items-center justify-between text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
-              <span>What the work brings</span>
-              <span className="text-lg text-primary" aria-hidden="true">↓</span>
+          <div className="space-y-5 sm:space-y-6">
+            <h1 className="max-w-full text-[1.8rem] font-normal leading-tight tracking-tight text-foreground sm:text-[2.3rem]">Making unreliable data easier to use for better decisions.</h1>
+            <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">I work across growth, operations, and risk, using messy data to make business questions easier to answer and next steps easier to discuss.</p>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <Button size="lg" asChild><Link href="#work">View the work <span className="ml-3" aria-hidden="true">→</span></Link></Button>
+              <Button size="lg" variant="outline" asChild><a href="mailto:hadi.budhy@gmail.com">Get in touch</a></Button>
             </div>
-            <div className="space-y-7">
-              {["Reliable data foundations", "Models built for a clear question", "Decision-ready analytics"].map((item, index) => (
-                <div key={item} className="flex gap-4 border-t border-border pt-5 first:border-t-0 first:pt-0">
-                  <span className="font-mono text-sm text-primary">0{index + 1}</span>
-                  <div>
-                    <h2 className="text-lg font-bold text-foreground">{item}</h2>
-                    <p className="mt-1 text-sm leading-6 text-muted-foreground">{["Clean, tested data that teams can use with confidence.", "Models that answer a clear question instead of adding complexity.", "Dashboards and analysis that make the next action easier to see."][index]}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-10 border-t border-border pt-5 text-sm text-muted-foreground">
-              <span className="text-primary">Available for practical data work.</span> Making the numbers useful starts with a clear question.
-            </div>
-          </aside>
+          </div>
         </div>
       </section>
 
       <section id="experience" className="scroll-mt-20 border-b border-border">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
+        <div className="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6 sm:py-16 md:py-20">
           <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
             <div>
               <p className="section-kicker">Career arc</p>
@@ -87,7 +60,7 @@ export default function Home() {
       </section>
 
       <section id="work" className="scroll-mt-20 border-b border-border">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
+        <div className="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6 sm:py-16 md:py-20">
           <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="section-kicker">Selected work</p>
@@ -96,13 +69,13 @@ export default function Home() {
             </div>
             <Link href="/projects" className="focus-ring inline-flex items-center text-sm font-bold text-primary transition-colors hover:text-foreground">View all projects <span className="ml-2 text-lg" aria-hidden="true">→</span></Link>
           </div>
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid gap-5 sm:grid-cols-2">
             {featuredProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} featured />)}
           </div>
           {supportingProjects.length > 0 && (
             <div className="mt-16">
               <p className="section-kicker mb-6">More analysis</p>
-              <div className="grid gap-6 lg:grid-cols-2">
+              <div className="grid gap-5 sm:grid-cols-2">
                 {supportingProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} />)}
               </div>
             </div>
@@ -111,7 +84,7 @@ export default function Home() {
       </section>
 
       <section id="skills" className="scroll-mt-20 border-b border-border bg-muted/40">
-          <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.7fr_1.3fr] lg:gap-10 md:py-24">
+          <div className="mx-auto grid w-full max-w-3xl gap-8 px-4 py-14 sm:px-6 sm:py-16 lg:grid-cols-[0.7fr_1.3fr] lg:gap-10 md:py-20">
           <div>
             <p className="section-kicker">Toolkit</p>
             <h2 className="section-title mt-4">Skills for useful analysis.</h2>
@@ -123,7 +96,7 @@ export default function Home() {
       </section>
 
       <section id="contact" className="scroll-mt-20">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
+        <div className="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6 sm:py-16 md:py-20">
           <div className="border border-primary/40 bg-primary/10 p-6 sm:p-8 md:p-14">
           <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
               <div>

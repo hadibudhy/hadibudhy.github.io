@@ -16,22 +16,22 @@
 }
 
 :root {
-  --background: #f4f0e8;
-  --foreground: #202321;
-  --primary: #b9553d;
-  --primary-foreground: #fffaf2;
-  --muted: #e9e3d8;
-  --muted-foreground: #68706b;
-  --card: #fbf9f4;
-  --card-foreground: #202321;
-  --border: #d8d1c5;
-  --ring: #b9553d;
+  --background: #fafafa;
+  --foreground: #171717;
+  --primary: #171717;
+  --primary-foreground: #fafafa;
+  --muted: #f3f4f6;
+  --muted-foreground: #737373;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --border: #e5e7eb;
+  --ring: #171717;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), "Trebuchet MS", "Segoe UI", sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -53,15 +53,15 @@ body {
 
 @layer components {
   .section-kicker {
-    @apply text-[0.68rem] font-bold uppercase tracking-[0.18em] text-primary;
+    @apply text-[0.68rem] font-bold uppercase tracking-[0.22em] text-muted-foreground;
   }
 
   .section-title {
-    @apply max-w-xl text-3xl font-bold tracking-[-0.035em] text-foreground md:text-5xl;
+    @apply max-w-xl text-3xl font-light tracking-[-0.035em] text-foreground md:text-4xl;
   }
 
   .surface {
-    @apply border border-border bg-card;
+    @apply rounded-xl border border-dashed border-border bg-card shadow-sm;
   }
 
   .focus-ring {

@@ -11,10 +11,10 @@ const links = [
 export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm">
-      <div className="mx-auto flex min-h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-8">
+      <div className="mx-auto flex min-h-14 w-full max-w-3xl items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-4">
         <Link href="/" className="focus-ring flex min-w-0 shrink-0 items-center gap-3" aria-label="Hadi Budhy home">
-          <span className="flex h-9 w-9 items-center justify-center border border-foreground bg-foreground text-xs font-bold text-background">HB</span>
-          <span className="hidden text-sm font-bold tracking-[0.14em] text-foreground sm:inline">HADI BUDHY</span>
+          <span className="text-sm font-bold tracking-tight text-foreground">HB</span>
+          <span className="hidden text-xs font-medium text-muted-foreground sm:inline">Hadi Budhy</span>
         </Link>
         <nav aria-label="Primary navigation" className="hidden min-w-0 items-center gap-5 text-sm font-semibold sm:flex md:gap-7">
           {links.map((link) => <Link key={link.href} href={link.href} className="focus-ring text-muted-foreground transition-colors hover:text-foreground">{link.label}</Link>)}
