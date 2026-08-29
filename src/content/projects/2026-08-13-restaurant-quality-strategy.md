@@ -27,17 +27,27 @@ Food quality is both a customer trust issue and an operating risk. A restaurant 
 
 How can a restaurant operator use public inspection data to prioritize quality coaching and follow-up visits?
 
-## How I approached it
+## Data used
 
 I used the current NYC Open Data extract, kept inspections from 2022 through 2025, and rolled repeated violation rows up to restaurant, inspection date, and inspection type. I then compared grade outcomes, maximum inspection score, and whether an inspection included at least one violation marked critical.
 
-## Finding 1: The raw data needed an inspection-level view
+## Why it matters
+
+Food-safety failures damage customer trust and can create closure or compliance costs. A prioritization queue helps limited coaching capacity reach the locations most likely to need support.
+
+## Approach
+
+I changed the unit of analysis from violation rows to inspections, then compared grade coverage and critical findings by borough. This supports prioritization; it does not identify why a restaurant received a violation.
+
+## Key findings
+
+### Finding 1: The raw data needed an inspection-level view
 
 The public extract contains **295,473 violation records**, but they are not the same as 295,473 inspections. After filtering to 2022-2025 and rolling rows up, the analysis produced **73,211 inspection records**.
 
 The extract also includes **150,352 missing grades**, **160,593 missing grade dates**, and **17,179 missing scores**, plus placeholder dates such as 1900-01-01. These are not small technical details: using raw row counts would overstate inspection volume and missing grades would make a simple grade ranking misleading.
 
-## Finding 2: Most recorded grades were A, but the ungraded cases still matter
+### Finding 2: Most recorded grades were A, but the ungraded cases still matter
 
 Among the inspection records with an A, B, or C grade, **85.8% were A**, **9.3% were B**, and **4.9% were C**. However, 30,037 rolled-up inspection records had no grade in this extract.
 
@@ -45,7 +55,7 @@ Among the inspection records with an A, B, or C grade, **85.8% were A**, **9.3% 
 
 **Business meaning:** A strong A-grade share does not mean every location is low risk. The ungraded group needs a separate workflow because it may represent inspections before a grade was assigned or records where the current extract does not contain the final outcome.
 
-## Finding 3: Critical-violation rates differed by borough
+### Finding 3: Critical-violation rates differed by borough
 
 In the 2022-2025 inspection-level roll-up, **77.3%** of records included at least one violation marked critical. The rate ranged from **75.9% in Manhattan** to **81.6% in Staten Island**. The Bronx was next at **79.7%**, followed by Queens at **78.2%** and Brooklyn at **77.1%**.
 
@@ -53,18 +63,22 @@ In the 2022-2025 inspection-level roll-up, **77.3%** of records included at leas
 
 These differences are useful for prioritization, but they do not prove that a borough causes worse performance. Restaurant mix, inspection timing, location, and reporting practices may all contribute.
 
-## Recommendations
+## Recommendation
 
 1. **Use a two-level quality queue.** Send immediate coaching to locations with recent critical violations or low grades, then review ungraded inspections separately instead of treating them as clean.
 2. **Start a borough-level pilot.** Compare the Bronx and Staten Island with Manhattan using the same inspection-level definitions, then test whether targeted coaching changes the next inspection result.
 3. **Track repeat outcomes by restaurant.** A restaurant-level history is more useful than a one-time citywide ranking. Measure whether critical violations recur after follow-up.
 4. **Keep the data limitations visible.** Do not use this public extract alone to rank managers or predict customer demand; pair it with internal visit, complaint, and operating data.
 
-## Takeaway
+## What internal data would improve the decision
+
+Internal restaurant type, manager, operating hours, training completion, complaint, closure, and repeat-inspection data would show whether the public patterns identify preventable risk and whether coaching changes outcomes.
+
+## Key takeaway
 
 Public inspection data can support a useful quality-prioritization system, but only after the business changes the unit of analysis from violation rows to inspections and treats missing outcomes as a follow-up queue rather than a clean result.
 
-## Senior decision frame
+## Decision details
 
 **Decision owner:** Director of Restaurant Operations. **Decision:** where should inspection-preparation and follow-up resources go first? **North-star KPI:** share of inspections with a critical violation. **Drivers:** borough, inspection type, restaurant, and repeat inspection history. **Guardrails:** inspection coverage, time since last inspection, and the rate of missing grades.
 
@@ -78,13 +92,13 @@ The outcome is also incomplete. Only 35,555 inspection records have an A grade, 
 
 The immediate opportunity is to focus review on the **two boroughs above the city rate**, then test whether risk falls after targeted education or follow-up. No financial impact is estimated because the data has no sales, closure cost, or customer-complaint fields. A lower violation rate could also reflect changed inspection coverage, so coverage is a guardrail.
 
-- **P0 — Act now:** review restaurants and inspection types in Staten Island and the Bronx with repeat critical findings.
-- **P1 — Test:** compare a targeted food-safety support group with similar restaurants receiving standard communication.
+- **P0 — Act now:** review restaurant-level repeat critical findings and treat Staten Island and the Bronx as priority areas for triage, not as proof of borough cause.
+- **P1 — Test:** compare targeted food-safety support with standard communication after matching or stratifying by restaurant type and inspection type.
 - **P2 — Investigate:** add restaurant type, inspection schedule, closure outcomes, and complaint data.
 
 Success means a lower repeat-critical rate without reducing inspection coverage. Sensitivity checks should exclude placeholder dates, separate inspection types, and report graded records separately from missing grades.
 
-## Supporting technical detail
+## Technical appendix
 
 The source is the [NYC Restaurant Inspection Results dataset](https://data.cityofnewyork.us/d/43nn-pn8j). The catalog says the data is public but does not list an explicit license, so the source and attribution are retained. The source also warns that administrative records may contain illogical values caused by data-entry or transfer errors. This analysis uses 2022-2025 records, groups by `camis`, `inspection_date`, and `inspection_type`, takes the maximum score within an inspection, and marks an inspection as critical when any associated violation has `critical_flag = Critical`.
 

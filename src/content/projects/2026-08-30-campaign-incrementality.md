@@ -9,21 +9,21 @@ result: "In the official Criteo benchmark, the assigned advertising group conver
 featured: true
 ---
 
-## The Business Question
+## Business question
 
 The growth team needs to know whether paid advertising creates new customers. Reported conversions alone cannot answer that question. Some people would have converted even without seeing the campaign.
 
-## Why This Matters
+## Why it matters
 
 If the business counts every conversion touched by an ad as campaign value, it can spend money on customers who did not need the ad. The right measure is the extra conversions caused by assigning the campaign.
 
-## What Data I Used
+## Data used
 
 I used the [Criteo AI Lab uplift dataset](https://ailab.criteo.com/criteo-uplift-prediction-dataset/). It combines results from randomized advertising tests. Each row represents one user record and shows whether the user was assigned to advertising, visited, or converted.
 
 The validated release contains **13,979,592 rows**. The user features are anonymized, so they can show different response patterns but cannot be turned into real customer groups. Criteo also warns that the file combines experiments and was sampled in a way that prevents the original campaign effect from being recovered. It is a benchmark for learning, not a forecast for a current campaign.
 
-## How I Approached It
+## Approach
 
 1. Check that the advertising and control groups are present in the expected proportions.
 2. Compare conversion and visit rates using the group each user was assigned to.
@@ -31,11 +31,11 @@ The validated release contains **13,979,592 rows**. The user features are anonym
 4. Explore whether response differs across anonymized user features.
 5. Define the information a real campaign needs before the business spends more.
 
-## What I Found
+## Key findings
 
 ### The advertising group converted more often
 
-The advertising group converted at **0.309%**. The control group converted at **0.194%**. The difference was **0.115 percentage points**, with a 95% confidence range from **0.108 to 0.122 percentage points**.
+The advertising group converted at **0.309%**. The control group converted at **0.194%**. The difference was **0.115 percentage points**, with a 95% confidence range from **0.108 to 0.122 percentage points**. This is the intention-to-treat difference within the released benchmark; it is not a forecast for a current campaign.
 
 ![Criteo randomized advertising benchmark: assigned advertising increased conversion by 0.115 percentage points, with the 95% confidence range shown](/images/growth-criteo-itt.png)
 
@@ -62,7 +62,7 @@ I divided the complete `f0` feature into four equal-sized bands as an explorator
 
 These are not real customer personas. The feature has no business label and the split was chosen for exploration. The useful conclusion is that response may differ across users, so a real campaign should test targeting rather than assume everyone has the same value.
 
-## What I Recommend
+## Recommendation
 
 **What:** Run the current campaign with a randomized holdout and measure extra conversions, not only attributed conversions.
 
@@ -74,14 +74,14 @@ These are not real customer personas. The feature has no business label and the 
 
 **Next test:** Compare broad targeting with uplift-based targeting. Set the minimum useful effect, sample size, stopping rule, and multiple-segment rule before launch.
 
-## What I Would Do With Internal Data
+## What internal data would improve the decision
 
 I would add ad spend, contribution margin, conversion value, customer identity, channel, frequency, and later retention. Then I would calculate incremental CPA and incremental return by a business-defined audience. The campaign would scale only when incremental CPA stays below contribution value and customer-experience guardrails remain healthy.
 
-## Key Takeaway
+## Key takeaway
 
 More reported conversions do not automatically mean profitable advertising. The important decision is to measure the conversions created by the campaign, then spend more only where a current holdout shows that the extra customers are worth the cost.
 
-## Technical Note
+## Technical appendix
 
 The primary analysis uses intention-to-treat. In plain language, each user stays in the group they were assigned to, even if the ad was not actually shown. This protects the fairness of the randomized comparison. The full validation and SQL live under `projects/growth-analytics/01-campaign-incrementality`.

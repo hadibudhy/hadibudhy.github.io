@@ -11,23 +11,23 @@ header:
   teaser: /images/growth-mta-event-study.png
 ---
 
-## The Business Question
+## Business question
 
 Congestion pricing began in New York on **5 January 2025**. A mobility business may want to change rider pricing, driver incentives, or its city strategy after the policy.
 
 The question is not simply whether traffic was different afterward. It is whether the policy changed traffic more than it would have changed without the policy.
 
-## Why This Matters
+## Why it matters
 
 Traffic changes naturally. Weather, holidays, construction, commuting patterns, and facility problems can all move the numbers. If we compare only before and after, we may blame the policy for a change it did not cause.
 
-## What Data I Used
+## Data used
 
 I used the official [MTA Bridges and Tunnels Hourly Crossings dataset](https://catalog.data.gov/dataset/mta-bridges-and-tunnels-hourly-crossings-beginning-2019). It provides traffic counts by facility and vehicle class. I selected car counts and built **27,080 facility-day observations** across 10 facilities from 2019 to May 2026.
 
 Three facilities provide access toward the central business district: RFK Bridge Manhattan, Queens-Midtown Tunnel, and Hugh L. Carey Tunnel. Seven other facilities act as comparison crossings. This is a traffic study, not a ride-hailing study. It does not measure platform requests, driver supply, or revenue.
 
-## How I Approached It
+## Approach
 
 1. Compare affected and comparison facilities before the policy.
 2. Check whether they were moving in a similar way.
@@ -37,7 +37,7 @@ Three facilities provide access toward the central business district: RFK Bridge
 
 The method is an event study. In plain language, it compares the gap between the two groups week by week around the policy instead of relying on one before-and-after average.
 
-## What I Found
+## Key findings
 
 ### The comparison group was already moving differently
 
@@ -53,7 +53,7 @@ The model can still show a post-policy difference, but that difference may refle
 
 **Business meaning:** a Country Manager should not change rider prices or driver incentives based on this result. The better next step is to build a comparison that matches the affected facilities before the policy.
 
-## What I Recommend
+## Recommendation
 
 **What:** Do not make a causal claim from this control group.
 
@@ -65,14 +65,14 @@ The model can still show a post-policy difference, but that difference may refle
 
 **Next test:** Pre-register the control-selection rule, add weather, construction, transit, and facility-disruption data, and require acceptable pre-policy trends and placebo results before estimating a policy effect.
 
-## What I Would Do With Internal Data
+## What internal data would improve the decision
 
 For a ride-hailing business, I would add requests, completed and cancelled rides, pickup delay, driver online time, passenger price, driver pay, and routes. I would then estimate effects separately for affected trips, border areas, peak periods, and airport flows. The public MTA study is useful external context, not a substitute for platform data.
 
-## Key Takeaway
+## Key takeaway
 
 The strongest analysis is sometimes the one that refuses a weak answer. This study found that the affected and comparison crossings were already on different paths, so the business should improve the comparison before changing pricing or supply policy.
 
-## Technical Note
+## Technical appendix
 
 The event-study script estimates the difference between affected and comparison facilities by week around 5 January 2025. It uses HAC uncertainty on the weekly group difference. The pre-policy coefficients are the reason the causal claim is blocked. Reproducible code is under `projects/growth-analytics/03-congestion-pricing-causal-impact`.

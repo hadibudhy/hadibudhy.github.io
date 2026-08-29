@@ -21,11 +21,15 @@ header:
 
 **Recommended action:** use the margin improvement as a starting point for segment and cost-driver review, not as proof that every business line improved.
 
-## Decision frame and KPI tree
+## Business question
 
 **Decision owner:** Finance Leader. **Decision:** where should management invest, control cost, or investigate performance quality? **North-star KPI:** sustainable operating contribution. **Drivers:** revenue growth, gross margin, operating expense, tax, mix, and recurring demand. **Guardrails:** cash flow, customer concentration, and one-off items.
 
-## Baseline and driver analysis
+## Why it matters
+
+Reported growth can look healthy while a segment, product, or cost base weakens. Management needs the driver behind the ratio before changing investment or cost targets.
+
+## Data used
 
 The SEC Company Facts API provides structured filing facts, periods, forms, and filing dates. The Microsoft comparison uses reported annual revenue and net income facts. Revenue rose from **$211.9B to $281.7B**, while net income rose from **$72.4B to $101.8B**. The margin movement is directionally positive, but net income is not the same as operating contribution.
 
@@ -35,11 +39,13 @@ This is evidence of reported improvement, not causal proof. Fiscal periods, amen
 
 ![Microsoft reported results, FY2023–FY2025: Net margin improved from about 34.1% to 36.1%, but segment drivers still need review](/images/sec-net-margin.png)
 
-## Opportunity, trade-offs, and scenarios
+## Approach
 
 The conservative case is to preserve the FY2025 margin while growth slows; the expected case tests whether the current margin can hold as mix changes; the ambitious case identifies controllable cost or mix drivers that improve contribution without reducing product investment. No incremental profit is claimed because segment costs and intervention effects are not established.
 
-## Prioritized plan and measurement
+## Key findings
+
+## Recommendation
 
 - **P0 — Act now:** monitor revenue growth, net margin, operating expense, and cash flow together.
 - **P1 — Test:** investigate one segment or cost category where growth and margin direction diverge.
@@ -47,10 +53,14 @@ The conservative case is to preserve the FY2025 margin while growth slows; the e
 
 Success means durable contribution and cash conversion, not one strong annual ratio. Repeat the analysis using filing date, fiscal period, amended filings, and alternative revenue tags as sensitivity checks.
 
-## Takeaway
+## Key takeaway
 
 Senior financial analysis turns growth into a question about quality and durability. SEC data makes the baseline repeatable; the filing context explains what management can actually control.
 
-## Supporting detail
+## What internal data would improve the decision
+
+Segment revenue, gross margin, customer retention, price and volume, operating costs, cash flow, and one-off items would separate durable performance from accounting or mix effects.
+
+## Technical appendix
 
 Source: [SEC Company Facts](https://www.sec.gov/data-research/sec-api-documentation). Values come from public XBRL filings and can reflect restatements, taxonomy changes, and different fiscal calendars. This is not stock-price analysis or investment advice.

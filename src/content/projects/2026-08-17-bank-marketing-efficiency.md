@@ -21,11 +21,15 @@ header:
 
 **Recommended action:** run a controlled targeting test and add cost/value fields before reallocating budget.
 
-## Decision frame and KPI tree
+## Business question
 
 **Decision owner:** Head of Marketing. **Decision:** which audiences and channels should receive incremental campaign capacity? **North-star KPI:** incremental contribution per contact. **Drivers:** response rate, contact cost, deposit value, and repeat response. **Guardrails:** complaint rate, contact frequency, and customer fatigue.
 
-## Baseline, segmentation, and driver analysis
+## Why it matters
+
+More outreach is not automatically better. A high response rate can still destroy value if the contact is expensive or the product contribution is low.
+
+## Data used
 
 The validated archive has **45,211 rows, 17 fields, no missing values, and no duplicates**. Positive outcomes are 11.7% overall. Cellular response is 14.9%, telephone 13.4%, and unknown contact type 4.1%. Previous successful outcomes respond at 64.7%, while unknown previous outcomes respond at 9.2%.
 
@@ -35,11 +39,13 @@ The channel pattern is associated evidence, not causality. Channel may proxy for
 
 ![Bank Marketing campaign archive, 45,211 contacts: Previous campaign success had a 64.7% positive response versus 9.2% for unknown prior outcomes](/images/bank-prior-outcome-response.png)
 
-## Quantified opportunity and trade-off
+## Approach
 
 If the **13,020 unknown-contact records** reached the observed cellular rate, the arithmetic upside would be about **1,410 additional positive outcomes**. This is a scenario, not a forecast: it assumes the group is reachable and comparable. The trade-off is that more contact may increase complaints or cost.
 
-## Prioritized plan and experiment
+## Key findings
+
+## Recommendation
 
 - **P0 — Act now:** repair contact-type completeness and add contact cost, deposit value, and complaint fields.
 - **P1 — Test:** randomize a targeted follow-up among customers with prior success; compare incremental contribution, not raw response.
@@ -47,10 +53,14 @@ If the **13,020 unknown-contact records** reached the observed cellular rate, th
 
 Treatment is a targeted offer; control is the current campaign; primary metric is contribution per contacted customer; guardrails are complaints, opt-outs, and contact frequency. Repeat using alternative definitions of “prior success” and exclude months with unusual campaign mix.
 
-## Takeaway
+## Key takeaway
 
 The bank has a clear targeting signal, but senior budget judgment requires economics. Response rate should open the investigation; incremental contribution should close it.
 
-## Supporting detail
+## What internal data would improve the decision
+
+Contact cost, deposit value, margin, complaints, opt-outs, customer history, and campaign assignment would show whether the observed response differences create profitable incremental value.
+
+## Technical appendix
 
 Source: [UCI Bank Marketing](https://archive.ics.uci.edu/dataset/222/bank%5C%5C%2Bmarketing), CC BY 4.0. The data covers a Portuguese bank’s direct-marketing campaign from 2008–2010 and does not prove causal channel lift or profitability.

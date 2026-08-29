@@ -21,11 +21,15 @@ header:
 
 **Recommended action:** monitor concentration and availability, then add booking data before changing marketplace investment.
 
-## Decision frame and KPI tree
+## Business question
 
 **Decision owner:** Marketplace GM. **Decision:** where should the platform invest in supply, trust, or demand? **North-star KPI:** successful booked nights with acceptable guest experience. **Drivers:** active supply, availability, price, demand, host quality, and location. **Guardrails:** cancellations, complaints, regulatory risk, and host concentration.
 
-## Baseline, segmentation, and driver analysis
+## Why it matters
+
+A large visible supply base can still produce poor choice if listings are unavailable, unaffordable, or controlled by a small group. Growth decisions need demand and booking evidence, not only listings.
+
+## Data used
 
 The validated snapshot contains **30,555 listings, 19 columns, and no duplicate rows**. It includes **16,808 entire-home** and **13,009 private-room** listings. After restricting price to $20–$1,000, 21,138 listings remained and the median listed price was **$171**.
 
@@ -35,11 +39,13 @@ The top 1% of observed hosts account for **24.7% of listings**. This is a concen
 
 ![Inside Airbnb New York snapshot, June 14 2026: The top 1% of observed hosts controlled 24.7% of visible listings](/images/airbnb-host-concentration.png)
 
-## Opportunity, trade-offs, and scenarios
+## Approach
 
 The conservative opportunity is to reduce supply concentration risk without removing productive hosts: improve onboarding and visibility for smaller hosts. The expected case adds booking and occupancy data by neighbourhood and room type. The ambitious case tests targeted supply incentives. The trade-off is that incentives can add supply but reduce platform contribution or increase regulatory exposure.
 
-## Prioritized plan and measurement
+## Key findings
+
+## Recommendation
 
 - **P0 — Act now:** add host concentration, active availability, price coverage, and cancellation to the marketplace scorecard.
 - **P1 — Test:** run a smaller-host activation experiment in a high-demand, low-choice segment.
@@ -47,10 +53,14 @@ The conservative opportunity is to reduce supply concentration risk without remo
 
 Primary metric is booked nights per active listing; guardrails are cancellation, complaints, guest rating, host retention, and contribution. Repeat concentration using top 0.5%, 1%, and 5% definitions.
 
-## Takeaway
+## Key takeaway
 
 Marketplace health is not listing count. It is reliable choice, demand conversion, and resilient supply. The current data identifies concentration clearly and shows exactly which missing measures must be added before making a commercial decision.
 
-## Supporting detail
+## What internal data would improve the decision
+
+Bookings, occupied nights, availability, search demand, conversion, host response, cancellations, reviews, contribution, and regulatory status would reveal whether concentration harms customer choice or service quality.
+
+## Technical appendix
 
 Source: [Inside Airbnb](https://insideairbnb.com/get-the-data/), New York snapshot dated 14 June 2026, CC BY 4.0. The source describes public listing data and warns that accuracy is not guaranteed. No bookings, occupancy, revenue, or causal policy effect is available.

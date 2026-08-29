@@ -21,13 +21,17 @@ header:
 
 **Recommended action:** instrument the journey first, then test the largest observed transition with a holdout group.
 
-## Decision frame and KPI tree
+## Business question
 
 **Decision owner:** Product Manager. **Decision:** which journey transition should receive the next product experiment? **North-star KPI:** completed purchase rate. **Drivers:** stage progression, product interaction, and checkout completion. **Guardrails:** page speed, error rate, average order value, and customer complaints.
 
+## Why it matters
+
+If the team optimizes event volume instead of completed purchases, it can improve a dashboard without improving revenue. The first decision is measurement quality, followed by a focused product test.
+
 The current file supports stage events, not a trustworthy completed-purchase KPI. That definition gap is itself a senior finding.
 
-## Evidence and root-cause view
+## Data used
 
 The event counts are **93,452 → 41,037 → 19,301 → 8,861 → 2,823** across page stages. This establishes where activity thins out, but not why. Possible explanations include weaker content, navigation friction, product availability, or tracking loss. The data cannot distinguish them.
 
@@ -37,11 +41,13 @@ The event counts are **93,452 → 41,037 → 19,301 → 8,861 → 2,823** across
 
 The source has 165,474 rows, 14 fields, no missing values, and no duplicate rows. The unit is an event, not a customer or order. Country and product-model fields also require session-level aggregation to avoid overstating value.
 
-## Decision and opportunity scenarios
+## Approach
 
 Do not attach revenue to the stage counts until order linkage is fixed. The conservative opportunity is measurement coverage: define one session ID, one checkout event, and one confirmed order ID. The expected case is a controlled experiment on the first high-volume transition; the ambitious case adds product availability and search-result data to explain the drop.
 
-## Prioritized plan
+## Key findings
+
+## Recommendation
 
 - **P0 — Act now:** add a funnel-quality dashboard and reconcile event counts with confirmed orders.
 - **P1 — Test:** improve the first high-volume transition for a randomly selected treatment group.
@@ -49,10 +55,14 @@ Do not attach revenue to the stage counts until order linkage is fixed. The cons
 
 **Experiment:** target multi-page sessions; treatment changes one journey element; control keeps the current experience; primary metric is completed purchase rate; guardrails are order value, page errors, and return rate. Success requires a stable lift across countries and a sensitivity check excluding sessions with incomplete event coverage.
 
-## Takeaway
+## Key takeaway
 
 The first business decision is not “which page converts best?” It is whether the measurement is reliable enough to support a product experiment. Once that is fixed, the sharp stage drop gives the team a defensible place to start.
 
-## Supporting detail
+## What internal data would improve the decision
+
+Confirmed orders, customer identity, product availability, search results, page performance, errors, and experiment assignment would show whether the stage drop is real friction, missing tracking, or unavailable inventory.
+
+## Technical appendix
 
 Source: [UCI Clickstream Data for Online Shopping](https://archive.ics.uci.edu/dataset/553/clickstream%2Bdata%2Bfor%2Bonline%2Bshopping), CC BY 4.0. The file covers five months in 2008 and does not provide confirmed revenue, margin, customer identity, or experiment assignment.

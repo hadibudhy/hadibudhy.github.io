@@ -9,17 +9,17 @@ result: "Official TLC data shows when recorded trips and observed driver coverag
 featured: false
 ---
 
-## The Business Question
+## Business question
 
 The Country Manager says riders are waiting longer and rides are being lost in some areas. The team wants to know whether to pay drivers more.
 
 The first question is more basic: where is the marketplace under pressure, and what can the public data actually prove?
 
-## Why This Matters
+## Why it matters
 
 A low number of recorded trips can mean low demand or poor supply. A busy hour can still have many unserved riders. If the business gives incentives without knowing which problem it has, it may spend money without improving the customer experience.
 
-## What Data I Used
+## Data used
 
 I used two official TLC sources:
 
@@ -28,7 +28,7 @@ I used two official TLC sources:
 
 The trip table contains **4,965,012 recorded rows**. It shows activity that was submitted by licensed high-volume services. It does not show every request, rejected match, cancellation, true wait time, or driver who was online but did not receive a trip.
 
-## How I Approached It
+## Approach
 
 1. Find the hours with the most recorded trip activity.
 2. Compare activity with the number of drivers and vehicles reported by TLC.
@@ -36,7 +36,7 @@ The trip table contains **4,965,012 recorded rows**. It shows activity that was 
 4. Decide what can be targeted now and what needs internal marketplace data.
 5. Design an incentive test that protects customers, drivers, and nearby zones.
 
-## What I Found
+## Key findings
 
 ### Recorded trip activity was highest in the early evening
 
@@ -65,7 +65,7 @@ TLC's monthly report gives a broader view. Average reported trips per day rose f
 | Lost requests | Requests that were not matched or were abandoned | Not available |
 | Zone-hour online supply | Drivers available in a specific place and hour | Not available |
 
-## What I Recommend
+## Recommendation
 
 **What:** Do not increase incentives across the whole city. First add request, match, cancellation, wait, online-driver, and incentive records.
 
@@ -77,15 +77,15 @@ TLC's monthly report gives a broader view. Average reported trips per day rose f
 
 **Next test:** Randomize matched zone-time blocks between normal incentives and a targeted incentive. Use request fulfillment as the primary customer outcome. Track recorded trips per online driver-hour as a supply measure and incremental trips per incentive dollar as the economic measure. Include a washout period, border-zone monitoring, and a sample-size plan before launch.
 
-## What I Would Do With Internal Data
+## What internal data would improve the decision
 
 I would build a request funnel from request to match to pickup. I would add true driver online time, cancellations, estimated wait, passenger price, driver pay, and incentive cost. This would separate low demand, low supply, and poor matching instead of treating all three as the same problem.
 
-## Key Takeaway
+## Key takeaway
 
 The public data shows when recorded marketplace activity is high and how reported driver coverage changes over time. It does not prove where riders are being lost. The responsible decision is to collect the missing request and availability measures, then test incentives only in confirmed shortage windows.
 
 
-## Technical Note
+## Technical appendix
 
 The trip chart is generated from the official Open Data query. The monthly chart uses separate panels because trips per day and unique drivers are different measures. SQL and Python sources are under `projects/growth-analytics/02-marketplace-supply-demand`.

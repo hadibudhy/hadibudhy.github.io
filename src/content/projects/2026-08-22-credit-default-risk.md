@@ -21,11 +21,15 @@ header:
 
 **Recommended action:** use group-level risk tiers for review and support experiments, not automatic approval or rejection.
 
-## Decision frame and KPI tree
+## Business question
 
 **Decision owner:** Credit Risk Director. **Decision:** which accounts or groups need earlier review or support? **North-star KPI:** avoidable loss after support cost. **Drivers:** repayment history, balance, credit limit, utilization, and payment behavior. **Guardrails:** approval rate, false positives, fairness, customer hardship, and complaints.
 
-## Baseline, segmentation, and root-cause logic
+## Why it matters
+
+Early support can reduce avoidable loss, but an unchecked risk score can deny access or direct help toward the wrong customers. The decision must balance exposure, customer outcomes, and fairness.
+
+## Data used
 
 The official file has **30,000 rows**, no missing values, no duplicate rows, and **24 measured fields** in addition to the record ID. **6,636 clients, or 22.1%, defaulted in the following month.** The useful business decomposition is **risk signal × exposure**: two accounts with similar observed default risk can create different potential losses when their balances or credit limits differ.
 
@@ -35,7 +39,7 @@ Repayment history should be the first diagnostic layer. Age, education, and othe
 
 ![UCI Taiwan credit-client sample, 30,000 accounts from 2005: Risk review should consider observed default and credit exposure together](/images/credit-default-by-exposure.png)
 
-## Opportunity, trade-offs, and validation
+## Approach
 
 The conservative scenario is a manual review queue for high-risk/high-exposure accounts. The expected scenario adds early payment support and measures avoided delinquency. The ambitious scenario adds current income, hardship, collection cost, and outcome data. Removing risky customers may reduce loss but also reduce revenue and access to credit.
 
@@ -43,16 +47,22 @@ The conservative scenario is a manual review queue for high-risk/high-exposure a
 - **P1 — Test:** offer support to a randomized eligible group against standard treatment.
 - **P2 — Investigate:** validate current performance, fairness, drift, and cost before any automated decision.
 
-Primary metric is net loss after support cost; guardrails are false-positive rate, approval/access outcomes, complaints, and fairness by protected group. Repeat with alternative exposure definitions and excluding extreme limits.
+Primary metric is net loss after support cost; guardrails are false-positive rate, approval/access outcomes, complaints, and fairness by protected group. Do not deploy automated lending decisions until current, representative, fairness-reviewed validation is complete. Repeat with alternative exposure definitions and excluding extreme limits.
 
-## Experiment and measurement plan
+## Key findings
+
+## Recommendation
 
 Target accounts with recent repayment stress and meaningful exposure. Treatment is early support or a payment-plan offer; control is standard communication. Measure delinquency/default, repayment completion, support cost, complaints, and downstream customer value. A result is decision-ready only if it improves net loss without unacceptable fairness or hardship effects.
 
-## Takeaway
+## Key takeaway
 
 Senior risk work is not just predicting default. It connects risk evidence to exposure, support capacity, customer outcomes, and governance before deciding who receives attention.
 
-## Supporting detail
+## What internal data would improve the decision
+
+Current repayment behavior, income, hardship status, collection cost, support history, protected-group outcomes, and net loss would show whether a review or support program helps customers without creating avoidable harm.
+
+## Technical appendix
 
 Source: [UCI Default of Credit Card Clients](https://archive.ics.uci.edu/dataset/350/default%2Bof%2Bcredit%2Bcard%2Bclients), CC BY 4.0. The source is historical and cannot support a current lending policy on its own.

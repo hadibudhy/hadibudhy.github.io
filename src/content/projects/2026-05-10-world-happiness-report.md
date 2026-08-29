@@ -17,7 +17,7 @@ header:
 
 ## Executive summary
 
-**Business problem:** yearly rankings hide long-term progress and widening gaps. **Decision:** where should a development or policy team focus attention? **Key finding:** the balanced 129-country average rose from 5.47 to 5.74, but the gap between the highest and lowest scores widened. **Recommended action:** track distributional progress and treat social support, income, and health as connected factors rather than causal levers.
+**Business problem:** yearly rankings hide long-term progress and widening gaps. **Decision:** where should a development or policy team focus attention? **Key finding:** the balanced 129-country average rose from 5.47 to 5.74, but the gap between the highest and lowest scores widened. **Evidence strength:** descriptive country-level comparison, not a causal policy study. **Recommended action:** track distributional progress and treat social support, income, and health as connected factors rather than causal levers.
 
 ## Business context
 
@@ -29,15 +29,25 @@ Rankings are easy to share, but they can hide the longer story. A country may ap
 
 How has national happiness changed over 14 years, which countries are moving most, and which conditions are most closely connected with higher scores?
 
-## How I approached it
+## Data used
 
 The 2026 World Happiness Report workbook covers 168 countries from 2011 to 2025, with no measurement for 2013. I focused on the 129 countries that appear in all 14 measured years. This balanced group makes year-to-year comparisons more consistent because the same countries are being compared each time.
 
 The happiness score is a self-reported 0-to-10 life evaluation. It measures how people rate their lives overall, not their mood at a particular moment.
 
-## Finding 1: The global average rose, even through COVID
+## Why it matters
 
-The average score for the balanced group increased from **5.47 in 2011 to 5.74 in 2025**, a gain of 0.26 points.
+Annual rankings can hide whether a country is improving or falling behind. A consistent multi-year view gives policy teams a better basis for deciding where to focus support.
+
+## Approach
+
+I compare the same countries over time, then separate country movement from cross-country differences. The analysis is descriptive: the relationships below are not causal estimates.
+
+## Key findings
+
+### Finding 1: The global average rose, even through COVID
+
+The average score for the balanced group increased from **5.47 in 2011 to 5.74 in 2025**, a gain of 0.26 points. This is an unweighted average of the 129 countries in the balanced panel, not a population-weighted global estimate.
 
 The average rose slightly in 2020, dipped in 2021 and 2022, then recovered by 2023 and reached a 14-year high in 2025.
 
@@ -45,7 +55,7 @@ The average rose slightly in 2020, dipped in 2021 and 2022, then recovered by 20
 
 **What this means:** The data does not show a long global happiness collapse during COVID. That does not remove the pain, loss, or anxiety caused by the pandemic. It shows that an overall life evaluation can behave differently from short-term mood or daily stress.
 
-## Finding 2: Eastern Europe showed the strongest gains
+### Finding 2: Eastern Europe showed the strongest gains
 
 Seven of the eight largest risers were post-Soviet or Balkan countries. China was the exception.
 
@@ -66,7 +76,7 @@ The largest decline was in Afghanistan: **-2.81 points**, from 4.26 in 2011 to 1
 
 ![Balanced panel of 129 countries, 2011–2025: The largest risers and fallers show how quickly national scores can change](/images/happiness-beat02.png)
 
-## Finding 3: The gap is not about money alone
+### Finding 3: The gap is not about money alone
 
 In 2025, the top 10 countries averaged **7.33**, while the bottom 10 averaged **3.36**. That is a four-point difference on a 10-point scale.
 
@@ -80,7 +90,7 @@ The largest gaps between the groups were:
 
 **Business meaning:** Economic resources matter, but they are not the whole story. Access to support and the ability to live a healthy life are nearly as important in the group comparison.
 
-## Finding 4: Social support, income, and health had the strongest relationships with happiness
+### Finding 4: Social support, income, and health had the strongest relationships with happiness
 
 Using factor data from 2019 to 2025, the strongest relationships with the final happiness score were:
 
@@ -94,25 +104,29 @@ Generosity had almost no relationship with the national happiness score (**r = 0
 
 ![Countries measured from 2019–2025: Social support, income, and health showed the strongest associations with happiness](/images/happiness-beat04.png)
 
-## Finding 5: The gap between countries widened
+### Finding 5: The gap between countries widened
 
 The range between the highest and lowest country scores grew from 4.8 points in 2011 to 6.3 points in 2025, an increase of 31%.
 
-So the global average rose, but the countries at the bottom did not keep pace with the countries at the top. That is a more important signal than the average alone because it shows that progress was uneven.
+So the balanced-panel average rose while the distance between the highest and lowest observed scores increased. That shows more dispersion, but it does not by itself show whether the bottom group improved or declined; a separate bottom-group trend is needed for that claim.
 
 ![Balanced panel of 129 countries, 2011–2025: The gap between the highest and lowest country scores widened over time](/images/happiness-drivers-inequality.png)
 
-## Recommendations
+## Recommendation
 
 1. **Track progress over time, not only rankings.** A single yearly position can hide meaningful improvement or decline.
 2. **Look beyond income.** Social support and health deserve equal attention when evaluating wellbeing and development.
 3. **Focus on the bottom of the distribution.** A rising average does not mean that the countries with the lowest scores are improving at the same pace.
 
-## Takeaway
+## What internal data would improve the decision
+
+Public country data cannot show which programs changed living conditions, whether people received support, or how outcomes differ within a country. A policy team would need local administrative outcomes, program reach, health access, household income, and survey microdata before choosing an intervention.
+
+## Key takeaway
 
 National happiness improved on average over these 14 years, but progress was uneven. The strongest relationships were linked to social support, income, and health, while generosity alone did not explain country-level differences.
 
-## Supporting technical detail
+## Technical appendix
 
 The analysis uses the 2026 release and a balanced panel of 129 countries across all 14 measured years. Factor data is available from 2019 onward, and all factors were checked against the reported happiness score with a maximum rounding difference of 0.003. The results use a self-reported life-evaluation scale, not an objective measure of wellbeing.
 
