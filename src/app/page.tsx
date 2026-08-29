@@ -15,7 +15,7 @@ export default function Home() {
       <section className="border-b border-border">
         <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 pb-12 pt-8 sm:gap-10 sm:px-6 sm:pb-16 sm:pt-14">
           <div className="flex items-center gap-4 sm:gap-6">
-            <Image src="/images/bio-pic-2.jpg" alt="Hadi Budhy" width={160} height={160} className="h-24 w-24 shrink-0 rounded-full border border-border object-cover sm:h-32 sm:w-32" priority />
+            <Image src="/images/profile-illustration.jpg" alt="Illustrated profile portrait of Hadi Budhy" width={160} height={160} className="h-24 w-24 shrink-0 rounded-full border border-border object-cover object-top sm:h-32 sm:w-32" priority />
             <div className="flex flex-col gap-2">
               <p className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">Hadi Budhy</p>
               <p className="text-sm text-muted-foreground">Data Analyst and Analytics Engineer</p>
