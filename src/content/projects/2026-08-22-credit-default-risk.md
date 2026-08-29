@@ -1,11 +1,11 @@
 ---
-title: "Credit Default Risk: Prioritizing Support Before Losses Grow"
+title: "Credit Default Risk: Descriptive Segmentation for Support Review"
 date: 2026-08-22
 categories: [risk analytics]
 tags: [credit risk, loss prevention, prioritization, governance]
 excerpt: "A transparent risk-prioritization study that combines repayment history with current-balance signals while keeping fairness, drift, and support outcomes visible."
 problem: "A lender needs to focus attention where repayment risk and current-balance or utilization signals are higher without turning a historical score into an automatic lending decision."
-result: "The validated UCI archive contains 30,000 clients, 6,636 observed defaults, and 24 measured credit and repayment fields; the default rate is 22.1% in this historical sample."
+result: "Descriptive review of 30,000 historical clients found 6,636 observed defaults and a 22.1% default rate; it does not claim validated predictive performance."
 featured: false
 header:
   teaser: /images/credit-default-balance.png
@@ -21,7 +21,7 @@ header:
 
 **Decision implication:** a transparent review queue could focus limited support capacity, but a model could create customer harm if used without current validation and governance.
 
-**Recommended action:** use group-level risk tiers for review and support experiments, not automatic approval or rejection.
+**Recommended action:** use descriptive group-level signals to design a review queue and support experiment, not automatic approval, rejection, or production scoring.
 
 ## Business question
 

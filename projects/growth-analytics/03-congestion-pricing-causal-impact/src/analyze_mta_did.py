@@ -38,7 +38,10 @@ def fit(frame: pd.DataFrame, policy_date: pd.Timestamp) -> tuple[dict, pd.DataFr
             event_week = int(name.split("T.", 1)[1].split("]", 1)[0])
             interval = model.conf_int().loc[name]
             effects.append({"event_week": event_week, "effect": float(model.params[name]), "p_value": float(model.pvalues[name]), "ci95": [float(interval[0]), float(interval[1])]})
-    return {"effects": sorted(effects, key=lambda row: row["event_week"]), "n_week_facility": len(frame), "weeks": int(sample["week"].nunique())}, sample
+    pre_sample = sample[sample["event_week"] < -1]
+    pre_trend_model = smf.ols("difference ~ time_index", data=pre_sample).fit(cov_type="HAC", cov_kwds={"maxlags": 4})
+    pre_trend_linear_p_value_hac = float(pre_trend_model.pvalues["time_index"])
+    return {"effects": sorted(effects, key=lambda row: row["event_week"]), "n_week_facility": len(frame), "weeks": int(sample["week"].nunique()), "pre_trend_linear_p_value_hac": pre_trend_linear_p_value_hac}, sample
 
 
 def main() -> None:

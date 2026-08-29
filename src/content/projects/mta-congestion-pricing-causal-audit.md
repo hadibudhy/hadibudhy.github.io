@@ -99,6 +99,6 @@ The strongest analysis is sometimes the one that refuses a weak answer. This stu
 | Panel and model | 3,880 facility-week rows across 388 weeks and 10 facilities; log(1 + weekly car crossings), time index, event-week indicators, HAC max lags 4 | Reproducible but only 10 facility clusters |
 | Pre-trends | Several pre-policy leads differ from zero, including event week −4 (effect 0.102; p < 0.001) | Fails the required parallel-trends check |
 | Placebo dates | Placebo interventions on 10 Nov, 8 Dec, and 22 Dec 2024 also produce significant movements | Comparator is not credible for causal attribution |
-| Formal joint pre-trend test | Not reported by the current estimator | No joint p-value is claimed |
+| Formal pre-trend test | HAC test of the pre-policy linear slope: **p = 0.011** | The treated-control gap was already changing before policy; the comparator is not clean |
 
 The event-study script estimates the difference between affected and comparison facilities by week around 5 January 2025. It uses HAC uncertainty on the weekly group difference. The pre-policy coefficients are the reason the causal claim is blocked. [Reproducible code, validation output, and zone-exposure notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/03-congestion-pricing-causal-impact) are available for review.

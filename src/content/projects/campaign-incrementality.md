@@ -20,10 +20,10 @@ If the business counts every conversion touched by an ad as campaign value, it c
 ## Decision brief
 
 - **Recommendation:** run the live campaign with a randomized holdout; scale only when incremental CPA is below contribution value.
-- **Evidence:** the released benchmark shows a **0.115 percentage-point** intention-to-treat conversion difference.
+- **Evidence:** control conversion was **0.194%** and treatment conversion **0.309%**: absolute lift **+0.115 percentage points** (95% CI **+0.108 to +0.122pp**), or about **+59.3% relative**.
 - **Potential value:** about **115 extra conversions per 100,000 assigned users** in this benchmark, before economics.
 - **Evidence strength:** High for the released randomized comparison; low for transporting the rate to a current campaign.
-- **Cost / resource requirement:** Current ad cost and contribution cannot be estimated from this dataset; reserve a randomized holdout and measurement capacity.
+- **Cost / resource requirement:** Current ad cost and contribution cannot be estimated from this dataset; reserve a randomized holdout and measurement capacity. Break-even CPA is contribution value per incremental conversion, not total attributed conversions.
 - **Main risk:** the file has no ad cost, margin, LTV, or current-campaign population.
 - **Cost of inaction:** Cannot be estimated from this dataset; the risk is paying for conversions that would have happened anyway.
 - **Success / stop rule:** Continue only if incremental CPA stays below contribution value; stop or redesign if the holdout shows no useful lift or the guardrail fails.
