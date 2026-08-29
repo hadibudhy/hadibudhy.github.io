@@ -7,6 +7,7 @@ excerpt: "An observational clickstream audit that shows where browsing activity 
 problem: "The store had many browsing events but could not identify which transition in the journey deserved product investment."
 result: "The validated file contains 24,026 sessions and 165,474 events; 79.0% of sessions contain more than one event, while event volume falls from 93,452 at stage 1 to 2,823 at stage 5."
 featured: false
+published: false
 header:
   teaser: /images/clickstream-stage-volume.png
 ---

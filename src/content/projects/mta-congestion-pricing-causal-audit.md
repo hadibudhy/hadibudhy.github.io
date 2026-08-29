@@ -24,7 +24,7 @@ Traffic changes naturally. Weather, holidays, construction, commuting patterns, 
 ## Decision brief
 
 - **Recommendation:** do not use this comparison group to claim a congestion-pricing effect or change rider pricing.
-- **Evidence:** affected crossings were already **8.0%–10.2%** above comparison crossings in placebo event weeks.
+- **Evidence:** the affected-comparison gap changed materially in both directions before the policy date.
 - **Potential value:** none estimated; this study is a decision-quality audit.
 - **Evidence strength:** High for rejecting this comparator; insufficient for estimating the policy effect.
 - **Cost / resource requirement:** A credible estimate requires a new comparator, route-exposure data, and internal ride outcomes; cost cannot be estimated from this study.
@@ -35,7 +35,7 @@ Traffic changes naturally. Weather, holidays, construction, commuting patterns, 
 
 ## My role
 
-I owned the event-study specification, comparator audit, placebo interpretation, and recommendation to pause the causal claim. I did not control the policy, facility operations, or ride-hailing data. I would hand the decision owner a rejected comparator, a pre-registered replacement rule, and the evidence required before pricing action. [Reproducible analysis and validation notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/03-congestion-pricing-causal-impact) show the design and limits.
+I owned the event-time diagnostic, comparator audit, and recommendation to pause the causal claim. I did not control the policy, facility operations, or ride-hailing data. I would hand the decision owner a rejected comparator, a pre-registered replacement rule, and the evidence required before pricing action. [Reproducible analysis and validation notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/03-congestion-pricing-causal-impact) show the design and limits.
 
 ## Data used
 
@@ -48,16 +48,16 @@ Three facilities provide access toward the central business district: RFK Bridge
 1. Compare affected and comparison facilities before the policy.
 2. Check whether they were moving in a similar way.
 3. Compare their changes around the policy date.
-4. Run placebo dates to see whether the same pattern appears before the policy.
+4. Inspect whether apparent breaks also occur before the policy.
 5. Stop the causal conclusion if the comparison group is not credible.
 
-The method is an event study. In plain language, it compares the gap between the two groups week by week around the policy instead of relying on one before-and-after average.
+The method is a descriptive event-time diagnostic. In plain language, it compares the gap between the two groups week by week around the policy instead of relying on one before-and-after average. Each event week is only one weekly group difference, so the chart does not report pointwise confidence intervals or p-values.
 
 ## Key findings
 
 ### The comparison group was already moving differently
 
-Before congestion pricing began, the affected crossings were already above the comparison crossings by about **10.2% in one earlier event week** and **8.0% in another**.
+Before congestion pricing began, the affected-comparison gap changed materially in both directions rather than staying near a stable baseline.
 
 ![MTA bridge and tunnel event study: affected crossings were already moving differently before congestion pricing, so the comparison is not reliable](/images/growth-mta-event-study.png)
 
@@ -65,7 +65,7 @@ Before congestion pricing began, the affected crossings were already above the c
 
 ### The most useful result is a decision to pause the claim
 
-The model can still show a post-policy difference, but that difference may reflect the pre-existing gap or another shock. A precise number is not useful if the comparison is biased.
+The chart can still show a post-policy difference, but that difference may reflect the pre-existing gap or another shock. A precise number is not useful if the comparison is biased.
 
 **Business meaning:** a Country Manager should not change rider prices or driver incentives based on this result. The better next step is to build a comparison that matches the affected facilities before the policy.
 
@@ -96,9 +96,9 @@ The strongest analysis is sometimes the one that refuses a weak answer. This stu
 | Check | Current evidence | Decision |
 |---|---|---|
 | Control selection | 3 affected facilities versus 7 comparison facilities; selected before interpreting post-policy movement | Keep as an audit, not a final estimate |
-| Panel and model | 3,880 facility-week rows across 388 weeks and 10 facilities; log(1 + weekly car crossings), time index, event-week indicators, HAC max lags 4 | Reproducible but only 10 facility clusters |
-| Pre-trends | Several pre-policy leads differ from zero, including event week −4 (effect 0.102; p < 0.001) | Fails the required parallel-trends check |
-| Placebo dates | Placebo interventions on 10 Nov, 8 Dec, and 22 Dec 2024 also produce significant movements | Comparator is not credible for causal attribution |
-| Formal pre-trend test | HAC test of the pre-policy linear slope: **p = 0.011** | The treated-control gap was already changing before policy; the comparator is not clean |
+| Panel and diagnostic | 3,880 facility-week rows across 388 weeks and 10 facilities; log(1 + weekly car crossings), centered on event week −1 | Reproducible descriptive comparison |
+| Pre-policy pattern | Weekly affected-comparison differences change direction and magnitude before policy | Comparator is not stable enough for causal attribution |
+| Inference audit | Each displayed event week is one weekly group difference; pointwise residual-based p-values and confidence intervals are not reported | Avoids false precision from singleton event bins |
+| Outcome scope | All-car crossing traffic, not ride-hailing requests, supply, trips, or revenue | Use as external context only |
 
-The event-study script estimates the difference between affected and comparison facilities by week around 5 January 2025. It uses HAC uncertainty on the weekly group difference. The pre-policy coefficients are the reason the causal claim is blocked. [Reproducible code, validation output, and zone-exposure notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/03-congestion-pricing-causal-impact) are available for review.
+The event-time script describes the difference between affected and comparison facilities by week around 5 January 2025. The unstable pre-policy gap is the reason the causal claim is blocked; the script deliberately does not attach pointwise inference to singleton weekly event bins. [Reproducible code, validation output, and zone-exposure notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/03-congestion-pricing-causal-impact) are available for review.

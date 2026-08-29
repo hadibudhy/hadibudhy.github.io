@@ -25,12 +25,13 @@ export default function Home() {
             </div>
           </div>
           <div className="space-y-5 sm:space-y-6">
-            <h1 className="max-w-full text-[1.8rem] font-normal leading-tight tracking-tight text-foreground sm:text-[2.3rem]">Decision-ready analysis for growth, product, and operations teams.</h1>
+            <h1 className="max-w-full text-[1.8rem] font-normal leading-tight tracking-tight text-foreground sm:text-[2.3rem]">Decision-ready analysis for growth, marketplace, and operations teams.</h1>
             <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">I turn messy data into evidence for what to invest in, what to test, and what to stop—while keeping uncertainty visible.</p>
-            <p className="text-sm font-medium leading-6 text-primary">Primary target: Senior Data Analyst · Growth &amp; Decision Analytics. Secondary strengths: experimentation, product analytics, marketplace operations, and analytics engineering.</p>
+            <p className="text-sm font-medium leading-6 text-primary">Primary target: Senior Data Analyst · Growth &amp; Decision Analytics. Secondary strengths: experimentation, marketplace operations, analytics engineering, and applied AI.</p>
             <p className="max-w-2xl text-base leading-7 text-foreground"><span className="font-semibold">Why hire me:</span> In professional work, I own alerting, warehouse pipelines, and live dashboards; in portfolio work, I show how to turn a growth question into a holdout, reject a weak causal comparison, separate marketplace proxies from demand, and build an auditable AI workflow with safe fallback.</p>
             <div className="flex flex-wrap gap-3 pt-2">
               <Button size="lg" asChild><Link href="#work">View the work <span className="ml-3" aria-hidden="true">→</span></Link></Button>
+              <Button size="lg" variant="outline" asChild><Link href="/resume">View resume</Link></Button>
               <Button size="lg" variant="outline" asChild><a href="mailto:hadi.budhy@gmail.com">Get in touch</a></Button>
             </div>
           </div>
@@ -66,7 +67,7 @@ export default function Home() {
             <div>
               <p className="section-kicker">Selected work</p>
               <h2 className="section-title mt-4">Selected case studies and analysis.</h2>
-              <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">{featuredProjects.length} featured case studies put the questions, evidence, and trade-offs first. The full library covers growth, product, operations, marketplace quality, and applied AI.</p>
+              <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">{featuredProjects.length} featured case studies put the questions, evidence, and trade-offs first. The supporting library adds customer growth and quality prioritization.</p>
             </div>
             <Link href="/projects" className="focus-ring inline-flex items-center text-sm font-bold text-primary transition-colors hover:text-foreground">View all projects <span className="ml-2 text-lg" aria-hidden="true">→</span></Link>
           </div>

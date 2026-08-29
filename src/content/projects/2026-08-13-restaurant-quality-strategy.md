@@ -108,4 +108,4 @@ Success means a lower repeat-critical rate without reducing inspection coverage.
 
 The source is the [NYC Restaurant Inspection Results dataset](https://data.cityofnewyork.us/d/43nn-pn8j). The catalog says the data is public but does not list an explicit license, so the source and attribution are retained. The source also warns that administrative records may contain illogical values caused by data-entry or transfer errors. This analysis uses 2022-2025 records, groups by `camis`, `inspection_date`, and `inspection_type`, takes the maximum score within an inspection, and marks an inspection as critical when any associated violation has `critical_flag = Critical`.
 
-**Dataset details:** [View the NYC Open Data source](https://data.cityofnewyork.us/d/43nn-pn8j)
+**Validation resources:** [View the chart and bootstrap code](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/scripts/generate_chart_replacements.py) · [View the NYC Open Data source](https://data.cityofnewyork.us/d/43nn-pn8j)

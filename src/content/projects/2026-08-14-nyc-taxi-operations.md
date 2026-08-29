@@ -11,6 +11,7 @@ excerpt: "A large-scale completed-trip analysis showing when activity peaks and 
 problem: "Completed-trip activity was not evenly distributed across time or location, making a single operating plan inefficient."
 result: "After filtering 3.48 million raw records, the analysis found that completed trips peaked in the evening while airport-linked areas produced longer, higher-fare trips."
 featured: false
+published: false
 header:
   teaser: /images/taxi-demand-by-hour.png
 ---

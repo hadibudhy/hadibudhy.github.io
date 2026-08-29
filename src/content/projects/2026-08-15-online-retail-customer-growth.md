@@ -110,4 +110,4 @@ The test succeeds only if repeat revenue rises without increasing cancellations 
 
 The source is the [UCI Online Retail dataset](https://archive.ics.uci.edu/dataset/352/online%2Bretail), licensed CC BY 4.0. The raw file covers 2010-12-01 through 2011-12-09. The cleaned analysis removed cancelled invoices, non-positive quantities, non-positive prices, and rows without `CustomerID`. Revenue is `Quantity * UnitPrice`; cost, margin, shipping cost, and marketing spend are not available, so this case study discusses revenue opportunity rather than profit.
 
-**Code and data:** [View the UCI dataset](https://archive.ics.uci.edu/dataset/352/online%2Bretail)
+**Validation resources:** [View the chart-generation code](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/scripts/generate_chart_replacements.py) · [View the UCI dataset](https://archive.ics.uci.edu/dataset/352/online%2Bretail)

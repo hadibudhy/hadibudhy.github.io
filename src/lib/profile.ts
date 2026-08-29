@@ -1,9 +1,8 @@
 export const capabilities = [
   { title: "Growth and decision analytics", evidence: "Campaign incrementality, retention, and decision-ready experiments." },
   { title: "Experimentation and causal inference", evidence: "Holdouts, event studies, uncertainty, and clear limits on causal claims." },
-  { title: "Marketplace and operations analytics", evidence: "Supply signals, trip economics, quality risk, and operational pilots." },
+  { title: "Marketplace and operations analytics", evidence: "Supply signals, marketplace measurement, quality prioritization, and operational pilots." },
   { title: "Analytics engineering", evidence: "Professional experience with warehouse pipelines, alerting, APIs, and reliable reporting systems; public implementation details are limited." },
-  { title: "Product analytics", evidence: "Instrumentation audits and measurement plans for product journeys." },
   { title: "Decision systems", evidence: "Auditable AI workflows, evaluation, escalation, and governance." },
 ];
 

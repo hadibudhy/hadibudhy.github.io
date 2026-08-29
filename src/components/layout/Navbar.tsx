@@ -4,13 +4,13 @@ const links = [
   { label: "About", href: "/about" },
   { label: "Experience", href: "/#experience" },
   { label: "Work", href: "/#work" },
-  { label: "Skills", href: "/#skills" },
+  { label: "Resume", href: "/resume" },
   { label: "Projects", href: "/projects" },
 ];
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm print:hidden">
       <div className="mx-auto flex min-h-14 w-full max-w-3xl items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-4">
         <Link href="/" className="focus-ring flex min-w-0 shrink-0 items-center gap-3" aria-label="Hadi Budhy home">
           <span className="text-sm font-bold tracking-tight text-foreground">HB</span>
