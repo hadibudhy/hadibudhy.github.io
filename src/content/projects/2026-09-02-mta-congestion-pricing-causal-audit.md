@@ -73,14 +73,6 @@ For a ride-hailing business, I would add requests, completed and cancelled rides
 
 The strongest analysis is sometimes the one that refuses a weak answer. This study found that the affected and comparison crossings were already on different paths, so the business should improve the comparison before changing pricing or supply policy.
 
-## Interview Versions
-
-**30 seconds:** “I tested congestion pricing with official MTA traffic data from 2019 to 2026. The key result was that the affected crossings were already moving differently before the policy, so the comparison group could not provide a credible counterfactual. I would not claim a causal effect or change marketplace pricing. I would rebuild the control group and require good pre-policy trends and placebo checks first.”
-
-**2 minutes:** Explain the affected and comparison facilities, weekly event comparison, pre-trend failure, and why a non-result is more useful than a biased effect.
-
-**5 minutes:** Explain the data grain, facility selection, policy exposure, event-time reference week, uncertainty, placebo tests, spillovers, and the internal ride-hailing fields needed for a stronger study.
-
 ## Technical Note
 
 The event-study script estimates the difference between affected and comparison facilities by week around 5 January 2025. It uses HAC uncertainty on the weekly group difference. The pre-policy coefficients are the reason the causal claim is blocked. Reproducible code is under `projects/growth-analytics/03-congestion-pricing-causal-impact`.

@@ -85,13 +85,6 @@ I would build a request funnel from request to match to pickup. I would add true
 
 The public data shows when recorded marketplace activity is high and how reported driver coverage changes over time. It does not prove where riders are being lost. The responsible decision is to collect the missing request and availability measures, then test incentives only in confirmed shortage windows.
 
-## Interview Versions
-
-**30 seconds:** “I used official TLC data to find when recorded ride activity was highest and compared it with monthly driver coverage. The data shows a strong 18:00 peak and more reported trips in 2025, while unique drivers stayed broadly flat. I would not call that a shortage because requests and online hours are missing. I would instrument the request funnel, then test a targeted zone-time incentive with fulfillment, cost, and neighboring-zone guardrails.”
-
-**2 minutes:** Explain the difference between recorded trips and total demand, the monthly driver proxy, the risk of moving drivers between zones, and the switchback design.
-
-**5 minutes:** Explain the grain, strict time window, source coverage, metric status table, interference, washout, power planning, displacement, and the decision rule for a targeted incentive.
 
 ## Technical Note
 

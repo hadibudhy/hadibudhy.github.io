@@ -48,12 +48,6 @@ Do not change pricing or incentives from the current evidence. **P0:** complete 
 
 The public records do not contain all requests, lost matches, driver online hours, or customer value. Policy exposure may spill into neighboring zones. Reporting completeness, provider mix, weather, holidays, and anticipation can invalidate a naive comparison.
 
-## Interview explanation
-
-**30-second explanation:** “I treated congestion pricing as a causal inference problem, not a before-and-after chart. TLC added the CBD fee field in 2025, but one post-policy month cannot identify the effect. I would compare treated and matched control zones in an event study, check pre-trends and placebo dates, cluster by zone, and measure substitution at the border before recommending pricing or incentives.”
-
-**2-minute explanation:** I would discuss treatment definition, parallel trends, fixed effects, clustered uncertainty, spillovers, seasonal controls, and the business decision rule.
-
 ## Supporting detail
 
 The reproducible design and source notes live under `projects/growth-analytics/03-congestion-pricing-causal-impact`. Raw TLC files remain local and are not published.

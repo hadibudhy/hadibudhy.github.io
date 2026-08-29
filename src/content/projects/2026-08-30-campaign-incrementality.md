@@ -82,14 +82,6 @@ I would add ad spend, contribution margin, conversion value, customer identity, 
 
 More reported conversions do not automatically mean profitable advertising. The important decision is to measure the conversions created by the campaign, then spend more only where a current holdout shows that the extra customers are worth the cost.
 
-## Interview Versions
-
-**30 seconds:** “I used a randomized Criteo advertising benchmark to separate campaign response from conversions that would have happened anyway. The assigned advertising group converted 0.115 percentage points more often, with a tight confidence range. I would not call that a current campaign forecast or a profit result because cost and contribution are missing. I would run a current holdout and use incremental CPA as the rollout gate.”
-
-**2 minutes:** Explain the business problem, assignment-based comparison, absolute lift, confidence range, uneven response across anonymized bands, and why current cost and contribution data are needed before scaling.
-
-**5 minutes:** Explain the sample-ratio check, intention-to-treat estimate, why exposure is downstream, exploratory segment testing, multiple comparisons, holdout design, MDE, stopping rules, and the difference between attribution, incrementality, and profit.
-
 ## Technical Note
 
 The primary analysis uses intention-to-treat. In plain language, each user stays in the group they were assigned to, even if the ad was not actually shown. This protects the fairness of the randomized comparison. The full validation and SQL live under `projects/growth-analytics/01-campaign-incrementality`.
