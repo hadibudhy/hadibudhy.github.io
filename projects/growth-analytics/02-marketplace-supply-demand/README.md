@@ -30,6 +30,10 @@ Marketplace health
 
 Hourly recorded trips rise from **59,285 at 04:00** to **334,713 at 18:00** in the bounded week. This describes a peak in submitted trip records. It does not prove that 04:00 has excess supply or that 18:00 has unmet demand, because requests, cancellations, wait time, and online driver-hours are absent from the historical public table.
 
+TLC's official monthly report adds a useful, but different, supply view. In the 12-month averages for 2024 versus 2025, reported trips per day rose from **654,410 to 667,537 (+2.0%)**, while unique drivers were nearly flat (**83,399 to 83,299**) and average hours per driver changed from **6.35 to 6.38**. This suggests more recorded activity without a comparable increase in observed driver coverage, but it still does not identify hourly online supply or unmet demand.
+
+![TLC monthly High Volume FHV reports, 2024–2025: reported trips increased while the observed driver count stayed broadly flat](/images/growth-hvf-monthly-supply.png)
+
 The correct next join is not another descriptive chart. It is an internal event table containing request, match, pickup, cancellation, driver-online, and incentive records at the same zone-time grain. Only then can the team distinguish low demand from poor fulfillment. Recorded trips per driver-hour is a supply diagnostic, not the primary customer outcome.
 
 ## Intervention design

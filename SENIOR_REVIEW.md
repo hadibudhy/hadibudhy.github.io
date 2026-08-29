@@ -4,7 +4,7 @@ Review date: 29 August 2026. Sol independently reviewed the project files, publi
 
 ## Executive verdict
 
-The Criteo project is now the strongest artifact: it has a real randomized source, a reproducible streaming ITT calculation, explicit data validation, uncertainty, and a narrower transport claim. The TLC marketplace project is useful interview preparation but remains a limited-data diagnostic because the public source does not observe requests, lost matches, or driver online time. The congestion project is intentionally unpublished because the complete pre/post HVFHV panel and a valid exposure map are not yet available.
+The Criteo project is now the strongest artifact: it has a real randomized source, a reproducible streaming ITT calculation, explicit data validation, uncertainty, and a narrower transport claim. The TLC marketplace project is now a triangulated limited-data diagnostic using trip records, monthly drivers/vehicles/hours, aggregate wait context, and official external sources. The congestion project remains intentionally unpublished because the complete pre/post HVFHV panel and route-level exposure are not yet available, although the official geofence is now validated.
 
 ## Project 1: Campaign incrementality
 
@@ -31,49 +31,49 @@ Criteo combines several experiments and non-uniformly subsamples the release, so
 
 ## Project 2: Marketplace supply and demand
 
-**Original Sol score:** 4.7/10. **Current score:** 6.5/10 for limited-data interview readiness.
+**Original Sol score:** 4.7/10. **Current score:** 7.5/10 for limited-data interview readiness.
 
 | Area | Original | Current | Review |
 |---|---:|---:|---|
 | Business relevance | 7 | 8 | Clear incentive decision |
-| Analytical depth | 6 | 7 | Official API extraction and source-generated chart |
+| Analytical depth | 6 | 8 | Official API extraction triangulated with monthly drivers, vehicles, and hours |
 | Statistical rigor | 3 | 5 | Descriptive evidence is now labelled; no causal estimate is claimed |
 | Experimentation | 4 | 7 | Zone-window switchback, washout, borders, and interference are named |
 | Causal reasoning | 6 | 7 | Does not infer shortage from trip volume |
 | Marketplace understanding | 6 | 7 | Denominator and displacement risks are explicit |
 | SQL | 2 | 7 | SQL now reproduces the official hourly API output |
-| Python | 2 | 7 | API fetch and chart regeneration are reproducible |
-| Visualization | 1 | 7 | Hourly chart has units, source, and limitation |
+| Python | 2 | 8 | API fetch, monthly proxy processing, and chart regeneration are reproducible |
+| Visualization | 1 | 8 | Hourly and monthly charts have units, source, and limitation |
 | Communication | 6 | 8 | Clear distinction between recorded trips and demand |
 | Decision quality | 4 | 7 | Collect missing funnel data before subsidy |
 | Interview strength | 5 | 8 | 15 bounded cases plus experiment questions |
 
 ### Remaining limitation
 
-The historical one-week API slice cannot establish current persistence, unmet demand, supply availability, or incentive ROI. Those gaps cannot be resolved from this public table alone; the next required source is internal request, match, cancellation, wait, driver-online, and incentive data.
+The historical one-week API slice cannot establish current zone persistence, unmet demand, or incentive ROI. TLC monthly reports improve supply context but are aggregate and not zone-hour online availability. Aggregate wait data is useful context but not a zone-level outcome. These gaps cannot be fully resolved from public sources alone; the next required source is internal request, match, cancellation, wait, driver-online, and incentive data.
 
 ## Project 3: Congestion-pricing causal impact
 
-**Original Sol score:** 4.0/10. **Current score:** 5.5/10 for causal-design readiness; **not published**.
+**Original Sol score:** 4.0/10. **Current score:** 6.5/10 for causal-design readiness; **not published**.
 
 | Area | Original | Current | Review |
 |---|---:|---:|---|
 | Business relevance | 7 | 8 | Direct pricing and marketplace decision |
-| Analytical depth | 5 | 7 | Event-study estimator and exposure requirements documented |
+| Analytical depth | 5 | 8 | Event-study estimator, external traffic context, and geofence validation |
 | Statistical rigor | 2 | 6 | Estimator now specifies panel grain and clustered inference checks |
 | Experimentation | 4 | 6 | Spillover and policy evaluation logic are explicit |
-| Causal reasoning | 4 | 7 | Pickup-only treatment rejected; through-trip exposure acknowledged |
+| Causal reasoning | 4 | 8 | Pickup-only treatment rejected; official zone overlap and through-trip ambiguity documented |
 | Econometrics | 4 | 7 | Fixed effects, event time, placebo/pre-trend requirements |
 | SQL | 1 | 7 | Integer event time and policy flag are explicit |
 | Python | 1 | 7 | Validated zone-day event-study estimator added |
-| Visualization | 1 | 2 | No effect chart until the complete panel exists |
+| Visualization | 1 | 3 | Boundary mapping is validated; no causal effect chart until the panel exists |
 | Communication | 5 | 7 | Correctly reports no identified effect |
 | Decision quality | 4 | 7 | No policy change from insufficient evidence |
 | Interview strength | 4 | 8 | Strong discussion of assumptions and failure modes |
 
 ### Remaining limitation
 
-TLC fee exposure applies to trips to, from, within, or through the charge zone. Pickup-only treatment and outside-zone controls are not sufficient. The full HVFHV pre/post panel, a documented exposure map, and a valid untreated comparison are required before publishing an effect or chart. Keeping this project unpublished is the correct business decision.
+TLC fee exposure applies to trips to, from, within, or through the charge zone. Pickup-only treatment and outside-zone controls are not sufficient. The MTA geofence-to-TLC-zone map is now reproducible and classifies 20 zones as inside, 21 as partial/boundary, and 222 as outside. The full HVFHV pre/post panel, route/fee exposure handling, and a valid untreated comparison are still required before publishing an effect or chart. Keeping this project unpublished is the correct business decision.
 
 ## Changes made after review
 
@@ -82,11 +82,15 @@ TLC fee exposure applies to trips to, from, within, or through the charge zone. 
 - Added exploratory feature-band output and an effect-size chart with uncertainty.
 - Replaced marketplace SQL that pointed to the wrong Parquet period and invalid field with the exact official API result source.
 - Added reproducible TLC API extraction and chart regeneration.
+- Added TLC monthly High Volume FHV driver, vehicle, trip, hours, and trip-duration proxies.
+- Added MTA geofence, CRZ entries, and official taxi-zone geometry downloads.
+- Added reproducible polygon-overlap validation with inside/partial/outside classification.
 - Changed marketplace primary metric hierarchy to request fulfillment, supply productivity, and incremental trips per incentive dollar.
 - Replaced “completed” with “recorded” where the public data only supports submitted-trip wording.
 - Rejected pickup-only congestion treatment and post-treatment composition controls.
 - Added a validated Python event-study estimator and integer event-time SQL.
 - Kept the congestion article unpublished until the required data and exposure map exist.
+- Added `DATA_GAP_RESEARCH.md` and `CONGESTION_ZONE_VALIDATION.md` with sources checked and remaining reconstructability limits.
 
 ## Final independent conclusion
 

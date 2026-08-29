@@ -6,6 +6,7 @@ Large raw files are stored under ignored analysis_data/growth_sources/.
 from __future__ import annotations
 
 import hashlib
+import argparse
 import json
 import shutil
 import subprocess
@@ -30,6 +31,22 @@ SOURCES = {
     "tlc_zone_lookup": (
         "https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv",
         "taxi_zone_lookup.csv",
+    ),
+    "tlc_monthly_reports": (
+        "https://www.nyc.gov/assets/tlc/downloads/csv/data_reports_monthly.csv",
+        "data_reports_monthly.csv",
+    ),
+    "tlc_taxi_zones_geometry": (
+        "https://d37ci6vzurychx.cloudfront.net/misc/taxi_zones.zip",
+        "taxi_zones.zip",
+    ),
+    "mta_cbd_geofence": (
+        "https://data.ny.gov/resource/srxy-5nxn.json?$limit=5000",
+        "mta_cbd_geofence.json",
+    ),
+    "mta_crz_vehicle_entries_q1_2025": (
+        "https://data.ny.gov/resource/t6yz-b64h.json?$select=toll_date,vehicle_class,sum(crz_entries)%20as%20crz_entries,sum(excluded_roadway_entries)%20as%20excluded_roadway_entries&$where=toll_date%20between%20%272025-01-01T00:00:00%27%20and%20%272025-03-31T00:00:00%27&$group=toll_date,vehicle_class&$order=toll_date,vehicle_class&$limit=50000",
+        "mta_crz_vehicle_entries_q1_2025.json",
     ),
 }
 
@@ -84,9 +101,15 @@ def download_ranged(name: str, url: str, filename: str, total_bytes: int, chunks
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--include-hvfhv", action="store_true", help="Attempt the large 2025 HVFHV Parquet download")
+    args = parser.parse_args()
     manifest = [download("criteo_uplift_unbiased", *SOURCES["criteo_uplift_unbiased"])]
-    manifest.append(download_ranged("tlc_hvfhv_january_2025", *SOURCES["tlc_hvfhv_january_2025"], total_bytes=491076642))
     manifest.append(download("tlc_zone_lookup", *SOURCES["tlc_zone_lookup"]))
+    for name in ["tlc_monthly_reports", "tlc_taxi_zones_geometry", "mta_cbd_geofence", "mta_crz_vehicle_entries_q1_2025"]:
+        manifest.append(download(name, *SOURCES[name]))
+    if args.include_hvfhv:
+        manifest.append(download_ranged("tlc_hvfhv_january_2025", *SOURCES["tlc_hvfhv_january_2025"], total_bytes=491076642))
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     print(json.dumps(manifest, indent=2))
 

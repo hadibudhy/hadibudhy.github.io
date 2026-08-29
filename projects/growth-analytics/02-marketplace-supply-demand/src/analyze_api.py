@@ -8,11 +8,13 @@ import urllib.request
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parents[4]
 OUTPUT = ROOT / "analysis_data" / "growth_sources" / "hvf_hourly_2019.json"
 CHART = ROOT / "public" / "images" / "growth-hvf-hourly.png"
+MONTHLY = ROOT / "analysis_data" / "growth_sources" / "data_reports_monthly.csv"
 API = "https://data.cityofnewyork.us/resource/4p5c-cbgn.json"
 PARAMS = {
     "$select": "date_extract_hh(pickup_datetime) as hour,count(*) as trips",
@@ -45,7 +47,30 @@ def main() -> None:
     CHART.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(CHART, dpi=160, bbox_inches="tight")
     plt.close(figure)
-    print(json.dumps({"rows": sum(trips), "peak_hour": hours[trips.index(max(trips))], "peak_trips": max(trips), "output": str(OUTPUT), "chart": str(CHART)}, indent=2))
+    monthly = pd.read_csv(MONTHLY)
+    monthly = monthly[monthly["License Class"].eq("FHV - High Volume")].copy()
+    numeric = ["Trips Per Day", "Unique Drivers", "Unique Vehicles", "Vehicles Per Day", "Avg Hours Per Day Per Vehicle", "Avg Hours Per Day Per Driver", "Avg Minutes Per Trip"]
+    for column in numeric:
+        monthly[column] = pd.to_numeric(monthly[column].astype(str).str.replace(",", "", regex=False).str.replace("%", "", regex=False), errors="coerce")
+    monthly["month"] = pd.to_datetime(monthly["Month/Year"], format="%Y-%m")
+    monthly = monthly.sort_values("month")
+    monthly_2024_25 = monthly[monthly.month.dt.year.isin([2024, 2025])]
+    MONTHLY.parent.mkdir(parents=True, exist_ok=True)
+    monthly_2024_25.to_json(ROOT / "analysis_data" / "growth_sources" / "tlc_hvfhv_monthly_2024_2025.json", orient="records", date_format="iso", indent=2)
+    figure, axis = plt.subplots(figsize=(7, 4.2))
+    axis.plot(monthly_2024_25.month, monthly_2024_25["Trips Per Day"], label="Trips per day", color="#171717", linewidth=2)
+    axis.plot(monthly_2024_25.month, monthly_2024_25["Unique Drivers"] * 8, label="Unique drivers ×8", color="#737373", linewidth=1.5)
+    axis.axvline(pd.Timestamp("2025-01-05"), color="#a3a3a3", linestyle="--", linewidth=1)
+    axis.set_title("HVFHV trip volume and observed driver coverage moved differently")
+    axis.set_ylabel("Monthly reported count")
+    axis.legend(frameon=False)
+    axis.spines[["top", "right"]].set_visible(False)
+    axis.text(0.5, -0.23, "TLC monthly report | High Volume FHV | driver line scaled for readability; not driver-hours", ha="center", transform=axis.transAxes, fontsize=8, color="#737373")
+    figure.tight_layout()
+    monthly_chart = ROOT / "public" / "images" / "growth-hvf-monthly-supply.png"
+    figure.savefig(monthly_chart, dpi=160, bbox_inches="tight")
+    plt.close(figure)
+    print(json.dumps({"rows": sum(trips), "peak_hour": hours[trips.index(max(trips))], "peak_trips": max(trips), "output": str(OUTPUT), "chart": str(CHART), "monthly_rows": len(monthly_2024_25), "monthly_chart": str(monthly_chart)}, indent=2))
 
 
 if __name__ == "__main__":

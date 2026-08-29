@@ -35,6 +35,10 @@ The strongest evidence is temporal concentration, not causal imbalance. The next
 
 ![Official NYC HVFHV Open Data slice: recorded trips peaked at 18:00, but the public file does not show unserved requests](/images/growth-hvf-hourly.png)
 
+TLC's monthly High Volume FHV report provides an additional observed-supply proxy. Average reported trips per day rose from **654,410 in 2024 to 667,537 in 2025**, while average unique drivers stayed almost flat at **83,399 versus 83,299**. This is useful triangulation, not proof that drivers were online when demand was highest.
+
+![TLC monthly High Volume FHV reports: reported trips rose in 2025 while average unique drivers stayed broadly flat](/images/growth-hvf-monthly-supply.png)
+
 ## Decision and Experiment
 
 Do not start with a citywide subsidy. Run a pre-powered zone-window switchback: selected shortage windows receive an incentive for eligible drivers, while matched windows remain business as usual. Use request fulfillment as the primary metric, with recorded trips per online driver-hour as a supply diagnostic. Watch estimated wait, cancellations, driver earnings, incentive cost per incremental ride, and neighboring-zone trips.
