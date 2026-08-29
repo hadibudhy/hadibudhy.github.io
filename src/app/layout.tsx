@@ -6,11 +6,11 @@ import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hadibudhy.github.io"),
-  title: {
-    default: "Hadi Budhy | Data Analyst & Analytics Engineer",
+    title: {
+    default: "Hadi Budhy | Data Analyst · Growth & Decision Analytics",
     template: "%s | Hadi Budhy"
   },
-  description: "Data analyst and analytics engineer who works with messy business data to clarify decisions.",
+  description: "Data analyst focused on growth and decision analytics, using messy business data to clarify decisions.",
   keywords: ["Data Analyst", "Data Engineer", "Analytics Engineer", "Machine Learning", "Python", "SQL"],
   authors: [{ name: "Hadi Budhy" }],
   creator: "Hadi Budhy",
@@ -20,15 +20,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://hadibudhy.github.io",
-    title: "Hadi Budhy | Data Analyst & Analytics Engineer",
-    description: "Data analyst and analytics engineer who works with messy business data to clarify decisions.",
+    title: "Hadi Budhy | Data Analyst · Growth & Decision Analytics",
+    description: "Data analyst focused on growth and decision analytics, using messy business data to clarify decisions.",
     siteName: "Hadi Budhy",
     locale: "en_US",
   },
   twitter: {
     card: "summary",
-    title: "Hadi Budhy | Data Analyst & Analytics Engineer",
-    description: "Data analyst and analytics engineer who works with messy business data to clarify decisions.",
+    title: "Hadi Budhy | Data Analyst · Growth & Decision Analytics",
+    description: "Data analyst focused on growth and decision analytics, using messy business data to clarify decisions.",
   },
 };
 

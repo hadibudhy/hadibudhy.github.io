@@ -23,12 +23,15 @@ If the business counts every conversion touched by an ad as campaign value, it c
 - **Evidence:** the released benchmark shows a **0.115 percentage-point** intention-to-treat conversion difference.
 - **Potential value:** about **115 extra conversions per 100,000 assigned users** in this benchmark, before economics.
 - **Evidence strength:** High for the released randomized comparison; low for transporting the rate to a current campaign.
+- **Cost / resource requirement:** Current ad cost and contribution cannot be estimated from this dataset; reserve a randomized holdout and measurement capacity.
 - **Main risk:** the file has no ad cost, margin, LTV, or current-campaign population.
+- **Cost of inaction:** Cannot be estimated from this dataset; the risk is paying for conversions that would have happened anyway.
+- **Success / stop rule:** Continue only if incremental CPA stays below contribution value; stop or redesign if the holdout shows no useful lift or the guardrail fails.
 - **Next action:** pre-register the holdout, minimum useful effect, sample size, and stopping rule.
 
 ## My role
 
-I owned the analysis design, streaming validation, intention-to-treat calculation, chart, and business recommendation for this portfolio case. I did not run the campaign or observe a live commercial outcome. [Analysis code, SQL, and validation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/01-campaign-incrementality) are available for review.
+I owned the analysis design, streaming validation, intention-to-treat calculation, chart, and business recommendation for this portfolio case. I did not run the campaign or observe a live commercial outcome. I would hand the decision owner a holdout design, break-even CPA rule, and segment hypotheses to retest. [Analysis code, SQL, and validation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/01-campaign-incrementality) are available for review.
 
 ## Data used
 
@@ -62,19 +65,6 @@ The benchmark difference is about **115 extra conversions per 100,000 assigned u
 
 **Business meaning:** statistical confidence tells us that the benchmark difference is unlikely to be random noise. It does not tell us whether the campaign earns more than it costs.
 
-### Response was uneven across the anonymized audience
-
-I divided the complete `f0` feature into four equal-sized bands as an exploratory check. The second band had the largest difference, **0.386 percentage points**. The other bands were **0.038**, **0.019**, and **0.010 percentage points**.
-
-| Exploratory group | Extra conversion rate | What the business should do |
-|---|---:|---|
-| `f0` lowest quarter | +0.038pp | Do not target from this benchmark alone |
-| `f0` second quarter | +0.386pp | Retest in a new holdout |
-| `f0` third quarter | +0.019pp | Do not target from this benchmark alone |
-| `f0` highest quarter | +0.010pp | Do not target from this benchmark alone |
-
-These are not real customer personas. The feature has no business label and the split was chosen for exploration. The useful conclusion is that response may differ across users, so a real campaign should test targeting rather than assume everyone has the same value.
-
 ## Recommendation
 
 **What:** Run the current campaign with a randomized holdout and measure extra conversions, not only attributed conversions.
@@ -97,4 +87,15 @@ More reported conversions do not automatically mean profitable advertising. The 
 
 ## Technical appendix
 
-The primary analysis uses intention-to-treat. In plain language, each user stays in the group they were assigned to, even if the ad was not actually shown. This protects the fairness of the randomized comparison. The full validation and SQL live under `projects/growth-analytics/01-campaign-incrementality`.
+The primary analysis uses intention-to-treat. In plain language, each user stays in the group they were assigned to, even if the ad was not actually shown. This protects the fairness of the randomized comparison. [Analysis code, SQL, and validation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/01-campaign-incrementality) are available for review.
+
+### Exploratory subgroup check
+
+I divided the complete `f0` feature into four equal-sized bands as an exploratory check. The second band had the largest difference, **0.386 percentage points**; the other bands were **0.038**, **0.019**, and **0.010 percentage points**. These are not real customer personas. The feature has no business label and the split was chosen for exploration, so a new campaign should retest any targeting hypothesis in a holdout.
+
+| Exploratory group | Extra conversion rate | Interpretation |
+|---|---:|---|
+| `f0` lowest quarter | +0.038pp | Hypothesis only |
+| `f0` second quarter | +0.386pp | Retest in a new holdout |
+| `f0` third quarter | +0.019pp | Hypothesis only |
+| `f0` highest quarter | +0.010pp | Hypothesis only |

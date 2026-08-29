@@ -24,7 +24,7 @@ header:
 
 **Engineering result:** the system has a FastAPI endpoint, input validation, PII redaction, a transparent baseline, retrieval, retries, fallback routing, SQLite persistence, and automated tests.
 
-**Business value:** the first measurable outcome is faster, more consistent triage. The system is designed so production value can be measured without hiding uncertainty behind a confident answer.
+**Potential value:** faster, more consistent triage. No production time saving or cost reduction is claimed; the system is designed so those outcomes can be measured without hiding uncertainty behind a confident answer.
 
 ## Business question
 
@@ -48,12 +48,15 @@ That limitation shapes the system. ComplaintFlow helps with routing and evidence
 - **Evidence:** the reference fixture achieves perfect routing and citation coverage, but it is small, synthetic, and hand-written.
 - **Potential value:** faster, more consistent triage; no production time or cost saving is claimed.
 - **Evidence strength:** High for the checked-in workflow contract; low for real-world model performance.
+- **Cost / resource requirement:** A live rollout requires privacy review, labeled holdout data, managed persistence, and provider-cost measurement; no production cost is claimed.
 - **Main risk:** privacy leakage, unsupported guidance, drift, and provider failure.
+- **Cost of inaction:** Cannot be estimated from the portfolio fixture; the current safe default is human review and transparent fallback routing.
+- **Success / stop rule:** Continue only if a privacy-reviewed holdout matches or beats the baseline with acceptable escalation recall, unsafe-output rate, latency, and cost.
 - **Next action:** collect reviewer labels on a privacy-reviewed real sample and measure routing, escalation, latency, cost, and unsafe output.
 
 ## My role
 
-I designed and implemented the portfolio reference service, including the baseline, retrieval boundary, provider fallback, validation, redaction, persistence, and evaluation harness. I did not deploy it to a live support team or claim real customer impact. [Reference implementation and tests](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/ai_engineering/complaintflow) are available.
+I designed and implemented the portfolio reference service, including the baseline, retrieval boundary, provider fallback, validation, redaction, persistence, and evaluation harness. I did not deploy it to a live support team or claim real customer impact. I would hand the support owner a shadow-mode rollout plan, evaluation contract, and escalation guardrails. [Reference implementation and tests](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/ai_engineering/complaintflow) are available.
 
 ## Data used
 

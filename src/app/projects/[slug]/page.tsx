@@ -100,7 +100,7 @@ export default async function ProjectPage({ params }: Props) {
           <div className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
             {formattedDate && (
               <div className="flex items-center">
-                <span className="mr-2 text-primary" aria-hidden="true">Published</span>
+                <span className="mr-2 text-primary" aria-hidden="true">Last updated</span>
                 {formattedDate}
               </div>
             )}

@@ -19,6 +19,8 @@ header:
 
 **Business problem:** focus food-safety preparation and follow-up where repeat risk is highest. **Key findings:** the selected inspection base has a 77.3% critical-violation rate; Staten Island and the Bronx are above the city rate; and 30,037 records have no grade. **Decision implication:** borough averages can prioritize attention but do not prove cause. **Recommended action:** target repeat critical findings while protecting inspection coverage and data quality.
 
+**Evidence strength:** Medium for inspection-level descriptive prioritization; low for explaining causes or predicting future violations.
+
 ## Business context
 
 Food quality is both a customer trust issue and an operating risk. A restaurant group cannot act on a raw list of violation records alone because one inspection may create several rows, grades may be missing, and some records contain placeholder dates.
@@ -26,6 +28,10 @@ Food quality is both a customer trust issue and an operating risk. A restaurant 
 ## Business question
 
 How can a restaurant operator use public inspection data to prioritize quality coaching and follow-up visits?
+
+## My role
+
+I owned the inspection-level roll-up, missingness review, borough comparison, uncertainty framing, chart, and follow-up recommendation for this independent portfolio case. I did not inspect restaurants or measure whether coaching changed outcomes.
 
 ## Data used
 

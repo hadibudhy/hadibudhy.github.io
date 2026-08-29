@@ -155,9 +155,48 @@ def save_retail_market_opportunity() -> None:
     plt.close(fig)
 
 
+def save_restaurant_risk_by_borough() -> None:
+    source = ROOT / "analysis_data" / "raw" / "nyc_restaurants.csv"
+    inspections = pd.read_csv(source, low_memory=False)
+    inspections["date"] = pd.to_datetime(inspections["INSPECTION DATE"], errors="coerce")
+    inspections = inspections[inspections["date"].dt.year.between(2022, 2025)]
+    grouped = inspections.groupby(["CAMIS", "INSPECTION DATE", "INSPECTION TYPE"], dropna=False).agg(
+        borough=("BORO", "first"), critical=("CRITICAL FLAG", lambda values: (values == "Critical").any())
+    ).reset_index()
+    grouped = grouped[grouped["borough"].isin(["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"])]
+    summary = []
+    for borough, frame in grouped.groupby("borough"):
+        n = len(frame)
+        rate = frame["critical"].mean()
+        margin = 1.96 * np.sqrt(rate * (1 - rate) / n)
+        summary.append((borough, rate * 100, n, max(0, rate - margin) * 100, min(1, rate + margin) * 100))
+    summary.sort(key=lambda row: row[1])
+    labels = [row[0] for row in summary]
+    rates = [row[1] for row in summary]
+    fig, ax = plt.subplots(figsize=(16, 8.5), facecolor="#07111f")
+    fig.subplots_adjust(top=0.78, bottom=0.20, left=0.10, right=0.97)
+    style_axis(ax)
+    y = np.arange(len(labels))
+    ax.barh(y, rates, color="#f36d72", height=0.56)
+    for index, (_, rate, n, lower, upper) in enumerate(summary):
+        ax.errorbar(rate, index, xerr=[[rate - lower], [upper - rate]], fmt="none", ecolor="#f3f6fb", capsize=5, linewidth=2)
+        ax.text(rate + 1.0, index, f"{rate:.1f}%  | n={n:,} | 95% CI {lower:.1f}–{upper:.1f}%", va="center", color="#e5edf8", fontsize=10)
+    ax.set_title("Borough differences are descriptive, not a ranking", color="#f3f6fb", fontsize=20, fontweight="bold", pad=24)
+    ax.text(0.5, 1.025, "NYC restaurant inspections | 2022–2025 | inspection-level roll-up | normal-approximation intervals",
+            transform=ax.transAxes, ha="center", color="#9fb0c6", fontsize=12)
+    ax.set_xlabel("Inspections with at least one critical violation (%)")
+    ax.set_yticks(y, labels)
+    ax.set_xlim(0, 100)
+    fig.text(0.5, 0.04, "Unknown borough records excluded; repeated inspections and inspection mix may affect uncertainty",
+             ha="center", color="#9fb0c6", fontsize=12)
+    fig.savefig(OUT / "restaurant-risk-by-borough.png", dpi=120, facecolor=fig.get_facecolor())
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     save_fake_job_model_comparison()
     save_jolts_signals()
     save_sec_net_margin()
     save_taxi_completed_trips()
     save_retail_market_opportunity()
+    save_restaurant_risk_by_borough()

@@ -29,6 +29,10 @@ Rankings are easy to share, but they can hide the longer story. A country may ap
 
 How has national happiness changed over 14 years, which countries are moving most, and which conditions are most closely connected with higher scores?
 
+## My role
+
+I owned the country-panel selection, trend and association analysis, chart production, and decision framing for this independent portfolio case. I did not evaluate or implement a national policy intervention.
+
 ## Data used
 
 The 2026 World Happiness Report workbook covers 168 countries from 2011 to 2025, with no measurement for 2013. I focused on the 129 countries that appear in all 14 measured years. This balanced group makes year-to-year comparisons more consistent because the same countries are being compared each time.

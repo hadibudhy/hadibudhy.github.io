@@ -17,7 +17,7 @@ export default function Home() {
             <Image src="/images/profile-illustration.jpg" alt="Illustrated profile portrait of Hadi Budhy" width={160} height={160} className="h-24 w-24 shrink-0 rounded-full border border-border object-cover object-top sm:h-32 sm:w-32" priority />
             <div className="flex flex-col gap-2">
               <p className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">Hadi Budhy</p>
-              <p className="text-sm text-muted-foreground">Senior Data Analyst · Growth &amp; Decision Analytics</p>
+              <p className="text-sm text-muted-foreground">Data Analyst · Growth &amp; Decision Analytics</p>
               <div className="flex gap-4 text-sm text-muted-foreground">
                 <a href="https://github.com/hadibudhy" target="_blank" rel="noreferrer" className="hover:text-foreground">GitHub</a>
                 <a href="https://linkedin.com/in/hadibudhy" target="_blank" rel="noreferrer" className="hover:text-foreground">LinkedIn</a>
@@ -27,6 +27,7 @@ export default function Home() {
           <div className="space-y-5 sm:space-y-6">
             <h1 className="max-w-full text-[1.8rem] font-normal leading-tight tracking-tight text-foreground sm:text-[2.3rem]">Making unreliable data easier to use for better decisions.</h1>
             <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">I help product, growth, and operations teams turn messy data into clear evidence, useful metrics, and safer next steps.</p>
+            <p className="text-sm font-medium leading-6 text-primary">Open to Senior Data Analyst, Growth Analytics, Product Analytics, and Analytics Engineering roles.</p>
             <p className="max-w-2xl text-base leading-7 text-foreground"><span className="font-semibold">Why hire me:</span> I connect analysis to implementation—from trustworthy pipelines and dashboards to experiments and decision systems that make uncertainty visible.</p>
             <div className="flex flex-wrap gap-3 pt-2">
               <Button size="lg" asChild><Link href="#work">View the work <span className="ml-3" aria-hidden="true">→</span></Link></Button>
@@ -79,7 +80,7 @@ export default function Home() {
           <div className="mx-auto grid w-full max-w-3xl gap-8 px-4 py-14 sm:px-6 sm:py-16 lg:grid-cols-[0.7fr_1.3fr] lg:gap-10 md:py-20">
           <div>
             <p className="section-kicker">Toolkit</p>
-            <h2 className="section-title mt-4">Capabilities backed by case studies.</h2>
+            <h2 className="section-title mt-4">Capabilities demonstrated across work and case studies.</h2>
           </div>
           <div className="space-y-5">
             {capabilities.map((capability) => <div key={capability.title} className="border-t border-border pt-4 first:border-t-0 first:pt-0"><h3 className="font-semibold text-foreground">{capability.title}</h3><p className="mt-1 text-sm leading-6 text-muted-foreground">{capability.evidence}</p></div>)}

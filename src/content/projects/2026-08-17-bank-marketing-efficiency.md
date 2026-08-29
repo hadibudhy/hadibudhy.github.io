@@ -15,6 +15,8 @@ header:
 
 **Business problem:** reduce low-value outreach while protecting response.
 
+**Evidence strength:** Medium for historical response segmentation; low for channel causality and profit because cost and deposit value are missing.
+
 **Key findings:** 5,289 of 45,211 contacts were positive; the unknown-contact group contains 13,020 contacts and trails cellular response; prior success is the strongest observed signal; and the dataset lacks contact cost and deposit value.
 
 **Decision implication:** improving data coverage could address a large contact pool, but response uplift is not yet a profit case.
@@ -24,6 +26,10 @@ header:
 ## Business question
 
 **Decision owner:** Head of Marketing. **Decision:** which audiences and channels should receive incremental campaign capacity? **North-star KPI:** incremental contribution per contact. **Drivers:** response rate, contact cost, deposit value, and repeat response. **Guardrails:** complaint rate, contact frequency, and customer fatigue.
+
+## My role
+
+I owned the response segmentation, data-quality review, scenario calculation, and controlled-targeting recommendation for this independent portfolio case. I did not run the bank campaign or observe incremental contribution.
 
 ## Why it matters
 

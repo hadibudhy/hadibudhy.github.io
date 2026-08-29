@@ -15,6 +15,8 @@ header:
 
 **Business problem:** protect marketplace choice and resilience while balancing hosts and guests.
 
+**Evidence strength:** Medium for visible supply and concentration in one snapshot; low for bookings, occupancy, revenue, and customer outcomes.
+
 **Key findings:** supply is dominated by entire homes and private rooms; 24.7% of listings are controlled by the top 1% of observed hosts; 8,758 listings have missing prices; and listings are not bookings.
 
 **Decision implication:** platform policy can have an outsized effect if professional hosts control a large share of visible supply, but demand and revenue cannot be inferred from listings alone.
@@ -24,6 +26,10 @@ header:
 ## Business question
 
 **Decision owner:** Marketplace GM. **Decision:** where should the platform invest in supply, trust, or demand? **North-star KPI:** successful booked nights with acceptable guest experience. **Drivers:** active supply, availability, price, demand, host quality, and location. **Guardrails:** cancellations, complaints, regulatory risk, and host concentration.
+
+## My role
+
+I owned the snapshot validation, supply segmentation, host-concentration analysis, chart, and measurement-first marketplace recommendation for this independent portfolio case. I did not observe bookings, host interventions, or guest outcomes.
 
 ## Why it matters
 

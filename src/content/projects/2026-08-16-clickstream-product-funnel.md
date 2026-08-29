@@ -15,6 +15,8 @@ header:
 
 **Business problem:** the store needs to improve shopping progress, not simply page traffic.
 
+**Evidence strength:** Medium for event and session coverage; low for product friction or conversion because confirmed orders are absent.
+
 **Key findings:** the median session has four events; 79.0% continue beyond the first event; stage volume falls sharply from 93,452 to 2,823; and the file cannot prove completed purchases.
 
 **Decision implication:** the largest immediate risk is making a conversion decision without reliable session-to-order measurement.
@@ -24,6 +26,10 @@ header:
 ## Business question
 
 **Decision owner:** Product Manager. **Decision:** which journey transition should receive the next product experiment? **North-star KPI:** completed purchase rate. **Drivers:** stage progression, product interaction, and checkout completion. **Guardrails:** page speed, error rate, average order value, and customer complaints.
+
+## My role
+
+I owned the event and session-level audit, stage-volume chart, measurement-gap diagnosis, and instrumentation-first experiment proposal for this independent portfolio case. I did not observe confirmed orders or run the product test.
 
 ## Why it matters
 

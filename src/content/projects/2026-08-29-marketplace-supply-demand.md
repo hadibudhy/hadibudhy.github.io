@@ -25,12 +25,15 @@ A low number of recorded trips can mean low demand or poor supply. A busy hour c
 - **Evidence:** recorded trips peak at **18:00**; reported 2025 trips rose while unique drivers stayed broadly flat.
 - **Potential value:** not estimated; requests, contribution, and incentive cost are missing.
 - **Evidence strength:** Medium for timing and activity signals; low for unmet demand or causal supply claims.
+- **Cost / resource requirement:** Request, match, wait, online-driver, incentive, and contribution instrumentation is required; spend cannot be estimated from this dataset.
 - **Main risk:** the hourly slice is from **February 2019**, while the monthly comparison is **2024–2025**; spillover and cannibalization are unknown.
+- **Cost of inaction:** Cannot be estimated from this dataset; a broad incentive could waste spend without improving fulfillment.
+- **Success / stop rule:** Continue only if request fulfillment and contribution improve without shifting harm to nearby zones; stop if incentives only cannibalize supply or raise cost per incremental trip.
 - **Next action:** add request, match, wait, online-driver, cancellation, incentive, and contribution fields.
 
 ## My role
 
-I owned the public-data analysis, proxy classification, limitation framing, and proposed zone-time pilot for this portfolio case. I did not operate an incentive program or observe platform fulfillment outcomes. [SQL, Python, and source notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/02-marketplace-supply-demand) document the analysis.
+I owned the public-data analysis, proxy classification, limitation framing, and proposed zone-time pilot for this portfolio case. I did not operate an incentive program or observe platform fulfillment outcomes. I would hand the Country Manager a measurement specification and a randomized zone-time pilot design. [SQL, Python, and source notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/02-marketplace-supply-demand) document the analysis.
 
 ## Data used
 
@@ -94,7 +97,7 @@ TLC's monthly report gives a broader view. Average reported trips per day rose f
 
 ## What internal data would improve the decision
 
-I would build a request funnel from request to match to pickup. I would add true driver online time, cancellations, estimated wait, passenger price, driver pay, and incentive cost. This would separate low demand, low supply, and poor matching instead of treating all three as the same problem.
+I would build a request funnel from request to match to pickup. I would add true driver online time, cancellations, estimated wait, passenger price, driver pay, incentive cost, contribution, spillover, and cannibalization measures. This would separate low demand, low supply, and poor matching instead of treating all three as the same problem.
 
 ## Key takeaway
 
@@ -103,4 +106,4 @@ The public data shows when recorded marketplace activity is high and how reporte
 
 ## Technical appendix
 
-The trip chart is generated from the official Open Data query. The monthly chart uses separate panels because trips per day and unique drivers are different measures. SQL and Python sources are under `projects/growth-analytics/02-marketplace-supply-demand`.
+The trip chart is generated from the official Open Data query. The monthly chart uses separate panels because trips per day and unique drivers are different measures. [SQL, Python, source manifest, and validation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/02-marketplace-supply-demand) document the analysis.

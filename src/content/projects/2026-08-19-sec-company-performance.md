@@ -15,6 +15,8 @@ header:
 
 **Business problem:** determine whether reported growth is also improving profitability.
 
+**Evidence strength:** Medium for the reported company-level trend; low for explaining segment drivers or durable contribution from three annual observations.
+
 **Key findings:** Microsoft’s reported revenue increased about 32.9% from FY2023 to FY2025; net income increased about 40.7%; and net margin improved from approximately 34.1% to 36.1%.
 
 **Decision implication:** the observed result is healthy at the reported-company level, but it does not identify whether growth came from volume, price, mix, acquisitions, or cost control.
@@ -24,6 +26,10 @@ header:
 ## Business question
 
 **Decision owner:** Finance Leader. **Decision:** where should management invest, control cost, or investigate performance quality? **North-star KPI:** sustainable operating contribution. **Drivers:** revenue growth, gross margin, operating expense, tax, mix, and recurring demand. **Guardrails:** cash flow, customer concentration, and one-off items.
+
+## My role
+
+I owned the public-filing extraction, revenue/net-income comparison, margin calculation, chart, and driver-review recommendation for this independent portfolio case. I did not access Microsoft’s internal segment or operating data.
 
 ## Why it matters
 
@@ -41,7 +47,7 @@ This is evidence of reported improvement, not causal proof. Fiscal periods, amen
 
 ## Approach
 
-The conservative case is to preserve the FY2025 margin while growth slows; the expected case tests whether the current margin can hold as mix changes; the ambitious case identifies controllable cost or mix drivers that improve contribution without reducing product investment. No incremental profit is claimed because segment costs and intervention effects are not established.
+The reported margin improvement is modest—about **2.0 percentage points** over two years—so it is a reason to investigate, not proof of a broad operating transformation. The conservative case is to preserve the FY2025 margin while growth slows; the expected case tests whether the current margin can hold as mix changes; the ambitious case identifies controllable cost or mix drivers that improve contribution without reducing product investment. No incremental profit is claimed because segment costs and intervention effects are not established.
 
 ## Key findings
 

@@ -7,6 +7,7 @@ excerpt: "A workforce decision framework that distinguishes open roles, complete
 problem: "Leaders can misread staffing pressure when openings, hires, and exits are treated as one workforce signal."
 result: "In the BLS December 2025 aggregate series, openings were 6.55 million, hires were 3.3%, quits were 2.0%, and total separations were 5.203 million."
 featured: false
+published: false
 header:
   teaser: /images/jolts-december-signals.png
 ---

@@ -27,12 +27,15 @@ Traffic changes naturally. Weather, holidays, construction, commuting patterns, 
 - **Evidence:** affected crossings were already **8.0%–10.2%** above comparison crossings in placebo event weeks.
 - **Potential value:** none estimated; this study is a decision-quality audit.
 - **Evidence strength:** High for rejecting this comparator; insufficient for estimating the policy effect.
+- **Cost / resource requirement:** A credible estimate requires a new comparator, route-exposure data, and internal ride outcomes; cost cannot be estimated from this study.
 - **Main risk:** pre-existing trends, spillovers, facility shocks, and the gap between traffic counts and ride-hailing outcomes.
+- **Cost of inaction:** Cannot be estimated from this dataset; acting on a false causal claim could misprice rides or misallocate supply.
+- **Success / stop rule:** Proceed only if pre-trends and placebo checks pass; stop the causal claim if the replacement comparator fails them.
 - **Next action:** rebuild the comparator and validate it with pre-trends, placebos, route exposure, and internal ride outcomes.
 
 ## My role
 
-I owned the event-study specification, comparator audit, placebo interpretation, and recommendation to pause the causal claim. I did not control the policy, facility operations, or ride-hailing data. [Reproducible analysis and validation notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/03-congestion-pricing-causal-impact) show the design and limits.
+I owned the event-study specification, comparator audit, placebo interpretation, and recommendation to pause the causal claim. I did not control the policy, facility operations, or ride-hailing data. I would hand the decision owner a rejected comparator, a pre-registered replacement rule, and the evidence required before pricing action. [Reproducible analysis and validation notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/03-congestion-pricing-causal-impact) show the design and limits.
 
 ## Data used
 
@@ -88,4 +91,4 @@ The strongest analysis is sometimes the one that refuses a weak answer. This stu
 
 ## Technical appendix
 
-The event-study script estimates the difference between affected and comparison facilities by week around 5 January 2025. It uses HAC uncertainty on the weekly group difference. The pre-policy coefficients are the reason the causal claim is blocked. Reproducible code is under `projects/growth-analytics/03-congestion-pricing-causal-impact`.
+The event-study script estimates the difference between affected and comparison facilities by week around 5 January 2025. It uses HAC uncertainty on the weekly group difference. The pre-policy coefficients are the reason the causal claim is blocked. [Reproducible code, validation output, and zone-exposure notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/03-congestion-pricing-causal-impact) are available for review.

@@ -19,6 +19,8 @@ header:
 
 **Business problem:** match vehicle capacity to observed trip activity and trip economics. **Key findings:** valid trips peak at 18:00; Manhattan contains about 89% of valid trips; and airport-linked trips are longer and higher-fare. **Decision implication:** one all-day operating plan may miss important operating differences. **Evidence strength:** descriptive January snapshot; it does not measure unmet demand or prove that repositioning creates trips. **Recommended action:** measure first, then test a separate airport operating lane.
 
+**Evidence strength:** Medium for a January completed-trip pattern; low for unmet demand, supply shortage, or causal capacity claims.
+
 ## Business context
 
 Taxi operators have to make decisions about where to position vehicles, when to add capacity, and which trips deserve a different service plan. A monthly trip file can describe completed-trip activity and trip economics, but it cannot show unserved demand.
@@ -26,6 +28,10 @@ Taxi operators have to make decisions about where to position vehicles, when to 
 ## Business question
 
 When and where should a taxi operator focus capacity, and which trip types should be managed as a separate operating lane?
+
+## My role
+
+I owned the trip cleaning rules, zone join, hourly and geographic comparisons, chart regeneration, and measurement-first recommendation for this independent portfolio case. I did not control vehicle supply or run the proposed pilot.
 
 ## Data used
 

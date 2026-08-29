@@ -19,6 +19,8 @@ header:
 
 **Business problem:** grow repeat revenue without increasing dependence on one-off orders or a small customer group. **Key findings:** the cleaned data contains 4,338 identifiable customers; the top 10% generate 61.3% of revenue; and the UK contributes about 82% of revenue. **Decision implication:** retention is valuable but concentrated. **Recommended action:** protect high-value customers and validate repeat-purchase tests in nearby European markets.
 
+**Evidence strength:** Medium for historical revenue and repeat-order patterns; low for market attractiveness, profitability, and causal retention effects.
+
 ## Business context
 
 This UK online retailer sold gift products to customers in the UK and overseas. The transaction file contains more than half a million rows, but raw sales volume alone does not show whether growth comes from loyal customers, one-off orders, or a small group of high-value buyers.
@@ -28,6 +30,10 @@ That distinction matters. A business that relies heavily on a few customers need
 ## Business question
 
 Which customers and markets should the retailer prioritize to grow repeat revenue without relying only on more one-time orders?
+
+## My role
+
+I owned the transaction cleaning, order and customer aggregation, concentration analysis, market comparison, scenario math, and holdout recommendation for this independent portfolio case. I did not run a retention campaign or observe post-test customer value.
 
 ## Data used
 
@@ -53,7 +59,7 @@ The highest-value 10% of customers generated **61.3% of revenue**. This is a con
 
 ### Finding 2: The UK was the core market, but nearby countries added visible opportunity
 
-The UK generated **£7.31 million**, or about **82% of cleaned revenue**. The next markets were the Netherlands, EIRE, Germany, and France. These markets were much smaller than the UK, but they were large enough to support focused tests around product selection, shipping, and repeat-purchase offers.
+The UK generated **£7.31 million**, or about **82% of cleaned revenue**. The next markets were the Netherlands, Ireland, Germany, and France. These markets were much smaller than the UK, but their historical revenue is only a reason to validate them, not proof of market attractiveness.
 
 ![Cleaned UCI Online Retail revenue, December 2010–December 2011: The UK generated most revenue, while nearby European markets require validation before expansion](/images/retail-market-opportunity.png)
 
@@ -66,7 +72,7 @@ Returning orders became a much larger part of monthly orders as the customer bas
 ## Recommendation
 
 1. **Create a high-value customer retention plan.** Track the top customer group separately and test early access, relevant bundles, or service improvements. The data shows where the value is concentrated, but it does not prove which offer will change behavior.
-2. **Build country-specific growth tests.** Start with the Netherlands, EIRE, Germany, and France. Compare repeat order rate, shipping cost, and product mix before increasing marketing spend.
+2. **Build country-specific growth tests.** Start with the Netherlands, Ireland, Germany, and France. Compare repeat order rate, market size, CAC, shipping cost, competition, regulation, and product mix before increasing marketing spend.
 3. **Measure returning orders as a core growth metric.** Report new customers, returning customers, orders, and revenue together so higher sales are not mistaken for healthier customer relationships.
 4. **Improve cancellation and customer identification fields.** The raw file contains 9,288 cancellation rows and 135,080 rows without a customer ID. Better capture would make retention reporting more complete.
 
@@ -95,7 +101,7 @@ If a retention test increased revenue from the top 10% customer group by **5%**,
 ### Prioritized action and measurement
 
 - **P0 — Act now:** create a protected high-value customer cohort and monitor repeat revenue, order frequency, and cancellations monthly.
-- **P1 — Test:** run country-specific repeat-purchase offers in the Netherlands, EIRE, Germany, and France against a control group. Measure repeat-order rate and contribution after shipping cost.
+- **P1 — Test:** run country-specific repeat-purchase offers in the Netherlands, Ireland, Germany, and France against a control group. Measure repeat-order rate and contribution after shipping cost.
 - **P2 — Investigate:** improve CustomerID capture and cancellation reason fields before using the portfolio as a complete retention view.
 
 The test succeeds only if repeat revenue rises without increasing cancellations or reducing contribution. Sensitivity checks should repeat the result with the top 5% and top 20% definitions, and exclude the incomplete December 2011 period.
