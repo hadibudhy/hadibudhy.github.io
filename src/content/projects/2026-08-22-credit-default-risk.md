@@ -7,6 +7,7 @@ excerpt: "A transparent risk-prioritization study that combines repayment histor
 problem: "A lender needs to focus attention where repayment risk and current-balance or utilization signals are higher without turning a historical score into an automatic lending decision."
 result: "Descriptive review of 30,000 historical clients found 6,636 observed defaults and a 22.1% default rate; it does not claim validated predictive performance."
 featured: false
+published: false
 header:
   teaser: /images/credit-default-balance.png
 ---

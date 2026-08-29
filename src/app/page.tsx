@@ -28,7 +28,7 @@ export default function Home() {
             <h1 className="max-w-full text-[1.8rem] font-normal leading-tight tracking-tight text-foreground sm:text-[2.3rem]">Decision-ready analysis for growth, product, and operations teams.</h1>
             <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">I turn messy data into evidence for what to invest in, what to test, and what to stop—while keeping uncertainty visible.</p>
             <p className="text-sm font-medium leading-6 text-primary">Primary target: Senior Data Analyst · Growth &amp; Decision Analytics. Secondary strengths: experimentation, product analytics, marketplace operations, and analytics engineering.</p>
-            <p className="max-w-2xl text-base leading-7 text-foreground"><span className="font-semibold">Why hire me:</span> The portfolio shows how I turn a growth question into a holdout, reject a weak causal comparison, separate marketplace proxies from demand, and build an auditable AI workflow with safe fallback.</p>
+            <p className="max-w-2xl text-base leading-7 text-foreground"><span className="font-semibold">Why hire me:</span> In professional work, I own alerting, warehouse pipelines, and live dashboards; in portfolio work, I show how to turn a growth question into a holdout, reject a weak causal comparison, separate marketplace proxies from demand, and build an auditable AI workflow with safe fallback.</p>
             <div className="flex flex-wrap gap-3 pt-2">
               <Button size="lg" asChild><Link href="#work">View the work <span className="ml-3" aria-hidden="true">→</span></Link></Button>
               <Button size="lg" variant="outline" asChild><a href="mailto:hadi.budhy@gmail.com">Get in touch</a></Button>

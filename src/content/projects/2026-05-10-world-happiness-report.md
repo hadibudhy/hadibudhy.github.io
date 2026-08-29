@@ -11,6 +11,7 @@ excerpt: "A long-term view of national happiness that separates real trends from
 problem: "Single-year rankings obscure how happiness changes across countries and over time."
 result: "The same 129 countries were compared across 14 years, revealing the biggest gains, losses, and relationships."
 featured: false
+published: false
 header:
   teaser: /images/happiness-beat01.png
 ---

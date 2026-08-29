@@ -7,6 +7,7 @@ excerpt: "A campaign decision study that identifies the strongest response signa
 problem: "The bank made 45,211 contacts, but broad response rates hid the difference between audience quality, channel coverage, and prior campaign history."
 result: "The overall positive-response rate is 11.7%; cellular contacts respond at 14.9%, unknown contact types at 4.1%, and previously successful contacts at 64.7%."
 featured: false
+published: false
 header:
   teaser: /images/bank-channel-response.png
 ---

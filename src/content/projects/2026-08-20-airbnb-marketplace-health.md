@@ -7,6 +7,7 @@ excerpt: "A supply-side marketplace analysis that separates listing growth from 
 problem: "A large listing count does not prove healthy demand, fair choice, or resilient supply."
 result: "The June 2026 snapshot has 30,555 listings; 24.7% of listings belong to the top 1% of observed hosts, and the filtered median listed price is $171."
 featured: false
+published: false
 header:
   teaser: /images/airbnb-room-supply.png
 ---

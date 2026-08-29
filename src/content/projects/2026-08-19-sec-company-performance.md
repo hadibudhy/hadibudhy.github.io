@@ -7,6 +7,7 @@ excerpt: "A public-filing analysis that separates reported growth from profitabi
 problem: "Revenue growth can hide margin pressure, while profit growth can be distorted by mix, accounting, or one-off items."
 result: "For Microsoft, SEC Company Facts reports FY2023 revenue of $211.9B and net income of $72.4B, rising to $281.7B and $101.8B in FY2025; reported net margin moved from about 34.1% to 36.1%."
 featured: false
+published: false
 header:
   teaser: /images/sec-revenue-net-income.png
 ---
