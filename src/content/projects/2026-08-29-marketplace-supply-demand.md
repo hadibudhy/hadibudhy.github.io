@@ -19,6 +19,19 @@ The first question is more basic: where is the marketplace under pressure, and w
 
 A low number of recorded trips can mean low demand or poor supply. A busy hour can still have many unserved riders. If the business gives incentives without knowing which problem it has, it may spend money without improving the customer experience.
 
+## Decision brief
+
+- **Recommendation:** measure the request funnel first, then pilot incentives only in repeated shortage windows.
+- **Evidence:** recorded trips peak at **18:00**; reported 2025 trips rose while unique drivers stayed broadly flat.
+- **Potential value:** not estimated; requests, contribution, and incentive cost are missing.
+- **Evidence strength:** Medium for timing and activity signals; low for unmet demand or causal supply claims.
+- **Main risk:** the hourly slice is from **February 2019**, while the monthly comparison is **2024–2025**; spillover and cannibalization are unknown.
+- **Next action:** add request, match, wait, online-driver, cancellation, incentive, and contribution fields.
+
+## My role
+
+I owned the public-data analysis, proxy classification, limitation framing, and proposed zone-time pilot for this portfolio case. I did not operate an incentive program or observe platform fulfillment outcomes. [SQL, Python, and source notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/02-marketplace-supply-demand) document the analysis.
+
 ## Data used
 
 I used two official TLC sources:

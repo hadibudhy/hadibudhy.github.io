@@ -5,7 +5,7 @@ import { capabilities, careerArc, education, experience, skills } from "@/lib/pr
 
 export const metadata = {
   title: "About",
-  description: "Hadi Budhy’s experience across business intelligence, analytics engineering, automation, and applied AI.",
+  description: "Hadi Budhy’s growth and decision analytics experience across business intelligence, analytics engineering, automation, and applied AI.",
   alternates: { canonical: "/about" },
 };
 
@@ -18,7 +18,7 @@ export default function AboutPage() {
           <h1 className="mt-5 max-w-4xl break-words text-[2.7rem] font-bold tracking-[-0.05em] text-foreground sm:text-5xl md:text-7xl">Hadi Budhy works from messy data toward a clearer decision.</h1>
           <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
             <div className="space-y-5 text-lg leading-8 text-muted-foreground">
-              <p>Hadi Budhy is a Data Analyst and Analytics Engineer with 5+ years of experience across business intelligence, customer analytics, data automation, and applied AI, based in Jakarta, Indonesia.</p>
+              <p>Hadi Budhy is a Senior Data Analyst focused on growth and decision analytics, with 5+ years of experience across business intelligence, customer analytics, data automation, and applied AI, based in Jakarta, Indonesia.</p>
               <p>He helps teams turn scattered information into evidence they can trust, decisions they can explain, and workflows they can operate.</p>
             </div>
             <div className="border-l border-primary/50 pl-6 text-sm leading-7 text-muted-foreground">His work spans reliable data pipelines, forecasting and classification models, and dashboards that help teams understand what is happening and what to do next. This public summary keeps employer, client, and operational details intentionally high level.<p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-primary">{education}</p></div>

@@ -17,6 +17,19 @@ The growth team needs to know whether paid advertising creates new customers. Re
 
 If the business counts every conversion touched by an ad as campaign value, it can spend money on customers who did not need the ad. The right measure is the extra conversions caused by assigning the campaign.
 
+## Decision brief
+
+- **Recommendation:** run the live campaign with a randomized holdout; scale only when incremental CPA is below contribution value.
+- **Evidence:** the released benchmark shows a **0.115 percentage-point** intention-to-treat conversion difference.
+- **Potential value:** about **115 extra conversions per 100,000 assigned users** in this benchmark, before economics.
+- **Evidence strength:** High for the released randomized comparison; low for transporting the rate to a current campaign.
+- **Main risk:** the file has no ad cost, margin, LTV, or current-campaign population.
+- **Next action:** pre-register the holdout, minimum useful effect, sample size, and stopping rule.
+
+## My role
+
+I owned the analysis design, streaming validation, intention-to-treat calculation, chart, and business recommendation for this portfolio case. I did not run the campaign or observe a live commercial outcome. [Analysis code, SQL, and validation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/01-campaign-incrementality) are available for review.
+
 ## Data used
 
 I used the [Criteo AI Lab uplift dataset](https://ailab.criteo.com/criteo-uplift-prediction-dataset/). It combines results from randomized advertising tests. Each row represents one user record and shows whether the user was assigned to advertising, visited, or converted.

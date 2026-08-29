@@ -3,12 +3,12 @@ title: "ComplaintFlow: A Reliable AI Triage Service for Consumer Support"
 date: 2026-08-23
 categories: [AI engineering]
 tags:
-  - production AI
+  - production-minded AI
   - evaluation
   - retrieval
   - reliability
   - FastAPI
-excerpt: "A production-oriented AI service that routes financial complaints, retrieves approved support playbooks, escalates uncertainty, and records enough evidence to evaluate every decision."
+excerpt: "A portfolio reference implementation that routes financial complaints, retrieves approved support playbooks, escalates uncertainty, and records enough evidence to evaluate every decision."
 problem: "Support teams need to route complaints quickly, but an unreliable AI response can send a customer to the wrong queue or invent guidance."
 result: "Portfolio reference implementation: ComplaintFlow combines a transparent baseline, approved-playbook retrieval, provider retries, PII redaction, schema checks, human escalation, and an auditable SQLite decision log."
 featured: true
@@ -41,6 +41,19 @@ The north-star metric is **correct queue routing**. Supporting metrics are time 
 The [CFPB Consumer Complaint Database](https://www.consumerfinance.gov/data-research/consumer-complaints/) publishes complaint records and some consumer narratives after privacy review. The Bureau says the data is freely available and generally updated daily, but it is not a representative sample of all consumer experiences.
 
 That limitation shapes the system. ComplaintFlow helps with routing and evidence retrieval; it does not estimate total consumer harm or decide whether a company response is correct.
+
+## Decision brief
+
+- **Recommendation:** use shadow mode first; assist routing only after a privacy-reviewed holdout matches or beats the transparent baseline.
+- **Evidence:** the reference fixture achieves perfect routing and citation coverage, but it is small, synthetic, and hand-written.
+- **Potential value:** faster, more consistent triage; no production time or cost saving is claimed.
+- **Evidence strength:** High for the checked-in workflow contract; low for real-world model performance.
+- **Main risk:** privacy leakage, unsupported guidance, drift, and provider failure.
+- **Next action:** collect reviewer labels on a privacy-reviewed real sample and measure routing, escalation, latency, cost, and unsafe output.
+
+## My role
+
+I designed and implemented the portfolio reference service, including the baseline, retrieval boundary, provider fallback, validation, redaction, persistence, and evaluation harness. I did not deploy it to a live support team or claim real customer impact. [Reference implementation and tests](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/ai_engineering/complaintflow) are available.
 
 ## Data used
 

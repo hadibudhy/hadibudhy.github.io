@@ -21,6 +21,19 @@ The question is not simply whether traffic was different afterward. It is whethe
 
 Traffic changes naturally. Weather, holidays, construction, commuting patterns, and facility problems can all move the numbers. If we compare only before and after, we may blame the policy for a change it did not cause.
 
+## Decision brief
+
+- **Recommendation:** do not use this comparison group to claim a congestion-pricing effect or change rider pricing.
+- **Evidence:** affected crossings were already **8.0%–10.2%** above comparison crossings in placebo event weeks.
+- **Potential value:** none estimated; this study is a decision-quality audit.
+- **Evidence strength:** High for rejecting this comparator; insufficient for estimating the policy effect.
+- **Main risk:** pre-existing trends, spillovers, facility shocks, and the gap between traffic counts and ride-hailing outcomes.
+- **Next action:** rebuild the comparator and validate it with pre-trends, placebos, route exposure, and internal ride outcomes.
+
+## My role
+
+I owned the event-study specification, comparator audit, placebo interpretation, and recommendation to pause the causal claim. I did not control the policy, facility operations, or ride-hailing data. [Reproducible analysis and validation notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/03-congestion-pricing-causal-impact) show the design and limits.
+
 ## Data used
 
 I used the official [MTA Bridges and Tunnels Hourly Crossings dataset](https://catalog.data.gov/dataset/mta-bridges-and-tunnels-hourly-crossings-beginning-2019). It provides traffic counts by facility and vehicle class. I selected car counts and built **27,080 facility-day observations** across 10 facilities from 2019 to May 2026.

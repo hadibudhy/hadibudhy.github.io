@@ -3,7 +3,7 @@ title: "Credit Default Risk: Prioritizing Support Before Losses Grow"
 date: 2026-08-22
 categories: [risk analytics]
 tags: [credit risk, loss prevention, prioritization, governance]
-excerpt: "A transparent risk-prioritization study that combines repayment history and exposure while keeping fairness, drift, and support outcomes visible."
+excerpt: "A transparent risk-prioritization study that combines repayment history with current-balance signals while keeping fairness, drift, and support outcomes visible."
 problem: "A lender needs to focus attention where repayment risk and potential exposure are higher without turning a historical score into an automatic lending decision."
 result: "The validated UCI archive contains 30,000 clients, 6,636 observed defaults, and 24 measured credit and repayment fields; the default rate is 22.1% in this historical sample."
 featured: false

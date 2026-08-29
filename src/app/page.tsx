@@ -17,7 +17,7 @@ export default function Home() {
             <Image src="/images/profile-illustration.jpg" alt="Illustrated profile portrait of Hadi Budhy" width={160} height={160} className="h-24 w-24 shrink-0 rounded-full border border-border object-cover object-top sm:h-32 sm:w-32" priority />
             <div className="flex flex-col gap-2">
               <p className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">Hadi Budhy</p>
-              <p className="text-sm text-muted-foreground">Data Analyst and Analytics Engineer</p>
+              <p className="text-sm text-muted-foreground">Senior Data Analyst · Growth &amp; Decision Analytics</p>
               <div className="flex gap-4 text-sm text-muted-foreground">
                 <a href="https://github.com/hadibudhy" target="_blank" rel="noreferrer" className="hover:text-foreground">GitHub</a>
                 <a href="https://linkedin.com/in/hadibudhy" target="_blank" rel="noreferrer" className="hover:text-foreground">LinkedIn</a>

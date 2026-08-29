@@ -124,8 +124,40 @@ def save_taxi_completed_trips() -> None:
     plt.close(fig)
 
 
+def save_retail_market_opportunity() -> None:
+    source = ROOT / "analysis_data" / "extracted" / "Online Retail.xlsx"
+    sales = pd.read_excel(source)
+    sales = sales[~sales["InvoiceNo"].astype(str).str.startswith("C")]
+    sales = sales[(sales["Quantity"] > 0) & (sales["UnitPrice"] > 0) & sales["CustomerID"].notna()].copy()
+    sales["revenue"] = sales["Quantity"] * sales["UnitPrice"]
+    country = sales.groupby("Country")["revenue"].sum().sort_values(ascending=False).head(8) / 1_000_000
+    fig, axes = plt.subplots(1, 2, figsize=(16, 8.5), facecolor="#07111f", gridspec_kw={"width_ratios": [1, 1.15]})
+    fig.subplots_adjust(top=0.80, bottom=0.16, left=0.12, right=0.97, wspace=0.34)
+    for ax in axes:
+        style_axis(ax)
+    axes[0].barh(["United Kingdom"], [country["United Kingdom"]], color="#22c7df", height=0.5)
+    axes[0].set_title("The UK is the revenue base", color="#f3f6fb", fontsize=17, fontweight="bold", pad=20)
+    axes[0].set_xlabel("Recorded revenue (£ millions)")
+    axes[0].set_xlim(0, country["United Kingdom"] * 1.12)
+    axes[0].invert_yaxis()
+    axes[0].text(country["United Kingdom"] / 2, 0, f"£{country['United Kingdom']:.2f}m", ha="center", va="center", color="#07111f", fontweight="bold")
+    other = country.drop("United Kingdom").sort_values()
+    axes[1].barh(other.index, other.values, color="#22c7df", height=0.55)
+    axes[1].set_title("Smaller markets require validation", color="#f3f6fb", fontsize=17, fontweight="bold", pad=20)
+    axes[1].set_xlabel("Recorded revenue (£ millions)")
+    axes[1].invert_yaxis()
+    for label, value in other.items():
+        axes[1].text(value + 0.01, label, f"£{value:.2f}m", va="center", color="#e5edf8", fontsize=10)
+    fig.suptitle("Historical revenue concentration identifies test markets, not expansion attractiveness", color="#f3f6fb", fontsize=21, fontweight="bold")
+    fig.text(0.5, 0.03, "UCI Online Retail | 1 Dec 2010–9 Dec 2011 | cleaned positive, non-cancelled lines with CustomerID | revenue, not margin",
+             ha="center", color="#9fb0c6", fontsize=12)
+    fig.savefig(OUT / "retail-market-opportunity.png", dpi=120, facecolor=fig.get_facecolor())
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     save_fake_job_model_comparison()
     save_jolts_signals()
     save_sec_net_margin()
     save_taxi_completed_trips()
+    save_retail_market_opportunity()
