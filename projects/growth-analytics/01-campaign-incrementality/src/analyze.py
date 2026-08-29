@@ -60,8 +60,9 @@ def analyze(source: Path, chunksize: int = 500_000) -> dict:
 
 
 def segment_analysis(source: Path, chunksize: int) -> list[dict]:
-    sample = pd.read_csv(source, usecols=["f0"], nrows=1_000_000)["f0"]
-    edges = sample.quantile([0, 0.25, 0.5, 0.75, 1]).to_list()
+    feature = pd.read_csv(source, usecols=["f0"])["f0"]
+    edges = feature.quantile([0, 0.25, 0.5, 0.75, 1]).to_list()
+    edges[0], edges[-1] = -float("inf"), float("inf")
     counts = {index: {"n": 0, "success": 0} for index in range(8)}
     for chunk in pd.read_csv(source, usecols=["f0", "treatment", "conversion"], chunksize=chunksize):
         band = pd.cut(chunk["f0"], bins=edges, labels=False, include_lowest=True, duplicates="drop")
@@ -87,7 +88,7 @@ def save_chart(result: dict, destination: Path) -> None:
     low = metric["ci95"][0] * 100
     high = metric["ci95"][1] * 100
     figure, axis = plt.subplots(figsize=(7, 4.2))
-    axis.errorbar([0], [value], yerr=[[value - low], [high - value]], fmt="o", color="#171717", capsize=6, markersize=7)
+    axis.errorbar([value], [0], xerr=[[value - low], [high - value]], fmt="o", color="#171717", capsize=6, markersize=7)
     axis.axvline(0, color="#a3a3a3", linewidth=1)
     axis.set_xlim(-0.2, 0.2)
     axis.set_yticks([0])

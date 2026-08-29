@@ -48,6 +48,10 @@ SOURCES = {
         "https://data.ny.gov/resource/t6yz-b64h.json?$select=toll_date,vehicle_class,sum(crz_entries)%20as%20crz_entries,sum(excluded_roadway_entries)%20as%20excluded_roadway_entries&$where=toll_date%20between%20%272025-01-01T00:00:00%27%20and%20%272025-03-31T00:00:00%27&$group=toll_date,vehicle_class&$order=toll_date,vehicle_class&$limit=50000",
         "mta_crz_vehicle_entries_q1_2025.json",
     ),
+    "mta_bridge_daily_car_counts": (
+        "https://data.ny.gov/resource/ebfx-2m7v.json?$select=date,facility_id,facility,vehicle_class_category,sum(traffic_count)%20as%20traffic_count&$where=vehicle_class_category=%27Car%27%20and%20date%20between%20%272019-01-01T00:00:00%27%20and%20%272026-05-31T23:59:59%27&$group=date,facility_id,facility,vehicle_class_category&$order=date,facility_id&$limit=500000",
+        "mta_bridge_daily_car_counts.json",
+    ),
 }
 
 
@@ -106,7 +110,7 @@ def main() -> None:
     args = parser.parse_args()
     manifest = [download("criteo_uplift_unbiased", *SOURCES["criteo_uplift_unbiased"])]
     manifest.append(download("tlc_zone_lookup", *SOURCES["tlc_zone_lookup"]))
-    for name in ["tlc_monthly_reports", "tlc_taxi_zones_geometry", "mta_cbd_geofence", "mta_crz_vehicle_entries_q1_2025"]:
+    for name in ["tlc_monthly_reports", "tlc_taxi_zones_geometry", "mta_cbd_geofence", "mta_crz_vehicle_entries_q1_2025", "mta_bridge_daily_car_counts"]:
         manifest.append(download(name, *SOURCES[name]))
     if args.include_hvfhv:
         manifest.append(download_ranged("tlc_hvfhv_january_2025", *SOURCES["tlc_hvfhv_january_2025"], total_bytes=491076642))

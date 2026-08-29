@@ -38,18 +38,27 @@ The visit lift is about **1,034 additional visits per 100,000 assigned users**. 
 
 Feature-level uplift is exploratory because the 12 feature names are anonymized, segment boundaries are analyst choices, and many comparisons create false-positive risk. Any rollout segment must be re-tested on a fresh holdout.
 
-As a reproducible diagnostic, I split `f0` into four equal-sized bands. The lowest band showed a **0.227pp** conversion difference (95% CI **0.214–0.241pp**); the other bands were **0.038pp**, **0.016pp**, and **0.009pp**. These are not customer personas: `f0` has no business meaning, the bands were selected after inspection, and the result needs multiplicity control and a new holdout. It is evidence that response may be heterogeneous, not a targeting policy.
+As a reproducible diagnostic, I split the full `f0` distribution into four equal-sized bands. The second band showed the largest conversion difference at **0.386pp** (95% CI **0.361–0.410pp**); the other bands were **0.038pp**, **0.019pp**, and **0.010pp**. These are not customer personas: `f0` has no business meaning, the bands were selected for exploration, and the result needs multiplicity control and a new holdout. It is evidence that response may be heterogeneous, not a targeting policy.
+
+| Exploratory band | Absolute lift | 95% CI | Economics | Current decision |
+|---|---:|---:|---|---|
+| `f0` lowest quartile | +0.038pp | +0.027 to +0.049pp | Not available | Do not target from this benchmark alone |
+| `f0` second quartile | +0.386pp | +0.361 to +0.410pp | Not available | Retest in a pre-registered holdout |
+| `f0` third quartile | +0.019pp | +0.012 to +0.027pp | Not available | Do not target from this benchmark alone |
+| `f0` highest quartile | +0.010pp | +0.005 to +0.016pp | Not available | Do not target from this benchmark alone |
+
+The table is a decision guardrail, not a spend plan. Without current CPA and contribution value, no segment can be called profitable.
 
 ## Economics and decision
 
-Let `V` be contribution value per incremental conversion and `C` be spend per 100,000 assigned users. The campaign breaks even when:
+Let `V` be internal contribution value per incremental conversion, and let `C` be internal spend per 100,000 assigned users. The campaign breaks even when:
 
 ```text
 break-even CPA = V
-incremental CPA = C / 115.2
+incremental CPA = C / internal_incremental_conversions
 ```
 
-The public data cannot supply `V` or `C`. Under a conservative scenario, the growth team should scale only if measured incremental CPA is below internal contribution value, and should stop treating response rate as success when it fails that guardrail.
+The public data cannot supply `V`, `C`, or a transportable current-campaign incremental-conversion rate. The growth team should use an internal holdout to measure both inputs, then scale only if measured incremental CPA is below internal contribution value.
 
 ## Recommended next experiment
 

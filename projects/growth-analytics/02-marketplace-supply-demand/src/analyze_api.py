@@ -18,7 +18,7 @@ MONTHLY = ROOT / "analysis_data" / "growth_sources" / "data_reports_monthly.csv"
 API = "https://data.cityofnewyork.us/resource/4p5c-cbgn.json"
 PARAMS = {
     "$select": "date_extract_hh(pickup_datetime) as hour,count(*) as trips",
-    "$where": "pickup_datetime between '2019-02-01T00:00:00' and '2019-02-08T00:00:00'",
+    "$where": "pickup_datetime >= '2019-02-01T00:00:00' and pickup_datetime < '2019-02-08T00:00:00'",
     "$group": "hour",
     "$order": "hour",
     "$limit": "100",
@@ -34,10 +34,12 @@ def main() -> None:
     OUTPUT.write_text(json.dumps(rows, indent=2), encoding="utf-8")
     hours = [int(row["hour"]) for row in rows]
     trips = [int(row["trips"]) for row in rows]
+    if hours != list(range(24)) or sum(trips) != 4_965_012:
+        raise ValueError(f"Unexpected API result: hours={hours}, total={sum(trips)}")
     figure, axis = plt.subplots(figsize=(7, 4.2))
     axis.plot(hours, trips, marker="o", color="#171717", linewidth=2)
     axis.fill_between(hours, trips, color="#e5e7eb")
-    axis.set_title("Completed HVFHV trips were highest at 18:00 in the observed week")
+    axis.set_title("Recorded HVFHV trips were highest at 18:00 in the observed week")
     axis.set_xlabel("Pickup hour")
     axis.set_ylabel("Dispatched trips")
     axis.set_xticks(range(0, 24, 3))
@@ -57,15 +59,17 @@ def main() -> None:
     monthly_2024_25 = monthly[monthly.month.dt.year.isin([2024, 2025])]
     MONTHLY.parent.mkdir(parents=True, exist_ok=True)
     monthly_2024_25.to_json(ROOT / "analysis_data" / "growth_sources" / "tlc_hvfhv_monthly_2024_2025.json", orient="records", date_format="iso", indent=2)
-    figure, axis = plt.subplots(figsize=(7, 4.2))
-    axis.plot(monthly_2024_25.month, monthly_2024_25["Trips Per Day"], label="Trips per day", color="#171717", linewidth=2)
-    axis.plot(monthly_2024_25.month, monthly_2024_25["Unique Drivers"] * 8, label="Unique drivers ×8", color="#737373", linewidth=1.5)
-    axis.axvline(pd.Timestamp("2025-01-05"), color="#a3a3a3", linestyle="--", linewidth=1)
-    axis.set_title("HVFHV trip volume and observed driver coverage moved differently")
-    axis.set_ylabel("Monthly reported count")
-    axis.legend(frameon=False)
-    axis.spines[["top", "right"]].set_visible(False)
-    axis.text(0.5, -0.23, "TLC monthly report | High Volume FHV | driver line scaled for readability; not driver-hours", ha="center", transform=axis.transAxes, fontsize=8, color="#737373")
+    figure, axes = plt.subplots(2, 1, figsize=(7, 5.6), sharex=True)
+    axes[0].plot(monthly_2024_25.month, monthly_2024_25["Trips Per Day"], color="#171717", linewidth=2)
+    axes[0].set_ylabel("Trips / day")
+    axes[0].set_title("Reported HVFHV activity and driver coverage moved on different scales")
+    axes[1].plot(monthly_2024_25.month, monthly_2024_25["Unique Drivers"], color="#737373", linewidth=2)
+    axes[1].set_ylabel("Unique drivers")
+    axes[1].set_xlabel("Month")
+    for axis in axes:
+        axis.axvline(pd.Timestamp("2025-01-05"), color="#a3a3a3", linestyle="--", linewidth=1)
+        axis.spines[["top", "right"]].set_visible(False)
+    axes[0].text(0.5, 1.08, "Dashed line marks 5 January 2025; monthly proxies are not hourly online supply", ha="center", transform=axes[0].transAxes, fontsize=8, color="#737373")
     figure.tight_layout()
     monthly_chart = ROOT / "public" / "images" / "growth-hvf-monthly-supply.png"
     figure.savefig(monthly_chart, dpi=160, bbox_inches="tight")

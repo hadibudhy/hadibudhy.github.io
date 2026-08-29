@@ -19,14 +19,15 @@ OUTPUT = ROOT / "analysis_data/growth_sources/cbd_taxi_zone_mapping.json"
 
 def main() -> None:
     geofences = [shape(row["polygon"]) for row in json.loads(GEOFENCE.read_text(encoding="utf-8"))]
-    cbd = unary_union(geofences)
+    cbd_wgs84 = unary_union(geofences)
     reader = shapefile.Reader(str(ZONE_ZIP))
     fields = [field[0] for field in reader.fields[1:]]
-    to_wgs84 = Transformer.from_crs("EPSG:2263", "EPSG:4326", always_xy=True).transform
+    to_ny_state_plane = Transformer.from_crs("EPSG:4326", "EPSG:2263", always_xy=True).transform
+    cbd = transform(to_ny_state_plane, cbd_wgs84)
     results = []
     for record, raw_shape in zip(reader.records(), reader.shapes()):
         values = dict(zip(fields, record))
-        zone = transform(to_wgs84, shape(raw_shape.__geo_interface__))
+        zone = shape(raw_shape.__geo_interface__)
         overlap = zone.intersection(cbd).area / zone.area if zone.area else 0
         classification = "inside" if overlap >= 0.95 else "partial" if overlap > 0.05 else "outside"
         results.append({"LocationID": int(values["LocationID"]), "zone": values["zone"], "borough": values["borough"], "overlap_ratio": round(overlap, 6), "classification": classification})

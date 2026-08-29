@@ -2,7 +2,7 @@
 
 ## Campaign experiment
 
-**Was the campaign successful?** The randomized assignment produced a positive conversion ITT with a tight confidence interval. I would call the response successful, but commercial success still depends on incremental CPA and contribution.
+**Was the campaign successful?** The released benchmark shows a positive assignment contrast with a tight confidence interval. I would not call a current campaign successful from this file because commercial success still depends on internally measured incremental CPA and contribution.
 
 **What is the primary metric?** Incremental conversion by assignment. Visits are a supporting metric, and CPA, margin, complaints, and downstream retention are guardrails.
 

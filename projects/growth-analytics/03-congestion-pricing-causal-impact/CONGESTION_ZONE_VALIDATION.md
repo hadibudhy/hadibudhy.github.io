@@ -16,9 +16,10 @@ Sources:
 1. Download the MTA polygon collection from State of New York Open Data.
 2. Download the official TLC taxi-zone geometry ZIP.
 3. Transform TLC zone geometry from EPSG:2263 to WGS84.
-4. Union the MTA polygons.
-5. Calculate each zone's polygon-overlap ratio.
-6. Classify zones as inside at 95% or more overlap, partial above 5% overlap, and outside at 5% or less.
+4. Transform the MTA polygons into the TLC geometry's projected CRS (EPSG:2263) before area calculations.
+5. Union the transformed MTA polygons.
+6. Calculate each zone's polygon-overlap ratio in projected square units.
+7. Classify zones as inside at 95% or more overlap, partial above 5% overlap, and outside at 5% or less.
 
 The script is `src/validate_zone_map.py`. It writes the full mapping to the ignored local file `analysis_data/growth_sources/cbd_taxi_zone_mapping.json`.
 

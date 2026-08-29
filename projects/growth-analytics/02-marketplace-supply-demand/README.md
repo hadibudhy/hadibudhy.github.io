@@ -4,7 +4,7 @@
 
 **Decision owner:** Country Manager and Marketplace Operations Lead. **Decision:** where and when should the team test driver incentives? **Primary metric:** request fulfillment rate. **Supply diagnostic:** recorded trips per eligible online driver-hour. **Economic metric:** incremental fulfilled trips per incentive dollar. **Guardrails:** wait time, cancellations, driver earnings, and neighboring-zone displacement.
 
-The official TLC HVFHV dataset records one submitted dispatched-trip row and includes pickup/drop-off time, zones, and license group; the historical API table may omit optional fields when they are null. An official Open Data API slice for 1–7 February 2019 contains **4,965,017 recorded trip rows**, with hourly counts ranging from **59,285 at 04:00** to **334,713 at 18:00**. The peak is recorded-trip concentration, not a direct measure of requests or lost rides.
+The official TLC HVFHV dataset records one submitted dispatched-trip row and includes pickup/drop-off time, zones, and license group; the historical API table may omit optional fields when they are null. An official Open Data API slice for 1–7 February 2019 contains **4,965,012 recorded trip rows**, with hourly counts ranging from **59,285 at 04:00** to **334,713 at 18:00**. The peak is recorded-trip concentration, not a direct measure of requests or lost rides.
 
 The decision is therefore not “pay more everywhere.” It is to instrument the missing marketplace denominators, identify repeatable shortage windows, and test targeted incentives with geographic or time-based randomization.
 
@@ -14,7 +14,7 @@ Leadership hears that riders wait longer and rides are lost in some areas. The p
 
 ## Dataset
 
-The source is the [NYC TLC High Volume FHV data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) and the [official HVFHV data dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_hvfhs.pdf). TLC states that each row is a trip dispatched by a licensed high-volume FHV base. The API slice used here is the official 2019 HVFHV Open Data table `4p5c-cbgn`, restricted to 1–7 February 2019 and containing 4,965,017 rows. A later 2025 Parquet source is also supported by the downloader, but the throttled endpoint was not treated as complete until fully downloaded.
+The source is the [NYC TLC High Volume FHV data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) and the [official HVFHV data dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_hvfhs.pdf). TLC states that each row is a trip dispatched by a licensed high-volume FHV base. The API slice used here is the official 2019 HVFHV Open Data table `4p5c-cbgn`, restricted to 1–7 February 2019 and containing 4,965,012 rows. A later 2025 Parquet source is also supported by the downloader, but the throttled endpoint was not treated as complete until fully downloaded.
 
 ## Metric framework
 

@@ -3,9 +3,9 @@ title: "Marketplace Supply and Demand: What Can the Public Data Tell Us?"
 date: 2026-08-31
 categories: [growth analytics]
 tags: [marketplace, supply and demand, experimentation, SQL]
-excerpt: "A limited-data marketplace diagnosis that separates completed trips from the requests and driver hours needed to measure imbalance."
+excerpt: "A limited-data marketplace diagnosis that separates recorded trips from the requests and driver hours needed to measure imbalance."
 problem: "A citywide incentive can be expensive when the real problem is concentrated in a few time and location windows."
-result: "In an official 4,965,017-row TLC HVFHV Open Data slice from 1–7 February 2019, recorded trips ranged from 59,285 at 04:00 to 334,713 at 18:00; the public file cannot observe unmet requests or driver online hours."
+result: "In an official 4,965,012-row TLC HVFHV Open Data slice from 1–7 February 2019, recorded trips ranged from 59,285 at 04:00 to 334,713 at 18:00; the public file cannot observe unmet requests or driver online hours."
 featured: false
 ---
 
@@ -23,11 +23,11 @@ Trip volume is not the same as demand. A low-trip zone may have little demand or
 
 ## Dataset
 
-The source is the official [NYC TLC HVFHV trip data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page). Each record is one submitted dispatched trip. The bounded API slice covers 1–7 February 2019 and contains 4,965,017 rows with provider/license group, pickup/drop-off timestamps, and pickup/drop-off zones; optional fields are not assumed to be complete. It does not include requests, rejected matches, cancellations, wait time, or driver-online hours.
+The source is the official [NYC TLC HVFHV trip data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page). Each record is one submitted dispatched trip. The bounded API slice covers 1–7 February 2019 and contains 4,965,012 rows with provider/license group, pickup/drop-off timestamps, and pickup/drop-off zones; optional fields are not assumed to be complete. It does not include requests, rejected matches, cancellations, wait time, or driver-online hours.
 
 ## Analysis
 
-Hourly recorded trips ranged from **59,285 at 04:00** to **334,713 at 18:00** across **4,965,017 rows**. This is useful for staffing and sampling a peak window. It is not sufficient to claim a shortage, because recorded trips can fall when demand is low and can stay high even when many requests are lost.
+Hourly recorded trips ranged from **59,285 at 04:00** to **334,713 at 18:00** across **4,965,012 rows**. This is useful for staffing and sampling a peak window. It is not sufficient to claim a shortage, because recorded trips can fall when demand is low and can stay high even when many requests are lost.
 
 ## Business Interpretation
 
@@ -51,4 +51,4 @@ The source is historical, bounded to one week, and based on submitted dispatched
 
 **30-second explanation:** “I found a clear peak in recorded HVFHV trips, but I did not overstate it as unmet demand. I would first add request, cancellation, wait, and online driver-hour data, then test a targeted incentive using zone-window randomization. The decision metric is request fulfillment, with incremental trips per incentive dollar as the economic guardrail.”
 
-**2-minute explanation:** I would explain the public-data grain, the missing denominator problem, the difference between demand and completed trips, the switchback design, interference, and the required guardrails.
+**2-minute explanation:** I would explain the public-data grain, the missing denominator problem, the difference between recorded trips and total demand, the switchback design, interference, and the required guardrails.

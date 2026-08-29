@@ -31,15 +31,24 @@ I used intention-to-treat: every assigned user stays in their original treatment
 
 The treatment group converted at **0.309%** and the control group at **0.194%**. The absolute difference was **0.115 percentage points** (95% CI **0.108–0.122pp**). The relative lift was approximately **59% within the released benchmark**, but the absolute difference is easier to interpret. Visits increased by **1.034 percentage points** (95% CI **1.006–1.063pp**). Criteo warns that this assembled, non-uniformly subsampled benchmark should not be treated as a current campaign forecast.
 
-An exploratory split of anonymized feature `f0` found the largest conversion difference in its lowest quartile: **0.227pp** (95% CI **0.214–0.241pp**). The remaining quartiles were smaller. Because `f0` has no business meaning and the split was not a pre-registered audience definition, this is a heterogeneity signal to retest, not a targeting recommendation.
+An exploratory split of the full anonymized feature `f0` distribution found the largest conversion difference in its second quartile: **0.386pp** (95% CI **0.361–0.410pp**). The other quartiles were **0.038pp**, **0.019pp**, and **0.010pp**. Because `f0` has no business meaning and the split was not a pre-registered audience definition, this is a heterogeneity signal to retest, not a targeting recommendation.
+
+| Exploratory band | Absolute lift | 95% CI | Decision |
+|---|---:|---:|---|
+| `f0` lowest quartile | +0.038pp | +0.027 to +0.049pp | No targeting decision yet |
+| `f0` second quartile | +0.386pp | +0.361 to +0.410pp | Retest in a holdout |
+| `f0` third quartile | +0.019pp | +0.012 to +0.027pp | No targeting decision yet |
+| `f0` highest quartile | +0.010pp | +0.005 to +0.016pp | No targeting decision yet |
+
+Economics are not estimable from this benchmark because spend, margin, and conversion value are absent.
 
 ![Criteo randomized campaign benchmark: assigned treatment increased conversion from 0.194% to 0.309%, with the uncertainty shown in the accompanying result](/images/growth-criteo-itt.png)
 
 ## Business Interpretation
 
-The campaign created a clear incremental response in this benchmark. Statistical significance is not the same as commercial success: a very large sample can make a small effect look certain, while profitability still depends on spend and contribution.
+The released benchmark shows a clear assignment-rate contrast. That is evidence about this benchmark population, not proof of the same lift in a current campaign. Statistical significance is not the same as commercial success: a very large sample can make a small effect look certain, while profitability still depends on spend and contribution.
 
-The practical planning question is whether roughly 115 incremental conversions per 100,000 assigned users create more contribution than the campaign costs. That value cannot be calculated from the public file.
+The practical planning question is whether the current campaign's internally measured incremental conversions create more contribution than the campaign costs. Neither current incremental conversions nor campaign economics can be calculated from this public file.
 
 ## Decision and Next Experiment
 
