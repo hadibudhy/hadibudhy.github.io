@@ -27,6 +27,7 @@ export default function AboutPage() {
             <Button size="lg" asChild><a href="mailto:hadi.budhy@gmail.com">Get in Touch</a></Button>
             <Button size="lg" variant="outline" asChild><Link href="/projects">Explore the Work <span className="ml-3 text-lg" aria-hidden="true">→</span></Link></Button>
           </div>
+          <div className="mt-10 border-l-2 border-primary/50 pl-5 text-sm leading-7 text-muted-foreground"><p className="font-bold uppercase tracking-[0.16em] text-primary">Real-world evidence boundary</p><p className="mt-2">Professional experience covers alerting, warehouse pipelines, live dashboards, campaign and survey models, and KPI work. Employer names, scale, adoption, and outcome metrics are kept private or are not verifiable in this public repository. The case studies below demonstrate independent analytical and engineering work, not employer results.</p></div>
         </div>
       </section>
 

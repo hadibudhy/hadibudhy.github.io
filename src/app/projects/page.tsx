@@ -3,19 +3,19 @@ import { getAllProjects } from "@/lib/mdx";
 
 export const metadata = {
   title: "Case Studies & Projects",
-  description: "Business-focused case studies across growth, product, operations, risk, finance, marketplaces, and applied AI.",
+  description: "Business-focused case studies across growth, product, operations, marketplace quality, and applied AI.",
   alternates: { canonical: "/projects" },
   openGraph: {
     type: "website",
     url: "https://hadibudhy.github.io/projects",
     title: "Case Studies & Projects | Hadi Budhy",
-    description: "Business-focused case studies across growth, product, operations, risk, finance, marketplaces, and applied AI.",
+    description: "Business-focused case studies across growth, product, operations, marketplace quality, and applied AI.",
     siteName: "Hadi Budhy",
   },
   twitter: {
     card: "summary",
     title: "Case Studies & Projects | Hadi Budhy",
-    description: "Business-focused case studies across growth, product, operations, risk, finance, marketplaces, and applied AI.",
+    description: "Business-focused case studies across growth, product, operations, marketplace quality, and applied AI.",
   },
 };
 
@@ -30,7 +30,7 @@ export default function ProjectsPage() {
         <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6 sm:py-14 md:py-16">
           <p className="section-kicker">Case studies</p>
           <h1 className="mt-5 max-w-4xl break-words text-[2.7rem] font-black tracking-[-0.05em] text-foreground sm:text-5xl md:text-7xl">Case studies built around real business questions.</h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground">A focused library of business case studies. Start with the featured work, then explore the deeper analyses across growth, product, operations, risk, finance, marketplaces, and applied AI.</p>
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground">A focused library of business case studies. Start with the featured work, then explore the deeper analyses across growth, product, operations, marketplace quality, and applied AI.</p>
         </div>
       </section>
       <section className="bg-muted/25">
