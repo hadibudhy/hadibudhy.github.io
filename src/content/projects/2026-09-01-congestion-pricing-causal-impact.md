@@ -7,6 +7,7 @@ excerpt: "A cautious econometric design for measuring how NYC congestion pricing
 problem: "A policy change can coincide with seasonality, weather, provider mix, and rider substitution, so a simple before-and-after chart can give leadership the wrong answer."
 result: "TLC added a CBD congestion-fee field from 2025 onward; the validated January 2025 yellow file contains 3,475,226 trips and 2,246,495 positive-fee rows, but this alone cannot identify a causal effect."
 featured: false
+published: false
 ---
 
 ## Executive Summary
