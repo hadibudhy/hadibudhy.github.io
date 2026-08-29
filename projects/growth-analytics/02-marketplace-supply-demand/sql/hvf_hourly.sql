@@ -1,19 +1,11 @@
--- Business question: when do completed HVFHV trips concentrate?
--- This is a completed-trip proxy, not total rider demand.
+-- Business question: when do recorded HVFHV trips concentrate?
+-- This is a fulfilled-trip proxy, not total rider demand.
 WITH trips AS (
-    SELECT
-        DATE_TRUNC('hour', pickup_datetime) AS pickup_hour,
-        PULocationID AS pickup_zone,
-        hvfhs_license_num AS provider,
-        SR_Flag AS shared_ride
-    FROM read_parquet('analysis_data/growth_sources/fhvhv_tripdata_2025-01.parquet')
+    SELECT CAST(hour AS INTEGER) AS pickup_hour, CAST(trips AS BIGINT) AS recorded_trips
+    FROM read_json_auto('analysis_data/growth_sources/hvf_hourly_2019.json')
 )
 SELECT
-    EXTRACT(hour FROM pickup_hour) AS pickup_hour_of_day,
-    pickup_zone,
-    provider,
-    COUNT(*) AS completed_trips,
-    AVG(shared_ride) AS shared_ride_share
+    pickup_hour,
+    recorded_trips
 FROM trips
-GROUP BY 1, 2, 3
-ORDER BY completed_trips DESC;
+ORDER BY pickup_hour;

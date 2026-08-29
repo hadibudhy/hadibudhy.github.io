@@ -28,7 +28,7 @@ The source is the official [NYC TLC trip-record collection](https://www.nyc.gov/
 
 ## Analysis Design
 
-Use a difference-in-differences event study with pickup inside the congestion zone as treatment and matched outside zones as control. Include zone fixed effects, date or hour fixed effects, weekday and holiday controls, weather where available, provider mix, and route composition. Cluster standard errors by zone.
+Use a difference-in-differences event study with policy exposure defined from origin, destination, and documented charge rules. A pickup-only flag is too narrow because the charge can apply to trips to, from, within, or through the zone. Matched controls must be plausibly untreated, and ambiguous through-trips and border spillovers must be handled explicitly. Include zone and time fixed effects; treat provider mix and route composition as diagnostics unless they are pre-treatment covariates. Use a pre-specified dependence strategy for standard errors.
 
 Before estimating an effect, check parallel trends and placebo dates. Measure trip volume, fare, driver pay, duration, airport flows, and border-zone substitution. A policy can reduce CBD trips while increasing nearby trips, so citywide totals and cross-zone flows are necessary guardrails.
 

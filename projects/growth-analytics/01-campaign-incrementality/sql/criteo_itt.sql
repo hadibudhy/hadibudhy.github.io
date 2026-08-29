@@ -10,10 +10,14 @@ WITH assignment_summary AS (
     GROUP BY treatment
 )
 SELECT
-    treatment,
-    assigned_users,
-    conversions,
-    visits,
-    conversions / NULLIF(assigned_users, 0) AS conversion_rate,
-    visits / NULLIF(assigned_users, 0) AS visit_rate
-FROM assignment_summary;
+    t.assigned_users AS treatment_users,
+    c.assigned_users AS control_users,
+    t.conversions AS treatment_conversions,
+    c.conversions AS control_conversions,
+    t.conversions * 1.0 / NULLIF(t.assigned_users, 0) AS treatment_conversion_rate,
+    c.conversions * 1.0 / NULLIF(c.assigned_users, 0) AS control_conversion_rate,
+    t.conversions * 1.0 / NULLIF(t.assigned_users, 0) - c.conversions * 1.0 / NULLIF(c.assigned_users, 0) AS absolute_conversion_lift,
+    (t.conversions * 1.0 / NULLIF(t.assigned_users, 0) - c.conversions * 1.0 / NULLIF(c.assigned_users, 0)) * 100000 AS benchmark_incremental_conversions_per_100k
+FROM assignment_summary t
+JOIN assignment_summary c ON c.treatment = 0
+WHERE t.treatment = 1;

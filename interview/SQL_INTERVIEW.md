@@ -49,4 +49,4 @@ WITH daily AS (
 SELECT * FROM ranked WHERE zone_rank <= 5;
 ```
 
-This answers where completed trips concentrate, not where unmet demand exists. The join and denominator checks are part of the answer.
+This answers where recorded trips concentrate, not where unmet demand exists. The join and denominator checks are part of the answer.

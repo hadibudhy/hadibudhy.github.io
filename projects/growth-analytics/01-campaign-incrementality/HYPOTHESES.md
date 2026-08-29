@@ -8,4 +8,4 @@
 | Exposure is not a safe primary treatment definition | Exposure is downstream of assignment | Unknown | Compare ITT with exposure descriptively | Do not replace random assignment with exposed-only analysis |
 | The campaign may be statistically positive but commercially weak | Large samples detect tiny effects | Positive but small | Effect size against scenario break-even | Do not scale without economics |
 
-Exploratory segment findings must be labelled exploratory and corrected for multiple comparisons.
+Exploratory segment findings must be labelled exploratory and corrected for multiple comparisons. The current script uses four `f0` bands as a diagnostic only; it does not create a production audience definition.

@@ -6,7 +6,7 @@
 
 The official unbiased Criteo release contains **13,979,592 user rows**, 12 anonymized features, randomized treatment, exposure, visits, and conversions. A streaming pass finds treatment conversion of **0.309%** versus control conversion of **0.194%**, an absolute difference of **0.115 percentage points** (95% CI **0.108–0.122pp**, two-sided p < 0.001). Visits differ by **1.034pp** (95% CI **1.006–1.063pp**). These are ITT estimates: assignment, not observed exposure, is the causal comparison.
 
-The result is statistically clear and operationally meaningful as a traffic/conversion signal. It is not enough to claim profitable scale because the public data does not contain campaign cost, conversion value, margin, or advertiser identity. The decision is therefore **scale only within a break-even CPA guardrail**, while using segment results to reduce waste.
+The result is statistically clear within this released benchmark. It should not be transported as the expected lift of a current advertiser campaign because Criteo combines several experiments and non-uniformly subsamples the data. The decision is therefore **do not infer profitable scale from this file**; use the result to define a current-campaign holdout and break-even CPA guardrail.
 
 ## Business problem
 
@@ -32,11 +32,13 @@ The treatment share is approximately 85%, consistent with the official release d
 
 ## Analysis and evidence
 
-The primary estimate is the difference in conversion proportions between all assigned treatment and all assigned control users. The normal approximation is appropriate at this scale; a bootstrap is an additional robustness check in the analysis script. The observed conversion lift is about **59.4% relative to control**, but the absolute lift is the more useful planning number: about **115 additional conversions per 100,000 assigned users**, before cost and value.
+The primary estimate is the difference in conversion proportions between all assigned treatment and all assigned control users. The normal approximation is appropriate at this scale. The observed conversion lift is about **59.4% relative to control within the released benchmark**, but the absolute lift is the more useful benchmark description: about **115 additional conversions per 100,000 assigned users**, before cost and value. This is not a current-campaign forecast.
 
 The visit lift is about **1,034 additional visits per 100,000 assigned users**. A visit is not a conversion, so the campaign should not be judged on visits alone.
 
 Feature-level uplift is exploratory because the 12 feature names are anonymized, segment boundaries are analyst choices, and many comparisons create false-positive risk. Any rollout segment must be re-tested on a fresh holdout.
+
+As a reproducible diagnostic, I split `f0` into four equal-sized bands. The lowest band showed a **0.227pp** conversion difference (95% CI **0.214–0.241pp**); the other bands were **0.038pp**, **0.016pp**, and **0.009pp**. These are not customer personas: `f0` has no business meaning, the bands were selected after inspection, and the result needs multiplicity control and a new holdout. It is evidence that response may be heterogeneous, not a targeting policy.
 
 ## Economics and decision
 
@@ -63,6 +65,6 @@ Run a fresh randomized holdout with pre-registered primary conversion, visit-qua
 
 ## Interview explanation
 
-**30 seconds:** “I used Criteo’s randomized incrementality benchmark to separate campaign lift from conversions that would have happened anyway. Assignment to treatment increased conversion by about 0.115 percentage points, with a tight confidence interval, so the effect is statistically and potentially operationally meaningful. I would not scale on that result alone because cost and contribution are missing. I would use incremental CPA as the decision guardrail and validate promising segments in a new holdout.”
+**30 seconds:** “I used Criteo’s randomized incrementality benchmark to estimate the difference between assigned treatment and control. The released sample shows a 0.115 percentage-point conversion difference with a tight confidence interval. I would not transport that rate to a current campaign because the benchmark combines and subsamples experiments. I would use it to define a current-campaign holdout and an incremental CPA guardrail.”
 
 **2 minutes:** Explain the ITT design, the control/treatment denominators, the conversion and visit confidence intervals, why exposure is downstream, the difference between statistical and practical significance, and the break-even economics required for a rollout decision.

@@ -12,6 +12,6 @@
 | Panel data | How do units change over time? | Repeated zone or provider observations | Missingness and dependence | “We use repeated observations while accounting for unit and time differences.” |
 | Clustered errors | How should uncertainty reflect grouped observations? | Trips in the same zone are related | Correct cluster level | “Trips in one zone are not independent, so uncertainty must be wider when needed.” |
 
-For congestion pricing, start with an event-study difference-in-differences. The treatment is a pickup inside the defined CBD after 5 January 2025; controls are matched outside zones. Inspect pre-trends, placebo dates, border spillovers, provider mix, weather, holidays, and reporting changes. If the assumptions fail, the correct conclusion is that the causal effect is not identified.
+For congestion pricing, start with an event-study difference-in-differences. Exposure must reflect trips to, from, within, or through the charge zone; pickup-only treatment is too narrow. Inspect pre-trends, placebo dates, border spillovers, provider mix, weather, holidays, and reporting changes. If the assumptions fail, the correct conclusion is that the causal effect is not identified.
 
 Do not call an OLS coefficient causal simply because controls were added. Endogeneity remains when pricing, driver supply, and demand respond to one another. Explain which assumption carries the result and what evidence would challenge it.

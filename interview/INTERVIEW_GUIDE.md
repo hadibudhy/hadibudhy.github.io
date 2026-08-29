@@ -22,11 +22,11 @@
 
 **What is happening when rides rise but wait also rises?** Demand may be growing faster than supply, matching may worsen, or reporting may change. Ask for requests, cancellations, wait, and driver-hour denominators.
 
-**Why not use completed trips as demand?** A completed trip is fulfilled demand. It omits rejected, abandoned, and unserved requests.
+**Why not use recorded trips as demand?** A recorded trip is evidence of a dispatched trip, not the full request pool. It omits rejected, abandoned, and unserved requests.
 
 **Why switchback or geographic randomization?** Drivers and riders interact, so individual treatment can contaminate control. Cluster or time assignment reduces interference.
 
-**What should be the incentive metric?** Incremental fulfilled trips per eligible driver-hour after incentive cost, with wait, cancellation, driver earnings, and neighboring-zone displacement as guardrails.
+**What should be the incentive metric?** Request fulfillment is the customer outcome; incremental recorded trips per online driver-hour is a supply diagnostic, and incremental trips per incentive dollar is the economic measure. Wait, cancellation, driver earnings, and neighboring-zone displacement are guardrails.
 
 **What if the public data is incomplete?** Narrow the claim, label proxies, and identify the next data needed. “Insufficient evidence” is a valid decision.
 

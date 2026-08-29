@@ -16,7 +16,7 @@
 
 For the Criteo campaign, assignment is the treatment and conversion is the primary metric. Use intention-to-treat, a predeclared confidence interval, and incremental CPA as the commercial guardrail. A p-value below 0.05 does not prove the campaign is profitable. A p-value of 0.08 is evidence that is inconclusive, not proof of no effect; inspect the interval and collect more evidence only under the planned stopping rule.
 
-For marketplace incentives, individual-driver randomization may violate SUTVA because treated drivers affect the same riders and supply pool as controls. Prefer zone clusters, time-based switchbacks, or another design that contains interference. Measure fulfilled trips per eligible driver-hour, not only gross rides.
+For marketplace incentives, individual-driver randomization may violate SUTVA because treated drivers affect the same riders and supply pool as controls. Prefer zone clusters, time-based switchbacks, or another design that contains interference. Measure request fulfillment and incremental trips per incentive dollar, not only gross rides or driver productivity.
 
 Avoid peeking, changing the metric after results, stopping when a convenient p-value appears, and testing many segments without correction. Control the false-discovery rate or use a predeclared primary segment. Monitor novelty effects, multiple testing, seasonality, assignment balance, and guardrail regressions.
 

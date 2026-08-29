@@ -2,7 +2,7 @@
 
 ## Executive summary
 
-**Decision owner:** Marketplace and Commercial leadership. **Decision:** should pricing, incentives, or geographic strategy change after congestion pricing? **Primary outcome:** fulfilled trips per zone-hour. **Guardrails:** passenger fare, driver pay, trip duration, cancellations, and cross-zone substitution.
+**Decision owner:** Marketplace and Commercial leadership. **Decision:** should pricing, incentives, or geographic strategy change after congestion pricing? **Primary outcome:** request fulfillment or recorded trips per zone-hour, depending on data availability. **Guardrails:** passenger fare, driver pay, trip duration, cancellations, and cross-zone substitution.
 
 NYC congestion pricing began on **5 January 2025**. TLC states that a `cbd_congestion_fee` field was added to Yellow, Green, and HVFHV records from 2025 onward. The January 2025 yellow-taxi file currently validated in this repository contains **3,475,226 trips** and **2,246,495 rows with a positive CBD fee**. Those are exposure and fee observations, not a causal estimate.
 
@@ -30,7 +30,7 @@ Marketplace outcome
 
 ## Identification strategy
 
-The preferred design is a difference-in-differences event study. Treatment is pickup inside a pre-defined congestion zone after 5 January 2025. Controls are comparable pickup zones outside the zone, selected using pre-policy trip volume, time pattern, and route mix. The model includes zone fixed effects, date or hour fixed effects, weekday controls, holidays, weather, and provider mix where available. Standard errors should be clustered at the zone level, with sensitivity to citywide time shocks.
+The preferred design is a difference-in-differences event study. Policy exposure is defined from origin, destination, and documented zone eligibility after 5 January 2025. A pickup-only flag is not enough because the charge can apply to trips to, from, within, or through the zone. Controls must be plausibly untreated, with ambiguous through-trips and border spillovers handled explicitly. The included Python estimator requires one row per zone-day, a precomputed exposure flag, zone and date fixed effects, and at least 10 zone clusters before clustered inference. Provider mix and route composition are diagnostics unless they are known pre-treatment covariates. Inference needs a pre-specified spatial and time dependence strategy, not only a default zone cluster.
 
 The parallel-trends assumption must be inspected before the policy date. Placebo intervention dates should produce no comparable step change. Spillovers are expected: trips may move to border zones, drivers may reposition, and riders may substitute modes. Those effects are part of the business result, not noise to hide.
 
