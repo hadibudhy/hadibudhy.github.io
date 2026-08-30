@@ -69,6 +69,20 @@ High concentration, a single bidder, or an amendment can have legitimate explana
 
 **Why it matters:** the output needs an explanation trail and appeal path.
 
+## Evidence register
+
+| Layer | Evidence | Decision use |
+|---|---|---|
+| Observed | OCDS releases connect planning, tender, award, contract, and implementation events through an OCID | Build process and stage-completeness views |
+| Inferred | A red-flag score is only useful after publisher completeness is visible | Prioritize data-quality work first |
+| Not established | A single bidder, amendment, or concentration proves misconduct | Send indicators to human review |
+
+## Validation record
+
+- **Grain:** immutable release and procurement process; releases are events, records are joined processes.
+- **Checks:** OCIDs, release IDs, stage tags, dates, parties, values, and publisher completeness are validated.
+- **Guardrail:** missing implementation data is not converted to “no implementation issue.”
+
 ## Recommendation
 
 **What:** ship the ingestion and completeness layer before a supplier-risk score.
@@ -92,4 +106,3 @@ Sources: [OCP Data Registry](https://data.open-contracting.org/en/search/) and [
 ## Technical appendix
 
 The core contracts are `stg_release`, `fct_procurement_process`, `fct_award`, `fct_contract_amendment`, and `dq_process_completeness`. Every indicator stores the source `ocid`, release IDs, publisher, retrieval date, and completeness status.
-
