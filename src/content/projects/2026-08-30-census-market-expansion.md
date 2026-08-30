@@ -69,6 +69,20 @@ Small-area business statistics may use range codes or suppression for confidenti
 
 **Why it matters:** markets with suppressed target values need primary research, not automatic exclusion or inclusion.
 
+## Evidence register
+
+| Layer | Evidence | Decision use |
+|---|---|---|
+| Observed | Annual county × NAICS records provide establishments, employment, payroll, and suppression status | Screen market structure and industry depth |
+| Inferred | A market with target-industry scale and stable supply deserves investigation | Allocate commercial research time |
+| Not established | Establishments are customers, or a county screen predicts revenue | Enrich with demand and competitor evidence |
+
+## Validation record
+
+- **Grain:** county × NAICS × year.
+- **Checks:** release year and NAICS level are explicit; suppressed/range values remain status fields.
+- **Guardrail:** location quotient and composite screens are not presented as demand or profit estimates.
+
 ## Recommendation
 
 **What:** build a two-stage expansion screen: objective Census thresholds first, commercial validation second.
@@ -92,4 +106,3 @@ Source and program documentation: [Census County Business Patterns](https://www.
 ## Technical appendix
 
 Use the Census API with an explicit `NAICS2017` query and release year. Preserve `D` and `S`-style suppression or range indicators as status fields; never coerce them to zero. Calculate location quotient only after selecting a consistent industry and comparison geography.
-
