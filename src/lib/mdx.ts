@@ -18,6 +18,7 @@ export interface ProjectMeta {
   featured?: boolean;
   published?: boolean;
   kind: ProjectKind;
+  evidenceVisuals: string[];
 }
 
 export interface Project {
@@ -46,6 +47,9 @@ function normalizeMeta(data: Record<string, unknown>): ProjectMeta | null {
   if (published && !validKind) {
     throw new Error(`Published project is missing a valid kind. Use flagship, completed, or methods.`);
   }
+  if (published && kind === "methods") {
+    throw new Error("Methods-only projects must remain unpublished until they have a completed project-specific result.");
+  }
 
   return {
     title: data.title,
@@ -61,6 +65,7 @@ function normalizeMeta(data: Record<string, unknown>): ProjectMeta | null {
     featured: data.featured === true,
     published,
     kind: validKind ? kind : "methods",
+    evidenceVisuals: toStringArray(data.evidenceVisuals),
   };
 }
 
@@ -82,6 +87,16 @@ export function getProjectBySlug(slug: string): Project | null {
   }
   
   if (meta.published === false) return null;
+
+  const visuals = new Set([...content.matchAll(/!\[[^\]]*\]\((\/images\/[^)]+)\)/g)].map((match) => match[1]));
+  const evidenceVisuals = [...new Set(meta.evidenceVisuals)].filter((visual) => {
+    const visualPath = path.join(process.cwd(), "public", visual);
+    if (!visuals.has(visual) || !fs.existsSync(visualPath)) return false;
+    return path.extname(visualPath) !== ".svg" || !fs.readFileSync(visualPath, "utf8").includes("CONCEPTUAL DESIGN");
+  });
+  if (evidenceVisuals.length < 3) {
+    throw new Error(`Published project ${realSlug} has ${evidenceVisuals.length} valid declared evidence visuals; at least 3 are required.`);
+  }
 
   return {
     slug: realSlug,

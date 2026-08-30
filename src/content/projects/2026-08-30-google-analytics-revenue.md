@@ -6,7 +6,7 @@ tags: [acquisition, revenue, calibration, Google Analytics]
 excerpt: "A revenue-quality study that ranks acquisition paths by observed value while keeping session leakage and the historical forecast boundary explicit."
 problem: "Marketing needs to decide which acquisition paths deserve more attention, but session volume alone can reward channels that bring many low-value visits."
 result: "The public Google Merchandise Store release contains visit-level records, user identifiers, channel and traffic fields, and a revenue target; it supports value-aware prioritization but not a current budget recommendation."
-published: true
+published: false
 kind: methods
 ---
 

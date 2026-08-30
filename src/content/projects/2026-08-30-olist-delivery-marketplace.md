@@ -6,7 +6,7 @@ tags: [marketplace, delivery, sellers, customer experience]
 excerpt: "A Brazilian e-commerce operations study that joins orders, sellers, products, payments, freight, and reviews to separate late delivery from product or seller-quality problems."
 problem: "A marketplace wants to improve customer trust, but a low review score can come from late delivery, product mismatch, payment friction, or seller behavior."
 result: "The public Olist release links about 100,000 orders across customers, sellers, products, payments, freight, delivery dates, and reviews; it supports root-cause decomposition without exposing private customer identity."
-published: true
+published: false
 kind: methods
 ---
 

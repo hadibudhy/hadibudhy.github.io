@@ -6,7 +6,7 @@ tags: [recommendation, coverage, ranking, MovieLens]
 excerpt: "A recommendation-product study that balances familiar titles, user relevance, novelty, and catalog coverage using real ratings and tags."
 problem: "A media product wants to improve recommendation quality, but optimizing only for popular titles can make the catalog feel repetitive and leave useful long-tail content undiscovered."
 result: "The GroupLens release contains 25 million ratings and one million tag applications across 62,000 movies from 162,000 users, enough to compare relevance with coverage and popularity bias."
-published: true
+published: false
 kind: methods
 ---
 

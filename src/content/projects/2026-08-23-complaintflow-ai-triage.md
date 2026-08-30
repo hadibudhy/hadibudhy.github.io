@@ -13,6 +13,10 @@ problem: "Support teams need to route complaints quickly, but an unreliable AI r
 result: "Portfolio reference implementation: ComplaintFlow combines a transparent baseline, approved-playbook retrieval, provider retries, PII redaction, schema checks, human escalation, and an auditable SQLite decision log."
 featured: true
 kind: flagship
+evidenceVisuals:
+  - /images/complaintflow-architecture.svg
+  - /images/portfolio-complaintflow-boundary.svg
+  - /images/portfolio-complaintflow-fixture.svg
 header:
   teaser: /images/complaintflow-architecture.svg
 ---
@@ -46,7 +50,7 @@ That limitation shapes the system. ComplaintFlow helps with routing and evidence
 ## Decision brief
 
 - **Recommendation:** use shadow mode first; assist routing only after a privacy-reviewed holdout matches or beats the transparent baseline.
-- **Evidence:** the reference fixture achieves perfect routing and citation coverage, but it is small, synthetic, and hand-written.
+- **Evidence:** the reference fixture achieves perfect routing and 100% citation coverage on routed cases (17/17; 85% across all 20 including escalations), but it is small, synthetic, and hand-written.
 - **Potential value:** faster, more consistent triage; no production time or cost saving is claimed.
 - **Evidence strength:** High for the checked-in workflow contract; low for real-world model performance.
 - **Cost / resource requirement:** A live rollout requires privacy review, labeled holdout data, managed persistence, and provider-cost measurement; no production cost is claimed.
@@ -78,7 +82,7 @@ The public complaint data is an example source for the workflow, not a represent
 
 ## Key findings
 
-The bounded workflow validates inputs, protects personal data, retrieves approved guidance, makes uncertainty visible, and records enough evidence for review. The local reference fixture achieved perfect routing and citation coverage, but that result is a contract test, not a production accuracy claim.
+The bounded workflow validates inputs, protects personal data, retrieves approved guidance, makes uncertainty visible, and records enough evidence for review. The local reference fixture achieved perfect routing and 100% citation coverage on routed cases (17/17; 85% across all 20 including escalations), but that result is a contract test, not a production accuracy claim.
 
 ## Additional visual evidence
 
@@ -93,6 +97,12 @@ The logging path makes the workflow reviewable by support and risk owners.
 ![ComplaintFlow evidence boundary: the fixture validates routing schema, fallbacks, retries, and audit logging, but not representative complaint prevalence or real resolution impact](/images/portfolio-complaintflow-boundary.svg)
 
 This visual keeps the synthetic fixture’s purpose explicit.
+
+### Validation result: the checked fixture passes the software contract
+
+![ComplaintFlow's 20-case synthetic fixture achieved 1.00 macro-F1, 100% citation coverage on 17 routed cases, and escalation on all three unknown cases](/images/portfolio-complaintflow-fixture.svg)
+
+The result verifies the checked baseline, routing, citation, and escalation paths on hand-written cases. It does not estimate performance on real complaint traffic.
 
 ## Recommendation
 

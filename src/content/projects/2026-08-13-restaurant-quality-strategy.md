@@ -12,6 +12,10 @@ problem: "Restaurant inspection records were detailed but repeated across violat
 result: "After rolling 227,520 recent violation rows into 73,211 inspection records, the analysis found meaningful differences in critical-violation rates across boroughs."
 featured: false
 kind: completed
+evidenceVisuals:
+  - /images/restaurant-grades.png
+  - /images/restaurant-risk-by-borough.png
+  - /images/portfolio-restaurant-triage.svg
 header:
   teaser: /images/restaurant-grades.png
 ---

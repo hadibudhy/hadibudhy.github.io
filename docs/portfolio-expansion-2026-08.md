@@ -1,5 +1,7 @@
 # Portfolio expansion: 14 source-grounded decision pages
 
+> **Superseded publication decision:** the current fail-closed status is recorded in `portfolio-completion-gate-2026-08.md`. The methods-only pages described below are no longer public.
+
 Build date: 2026-08-30
 
 This expansion adds 14 published source-grounded pages to the existing portfolio. The set is intentionally decision-led: each page starts with a business choice, states what the public data can measure, separates observation from inference, and ends with a bounded next action. The current repository classifies zero pages as completed analyses and 14 as methods/design studies because no checked-in dataset and runnable project-specific computation are available for these expansion pages. No dummy, synthetic, placeholder, or generic sample dataset is used as claimed evidence in these 14 pages.

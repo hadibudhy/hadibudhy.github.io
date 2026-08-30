@@ -6,7 +6,7 @@ tags: [mobility, stations, member experience, operations]
 excerpt: "A station-level product and service study that combines trip histories with current availability concepts to find where a popular origin can still create a poor journey."
 problem: "A bike-share product can celebrate trip volume while riders still encounter empty origins or full destinations during the moments that matter."
 result: "Citi Bike publishes trip histories with origin, destination, time, ride type, and member/casual status, plus real-time station status feeds; together they support an imbalance diagnostic but not a counterfactual rebalancing effect."
-published: true
+published: false
 kind: methods
 ---
 

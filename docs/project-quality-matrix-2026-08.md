@@ -1,5 +1,7 @@
 # Project quality matrix
 
+> **Superseded publication decision:** use `portfolio-completion-gate-2026-08.md` for the current evidence and publication gate.
+
 Current editorial classification for the 20 published project pages. Scores are internal review scores, not proof of professional impact. “Findings” means computed project-specific output; source facts and conceptual diagrams do not count as completed findings.
 
 | Project | Class | Findings | Data quality | Reproducibility | Decision relevance | Visual evidence | Method rigor | Originality | Business use | Credibility | Hiring signal |

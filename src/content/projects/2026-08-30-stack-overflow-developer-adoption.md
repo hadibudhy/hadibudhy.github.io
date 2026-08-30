@@ -6,7 +6,7 @@ tags: [developer experience, survey analytics, AI adoption, segmentation]
 excerpt: "A product-research study that turns a large developer survey into onboarding and enablement decisions without treating self-reported adoption as product telemetry."
 problem: "A developer-product team needs to decide whether to invest next in onboarding, AI guidance, or workflow support, but survey popularity alone does not reveal the highest-value intervention."
 result: "The 2025 Stack Overflow Developer Survey contains 49,019 responses; 76% identify as professional developers, and the source reports AI-learning behavior alongside role and experience context."
-published: true
+published: false
 kind: methods
 ---
 

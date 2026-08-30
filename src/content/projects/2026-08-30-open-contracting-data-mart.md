@@ -6,7 +6,7 @@ tags: [procurement, OCDS, data quality, governance]
 excerpt: "A procurement-data mart design that preserves the lifecycle of a public contract and makes missing stages visible before anyone ranks supplier or integrity risk."
 problem: "Procurement analysts want to compare competition, awards, and delivery, but public contracting data arrives as nested releases with different stages and publisher-specific completeness."
 result: "The Open Contracting Data Standard links planning, tender, award, contract, and implementation releases with an OCID; it provides a real shared model for a governed procurement mart."
-published: true
+published: false
 kind: methods
 ---
 

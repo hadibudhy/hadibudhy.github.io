@@ -6,7 +6,7 @@ tags: [service operations, workload, public data, response time]
 excerpt: "A service-operations study that separates incoming request volume from close time, backlog, and workflow mix before recommending where capacity should move."
 problem: "A service team sees high 311 volume in several neighborhoods, but raw request count does not show which queues are slow, which issues need specialized work, or whether a response was actually resolved."
 result: "The public NYC 311 dataset provides a long-running record of request type, creation and closure timestamps, location, and status; it supports workload triage while keeping administrative closure distinct from resolution."
-published: true
+published: false
 kind: methods
 ---
 

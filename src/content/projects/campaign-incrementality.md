@@ -8,6 +8,10 @@ problem: "A campaign can increase reported conversions while adding little incre
 result: "In the official Criteo benchmark, the assigned advertising group converted 0.115 percentage points more often than the control group."
 featured: true
 kind: flagship
+evidenceVisuals:
+  - /images/growth-criteo-itt.png
+  - /images/portfolio-campaign-economics.svg
+  - /images/portfolio-campaign-f0.svg
 ---
 
 ## Business question
@@ -75,6 +79,12 @@ The practical launch threshold is explicit: scale only when incremental CPA is b
 ![Criteo randomized benchmark: 0.194% control conversion, 0.309% treatment conversion, +0.115 percentage-point lift, and 115 extra conversions per 100,000 assigned users](/images/portfolio-campaign-economics.svg)
 
 The visual keeps the lift and its economic boundary in the same frame.
+
+### Driver check: the exploratory lift is concentrated in one anonymous band
+
+![Criteo exploratory f0 quartiles: absolute conversion lift was 0.038, 0.386, 0.019, and 0.010 percentage points across the four bands](/images/portfolio-campaign-f0.svg)
+
+The second `f0` quarter shows the largest historical difference, but `f0` has no business label. It is a retest hypothesis, not a deployable customer segment.
 
 ### Decision: retain a randomized holdout and an economic stop rule
 

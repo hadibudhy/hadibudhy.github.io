@@ -6,6 +6,7 @@ explicitly labelled conceptual designs rather than observed business outcomes.
 """
 
 from html import escape
+import json
 from pathlib import Path
 
 
@@ -74,16 +75,18 @@ def bars(name, title, subtitle, labels, values, unit, source, footnote):
     body = [text(82, 215, unit, 16, MUTED, 700)]
     base_y = 505
     chart_h = 250
-    bar_w = 160
-    gap = 80
+    gap = 24 if len(values) > 4 else 80
+    bar_w = (970 - gap * (len(values) - 1)) / len(values) if len(values) > 4 else 160
+    chart_x = 110 if len(values) > 4 else 170
     for i, (label, value) in enumerate(zip(labels, values)):
-        x = 170 + i * (bar_w + gap)
+        x = chart_x + i * (bar_w + gap)
         height = chart_h * value / max_value
         y = base_y - height
         body.append(f'<line x1="110" y1="{base_y}" x2="1080" y2="{base_y}" stroke="{BORDER}" stroke-width="2"/>')
         body.append(f'<rect x="{x}" y="{y:.1f}" width="{bar_w}" height="{height:.1f}" fill="{ACCENT if i % 2 == 0 else ACCENT_2}"/>')
         body.append(text(x + bar_w / 2, y - 18, f"{value:g}", 24, INK, 700, "middle"))
-        body.append(wrap(x + bar_w / 2, base_y + 34, label, 16, 17, INK, 22, 700, "middle"))
+        label_width = 16 if len(values) <= 4 else max(8, int(bar_w / 9))
+        body.append(wrap(x + bar_w / 2, base_y + 34, label, label_width, 17 if len(values) <= 4 else 15, INK, 22, 700, "middle"))
     write(name, shell(title, subtitle, source, "".join(body), footnote))
 
 
@@ -99,11 +102,11 @@ def timeline(name, title, subtitle, events, source, footnote="Time boundary from
     write(name, shell(title, subtitle, source, "".join(body), footnote))
 
 
-def observability(name, title, subtitle, observed, missing, source, footnote="Observed vs not observed"):
+def observability(name, title, subtitle, observed, missing, source, footnote="Observed vs not observed", observed_label="Observed in the public source"):
     body = [
         f'<rect x="82" y="220" width="480" height="310" fill="#ecfdf5" stroke="{ACCENT_2}"/>',
         f'<rect x="638" y="220" width="480" height="310" fill="#fff7ed" stroke="{ORANGE}"/>',
-        text(112, 270, "Observed in the public source", 22, ACCENT_2, 700),
+        text(112, 270, observed_label, 22, ACCENT_2, 700),
         text(668, 270, "Not observed / do not claim", 22, ORANGE, 700),
     ]
     for i, value in enumerate(observed):
@@ -136,7 +139,17 @@ def flow(name, title, subtitle, steps, source, footnote="Conceptual design — n
 
 def generate():
     # New project visuals
-    flow("portfolio-online-shoppers-experiment.svg", "Turn the descriptive contrast into a clean activation test", "The next decision needs a pre-intervention feature set, randomized eligibility, and experience guardrails.", [("Eligibility", "Visitor type and early browsing only"), ("Randomize", "Prompt versus no prompt"), ("Measure", "Conversion, bounce, seven-day return")], "UCI session fields and project experiment design")
+    shopper_metrics = json.loads((OUT.parent / "data" / "online-shoppers-metrics.json").read_text(encoding="utf-8"))
+    visitor = shopper_metrics["visitor_conversion"]
+    raw_visitor = shopper_metrics["raw_visitor_conversion"]
+    page_values = shopper_metrics["mean_page_values"]
+    new_rate = 100 * visitor["New_Visitor"]["rate"]
+    returning_rate = 100 * visitor["Returning_Visitor"]["rate"]
+    conversions = sum(item["conversions"] for item in visitor.values())
+    bars("portfolio-online-shoppers-visitor.svg", f"New visitors converted {new_rate - returning_rate:.1f} points more often than returning visitors", f"Revenue=True share after exact-row deduplication; n={shopper_metrics['deduplicated_sessions']:,} sessions across ten months of 2018.", [f"New visitor (n={visitor['New_Visitor']['sessions']:,})", f"Other (n={visitor['Other']['sessions']:,})", f"Returning visitor (n={visitor['Returning_Visitor']['sessions']:,})"], [round(new_rate, 1), round(100 * visitor["Other"]["rate"], 1), round(returning_rate, 1)], "Session conversion rate (%)", "UCI Online Shoppers Purchasing Intention dataset", "Descriptive, not causal")
+    bars("portfolio-online-shoppers-pagevalue.svg", "PageValues strongly separates outcomes—but its timing is unverified", f"Mean PageValues by Revenue outcome after exact-row deduplication; n={shopper_metrics['deduplicated_sessions']:,} sessions.", [f"Revenue=True (n={conversions:,})", f"Revenue=False (n={shopper_metrics['deduplicated_sessions'] - conversions:,})"], [round(page_values["true"], 1), round(page_values["false"], 1)], "Mean PageValues", "UCI Online Shoppers Purchasing Intention dataset", "Unsafe until timing is verified")
+    bars("portfolio-online-shoppers-sensitivity.svg", "The visitor contrast survives the exact-row deduplication choice", "Revenue=True share before and after removing 125 exact-identical rows; raw n=12,330, deduplicated n=12,205.", ["New: raw", "New: deduplicated", "Returning: raw", "Returning: deduplicated"], [round(100 * raw_visitor["New_Visitor"]["rate"], 1), round(new_rate, 1), round(100 * raw_visitor["Returning_Visitor"]["rate"], 1), round(returning_rate, 1)], "Session conversion rate (%)", "UCI Online Shoppers Purchasing Intention dataset", "Sensitivity to row treatment")
+    flow("portfolio-online-shoppers-experiment.svg", "Test the observed visitor gap instead of treating it as lift", "The completed analysis identifies a segment contrast; a randomized prompt is still required to estimate incremental conversion.", [("Eligibility", "Visitor type and early browsing only"), ("Randomize", "Prompt versus no prompt"), ("Measure", "Conversion, bounce, seven-day return")], "UCI session analysis and proposed experiment")
 
     facts("portfolio-instacart-scale.svg", "Instacart exposes the sequence needed for reorder analysis", "The public release is relational: the decision depends on preserving order, product, and reorder grain.", [("3.4M", "orders", "Order sequence and cadence"), ("206,209", "users", "Anonymous user histories"), ("49,688", "products", "Product and aisle metadata"), ("6", "linked tables", "Orders, products, taxonomy, and labels")], "Instacart public release and competition documentation")
     observability("portfolio-instacart-evidence.svg", "Reorder history is observable; incremental value is not", "The visual keeps the growth hypothesis separate from the economics the public release cannot measure.", ["order_number and days_since_prior_order", "product-level reordered flag", "aisle and department context"], ["reminder assignment or holdout", "inventory and substitutions", "margin and incremental orders"], "Instacart public release")
@@ -194,8 +207,10 @@ def generate():
     facts("portfolio-restaurant-triage.svg", "Restaurant inspection work needs an inspection-level quality queue", "The validated 2022–2025 rollup contains 73,211 inspections, including 30,037 without a recorded grade.", [("73,211", "inspection records", "One inspection grain"), ("30,037", "without grade", "Follow-up uncertainty"), ("2022–2025", "analysis window", "Comparable period"), ("1", "inspection", "Not one row per violation")], "NYC Restaurant Inspection Results")
     bars("portfolio-retail-cleaning.svg", "Cleaning customer identity changes the growth denominator", "The UCI Online Retail release contains missing customer IDs and transaction rows that must be handled before retention analysis.", ["Raw rows", "Missing CustomerID", "Identifiable customers"], [541909, 135080, 4338], "Records / customers (different units)", "UCI Online Retail validation record", "Do not compare unlike units as a rate")
     flow("portfolio-complaintflow-log.svg", "ComplaintFlow turns every AI decision into an auditable workflow record", "The reference design keeps input validation, redaction, retrieval, escalation, and logging distinct.", [("Validate", "Schema and PII"), ("Retrieve", "Approved playbook"), ("Escalate", "Uncertainty"), ("Log", "Evidence and outcome")], "ComplaintFlow reference implementation")
-    observability("portfolio-complaintflow-boundary.svg", "A synthetic fixture validates software behavior, not real-world model quality", "The system contract is testable; production performance needs privacy-reviewed labeled complaints.", ["routing schema and fallbacks", "provider retries and audit log", "evaluation slices in fixture"], ["representative complaint prevalence", "hosted-model production accuracy", "real customer resolution impact"], "ComplaintFlow project documentation")
+    observability("portfolio-complaintflow-boundary.svg", "A synthetic fixture validates software behavior, not real-world model quality", "The system contract is testable; production performance needs privacy-reviewed labeled complaints.", ["routing schema and fallbacks", "provider retries and audit log", "evaluation slices in fixture"], ["representative complaint prevalence", "hosted-model production accuracy", "real customer resolution impact"], "ComplaintFlow project documentation", observed_label="Implemented / tested in the repository")
+    facts("portfolio-complaintflow-fixture.svg", "The 20-case fixture passes the routing contract—not a production benchmark", "Checked local evaluation output on hand-written standard, unknown, PII, paraphrase, and short cases.", [("20", "fixture cases", "Small synthetic contract test"), ("1.00", "macro-F1", "Baseline and service"), ("100%", "routed citation coverage", "17 of 17 routed cases"), ("3", "human escalations", "All unknown cases")], "ComplaintFlow checked evaluation fixture", "Synthetic validation evidence")
     facts("portfolio-campaign-economics.svg", "The randomized benchmark shows lift, but economics still set the rollout gate", "Criteo ITT conversion effect from the released benchmark; current ad cost and contribution are unavailable.", [("0.194%", "control conversion", "Assigned control"), ("0.309%", "treatment conversion", "Assigned advertising"), ("+0.115pp", "absolute lift", "95% CI +0.108 to +0.122pp"), ("115", "extra conversions / 100k", "Benchmark scenario")], "Criteo Uplift Modeling Dataset", "Scale only when incremental CPA clears contribution")
+    bars("portfolio-campaign-f0.svg", "One anonymized feature band contains most of the exploratory lift", "Intention-to-treat conversion difference across complete f0 quartiles; n=13,979,592 benchmark rows. Bands are not customer personas.", ["f0 Q1", "f0 Q2", "f0 Q3", "f0 Q4"], [0.038, 0.386, 0.019, 0.010], "Absolute conversion lift (percentage points)", "Criteo Uplift Modeling Dataset", "Exploratory; retest before targeting")
     flow("portfolio-campaign-holdout.svg", "The next campaign decision is a randomized holdout with an economic stop rule", "Assignment remains the treatment definition; exposure, CPA, and contribution are measured after launch.", [("Assign", "Treatment or holdout"), ("Measure", "Incremental conversion"), ("Scale", "CPA below contribution")], "Criteo Uplift Modeling Dataset")
     observability("portfolio-marketplace-measurement.svg", "Recorded trips show activity, not the complete marketplace demand funnel", "The public TLC data is useful context for a pilot, not evidence for a citywide incentive rollout.", ["recorded trips by hour and zone", "monthly driver and vehicle proxies", "official source aggregation"], ["all requests and lost matches", "true wait and cancellations", "incentive ROI and contribution"], "NYC TLC public data")
     facts("portfolio-mta-panel-scope.svg", "The MTA audit has a complete panel but the comparator still fails the causal test", "The official panel covers facilities and weeks around the policy date; the pre-policy gap is unstable.", [("27,080", "facility-day rows", "10 facilities"), ("3,880", "facility-week rows", "388 weeks"), ("10", "facilities", "Crossing locations"), ("−26 to +26", "event weeks", "Diagnostic window")], "MTA Bridges and Tunnels Hourly Crossings")

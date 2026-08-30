@@ -6,7 +6,7 @@ tags: [SEC, XBRL, data modeling, finance]
 excerpt: "An analytics-engineering design for turning issuer-level XBRL facts into a comparable metric mart without hiding units, fiscal periods, restatements, or taxonomy changes."
 problem: "Finance stakeholders want comparable growth and margin metrics, but raw XBRL facts mix tags, units, filing forms, fiscal periods, and amended facts."
 result: "The SEC Company Facts API exposes issuer facts with taxonomy tags, units, filing forms, accession metadata, and periods; the correct deliverable is a governed metric layer, not a blind sum of reported values."
-published: true
+published: false
 kind: methods
 ---
 

@@ -6,7 +6,7 @@ tags: [market sizing, Census, location strategy, NAICS]
 excerpt: "A market-screening framework using Census business counts, employment, and payroll to avoid choosing an expansion location from population or establishment count alone."
 problem: "A commercial team needs to shortlist markets, but a large population does not guarantee a reachable customer base, competitive supply, or enough businesses in the target industry."
 result: "The Census County Business Patterns program provides annual county × NAICS observations for establishments, employment, and payroll, with suppression markers that must remain visible in the market screen."
-published: true
+published: false
 kind: methods
 ---
 

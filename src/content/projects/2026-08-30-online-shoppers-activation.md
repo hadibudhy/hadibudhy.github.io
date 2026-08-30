@@ -5,9 +5,13 @@ categories: [growth analytics]
 tags: [activation, conversion, leakage, UCI]
 excerpt: "A session-level conversion study that separates useful early intent signals from fields that only appear after a shopper has already shown value."
 problem: "The product team wants to improve conversion, but a targeting rule can look excellent simply because it uses information created after the shopper has already progressed."
-result: "The UCI release exposes session-level browsing and visitor fields alongside downstream PageValues and Revenue outcomes; it supports leakage-aware experiment design, not an observed intervention effect."
+result: "After removing 125 exact duplicates, 12,205 sessions remained: new visitors converted at 24.9% versus 14.1% for returning visitors, while PageValues was confirmed as an outcome-adjacent leakage risk."
 published: true
-kind: methods
+kind: completed
+evidenceVisuals:
+  - /images/portfolio-online-shoppers-visitor.svg
+  - /images/portfolio-online-shoppers-pagevalue.svg
+  - /images/portfolio-online-shoppers-sensitivity.svg
 ---
 
 ## Business question
@@ -21,7 +25,7 @@ A high-performing conversion model can still be useless if it reads the answer f
 ## Decision brief
 
 - **Recommendation:** test a light-touch activation prompt using pre-intervention browsing depth and visitor type; keep `PageValues` out of targeting.
-- **Evidence:** the UCI release exposes visitor type, browsing behavior, downstream PageValues, and a Revenue outcome; no treatment assignment is included.
+- **Evidence:** among 12,205 deduplicated sessions, new visitors converted at 24.9% (422/1,693) versus 14.1% (1,470/10,431) for returning visitors; no treatment assignment is included.
 - **Evidence strength:** Moderate for descriptive segmentation; low for causal product impact because no treatment assignment or user-level experiment exists.
 - **Main risk:** the sample is historical and session-level. A returning visitor may appear in many rows, and the dataset does not show margin or long-term value.
 - **Next test:** randomize prompt eligibility, pre-register conversion and guardrail metrics, and report results by new/returning visitor without using post-intervention fields.
@@ -40,15 +44,31 @@ The data is real observation-level web traffic, but it is not a current product 
 
 1. Validate row grain, missingness, duplicates, and the binary outcome.
 2. Remove exact duplicate sessions before calculating rates.
-3. Compare conversion by visitor type, weekend status, month, and browsing signals.
+3. Compare conversion by visitor type and inspect the strongest browsing-signal contrast.
 4. Mark variables that are unavailable or unsafe at intervention time.
 5. Turn the strongest descriptive contrasts into a bounded randomized test.
 
-## What the source supports
+## Completed result
 
-The source supports a leakage-aware activation design: visitor type and early browsing fields can be assessed before an intervention, while PageValues and Revenue are downstream outcomes. No source-specific recomputation or treatment assignment is published in this repository.
+After removing **125 exact duplicate rows**, the analysis retained **12,205 sessions**. New visitors converted at **24.9%** (422 of 1,693), compared with **14.1%** (1,470 of 10,431) for returning visitors—a descriptive gap of **10.8 percentage points**. The difference is useful for experiment stratification, not proof that visitor status causes conversion.
 
-## Evidence and design visuals
+### Main finding: new visitors had the highest observed conversion rate
+
+![New visitors converted at 24.9% versus 14.1% for returning visitors among 12,205 deduplicated sessions](/images/portfolio-online-shoppers-visitor.svg)
+
+The finding changes the test design: do not assume returning traffic is the easiest activation audience, and report the randomized result separately by visitor type.
+
+### Leakage check: PageValues is unsafe until its timing is verified
+
+![Mean PageValues was 27.3 for converted sessions and 2.0 for non-converted sessions, but its availability at intervention time is not established](/images/portfolio-online-shoppers-pagevalue.svg)
+
+Converted sessions averaged **27.3 PageValues**, versus **2.0** for non-converted sessions. That strong separation is analytically useful but operationally unsafe until the business verifies the field's derivation and timestamp availability. The analysis therefore excludes it from eligibility rather than claiming it is definitely late.
+
+### Sensitivity: the visitor contrast survives the row-treatment choice
+
+![New-visitor conversion was 24.9% before and after exact-row deduplication, while returning-visitor conversion moved from 13.9% to 14.1%](/images/portfolio-online-shoppers-sensitivity.svg)
+
+The conclusion is not an artifact of treating exact-identical rows as duplicates. New-visitor conversion remains **24.9%** in both the raw and deduplicated files; returning-visitor conversion moves from **13.9% to 14.1%**. Because the source has no session identifier, the page reports this as a sensitivity decision—not proof that the 125 identical rows are erroneous.
 
 ## Experiment design
 
@@ -58,21 +78,13 @@ The source supports a leakage-aware activation design: visitor type and early br
 
 The decision visual shows the measurement design required before making a product claim.
 
-### Pre-intervention fields need a timestamp boundary
+### Decision: test the observed gap with a timestamp-safe prompt
 
-Visitor type and early browsing behavior are candidate inputs for an activation test. `PageValues` and `Revenue` are downstream fields and belong in diagnosis or outcome measurement, not eligibility.
+Visitor type and early browsing behavior are candidate inputs for an activation test. `Revenue` is the outcome; `PageValues` remains excluded from eligibility until its derivation and timestamp availability are verified.
 
 **Meaning:** feature availability must be defined at the moment the prompt could appear.
 
 **Why it matters:** a targeting rule that reads downstream value can overstate expected lift.
-
-### Calendar mix belongs in the test design
-
-The source spans multiple months and includes calendar fields, but no source-specific recomputation is published here.
-
-**Meaning:** a pooled session rate would not be a sufficient planning assumption.
-
-**Why it matters:** the next experiment needs time-stratified randomization and a calendar-aware readout.
 
 ## Evidence register
 
@@ -84,8 +96,9 @@ The source spans multiple months and includes calendar fields, but no source-spe
 
 ## Validation record
 
-- **Grain:** one session; the source-specific row, duplicate, missingness, and outcome checks remain to be rerun from the downloaded file.
-- **Checks required:** raw row count, exact duplicates, missingness, and binary `Revenue` outcome.
+- **Grain:** one session; 12,330 raw rows became 12,205 after removing 125 exact duplicates.
+- **Denominators:** visitor-type rates use all deduplicated rows in each visitor group; counts are printed by the checked analysis script.
+- **Checks completed:** pinned source hash, exact schema, missing cells, allowed `Revenue` and visitor categories, raw row count, exact-identical rows, group counts, and arithmetic assertions.
 - **Guardrail:** `PageValues` is retained for diagnosis but excluded from a pre-intervention feature set.
 
 ## Recommendation
@@ -106,7 +119,7 @@ This is an observational session analysis. It supports hypotheses and measuremen
 
 ## Reproducibility
 
-Source and file documentation: [UCI dataset page](https://archive.ics.uci.edu/dataset/468/online%2Bshoppers%2Bpurchasing%2Bintention%2Bdataset). The portfolio’s [expansion validation record](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/docs/portfolio-expansion-2026-08.md) records the checked file, grain, and validation decisions.
+Source and file documentation: [UCI dataset page](https://archive.ics.uci.edu/dataset/468/online%2Bshoppers%2Bpurchasing%2Bintention%2Bdataset). The result is reproducible with [`scripts/analyze_online_shoppers.py`](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/scripts/analyze_online_shoppers.py); pass the downloaded `online_shoppers_intention.csv` path and `--output public/data/online-shoppers-metrics.json`. The checked [metrics manifest](/data/online-shoppers-metrics.json) records the source hash, grain, period, denominators, and chart values.
 
 ## Technical appendix
 

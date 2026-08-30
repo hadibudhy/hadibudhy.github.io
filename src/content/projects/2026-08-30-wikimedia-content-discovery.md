@@ -6,7 +6,7 @@ tags: [content analytics, pageviews, discovery, time series]
 excerpt: "A content-discovery study using Wikimedia’s public pageview API to separate durable reader interest from short-lived traffic spikes."
 problem: "An editorial product team needs to decide which pages deserve refresh, related-content links, or better discovery placement when a high view count may only reflect a temporary event."
 result: "The public API supports article and project pageview time series by access method and agent type, making persistence and spike-recovery metrics observable without pretending that pageviews are unique readers."
-published: true
+published: false
 kind: methods
 ---
 

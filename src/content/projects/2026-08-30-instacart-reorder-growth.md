@@ -6,7 +6,7 @@ tags: [retention, reorder, basket analysis, grocery]
 excerpt: "A next-order growth study using real grocery baskets to separate repeatable routines from attractive but unreliable cross-sell ideas."
 problem: "A grocery marketplace wants to increase the next order without filling the reminder with products that customers rarely buy together or do not need again."
 result: "The three-million-order public release makes reorder timing, product-level reorder flags, and order sequence observable, but it does not contain intervention assignment or profit."
-published: true
+published: false
 kind: methods
 ---
 

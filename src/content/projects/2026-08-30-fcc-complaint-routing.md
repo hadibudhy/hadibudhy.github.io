@@ -6,7 +6,7 @@ tags: [NLP, complaint routing, classification, governance]
 excerpt: "An AI-assisted complaint-routing study that combines transparent taxonomy, confidence thresholds, and human review for public telecom complaints."
 problem: "A consumer-support organization receives complaints spanning billing, service quality, equipment, and privacy, but manual routing is slow and the complaint text is not independently verified."
 result: "The FCC publishes individual informal consumer complaints beginning in October 2014; the dataset supports taxonomy and routing analysis while the agency warns that allegations are selected by consumers and not verified by the FCC."
-published: true
+published: false
 kind: methods
 ---
 

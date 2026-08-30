@@ -12,6 +12,10 @@ problem: "The retailer had many transactions, but it was not clear which custome
 result: "After cleaning 541,909 transactions, the analysis found 4,338 identifiable customers and a strong concentration of revenue among the highest-value customers."
 featured: false
 kind: completed
+evidenceVisuals:
+  - /images/retail-growth-patterns.png
+  - /images/retail-market-opportunity.png
+  - /images/portfolio-retail-cleaning.svg
 header:
   teaser: /images/retail-growth-patterns.png
 ---

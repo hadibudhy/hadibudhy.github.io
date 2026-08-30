@@ -6,7 +6,7 @@ tags: [NLP, human review, aviation safety, triage]
 excerpt: "A safety-minded text triage design using FAA Service Difficulty Reports to prioritize review while keeping airworthiness decisions with qualified people."
 problem: "Maintenance teams receive narrative malfunction and defect reports that vary in wording and completeness, making it difficult to prioritize review without hiding safety-critical ambiguity."
 result: "The FAA publishes annual Service Difficulty Report CSVs containing operator and repair-station reports; the data supports auditable text classification and retrieval, not automatic airworthiness decisions."
-published: true
+published: false
 kind: methods
 ---
 
