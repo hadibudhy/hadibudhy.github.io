@@ -69,6 +69,20 @@ Some cases are too ambiguous or sensitive to automate safely.
 
 **Why it matters:** report automated coverage and human-review quality together.
 
+## Evidence register
+
+| Layer | Evidence | Decision use |
+|---|---|---|
+| Observed | FCC records contain selected informal complaints and issue/provider fields; the FCC does not verify allegations | Build and monitor a routing taxonomy |
+| Inferred | Confidence-based routing with escalation can improve queue handling | Start in shadow mode with human review |
+| Not established | Complaint counts are provider failure rates, or automated routing resolves the issue | Avoid public rankings and measure corrections |
+
+## Validation record
+
+- **Grain:** one informal complaint; narrative and structured fields remain linked.
+- **Checks:** direct identifiers/PII, source-label drift, time split, rare categories, reviewer labels, and correction outcomes are reviewed.
+- **Guardrail:** low-confidence, sensitive, and novel cases always have a human path.
+
 ## Recommendation
 
 **What:** launch a shadow-mode router that suggests a queue and cites the source fields used.
@@ -92,4 +106,3 @@ Source and field metadata: [FCC CGB Consumer Complaints Data](https://catalog.da
 ## Technical appendix
 
 The baseline should report macro recall, per-queue recall, escalation rate, correction rate, and calibration. A model must not be trained on post-routing labels without a time split, and every generated explanation must be traceable to the original complaint fields.
-
