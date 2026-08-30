@@ -69,6 +69,20 @@ A model can rank historical high-value users without proving that a paid touch c
 
 **Why it matters:** a holdout is still required to estimate incremental revenue and avoid paying for customers who would have purchased anyway.
 
+## Evidence register
+
+| Layer | Evidence | Decision use |
+|---|---|---|
+| Observed | Visit-level records include `fullVisitorId`, channel, traffic, device, date, and a nested revenue target | Build a user-period value view |
+| Inferred | Acquisition quality should be compared at user level, not by session volume | Shortlist channels for controlled tests |
+| Not established | A historical channel difference is current incremental contribution or ROI | Do not set present-day spend from this file |
+
+## Validation record
+
+- **Grain:** one visit in the source; user-period after aggregation.
+- **Checks:** IDs remain strings; nested revenue is parsed separately; features are frozen before the target period.
+- **Guardrail:** `transactionRevenue` is never used as an input feature, and the evaluation split is forward in time.
+
 ## Recommendation
 
 **What:** use the dataset to shortlist acquisition paths for controlled tests, not to set current spend.
@@ -92,4 +106,3 @@ Source and field definitions: [Kaggle competition data page](https://www.kaggle.
 ## Technical appendix
 
 No `transactionRevenue` field is used as an input feature. A production design would freeze features at the acquisition decision timestamp, use a temporal holdout, calibrate predicted value, and compare the model policy with a business-as-usual control.
-
