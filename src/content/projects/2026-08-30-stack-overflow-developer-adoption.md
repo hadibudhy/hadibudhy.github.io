@@ -69,6 +69,20 @@ Country, age, role, and AI questions have different answered counts.
 
 **Why it matters:** the product brief must show question-level `n` and avoid false precision.
 
+## Evidence register
+
+| Layer | Evidence | Decision use |
+|---|---|---|
+| Observed | 49,019 responses; 76% professional developers; 66% aged 25–44 in the 2025 survey | Choose onboarding and interview hypotheses |
+| Inferred | Role and experience differences may justify different enablement paths | Instrument first-success behavior by segment |
+| Not established | Self-reported AI or tool use is product adoption, quality, or causal preference | Do not forecast feature ROI from the survey |
+
+## Validation record
+
+- **Grain:** one respondent, with a different denominator for each question.
+- **Checks:** question-level response counts, missingness, role labels, and survey-year definitions are retained.
+- **Guardrail:** all percentages show the answered `n`; no population weighting is implied.
+
 ## Recommendation
 
 **What:** use the survey to prioritize two onboarding hypotheses: a beginner path for learners and workflow guidance for professional developers evaluating AI assistance.
@@ -92,4 +106,3 @@ Source, summaries, and downloads: [2025 Stack Overflow Developer Survey](https:/
 ## Technical appendix
 
 Every percentage is paired with its question-specific response count. If weighting is used, the weighting method must be documented; otherwise results are labeled unweighted descriptive statistics.
-
