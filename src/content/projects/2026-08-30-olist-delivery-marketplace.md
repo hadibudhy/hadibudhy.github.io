@@ -69,6 +69,20 @@ Orders have multiple items, payments, and review or installment records.
 
 **Why it matters:** a trusted marketplace dashboard needs one row per order for order KPIs and child-level tables for diagnostics.
 
+## Evidence register
+
+| Layer | Evidence | Decision use |
+|---|---|---|
+| Observed | About 100,000 orders connect purchase, promise, delivery, seller, freight, and review fields | Decompose delivery-quality pathways |
+| Inferred | Promise lateness may be a more actionable service signal than review score alone | Route work to seller, carrier, or product teams |
+| Not established | Lateness caused a review score, or an intervention will improve contribution | Test coaching and promise changes |
+
+## Validation record
+
+- **Grain:** one order with item, payment, and review child rows.
+- **Checks:** order-level KPIs are calculated before child joins; missing delivery timestamps stay missing.
+- **Guardrail:** actual versus estimated delivery is reported separately from elapsed delivery duration.
+
 ## Recommendation
 
 **What:** create a delivery-quality queue that combines promise lateness, review outcome, freight burden, and seller history.
@@ -92,4 +106,3 @@ Source: [Olist Brazilian e-commerce dataset](https://www.kaggle.com/datasets/oli
 ## Technical appendix
 
 Calculate order-level metrics before joining item, payment, or review children. Delivery lateness is `delivered_customer_date - estimated_delivery_date`; missing timestamps remain missing and are reported as data-quality cases rather than imputed as on-time.
-
