@@ -61,6 +61,11 @@ export default function ResumePage() {
       </section>
 
       <section className="border-b border-border py-10">
+        <p className="section-kicker">Decision scope</p>
+        <p className="mt-4 leading-7 text-muted-foreground">Experiment design, KPI governance, customer cohorts, warehouse pipelines, event-driven alerting, live dashboards, marketplace measurement, and auditable AI workflows.</p>
+      </section>
+
+      <section className="border-b border-border py-10">
         <div>
           <p className="section-kicker">Skills &amp; education</p>
           <p className="mt-5 text-sm leading-7 text-muted-foreground">{skills.join(" · ")}</p>

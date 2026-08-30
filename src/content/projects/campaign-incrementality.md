@@ -65,6 +65,8 @@ The benchmark difference is about **115 extra conversions per 100,000 assigned u
 
 **Business meaning:** statistical confidence tells us that the benchmark difference is unlikely to be random noise. It does not tell us whether the campaign earns more than it costs.
 
+The practical launch threshold is explicit: scale only when incremental CPA is below contribution value after ad cost, with the holdout result stable across the pre-specified audience and frequency guardrails.
+
 ## Recommendation
 
 **What:** Run the current campaign with a randomized holdout and measure extra conversions, not only attributed conversions.

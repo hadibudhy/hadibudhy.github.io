@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://hadibudhy.github.io";
   const routes = ["", "/about", "/projects", "/resume", "/privacy", "/terms"].map((path) => ({
     url: `${baseUrl}${path}`,
-    lastModified: new Date("2026-08-15T00:00:00Z"),
+    lastModified: new Date("2026-08-30T00:00:00Z"),
   }));
   const projects = getAllProjects().map((project) => ({
     url: `${baseUrl}/projects/${project.slug}`,

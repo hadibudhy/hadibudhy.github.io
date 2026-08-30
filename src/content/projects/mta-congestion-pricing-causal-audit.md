@@ -59,6 +59,8 @@ The method is a descriptive event-time diagnostic. In plain language, it compare
 
 Before congestion pricing began, the affected-comparison gap changed materially in both directions rather than staying near a stable baseline.
 
+In plain English: the comparison was already moving around before the policy, so its later movement cannot be cleanly attributed to congestion pricing.
+
 ![MTA bridge and tunnel event study: affected crossings were already moving differently before congestion pricing, so the comparison is not reliable](/images/growth-mta-event-study.png)
 
 **Business meaning:** the chosen comparison group does not provide a stable descriptive baseline for the affected crossings. The later differences cannot be assigned to congestion pricing with confidence.
