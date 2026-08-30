@@ -69,6 +69,20 @@ The public history does not include a failed unlock, empty-origin search, or ful
 
 **Why it matters:** product telemetry is needed before investing heavily in rebalancing.
 
+## Evidence register
+
+| Layer | Evidence | Decision use |
+|---|---|---|
+| Observed | Trip histories contain time, origin, destination, ride type, and member/casual status; GBFS provides station snapshots | Identify directional station-window candidates |
+| Inferred | Rebalancing need is directional and likely varies by rider job | Prioritize station moves and guidance |
+| Not established | A low-flow station has unmet demand, or rebalancing increases successful rides | Add failed-search telemetry and a control |
+
+## Validation record
+
+- **Grain:** one ride versus one station-status snapshot; they are not interchangeable.
+- **Checks:** station identifiers and timestamps are normalized; origin and destination flows are kept separate.
+- **Guardrail:** completed trips are treated as a lower bound on demand.
+
 ## Recommendation
 
 **What:** create a station-window priority list using directional flow, current availability, and member/casual mix.
@@ -92,4 +106,3 @@ Sources: [Citi Bike System Data](https://citibikenyc.com/system-data), [NYC DOT 
 ## Technical appendix
 
 The primary analysis grain is station × hour × direction. A station is not classified as “bad” from low trip volume alone. Flow imbalance is a prioritization metric, not a service-level or customer-outcome estimate.
-
