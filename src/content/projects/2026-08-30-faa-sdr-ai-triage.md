@@ -69,6 +69,20 @@ Reports depend on reporting practices, fleet mix, and maintenance processes.
 
 **Why it matters:** operational rate claims require exposure denominators such as flight hours or installed fleet.
 
+## Evidence register
+
+| Layer | Evidence | Decision use |
+|---|---|---|
+| Observed | Annual FAA files contain submitted malfunction, failure, or defect reports with narrative and coded context | Retrieve similar reports and suggest review queues |
+| Inferred | Retrieval and triage can reduce search effort without deciding airworthiness | Keep qualified reviewers accountable |
+| Not established | Report volume is fleet failure probability, or AI disposition is safe | Require exposure data and expert approval |
+
+## Validation record
+
+- **Grain:** one processed report, with supplemental/related relationships preserved.
+- **Checks:** report IDs, dates, text availability, source year, reviewer labels, and time-based evaluation split are required.
+- **Guardrail:** critical-case recall and human override matter more than aggregate accuracy; generated maintenance instructions are prohibited.
+
 ## Recommendation
 
 **What:** deploy a reviewer-assist queue only after a safety owner approves labels, severity policy, and escalation behavior.
@@ -92,4 +106,3 @@ Source and downloads: [FAA Service Difficulty Reports](https://www.faa.gov/av-in
 ## Technical appendix
 
 Primary metrics are critical-case recall, alert precision at the review-team capacity limit, calibration, citation coverage, and human override rate. A generative model must not be allowed to create maintenance instructions; it may summarize retrieved source text with provenance.
-
