@@ -1,11 +1,11 @@
 ---
-title: "Congestion Pricing: When the Causal Design Fails the Test"
+title: "Congestion Pricing: A Comparator Audit Before Causal Claims"
 date: 2026-08-29
 categories: [growth analytics]
-tags: [econometrics, causal inference, mobility, decision quality]
-excerpt: "An event-study audit of NYC bridge and tunnel traffic that shows why a plausible policy story is not enough for a causal business decision."
+tags: [causal design, comparator audit, mobility, decision quality]
+excerpt: "A descriptive audit of NYC bridge and tunnel traffic that shows why a plausible policy story is not enough for a causal business decision."
 problem: "Leadership wants to know whether congestion pricing changed traffic, but affected and comparison crossings may already have been on different paths."
-result: "The official MTA panel contains 27,080 facility-day observations from 2019 to May 2026; pre-policy differences fail the parallel-trends check, so no causal effect is reported."
+result: "The official MTA panel contains 27,080 facility-day observations from 2019 to May 2026; the displayed pre-policy gap is visibly unstable, so this comparator is not used for causal attribution."
 featured: true
 header:
   teaser: /images/growth-mta-event-study.png
@@ -26,7 +26,7 @@ Traffic changes naturally. Weather, holidays, construction, commuting patterns, 
 - **Recommendation:** do not use this comparison group to claim a congestion-pricing effect or change rider pricing.
 - **Evidence:** the affected-comparison gap changed materially in both directions before the policy date.
 - **Potential value:** none estimated; this study is a decision-quality audit.
-- **Evidence strength:** High for rejecting this comparator; insufficient for estimating the policy effect.
+- **Evidence strength:** Moderate for flagging comparator instability; insufficient for formally rejecting parallel trends or estimating the policy effect.
 - **Cost / resource requirement:** A credible estimate requires a new comparator, route-exposure data, and internal ride outcomes; cost cannot be estimated from this study.
 - **Main risk:** pre-existing trends, spillovers, facility shocks, and the gap between traffic counts and ride-hailing outcomes.
 - **Cost of inaction:** Cannot be estimated from this dataset; acting on a false causal claim could misprice rides or misallocate supply.
@@ -61,7 +61,7 @@ Before congestion pricing began, the affected-comparison gap changed materially 
 
 ![MTA bridge and tunnel event study: affected crossings were already moving differently before congestion pricing, so the comparison is not reliable](/images/growth-mta-event-study.png)
 
-**Business meaning:** the chosen comparison group does not show what would have happened to the affected crossings without the policy. The later differences cannot be assigned to congestion pricing with confidence.
+**Business meaning:** the chosen comparison group does not provide a stable descriptive baseline for the affected crossings. The later differences cannot be assigned to congestion pricing with confidence.
 
 ### The most useful result is a decision to pause the claim
 
@@ -75,7 +75,7 @@ The chart can still show a post-policy difference, but that difference may refle
 
 **Where / who:** Rebuild the comparison using facilities with similar pre-policy traffic patterns. Treat nearby crossings as possible spillover areas, not automatically as clean controls.
 
-**Why:** The pre-policy trends fail the basic test required for this type of comparison.
+**Why:** The displayed pre-policy gap is visibly unstable, and this descriptive audit does not formally test the parallel-trends assumption.
 
 **Risk:** A new control may also be affected by the policy or by a facility-specific event.
 
@@ -87,7 +87,7 @@ For a ride-hailing business, I would add requests, completed and cancelled rides
 
 ## Key takeaway
 
-The strongest analysis is sometimes the one that refuses a weak answer. This study found that the affected and comparison crossings were already on different paths, so the business should improve the comparison before changing pricing or supply policy.
+The strongest analysis is sometimes the one that refuses a weak answer. This study found an unstable pre-policy gap, so the business should improve and formally validate the comparison before changing pricing or supply policy.
 
 ## Technical appendix
 
@@ -96,8 +96,8 @@ The strongest analysis is sometimes the one that refuses a weak answer. This stu
 | Check | Current evidence | Decision |
 |---|---|---|
 | Control selection | 3 affected facilities versus 7 comparison facilities; selected before interpreting post-policy movement | Keep as an audit, not a final estimate |
-| Panel and diagnostic | 3,880 facility-week rows across 388 weeks and 10 facilities; log(1 + weekly car crossings), centered on event week −1 | Reproducible descriptive comparison |
-| Pre-policy pattern | Weekly affected-comparison differences change direction and magnitude before policy | Comparator is not stable enough for causal attribution |
+| Panel and diagnostic | 3,880 facility-week rows across 388 weeks and 10 facilities; equal-weight group means of log(1 + weekly car crossings), centered on event week −1 and shown within ±26 weeks | Reproducible descriptive comparison |
+| Pre-policy pattern | Weekly affected-comparison differences change direction and magnitude before policy | Do not use this comparator for causal attribution without formal design validation |
 | Inference audit | Each displayed event week is one weekly group difference; pointwise residual-based p-values and confidence intervals are not reported | Avoids false precision from singleton event bins |
 | Outcome scope | All-car crossing traffic, not ride-hailing requests, supply, trips, or revenue | Use as external context only |
 

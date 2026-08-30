@@ -21,7 +21,7 @@ export default function AboutPage() {
               <p>Hadi Budhy is a Data Analyst focused on growth and decision analytics, with 5+ years of experience across business intelligence, customer analytics, data automation, and applied AI, based in Jakarta, Indonesia. His primary target is Senior Data Analyst · Growth &amp; Decision Analytics, with secondary strengths in experimentation, marketplace operations, analytics engineering, and applied AI.</p>
               <p>He helps teams turn scattered information into evidence they can trust, decisions they can explain, and workflows they can operate.</p>
             </div>
-            <div className="border-l border-primary/50 pl-6 text-sm leading-7 text-muted-foreground">His work spans reliable data pipelines, forecasting and classification models, and dashboards that help teams understand what is happening and what to do next. This public summary keeps employer, client, and operational details intentionally high level.<p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-primary">{education}</p></div>
+            <div className="border-l border-primary/50 pl-6 text-sm leading-7 text-muted-foreground">His work spans reliable data pipelines, forecasting and classification models, and dashboards that help teams understand what is happening and what to do next.<p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-primary">{education}</p></div>
           </div>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <Button size="lg" asChild><a href="mailto:hadi.budhy@gmail.com">Get in Touch</a></Button>
@@ -41,7 +41,7 @@ export default function AboutPage() {
       <section className="border-b border-border bg-muted/40">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
           <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-12">
-            <div><p className="section-kicker">Selected experience</p><h2 className="section-title mt-4">A progression from reporting to decision systems.</h2><p className="mt-5 leading-7 text-muted-foreground">The public version focuses on the type of work and decisions supported, while keeping company and client details private. The case studies are independent portfolio work; they are not presented as employer outcomes. No quantified employer outcomes are published because the available evidence does not verify them.</p></div>
+            <div><p className="section-kicker">Selected experience</p><h2 className="section-title mt-4">A progression from reporting to decision systems.</h2><p className="mt-5 leading-7 text-muted-foreground">A concise view of the work owned, the teams supported, and the decisions made clearer across four analytics roles.</p></div>
             <div className="space-y-0">{experience.map((item) => <div key={`${item.period}-${item.role}`} className="border-t border-border py-6 first:border-t-0 first:pt-0"><div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-baseline"><h3 className="text-xl font-bold text-foreground">{item.role}</h3><span className="text-sm text-primary">{item.period}</span></div><p className="mt-1 text-sm font-semibold text-foreground/70">{item.setting}</p><p className="mt-3 max-w-2xl leading-7 text-muted-foreground">{item.description}</p></div>)}</div>
           </div>
         </div>

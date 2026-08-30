@@ -1,8 +1,8 @@
-"""Estimate a weekly MTA crossings event study around congestion pricing.
+"""Describe the weekly MTA treated-comparison gap around congestion pricing.
 
 This is a mobility-policy outcome, not a ride-hailing outcome. Treatment is a
-facility-level exposure classification, so interpretation is limited to the
-selected crossings and their observed car traffic.
+facility-level exposure classification. This comparator audit deliberately
+reports no causal estimate or pointwise inference.
 """
 
 from __future__ import annotations

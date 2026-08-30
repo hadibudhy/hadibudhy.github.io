@@ -1,51 +1,33 @@
-# Congestion pricing and marketplace outcomes
+# Congestion pricing comparator audit
 
-## Executive summary
+## Shipped result
 
-**Decision owner:** Marketplace and Commercial leadership. **Decision:** should pricing, incentives, or geographic strategy change after congestion pricing? **Primary outcome:** request fulfillment or recorded trips per zone-hour, depending on data availability. **Guardrails:** passenger fare, driver pay, trip duration, cancellations, and cross-zone substitution.
+This project ships a **descriptive comparator audit**, not a difference-in-differences estimate. It compares equal-weight weekly means of `log(1 + car crossings)` for three affected facilities and seven comparison facilities within 26 weeks of NYC congestion pricing's 5 January 2025 start.
 
-NYC congestion pricing began on **5 January 2025**. TLC states that a `cbd_congestion_fee` field was added to Yellow, Green, and HVFHV records from 2025 onward. The January 2025 yellow-taxi file currently validated in this repository contains **3,475,226 trips** and **2,246,495 rows with a positive CBD fee**. Those are exposure and fee observations, not a causal estimate.
+The displayed pre-policy gap changes direction and magnitude. That is enough to pause causal attribution, but it is not a formal parallel-trends test, statistical rejection rule, or policy-effect estimate.
 
-The senior conclusion is deliberately conditional: a simple January before/after comparison cannot identify the policy effect. A credible answer needs a pre-period, a comparison group, event-time controls, and tests for spillovers and pre-trends. Until the official HVFHV 2024–2025 files are complete locally, this project is a causal-design prototype rather than a published effect claim.
+Run the shipped analysis from the repository root:
 
-## Business problem
-
-Leadership needs to know whether the new fee changed ride volume, fare, driver economics, or geography. A raw post-policy decline could also reflect winter seasonality, weather, holidays, provider mix, or reporting changes.
-
-## Data and grain
-
-The analysis uses [official TLC trip records](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), the [HVFHV data dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_hvfhs.pdf), and official taxi-zone lookup data. Each trip record is one submitted trip. The policy exposure is assigned at trip-zone and date-time level. The data does not directly contain every ride request, lost match, driver online hour, or customer value.
-
-The validated January 2025 yellow file is used only for schema and fee-field validation. HVFHV is the intended marketplace outcome source because it records licensed high-volume FHV trips; its large official Parquet file must be fully downloaded and checked before publishing estimates.
-
-## Metric framework
-
-```text
-Marketplace outcome
-  -> fulfilled trips per zone-hour
-    -> trip volume, fare, duration, route mix
-  Diagnostics: CBD exposure, time of day, airport flows, provider mix
-  Guardrails: cancellations, wait, driver pay, substitution, reporting coverage
+```bash
+python projects/growth-analytics/03-congestion-pricing-causal-impact/src/analyze_mta_comparator.py
 ```
 
-## Identification strategy
+## Decision boundary
 
-The preferred design is a difference-in-differences event study. Policy exposure is defined from origin, destination, and documented zone eligibility after 5 January 2025. A pickup-only flag is not enough because the charge can apply to trips to, from, within, or through the zone. The downloaded MTA CBD geofence and TLC taxi-zone geometry now provide a reproducible coarse boundary map: 20 zones are mostly inside, 21 are partial/boundary, and 222 are outside. The included Python estimator requires one row per zone-day, a precomputed exposure flag, zone and date fixed effects, at least 10 zone clusters, and reports lead/lag coefficients plus pre-policy placebo tests. Provider mix and route composition are diagnostics unless they are known pre-treatment covariates. Inference needs a pre-specified spatial and time dependence strategy, not only a default zone cluster.
+**Decision owner:** Marketplace and Commercial leadership. **Decision:** whether pricing, incentives, or geographic strategy should change after congestion pricing.
 
-The parallel-trends assumption must be inspected before the policy date. Placebo intervention dates should produce no comparable step change. Spillovers are expected: trips may move to border zones, drivers may reposition, and riders may substitute modes. Those effects are part of the business result, not noise to hide.
+This audit does not support changing pricing or supply. A decision-ready study needs a pre-registered comparator rule, formal pre-trend and placebo checks, route-level policy exposure, and internal outcomes such as requests, completed rides, cancellations, pickup delay, passenger price, and driver pay.
 
-As an additional sensitivity check, the complete TLC monthly High Volume FHV subset from January 2015 through May 2026 was analyzed as an aggregate interrupted series. It contains **137 monthly observations** with reported trips per day, unique drivers, unique vehicles, and average hours. The model estimates a post-policy level change of **-0.257 log points** (HAC p = **0.034**) and a post-policy trend change of **-0.007 log points per month** (p = **0.110**). These are diagnostic associations, not congestion-pricing effects, because the series has no untreated market and no route-level toll exposure.
+## Data and scope
 
-## Evidence and current boundary
+The shipped panel uses official [MTA Bridges and Tunnels Hourly Crossings](https://catalog.data.gov/dataset/mta-bridges-and-tunnels-hourly-crossings-beginning-2019): 27,080 facility-day observations, aggregated to 3,880 facility-week rows across 10 facilities and 388 weeks. The outcome is car crossings, not ride-hailing demand, supply, revenue, or customer behavior.
 
-The January yellow file confirms that the fee field is populated and that positive fee observations exist after the policy date. It does not supply the pre-policy HVFHV comparison needed for the requested causal claim. Therefore this project reports **no estimated policy effect** yet. That is the correct decision under insufficient identification.
+The affected group is RFK Bridge Manhattan, Queens-Midtown Tunnel, and Hugh L. Carey Tunnel. The seven remaining facilities form the comparison group for this audit. Group means weight each facility equally.
 
-## Recommendation
+## Future-design scaffolds
 
-**P0:** complete and validate monthly HVFHV files from at least 2024 and 2025, with the same zone and provider definitions. **P1:** run the event-study and placebo checks. **P2:** add weather, holidays, airport activity, and transit data only when they materially improve pre-trend fit. Change pricing or incentives only if the estimated effect is stable across controls and does not create harmful cross-zone substitution.
+- `src/event_study.py` and `sql/cbd_event_study.sql` are unexecuted design scaffolds for a future zone-level study; they are not current evidence.
+- `src/analyze_monthly_its.py` is an aggregate diagnostic without an untreated market or route-level exposure; it does not identify the policy effect.
+- `CONGESTION_ZONE_VALIDATION.md` documents a coarse zone-boundary check for future trip-level work.
 
-## Interview explanation
-
-**30-second explanation:** “I would not call the January change causal from a before/after chart. Congestion pricing started on 5 January 2025, and TLC added a CBD fee field, but seasonality and spillovers remain serious threats. I would use HVFHV trips with zone and time fixed effects, a matched outside-zone control, an event study, placebo dates, clustered errors, and border-zone guardrails. If pre-trends fail, I would report that the effect is not identified.”
-
-**2-minute explanation:** Explain treatment assignment, control construction, parallel trends, anticipation, spillovers, provider mix, route substitution, event-time coefficients, placebo checks, and how the final result would change pricing or supply decisions.
+No causal policy effect is reported in this repository.

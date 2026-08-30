@@ -11,6 +11,7 @@ import csv
 import hashlib
 import json
 import shutil
+import sys
 import urllib.request
 import zipfile
 from pathlib import Path
@@ -19,7 +20,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "analysis_data"
 RAW = DATA / "raw"
+EXTRACTED = DATA / "extracted"
 RAW.mkdir(parents=True, exist_ok=True)
+EXTRACTED.mkdir(parents=True, exist_ok=True)
 
 SOURCES = {
     "online_retail": "https://archive.ics.uci.edu/static/public/352/online+retail.zip",
@@ -82,6 +85,12 @@ def inspect_file(item: dict) -> dict:
     return result
 
 
+def extract_online_retail(item: dict) -> None:
+    with zipfile.ZipFile(ROOT / item["path"]) as archive:
+        with archive.open("Online Retail.xlsx") as source, (EXTRACTED / "Online Retail.xlsx").open("wb") as target:
+            shutil.copyfileobj(source, target)
+
+
 def download_bls() -> dict:
     target = RAW / "bls_jolts_2025.json"
     if not target.exists():
@@ -106,16 +115,25 @@ def download_bls() -> dict:
 
 
 def main() -> None:
+    requested = sys.argv[1:] or list(SOURCES)
+    unknown = sorted(set(requested) - SOURCES.keys())
+    if unknown:
+        raise SystemExit(f"Unknown source name(s): {', '.join(unknown)}")
     inventory = []
-    for name, url in SOURCES.items():
+    for name in requested:
+        url = SOURCES[name]
         try:
-            inventory.append(inspect_file(download(name, url)))
+            item = download(name, url)
+            inventory.append(inspect_file(item))
+            if name == "online_retail":
+                extract_online_retail(item)
         except Exception as exc:
             inventory.append({"name": name, "url": url, "status": "download_failed", "error": str(exc)})
-    try:
-        inventory.append(download_bls())
-    except Exception as exc:
-        inventory.append({"name": "bls_jolts_2025", "status": "download_failed", "error": str(exc)})
+    if not sys.argv[1:]:
+        try:
+            inventory.append(download_bls())
+        except Exception as exc:
+            inventory.append({"name": "bls_jolts_2025", "status": "download_failed", "error": str(exc)})
     (DATA / "inventory.json").write_text(json.dumps(inventory, indent=2), encoding="utf-8")
     print(json.dumps(inventory, indent=2))
 

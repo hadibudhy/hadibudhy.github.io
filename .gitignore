@@ -16,8 +16,12 @@
 # next.js
 /.next/
 /out/
+/output/
+/tmp/
 /.worktrees/
 /analysis_data/
+/.codex-remote-attachments/
+/runs.json
 
 # production
 /build

@@ -1,3 +1,5 @@
+import hashlib
+import sys
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -7,6 +9,21 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "public" / "images"
+
+SOURCE_SNAPSHOTS = {
+    "Online Retail.xlsx": "43465a06f2ccf7c8b5bd2892bc7defb52f97487934fe93b16ae4c3936424676d",
+    "nyc_restaurants.csv": "a02bf468aaf826c64a78b6ad17e038908d643e769dcb4ee8257b5a6282519bb1",
+}
+
+
+def require_source_snapshot(path: Path) -> None:
+    actual = hashlib.sha256(path.read_bytes()).hexdigest()
+    expected = SOURCE_SNAPSHOTS[path.name]
+    if actual != expected:
+        raise ValueError(
+            f"Source snapshot drift for {path}: expected SHA-256 {expected}, got {actual}. "
+            "Revalidate the published metrics before replacing the recorded snapshot."
+        )
 
 
 def style_axis(ax):
@@ -126,11 +143,25 @@ def save_taxi_completed_trips() -> None:
 
 def save_retail_market_opportunity() -> None:
     source = ROOT / "analysis_data" / "extracted" / "Online Retail.xlsx"
-    sales = pd.read_excel(source)
-    sales = sales[~sales["InvoiceNo"].astype(str).str.startswith("C")]
+    require_source_snapshot(source)
+    raw = pd.read_excel(source)
+    sales = raw[~raw["InvoiceNo"].astype(str).str.startswith("C")]
     sales = sales[(sales["Quantity"] > 0) & (sales["UnitPrice"] > 0) & sales["CustomerID"].notna()].copy()
     sales["revenue"] = sales["Quantity"] * sales["UnitPrice"]
+    customer_revenue = sales.groupby("CustomerID")["revenue"].sum().sort_values(ascending=False)
+    customer_orders = sales.groupby("CustomerID")["InvoiceNo"].nunique()
+    top_decile = int(np.ceil(len(customer_revenue) * 0.1))
+    assert len(raw) == 541_909
+    assert raw["InvoiceNo"].astype(str).str.startswith("C").sum() == 9_288
+    assert raw["CustomerID"].isna().sum() == 135_080
+    assert len(customer_revenue) == 4_338 and sales["InvoiceNo"].nunique() == 18_532
+    assert np.isclose(sales["revenue"].sum(), 8_911_407.904)
+    assert np.isclose(customer_orders.ge(2).mean(), 0.6558321807)
+    assert np.isclose(customer_revenue.iloc[:top_decile].sum() / customer_revenue.sum(), 0.6137506575)
+    monthly_revenue = sales.set_index("InvoiceDate").resample("ME")["revenue"].sum()
+    assert round(monthly_revenue.loc["2011-11-30"] / 1_000_000, 2) == 1.16
     country = sales.groupby("Country")["revenue"].sum().sort_values(ascending=False).head(8) / 1_000_000
+    assert np.isclose(country["United Kingdom"] * 1_000_000 / customer_revenue.sum(), 0.8201163759)
     fig, axes = plt.subplots(1, 2, figsize=(16, 8.5), facecolor="#07111f", gridspec_kw={"width_ratios": [1, 1.15]})
     fig.subplots_adjust(top=0.80, bottom=0.16, left=0.12, right=0.97, wspace=0.34)
     for ax in axes:
@@ -157,13 +188,28 @@ def save_retail_market_opportunity() -> None:
 
 def save_restaurant_risk_by_borough() -> None:
     source = ROOT / "analysis_data" / "raw" / "nyc_restaurants.csv"
+    require_source_snapshot(source)
     inspections = pd.read_csv(source, low_memory=False)
+    assert len(inspections) == 295_473
+    assert inspections["GRADE"].isna().sum() == 150_352
+    assert inspections["GRADE DATE"].isna().sum() == 160_593
+    assert inspections["SCORE"].isna().sum() == 17_179
     inspections["date"] = pd.to_datetime(inspections["INSPECTION DATE"], errors="coerce")
     inspections = inspections[inspections["date"].dt.year.between(2022, 2025)]
+    assert len(inspections) == 227_520
     grouped = inspections.groupby(["CAMIS", "INSPECTION DATE", "INSPECTION TYPE"], dropna=False).agg(
-        borough=("BORO", "first"), critical=("CRITICAL FLAG", lambda values: (values == "Critical").any())
+        borough=("BORO", "first"),
+        grade=("GRADE", "first"),
+        score=("SCORE", "max"),
+        critical=("CRITICAL FLAG", lambda values: (values == "Critical").any()),
     ).reset_index()
+    assert len(grouped) == 73_211 and np.isclose(grouped["critical"].mean(), 0.7730942072)
+    assert grouped["grade"].value_counts().loc[["A", "B", "C"]].to_dict() == {"A": 35_555, "B": 3_856, "C": 2_040}
+    assert grouped["grade"].isna().sum() == 30_037
+    grade_shares = grouped["grade"].value_counts().loc[["A", "B", "C"]] / grouped["grade"].isin(["A", "B", "C"]).sum()
+    assert [round(value * 100, 1) for value in grade_shares] == [85.8, 9.3, 4.9]
     grouped = grouped[grouped["borough"].isin(["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"])]
+    assert len(grouped) == 73_109
     summary = []
     rng = np.random.default_rng(42)
     for borough, frame in grouped.groupby("borough"):
@@ -174,6 +220,8 @@ def save_restaurant_risk_by_borough() -> None:
         lower, upper = np.quantile(draws, [0.025, 0.975]) * 100
         summary.append((borough, rate * 100, n, lower, upper))
     summary.sort(key=lambda row: row[1])
+    expected = {"Manhattan": (75.9, 27_825), "Brooklyn": (77.1, 18_758), "Queens": (78.2, 17_285), "Bronx": (79.7, 6_771), "Staten Island": (81.7, 2_470)}
+    assert all(round(rate, 1) == expected[borough][0] and n == expected[borough][1] for borough, rate, n, _, _ in summary)
     labels = [row[0] for row in summary]
     rates = [row[1] for row in summary]
     fig, ax = plt.subplots(figsize=(16, 8.5), facecolor="#07111f")
@@ -197,9 +245,18 @@ def save_restaurant_risk_by_borough() -> None:
 
 
 if __name__ == "__main__":
-    save_fake_job_model_comparison()
-    save_jolts_signals()
-    save_sec_net_margin()
-    save_taxi_completed_trips()
-    save_retail_market_opportunity()
-    save_restaurant_risk_by_borough()
+    tasks = {
+        "fake-job": save_fake_job_model_comparison,
+        "jolts": save_jolts_signals,
+        "sec": save_sec_net_margin,
+        "taxi": save_taxi_completed_trips,
+        "retail": save_retail_market_opportunity,
+        "restaurant": save_restaurant_risk_by_borough,
+    }
+    requested = sys.argv[1:] or list(tasks)
+    unknown = sorted(set(requested) - tasks.keys())
+    if unknown:
+        raise SystemExit(f"Unknown task(s): {', '.join(unknown)}. Choose from: {', '.join(tasks)}")
+    for name in requested:
+        tasks[name]()
+        print(f"validated: {name}")

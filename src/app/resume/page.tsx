@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 export default function ResumePage() {
-  const selectedProjects = getAllProjects().filter((project) => ["campaign-incrementality", "mta-congestion-pricing-causal-audit", "marketplace-supply-demand"].includes(project.slug));
+  const selectedProjects = getAllProjects().filter((project) => ["campaign-incrementality", "marketplace-supply-demand", "2026-08-23-complaintflow-ai-triage"].includes(project.slug));
 
   return (
     <article className="mx-auto w-full max-w-3xl px-4 py-14 print:max-w-none print:px-0 print:py-0 sm:px-6 sm:py-20">
@@ -18,6 +18,7 @@ export default function ResumePage() {
         <p className="section-kicker">Public resume</p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight text-foreground sm:text-6xl">Hadi Budhy</h1>
         <p className="mt-3 text-lg text-primary">Data Analyst · Growth &amp; Decision Analytics</p>
+        <p className="mt-2 text-sm font-semibold text-foreground">Target role: Senior Data Analyst — Growth &amp; Decision Analytics</p>
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Jakarta, Indonesia · 5+ years across business intelligence, customer analytics, and data automation; applied AI demonstrated through public portfolio work.</p>
         <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
           <a className="focus-ring text-primary hover:text-foreground" href="mailto:hadi.budhy@gmail.com">hadi.budhy@gmail.com</a>
@@ -41,7 +42,7 @@ export default function ResumePage() {
                 <span className="text-sm text-primary">{item.period}</span>
               </div>
               <p className="mt-1 text-sm font-semibold text-foreground/70">{item.setting}</p>
-              <p className="mt-3 leading-7 text-muted-foreground">{item.description}</p>
+              <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-6 text-muted-foreground">{item.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul>
             </div>
           ))}
         </div>
@@ -68,9 +69,10 @@ export default function ResumePage() {
       </section>
 
       <footer className="pt-10">
-        <p className="text-sm leading-6 text-muted-foreground">Professional employer names, scale, adoption, and outcome metrics are omitted when they cannot be verified in this public repository. Role-specific context can be discussed in an interview subject to confidentiality.</p>
-        <div className="mt-6 flex flex-wrap gap-3 print:hidden">
-          <Button asChild><a href="mailto:hadi.budhy@gmail.com">Contact Hadi</a></Button>
+        <p className="mb-5 text-xs leading-5 text-muted-foreground">Public version omits employer/client names and unverified outcome metrics.</p>
+        <div className="flex flex-wrap gap-3 print:hidden">
+          <Button asChild><a href="/hadi-budhy-resume.pdf" download>Download PDF</a></Button>
+          <Button variant="outline" asChild><a href="mailto:hadi.budhy@gmail.com">Contact Hadi</a></Button>
           <Button variant="outline" asChild><Link href="/projects">Review case studies</Link></Button>
         </div>
       </footer>

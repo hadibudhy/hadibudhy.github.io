@@ -81,7 +81,7 @@ export default function Home() {
           <div className="mx-auto grid w-full max-w-3xl gap-8 px-4 py-14 sm:px-6 sm:py-16 lg:grid-cols-[0.7fr_1.3fr] lg:gap-10 md:py-20">
           <div>
             <p className="section-kicker">Toolkit</p>
-            <h2 className="section-title mt-4">Capabilities demonstrated across work and case studies.</h2>
+            <h2 className="section-title mt-4">Capabilities across professional work and public case studies.</h2>
           </div>
           <div className="space-y-5">
             {capabilities.map((capability) => <div key={capability.title} className="border-t border-border pt-4 first:border-t-0 first:pt-0"><h3 className="font-semibold text-foreground">{capability.title}</h3><p className="mt-1 text-sm leading-6 text-muted-foreground">{capability.evidence}</p></div>)}
