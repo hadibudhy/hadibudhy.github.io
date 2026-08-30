@@ -18,6 +18,7 @@ export interface ProjectMeta {
   featured?: boolean;
   published?: boolean;
   kind: ProjectKind;
+  artifactLabel?: string;
   evidenceVisuals: string[];
 }
 
@@ -65,6 +66,7 @@ function normalizeMeta(data: Record<string, unknown>): ProjectMeta | null {
     featured: data.featured === true,
     published,
     kind: validKind ? kind : "methods",
+    artifactLabel: typeof data.artifactLabel === 'string' ? data.artifactLabel : undefined,
     evidenceVisuals: toStringArray(data.evidenceVisuals),
   };
 }

@@ -13,6 +13,7 @@ problem: "Support teams need to route complaints quickly, but an unreliable AI r
 result: "Portfolio reference implementation: ComplaintFlow combines a transparent baseline, approved-playbook retrieval, provider retries, PII redaction, schema checks, human escalation, and an auditable SQLite decision log."
 featured: true
 kind: flagship
+artifactLabel: "Flagship system prototype"
 evidenceVisuals:
   - /images/complaintflow-architecture.svg
   - /images/portfolio-complaintflow-boundary.svg
@@ -84,7 +85,7 @@ The public complaint data is an example source for the workflow, not a represent
 
 The bounded workflow validates inputs, protects personal data, retrieves approved guidance, makes uncertainty visible, and records enough evidence for review. The local reference fixture achieved perfect routing and 100% citation coverage on routed cases (17/17; 85% across all 20 including escalations), but that result is a contract test, not a production accuracy claim.
 
-## Additional visual evidence
+## Visual evidence
 
 ### Decision: log the evidence behind every routing choice
 
@@ -108,9 +109,15 @@ The result verifies the checked baseline, routing, citation, and escalation path
 
 Start in shadow mode. Roll out only if a privacy-reviewed holdout shows equal or better routing accuracy and escalation recall than the baseline, with acceptable latency, cost, and unsafe-output rates.
 
+**Decision status:** Prototype validated on a synthetic contract fixture; real-world performance and rollout remain unmeasured.
+
 ## What internal data would improve the decision
 
 Real reviewer labels, queue outcomes, resolution time, customer satisfaction, language, attachments, privacy incidents, and provider cost would show whether the workflow improves support operations safely.
+
+## Key takeaway
+
+The public complaint database is not representative of all consumers, and the checked-in fixture is intentionally small. The next engineering step is a privacy-reviewed sample of real narratives with reviewer labels, followed by a stronger model comparison, calibration, drift monitoring, and managed persistence.
 
 ## Technical design
 
@@ -156,10 +163,6 @@ The privacy evidence is also deliberately limited. The tests prove that common e
 ### Rollout and measurement plan
 
 Start in shadow mode: generate recommendations without changing routing. Measure reviewer agreement, queue accuracy, escalation recall, latency, cost, and unsafe-output rate. Move to a small assisted cohort only if the system matches or beats the baseline on a time-based, privacy-reviewed holdout. Keep a control group and monitor product, state, company, language, and narrative-length slices.
-
-## Key takeaway
-
-The public complaint database is not representative of all consumers, and the checked-in fixture is intentionally small. The next engineering step is a privacy-reviewed sample of real narratives with reviewer labels, followed by a stronger model comparison, calibration, drift monitoring, and managed persistence.
 
 ## Technical appendix
 

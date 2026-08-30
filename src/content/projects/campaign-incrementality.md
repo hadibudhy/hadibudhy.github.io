@@ -72,19 +72,13 @@ The benchmark difference is about **115 extra conversions per 100,000 assigned u
 
 The practical launch threshold is explicit: scale only when incremental CPA is below contribution value after ad cost, with the holdout result stable across the pre-specified audience and frequency guardrails.
 
-## Additional visual evidence
+## Visual evidence
 
 ### Main finding: the benchmark’s lift is statistically clear but economically incomplete
 
 ![Criteo randomized benchmark: 0.194% control conversion, 0.309% treatment conversion, +0.115 percentage-point lift, and 115 extra conversions per 100,000 assigned users](/images/portfolio-campaign-economics.svg)
 
 The visual keeps the lift and its economic boundary in the same frame.
-
-### Driver check: the exploratory lift is concentrated in one anonymous band
-
-![Criteo exploratory f0 quartiles: absolute conversion lift was 0.038, 0.386, 0.019, and 0.010 percentage points across the four bands](/images/portfolio-campaign-f0.svg)
-
-The second `f0` quarter shows the largest historical difference, but `f0` has no business label. It is a retest hypothesis, not a deployable customer segment.
 
 ### Decision: retain a randomized holdout and an economic stop rule
 
@@ -104,6 +98,8 @@ This makes the rollout recommendation operational.
 
 **Next test:** Compare broad targeting with uplift-based targeting. Set the minimum useful effect, sample size, stopping rule, and multiple-segment rule before launch.
 
+**Decision status:** Completed benchmark analysis; current-campaign holdout and commercial outcome not measured.
+
 ## What internal data would improve the decision
 
 A complete decision needs ad spend, contribution margin, conversion value, customer identity, channel, frequency, and later retention. Incremental CPA and incremental return can then be calculated by a business-defined audience. Scale remains conditional on incremental CPA staying below contribution value and customer-experience guardrails remaining healthy.
@@ -117,6 +113,8 @@ More reported conversions do not automatically mean profitable advertising. The 
 The primary analysis uses intention-to-treat. In plain language, each user stays in the group they were assigned to, even if the ad was not actually shown. This protects the fairness of the randomized comparison. [Analysis code, SQL, and validation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/01-campaign-incrementality) are available for review.
 
 ### Exploratory subgroup check
+
+![Criteo exploratory f0 quartiles: absolute conversion lift was 0.038, 0.386, 0.019, and 0.010 percentage points across the four bands](/images/portfolio-campaign-f0.svg)
 
 An exploratory check divided the complete `f0` feature into four equal-sized bands. The second band had the largest difference, **0.386 percentage points**; the other bands were **0.038**, **0.019**, and **0.010 percentage points**. These are not real customer personas. The feature has no business label and the split was chosen for exploration, so a new campaign should retest any targeting hypothesis in a holdout.
 

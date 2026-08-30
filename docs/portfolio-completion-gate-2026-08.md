@@ -27,26 +27,26 @@ A page is public only when checked code produces a decision-relevant result from
 
 ## Online Shoppers quality gate
 
-| Metric | Score | Rationale |
-|---|---:|---|
-| Business readability | 9.3 | Opens with the activation decision, states exact rates and denominators, and separates the historical finding from the proposed test |
-| Data storytelling | 9.2 | Context, leakage conflict, and experiment decision form one clear narrative; four visuals have conclusion-led titles |
-| Analytical credibility | 9.4 | Deduplication, group denominators, source hash, arithmetic assertions, leakage boundary, and observational limits are explicit |
-| Senior-level thinking | 9.2 | Rejects the strongest-looking downstream field, stratifies the next test, and adds experience guardrails |
+| Requirement | Status | Evidence |
+|---|---|---|
+| Business readability | Pass | Opens with the activation decision, states exact rates and denominators, and separates the historical finding from the proposed test |
+| Data storytelling | Pass | Context, leakage conflict, and experiment decision form one clear narrative; four visuals have conclusion-led titles |
+| Analytical credibility | Pass | Deduplication, all visitor-group denominators, source hash, arithmetic assertions, leakage boundary, and observational limits are explicit |
+| Decision judgment | Pass | Rejects the strongest-looking downstream field, stratifies the next test, and adds experience guardrails |
 
-No score was rounded up to pass. The first draft failed because it had one visual and no published computation; it was revised before this review.
+The first draft failed because it had one visual and no published computation; it was revised before publication.
 
 ## Online Shoppers stakeholder gate
 
-| Stakeholder | Score | First impression / what works | Weakness, missing evidence, and decision usefulness |
-|---|---:|---|---|
-| Recruiter | 9.1 | The 24.9% versus 14.1% contrast is scannable and the chart sequence explains the story quickly | Historical setting limits brand relevance, but the judgment and finished artifact increase interview likelihood |
-| Hiring Manager | 9.2 | The result, leakage rejection, and next experiment demonstrate practical analyst judgment | No causal lift or customer value; the recommendation remains appropriately bounded |
-| Data Manager | 9.3 | Checked code, source hash, exact denominators, duplicate handling, and manifest make the claims auditable | No unique-user key; the page explicitly avoids user-level retention claims |
-| Country Manager | 8.8 | The segment priority and leakage risk are understandable without technical translation | No margin or current-market estimate, so the output supports a pilot rather than rollout |
-| Business Stakeholder | 9.0 | The visuals make the target, risk, and next action easier to understand | The expected upside is intentionally not invented; a randomized test is required before investment |
+| Stakeholder lens | Status | What works | Remaining evidence gap |
+|---|---|---|---|
+| Recruiter | Pass | The 24.9% versus 14.1% contrast is scannable and the chart sequence explains the story quickly | Historical setting limits brand relevance |
+| Hiring Manager | Pass | The result, leakage rejection, and next experiment demonstrate practical analyst judgment | No causal lift or customer value |
+| Data Manager | Pass | Checked code, source hash, all visitor denominators, duplicate handling, and manifest make the claims auditable | No unique-user key |
+| Country Manager | Pass | The segment priority and leakage risk are understandable without technical translation | No margin or current-market estimate |
+| Business Stakeholder | Pass | The visuals make the target, risk, and next action easier to understand | A randomized test is required before investment |
 
-These are internal role-based editorial assessments, not claims that five external people reviewed the page. In each perspective, the visuals improve comprehension or trust. All scores meet the required threshold without averaging.
+These are internal editorial checks, not claims that external reviewers endorsed the page.
 
 ## Commands
 

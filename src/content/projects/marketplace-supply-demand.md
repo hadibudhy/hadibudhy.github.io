@@ -88,7 +88,7 @@ TLC's monthly report gives a broader view. Average reported trips per day rose f
 | Lost requests | Requests that were not matched or were abandoned | Not available |
 | Zone-hour online supply | Drivers available in a specific place and hour | Not available |
 
-## Additional visual evidence
+## Visual evidence
 
 ### Decision: recorded trips are only one layer of marketplace measurement
 
@@ -107,6 +107,8 @@ The visual supports collecting the missing demand and supply measures before bro
 **Risk:** An incentive may move drivers from a nearby zone instead of adding supply. It may also raise cost without improving fulfillment.
 
 **Next test:** Randomize matched zone-time blocks between normal incentives and a targeted incentive. Use request fulfillment as the primary customer outcome. Track recorded trips per online driver-hour as a supply measure and incremental trips per incentive dollar as the economic measure. Include a washout period, border-zone monitoring, and a sample-size plan before launch.
+
+**Decision status:** Completed measurement audit; shortage diagnosis, incentive pilot, and unit economics remain unmeasured.
 
 ## What internal data would improve the decision
 

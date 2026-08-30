@@ -52,11 +52,16 @@ def main():
 
     metrics = json.loads((ROOT / "public" / "data" / "online-shoppers-metrics.json").read_text(encoding="utf-8"))
     new = metrics["visitor_conversion"]["New_Visitor"]
+    other = metrics["visitor_conversion"]["Other"]
     returning = metrics["visitor_conversion"]["Returning_Visitor"]
     raw_returning = metrics["raw_visitor_conversion"]["Returning_Visitor"]
     assert metrics["source"]["sha256"] == EXPECTED_SHOPPER_SHA
     assert metrics["deduplicated_sessions"] == 12_205
+    assert sum(group["sessions"] for group in metrics["visitor_conversion"].values()) == 12_205
     assert round(100 * new["rate"], 1) == 24.9
+    assert other["sessions"] == 81
+    assert other["conversions"] == 16
+    assert round(100 * other["rate"], 1) == 19.8
     assert round(100 * returning["rate"], 1) == 14.1
     assert round(100 * raw_returning["rate"], 1) == 13.9
     shopper_page = (PROJECTS / "2026-08-30-online-shoppers-activation.md").read_text(encoding="utf-8")

@@ -84,7 +84,10 @@ export default async function ProjectPage({ params }: Props) {
   }
 
   const formattedDate = format(project.meta.date, 'MMMM yyyy');
-  const kindLabel = project.meta.kind === "methods" ? "Methods / design study" : project.meta.kind === "completed" ? "Completed analysis" : "Flagship analysis";
+  const kindLabel = project.meta.artifactLabel ?? (project.meta.kind === "methods" ? "Methods / design study" : project.meta.kind === "completed" ? "Completed analysis" : "Flagship analysis");
+  const technicalStart = project.content.search(/\n(?=## Technical (?:appendix|design)\b)/i);
+  const summaryContent = technicalStart === -1 ? project.content : project.content.slice(0, technicalStart);
+  const technicalContent = technicalStart === -1 ? "" : project.content.slice(technicalStart + 1);
 
   return (
     <article className="py-12 sm:py-16 md:py-24">
@@ -137,10 +140,18 @@ export default async function ProjectPage({ params }: Props) {
 
         <div className="prose prose-invert max-w-none">
           <MDXRemote
-            source={project.content}
+            source={summaryContent}
             components={components}
             options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
           />
+          {technicalContent && (
+            <details className="my-10 border border-border bg-muted/30 p-5 sm:p-6">
+              <summary className="cursor-pointer font-bold text-foreground">Read technical details</summary>
+              <div className="mt-6 border-t border-border pt-2">
+                <MDXRemote source={technicalContent} components={components} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
+              </div>
+            </details>
+          )}
         </div>
       </div>
     </article>

@@ -74,7 +74,7 @@ In the 2022-2025 inspection-level roll-up, **77.3%** of records included at leas
 
 These differences are useful for prioritization, but they do not prove that a borough causes worse performance. Restaurant mix, inspection timing, location, and reporting practices may all contribute.
 
-## Additional visual evidence
+## Visual evidence
 
 ### Decision: an inspection-level queue keeps missing grades visible
 
@@ -89,33 +89,11 @@ This visual supports prioritization without turning a missing grade into a faile
 3. **Track repeat outcomes by restaurant.** A restaurant-level history is more useful than a one-time citywide ranking. Measure whether critical violations recur after follow-up.
 4. **Keep the data limitations visible.** Do not use this public extract alone to rank managers or predict customer demand; pair it with internal visit, complaint, and operating data.
 
+**Decision status:** Completed unadjusted triage analysis; coaching pilot and outcome measurement remain proposed.
+
 ## What internal data would improve the decision
 
 Internal restaurant type, manager, operating hours, training completion, complaint, closure, and repeat-inspection data would show whether the public patterns identify preventable risk and whether coaching changes outcomes.
-
-## Key takeaway
-
-Public inspection data can support a useful quality-prioritization system, but only after the business changes the unit of analysis from violation rows to inspections and treats missing outcomes as a follow-up queue rather than a clean result.
-
-## Decision details
-
-**Decision owner:** Director of Restaurant Operations. **Decision:** where should inspection-preparation and follow-up resources go first? **North-star KPI:** share of inspections with a critical violation. **Drivers:** borough, inspection type, restaurant, and repeat inspection history. **Guardrails:** inspection coverage, time since last inspection, and the rate of missing grades.
-
-### What is driving the result?
-
-The 2022–2025 inspection-level base has a **77.3% critical-violation rate** after rolling violation rows up to restaurant, inspection date, and inspection type. The rate is highest in Staten Island (**81.7%**) and the Bronx (**79.7%**) and lowest in Manhattan (**75.9%**). This is a prioritization signal, not proof that borough causes risk: inspection mix, restaurant type, repeated inspections, and reporting completeness may differ.
-
-The outcome is also incomplete. Only 35,555 inspection records have an A grade, while 30,037 have no grade in the selected period. A missing grade must not be treated as a pass.
-
-### Opportunity, trade-offs, and validation
-
-The immediate opportunity is to focus review on the **two boroughs above the city rate**, then test whether risk falls after targeted education or follow-up. No financial impact is estimated because the data has no sales, closure cost, or customer-complaint fields. A lower violation rate could also reflect changed inspection coverage, so coverage is a guardrail.
-
-- **First:** review restaurant-level repeat critical findings and treat Staten Island and the Bronx as priority areas for triage, not as proof of borough cause.
-- **Then test:** compare targeted food-safety support with standard communication after matching or stratifying by restaurant type and inspection type.
-- **To decide later:** add restaurant type, inspection schedule, closure outcomes, and complaint data.
-
-Success means a lower repeat-critical rate without reducing inspection coverage. Sensitivity checks should exclude placeholder dates, separate inspection types, and report graded records separately from missing grades.
 
 ## Technical appendix
 

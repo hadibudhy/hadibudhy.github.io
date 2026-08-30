@@ -5,7 +5,7 @@ categories: [growth analytics]
 tags: [activation, conversion, leakage, UCI]
 excerpt: "A session-level conversion study that separates useful early intent signals from fields that only appear after a shopper has already shown value."
 problem: "The product team wants to improve conversion, but a targeting rule can look excellent simply because it uses information created after the shopper has already progressed."
-result: "After removing 125 exact duplicates, 12,205 sessions remained: new visitors converted at 24.9% versus 14.1% for returning visitors, while PageValues was confirmed as an outcome-adjacent leakage risk."
+result: "After removing 125 exact duplicates, all 12,205 sessions are accounted for: new visitors converted at 24.9%, Other at 19.8%, and returning visitors at 14.1%."
 published: true
 kind: completed
 evidenceVisuals:
@@ -25,7 +25,7 @@ A high-performing conversion model can still be useless if it reads the answer f
 ## Decision brief
 
 - **Recommendation:** test a light-touch activation prompt using pre-intervention browsing depth and visitor type; keep `PageValues` out of targeting.
-- **Evidence:** among 12,205 deduplicated sessions, new visitors converted at 24.9% (422/1,693) versus 14.1% (1,470/10,431) for returning visitors; no treatment assignment is included.
+- **Evidence:** among 12,205 deduplicated sessions, new visitors converted at 24.9% (422/1,693), “Other” at 19.8% (16/81), and returning visitors at 14.1% (1,470/10,431); no treatment assignment is included.
 - **Evidence strength:** Moderate for descriptive segmentation; low for causal product impact because no treatment assignment or user-level experiment exists.
 - **Main risk:** the sample is historical and session-level. A returning visitor may appear in many rows, and the dataset does not show margin or long-term value.
 - **Next test:** randomize prompt eligibility, pre-register conversion and guardrail metrics, and report results by new/returning visitor without using post-intervention fields.
@@ -50,13 +50,13 @@ The data is real observation-level web traffic, but it is not a current product 
 
 ## Completed result
 
-After removing **125 exact duplicate rows**, the analysis retained **12,205 sessions**. New visitors converted at **24.9%** (422 of 1,693), compared with **14.1%** (1,470 of 10,431) for returning visitors—a descriptive gap of **10.8 percentage points**. The difference is useful for experiment stratification, not proof that visitor status causes conversion.
+After removing **125 exact duplicate rows**, the analysis retained **12,205 sessions**. New visitors converted at **24.9%** (422 of 1,693), the source’s **“Other” group converted at 19.8%** (16 of 81), and returning visitors converted at **14.1%** (1,470 of 10,431). The headline new-versus-returning gap is **10.8 percentage points**; the 81 “Other” sessions are shown but are not used in that two-group contrast. These differences are useful for experiment stratification, not proof that visitor status causes conversion.
 
 ### Main finding: new visitors had the highest observed conversion rate
 
-![New visitors converted at 24.9% versus 14.1% for returning visitors among 12,205 deduplicated sessions](/images/portfolio-online-shoppers-visitor.svg)
+![Among 12,205 deduplicated sessions, new visitors converted at 24.9%, Other at 19.8%, and returning visitors at 14.1%](/images/portfolio-online-shoppers-visitor.svg)
 
-The finding changes the test design: do not assume returning traffic is the easiest activation audience, and report the randomized result separately by visitor type.
+The finding changes the test design: do not assume returning traffic is the easiest activation audience, and report the randomized result separately by visitor type. Month, traffic source, device, region, browsing depth, and campaign mix may differ across these groups, so the unadjusted comparison is a hypothesis—not an activation effect estimate.
 
 ### Leakage check: PageValues is unsafe until its timing is verified
 
@@ -112,6 +112,8 @@ Visitor type and early browsing behavior are candidate inputs for an activation 
 **Risk:** a prompt can increase short-term conversion while harming experience or repeat use. Add dismissal, bounce, and seven-day return guardrails.
 
 **Next action:** define the eligibility timestamp, primary denominator, minimum detectable effect, and stop rule before launch.
+
+**Decision status:** Completed descriptive analysis; activation experiment proposed, not launched or measured.
 
 ## Evidence strength and limitations
 

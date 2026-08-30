@@ -22,7 +22,7 @@ header:
 
 ## Executive summary
 
-**Business problem:** grow repeat revenue without increasing dependence on one-off orders or a small customer group. **Key findings:** the cleaned data contains 4,338 identifiable customers; the top 10% generate 61.3% of revenue; and the UK contributes about 82% of revenue. **Decision implication:** retention is valuable but concentrated. **Recommended action:** protect high-value customers and validate repeat-purchase tests in nearby European markets.
+**Business problem:** grow repeat revenue without increasing dependence on one-off orders or a small customer group. **Key findings:** the cleaned data contains 4,338 identifiable customers; the top 10% generate 61.3% of revenue; and the UK contributes about 82% of revenue. **Decision implication:** retention is valuable but concentrated. **Recommended action:** protect high-value customers and treat nearby European markets as research priorities before any expansion decision.
 
 **Evidence strength:** Medium for historical revenue and repeat-order patterns; low for market attractiveness, profitability, and causal retention effects.
 
@@ -74,7 +74,7 @@ Returning orders became a much larger part of monthly orders as the customer bas
 
 **Business meaning:** The retailer appears to have a useful repeat-purchase pattern, but the value is unevenly distributed. Growth planning should protect the highest-value customer relationships while testing whether successful UK offers can travel to nearby markets; the data does not establish market attractiveness.
 
-## Additional visual evidence
+## Visual evidence
 
 ### Decision: customer identity is the first retention denominator
 
@@ -85,39 +85,15 @@ The visual shows why repeat-revenue claims must state the identifiable-customer 
 ## Recommendation
 
 1. **Create a high-value customer retention plan.** Track the top customer group separately and test early access, relevant bundles, or service improvements. The data shows where the value is concentrated, but it does not prove which offer will change behavior.
-2. **Build country-specific growth tests.** Start with the Netherlands, Ireland, Germany, and France. Compare repeat order rate, market size, CAC, shipping cost, competition, regulation, and product mix before increasing marketing spend.
+2. **Research country-specific growth conditions.** Use the Netherlands, Ireland, Germany, and France as a research shortlist—not expansion evidence. Compare reachable demand, repeat order rate, market size, CAC, shipping cost, competition, regulation, and product mix before designing a controlled growth test.
 3. **Measure returning orders as a core growth metric.** Report new customers, returning customers, orders, and revenue together so higher sales are not mistaken for healthier customer relationships.
 4. **Improve cancellation and customer identification fields.** The raw file contains 9,288 cancellation rows and 135,080 rows without a customer ID. Better capture would make retention reporting more complete.
+
+**Decision status:** Completed historical analysis; retention tests and market investment remain proposed and unmeasured.
 
 ## What internal data would improve the decision
 
 Customer identity coverage, product margin, shipping cost, marketing exposure, inventory, and repeat-purchase history would turn the revenue signals into a contribution-based retention and expansion decision.
-
-## Key takeaway
-
-The retailer did not need more sales data first. It needed a clearer view of customer value. A small group generated most revenue, while the UK remained the foundation and nearby European markets offered the most practical expansion path.
-
-## Decision details
-
-**Decision owner:** Head of Growth. **Decision:** where should retention and market-expansion effort go first? **North-star KPI:** repeat revenue. **Drivers:** identifiable customers, repeat-customer rate, orders per customer, and average order value. **Guardrails:** cancellation rate, customer concentration, and shipping cost, which is not available in this file.
-
-### What is driving the result?
-
-The main result is not simply “sales grew.” The cleaned base contains **4,338 customers**, and the highest-value 10% generate **61.3% of revenue**. The business is therefore exposed to both customer concentration and incomplete customer identification. The UK contributes about **82% of revenue**, so a country-wide average hides the difference between protecting the core market and testing nearby markets.
-
-This is evidence of concentration, not proof that high-value customers will respond to a particular offer. It also cannot separate customer behavior from product mix because margin, inventory, and marketing cost are missing.
-
-### Opportunity scenarios
-
-If a retention test increased revenue from the top 10% customer group by **5%**, the arithmetic opportunity would be about **£273,000** (`£8.91m × 61.3% × 5%`) before cost. That is a scenario, not a forecast. A conservative test should start below this level and compare against a holdout group.
-
-### Prioritized action and measurement
-
-- **First:** create a protected high-value customer cohort and monitor repeat revenue, order frequency, and cancellations monthly.
-- **Then test:** run country-specific repeat-purchase offers in the Netherlands, Ireland, Germany, and France against a control group. Measure repeat-order rate and contribution after shipping cost.
-- **To decide later:** improve CustomerID capture and cancellation reason fields before using the portfolio as a complete retention view.
-
-The test succeeds only if repeat revenue rises without increasing cancellations or reducing contribution. Sensitivity checks should repeat the result with the top 5% and top 20% definitions, and exclude the incomplete December 2011 period.
 
 ## Technical appendix
 

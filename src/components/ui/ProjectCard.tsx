@@ -6,7 +6,7 @@ import type { ProjectMeta } from "@/lib/mdx";
 interface ProjectCardProps { slug: string; meta: ProjectMeta; featured?: boolean; }
 
 export function ProjectCard({ slug, meta, featured = false }: ProjectCardProps) {
-  const kindLabel = meta.kind === "methods" ? "Methods / design" : meta.kind === "completed" ? "Completed analysis" : "Flagship analysis";
+  const kindLabel = meta.artifactLabel ?? (meta.kind === "methods" ? "Methods / design" : meta.kind === "completed" ? "Completed analysis" : "Flagship analysis");
   const signalLabel = meta.kind === "methods" ? "Evidence boundary" : "Decision signal";
 
   return (

@@ -93,9 +93,9 @@ export default function Home() {
               <div>
                 <p className="section-kicker">Next conversation</p>
                 <h2 className="mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground md:text-5xl">Have a messy data problem worth making clear?</h2>
-                <p className="mt-5 max-w-xl leading-7 text-muted-foreground">Available for conversations about analytics, data work, and decisions that need clearer evidence.</p>
+                <p className="mt-5 max-w-xl leading-7 text-muted-foreground">Hiring for a Data Analyst role? Get in touch to discuss the decisions, evidence, and analytical work involved.</p>
               </div>
-              <Button size="lg" asChild className="w-full sm:w-auto"><a href="mailto:hadi.budhy@gmail.com">Let&apos;s talk <span className="ml-3 text-lg" aria-hidden="true">→</span></a></Button>
+              <Button size="lg" asChild className="w-full sm:w-auto"><a href="mailto:hadi.budhy@gmail.com">Discuss a role <span className="ml-3 text-lg" aria-hidden="true">→</span></a></Button>
             </div>
           </div>
         </div>

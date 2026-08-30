@@ -76,7 +76,7 @@ The chart can still show a post-policy difference, but that difference may refle
 
 **Business meaning:** a Country Manager should not change rider prices or driver incentives based on this result. The better next step is to build a comparison that matches the affected facilities before the policy.
 
-## Additional visual evidence
+## Visual evidence
 
 ### Context: the audited panel has broad facility and week coverage
 
@@ -101,6 +101,8 @@ This is the decision-relevant result: improve identification before attributing 
 **Risk:** A new control may also be affected by the policy or by a facility-specific event.
 
 **Next test:** Pre-register the control-selection rule, add weather, construction, transit, and facility-disruption data, and require acceptable pre-policy trends and placebo results before estimating a policy effect.
+
+**Decision status:** Comparator rejected after validation; no causal policy effect or operational outcome is claimed.
 
 ## What internal data would improve the decision
 
