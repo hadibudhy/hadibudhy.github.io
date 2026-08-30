@@ -69,6 +69,20 @@ November converted at **25.5%**, while May converted at **11.0%**. Weekend sessi
 
 **Why it matters:** the next test needs time-stratified randomization and a calendar-aware readout so a seasonal mix shift is not mistaken for product impact.
 
+## Evidence register
+
+| Layer | Evidence | Decision use |
+|---|---|---|
+| Observed | 12,205 deduplicated sessions; new visitors converted at 24.9% and returning visitors at 14.1% | Choose hypotheses for the next activation test |
+| Inferred | Visitor type and early browsing behavior may be useful eligibility signals | Design a stratified, randomized prompt test |
+| Not established | Any prompt caused conversion, or that `PageValues` is available before intervention | Do not use post-outcome fields for targeting |
+
+## Validation record
+
+- **Grain:** one session; rates use deduplicated rows.
+- **Checks:** 12,330 raw rows, 125 exact duplicate rows, 0 missing values, binary `Revenue` outcome.
+- **Guardrail:** `PageValues` is retained for diagnosis but excluded from a pre-intervention feature set.
+
 ## Recommendation
 
 **What:** run a randomized activation experiment based on fields available before the prompt, such as visitor type, product-page depth, and time-on-site.
@@ -92,4 +106,3 @@ Source and file documentation: [UCI dataset page](https://archive.ics.uci.edu/da
 ## Technical appendix
 
 Rates use deduplicated session rows as the denominator. `Revenue=True` is the outcome. No feature selection or model metric is used as evidence of incremental conversion. The recommended test is an A/B test because the public source has no treatment assignment.
-
