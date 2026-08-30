@@ -69,6 +69,20 @@ The file records people who rated movies, not everyone who saw a recommendation 
 
 **Why it matters:** the launch gate must include online behavioral and experience outcomes.
 
+## Evidence register
+
+| Layer | Evidence | Decision use |
+|---|---|---|
+| Observed | 25M ratings, 1M tag applications, 62,000 movies, and 162,000 users with timestamps | Benchmark relevance and catalog coverage |
+| Inferred | Popularity is a useful baseline but can narrow exposure | Add coverage and novelty guardrails |
+| Not established | A higher offline rating score increases watching, satisfaction, or retention | Validate online with an experiment |
+
+## Validation record
+
+- **Grain:** user × movie × timestamp for ratings; tag applications remain a separate child table.
+- **Checks:** rating keys, timestamps, movie references, and chronological train/test boundary are validated.
+- **Guardrail:** relevance and coverage are reported as separate metrics, not hidden in one score.
+
 ## Recommendation
 
 **What:** keep the popularity baseline, add personalized candidates from user history and tags, and enforce a minimum catalog-coverage guardrail.
@@ -92,4 +106,3 @@ Source and checksum guidance: [GroupLens MovieLens 25M](https://grouplens.org/da
 ## Technical appendix
 
 All offline metrics use a timestamp-based train/test boundary. Coverage is reported as unique recommended movies divided by the eligible catalog, and relevance is not combined with coverage into an unexplained single score.
-
