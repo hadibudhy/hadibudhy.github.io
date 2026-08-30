@@ -69,6 +69,20 @@ Neighborhood request volume reflects both service need and residents’ likeliho
 
 **Why it matters:** avoid using raw requests to rank neighborhood value or agency performance without external context.
 
+## Evidence register
+
+| Layer | Evidence | Decision use |
+|---|---|---|
+| Observed | Request records include complaint type, created/closed timestamps, status, agency, and geography | Measure queue arrivals, age, and workflow mix |
+| Inferred | A smaller queue with older work can be a bigger capacity bottleneck than a high-volume fast queue | Target staffing or routing pilots |
+| Not established | Closed means resolved, or low request volume means low resident need | Add outcome and reporting-access context |
+
+## Validation record
+
+- **Grain:** one service request.
+- **Checks:** fixed cutoff, request IDs, missing close dates, negative durations, and agency workflow definitions are reviewed.
+- **Guardrail:** open requests remain in backlog and close time is labeled an administrative process metric.
+
 ## Recommendation
 
 **What:** create a queue-level operating view with arrivals, open age, tail duration, and workflow mix.
@@ -92,4 +106,3 @@ Source: [NYC 311 Service Requests on Data.gov](https://catalog.data.gov/dataset/
 ## Technical appendix
 
 Use `created_date` for arrivals. For records without `closed_date`, retain them in the open backlog at the analysis cutoff. Summarize duration with median and high percentiles; do not let a small number of extreme records determine the entire queue story.
-
