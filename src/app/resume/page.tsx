@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 export default function ResumePage() {
-  const selectedProjects = getAllProjects().filter((project) => ["campaign-incrementality", "marketplace-supply-demand", "2026-08-23-complaintflow-ai-triage"].includes(project.slug));
+  const selectedProjects = getAllProjects().filter((project) => ["campaign-incrementality", "marketplace-supply-demand", "mta-congestion-pricing-causal-audit", "2026-08-23-complaintflow-ai-triage"].includes(project.slug));
 
   return (
     <article className="mx-auto w-full max-w-3xl px-4 py-14 print:max-w-none print:px-0 print:py-0 sm:px-6 sm:py-20">

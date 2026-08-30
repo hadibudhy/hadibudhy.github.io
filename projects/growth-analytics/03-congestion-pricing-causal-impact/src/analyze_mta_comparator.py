@@ -17,7 +17,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[4]
 SOURCE = ROOT / "analysis_data/growth_sources/mta_bridge_daily_car_counts.json"
-OUTPUT = ROOT / "analysis_data/growth_sources/mta_bridge_event_study.json"
+OUTPUT = ROOT / "analysis_data/growth_sources/mta_comparator_audit.json"
 CHART = ROOT / "public/images/growth-mta-event-study.png"
 TREATED_FACILITIES = {22, 27, 28}  # RFK Manhattan, Queens-Midtown Tunnel, Hugh L. Carey Tunnel
 
