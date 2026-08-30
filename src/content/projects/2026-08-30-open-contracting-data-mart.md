@@ -45,6 +45,26 @@ The data is real public procurement information, but it is not a complete view o
 
 ## Key findings
 
+## Visual evidence
+
+### Context: a contract is a lifecycle of releases
+
+![Open Contracting lifecycle: planning, tender, award, contract, and implementation connected through an OCID](/images/portfolio-ocds-lifecycle.svg)
+
+The standard’s process model is the foundation for a trustworthy procurement mart.
+
+### Main finding: missing implementation data is an uncertainty state
+
+![Open Contracting evidence boundary: OCID-linked releases and parties are observed, while complete payments and proven misconduct are not](/images/portfolio-ocds-boundary.svg)
+
+The visual prevents missing data from being interpreted as a clean outcome.
+
+### Decision: profile completeness before red-flag scoring
+
+![Conceptual Open Contracting data gate: ingest immutable releases, profile stage completeness, then send lineage-backed indicators to review](/images/portfolio-ocds-gate.svg)
+
+This makes data quality part of the procurement decision.
+
 ### A procurement process is not one row
 
 A release represents an event, while a record represents the joined contracting process.

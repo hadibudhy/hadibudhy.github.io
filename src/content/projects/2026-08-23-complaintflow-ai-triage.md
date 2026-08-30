@@ -79,6 +79,20 @@ The public complaint data is an example source for the workflow, not a represent
 
 The bounded workflow validates inputs, protects personal data, retrieves approved guidance, makes uncertainty visible, and records enough evidence for review. The local reference fixture achieved perfect routing and citation coverage, but that result is a contract test, not a production accuracy claim.
 
+## Additional visual evidence
+
+### Decision: log the evidence behind every routing choice
+
+![Conceptual ComplaintFlow audit trail: validate schema and PII, retrieve approved playbooks, escalate uncertainty, and log evidence and outcomes](/images/portfolio-complaintflow-log.svg)
+
+The logging path makes the workflow reviewable by support and risk owners.
+
+### Evidence boundary: software validation is not production model performance
+
+![ComplaintFlow evidence boundary: the fixture validates routing schema, fallbacks, retries, and audit logging, but not representative complaint prevalence or real resolution impact](/images/portfolio-complaintflow-boundary.svg)
+
+This visual keeps the synthetic fixture’s purpose explicit.
+
 ## Recommendation
 
 Start in shadow mode. Roll out only if a privacy-reviewed holdout shows equal or better routing accuracy and escalation recall than the baseline, with acceptable latency, cost, and unsafe-output rates.

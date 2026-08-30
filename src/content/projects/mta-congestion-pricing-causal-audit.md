@@ -71,6 +71,20 @@ The chart can still show a post-policy difference, but that difference may refle
 
 **Business meaning:** a Country Manager should not change rider prices or driver incentives based on this result. The better next step is to build a comparison that matches the affected facilities before the policy.
 
+## Additional visual evidence
+
+### Context: the audited panel has broad facility and week coverage
+
+![MTA congestion-pricing audit scope: 27,080 facility-day observations, 3,880 facility-week observations, 10 facilities, and a plus-or-minus 26-week diagnostic window](/images/portfolio-mta-panel-scope.svg)
+
+The panel is large enough for a diagnostic; size alone does not make the comparator valid.
+
+### Decision: stop the causal claim when the pre-trend fails
+
+![MTA causal evidence boundary: facility crossings and a policy date are observed, but ride-hailing fee exposure and a parallel untreated counterfactual are not](/images/portfolio-mta-causal-boundary.svg)
+
+This is the decision-relevant result: improve identification before attributing an effect.
+
 ## Recommendation
 
 **What:** Do not make a causal claim from this control group.

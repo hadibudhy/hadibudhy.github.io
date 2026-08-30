@@ -69,6 +69,14 @@ Returning orders became a much larger part of monthly orders as the customer bas
 
 **Business meaning:** The retailer appears to have a useful repeat-purchase pattern, but the value is unevenly distributed. Growth planning should protect the highest-value customer relationships while testing whether successful UK offers can travel to nearby markets; the data does not establish market attractiveness.
 
+## Additional visual evidence
+
+### Decision: customer identity is the first retention denominator
+
+![UCI Online Retail cleaning funnel: 541,909 raw transaction rows, 135,080 missing CustomerID values, and 4,338 identifiable customers](/images/portfolio-retail-cleaning.svg)
+
+The visual shows why repeat-revenue claims must state the identifiable-customer boundary.
+
 ## Recommendation
 
 1. **Create a high-value customer retention plan.** Track the top customer group separately and test early access, relevant bundles, or service improvements. The data shows where the value is concentrated, but it does not prove which offer will change behavior.

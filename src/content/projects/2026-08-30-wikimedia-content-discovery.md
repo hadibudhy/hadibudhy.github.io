@@ -45,6 +45,26 @@ The source measures requests, not unique readers, comprehension, satisfaction, o
 
 ## Key findings
 
+## Visual evidence
+
+### Context: pageviews have multiple analytical dimensions
+
+![Wikimedia pageview grain: page or project, time period, access method, and agent type](/images/portfolio-wikimedia-api-grain.svg)
+
+Keeping these dimensions visible protects the content queue from mixing mobile, desktop, and automated traffic.
+
+### Main finding: persistence is not reader retention
+
+![Wikimedia evidence boundary: pageview time series and access mix are observed, while unique readers, satisfaction, and causal refresh impact are not](/images/portfolio-wikimedia-boundary.svg)
+
+The visual makes the aggregate-data limitation part of the recommendation.
+
+### Decision: split spike response from durable maintenance
+
+![Conceptual content queue: classify a spike or stable floor, refresh content and links, then validate depth and return in a holdout](/images/portfolio-wikimedia-queue.svg)
+
+This is the operational decision the public series can support.
+
 ### A spike and a durable audience are different product states
 
 Pages with one unusually high period can look more important than pages with consistent demand.

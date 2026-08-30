@@ -45,6 +45,26 @@ The data is real observation-level web traffic, but it is not a current product 
 
 ## Key findings
 
+## Visual evidence
+
+### Context: new and returning sessions have different observed rates
+
+![New visitors converted more often in the deduplicated 2018 session file: 24.9% versus 14.1%, with session denominators shown](/images/portfolio-online-shoppers-segments.svg)
+
+This descriptive comparison sets the baseline for segmentation; it does not identify an intervention effect.
+
+### Main finding: PageValues is predictive but downstream
+
+![Positive PageValues sessions converted at 56.3% versus 3.9% for zero-PageValues sessions, shown as a leakage diagnostic](/images/portfolio-online-shoppers-pagevalue.svg)
+
+The contrast is useful for diagnosis and explicitly supports excluding this field from pre-intervention targeting.
+
+### Decision: test early signals with a randomized prompt
+
+![Conceptual activation experiment: pre-intervention eligibility flows to randomized prompt assignment and conversion guardrails](/images/portfolio-online-shoppers-experiment.svg)
+
+The decision visual shows the measurement design required before making a product claim.
+
 ### New visitors were not the lowest-intent group
 
 New visitors converted at **24.9%**, while returning visitors converted at **14.1%** in this file.

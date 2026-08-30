@@ -45,6 +45,26 @@ The operator notes that staff/test trips are removed and that data is provided u
 
 ## Key findings
 
+## Visual evidence
+
+### Context: trips and station status answer different questions
+
+![Citi Bike analytical grains: one ride, one station-status snapshot, and rider/vehicle context](/images/portfolio-citibike-grain.svg)
+
+The visual prevents a live station snapshot from being treated as a completed-trip outcome.
+
+### Main finding: direction is more actionable than popularity
+
+![Conceptual Citi Bike flow view: count origins and destinations, compare direction by peak window, and prioritize station moves](/images/portfolio-citibike-imbalance.svg)
+
+Origin and destination fields support an imbalance diagnostic, not a claim of unmet demand.
+
+### Decision: make service outcomes measurable before rebalancing
+
+![Conceptual Citi Bike service test: instrument search and unlock failures, pilot a station-window priority, and measure successful rides and repeat use](/images/portfolio-citibike-test.svg)
+
+The test adds the missing customer-experience evidence.
+
 ### Total station volume hides direction
 
 A station can be a top origin and a weak destination, or the reverse.

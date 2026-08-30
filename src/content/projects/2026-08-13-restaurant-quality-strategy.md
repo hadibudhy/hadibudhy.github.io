@@ -69,6 +69,14 @@ In the 2022-2025 inspection-level roll-up, **77.3%** of records included at leas
 
 These differences are useful for prioritization, but they do not prove that a borough causes worse performance. Restaurant mix, inspection timing, location, and reporting practices may all contribute.
 
+## Additional visual evidence
+
+### Decision: an inspection-level queue keeps missing grades visible
+
+![NYC restaurant inspection triage: 73,211 inspection records from 2022–2025 include 30,037 inspections without a recorded grade](/images/portfolio-restaurant-triage.svg)
+
+This visual supports prioritization without turning a missing grade into a failed inspection.
+
 ## Recommendation
 
 1. **Use a two-level quality queue.** Send immediate coaching to locations with recent critical violations or low grades, then review ungraded inspections separately instead of treating them as clean.

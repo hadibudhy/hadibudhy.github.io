@@ -45,6 +45,26 @@ Ratings are explicit feedback, not impressions, clicks, starts, completed watche
 
 ## Key findings
 
+## Visual evidence
+
+### Context: the release combines ratings, tags, and catalog scale
+
+![MovieLens 25M scale: 25 million ratings, one million tag applications, 62,000 movies, and 162,000 users](/images/portfolio-movielens-scale.svg)
+
+These counts define the offline evidence available for relevance and coverage.
+
+### Main finding: offline evidence stops before engagement
+
+![MovieLens evidence boundary: ratings and tags support offline relevance and coverage, but not impressions, watch completion, or retention](/images/portfolio-movielens-boundary.svg)
+
+The recommendation avoids turning an offline score into a product outcome.
+
+### Decision: keep popularity as a benchmark and test exploration
+
+![Conceptual recommendation test: benchmark popularity, personalize with history and tags, and guardrail coverage and satisfaction](/images/portfolio-movielens-test.svg)
+
+The test preserves a clear baseline while making the long-tail trade-off measurable.
+
 ### Popularity is a strong baseline and a poor complete strategy
 
 A popularity ranking is easy to explain and usually serves common tastes well, but it repeatedly favors titles with more historical exposure.

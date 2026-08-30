@@ -45,6 +45,26 @@ The release measures recorded marketplace transactions. It does not measure brow
 
 ## Key findings
 
+## Visual evidence
+
+### Context: the order is the business entity across multiple child tables
+
+![Olist public release scope: about 100,000 orders from 2016–2018 connect delivery dates, sellers, freight, products, payments, and reviews](/images/portfolio-olist-scale.svg)
+
+The data model explains why order-level KPIs must be calculated before one-to-many joins.
+
+### Main finding: promise and review do not reveal root cause by themselves
+
+![Olist evidence boundary: delivery dates and reviews are observed, while carrier events, unplaced demand, and contribution margin are not](/images/portfolio-olist-boundary.svg)
+
+This keeps a low review score from becoming an unsupported seller penalty.
+
+### Decision: route the operational cause before coaching
+
+![Conceptual Olist delivery-quality pilot: diagnose the promise gap, route to seller, carrier, or product, then compare coaching with control](/images/portfolio-olist-pilot.svg)
+
+The visual turns the diagnostic into a bounded marketplace intervention.
+
 ### A review is an outcome, not a root cause
 
 The joined model makes it possible to compare review scores with delivery timing and order context.

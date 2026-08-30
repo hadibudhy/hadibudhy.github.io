@@ -45,6 +45,26 @@ This is administrative business data, not a customer panel. It does not contain 
 
 ## Key findings
 
+## Visual evidence
+
+### Context: market structure needs scale, density, and workforce depth
+
+![County Business Patterns market measures: county and NAICS scope, establishments, employment, and payroll](/images/portfolio-census-market-measures.svg)
+
+The visual shows why population alone is not an expansion screen.
+
+### Main finding: suppression changes how a market can be ranked
+
+![County Business Patterns evidence boundary: annual structure is observed, while demand, competitor quality, and exact suppressed values are not](/images/portfolio-census-suppression.svg)
+
+Suppression is carried forward as uncertainty rather than silently converted to zero.
+
+### Decision: screen markets before spending on local research
+
+![Conceptual Census expansion process: screen scale, density, and stability; enrich with local context; then pilot incremental demand](/images/portfolio-census-screen.svg)
+
+The decision visual makes the public source a research filter, not a revenue forecast.
+
 ### Establishment count and demand are different quantities
 
 A county can have many target establishments because competition is dense, not because unmet demand is high.

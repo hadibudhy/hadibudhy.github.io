@@ -45,6 +45,26 @@ This is real store traffic, but it is a historical competition release. It is no
 
 ## Key findings
 
+## Visual evidence
+
+### Context: the release has separate historical windows
+
+![Google Analytics Customer Revenue Prediction time boundary: training visits, forward test visits, and a competition target period not present in the file](/images/portfolio-google-analytics-window.svg)
+
+The timeline makes it harder to mistake an old competition window for current budget evidence.
+
+### Main finding: value must be aggregated to users
+
+![Conceptual Google Analytics grain: visit-level channel and device fields aggregate to user-period value](/images/portfolio-google-analytics-grain.svg)
+
+This is the denominator needed for a customer-value decision; sessions alone overcount repeat browsers.
+
+### Decision: channel ranking must lead to a holdout
+
+![Conceptual acquisition decision: rank calibrated user value, hold out business-as-usual traffic, and scale only when contribution clears cost](/images/portfolio-google-analytics-holdout.svg)
+
+The design separates a prediction screen from the incremental commercial decision.
+
 ### Volume is not a value decision
 
 Channels can bring many visits while contributing little user-level revenue, and a smaller channel can have a heavier tail of valuable users.

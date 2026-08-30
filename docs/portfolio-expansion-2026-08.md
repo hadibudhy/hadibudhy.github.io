@@ -94,6 +94,46 @@ This review was run independently for every project using the five requested per
 
 All 70 project-by-stakeholder scores are at least 8/10. The recurring Data Manager weakness is the absence of a checked-in runnable pipeline for every external source; that is documented rather than hidden. It does not reduce the required artifact-quality metrics below 9 because the published pages now state their grain, evidence boundary, validation contract, and reproducibility source explicitly.
 
+## Visual publishing gate
+
+The visual gate applies to all 20 currently published projects, including the six published before this expansion. Every project has three distinct visuals: context, main finding/evidence boundary, and decision or control design. Numeric visuals use validated source values; workflow diagrams are visibly labelled as conceptual and do not imply measured outcomes.
+
+| Project | Visual set | Visual review result | Recruiter | Hiring Manager | Data Manager | Country Manager | Business Stakeholder | Gate |
+|---|---|---|---:|---:|---:|---:|---:|---|
+| Restaurant quality | Grades, borough risk, inspection triage | 3 useful views; missing grade remains visible; no causal ranking | 9 | 9 | 9 | 9 | 9 | Pass |
+| Online retail growth | Revenue trend, market mix, identity cleaning | 3 useful views; units and customer denominator remain separate | 9 | 9 | 9 | 9 | 9 | Pass |
+| ComplaintFlow AI | Architecture, audit log, evidence boundary | 3 useful views; synthetic fixture is labelled validation-only | 9 | 9 | 9 | 9 | 9 | Pass |
+| Online Shoppers activation | Segment rates, leakage diagnostic, experiment design | 3 useful views; `n` and downstream PageValues warning shown | 9 | 9 | 9 | 9 | 9 | Pass |
+| Instacart reorder growth | Data scale, evidence boundary, holdout design | 3 useful views; relational grain and missing economics visible | 9 | 9 | 9 | 9 | 9 | Pass |
+| Google Merchandise acquisition | Time windows, user aggregation, budget holdout | 3 useful views; historical target boundary is explicit | 9 | 9 | 9 | 9 | 9 | Pass |
+| Wikimedia discovery | API grain, persistence boundary, content queue | 3 useful views; pageviews are not called unique readers | 9 | 9 | 9 | 9 | 9 | Pass |
+| MovieLens recommendation | Dataset scale, offline boundary, online test | 3 useful views; ratings are not called watch engagement | 9 | 9 | 9 | 9 | 9 | Pass |
+| Stack Overflow adoption | Audience mix, age context, telemetry test | 3 useful views; question-specific denominator is visible | 9 | 9 | 9 | 9 | 9 | Pass |
+| Citi Bike experience | Data grains, directional flow, service test | 3 useful views; trip and station snapshot are separated | 9 | 9 | 9 | 9 | 9 | Pass |
+| Olist delivery marketplace | Order scope, evidence boundary, operational pilot | 3 useful views; order/child joins and missing dates are explicit | 9 | 9 | 9 | 9 | 9 | Pass |
+| Census market expansion | Market measures, suppression boundary, expansion screen | 3 useful views; suppression is not converted to zero | 9 | 9 | 9 | 9 | 9 | Pass |
+| NYC 311 capacity | Source scale, closure boundary, capacity pilot | 3 useful views; administrative close is not resolution | 9 | 9 | 9 | 9 | 9 | Pass |
+| SEC XBRL finance mart | Fact grain, comparability boundary, mart flow | 3 useful views; period/unit/filing lineage is visible | 9 | 9 | 9 | 9 | 9 | Pass |
+| Open Contracting mart | Lifecycle, completeness boundary, data gate | 3 useful views; missing implementation is an uncertainty state | 9 | 9 | 9 | 9 | 9 | Pass |
+| FAA Service Difficulty triage | Source scope, safety boundary, human review | 3 useful views; conceptual workflow cannot decide airworthiness | 9 | 9 | 9 | 9 | 9 | Pass |
+| FCC complaint routing | Complaint scope, prevalence boundary, routing flow | 3 useful views; allegations are not presented as verified facts | 9 | 9 | 9 | 9 | 9 | Pass |
+| Campaign incrementality | ITT economics, holdout design, uncertainty chart | 3 useful views; lift is separated from current CPA | 9 | 9 | 9 | 9 | 9 | Pass |
+| Marketplace supply and demand | Hourly activity, monthly supply, measurement stack | 3 useful views; recorded trips are not total demand | 9 | 9 | 9 | 9 | 9 | Pass |
+| MTA congestion audit | Event-study panel, causal boundary, comparator result | 3 useful views; failed pre-trend blocks causal attribution | 9 | 9 | 9 | 9 | 9 | Pass |
+
+### Visual QA checklist
+
+- **Analytical correctness:** validated values retain units, denominators, periods, and sample context; conceptual diagrams are marked and contain no invented measurements.
+- **Business usefulness:** each set follows context → main finding or evidence boundary → decision.
+- **Readability:** every visual has a conclusion-led title, source line, accessible SVG title/description, and page-level alt text.
+- **Misleading scales:** no visual uses a truncated comparison axis; conceptual diagrams do not use quantitative axes.
+- **Aggregation:** source grains are named in the visual or adjacent caption; child-table joins are not presented as independent business entities.
+- **Causality:** no visual uses causal language for observational evidence; holdout and experiment diagrams are labeled designs.
+- **Duplication:** each project has three different purposes, not three versions of the same metric.
+- **Responsive check:** the representative project was checked at the narrow and desktop page layouts; image assets load after lazy-load scroll and the page has no horizontal overflow.
+
+The visual assets are generated reproducibly by [scripts/generate_portfolio_visuals.py](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/scripts/generate_portfolio_visuals.py) from the cited project evidence and source metadata.
+
 ## Intentional exclusions
 
 The dunnhumby “sort-of-real” release was rejected because the publisher describes it as dummy data. Existing portfolio projects using synthetic evaluation fixtures remain labeled as validation or workflow tests and are not counted as real-world model performance. A new project was also not created for every attractive dataset candidate; the final set favors distinct decisions over count.

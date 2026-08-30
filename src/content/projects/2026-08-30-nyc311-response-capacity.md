@@ -45,6 +45,26 @@ The source captures people who reported through 311, not every service need. It 
 
 ## Key findings
 
+## Visual evidence
+
+### Context: request volume requires a queue-level view
+
+![NYC 311 source scale: 22.2 million request rows, 44 columns, one service-request grain, and daily updates](/images/portfolio-nyc311-scale.svg)
+
+The scale and mutable source make fixed cutoffs and request-level metrics important.
+
+### Main finding: administrative closure is not resolution quality
+
+![NYC 311 evidence boundary: created and closed timestamps, agency, type, status, and location are observed, but resolution quality and staff hours are not](/images/portfolio-nyc311-boundary.svg)
+
+This prevents a faster close from being treated as a better service outcome.
+
+### Decision: move capacity toward old actionable work
+
+![Conceptual NYC 311 capacity pilot: measure arrivals and backlog age, change routing or staffing, then guardrail reopen and follow-up](/images/portfolio-nyc311-pilot.svg)
+
+The visual connects public workload evidence to a testable operating change.
+
 ### High volume is not the same as high workload pressure
 
 A queue with many short requests can require less capacity than a smaller queue with long-tail aging.

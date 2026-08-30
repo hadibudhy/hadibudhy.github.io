@@ -45,6 +45,26 @@ The survey is real respondent data, but it is not a product event stream and sho
 
 ## Key findings
 
+## Visual evidence
+
+### Context: professional developers are the majority, not the whole audience
+
+![Stack Overflow Developer Survey 2025 audience mix: 76% professional developers, 15% aspirational or adjacent, and 9% other respondents](/images/portfolio-stackoverflow-audience.svg)
+
+The respondent mix argues against designing one onboarding path for everyone.
+
+### Main finding: age is a question-level context, not a product segment
+
+![Stack Overflow Developer Survey 2025 age context: 66% of respondents are aged 25–44 in the answered age question](/images/portfolio-stackoverflow-age.svg)
+
+The visual labels the denominator so the survey is not mistaken for a population census.
+
+### Decision: turn survey demand into a telemetry test
+
+![Conceptual developer enablement test: use survey responses for a segment hypothesis, instrument first success, and compare guidance with control](/images/portfolio-stackoverflow-telemetry.svg)
+
+This turns a self-reported signal into a measurable product decision.
+
 ### The audience is broad enough that one onboarding path is unlikely to fit all
 
 The source reports a large professional-developer majority, but also includes learners and adjacent roles.

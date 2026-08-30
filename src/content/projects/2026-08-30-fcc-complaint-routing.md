@@ -45,6 +45,26 @@ The project treats the data as routing evidence. It does not treat a complaint a
 
 ## Key findings
 
+## Visual evidence
+
+### Context: FCC complaints are individual informal reports
+
+![FCC complaint source scope: complaints from October 31, 2014 onward, one complaint grain, issue fields, and an unverified-allegation boundary](/images/portfolio-fcc-complaint-scope.svg)
+
+The source is useful for queue design, not a denominator of provider experience.
+
+### Main finding: routing evidence and prevalence evidence are different
+
+![FCC evidence boundary: issue and provider context are observed, while representative prevalence, verified fault, and resolution quality are not](/images/portfolio-fcc-boundary.svg)
+
+This is why the project avoids provider rankings.
+
+### Decision: confidence-based routing keeps a human path
+
+![Conceptual FCC complaint workflow: redact complaint text, suggest a cited queue, and escalate low-confidence or sensitive cases](/images/portfolio-fcc-routing.svg)
+
+The visual makes escalation a product outcome, not a model failure.
+
 ### Complaint volume is not provider failure rate
 
 The dataset records people who chose to file an informal complaint.

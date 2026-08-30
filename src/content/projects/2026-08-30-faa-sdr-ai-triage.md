@@ -45,6 +45,26 @@ Reports are selected submissions and are not a denominator of all flights, aircr
 
 ## Key findings
 
+## Visual evidence
+
+### Context: FAA reports are selected technical observations
+
+![FAA Service Difficulty Reports scope: annual files, one processed report grain, narrative evidence, and coded context](/images/portfolio-faa-sdr-scope.svg)
+
+The source supports search and triage, but not a fleet-rate denominator.
+
+### Main finding: AI should organize evidence, not decide airworthiness
+
+![FAA Service Difficulty evidence boundary: submitted reports and aircraft context are observed, while fleet failure probability and automatic disposition are not](/images/portfolio-faa-sdr-boundary.svg)
+
+This is the safety boundary for the applied-AI workflow.
+
+### Decision: optimize critical-case recall and human override
+
+![Conceptual FAA review workflow: retrieve cited similar reports, escalate uncertain or critical cases, and leave the decision with a qualified reviewer](/images/portfolio-faa-review.svg)
+
+The evaluation visual makes the operating point a safety-and-workload decision.
+
 ### Triage is safer than automatic disposition
 
 The data contains technical narrative and coded context, but it does not encode the correct operational action for every report.

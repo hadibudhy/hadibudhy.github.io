@@ -67,6 +67,20 @@ The benchmark difference is about **115 extra conversions per 100,000 assigned u
 
 The practical launch threshold is explicit: scale only when incremental CPA is below contribution value after ad cost, with the holdout result stable across the pre-specified audience and frequency guardrails.
 
+## Additional visual evidence
+
+### Main finding: the benchmark’s lift is statistically clear but economically incomplete
+
+![Criteo randomized benchmark: 0.194% control conversion, 0.309% treatment conversion, +0.115 percentage-point lift, and 115 extra conversions per 100,000 assigned users](/images/portfolio-campaign-economics.svg)
+
+The visual keeps the lift and its economic boundary in the same frame.
+
+### Decision: retain a randomized holdout and an economic stop rule
+
+![Conceptual campaign holdout: assign treatment or holdout, measure incremental conversion, and scale only when incremental CPA is below contribution](/images/portfolio-campaign-holdout.svg)
+
+This makes the rollout recommendation operational.
+
 ## Recommendation
 
 **What:** Run the current campaign with a randomized holdout and measure extra conversions, not only attributed conversions.

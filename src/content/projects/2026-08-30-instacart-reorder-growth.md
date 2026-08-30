@@ -45,6 +45,26 @@ The grain changes by table: one row per order in `orders`, one row per product-i
 
 ## Key findings
 
+## Visual evidence
+
+### Context: the release supports sequence-level reorder analysis
+
+![Instacart public release scale and relational structure: about 3.4 million orders, 206,209 users, 49,688 products, and six linked tables](/images/portfolio-instacart-scale.svg)
+
+The visual establishes the data entities that must remain separate before computing reorder metrics.
+
+### Main finding: history is observable, incrementality is not
+
+![Instacart evidence boundary: order cadence and reordered flags are observed, while reminder assignment, inventory, and margin are not](/images/portfolio-instacart-evidence.svg)
+
+This boundary prevents co-occurrence or historical reorder from being presented as campaign lift.
+
+### Decision: make replenishment the tested default
+
+![Conceptual replenishment test: select known repeat products, hold out reminders, and decide using incremental orders and margin](/images/portfolio-instacart-holdout.svg)
+
+The next-basket recommendation is therefore a testable policy, not an assumed outcome.
+
 ### Reorder is a different job from discovery
 
 The data explicitly distinguishes reordered products from first-time products. Replenishment signals are strongest when the customer has already purchased the product in an earlier order.

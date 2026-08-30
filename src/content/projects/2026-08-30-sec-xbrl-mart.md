@@ -43,6 +43,26 @@ The [SEC Company Facts API](https://www.sec.gov/data-research/sec-api-documentat
 
 ## Key findings
 
+## Visual evidence
+
+### Context: every finance fact needs source identity
+
+![SEC Company Facts grain: reported tag, unit, period, and accession identity preserved for finance-mart lineage](/images/portfolio-sec-fact-grain.svg)
+
+The source fields are the evidence needed for review and reuse.
+
+### Main finding: reported facts are not automatic comparables
+
+![SEC Company Facts evidence boundary: reported values and filing metadata are observed, while economic comparability and operating explanation are not](/images/portfolio-sec-period-boundary.svg)
+
+The visual makes semantic exceptions visible before a comparison is published.
+
+### Decision: reconcile a narrow metric layer first
+
+![Conceptual SEC finance mart: land raw issuer JSON, normalize fact and period grain, then approve finance-reconciled metrics](/images/portfolio-sec-mart.svg)
+
+The engineering recommendation is to ship trust and lineage before breadth.
+
 ### XBRL is structured, not automatically comparable
 
 Two issuers can report similar concepts under different tags or units.

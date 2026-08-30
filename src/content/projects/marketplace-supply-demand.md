@@ -83,6 +83,14 @@ TLC's monthly report gives a broader view. Average reported trips per day rose f
 | Lost requests | Requests that were not matched or were abandoned | Not available |
 | Zone-hour online supply | Drivers available in a specific place and hour | Not available |
 
+## Additional visual evidence
+
+### Decision: recorded trips are only one layer of marketplace measurement
+
+![NYC TLC marketplace evidence boundary: recorded trips, monthly driver proxies, and official aggregations are observed, while requests, lost matches, cancellations, and incentive ROI are not](/images/portfolio-marketplace-measurement.svg)
+
+The visual supports collecting the missing demand and supply measures before broad incentives.
+
 ## Recommendation
 
 **What:** Do not increase incentives across the whole city. First add request, match, cancellation, wait, online-driver, and incentive records.
