@@ -69,6 +69,20 @@ The public article metric does not identify a person returning to the same page.
 
 **Why it matters:** a product team needs authenticated or privacy-safe reader cohorts before calling an intervention a retention improvement.
 
+## Evidence register
+
+| Layer | Evidence | Decision use |
+|---|---|---|
+| Observed | The API returns page/project views by period, access method, and agent type | Rank content by stable demand and access context |
+| Inferred | A sustained lower bound can be more useful for refresh planning than a single peak | Separate evergreen maintenance from spike response |
+| Not established | A pageview is a unique returning reader, or a refresh caused more reading | Require first-party reader telemetry and a holdout |
+
+## Validation record
+
+- **Grain:** page/project × period × access × agent.
+- **Checks:** fixed endpoint and retrieval window; automated traffic separated; access series not double-counted.
+- **Guardrail:** pageview persistence is labeled as aggregate demand, never user retention.
+
 ## Recommendation
 
 **What:** create a two-track content queue: spike follow-up for timely pages and durable-interest refresh for pages with a stable view floor.
@@ -92,4 +106,3 @@ Source documentation and endpoint examples: [Wikimedia Analytics API getting sta
 ## Technical appendix
 
 Use the same project, language, period, access, and agent filters when comparing pages. Report the endpoint URL and retrieval date. Do not sum desktop, mobile, and app series if the API already returns an all-access total.
-
