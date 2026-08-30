@@ -69,6 +69,20 @@ The `days_since_prior_order` and `order_number` fields make it possible to compa
 
 **Why it matters:** the experiment should test timing bands and avoid sending a prompt when the customer has recently ordered.
 
+## Evidence register
+
+| Layer | Evidence | Decision use |
+|---|---|---|
+| Observed | About 3.4M orders, 206,209 users, 49,688 products, order sequence, cadence, and product-level reorder flags | Rank replenishment candidates and timing bands |
+| Inferred | Prior purchase history is a safer reminder signal than one-time co-occurrence | Make replenishment the primary surface |
+| Not established | A reminder creates an additional order or positive margin | Require a randomized holdout and economics |
+
+## Validation record
+
+- **Grain:** `orders` is one row per order; order-product tables are one row per product-in-order.
+- **Checks:** primary and foreign keys are tested before joins; order KPIs are calculated before child-table expansion.
+- **Guardrail:** co-purchase support is shown separately from causal or incremental reorder impact.
+
 ## Recommendation
 
 **What:** launch a replenishment-first next-basket test with a small complementary shelf below it.
@@ -92,4 +106,3 @@ Source: [Instacart’s public release announcement](https://tech.instacart.com/3
 ## Technical appendix
 
 The primary unit for retention is `user_id` × `order_number`; the primary unit for basket association is `order_id` × `product_id`. Reorder rate is the share of eligible product-in-order rows with `reordered=1`. Product pairs are filtered by support before any ranking to avoid promoting rare coincidences.
-
