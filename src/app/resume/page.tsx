@@ -66,6 +66,11 @@ export default function ResumePage() {
       </section>
 
       <section className="border-b border-border py-10">
+        <p className="section-kicker">Selected portfolio signal</p>
+        <p className="mt-4 leading-7 text-muted-foreground">Independent public analyses show a <span className="font-semibold text-foreground">0.115 percentage-point</span> benchmark conversion lift, <span className="font-semibold text-foreground">61.3%</span> of retail revenue from the top customer decile, and <span className="font-semibold text-foreground">73,211</span> restaurant inspection records rolled up for uncertainty-aware prioritization. The MTA audit demonstrates when not to claim a policy effect.</p>
+      </section>
+
+      <section className="border-b border-border py-10">
         <div>
           <p className="section-kicker">Skills &amp; education</p>
           <p className="mt-5 text-sm leading-7 text-muted-foreground">{skills.join(" · ")}</p>

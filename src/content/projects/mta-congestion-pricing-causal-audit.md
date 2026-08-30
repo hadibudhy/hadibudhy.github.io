@@ -24,7 +24,7 @@ Traffic changes naturally. Weather, holidays, construction, commuting patterns, 
 ## Decision brief
 
 - **Recommendation:** do not use this comparison group to claim a congestion-pricing effect or change rider pricing.
-- **Evidence:** the affected-comparison gap changed materially in both directions before the policy date.
+- **Evidence:** the affected-comparison gap changed materially in both directions before the policy date; this is a descriptive instability flag, not a formal test.
 - **Potential value:** none estimated; this study is a decision-quality audit.
 - **Evidence strength:** Moderate for flagging comparator instability; insufficient for formally rejecting parallel trends or estimating the policy effect.
 - **Cost / resource requirement:** A credible estimate requires a new comparator, route-exposure data, and internal ride outcomes; cost cannot be estimated from this study.

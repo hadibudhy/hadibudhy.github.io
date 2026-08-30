@@ -82,6 +82,7 @@ def build_resume() -> None:
         Paragraph('<b>ComplaintFlow</b> - Reference implementation combines transparent routing, approved-playbook retrieval, uncertainty escalation, PII redaction, and an auditable decision log. <link href="https://hadibudhy.github.io/projects/2026-08-23-complaintflow-ai-triage" color="#087E8B">Case study</link>', body),
         Paragraph("SKILLS &amp; EDUCATION", heading),
         Paragraph("Decision scope: experiment design, KPI governance, customer cohorts, warehouse pipelines, event-driven alerting, live dashboards, marketplace measurement, and auditable AI workflows.", body),
+        Paragraph("Selected portfolio signal: independent public analyses show a 0.115 percentage-point benchmark conversion lift, 61.3% of retail revenue from the top customer decile, and 73,211 restaurant inspection records rolled up for uncertainty-aware prioritization. The MTA audit demonstrates when not to claim a policy effect.", body),
         Paragraph("SQL  |  Python  |  BigQuery  |  dbt  |  Airflow  |  A/B testing  |  Cohort analysis  |  FastAPI  |  LLM evaluation  |  Git", body),
         Paragraph("Bachelor of Public Health (Biostatistics), Universitas Indonesia", body),
         Spacer(1, 3),
