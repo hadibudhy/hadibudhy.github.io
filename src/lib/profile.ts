@@ -1,9 +1,10 @@
 export const capabilities = [
-  { title: "Growth and decision analytics", evidence: "Campaign incrementality, retention, and decision-ready experiments." },
-  { title: "Experimentation and causal inference", evidence: "Holdouts, event studies, uncertainty, and clear limits on causal claims." },
+  { title: "Growth and experimentation", evidence: "Incrementality, retention, holdouts, and decision-ready tests." },
+  { title: "Product analytics", evidence: "Product, customer, and commercial reporting that supports funnel and roadmap questions." },
   { title: "Marketplace and operations analytics", evidence: "Supply signals, marketplace measurement, quality prioritization, and operational pilots." },
+  { title: "Business and decision analytics", evidence: "KPI governance, customer cohorts, scenario framing, and clear evidence boundaries." },
   { title: "Analytics engineering", evidence: "Professional experience with warehouse pipelines, alerting, APIs, and reliable reporting systems; public implementation details are limited." },
-  { title: "Decision systems", evidence: "Auditable AI workflows, evaluation, escalation, and governance." },
+  { title: "Applied AI", evidence: "Auditable workflows, evaluation, escalation, and governance where automation is relevant." },
 ];
 
 export const skills = ["SQL", "Python", "BigQuery", "dbt", "Airflow", "A/B testing", "Cohort analysis", "FastAPI", "LLM evaluation", "Git"];
@@ -14,17 +15,17 @@ export const careerArc = [
   {
     index: "01",
     title: "BI foundations",
-    description: "Started in Business Intelligence, learning to turn operational questions into useful reporting.",
+    description: "Business Intelligence foundations turn operational questions into useful reporting.",
   },
   {
     index: "02",
     title: "Broader data work",
-    description: "Expanded from reporting into data pipelines, predictive models, and the systems behind trustworthy analysis.",
+    description: "Reporting expands into data pipelines, predictive models, and systems behind trustworthy analysis.",
   },
   {
     index: "03",
     title: "Decision systems",
-    description: "Now focused on connecting reliable data with clear recommendations and better business decisions.",
+    description: "Reliable data connects with clear recommendations and better business decisions.",
   },
 ];
 
@@ -33,28 +34,28 @@ export const experience = [
     period: "Oct 2024 — present",
     role: "Data Analyst",
     setting: "Consumer commerce platform",
-    description: "Own event-driven alerting, warehouse pipelines, and live dashboards that help support and product teams monitor customer activity and respond to change.",
-    highlights: ["Own event-driven alerting and warehouse pipelines for customer-activity monitoring.", "Maintain live dashboards that help support and product teams detect and respond to change."],
+    description: "Event-driven alerting, warehouse pipelines, and live dashboards support customer-activity monitoring for support and product teams.",
+    highlights: ["Event-driven alerting and warehouse pipelines for customer-activity monitoring.", "Live dashboards for support and product teams to detect and respond to change."],
   },
   {
     period: "Mar 2023 — Oct 2024",
     role: "Data & Automation Consultant",
     setting: "Independent consulting",
-    description: "Own the path from complex survey and campaign data to reusable analytical models, automated warehouse workflows, and leadership-ready reporting.",
-    highlights: ["Turn complex survey and campaign data into reusable analytical models.", "Automate warehouse workflows and translate results into leadership-ready reporting."],
+    description: "Survey and campaign data becomes reusable analytical models, automated warehouse workflows, and leadership-ready reporting.",
+    highlights: ["Reusable analytical models for complex survey and campaign data.", "Automated warehouse workflows and leadership-ready reporting."],
   },
   {
     period: "Jul 2022 — Mar 2023",
     role: "Senior Business Intelligence Analyst",
     setting: "E-commerce platform",
-    description: "Connected churn analysis, customer segmentation, cohort analysis, and KPI governance so retention and marketing teams could work from consistent customer signals.",
-    highlights: ["Connected churn, segmentation, and cohort analysis into a consistent customer view.", "Governed KPI definitions used by retention and marketing teams."],
+    description: "Churn analysis, customer segmentation, cohort analysis, and KPI governance connect retention and marketing teams to consistent customer signals.",
+    highlights: ["Consistent customer view across churn, segmentation, and cohort analysis.", "KPI definitions for retention and marketing teams."],
   },
   {
     period: "Apr 2021 — Jun 2022",
     role: "Business Intelligence Analyst",
     setting: "E-commerce platform",
-    description: "Built product, customer, and commercial reporting that surfaced engagement patterns and supported roadmap decisions.",
-    highlights: ["Built product, customer, and commercial reporting for recurring decision support.", "Surfaced engagement patterns used in roadmap discussions."],
+    description: "Product, customer, and commercial reporting surfaces engagement patterns for roadmap decisions.",
+    highlights: ["Product, customer, and commercial reporting for recurring decision support.", "Engagement patterns for roadmap discussions."],
   },
 ];

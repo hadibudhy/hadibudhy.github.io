@@ -5,7 +5,7 @@ export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://hadibudhy.github.io";
-  const routes = ["", "/about", "/projects", "/resume", "/privacy", "/terms"].map((path) => ({
+  const routes = ["", "/about", "/projects", "/privacy", "/terms"].map((path) => ({
     url: `${baseUrl}${path}`,
     lastModified: new Date("2026-08-30T00:00:00Z"),
   }));

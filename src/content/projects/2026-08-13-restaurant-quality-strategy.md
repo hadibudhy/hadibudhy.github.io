@@ -29,13 +29,13 @@ Food quality is both a customer trust issue and an operating risk. A restaurant 
 
 How can a restaurant operator use public inspection data to prioritize quality coaching and follow-up visits?
 
-## My role
+## Role
 
-I owned the inspection-level roll-up, missingness review, borough comparison, uncertainty framing, chart, and follow-up recommendation for this independent portfolio case. I did not inspect restaurants or measure whether coaching changed outcomes.
+Role: inspection-level roll-up, missingness review, borough comparison, uncertainty framing, chart, and follow-up recommendation. No restaurant inspection or coaching outcome measurement is included.
 
 ## Data used
 
-I used the current NYC Open Data extract, kept inspections from 2022 through 2025, and rolled repeated violation rows up to restaurant, inspection date, and inspection type. I then compared grade outcomes, maximum inspection score, and whether an inspection included at least one violation marked critical.
+The analysis uses the current NYC Open Data extract, keeps inspections from 2022 through 2025, and rolls repeated violation rows up to restaurant, inspection date, and inspection type. Grade outcomes, maximum inspection score, and whether an inspection included at least one violation marked critical are then compared.
 
 ## Why it matters
 
@@ -43,7 +43,7 @@ Food-safety failures damage customer trust and can create closure or compliance 
 
 ## Approach
 
-I changed the unit of analysis from violation rows to inspections, then compared grade coverage and critical findings by borough. This supports prioritization; it does not identify why a restaurant received a violation.
+The unit of analysis changes from violation rows to inspections, followed by comparisons of grade coverage and critical findings by borough. This supports prioritization; it does not identify why a restaurant received a violation.
 
 ## Key findings
 

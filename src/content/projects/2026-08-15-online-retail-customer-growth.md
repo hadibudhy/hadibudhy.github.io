@@ -31,13 +31,13 @@ That distinction matters. A business that relies heavily on a few customers need
 
 Which customers and markets should the retailer prioritize to grow repeat revenue without relying only on more one-time orders?
 
-## My role
+## Role
 
-I owned the transaction cleaning, order and customer aggregation, concentration analysis, market comparison, scenario math, and holdout recommendation for this independent portfolio case. I did not run a retention campaign or observe post-test customer value.
+Role: transaction cleaning, order and customer aggregation, concentration analysis, market comparison, scenario math, and holdout recommendation. No retention campaign execution or post-test customer value is included.
 
 ## Data used
 
-I first separated completed purchases from cancellations and invalid quantities or prices. I then grouped line items into orders and orders into customers. This made it possible to compare revenue, order frequency, repeat behavior, and country mix using business-level measures instead of raw transaction rows.
+Completed purchases are separated from cancellations and invalid quantities or prices. Line items are grouped into orders, and orders into customers. This makes it possible to compare revenue, order frequency, repeat behavior, and country mix using business-level measures instead of raw transaction rows.
 
 ## Why it matters
 
@@ -45,7 +45,7 @@ Revenue growth is more resilient when customers return and no single market or c
 
 ## Approach
 
-I remove cancellations and invalid values, group line items into orders, and group orders into customers. The result describes revenue and repeat behavior; it does not measure margin or prove that a retention offer will work.
+Cancellations and invalid values are removed, line items are grouped into orders, and orders are grouped into customers. The result describes revenue and repeat behavior; it does not measure margin or prove that a retention offer will work.
 
 ## Key findings
 
@@ -67,7 +67,7 @@ The UK generated **£7.31 million**, or about **82% of cleaned revenue**. The ne
 
 Returning orders became a much larger part of monthly orders as the customer base matured. Revenue also rose sharply in September, October, and November 2011, with November reaching **£1.16 million**. December is only partially covered in the source data, so it should not be compared with a complete holiday month.
 
-**Business meaning:** The retailer appears to have a useful repeat-purchase pattern, but the value is unevenly distributed. Growth planning should protect the strongest customer relationships while testing whether successful UK offers can travel to nearby markets; the data does not establish market attractiveness.
+**Business meaning:** The retailer appears to have a useful repeat-purchase pattern, but the value is unevenly distributed. Growth planning should protect the highest-value customer relationships while testing whether successful UK offers can travel to nearby markets; the data does not establish market attractiveness.
 
 ## Recommendation
 

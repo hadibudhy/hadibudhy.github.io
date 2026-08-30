@@ -29,13 +29,13 @@ If the business counts every conversion touched by an ad as campaign value, it c
 - **Success / stop rule:** Continue only if incremental CPA stays below contribution value; stop or redesign if the holdout shows no useful lift or the guardrail fails.
 - **Next action:** pre-register the holdout, minimum useful effect, sample size, and stopping rule.
 
-## My role
+## Role
 
-I owned the analysis design, streaming validation, intention-to-treat calculation, chart, and business recommendation for this portfolio case. I did not run the campaign or observe a live commercial outcome. I would hand the decision owner a holdout design, break-even CPA rule, and segment hypotheses to retest. [Analysis code, SQL, and validation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/01-campaign-incrementality) are available for review.
+Role: analysis design, streaming validation, intention-to-treat calculation, chart, and business recommendation. No live campaign execution or commercial outcome is included. Decision-owner handoff: a holdout design, break-even CPA rule, and segment hypotheses to retest. [Analysis code, SQL, and validation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/01-campaign-incrementality) are available for review.
 
 ## Data used
 
-I used the [Criteo AI Lab uplift dataset](https://ailab.criteo.com/criteo-uplift-prediction-dataset/). It combines results from randomized advertising tests. Each row represents one user record and shows whether the user was assigned to advertising, visited, or converted.
+The analysis uses the [Criteo AI Lab uplift dataset](https://ailab.criteo.com/criteo-uplift-prediction-dataset/). It combines results from randomized advertising tests. Each row represents one user record and shows whether the user was assigned to advertising, visited, or converted.
 
 The validated release contains **13,979,592 rows**. The user features are anonymized, so they can show different response patterns but cannot be turned into real customer groups. Criteo also warns that the file combines experiments and was sampled in a way that prevents the original campaign effect from being recovered. It is a benchmark for learning, not a forecast for a current campaign.
 
@@ -81,7 +81,7 @@ The practical launch threshold is explicit: scale only when incremental CPA is b
 
 ## What internal data would improve the decision
 
-I would add ad spend, contribution margin, conversion value, customer identity, channel, frequency, and later retention. Then I would calculate incremental CPA and incremental return by a business-defined audience. The campaign would scale only when incremental CPA stays below contribution value and customer-experience guardrails remain healthy.
+A complete decision needs ad spend, contribution margin, conversion value, customer identity, channel, frequency, and later retention. Incremental CPA and incremental return can then be calculated by a business-defined audience. Scale remains conditional on incremental CPA staying below contribution value and customer-experience guardrails remaining healthy.
 
 ## Key takeaway
 
@@ -93,7 +93,7 @@ The primary analysis uses intention-to-treat. In plain language, each user stays
 
 ### Exploratory subgroup check
 
-I divided the complete `f0` feature into four equal-sized bands as an exploratory check. The second band had the largest difference, **0.386 percentage points**; the other bands were **0.038**, **0.019**, and **0.010 percentage points**. These are not real customer personas. The feature has no business label and the split was chosen for exploration, so a new campaign should retest any targeting hypothesis in a holdout.
+An exploratory check divided the complete `f0` feature into four equal-sized bands. The second band had the largest difference, **0.386 percentage points**; the other bands were **0.038**, **0.019**, and **0.010 percentage points**. These are not real customer personas. The feature has no business label and the split was chosen for exploration, so a new campaign should retest any targeting hypothesis in a holdout.
 
 | Exploratory group | Extra conversion rate | Interpretation |
 |---|---:|---|

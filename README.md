@@ -29,4 +29,4 @@ The production build is a static export written to `out/`.
 
 GitHub Actions deploys `out/` to GitHub Pages when changes are pushed to `master`. See `.github/workflows/nextjs.yml`.
 
-The resume page links to the downloadable PDF at `public/hadi-budhy-resume.pdf`; the navigation Contact button continues to use email.
+The navigation Contact button uses email; the public site presents the work and experience directly.

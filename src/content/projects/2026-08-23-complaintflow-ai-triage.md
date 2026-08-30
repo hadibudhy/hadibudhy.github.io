@@ -1,7 +1,7 @@
 ---
-title: "ComplaintFlow: A Reliable AI Triage Service for Consumer Support"
+title: "ComplaintFlow: An Auditable AI Triage Workflow"
 date: 2026-08-23
-categories: [AI engineering]
+categories: [applied AI]
 tags:
   - production-minded AI
   - evaluation
@@ -54,9 +54,9 @@ That limitation shapes the system. ComplaintFlow helps with routing and evidence
 - **Success / stop rule:** Continue only if a privacy-reviewed holdout matches or beats the baseline with acceptable escalation recall, unsafe-output rate, latency, and cost.
 - **Next action:** collect reviewer labels on a privacy-reviewed real sample and measure routing, escalation, latency, cost, and unsafe output.
 
-## My role
+## Role
 
-I designed and implemented the portfolio reference service, including the baseline, retrieval boundary, provider fallback, validation, redaction, persistence, and evaluation harness. I did not deploy it to a live support team or claim real customer impact. I would hand the support owner a shadow-mode rollout plan, evaluation contract, and escalation guardrails. [Reference implementation and tests](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/ai_engineering/complaintflow) are available.
+Role: design and implementation of the portfolio reference service, including the baseline, retrieval boundary, provider fallback, validation, redaction, persistence, and evaluation harness. No live support deployment or real customer impact is claimed. Support-owner handoff: a shadow-mode rollout plan, evaluation contract, and escalation guardrails. [Reference implementation and tests](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/ai_engineering/complaintflow) are available.
 
 ## Data used
 
@@ -140,4 +140,4 @@ The public complaint database is not representative of all consumers, and the ch
 
 Code: [ComplaintFlow reference implementation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/ai_engineering/complaintflow)
 
-Research and design: [AI Engineer project research](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/docs/ai-engineer-project-research-2026-08.md) and [ComplaintFlow design](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/docs/ai-engineer-complaintflow-design-2026-08.md).
+Research and design: [Applied AI project research](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/docs/ai-engineer-project-research-2026-08.md) and [ComplaintFlow design](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/docs/ai-engineer-complaintflow-design-2026-08.md).

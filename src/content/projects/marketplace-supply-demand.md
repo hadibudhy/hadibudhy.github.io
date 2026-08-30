@@ -31,13 +31,13 @@ A low number of recorded trips can mean low demand or poor supply. A busy hour c
 - **Success / stop rule:** Continue only if request fulfillment and contribution improve without shifting harm to nearby zones; stop if incentives only cannibalize supply or raise cost per incremental trip.
 - **Next action:** add request, match, wait, online-driver, cancellation, incentive, and contribution fields.
 
-## My role
+## Role
 
-I owned the public-data analysis, proxy classification, limitation framing, and proposed zone-time pilot for this portfolio case. I did not operate an incentive program or observe platform fulfillment outcomes. I would hand the Country Manager a measurement specification and a randomized zone-time pilot design. [SQL, Python, and source notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/02-marketplace-supply-demand) document the analysis.
+Role: public-data analysis, proxy classification, limitation framing, and proposed zone-time pilot. No incentive program operation or platform fulfillment outcome is included. Decision-owner handoff: a measurement specification and a randomized zone-time pilot design. [SQL, Python, and source notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/02-marketplace-supply-demand) document the analysis.
 
 ## Data used
 
-I used two official TLC sources:
+The analysis uses two official TLC sources:
 
 - A High Volume FHV trip table for **1–7 February 2019**, with one submitted trip per row.
 - TLC's monthly report for High Volume FHV activity, including reported trips per day, unique drivers, unique vehicles, and average hours.
@@ -97,7 +97,7 @@ TLC's monthly report gives a broader view. Average reported trips per day rose f
 
 ## What internal data would improve the decision
 
-I would build a request funnel from request to match to pickup. I would add true driver online time, cancellations, estimated wait, passenger price, driver pay, incentive cost, contribution, spillover, and cannibalization measures. This would separate low demand, low supply, and poor matching instead of treating all three as the same problem.
+A complete measurement plan needs a request funnel from request to match to pickup, plus true driver online time, cancellations, estimated wait, passenger price, driver pay, incentive cost, contribution, spillover, and cannibalization measures. These measures separate low demand, low supply, and poor matching instead of treating all three as the same problem.
 
 ## Key takeaway
 

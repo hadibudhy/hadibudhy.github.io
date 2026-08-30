@@ -19,7 +19,7 @@ The question is not simply whether traffic was different afterward. It is whethe
 
 ## Why it matters
 
-Traffic changes naturally. Weather, holidays, construction, commuting patterns, and facility problems can all move the numbers. If we compare only before and after, we may blame the policy for a change it did not cause.
+Traffic changes naturally. Weather, holidays, construction, commuting patterns, and facility problems can all move the numbers. Comparing only before and after can attribute a natural or unrelated change to the policy.
 
 ## Decision brief
 
@@ -33,13 +33,13 @@ Traffic changes naturally. Weather, holidays, construction, commuting patterns, 
 - **Success / stop rule:** Proceed only if pre-trends and placebo checks pass; stop the causal claim if the replacement comparator fails them.
 - **Next action:** rebuild the comparator and validate it with pre-trends, placebos, route exposure, and internal ride outcomes.
 
-## My role
+## Role
 
-I owned the event-time diagnostic, comparator audit, and recommendation to pause the causal claim. I did not control the policy, facility operations, or ride-hailing data. I would hand the decision owner a rejected comparator, a pre-registered replacement rule, and the evidence required before pricing action. [Reproducible analysis and validation notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/03-congestion-pricing-causal-impact) show the design and limits.
+Role: event-time diagnostic, comparator audit, and recommendation to pause the causal claim. The analysis does not control policy, facility operations, or ride-hailing data. Decision-owner handoff: a rejected comparator, a pre-registered replacement rule, and the evidence required before pricing action. [Reproducible analysis and validation notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/03-congestion-pricing-causal-impact) show the design and limits.
 
 ## Data used
 
-I used the official [MTA Bridges and Tunnels Hourly Crossings dataset](https://catalog.data.gov/dataset/mta-bridges-and-tunnels-hourly-crossings-beginning-2019). It provides traffic counts by facility and vehicle class. I selected car counts and built **27,080 facility-day observations** across 10 facilities from 2019 to May 2026.
+The analysis uses the official [MTA Bridges and Tunnels Hourly Crossings dataset](https://catalog.data.gov/dataset/mta-bridges-and-tunnels-hourly-crossings-beginning-2019). It provides traffic counts by facility and vehicle class. Car counts form **27,080 facility-day observations** across 10 facilities from 2019 to May 2026.
 
 Three facilities provide access toward the central business district: RFK Bridge Manhattan, Queens-Midtown Tunnel, and Hugh L. Carey Tunnel. Seven other facilities act as comparison crossings. This is a traffic study, not a ride-hailing study. It does not measure platform requests, driver supply, or revenue.
 
@@ -85,11 +85,11 @@ The chart can still show a post-policy difference, but that difference may refle
 
 ## What internal data would improve the decision
 
-For a ride-hailing business, I would add requests, completed and cancelled rides, pickup delay, driver online time, passenger price, driver pay, and routes. I would then estimate effects separately for affected trips, border areas, peak periods, and airport flows. The public MTA study is useful external context, not a substitute for platform data.
+For a ride-hailing business, the missing decision inputs are requests, completed and cancelled rides, pickup delay, driver online time, passenger price, driver pay, and routes. Effects should then be estimated separately for affected trips, border areas, peak periods, and airport flows. The public MTA study is useful external context, not a substitute for platform data.
 
 ## Key takeaway
 
-The strongest analysis is sometimes the one that refuses a weak answer. This study found an unstable pre-policy gap, so the business should improve and formally validate the comparison before changing pricing or supply policy.
+A useful analysis can refuse a weak answer. This study found an unstable pre-policy gap, so the business should improve and formally validate the comparison before changing pricing or supply policy.
 
 ## Technical appendix
 

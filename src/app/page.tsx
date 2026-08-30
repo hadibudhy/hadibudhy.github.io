@@ -17,7 +17,7 @@ export default function Home() {
             <Image src="/images/profile-illustration.jpg" alt="Illustrated profile portrait of Hadi Budhy" width={160} height={160} className="h-24 w-24 shrink-0 rounded-full border border-border object-cover object-top sm:h-32 sm:w-32" priority />
             <div className="flex flex-col gap-2">
               <p className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">Hadi Budhy</p>
-              <p className="text-sm text-muted-foreground">Data Analyst · Growth &amp; Decision Analytics</p>
+            <p className="text-sm text-muted-foreground">Data Analyst</p>
               <div className="flex gap-4 text-sm text-muted-foreground">
                 <a href="https://github.com/hadibudhy" target="_blank" rel="noreferrer" className="hover:text-foreground">GitHub</a>
                 <a href="https://linkedin.com/in/hadibudhy" target="_blank" rel="noreferrer" className="hover:text-foreground">LinkedIn</a>
@@ -26,12 +26,9 @@ export default function Home() {
           </div>
           <div className="space-y-5 sm:space-y-6">
             <h1 className="max-w-full text-[1.8rem] font-normal leading-tight tracking-tight text-foreground sm:text-[2.3rem]">Decision-ready analysis for growth, marketplace, and operations teams.</h1>
-            <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">I turn messy data into evidence for what to invest in, what to test, and what to stop—while keeping uncertainty visible.</p>
-            <p className="text-sm font-medium leading-6 text-primary">Primary target: Senior Data Analyst · Growth &amp; Decision Analytics. Secondary strengths: experimentation, marketplace operations, analytics engineering, and applied AI.</p>
-            <p className="max-w-2xl text-base leading-7 text-foreground"><span className="font-semibold">Why hire me:</span> In professional work, I own alerting, warehouse pipelines, and live dashboards; in portfolio work, I show how to turn a growth question into a holdout, reject a weak causal comparison, separate marketplace proxies from demand, and build an auditable AI workflow with safe fallback.</p>
+            <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">Messy data becomes evidence for what to invest in, what to test, and what to stop, with uncertainty kept visible.</p>
             <div className="flex flex-wrap gap-3 pt-2">
               <Button size="lg" asChild><Link href="#work">View the work <span className="ml-3" aria-hidden="true">→</span></Link></Button>
-              <Button size="lg" variant="outline" asChild><Link href="/resume">View resume</Link></Button>
               <Button size="lg" variant="outline" asChild><a href="mailto:hadi.budhy@gmail.com">Get in touch</a></Button>
             </div>
           </div>

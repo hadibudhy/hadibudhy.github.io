@@ -7,11 +7,11 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   metadataBase: new URL("https://hadibudhy.github.io"),
     title: {
-    default: "Hadi Budhy | Data Analyst · Growth & Decision Analytics",
+    default: "Hadi Budhy | Data Analyst",
     template: "%s | Hadi Budhy"
   },
-  description: "Data analyst focused on growth and decision analytics, using messy business data to clarify decisions.",
-  keywords: ["Data Analyst", "Data Engineer", "Analytics Engineer", "Machine Learning", "Python", "SQL"],
+  description: "Data analyst working across growth, product, marketplace, operations, business, and decision analytics.",
+  keywords: ["Data Analyst", "Growth analytics", "Product analytics", "Marketplace analytics", "Analytics engineering", "Applied AI", "Python", "SQL"],
   authors: [{ name: "Hadi Budhy" }],
   creator: "Hadi Budhy",
   alternates: {
@@ -20,15 +20,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://hadibudhy.github.io",
-    title: "Hadi Budhy | Data Analyst · Growth & Decision Analytics",
-    description: "Data analyst focused on growth and decision analytics, using messy business data to clarify decisions.",
+    title: "Hadi Budhy | Data Analyst",
+    description: "Data analyst working across growth, product, marketplace, operations, business, and decision analytics.",
     siteName: "Hadi Budhy",
     locale: "en_US",
   },
   twitter: {
     card: "summary",
-    title: "Hadi Budhy | Data Analyst · Growth & Decision Analytics",
-    description: "Data analyst focused on growth and decision analytics, using messy business data to clarify decisions.",
+    title: "Hadi Budhy | Data Analyst",
+    description: "Data analyst working across growth, product, marketplace, operations, business, and decision analytics.",
   },
 };
 
@@ -56,7 +56,7 @@ export default function RootLayout({
               "@type": "Person",
               name: "Hadi Budhy",
               url: "https://hadibudhy.github.io",
-              jobTitle: "Data Analyst & Analytics Engineer",
+              jobTitle: "Data Analyst",
               address: { "@type": "PostalAddress", addressLocality: "Jakarta", addressCountry: "ID" },
               sameAs: ["https://github.com/hadibudhy", "https://linkedin.com/in/hadibudhy"],
             })}
