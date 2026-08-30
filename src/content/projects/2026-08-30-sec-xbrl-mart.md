@@ -67,6 +67,20 @@ Amended filings and later revisions can change a reported fact.
 
 **Why it matters:** consumers need to know whether a report is “as originally filed” or “latest available.”
 
+## Evidence register
+
+| Layer | Evidence | Decision use |
+|---|---|---|
+| Observed | SEC facts carry tag, unit, value, form, accession, fiscal period, and filing metadata | Build a lineage-preserving metric layer |
+| Inferred | A governed definition is required before comparing issuer values | Approve a narrow finance mart |
+| Not established | Same-label facts are economically comparable across issuers or periods | Reconcile and surface exceptions |
+
+## Validation record
+
+- **Grain:** issuer × taxonomy × tag × unit × period × filing.
+- **Checks:** unit, duration, fiscal period, amended filing, accession, and statement reconciliation checks are required.
+- **Guardrail:** latest-available and as-filed values remain distinguishable.
+
 ## Recommendation
 
 **What:** ship a narrow approved metric set first: revenue, net income, and a derived margin with source lineage.
@@ -90,4 +104,3 @@ Source documentation: [SEC API documentation](https://www.sec.gov/data-research/
 ## Technical appendix
 
 The proposed tables are `raw_company_facts`, `stg_xbrl_facts`, `dim_metric_definition`, and `fct_reported_metric`. Every gold metric retains accession number, filing date, source tag, unit, fiscal period, and a quality status.
-
