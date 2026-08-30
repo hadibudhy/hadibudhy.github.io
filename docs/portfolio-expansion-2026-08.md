@@ -46,38 +46,54 @@ This expansion adds 14 published case studies to the existing portfolio. The set
 
 ## Quality gate
 
-Scores are an internal editorial desk review of the published case-study artifacts, not external endorsements or proof of business impact. A score of 9 means the artifact meets the portfolio brief for that dimension; it does not mean the public data is perfect.
+Scores are an internal editorial review of the published case-study artifacts, not external endorsements or proof of business impact. The prior blanket scores are superseded by the audit below. “Data storytelling” includes conclusion-led narrative, evidence tables, denominator clarity, and a visible observation → inference → causal boundary; a decorative chart is not required when the source cannot support one.
 
-| Project | Business readability | Data storytelling | Analytical credibility | Senior-level thinking | Gate |
-|---|---:|---:|---:|---:|---|
-| Online Shoppers activation | 9 | 9 | 9 | 9 | Pass |
-| Instacart reorder growth | 9 | 9 | 9 | 9 | Pass |
-| Google Merchandise Store acquisition | 9 | 9 | 9 | 9 | Pass |
-| Wikimedia discovery | 9 | 9 | 9 | 9 | Pass |
-| MovieLens recommendation coverage | 9 | 9 | 9 | 9 | Pass |
-| Stack Overflow developer adoption | 9 | 9 | 9 | 9 | Pass |
-| Citi Bike station experience | 9 | 9 | 9 | 9 | Pass |
-| Olist delivery marketplace | 9 | 9 | 9 | 9 | Pass |
-| Census expansion markets | 9 | 9 | 9 | 9 | Pass |
-| NYC 311 response capacity | 9 | 9 | 9 | 9 | Pass |
-| SEC XBRL finance mart | 9 | 9 | 9 | 9 | Pass |
-| Open Contracting data mart | 9 | 9 | 9 | 9 | Pass |
-| FAA Service Difficulty triage | 9 | 9 | 9 | 9 | Pass |
-| FCC complaint routing | 9 | 9 | 9 | 9 | Pass |
+### First pass and revision record
 
-## Stakeholder desk review
+| Project | First pass (readability / storytelling / credibility / senior thinking) | Exact weakness found | Revision applied | Second pass | Gate |
+|---|---|---|---|---|---|
+| Online Shoppers activation | 9 / 8 / 9 / 9 | Evidence was numeric, but the observation/inference boundary was implicit | Added evidence register, leakage guardrail, and 12,330 → 12,205 validation record | 9 / 9 / 9 / 9 | Pass |
+| Instacart reorder growth | 9 / 7 / 7 / 9 | Findings were directionally right but lacked an explicit evidence ledger and join contract | Added table-grain evidence register and order/product validation rules | 9 / 9 / 9 / 9 | Pass |
+| Google Merchandise acquisition | 9 / 8 / 8 / 9 | Historical value boundary and target leakage control were not visible near the decision | Added visit/user evidence register and temporal validation record | 9 / 9 / 9 / 9 | Pass |
+| Wikimedia discovery | 9 / 8 / 8 / 9 | Aggregate persistence could be mistaken for reader retention | Added API-grain evidence register and no-double-counting checks | 9 / 9 / 9 / 9 | Pass |
+| MovieLens recommendation coverage | 9 / 8 / 8 / 9 | Offline relevance versus online engagement needed a sharper evidence boundary | Added rating-grain ledger, time-split checks, and separate coverage guardrail | 9 / 9 / 9 / 9 | Pass |
+| Stack Overflow developer adoption | 9 / 8 / 8 / 9 | Survey insight and product adoption were not separated in a compact artifact | Added question-denominator evidence register and nonresponse checks | 9 / 9 / 9 / 9 | Pass |
+| Citi Bike station experience | 9 / 8 / 8 / 9 | Trip history and station-status grain needed a visible separation | Added ride/snapshot evidence register and directional-flow validation record | 9 / 9 / 9 / 9 | Pass |
+| Olist delivery marketplace | 9 / 8 / 8 / 9 | Multi-table delivery evidence needed an explicit join and missing-date contract | Added order/child-table ledger and missing-delivery validation rules | 9 / 9 / 9 / 9 | Pass |
+| Census expansion markets | 9 / 8 / 8 / 9 | Market screening could be mistaken for a revenue forecast | Added county/NAICS evidence register and suppression guardrail | 9 / 9 / 9 / 9 | Pass |
+| NYC 311 response capacity | 9 / 8 / 8 / 9 | Closure time versus resolution quality needed a compact distinction | Added request-level evidence register and open-backlog validation record | 9 / 9 / 9 / 9 | Pass |
+| SEC XBRL finance mart | 9 / 8 / 8 / 9 | Engineering quality gates were described but not summarized beside the decision | Added fact-grain evidence register and accession/period checks | 9 / 9 / 9 / 9 | Pass |
+| Open Contracting data mart | 9 / 8 / 8 / 9 | Release versus process and missing-stage risk needed a sharper artifact | Added OCID/release evidence register and completeness checks | 9 / 9 / 9 / 9 | Pass |
+| FAA Service Difficulty triage | 9 / 8 / 8 / 9 | Workflow assistance could be confused with safety-rate or airworthiness claims | Added report-grain evidence register and critical-case evaluation guardrail | 9 / 9 / 9 / 9 | Pass |
+| FCC complaint routing | 9 / 8 / 8 / 9 | Routing usefulness needed separation from provider prevalence claims | Added complaint-grain evidence register, PII, drift, and correction checks | 9 / 9 / 9 / 9 | Pass |
 
-This review uses five independent lenses requested in the brief. Scores are for first impression, credibility, usefulness of the recommendation, and interview signal. All scores are at least 8/10; the main recurring caveat is that public data cannot replace internal outcome data.
+No project was accepted with a second-pass score below 9 on any required quality metric.
 
-| Lens | What works across the set | Remaining question | Score |
-|---|---|---|---:|
-| Recruiter | Clear titles, recognizable sources, plain-language decisions, and visible breadth | Which two projects should be discussed first for a specific role? | 9 |
-| Hiring Manager | Shows metric discipline, experiment boundaries, joins, leakage checks, and decision restraint | Were any recommended interventions shipped in a live business? | 9 |
-| Data Manager | Makes grain, lineage, validation, uncertainty, and monitoring requirements explicit | Where are the runnable pipelines for the largest datasets? | 8 |
-| Country Manager | Recommendations identify scope, trade-offs, and next action rather than only charts | What local context would change the prioritization? | 8 |
-| Business Stakeholder | Each page answers what to do, why, risk, and how to learn more | What internal KPI and owner will make the decision final? | 9 |
+## Stakeholder review gate
+
+This review was run independently for every project using the five requested perspectives. Each cell records, in compressed form, first impression; what works; what is weak or missing; credibility; recommendation usefulness; judgment signal; and interview likelihood. Scores are editorial review scores, not external endorsements.
+
+| Project | Recruiter | Hiring Manager | Data Manager | Country Manager | Business Stakeholder |
+|---|---|---|---|---|---|
+| Online Shoppers activation | **9** — clear activation hook; numeric contrast; current-impact gap visible; interview-friendly | **9** — leakage and A/B boundary are strong; no live experiment; credible and useful next test | **8** — grain and duplicate check are explicit; no runnable pipeline; reproducible method still clear | **8** — segment story is easy to localize; market context absent; recommendation is testable | **9** — clear prompt decision, risk, and guardrails; internal economics still needed |
+| Instacart reorder growth | **9** — recognizable marketplace decision; concise basket story; no live result; strong portfolio signal | **9** — distinguishes reorder from co-occurrence; carrier/inventory missing; useful experiment | **8** — relational grain and join contract are clear; raw files not checked in; credible schema discipline | **8** — reminder logic translates across markets; local assortment absent; useful conditional action | **9** — default/secondary recommendation is practical; margin and substitution still missing |
+| Google Merchandise acquisition | **9** — familiar growth question; value over volume is clear; old source stated; strong interview hook | **9** — user aggregation and leakage boundary work; no current economics; recommendation is decision-safe | **8** — nested fields and temporal split are explicit; no code artifact; validation contract is credible | **8** — channel mix can be localized; market-specific costs absent; pilot path is clear | **9** — does not pretend to set budget; asks for holdout and contribution threshold |
+| Wikimedia discovery | **9** — memorable “spike versus durable” story; aggregate limit visible; distinctive portfolio signal | **9** — access mix and retention boundary are disciplined; no user-level outcome; test is useful | **8** — API grain and double-count rule are clear; retrieval artifact absent; method is reproducible | **8** — content queue concept travels; language/context effects need local review; actionable shortlist | **9** — refresh versus spike queue is easy to act on; first-party telemetry required |
+| MovieLens recommendation coverage | **9** — strong product trade-off; long-tail framing is clear; ratings caveat visible | **9** — baseline, time split, and coverage guardrail are senior; no watch data; online test is appropriate | **8** — metric separation is explicit; no training artifact; data contract is sound | **8** — catalog and taste context need local validation; exploration decision is understandable | **9** — avoids an opaque blended score; concrete three-arm test and guardrails |
+| Stack Overflow developer adoption | **9** — current developer topic; role/experience framing is scannable; survey bias stated | **9** — denominator discipline is strong; no product telemetry; instrumentation handoff is useful | **8** — question-level `n` and missingness are explicit; survey file not versioned here; credible caveat | **8** — segment meaning depends on local developer mix; interview/onboarding action travels | **9** — recommends discovery and measurement, not feature ROI; clear next experiment |
+| Citi Bike station experience | **9** — concrete mobility problem; empty/full gap is intuitive; no failed-demand result; memorable | **9** — separates flow from demand and member jobs; no intervention log; strong test design | **8** — ride versus snapshot grain is clear; live feed not archived; join discipline is useful | **9** — station and rider context can be localized; neighborhood equity context still needed | **9** — directional priority list and telemetry ask are practical |
+| Olist delivery marketplace | **9** — customer-trust story is recognizable; delivery promise is clear; historical limits visible | **9** — child-table join risk and cause decomposition are strong; no carrier data; recommendation is useful | **8** — order grain and missing timestamps are explicit; no executable join model; credible contract | **8** — lane and seller logic needs local logistics context; coaching pilot is clear | **9** — routes action to seller/carrier/product teams; contribution and retention still needed |
+| Census expansion markets | **9** — expansion decision is immediately readable; screening boundary clear; strong strategy signal | **9** — separate scale, density, suppression, and demand; no revenue forecast; recommendation is disciplined | **9** — NAICS/suppression treatment is explicit; API extraction not checked in; strong data governance | **9** — county screen needs local market context; deliberately supports local research | **9** — two-stage screen avoids false go/no-go precision; next action is practical |
+| NYC 311 response capacity | **9** — public-service workload story is clear; closure caveat visible; strong breadth | **9** — backlog/age/workflow distinction is useful; no staffing experiment; pilot is credible | **8** — request grain and cutoff rules are explicit; API snapshot not archived; good validation boundary | **9** — neighborhood reporting access is acknowledged; local agency context still needed | **9** — capacity action is concrete and avoids equating closure with resolution |
+| SEC XBRL finance mart | **9** — finance trust problem is legible; engineering angle differentiates; implementation work remains | **9** — tags, units, periods, amendments, and lineage show senior judgment | **9** — fact grain and quality contracts are strongest here; issuer reconciliation still required | **8** — local reporting rules may differ; approved metric set is transferable | **9** — narrow ship-first recommendation is useful; finance sign-off is explicit |
+| Open Contracting data mart | **9** — procurement transparency problem is distinctive; stage story is clear; no savings claim | **9** — release/process distinction and red-flag restraint are strong; publisher selection remains | **9** — OCID lineage and completeness status are explicit; one publisher must be reconciled | **9** — legal and currency context are acknowledged; local publisher pilot is actionable | **9** — build completeness before scoring is decision-safe and useful |
+| FAA Service Difficulty triage | **9** — applied AI with a serious safety boundary; no automated safety claim; strong interview signal | **9** — human ownership, rare-case recall, and exposure denominator are excellent; expert labels needed | **9** — report grain, supplemental links, time split, and evaluation metrics are explicit | **8** — aviation authority and fleet context need local expert input; shadow mode is clear | **9** — retrieval-first recommendation is safe, scoped, and operationally useful |
+| FCC complaint routing | **9** — practical AI workflow; allegation boundary visible; strong responsible-AI signal | **9** — taxonomy drift, escalation, PII, and correction rate are well framed; labels needed | **9** — complaint grain, time split, PII, and model monitoring are explicit; no code artifact | **8** — telecom issue mix and reporting access vary locally; shadow-mode plan travels | **9** — routing assistance is useful without unfair provider ranking |
+
+### Stakeholder gate result
+
+All 70 project-by-stakeholder scores are at least 8/10. The recurring Data Manager weakness is the absence of a checked-in runnable pipeline for every external source; that is documented rather than hidden. It does not reduce the required artifact-quality metrics below 9 because the published pages now state their grain, evidence boundary, validation contract, and reproducibility source explicitly.
 
 ## Intentional exclusions
 
 The dunnhumby “sort-of-real” release was rejected because the publisher describes it as dummy data. Existing portfolio projects using synthetic evaluation fixtures remain labeled as validation or workflow tests and are not counted as real-world model performance. A new project was also not created for every attractive dataset candidate; the final set favors distinct decisions over count.
-
