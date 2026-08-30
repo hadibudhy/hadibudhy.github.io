@@ -7,6 +7,7 @@ excerpt: "A market-screening framework using Census business counts, employment,
 problem: "A commercial team needs to shortlist markets, but a large population does not guarantee a reachable customer base, competitive supply, or enough businesses in the target industry."
 result: "The Census County Business Patterns program provides annual county × NAICS observations for establishments, employment, and payroll, with suppression markers that must remain visible in the market screen."
 published: true
+kind: methods
 ---
 
 ## Business question
@@ -43,9 +44,9 @@ This is administrative business data, not a customer panel. It does not contain 
 4. Compare establishments per worker, target-industry employment, payroll intensity, and year-over-year stability.
 5. Convert the screen into a research queue with explicit follow-up evidence.
 
-## Key findings
+## What the source supports
 
-## Visual evidence
+## Evidence and design visuals
 
 ### Context: market structure needs scale, density, and workforce depth
 
@@ -53,13 +54,13 @@ This is administrative business data, not a customer panel. It does not contain 
 
 The visual shows why population alone is not an expansion screen.
 
-### Main finding: suppression changes how a market can be ranked
+### Evidence boundary: suppression changes how a market can be ranked
 
 ![County Business Patterns evidence boundary: annual structure is observed, while demand, competitor quality, and exact suppressed values are not](/images/portfolio-census-suppression.svg)
 
 Suppression is carried forward as uncertainty rather than silently converted to zero.
 
-### Decision: screen markets before spending on local research
+### Design response: screen markets before spending on local research
 
 ![Conceptual Census expansion process: screen scale, density, and stability; enrich with local context; then pilot incremental demand](/images/portfolio-census-screen.svg)
 

@@ -84,6 +84,7 @@ export default async function ProjectPage({ params }: Props) {
   }
 
   const formattedDate = format(project.meta.date, 'MMMM yyyy');
+  const kindLabel = project.meta.kind === "methods" ? "Methods / design study" : project.meta.kind === "completed" ? "Completed analysis" : "Flagship analysis";
 
   return (
     <article className="py-12 sm:py-16 md:py-24">
@@ -110,6 +111,7 @@ export default async function ProjectPage({ params }: Props) {
                 {project.meta.categories.join(', ')}
               </div>
             )}
+            <Badge variant="secondary">{kindLabel}</Badge>
           </div>
 
           {project.meta.tags && (

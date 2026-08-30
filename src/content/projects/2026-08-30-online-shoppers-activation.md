@@ -5,8 +5,9 @@ categories: [growth analytics]
 tags: [activation, conversion, leakage, UCI]
 excerpt: "A session-level conversion study that separates useful early intent signals from fields that only appear after a shopper has already shown value."
 problem: "The product team wants to improve conversion, but a targeting rule can look excellent simply because it uses information created after the shopper has already progressed."
-result: "After deduplicating 12,205 sessions, new visitors converted at 24.9% versus 14.1% for returning visitors, while positive PageValues sessions converted at 56.3% and zero-PageValues sessions at 3.9%."
+result: "The UCI release exposes session-level browsing and visitor fields alongside downstream PageValues and Revenue outcomes; it supports leakage-aware experiment design, not an observed intervention effect."
 published: true
+kind: methods
 ---
 
 ## Business question
@@ -20,7 +21,7 @@ A high-performing conversion model can still be useless if it reads the answer f
 ## Decision brief
 
 - **Recommendation:** test a light-touch activation prompt using pre-intervention browsing depth and visitor type; keep `PageValues` out of targeting.
-- **Evidence:** the cleaned file contains 12,205 sessions after removing 125 duplicate rows. New visitors converted at **24.9%** (422/1,693) versus **14.1%** (1,470/10,431) for returning visitors.
+- **Evidence:** the UCI release exposes visitor type, browsing behavior, downstream PageValues, and a Revenue outcome; no treatment assignment is included.
 - **Evidence strength:** Moderate for descriptive segmentation; low for causal product impact because no treatment assignment or user-level experiment exists.
 - **Main risk:** the sample is historical and session-level. A returning visitor may appear in many rows, and the dataset does not show margin or long-term value.
 - **Next test:** randomize prompt eligibility, pre-register conversion and guardrail metrics, and report results by new/returning visitor without using post-intervention fields.
@@ -43,21 +44,13 @@ The data is real observation-level web traffic, but it is not a current product 
 4. Mark variables that are unavailable or unsafe at intervention time.
 5. Turn the strongest descriptive contrasts into a bounded randomized test.
 
-## Key findings
+## What the source supports
 
-## Visual evidence
+The source supports a leakage-aware activation design: visitor type and early browsing fields can be assessed before an intervention, while PageValues and Revenue are downstream outcomes. No source-specific recomputation or treatment assignment is published in this repository.
 
-### Context: new and returning sessions have different observed rates
+## Evidence and design visuals
 
-![New visitors converted more often in the deduplicated 2018 session file: 24.9% versus 14.1%, with session denominators shown](/images/portfolio-online-shoppers-segments.svg)
-
-This descriptive comparison sets the baseline for segmentation; it does not identify an intervention effect.
-
-### Main finding: PageValues is predictive but downstream
-
-![Positive PageValues sessions converted at 56.3% versus 3.9% for zero-PageValues sessions, shown as a leakage diagnostic](/images/portfolio-online-shoppers-pagevalue.svg)
-
-The contrast is useful for diagnosis and explicitly supports excluding this field from pre-intervention targeting.
+## Experiment design
 
 ### Decision: test early signals with a randomized prompt
 
@@ -65,42 +58,34 @@ The contrast is useful for diagnosis and explicitly supports excluding this fiel
 
 The decision visual shows the measurement design required before making a product claim.
 
-### New visitors were not the lowest-intent group
+### Pre-intervention fields need a timestamp boundary
 
-New visitors converted at **24.9%**, while returning visitors converted at **14.1%** in this file.
+Visitor type and early browsing behavior are candidate inputs for an activation test. `PageValues` and `Revenue` are downstream fields and belong in diagnosis or outcome measurement, not eligibility.
 
-**Meaning:** visitor type is a useful descriptive cut, but it is not a customer-value ranking. The result may reflect traffic mix, campaign timing, or how the dataset defines a new session.
+**Meaning:** feature availability must be defined at the moment the prompt could appear.
 
-**Why it matters:** a blanket “returning visitors deserve the prompt” rule would be poorly supported. Test the interaction between visitor type and early browsing behavior instead.
+**Why it matters:** a targeting rule that reads downstream value can overstate expected lift.
 
-### PageValues is a powerful diagnostic and a dangerous targeting feature
+### Calendar mix belongs in the test design
 
-Sessions with positive `PageValues` converted at **56.3%** (1,538/2,730), compared with **3.9%** (370/9,475) when the value was zero.
+The source spans multiple months and includes calendar fields, but no source-specific recomputation is published here.
 
-**Meaning:** the field is strongly associated with the outcome, but it summarizes value-producing pages in the session. It is not a clean pre-intervention feature for a conversion prompt.
+**Meaning:** a pooled session rate would not be a sufficient planning assumption.
 
-**Why it matters:** using it would create leakage and overstate expected lift. Keep it for diagnosis and guardrail analysis, not eligibility.
-
-### The outcome moved with season and calendar mix
-
-November converted at **25.5%**, while May converted at **11.0%**. Weekend sessions converted at **17.5%**, versus **15.1%** on weekdays.
-
-**Meaning:** traffic context matters, and a single pooled conversion rate is not a stable planning assumption.
-
-**Why it matters:** the next test needs time-stratified randomization and a calendar-aware readout so a seasonal mix shift is not mistaken for product impact.
+**Why it matters:** the next experiment needs time-stratified randomization and a calendar-aware readout.
 
 ## Evidence register
 
 | Layer | Evidence | Decision use |
 |---|---|---|
-| Observed | 12,205 deduplicated sessions; new visitors converted at 24.9% and returning visitors at 14.1% | Choose hypotheses for the next activation test |
+| Observed | Session-level visitor, browsing, calendar, PageValues, and Revenue fields are available in the UCI release | Define candidate inputs and outcome fields |
 | Inferred | Visitor type and early browsing behavior may be useful eligibility signals | Design a stratified, randomized prompt test |
 | Not established | Any prompt caused conversion, or that `PageValues` is available before intervention | Do not use post-outcome fields for targeting |
 
 ## Validation record
 
-- **Grain:** one session; rates use deduplicated rows.
-- **Checks:** 12,330 raw rows, 125 exact duplicate rows, 0 missing values, binary `Revenue` outcome.
+- **Grain:** one session; the source-specific row, duplicate, missingness, and outcome checks remain to be rerun from the downloaded file.
+- **Checks required:** raw row count, exact duplicates, missingness, and binary `Revenue` outcome.
 - **Guardrail:** `PageValues` is retained for diagnosis but excluded from a pre-intervention feature set.
 
 ## Recommendation

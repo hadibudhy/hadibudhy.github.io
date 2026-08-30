@@ -7,6 +7,7 @@ excerpt: "A service-operations study that separates incoming request volume from
 problem: "A service team sees high 311 volume in several neighborhoods, but raw request count does not show which queues are slow, which issues need specialized work, or whether a response was actually resolved."
 result: "The public NYC 311 dataset provides a long-running record of request type, creation and closure timestamps, location, and status; it supports workload triage while keeping administrative closure distinct from resolution."
 published: true
+kind: methods
 ---
 
 ## Business question
@@ -43,9 +44,9 @@ The source captures people who reported through 311, not every service need. It 
 4. Keep borough and neighborhood comparisons descriptive because reporting and agency mix differ.
 5. Define a capacity pilot with pre-specified queue metrics.
 
-## Key findings
+## What the source supports
 
-## Visual evidence
+## Evidence and design visuals
 
 ### Context: request volume requires a queue-level view
 
@@ -53,13 +54,13 @@ The source captures people who reported through 311, not every service need. It 
 
 The scale and mutable source make fixed cutoffs and request-level metrics important.
 
-### Main finding: administrative closure is not resolution quality
+### Evidence boundary: administrative closure is not resolution quality
 
 ![NYC 311 evidence boundary: created and closed timestamps, agency, type, status, and location are observed, but resolution quality and staff hours are not](/images/portfolio-nyc311-boundary.svg)
 
 This prevents a faster close from being treated as a better service outcome.
 
-### Decision: move capacity toward old actionable work
+### Design response: move capacity toward old actionable work
 
 ![Conceptual NYC 311 capacity pilot: measure arrivals and backlog age, change routing or staffing, then guardrail reopen and follow-up](/images/portfolio-nyc311-pilot.svg)
 

@@ -7,6 +7,7 @@ excerpt: "A descriptive audit of NYC bridge and tunnel traffic that shows why a 
 problem: "Leadership wants to know whether congestion pricing changed traffic, but affected and comparison crossings may already have been on different paths."
 result: "The official MTA panel contains 27,080 facility-day observations from 2019 to May 2026; the displayed pre-policy gap is visibly unstable, so this comparator is not used for causal attribution."
 featured: true
+kind: flagship
 header:
   teaser: /images/growth-mta-event-study.png
 ---

@@ -7,6 +7,7 @@ excerpt: "A station-level product and service study that combines trip histories
 problem: "A bike-share product can celebrate trip volume while riders still encounter empty origins or full destinations during the moments that matter."
 result: "Citi Bike publishes trip histories with origin, destination, time, ride type, and member/casual status, plus real-time station status feeds; together they support an imbalance diagnostic but not a counterfactual rebalancing effect."
 published: true
+kind: methods
 ---
 
 ## Business question
@@ -43,9 +44,9 @@ The operator notes that staff/test trips are removed and that data is provided u
 4. Compare historic flow patterns with observed availability snapshots where timestamps align.
 5. Define the missing product events required to measure failed demand.
 
-## Key findings
+## What the source supports
 
-## Visual evidence
+## Evidence and design visuals
 
 ### Context: trips and station status answer different questions
 
@@ -53,13 +54,13 @@ The operator notes that staff/test trips are removed and that data is provided u
 
 The visual prevents a live station snapshot from being treated as a completed-trip outcome.
 
-### Main finding: direction is more actionable than popularity
+### Evidence boundary: direction is more actionable than popularity
 
 ![Conceptual Citi Bike flow view: count origins and destinations, compare direction by peak window, and prioritize station moves](/images/portfolio-citibike-imbalance.svg)
 
 Origin and destination fields support an imbalance diagnostic, not a claim of unmet demand.
 
-### Decision: make service outcomes measurable before rebalancing
+### Design response: make service outcomes measurable before rebalancing
 
 ![Conceptual Citi Bike service test: instrument search and unlock failures, pilot a station-window priority, and measure successful rides and repeat use](/images/portfolio-citibike-test.svg)
 

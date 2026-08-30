@@ -11,6 +11,7 @@ excerpt: "A transaction analysis showing where repeat revenue comes from and whi
 problem: "The retailer had many transactions, but it was not clear which customers and markets created repeat revenue."
 result: "After cleaning 541,909 transactions, the analysis found 4,338 identifiable customers and a strong concentration of revenue among the highest-value customers."
 featured: false
+kind: completed
 header:
   teaser: /images/retail-growth-patterns.png
 ---

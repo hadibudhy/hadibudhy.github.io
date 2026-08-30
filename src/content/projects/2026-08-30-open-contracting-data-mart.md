@@ -7,6 +7,7 @@ excerpt: "A procurement-data mart design that preserves the lifecycle of a publi
 problem: "Procurement analysts want to compare competition, awards, and delivery, but public contracting data arrives as nested releases with different stages and publisher-specific completeness."
 result: "The Open Contracting Data Standard links planning, tender, award, contract, and implementation releases with an OCID; it provides a real shared model for a governed procurement mart."
 published: true
+kind: methods
 ---
 
 ## Business question
@@ -43,9 +44,9 @@ The data is real public procurement information, but it is not a complete view o
 4. Publish stage coverage and missingness by publisher, buyer, and time.
 5. Only then calculate competition, amendment, and delivery indicators.
 
-## Key findings
+## What the source supports
 
-## Visual evidence
+## Evidence and design visuals
 
 ### Context: a contract is a lifecycle of releases
 
@@ -53,13 +54,13 @@ The data is real public procurement information, but it is not a complete view o
 
 The standard’s process model is the foundation for a trustworthy procurement mart.
 
-### Main finding: missing implementation data is an uncertainty state
+### Evidence boundary: missing implementation data is an uncertainty state
 
 ![Open Contracting evidence boundary: OCID-linked releases and parties are observed, while complete payments and proven misconduct are not](/images/portfolio-ocds-boundary.svg)
 
 The visual prevents missing data from being interpreted as a clean outcome.
 
-### Decision: profile completeness before red-flag scoring
+### Design response: profile completeness before red-flag scoring
 
 ![Conceptual Open Contracting data gate: ingest immutable releases, profile stage completeness, then send lineage-backed indicators to review](/images/portfolio-ocds-gate.svg)
 

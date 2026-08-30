@@ -7,6 +7,7 @@ excerpt: "A safety-minded text triage design using FAA Service Difficulty Report
 problem: "Maintenance teams receive narrative malfunction and defect reports that vary in wording and completeness, making it difficult to prioritize review without hiding safety-critical ambiguity."
 result: "The FAA publishes annual Service Difficulty Report CSVs containing operator and repair-station reports; the data supports auditable text classification and retrieval, not automatic airworthiness decisions."
 published: true
+kind: methods
 ---
 
 ## Business question
@@ -43,9 +44,9 @@ Reports are selected submissions and are not a denominator of all flights, aircr
 4. Calibrate a classifier on reviewer labels with time-based evaluation.
 5. Escalate low-confidence or high-severity candidates and retain citations to source reports.
 
-## Key findings
+## What the source supports
 
-## Visual evidence
+## Evidence and design visuals
 
 ### Context: FAA reports are selected technical observations
 
@@ -53,13 +54,13 @@ Reports are selected submissions and are not a denominator of all flights, aircr
 
 The source supports search and triage, but not a fleet-rate denominator.
 
-### Main finding: AI should organize evidence, not decide airworthiness
+### Evidence boundary: AI should organize evidence, not decide airworthiness
 
 ![FAA Service Difficulty evidence boundary: submitted reports and aircraft context are observed, while fleet failure probability and automatic disposition are not](/images/portfolio-faa-sdr-boundary.svg)
 
 This is the safety boundary for the applied-AI workflow.
 
-### Decision: optimize critical-case recall and human override
+### Design response: optimize critical-case recall and human override
 
 ![Conceptual FAA review workflow: retrieve cited similar reports, escalate uncertain or critical cases, and leave the decision with a qualified reviewer](/images/portfolio-faa-review.svg)
 

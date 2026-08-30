@@ -7,6 +7,7 @@ excerpt: "A randomized advertising analysis that separates additional conversion
 problem: "A campaign can increase reported conversions while adding little incremental value if it mainly reaches people who were already likely to act."
 result: "In the official Criteo benchmark, the assigned advertising group converted 0.115 percentage points more often than the control group."
 featured: true
+kind: flagship
 ---
 
 ## Business question

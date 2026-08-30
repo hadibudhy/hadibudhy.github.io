@@ -7,6 +7,7 @@ excerpt: "A content-discovery study using Wikimedia’s public pageview API to s
 problem: "An editorial product team needs to decide which pages deserve refresh, related-content links, or better discovery placement when a high view count may only reflect a temporary event."
 result: "The public API supports article and project pageview time series by access method and agent type, making persistence and spike-recovery metrics observable without pretending that pageviews are unique readers."
 published: true
+kind: methods
 ---
 
 ## Business question
@@ -43,9 +44,9 @@ The source measures requests, not unique readers, comprehension, satisfaction, o
 4. Compare topics at the same language and access grain.
 5. Convert candidate ranks into a controlled discovery or refresh test.
 
-## Key findings
+## What the source supports
 
-## Visual evidence
+## Evidence and design visuals
 
 ### Context: pageviews have multiple analytical dimensions
 
@@ -53,13 +54,13 @@ The source measures requests, not unique readers, comprehension, satisfaction, o
 
 Keeping these dimensions visible protects the content queue from mixing mobile, desktop, and automated traffic.
 
-### Main finding: persistence is not reader retention
+### Evidence boundary: persistence is not reader retention
 
 ![Wikimedia evidence boundary: pageview time series and access mix are observed, while unique readers, satisfaction, and causal refresh impact are not](/images/portfolio-wikimedia-boundary.svg)
 
 The visual makes the aggregate-data limitation part of the recommendation.
 
-### Decision: split spike response from durable maintenance
+### Design response: split spike response from durable maintenance
 
 ![Conceptual content queue: classify a spike or stable floor, refresh content and links, then validate depth and return in a holdout](/images/portfolio-wikimedia-queue.svg)
 

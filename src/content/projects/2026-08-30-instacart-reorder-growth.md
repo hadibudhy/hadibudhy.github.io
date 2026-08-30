@@ -7,6 +7,7 @@ excerpt: "A next-order growth study using real grocery baskets to separate repea
 problem: "A grocery marketplace wants to increase the next order without filling the reminder with products that customers rarely buy together or do not need again."
 result: "The three-million-order public release makes reorder timing, product-level reorder flags, and order sequence observable, but it does not contain intervention assignment or profit."
 published: true
+kind: methods
 ---
 
 ## Business question
@@ -31,7 +32,7 @@ Role: relational data modeling, reorder-rate definition, basket association anal
 
 ## Data used
 
-The analysis uses the [Instacart Market Basket Analysis release](https://tech.instacart.com/3-million-instacart-orders-open-sourced-d40d29ead6f2), also distributed through the [Kaggle competition page](https://www.kaggle.com/competitions/instacart-market-basket-analysis). The source contains order history, products, aisles, departments, and product-level reorder labels. The dataset represents real anonymized grocery-order behavior, but it is a historical public release and its use is subject to the source terms.
+The analysis uses the [Instacart Market Basket Analysis release](https://tech.instacart.com/3-million-instacart-orders-open-sourced-d40d29ead6f2). The source contains order history, products, aisles, departments, and product-level reorder labels. The dataset represents real anonymized grocery-order behavior, but it is a historical public release and its use is subject to the source terms.
 
 The grain changes by table: one row per order in `orders`, one row per product-in-order in the order-product tables, and one row per product in `products`. Treating every product row as an order would inflate demand.
 
@@ -43,9 +44,9 @@ The grain changes by table: one row per order in `orders`, one row per product-i
 4. Compare simple replenishment candidates with co-purchase candidates.
 5. Define an incremental experiment instead of treating correlation as recommendation impact.
 
-## Key findings
+## What the source supports
 
-## Visual evidence
+## Evidence and design visuals
 
 ### Context: the release supports sequence-level reorder analysis
 
@@ -53,13 +54,13 @@ The grain changes by table: one row per order in `orders`, one row per product-i
 
 The visual establishes the data entities that must remain separate before computing reorder metrics.
 
-### Main finding: history is observable, incrementality is not
+### Evidence boundary: history is observable, incrementality is not
 
 ![Instacart evidence boundary: order cadence and reordered flags are observed, while reminder assignment, inventory, and margin are not](/images/portfolio-instacart-evidence.svg)
 
 This boundary prevents co-occurrence or historical reorder from being presented as campaign lift.
 
-### Decision: make replenishment the tested default
+### Design response: make replenishment the tested default
 
 ![Conceptual replenishment test: select known repeat products, hold out reminders, and decide using incremental orders and margin](/images/portfolio-instacart-holdout.svg)
 

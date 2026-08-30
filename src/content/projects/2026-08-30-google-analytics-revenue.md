@@ -7,6 +7,7 @@ excerpt: "A revenue-quality study that ranks acquisition paths by observed value
 problem: "Marketing needs to decide which acquisition paths deserve more attention, but session volume alone can reward channels that bring many low-value visits."
 result: "The public Google Merchandise Store release contains visit-level records, user identifiers, channel and traffic fields, and a revenue target; it supports value-aware prioritization but not a current budget recommendation."
 published: true
+kind: methods
 ---
 
 ## Business question
@@ -43,9 +44,9 @@ This is real store traffic, but it is a historical competition release. It is no
 4. Use a forward time split and compare a simple channel baseline with a calibrated model.
 5. Evaluate ranking quality and economic usefulness separately.
 
-## Key findings
+## What the source supports
 
-## Visual evidence
+## Evidence and design visuals
 
 ### Context: the release has separate historical windows
 
@@ -53,13 +54,13 @@ This is real store traffic, but it is a historical competition release. It is no
 
 The timeline makes it harder to mistake an old competition window for current budget evidence.
 
-### Main finding: value must be aggregated to users
+### Evidence boundary: value must be aggregated to users
 
 ![Conceptual Google Analytics grain: visit-level channel and device fields aggregate to user-period value](/images/portfolio-google-analytics-grain.svg)
 
 This is the denominator needed for a customer-value decision; sessions alone overcount repeat browsers.
 
-### Decision: channel ranking must lead to a holdout
+### Design response: channel ranking must lead to a holdout
 
 ![Conceptual acquisition decision: rank calibrated user value, hold out business-as-usual traffic, and scale only when contribution clears cost](/images/portfolio-google-analytics-holdout.svg)
 

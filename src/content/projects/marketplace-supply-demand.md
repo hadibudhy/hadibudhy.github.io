@@ -7,6 +7,7 @@ excerpt: "A limited-data marketplace diagnosis that separates recorded trips fro
 problem: "A citywide incentive can be expensive when the real problem is concentrated in a few time and location windows."
 result: "Official TLC data shows when recorded trips and observed driver coverage move, but it cannot directly show all ride requests or unserved customers."
 featured: true
+kind: flagship
 ---
 
 ## Business question

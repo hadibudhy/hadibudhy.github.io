@@ -12,6 +12,7 @@ excerpt: "A portfolio reference implementation that routes financial complaints,
 problem: "Support teams need to route complaints quickly, but an unreliable AI response can send a customer to the wrong queue or invent guidance."
 result: "Portfolio reference implementation: ComplaintFlow combines a transparent baseline, approved-playbook retrieval, provider retries, PII redaction, schema checks, human escalation, and an auditable SQLite decision log."
 featured: true
+kind: flagship
 header:
   teaser: /images/complaintflow-architecture.svg
 ---

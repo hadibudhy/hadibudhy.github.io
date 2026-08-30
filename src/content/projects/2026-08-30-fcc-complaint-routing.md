@@ -7,6 +7,7 @@ excerpt: "An AI-assisted complaint-routing study that combines transparent taxon
 problem: "A consumer-support organization receives complaints spanning billing, service quality, equipment, and privacy, but manual routing is slow and the complaint text is not independently verified."
 result: "The FCC publishes individual informal consumer complaints beginning in October 2014; the dataset supports taxonomy and routing analysis while the agency warns that allegations are selected by consumers and not verified by the FCC."
 published: true
+kind: methods
 ---
 
 ## Business question
@@ -43,9 +44,9 @@ The project treats the data as routing evidence. It does not treat a complaint a
 4. Evaluate on a chronological, reviewer-labeled sample with rare and sensitive slices.
 5. Escalate uncertain, novel, or high-impact cases and log the evidence used for routing.
 
-## Key findings
+## What the source supports
 
-## Visual evidence
+## Evidence and design visuals
 
 ### Context: FCC complaints are individual informal reports
 
@@ -53,13 +54,13 @@ The project treats the data as routing evidence. It does not treat a complaint a
 
 The source is useful for queue design, not a denominator of provider experience.
 
-### Main finding: routing evidence and prevalence evidence are different
+### Evidence boundary: routing evidence and prevalence evidence are different
 
 ![FCC evidence boundary: issue and provider context are observed, while representative prevalence, verified fault, and resolution quality are not](/images/portfolio-fcc-boundary.svg)
 
 This is why the project avoids provider rankings.
 
-### Decision: confidence-based routing keeps a human path
+### Design response: confidence-based routing keeps a human path
 
 ![Conceptual FCC complaint workflow: redact complaint text, suggest a cited queue, and escalate low-confidence or sensitive cases](/images/portfolio-fcc-routing.svg)
 

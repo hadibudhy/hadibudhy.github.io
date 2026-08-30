@@ -11,6 +11,7 @@ excerpt: "A messy inspection-data analysis showing how a restaurant group could 
 problem: "Restaurant inspection records were detailed but repeated across violations, making it difficult to compare quality risk fairly."
 result: "After rolling 227,520 recent violation rows into 73,211 inspection records, the analysis found meaningful differences in critical-violation rates across boroughs."
 featured: false
+kind: completed
 header:
   teaser: /images/restaurant-grades.png
 ---

@@ -7,6 +7,7 @@ excerpt: "An analytics-engineering design for turning issuer-level XBRL facts in
 problem: "Finance stakeholders want comparable growth and margin metrics, but raw XBRL facts mix tags, units, filing forms, fiscal periods, and amended facts."
 result: "The SEC Company Facts API exposes issuer facts with taxonomy tags, units, filing forms, accession metadata, and periods; the correct deliverable is a governed metric layer, not a blind sum of reported values."
 published: true
+kind: methods
 ---
 
 ## Business question
@@ -41,9 +42,9 @@ The [SEC Company Facts API](https://www.sec.gov/data-research/sec-api-documentat
 4. Resolve annual versus quarterly periods and amended filings explicitly.
 5. Test totals, signs, units, period overlap, and reconciliation to a filed statement.
 
-## Key findings
+## What the source supports
 
-## Visual evidence
+## Evidence and design visuals
 
 ### Context: every finance fact needs source identity
 
@@ -51,13 +52,13 @@ The [SEC Company Facts API](https://www.sec.gov/data-research/sec-api-documentat
 
 The source fields are the evidence needed for review and reuse.
 
-### Main finding: reported facts are not automatic comparables
+### Evidence boundary: reported facts are not automatic comparables
 
 ![SEC Company Facts evidence boundary: reported values and filing metadata are observed, while economic comparability and operating explanation are not](/images/portfolio-sec-period-boundary.svg)
 
 The visual makes semantic exceptions visible before a comparison is published.
 
-### Decision: reconcile a narrow metric layer first
+### Design response: reconcile a narrow metric layer first
 
 ![Conceptual SEC finance mart: land raw issuer JSON, normalize fact and period grain, then approve finance-reconciled metrics](/images/portfolio-sec-mart.svg)
 

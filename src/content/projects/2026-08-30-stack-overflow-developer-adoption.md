@@ -7,6 +7,7 @@ excerpt: "A product-research study that turns a large developer survey into onbo
 problem: "A developer-product team needs to decide whether to invest next in onboarding, AI guidance, or workflow support, but survey popularity alone does not reveal the highest-value intervention."
 result: "The 2025 Stack Overflow Developer Survey contains 49,019 responses; 76% identify as professional developers, and the source reports AI-learning behavior alongside role and experience context."
 published: true
+kind: methods
 ---
 
 ## Business question
@@ -43,9 +44,9 @@ The survey is real respondent data, but it is not a product event stream and sho
 4. Use segment differences to select interviews and telemetry requirements.
 5. Keep any product-effect claim for a later controlled test.
 
-## Key findings
+## What the source supports
 
-## Visual evidence
+## Evidence and design visuals
 
 ### Context: professional developers are the majority, not the whole audience
 
@@ -53,13 +54,13 @@ The survey is real respondent data, but it is not a product event stream and sho
 
 The respondent mix argues against designing one onboarding path for everyone.
 
-### Main finding: age is a question-level context, not a product segment
+### Evidence boundary: age is a question-level context, not a product segment
 
 ![Stack Overflow Developer Survey 2025 age context: 66% of respondents are aged 25–44 in the answered age question](/images/portfolio-stackoverflow-age.svg)
 
 The visual labels the denominator so the survey is not mistaken for a population census.
 
-### Decision: turn survey demand into a telemetry test
+### Design response: turn survey demand into a telemetry test
 
 ![Conceptual developer enablement test: use survey responses for a segment hypothesis, instrument first success, and compare guidance with control](/images/portfolio-stackoverflow-telemetry.svg)
 

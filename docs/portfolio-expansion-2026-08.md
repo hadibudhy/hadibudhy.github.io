@@ -1,8 +1,8 @@
-# Portfolio expansion: 14 real-data decision studies
+# Portfolio expansion: 14 source-grounded decision pages
 
 Build date: 2026-08-30
 
-This expansion adds 14 published case studies to the existing portfolio. The set is intentionally decision-led: each project starts with a business choice, states what the public data can measure, separates observation from inference, and ends with a bounded next action. No dummy, synthetic, placeholder, or generic sample dataset is used in these 14 projects.
+This expansion adds 14 published source-grounded pages to the existing portfolio. The set is intentionally decision-led: each page starts with a business choice, states what the public data can measure, separates observation from inference, and ends with a bounded next action. The current repository classifies zero pages as completed analyses and 14 as methods/design studies because no checked-in dataset and runnable project-specific computation are available for these expansion pages. No dummy, synthetic, placeholder, or generic sample dataset is used as claimed evidence in these 14 pages.
 
 ## Capability mix
 
@@ -52,7 +52,7 @@ Scores are an internal editorial review of the published case-study artifacts, n
 
 | Project | First pass (readability / storytelling / credibility / senior thinking) | Exact weakness found | Revision applied | Second pass | Gate |
 |---|---|---|---|---|---|
-| Online Shoppers activation | Review flag: evidence boundary needed tightening | Evidence was numeric, but the observation/inference boundary was implicit | Added evidence register, leakage guardrail, and 12,330 → 12,205 validation record | 9 / 9 / 9 / 9 | Pass |
+| Online Shoppers activation | Review flag: evidence boundary needed tightening | Numeric visual values were not backed by a source-specific runnable computation | Reclassified as methods/design; removed numeric claims and retained leakage-aware experiment design | 9 / 9 / 9 / 9 | Pass |
 | Instacart reorder growth | Review flag: evidence ledger and join contract needed tightening | Findings were directionally right but lacked an explicit evidence ledger and join contract | Added table-grain evidence register and order/product validation rules | 9 / 9 / 9 / 9 | Pass |
 | Google Merchandise acquisition | Review flag: historical value and leakage boundary needed tightening | Historical value boundary and target leakage control were not visible near the decision | Added visit/user evidence register and temporal validation record | 9 / 9 / 9 / 9 | Pass |
 | Wikimedia discovery | Review flag: aggregate persistence boundary needed tightening | Aggregate persistence could be mistaken for reader retention | Added API-grain evidence register and no-double-counting checks | 9 / 9 / 9 / 9 | Pass |
@@ -67,7 +67,7 @@ Scores are an internal editorial review of the published case-study artifacts, n
 | FAA Service Difficulty triage | Review flag: workflow/safety boundary needed tightening | Workflow assistance could be confused with safety-rate or airworthiness claims | Added report-grain evidence register and critical-case evaluation guardrail | 9 / 9 / 9 / 9 | Pass |
 | FCC complaint routing | Review flag: routing/prevalence boundary needed tightening | Routing usefulness needed separation from provider prevalence claims | Added complaint-grain evidence register, PII, drift, and correction checks | 9 / 9 / 9 / 9 | Pass |
 
-No project was accepted with a second-pass score below 9 on any required quality metric.
+The expansion pages passed the evidence-boundary gate; Online Shoppers is intentionally recorded as a methods/design page rather than a completed analysis because source-specific computation is not checked in.
 
 ## Stakeholder review gate
 
@@ -75,7 +75,7 @@ This review was run independently for every project using the five requested per
 
 | Project | Recruiter | Hiring Manager | Data Manager | Country Manager | Business Stakeholder |
 |---|---|---|---|---|---|
-| Online Shoppers activation | **9** — clear activation hook; numeric contrast; current-impact gap visible; interview-friendly | **9** — leakage and A/B boundary are strong; no live experiment; credible and useful next test | **8** — grain and duplicate check are explicit; no runnable pipeline; reproducible method still clear | **8** — segment story is easy to localize; market context absent; recommendation is testable | **9** — clear prompt decision, risk, and guardrails; internal economics still needed |
+| Online Shoppers activation | **8** — clear activation design; numeric evidence removed until reproducible; useful interview hook | **8** — leakage and A/B boundary are strong; no source-specific computation; credible next test | **7** — source grain is explicit; runnable pipeline remains absent; classification is honest | **8** — test design is easy to localize; market context absent; recommendation is testable | **8** — prompt decision, risk, and guardrails are clear; internal economics still needed |
 | Instacart reorder growth | **9** — recognizable marketplace decision; concise basket story; no live result; strong portfolio signal | **9** — distinguishes reorder from co-occurrence; carrier/inventory missing; useful experiment | **8** — relational grain and join contract are clear; raw files not checked in; credible schema discipline | **8** — reminder logic translates across markets; local assortment absent; useful conditional action | **9** — default/secondary recommendation is practical; margin and substitution still missing |
 | Google Merchandise acquisition | **9** — familiar growth question; value over volume is clear; old source stated; strong interview hook | **9** — user aggregation and leakage boundary work; no current economics; recommendation is decision-safe | **8** — nested fields and temporal split are explicit; no code artifact; validation contract is credible | **8** — channel mix can be localized; market-specific costs absent; pilot path is clear | **9** — does not pretend to set budget; asks for holdout and contribution threshold |
 | Wikimedia discovery | **9** — memorable “spike versus durable” story; aggregate limit visible; distinctive portfolio signal | **9** — access mix and retention boundary are disciplined; no user-level outcome; test is useful | **8** — API grain and double-count rule are clear; retrieval artifact absent; method is reproducible | **8** — content queue concept travels; language/context effects need local review; actionable shortlist | **9** — refresh versus spike queue is easy to act on; first-party telemetry required |
@@ -92,18 +92,18 @@ This review was run independently for every project using the five requested per
 
 ### Stakeholder gate result
 
-All 70 project-by-stakeholder scores are at least 8/10. The recurring Data Manager weakness is the absence of a checked-in runnable pipeline for every external source; that is documented rather than hidden. It does not reduce the required artifact-quality metrics below 9 because the published pages now state their grain, evidence boundary, validation contract, and reproducibility source explicitly.
+The stakeholder review records mostly 8–9/10 scores. Online Shoppers is lower on reproducibility because no source-specific runnable computation is checked in; that limitation is documented rather than hidden. The published pages state their grain, evidence boundary, validation contract, and reproducibility source explicitly.
 
 ## Visual publishing gate
 
-The visual gate applies to all 20 currently published projects, including the six published before this expansion. Every project has three distinct visuals: context, main finding/evidence boundary, and decision or control design. Numeric visuals use validated source values; workflow diagrams are visibly labelled as conceptual and do not imply measured outcomes.
+The visual gate applies to all 20 currently published projects, including the six published before this expansion. Flagship and completed pages use distinct context, evidence, and decision visuals; methods/design pages use source, evidence-boundary, and design visuals where available. Online Shoppers retains one conceptual experiment visual after its unreproducible numeric visuals were removed. Numeric visuals use validated source values; workflow diagrams are visibly labelled as conceptual and do not imply measured outcomes.
 
 | Project | Visual set | Visual review result | Recruiter | Hiring Manager | Data Manager | Country Manager | Business Stakeholder | Gate |
 |---|---|---|---:|---:|---:|---:|---:|---|
 | Restaurant quality | Grades, borough risk, inspection triage | 3 useful views; missing grade remains visible; no causal ranking | 9 | 9 | 9 | 9 | 9 | Pass |
 | Online retail growth | Revenue trend, market mix, identity cleaning | 3 useful views; units and customer denominator remain separate | 9 | 9 | 9 | 9 | 9 | Pass |
 | ComplaintFlow AI | Architecture, audit log, evidence boundary | 3 useful views; synthetic fixture is labelled validation-only | 9 | 9 | 9 | 9 | 9 | Pass |
-| Online Shoppers activation | Segment rates, leakage diagnostic, experiment design | 3 useful views; `n` and downstream PageValues warning shown | 9 | 9 | 9 | 9 | 9 | Pass |
+| Online Shoppers activation | Activation experiment design | One conceptual design view remains; numeric visuals removed pending reproducible computation | 8 | 8 | 8 | 8 | 8 | Pass |
 | Instacart reorder growth | Data scale, evidence boundary, holdout design | 3 useful views; relational grain and missing economics visible | 9 | 9 | 9 | 9 | 9 | Pass |
 | Google Merchandise acquisition | Time windows, user aggregation, budget holdout | 3 useful views; historical target boundary is explicit | 9 | 9 | 9 | 9 | 9 | Pass |
 | Wikimedia discovery | API grain, persistence boundary, content queue | 3 useful views; pageviews are not called unique readers | 9 | 9 | 9 | 9 | 9 | Pass |

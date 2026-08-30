@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
+export type ProjectKind = "flagship" | "completed" | "methods";
+
 const contentDirectory = path.join(process.cwd(), 'src/content/projects');
 
 export interface ProjectMeta {
@@ -15,6 +17,7 @@ export interface ProjectMeta {
   result?: string;
   featured?: boolean;
   published?: boolean;
+  kind: ProjectKind;
 }
 
 export interface Project {
@@ -37,6 +40,13 @@ function normalizeMeta(data: Record<string, unknown>): ProjectMeta | null {
   const date = parseDate(data.date);
   if (typeof data.title !== 'string' || typeof data.excerpt !== 'string' || !date) return null;
 
+  const published = data.published !== false;
+  const kind = data.kind;
+  const validKind = kind === "flagship" || kind === "methods" || kind === "completed";
+  if (published && !validKind) {
+    throw new Error(`Published project is missing a valid kind. Use flagship, completed, or methods.`);
+  }
+
   return {
     title: data.title,
     excerpt: data.excerpt,
@@ -49,7 +59,8 @@ function normalizeMeta(data: Record<string, unknown>): ProjectMeta | null {
     problem: typeof data.problem === 'string' ? data.problem : undefined,
     result: typeof data.result === 'string' ? data.result : undefined,
     featured: data.featured === true,
-    published: data.published !== false,
+    published,
+    kind: validKind ? kind : "methods",
   };
 }
 

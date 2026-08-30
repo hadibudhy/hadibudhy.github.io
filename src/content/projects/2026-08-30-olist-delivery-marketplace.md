@@ -7,6 +7,7 @@ excerpt: "A Brazilian e-commerce operations study that joins orders, sellers, pr
 problem: "A marketplace wants to improve customer trust, but a low review score can come from late delivery, product mismatch, payment friction, or seller behavior."
 result: "The public Olist release links about 100,000 orders across customers, sellers, products, payments, freight, delivery dates, and reviews; it supports root-cause decomposition without exposing private customer identity."
 published: true
+kind: methods
 ---
 
 ## Business question
@@ -43,9 +44,9 @@ The release measures recorded marketplace transactions. It does not measure brow
 4. Compare review outcomes by lateness, seller, product category, geography, and freight context.
 5. Use a holdout for any seller or promise intervention.
 
-## Key findings
+## What the source supports
 
-## Visual evidence
+## Evidence and design visuals
 
 ### Context: the order is the business entity across multiple child tables
 
@@ -53,13 +54,13 @@ The release measures recorded marketplace transactions. It does not measure brow
 
 The data model explains why order-level KPIs must be calculated before one-to-many joins.
 
-### Main finding: promise and review do not reveal root cause by themselves
+### Evidence boundary: promise and review do not reveal root cause by themselves
 
 ![Olist evidence boundary: delivery dates and reviews are observed, while carrier events, unplaced demand, and contribution margin are not](/images/portfolio-olist-boundary.svg)
 
 This keeps a low review score from becoming an unsupported seller penalty.
 
-### Decision: route the operational cause before coaching
+### Design response: route the operational cause before coaching
 
 ![Conceptual Olist delivery-quality pilot: diagnose the promise gap, route to seller, carrier, or product, then compare coaching with control](/images/portfolio-olist-pilot.svg)
 

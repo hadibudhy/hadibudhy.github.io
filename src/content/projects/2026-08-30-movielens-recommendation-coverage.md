@@ -7,6 +7,7 @@ excerpt: "A recommendation-product study that balances familiar titles, user rel
 problem: "A media product wants to improve recommendation quality, but optimizing only for popular titles can make the catalog feel repetitive and leave useful long-tail content undiscovered."
 result: "The GroupLens release contains 25 million ratings and one million tag applications across 62,000 movies from 162,000 users, enough to compare relevance with coverage and popularity bias."
 published: true
+kind: methods
 ---
 
 ## Business question
@@ -43,9 +44,9 @@ Ratings are explicit feedback, not impressions, clicks, starts, completed watche
 4. Report ranking relevance alongside catalog coverage, novelty, and user-history coverage.
 5. Define an online test before recommending a production change.
 
-## Key findings
+## What the source supports
 
-## Visual evidence
+## Evidence and design visuals
 
 ### Context: the release combines ratings, tags, and catalog scale
 
@@ -53,13 +54,13 @@ Ratings are explicit feedback, not impressions, clicks, starts, completed watche
 
 These counts define the offline evidence available for relevance and coverage.
 
-### Main finding: offline evidence stops before engagement
+### Evidence boundary: offline evidence stops before engagement
 
 ![MovieLens evidence boundary: ratings and tags support offline relevance and coverage, but not impressions, watch completion, or retention](/images/portfolio-movielens-boundary.svg)
 
 The recommendation avoids turning an offline score into a product outcome.
 
-### Decision: keep popularity as a benchmark and test exploration
+### Design response: keep popularity as a benchmark and test exploration
 
 ![Conceptual recommendation test: benchmark popularity, personalize with history and tags, and guardrail coverage and satisfaction](/images/portfolio-movielens-test.svg)
 

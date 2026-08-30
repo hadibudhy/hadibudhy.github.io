@@ -21,8 +21,9 @@ export const metadata = {
 
 export default function ProjectsPage() {
   const projects = getAllProjects();
-  const featuredProjects = projects.filter((project) => project.meta.featured);
-  const supportingProjects = projects.filter((project) => !project.meta.featured);
+  const featuredProjects = projects.filter((project) => project.meta.kind === "flagship");
+  const completedProjects = projects.filter((project) => project.meta.kind === "completed");
+  const methodsProjects = projects.filter((project) => project.meta.kind === "methods");
 
   return (
     <div>
@@ -40,7 +41,8 @@ export default function ProjectsPage() {
             <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">{featuredProjects.length} studies put the business question, the available evidence, and the limits of each analysis in view.</p>
           </div>
           {projects.length === 0 ? <div className="surface p-8"><p className="text-lg font-semibold text-foreground">No case studies are available yet.</p><p className="mt-2 text-muted-foreground">Please return shortly or use the contact link to request the current portfolio.</p></div> : <div className="grid gap-5 sm:grid-cols-2">{featuredProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} featured />)}</div>}
-          {supportingProjects.length > 0 && <div className="mt-14"><p className="section-kicker mb-2">Supporting library</p><p className="mb-6 max-w-2xl text-sm leading-6 text-muted-foreground">Supporting work covers product analytics, marketplace operations, business decisions, analytics engineering, and applied AI.</p><div className="grid gap-5 sm:grid-cols-2">{supportingProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} />)}</div></div>}
+          {completedProjects.length > 0 && <div className="mt-14"><p className="section-kicker mb-2">Completed analysis</p><p className="mb-6 max-w-2xl text-sm leading-6 text-muted-foreground">Completed public analyses with computed findings, explicit denominators, and decision boundaries.</p><div className="grid gap-5 sm:grid-cols-2">{completedProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} />)}</div></div>}
+          {methodsProjects.length > 0 && <div className="mt-14"><p className="section-kicker mb-2">Methods &amp; design studies</p><p className="mb-6 max-w-2xl text-sm leading-6 text-muted-foreground">Useful analytical designs and source-grounded decision frameworks. These pages do not claim a completed project-specific result where no computed output is published.</p><div className="grid gap-5 sm:grid-cols-2">{methodsProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} />)}</div></div>}
         </div>
       </section>
     </div>
