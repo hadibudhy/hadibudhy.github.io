@@ -25,10 +25,27 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+      - name: Install analytics dependencies
+        run: python -m pip install -r analytics/requirements.txt
+      - name: Run analytics contract tests
+        run: python -m pytest analytics/tests/test_contracts.py -q
+      - name: Build CI analytics marts
+        run: |
+          dbt seed --project-dir analytics --profiles-dir analytics --target ci
+          dbt build --project-dir analytics --profiles-dir analytics --target ci
+      - name: Verify published evidence
+        run: python scripts/verify_published_evidence.py
+      - name: Lint
+        run: npm run lint
       - name: Build with Next.js
         run: npm run build
       - name: Upload artifact

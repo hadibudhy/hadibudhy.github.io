@@ -16,6 +16,8 @@ The raw event file remains outside Git. The full-data profile records source has
 
 python -m pip install -r analytics/requirements.txt
 python analytics/load_rees46.py --source analysis_data/product-events/electronics-events.csv.gz
+python analytics/load_sec_company_facts.py --source analysis_data/raw/sec_microsoft_companyfacts.json
+python analytics/load_nyc311.py --source analysis_data/raw/nyc311_snapshot.csv
 dbt build --profiles-dir analytics --project-dir analytics
 dbt docs generate --profiles-dir analytics --project-dir analytics
 

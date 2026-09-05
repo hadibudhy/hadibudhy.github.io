@@ -1,4 +1,5 @@
 {
+  "schemaVersion": 2,
   "caseId": "financial-metrics",
   "status": "published",
   "source": {
@@ -8,6 +9,7 @@
     "accessed": "2026-09-05",
     "issuerScope": "Microsoft Corporation",
     "grain": "reported fact with tag, unit, fiscal period, frame, filing date, and value",
+    "sha256": "f8aae2965b20ad0df44bdf7ccbedf797d275b6b8dc030154a7a311361bb7246f",
     "publicDataOnly": true
   },
   "validation": {
@@ -20,5 +22,6 @@
     "/images/sec-net-margin.png",
     "/images/portfolio-sec-fact-grain.svg"
   ],
+  "artifactHashes": {"/images/sec-revenue-net-income.png": "7cb1921a410c92568ff071f37095c5408f60b4329c43221cf71ac72bc322f35a", "/images/sec-net-margin.png": "0a932489a5814740e16e1a235c5dbd7bf138a1a9186a85e64b36a73597468b9c", "/images/portfolio-sec-fact-grain.svg": "d9355f7e357d46492f70b82a0de2e463bba25325bb5994a6a7cf90536fd7f98f"},
   "evidenceBoundary": "The case supports reported company-level trend metrics. It does not support product, customer, or causal operating conclusions."
 }

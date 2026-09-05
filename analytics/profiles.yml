@@ -5,3 +5,7 @@ ae_product_analytics:
       type: duckdb
       path: target/ae_product.duckdb
       threads: 4
+    ci:
+      type: duckdb
+      path: target/ae_product_ci.duckdb
+      threads: 2

@@ -1,4 +1,5 @@
 {
+  "schemaVersion": 2,
   "caseId": "product-event-foundation",
   "status": "published",
   "source": {
@@ -23,5 +24,6 @@
     "/images/rees46-quality-checks.svg",
     "/images/rees46-model-grain.svg"
   ],
+  "artifactHashes": {"/images/rees46-event-mix.svg": "0a6d354ddf0261bc69fc14ea14bd40bf1686a19acd2369d6248510a0b521a470", "/images/rees46-quality-checks.svg": "7daaca7c0cfe6d19c721998cb92db6a8c48dfa9b6f4d9228cb3dc5f4cbc77d37", "/images/rees46-model-grain.svg": "a0de94e9baf1425b53d4a74a1745ddf9b39f9988ba3a7591e1f0708a4f7ce72b"},
   "evidenceBoundary": "Event counts and identified-session metrics are supported. A live product activation or retention claim requires internal telemetry and an approved tracking plan."
 }

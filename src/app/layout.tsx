@@ -56,7 +56,8 @@ export default function RootLayout({
               "@type": "Person",
               name: "Hadi Budhy",
               url: "https://hadibudhy.github.io",
-              jobTitle: "Analytics Engineer & Product Analyst",
+              jobTitle: "Data Analyst",
+              knowsAbout: ["Analytics engineering", "Product analytics", "Experimentation"],
               address: { "@type": "PostalAddress", addressLocality: "Jakarta", addressCountry: "ID" },
               sameAs: ["https://github.com/hadibudhy", "https://linkedin.com/in/hadibudhy"],
             })}

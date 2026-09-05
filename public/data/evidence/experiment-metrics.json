@@ -1,11 +1,13 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "caseId": "experiment-metrics",
   "scope": "full-data",
   "status": "verified",
-  "sources": ["Criteo AI Lab uplift benchmark v2.1"],
+  "source": {"name": "Criteo AI Lab uplift benchmark v2.1", "url": "https://ailab.criteo.com/criteo-uplift-prediction-dataset/", "publisher": "Criteo AI Lab", "grain": "assigned user record", "sha256": "2716e1bf0fd157a93b5bf86924d9088419dfbac2022c6cd90030220634f616dc"},
   "models": ["Python streaming ITT", "SQL assignment summary"],
   "checks": ["row count", "schema", "binary values", "control exposure", "sample ratio"],
   "metrics": {"rows": 13979592, "absolute_conversion_lift_pp": 0.1152, "ci95_pp": [0.108, 0.122]},
-  "artifacts": ["/images/growth-criteo-itt.png", "/images/portfolio-campaign-economics.svg", "/images/portfolio-campaign-f0.svg"]
+  "artifacts": ["/images/growth-criteo-itt.png", "/images/portfolio-campaign-economics.svg", "/images/portfolio-campaign-f0.svg"],
+  "artifactHashes": {"/images/growth-criteo-itt.png": "5a9701995138db6a31c6135480c52d390c07d70d92cd9891155e7160da55d068", "/images/portfolio-campaign-economics.svg": "db7d2141c6b03d65f700b7efa2ba96c3c37125955b64f0fd83e43b9fe7361bfd", "/images/portfolio-campaign-f0.svg": "49f3476f3c34169f4ca284bd0d99132e094a033c2c5e928c467552b4978ab8b0"},
+  "evidenceBoundary": "The randomized benchmark supports intention-to-treat lift. Current campaign economics and transportability are not observed."
 }

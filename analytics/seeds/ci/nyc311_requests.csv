@@ -1,0 +1,5 @@
+request_id,created_at,closed_at,status,agency,complaint_type,borough
+1001,2025-01-01 09:00:00,2025-01-01 12:00:00,Closed,DEP,Water System,MANHATTAN
+1002,2025-01-01 10:00:00,,Open,DEP,Water System,MANHATTAN
+1003,2025-01-02 11:00:00,2025-01-04 11:00:00,Closed,DOT,Street Condition,QUEENS
+1004,2025-01-03 08:00:00,,Open,DOT,Street Condition,QUEENS

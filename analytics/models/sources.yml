@@ -15,3 +15,25 @@ sources:
                   values: ['view', 'cart', 'purchase']
           - name: user_id
             tests: [not_null]
+  - name: sec
+    description: SEC Company Facts fixture/source contract.
+    schema: raw
+    tables:
+      - name: company_facts
+        columns:
+          - name: fact_id
+            tests: [not_null, unique]
+          - name: tag
+            tests: [not_null]
+          - name: value
+            tests: [not_null]
+  - name: nyc311
+    description: NYC 311 request lifecycle fixture/source contract.
+    schema: raw
+    tables:
+      - name: requests
+        columns:
+          - name: request_id
+            tests: [not_null, unique]
+          - name: created_at
+            tests: [not_null]

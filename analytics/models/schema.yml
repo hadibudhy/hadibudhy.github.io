@@ -12,21 +12,72 @@ models:
       - name: event_time
         data_type: timestamp
         tests: [not_null]
+      - name: source_row_number
+        data_type: bigint
+        tests: [not_null]
       - name: event_type
         data_type: varchar
         tests:
           - not_null
           - accepted_values:
               values: ['view', 'cart', 'purchase']
+      - name: product_id
+        data_type: varchar
+      - name: category_id
+        data_type: varchar
+      - name: category_code
+        data_type: varchar
+      - name: brand
+        data_type: varchar
+      - name: price
+        data_type: double
       - name: user_id
         data_type: varchar
         tests: [not_null]
+      - name: user_session
+        data_type: varchar
+      - name: loaded_at
+        data_type: timestamp
   - name: fct_product_funnel
     description: Daily event and session metrics for product journey diagnosis.
     columns:
       - name: event_date
         tests: [not_null]
-      - name: event_type
-        tests: [not_null]
       - name: event_count
+        tests: [not_null]
+      - name: purchase_session_rate
+        tests: [not_null]
+  - name: stg_sec_company_facts
+    description: Typed SEC fact grain with filing and period context retained.
+    columns:
+      - name: fact_id
+        tests: [not_null, unique]
+      - name: fiscal_year
+        tests: [not_null]
+      - name: value
+        tests: [not_null]
+  - name: mart_financial_metrics
+    description: Annual revenue, net income, and reconciled net margin from selected reported facts.
+    columns:
+      - name: fiscal_year
+        tests: [not_null, unique]
+      - name: revenue
+        tests: [not_null]
+      - name: net_income
+        tests: [not_null]
+  - name: stg_nyc311_requests
+    description: Typed request-grain lifecycle records for service workload metrics.
+    columns:
+      - name: request_id
+        tests: [not_null, unique]
+      - name: created_at
+        tests: [not_null]
+  - name: mart_service_queue_metrics
+    description: Queue-level arrivals, open backlog, and close-time distribution at a fixed cutoff.
+    columns:
+      - name: agency
+        tests: [not_null]
+      - name: complaint_type
+        tests: [not_null]
+      - name: arrivals
         tests: [not_null]

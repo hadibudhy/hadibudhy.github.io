@@ -8,6 +8,7 @@ through the application build.
 from __future__ import annotations
 
 import json
+import hashlib
 import re
 from pathlib import Path
 
@@ -79,6 +80,29 @@ def main() -> None:
             errors.append(f"{manifest}: caseId does not match {case_id}")
         if data.get("status") not in {"verified", "published"}:
             errors.append(f"{manifest}: status is not verified or published")
+        if data.get("schemaVersion") != 2:
+            errors.append(f"{manifest}: schemaVersion must be 2")
+        if not data.get("source"):
+            errors.append(f"{manifest}: source provenance is missing")
+        checks = data.get("checks") or data.get("validation", {}).get("checks")
+        if not checks:
+            errors.append(f"{manifest}: validation checks are missing")
+        artifacts = data.get("artifacts")
+        artifact_hashes = data.get("artifactHashes")
+        if not isinstance(artifacts, list) or len(artifacts) < 3 or not isinstance(artifact_hashes, dict):
+            errors.append(f"{manifest}: artifact list or hashes are missing")
+        else:
+            for artifact in artifacts:
+                artifact_path = PUBLIC / str(artifact).lstrip("/")
+                if not artifact_path.is_file():
+                    errors.append(f"{manifest}: missing artifact {artifact}")
+                    continue
+                expected_hash = artifact_hashes.get(artifact)
+                actual_hash = hashlib.sha256(artifact_path.read_bytes()).hexdigest()
+                if expected_hash != actual_hash:
+                    errors.append(f"{manifest}: artifact hash mismatch for {artifact}")
+        if not data.get("evidenceBoundary"):
+            errors.append(f"{manifest}: evidence boundary is missing")
 
     metrics_path = PUBLIC / "data" / "online-shoppers-metrics.json"
     if metrics_path.exists():

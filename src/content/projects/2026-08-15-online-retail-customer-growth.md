@@ -28,7 +28,7 @@ header:
 
 ## Executive summary
 
-**Business problem:** grow repeat revenue without increasing dependence on one-off orders or a small customer group. **Key findings:** the cleaned data contains 4,338 identifiable customers; the top 10% generate 61.3% of revenue; and the UK contributes about 82% of revenue. **Decision implication:** retention is valuable but concentrated. **Recommended action:** protect high-value customers and treat nearby European markets as research priorities before any expansion decision.
+**Business problem:** grow repeat revenue without increasing dependence on one-off orders or a small customer group. **Key findings:** the cleaned data contains 4,338 identifiable customers; the top 10% generate 61.4% of revenue; and the UK contributes about 82% of revenue. **Decision implication:** retention is valuable but concentrated. **Recommended action:** protect high-value customers and treat nearby European markets as research priorities before any expansion decision.
 
 **Evidence strength:** Medium for historical revenue and repeat-order patterns; low for market attractiveness, profitability, and causal retention effects.
 
@@ -64,7 +64,7 @@ Cancellations and invalid values are removed, line items are grouped into orders
 
 The cleaned data contains **4,338 identifiable customers**, **18,532 orders**, and **£8.91 million in recorded revenue**. Customers with at least two orders made up **65.6% of the customer base**.
 
-The highest-value 10% of customers generated **61.3% of revenue**. This is a concentration risk and an opportunity: keeping a small group of valuable customers engaged could protect a large share of sales, while losing them would have an outsized effect.
+The highest-value 10% of customers generated **61.4% of revenue**. This is a concentration risk and an opportunity: keeping a small group of valuable customers engaged could protect a large share of sales, while losing them would have an outsized effect.
 
 ![Cleaned UCI Online Retail orders, December 2010–December 2011: Recorded revenue rose into the holiday season while returning orders became a larger share of orders](/images/retail-growth-patterns.png)
 
