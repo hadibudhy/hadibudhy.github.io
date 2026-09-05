@@ -25,5 +25,8 @@ seeds:
         +alias: events
       sec_company_facts:
         +alias: company_facts
+        +column_types:
+          fy: integer
+          value: double
       nyc311_requests:
         +alias: requests
