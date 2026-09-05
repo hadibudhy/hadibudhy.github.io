@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">The service metric contract separates observed lifecycle measures from unavailable outcomes</title>
+  <desc id="desc">A metric contract showing observed request fields, derived workload measures, and outcomes not present in the public source.</desc>
+  <rect width="1200" height="680" fill="#fbfbfa"/>
+  <text x="82" y="96" fill="#171717" font-family="Arial, sans-serif" font-size="31px" font-weight="700">A metric contract makes the evidence boundary visible</text>
+  <text x="82" y="138" fill="#737373" font-family="Arial, sans-serif" font-size="18px">Observed lifecycle fields can support queue monitoring, but they do not prove resolution quality.</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="90" y="220" width="300" height="240" fill="#f0f4ff" stroke="#9cb7f7"/><text x="120" y="266" fill="#155eef" font-size="18px" font-weight="700">OBSERVED</text><text x="120" y="315" fill="#171717" font-size="19px">request id</text><text x="120" y="352" fill="#171717" font-size="19px">created / closed time</text><text x="120" y="389" fill="#171717" font-size="19px">status, agency, type</text><text x="120" y="426" fill="#171717" font-size="19px">location</text>
+    <rect x="450" y="220" width="300" height="240" fill="#e6f4ea" stroke="#abd5b5"/><text x="480" y="266" fill="#1b5e20" font-size="18px" font-weight="700">DERIVED</text><text x="480" y="315" fill="#171717" font-size="19px">arrivals</text><text x="480" y="352" fill="#171717" font-size="19px">open backlog</text><text x="480" y="389" fill="#171717" font-size="19px">age and close-time tails</text><text x="480" y="426" fill="#171717" font-size="19px">workflow mix</text>
+    <rect x="810" y="220" width="300" height="240" fill="#fff4e5" stroke="#e7c38a"/><text x="840" y="266" fill="#8a4b00" font-size="18px" font-weight="700">NOT OBSERVED</text><text x="840" y="315" fill="#171717" font-size="19px">first response</text><text x="840" y="352" fill="#171717" font-size="19px">staff hours</text><text x="840" y="389" fill="#171717" font-size="19px">reopen / transfer</text><text x="840" y="426" fill="#171717" font-size="19px">resolution quality</text>
+  </g>
+  <text x="1110" y="625" text-anchor="end" fill="#737373" font-family="Arial, sans-serif" font-size="15px">Source: NYC 311 public schema • metric contract</text>
+</svg>

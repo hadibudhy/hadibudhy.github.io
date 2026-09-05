@@ -7,11 +7,11 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   metadataBase: new URL("https://hadibudhy.github.io"),
     title: {
-    default: "Hadi Budhy | Data Analyst",
+    default: "Hadi Budhy | Analytics Engineer & Product Analyst",
     template: "%s | Hadi Budhy"
   },
-  description: "Data analyst working across growth, product, marketplace, operations, business, and decision analytics.",
-  keywords: ["Data Analyst", "Growth analytics", "Product analytics", "Marketplace analytics", "Analytics engineering", "Applied AI", "Python", "SQL"],
+  description: "Analytics Engineer and Product Analyst building trustworthy metrics and using product data to guide decisions.",
+  keywords: ["Analytics Engineer", "Product Analyst", "Product analytics", "Analytics engineering", "dbt", "SQL", "Python"],
   authors: [{ name: "Hadi Budhy" }],
   creator: "Hadi Budhy",
   alternates: {
@@ -20,15 +20,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://hadibudhy.github.io",
-    title: "Hadi Budhy | Data Analyst",
-    description: "Data analyst working across growth, product, marketplace, operations, business, and decision analytics.",
+    title: "Hadi Budhy | Analytics Engineer & Product Analyst",
+    description: "Analytics Engineer and Product Analyst building trustworthy metrics and using product data to guide decisions.",
     siteName: "Hadi Budhy",
     locale: "en_US",
   },
   twitter: {
     card: "summary",
-    title: "Hadi Budhy | Data Analyst",
-    description: "Data analyst working across growth, product, marketplace, operations, business, and decision analytics.",
+    title: "Hadi Budhy | Analytics Engineer & Product Analyst",
+    description: "Analytics Engineer and Product Analyst building trustworthy metrics and using product data to guide decisions.",
   },
 };
 
@@ -56,7 +56,7 @@ export default function RootLayout({
               "@type": "Person",
               name: "Hadi Budhy",
               url: "https://hadibudhy.github.io",
-              jobTitle: "Data Analyst",
+              jobTitle: "Analytics Engineer & Product Analyst",
               address: { "@type": "PostalAddress", addressLocality: "Jakarta", addressCountry: "ID" },
               sameAs: ["https://github.com/hadibudhy", "https://linkedin.com/in/hadibudhy"],
             })}

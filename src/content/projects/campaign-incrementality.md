@@ -8,6 +8,12 @@ problem: "A campaign can increase reported conversions while adding little incre
 result: "In the official Criteo benchmark, the assigned advertising group converted 0.115 percentage points more often than the control group."
 featured: true
 kind: flagship
+published: true
+caseId: experiment-metrics
+primaryTrack: experimentation-growth
+secondaryTracks: [analytics-engineering, product-analytics]
+displayOrder: 50
+evidenceManifest: /data/evidence/experiment-metrics.json
 evidenceVisuals:
   - /images/growth-criteo-itt.png
   - /images/portfolio-campaign-economics.svg

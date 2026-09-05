@@ -1,0 +1,17 @@
+version: 2
+sources:
+  - name: rees46
+    description: REES46 Electronics event export.
+    schema: raw
+    tables:
+      - name: events
+        columns:
+          - name: event_time
+            tests: [not_null]
+          - name: event_type
+            tests:
+              - not_null
+              - accepted_values:
+                  values: ['view', 'cart', 'purchase']
+          - name: user_id
+            tests: [not_null]

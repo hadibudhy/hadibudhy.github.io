@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "caseId": "marketplace-experience",
+  "scope": "full-data",
+  "status": "verified",
+  "sources": ["NYC TLC HVFHV Open Data", "TLC monthly reports"],
+  "models": ["Official API hourly aggregation", "Monthly supply context"],
+  "checks": ["24 hourly buckets", "source total", "monthly period", "proxy labels"],
+  "metrics": {"recorded_rows": 4965012, "peak_hour": 18, "peak_recorded_trips": 334713},
+  "artifacts": ["/images/growth-hvf-hourly.png", "/images/growth-hvf-monthly-supply.png", "/images/portfolio-marketplace-measurement.svg"]
+}

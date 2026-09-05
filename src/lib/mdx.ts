@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 
 export type ProjectKind = "flagship" | "completed" | "methods";
+export type ProjectTrack = "analytics-engineering" | "product-analytics" | "experimentation-growth";
 
 const contentDirectory = path.join(process.cwd(), 'src/content/projects');
 
@@ -20,6 +21,11 @@ export interface ProjectMeta {
   kind: ProjectKind;
   artifactLabel?: string;
   evidenceVisuals: string[];
+  caseId: string;
+  primaryTrack: ProjectTrack;
+  secondaryTracks: ProjectTrack[];
+  displayOrder: number;
+  evidenceManifest: string;
 }
 
 export interface Project {
@@ -42,14 +48,19 @@ function normalizeMeta(data: Record<string, unknown>): ProjectMeta | null {
   const date = parseDate(data.date);
   if (typeof data.title !== 'string' || typeof data.excerpt !== 'string' || !date) return null;
 
-  const published = data.published !== false;
+  const published = data.published === true;
   const kind = data.kind;
   const validKind = kind === "flagship" || kind === "methods" || kind === "completed";
+  const primaryTrack = data.primaryTrack;
+  const validTrack = primaryTrack === "analytics-engineering" || primaryTrack === "product-analytics" || primaryTrack === "experimentation-growth";
   if (published && !validKind) {
     throw new Error(`Published project is missing a valid kind. Use flagship, completed, or methods.`);
   }
   if (published && kind === "methods") {
     throw new Error("Methods-only projects must remain unpublished until they have a completed project-specific result.");
+  }
+  if (published && (typeof data.caseId !== "string" || !validTrack || typeof data.displayOrder !== "number" || typeof data.evidenceManifest !== "string")) {
+    throw new Error("Published project requires caseId, primaryTrack, displayOrder, and evidenceManifest.");
   }
 
   return {
@@ -68,6 +79,11 @@ function normalizeMeta(data: Record<string, unknown>): ProjectMeta | null {
     kind: validKind ? kind : "methods",
     artifactLabel: typeof data.artifactLabel === 'string' ? data.artifactLabel : undefined,
     evidenceVisuals: toStringArray(data.evidenceVisuals),
+    caseId: typeof data.caseId === "string" ? data.caseId : "",
+    primaryTrack: validTrack ? primaryTrack : "product-analytics",
+    secondaryTracks: toStringArray(data.secondaryTracks) as ProjectTrack[],
+    displayOrder: typeof data.displayOrder === "number" ? data.displayOrder : 999,
+    evidenceManifest: typeof data.evidenceManifest === "string" ? data.evidenceManifest : "",
   };
 }
 
@@ -89,6 +105,11 @@ export function getProjectBySlug(slug: string): Project | null {
   }
   
   if (meta.published === false) return null;
+
+  const manifestPath = path.join(process.cwd(), "public", meta.evidenceManifest.replace(/^\//, ""));
+  if (!fs.existsSync(manifestPath)) {
+    throw new Error(`Published project ${realSlug} is missing evidence manifest ${meta.evidenceManifest}.`);
+  }
 
   const visuals = new Set([...content.matchAll(/!\[[^\]]*\]\((\/images\/[^)]+)\)/g)].map((match) => match[1]));
   const evidenceVisuals = [...new Set(meta.evidenceVisuals)].filter((visual) => {
@@ -114,8 +135,13 @@ export function getAllProjects(): Project[] {
   const projects = slugs
     .map((slug) => getProjectBySlug(slug))
     .filter((post): post is NonNullable<typeof post> => Boolean(post))
-    // Sort projects by date in descending order
-    .sort((post1, post2) => post2.meta.date.getTime() - post1.meta.date.getTime());
+    .sort((post1, post2) => post1.meta.displayOrder - post2.meta.displayOrder || post1.meta.date.getTime() - post2.meta.date.getTime());
+
+  const seen = new Set<string>();
+  for (const project of projects) {
+    if (seen.has(project.meta.caseId)) throw new Error(`Duplicate published caseId: ${project.meta.caseId}`);
+    seen.add(project.meta.caseId);
+  }
     
   return projects;
 }

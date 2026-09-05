@@ -1,0 +1,27 @@
+{
+  "caseId": "product-event-foundation",
+  "status": "published",
+  "source": {
+    "name": "REES46 Electronics behaviour events",
+    "url": "https://data.rees46.com/datasets/electronics-events/electronics-events.csv.gz",
+    "publisher": "REES46",
+    "accessed": "2026-09-05",
+    "grain": "one recorded event",
+    "publicDataOnly": true,
+    "fileRangeObserved": "2020-09-24 through 2021-02-28",
+    "publisherDescription": "The publisher describes a five-month electronics behaviour export; the loaded file range is retained as the controlling evidence."
+  },
+  "validation": {
+    "eventTypes": ["view", "cart", "purchase"],
+    "eventRows": 885129,
+    "eventCounts": {"view": 793748, "cart": 54035, "purchase": 37346},
+    "missingSessionRows": 165,
+    "checks": ["deterministic event key", "event type accepted values", "timestamp parsing", "session coverage visible", "CI fixture expected rows"]
+  },
+  "artifacts": [
+    "/images/rees46-event-mix.svg",
+    "/images/rees46-quality-checks.svg",
+    "/images/rees46-model-grain.svg"
+  ],
+  "evidenceBoundary": "Event counts and identified-session metrics are supported. A live product activation or retention claim requires internal telemetry and an approved tracking plan."
+}

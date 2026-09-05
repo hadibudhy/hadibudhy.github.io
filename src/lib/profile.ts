@@ -1,13 +1,11 @@
 export const capabilities = [
-  { title: "Growth and experimentation", evidence: "Incrementality, retention, holdouts, and decision-ready tests." },
-  { title: "Product analytics", evidence: "Product, customer, and commercial reporting that supports funnel and roadmap questions." },
-  { title: "Marketplace and operations analytics", evidence: "Supply signals, marketplace measurement, quality prioritization, and operational pilots." },
-  { title: "Business and decision analytics", evidence: "KPI governance, customer cohorts, scenario framing, and clear evidence boundaries." },
-  { title: "Analytics engineering", evidence: "Professional experience with warehouse pipelines, alerting, APIs, and reliable reporting systems; public implementation details are limited." },
-  { title: "Applied AI", evidence: "Auditable workflows, evaluation, escalation, and governance where automation is relevant." },
+  { title: "Analytics engineering", evidence: "Layered SQL models, metric definitions, event-grain thinking, data-quality checks, and reproducible pipelines." },
+  { title: "Product analytics", evidence: "Funnels, activation signals, cohorts, retention, segmentation, and product measurement plans." },
+  { title: "Experimentation", evidence: "Incrementality, holdouts, guardrails, treatment integrity, and decisions grounded in business value." },
+  { title: "Data reliability", evidence: "Source validation, freshness boundaries, reconciliation, lineage, and visible evidence limits." },
 ];
 
-export const skills = ["SQL", "Python", "BigQuery", "dbt", "Airflow", "A/B testing", "Cohort analysis", "FastAPI", "LLM evaluation", "Git"];
+export const skills = ["SQL", "Python", "DuckDB", "dbt", "BigQuery", "Dimensional modeling", "Metric definitions", "Event tracking", "Funnels", "Cohorts", "A/B testing", "Git"];
 
 export const education = "Bachelor of Public Health (Biostatistics), Universitas Indonesia";
 

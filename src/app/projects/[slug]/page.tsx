@@ -84,7 +84,11 @@ export default async function ProjectPage({ params }: Props) {
   }
 
   const formattedDate = format(project.meta.date, 'MMMM yyyy');
-  const kindLabel = project.meta.artifactLabel ?? (project.meta.kind === "methods" ? "Methods / design study" : project.meta.kind === "completed" ? "Completed analysis" : "Flagship analysis");
+  const kindLabel = project.meta.artifactLabel ?? {
+    "analytics-engineering": "Analytics engineering",
+    "product-analytics": "Product analytics",
+    "experimentation-growth": "Experimentation & growth",
+  }[project.meta.primaryTrack];
   const technicalStart = project.content.search(/\n(?=## Technical (?:appendix|design)\b)/i);
   const summaryContent = technicalStart === -1 ? project.content : project.content.slice(0, technicalStart);
   const technicalContent = technicalStart === -1 ? "" : project.content.slice(technicalStart + 1);

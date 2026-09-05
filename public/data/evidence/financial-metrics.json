@@ -1,0 +1,24 @@
+{
+  "caseId": "financial-metrics",
+  "status": "published",
+  "source": {
+    "name": "SEC Company Facts API",
+    "url": "https://www.sec.gov/edgar/sec-api-documentation",
+    "publisher": "U.S. Securities and Exchange Commission",
+    "accessed": "2026-09-05",
+    "issuerScope": "Microsoft Corporation",
+    "grain": "reported fact with tag, unit, fiscal period, frame, filing date, and value",
+    "publicDataOnly": true
+  },
+  "validation": {
+    "checks": ["unit compatibility", "annual period selection", "duplicate fact context", "revenue/net income margin reconciliation", "source lineage retained"],
+    "metrics": ["revenue", "net income", "net margin"],
+    "periodRule": "Use documented annual facts from the selected issuer context; do not mix quarterly and annual frames."
+  },
+  "artifacts": [
+    "/images/sec-revenue-net-income.png",
+    "/images/sec-net-margin.png",
+    "/images/portfolio-sec-fact-grain.svg"
+  ],
+  "evidenceBoundary": "The case supports reported company-level trend metrics. It does not support product, customer, or causal operating conclusions."
+}
