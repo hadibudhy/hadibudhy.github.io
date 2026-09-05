@@ -4,22 +4,37 @@ with annual_facts as (
     from {{ ref('stg_sec_company_facts') }}
     where fiscal_period = 'FY'
       and unit = 'USD'
+      and form in ('10-K', '10-K/A')
+), filing_candidates as (
+    select distinct fiscal_year, accession, filed_date
+    from annual_facts
+), chosen_filing as (
+    select fiscal_year, accession
+    from (
+        select
+            *,
+            row_number() over (partition by fiscal_year order by filed_date desc nulls last, accession desc) as filing_rank
+        from filing_candidates
+    ) ranked_filings
+    where filing_rank = 1
 ), normalized as (
     select
-        fiscal_year,
-        filed_date,
-        accession,
+        facts.fiscal_year,
+        facts.period_end,
+        facts.accession,
         case
-            when tag in ('Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax') then 'revenue'
-            when tag = 'NetIncomeLoss' then 'net_income'
+            when facts.tag in ('Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax') then 'revenue'
+            when facts.tag = 'NetIncomeLoss' then 'net_income'
         end as metric_name,
-        value
-    from annual_facts
-    where tag in ('Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax', 'NetIncomeLoss')
+        case when facts.tag = 'Revenues' then 1 else 2 end as tag_priority,
+        facts.value
+    from annual_facts as facts
+    inner join chosen_filing using (fiscal_year, accession)
+    where facts.tag in ('Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax', 'NetIncomeLoss')
 ), ranked as (
     select
         *,
-        row_number() over (partition by fiscal_year, metric_name order by filed_date desc nulls last, accession desc nulls last) as metric_rank
+        row_number() over (partition by fiscal_year, metric_name order by tag_priority, period_end desc nulls last) as metric_rank
     from normalized
 ), selected as (
     select

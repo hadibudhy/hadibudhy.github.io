@@ -3,11 +3,14 @@ import sys
 from pathlib import Path
 import pytest
 import duckdb
+import gzip
+from tempfile import TemporaryDirectory
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from ingest import validate_records
 from load_sec_company_facts import rows_from_facts
 from load_sec_company_facts import load_rows as load_sec_rows
 from load_nyc311 import load_rows as load_311_rows
+from load_rees46 import load_source as load_rees46_source
 
 def test_missing_key_cannot_be_loaded_as_a_valid_request():
     with pytest.raises(ValueError, match="unique_key"):
@@ -43,3 +46,13 @@ def test_311_loader_writes_a_queryable_raw_relation():
     with duckdb.connect(":memory:") as connection:
         load_311_rows(connection, rows)
         assert connection.execute("select count(*) from raw.requests").fetchone()[0] == 1
+
+def test_rees46_loader_persists_a_stable_source_row_number():
+    with TemporaryDirectory() as directory:
+        source = Path(directory) / "events.csv.gz"
+        with gzip.open(source, "wt", encoding="utf-8", newline="") as stream:
+            stream.write("event_time,event_type,product_id,category_id,category_code,brand,price,user_id,user_session\n")
+            stream.write("2020-01-01 00:00:00,view,1,10,electronics.audio,Acme,10.0,100,session-a\n")
+        with duckdb.connect(":memory:") as connection:
+            assert load_rees46_source(connection, source) == 1
+            assert connection.execute("select source_row_number from raw.events").fetchone()[0] == 1
