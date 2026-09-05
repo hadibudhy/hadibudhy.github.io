@@ -17,7 +17,7 @@ with source_rows as (
         cast(price as double) as price,
         cast(user_id as varchar) as user_id,
         nullif(cast(user_session as varchar), '') as user_session,
-        current_timestamp as loaded_at
+        cast(current_timestamp as timestamp) as loaded_at
     from source_rows
 )
 select * from typed
