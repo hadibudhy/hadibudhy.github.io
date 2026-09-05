@@ -19,6 +19,13 @@ PUBLIC = ROOT / "public"
 EXPECTED_SHOPPER_SHA = "b3055ee355f59134d851d32641183cb4a8b45def7124d2f50442a042f358e0d9"
 
 
+def artifact_digest(path: Path) -> str:
+    contents = path.read_bytes()
+    if path.suffix.lower() == ".svg":
+        contents = contents.replace(b"\r\n", b"\n")
+    return hashlib.sha256(contents).hexdigest()
+
+
 def front_matter(text: str) -> str:
     match = re.match(r"^---\r?\n(.*?)\r?\n---", text, flags=re.DOTALL)
     return match.group(1) if match else ""
@@ -100,7 +107,7 @@ def main() -> None:
                     errors.append(f"{manifest}: missing artifact {artifact}")
                     continue
                 expected_hash = artifact_hashes.get(artifact)
-                actual_hash = hashlib.sha256(artifact_path.read_bytes()).hexdigest()
+                actual_hash = artifact_digest(artifact_path)
                 if expected_hash != actual_hash:
                     errors.append(f"{manifest}: artifact hash mismatch for {artifact}")
         if not data.get("evidenceBoundary"):

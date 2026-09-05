@@ -8,6 +8,6 @@
   "checks": ["row count", "schema", "binary values", "control exposure", "sample ratio"],
   "metrics": {"rows": 13979592, "absolute_conversion_lift_pp": 0.1152, "ci95_pp": [0.108, 0.122]},
   "artifacts": ["/images/growth-criteo-itt.png", "/images/portfolio-campaign-economics.svg", "/images/portfolio-campaign-f0.svg"],
-  "artifactHashes": {"/images/growth-criteo-itt.png": "5a9701995138db6a31c6135480c52d390c07d70d92cd9891155e7160da55d068", "/images/portfolio-campaign-economics.svg": "db7d2141c6b03d65f700b7efa2ba96c3c37125955b64f0fd83e43b9fe7361bfd", "/images/portfolio-campaign-f0.svg": "49f3476f3c34169f4ca284bd0d99132e094a033c2c5e928c467552b4978ab8b0"},
+  "artifactHashes": {"/images/growth-criteo-itt.png": "5a9701995138db6a31c6135480c52d390c07d70d92cd9891155e7160da55d068", "/images/portfolio-campaign-economics.svg": "377522a16af96affbc197232dfb1a1a07d7af5c01def131fe0a3ddaa08fa9f09", "/images/portfolio-campaign-f0.svg": "5d6e9a61b2b3211f9682b18f36bf4701534efebe9863ee0e3103df63f94190bc"},
   "evidenceBoundary": "The randomized benchmark supports intention-to-treat lift. Current campaign economics and transportability are not observed."
 }

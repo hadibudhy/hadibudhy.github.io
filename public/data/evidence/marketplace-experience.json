@@ -8,6 +8,6 @@
   "checks": ["24 hourly buckets", "source total", "monthly period", "proxy labels"],
   "metrics": {"recorded_rows": 4965012, "peak_hour": 18, "peak_recorded_trips": 334713},
   "artifacts": ["/images/growth-hvf-hourly.png", "/images/growth-hvf-monthly-supply.png", "/images/portfolio-marketplace-measurement.svg"],
-  "artifactHashes": {"/images/growth-hvf-hourly.png": "d7b5fc6cf0453254736be607e019014f05aec5873424bda90c70ef596877825a", "/images/growth-hvf-monthly-supply.png": "99e2d017edc0c8de16e01b2d59db91cc237a76d3f7a7b3afeebcbd9d26ef8cd0", "/images/portfolio-marketplace-measurement.svg": "69b887b1e9ebe90cd940e45ca9b0e58efb94a1cc9a8dc71f1d541af8af912476"},
+  "artifactHashes": {"/images/growth-hvf-hourly.png": "d7b5fc6cf0453254736be607e019014f05aec5873424bda90c70ef596877825a", "/images/growth-hvf-monthly-supply.png": "99e2d017edc0c8de16e01b2d59db91cc237a76d3f7a7b3afeebcbd9d26ef8cd0", "/images/portfolio-marketplace-measurement.svg": "41e6b861e6728d0f1b6ced7b992b6c6dc9411059bdec81282ccf2859f285857e"},
   "evidenceBoundary": "Completed-trip activity and official monthly proxies are supported. Total requests, lost matches, and incentive ROI are not observed."
 }

@@ -21,6 +21,6 @@
     "/images/portfolio-nyc311-boundary.svg",
     "/images/portfolio-nyc311-metrics.svg"
   ],
-  "artifactHashes": {"/images/portfolio-nyc311-scale.svg": "c70d69c2ab61ac46016b2bf1a802b74a8f694bbf2eafe025eb25321b49806cad", "/images/portfolio-nyc311-boundary.svg": "c33fdfc0409dc9b8346e7040ad7e8fe5c68f0a35d3f2a8c9837fcb29799d9e2e", "/images/portfolio-nyc311-metrics.svg": "e66a280c02454b39aecb0e6f637c7c67669829cef710d6233a6c6db8dd2e591b"},
+  "artifactHashes": {"/images/portfolio-nyc311-scale.svg": "6d4f361a4f431eff972075c9659b7b65aa38f829a3826395b73ff0b227ca5d1d", "/images/portfolio-nyc311-boundary.svg": "b5191020124a74aa7b5be7a5286de9fcb28c25f59871783fd6114bdeb946a248", "/images/portfolio-nyc311-metrics.svg": "c06180c746e4419d35dc1aa53937862ee862ac337acd15cb0968ccc2e7ea9cb7"},
   "evidenceBoundary": "The case supports queue workload and lifecycle measurement. It does not claim that administrative closure equals resident resolution or that low volume equals low need."
 }

@@ -8,6 +8,6 @@
   "checks": ["source hash", "cancellation handling", "customer identity", "revenue grain"],
   "metrics": {"raw_rows": 541909, "identifiable_customers": 4338, "recorded_revenue_gbp": 8911407.904},
   "artifacts": ["/images/retail-growth-patterns.png", "/images/retail-market-opportunity.png", "/images/portfolio-retail-cleaning.svg"],
-  "artifactHashes": {"/images/retail-growth-patterns.png": "eb74413876ac617675376f50781165ac875595a3c84422de95f6f2d4942b5993", "/images/retail-market-opportunity.png": "dd5f05a531f9c872a1fdf5c3dfd9ded3373b9346015bd40e18972f7d01c29c33", "/images/portfolio-retail-cleaning.svg": "80ecf99a41b955a8a41811aea74c85587ce302ae354e3793f1bb2866885192a1"},
+  "artifactHashes": {"/images/retail-growth-patterns.png": "eb74413876ac617675376f50781165ac875595a3c84422de95f6f2d4942b5993", "/images/retail-market-opportunity.png": "dd5f05a531f9c872a1fdf5c3dfd9ded3373b9346015bd40e18972f7d01c29c33", "/images/portfolio-retail-cleaning.svg": "b003d857924ca9b5c6eb28a6b681793295d4506d90e1872bd637006a0e4c1996"},
   "evidenceBoundary": "Revenue concentration is supported. Profitability and causal retention impact are not observed."
 }

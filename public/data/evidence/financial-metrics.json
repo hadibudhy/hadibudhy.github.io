@@ -22,6 +22,6 @@
     "/images/sec-net-margin.png",
     "/images/portfolio-sec-fact-grain.svg"
   ],
-  "artifactHashes": {"/images/sec-revenue-net-income.png": "7cb1921a410c92568ff071f37095c5408f60b4329c43221cf71ac72bc322f35a", "/images/sec-net-margin.png": "0a932489a5814740e16e1a235c5dbd7bf138a1a9186a85e64b36a73597468b9c", "/images/portfolio-sec-fact-grain.svg": "d9355f7e357d46492f70b82a0de2e463bba25325bb5994a6a7cf90536fd7f98f"},
+  "artifactHashes": {"/images/sec-revenue-net-income.png": "7cb1921a410c92568ff071f37095c5408f60b4329c43221cf71ac72bc322f35a", "/images/sec-net-margin.png": "0a932489a5814740e16e1a235c5dbd7bf138a1a9186a85e64b36a73597468b9c", "/images/portfolio-sec-fact-grain.svg": "7a589416a6a30f8c5c8a82bdc2ba54863e77b67f4b59ae7e33437db5f6994fb5"},
   "evidenceBoundary": "The case supports reported company-level trend metrics. It does not support product, customer, or causal operating conclusions."
 }
