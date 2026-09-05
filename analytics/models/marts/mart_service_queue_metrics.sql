@@ -12,8 +12,8 @@ with cutoff as (
         complaint_type,
         count(*) as arrivals,
         count(*) filter (where closed_at is null or closed_at > (select cutoff_at from cutoff)) as open_backlog,
-        median(date_diff('hour', created_at, closed_at)) filter (where closed_at is not null and closed_at >= created_at) as median_close_hours,
-        quantile_cont(date_diff('hour', created_at, closed_at), 0.9) filter (where closed_at is not null and closed_at >= created_at) as p90_close_hours
+        median(date_diff('hour', created_at, closed_at)) filter (where closed_at is not null and closed_at >= created_at and closed_at <= (select cutoff_at from cutoff)) as median_close_hours,
+        quantile_cont(date_diff('hour', created_at, closed_at), 0.9) filter (where closed_at is not null and closed_at >= created_at and closed_at <= (select cutoff_at from cutoff)) as p90_close_hours
     from scoped
     group by 1, 2
 )

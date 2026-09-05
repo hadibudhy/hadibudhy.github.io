@@ -8,6 +8,8 @@ sources:
         columns:
           - name: event_time
             tests: [not_null]
+          - name: source_row_number
+            tests: [not_null]
           - name: event_type
             tests:
               - not_null
@@ -26,6 +28,10 @@ sources:
           - name: tag
             tests: [not_null]
           - name: value
+            tests: [not_null]
+          - name: accession
+            tests: [not_null]
+          - name: form
             tests: [not_null]
   - name: nyc311
     description: NYC 311 request lifecycle fixture/source contract.

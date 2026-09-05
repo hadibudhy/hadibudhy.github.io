@@ -89,6 +89,8 @@ def main() -> None:
             errors.append(f"{manifest}: validation checks are missing")
         artifacts = data.get("artifacts")
         artifact_hashes = data.get("artifactHashes")
+        if set(artifacts or []) != set(declared_evidence):
+            errors.append(f"{manifest}: manifest artifacts do not match front-matter evidenceVisuals")
         if not isinstance(artifacts, list) or len(artifacts) < 3 or not isinstance(artifact_hashes, dict):
             errors.append(f"{manifest}: artifact list or hashes are missing")
         else:

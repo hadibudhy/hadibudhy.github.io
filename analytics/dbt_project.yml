@@ -20,3 +20,10 @@ seeds:
   ae_product_analytics:
     +schema: raw
     +quote_columns: false
+    ci:
+      events:
+        +alias: events
+      sec_company_facts:
+        +alias: company_facts
+      nyc311_requests:
+        +alias: requests

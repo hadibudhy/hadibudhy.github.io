@@ -4,12 +4,30 @@ with annual_facts as (
     from {{ ref('stg_sec_company_facts') }}
     where fiscal_period = 'FY'
       and unit = 'USD'
+), normalized as (
+    select
+        fiscal_year,
+        filed_date,
+        accession,
+        case
+            when tag in ('Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax') then 'revenue'
+            when tag = 'NetIncomeLoss' then 'net_income'
+        end as metric_name,
+        value
+    from annual_facts
+    where tag in ('Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax', 'NetIncomeLoss')
+), ranked as (
+    select
+        *,
+        row_number() over (partition by fiscal_year, metric_name order by filed_date desc nulls last, accession desc nulls last) as metric_rank
+    from normalized
 ), selected as (
     select
         fiscal_year,
-        max(case when tag in ('Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax') then value end) as revenue,
-        max(case when tag = 'NetIncomeLoss' then value end) as net_income
-    from annual_facts
+        max(case when metric_name = 'revenue' then value end) as revenue,
+        max(case when metric_name = 'net_income' then value end) as net_income
+    from ranked
+    where metric_rank = 1
     group by 1
 )
 select

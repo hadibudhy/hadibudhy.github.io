@@ -9,5 +9,7 @@ select
     try_cast(nullif(filed, '') as date) as filed_date,
     try_cast(nullif(end_date, '') as date) as period_end,
     try_cast(nullif(start_date, '') as date) as period_start,
-    try_cast(value as double) as value
+    try_cast(value as double) as value,
+    cast(accession as varchar) as accession,
+    cast(form as varchar) as form
 from {{ source('sec', 'company_facts') }}

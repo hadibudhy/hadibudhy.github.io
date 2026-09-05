@@ -12,6 +12,18 @@ import duckdb
 EXPECTED_COLUMNS = ["request_id", "created_at", "closed_at", "status", "agency", "complaint_type", "borough"]
 
 
+def load_rows(connection: duckdb.DuckDBPyConnection, rows: list[tuple]) -> None:
+    connection.execute("create schema if not exists raw")
+    connection.execute("drop table if exists raw.requests")
+    connection.execute("""
+        create table raw.requests (
+            request_id varchar, created_at timestamp, closed_at timestamp,
+            status varchar, agency varchar, complaint_type varchar, borough varchar
+        )
+    """)
+    connection.executemany("insert into raw.requests values (?, ?, ?, ?, ?, ?, ?)", rows)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source", type=Path, required=True)
@@ -26,15 +38,7 @@ def main() -> None:
     database.parent.mkdir(parents=True, exist_ok=True)
     connection = duckdb.connect(str(database))
     try:
-        connection.execute("create schema if not exists raw")
-        connection.execute("drop table if exists raw.requests")
-        connection.execute("""
-            create table raw.requests (
-                request_id varchar, created_at timestamp, closed_at timestamp,
-                status varchar, agency varchar, complaint_type varchar, borough varchar
-            )
-        """)
-        connection.executemany("insert into raw.requests values (?, ?, ?, ?, ?, ?, ?)", rows)
+        load_rows(connection, rows)
         print(f"loaded raw.requests: {len(rows):,} rows")
     finally:
         connection.close()

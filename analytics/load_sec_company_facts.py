@@ -20,10 +20,24 @@ def rows_from_facts(payload: dict) -> list[tuple]:
                         taxonomy, tag, unit, observation.get("fy"), observation.get("fp"),
                         observation.get("frame"), observation.get("filed"), observation.get("end"),
                         observation.get("start"), observation.get("val"), observation.get("accn"),
+                        observation.get("form"),
                     )
                     fact_id = hashlib.sha256("|".join(map(str, values)).encode()).hexdigest()
-                    rows.append((fact_id, tag, unit, observation.get("fy"), observation.get("fp"), observation.get("frame"), observation.get("filed"), observation.get("end"), observation.get("start"), observation.get("val")))
+                    rows.append((fact_id, tag, unit, observation.get("fy"), observation.get("fp"), observation.get("frame"), observation.get("filed"), observation.get("end"), observation.get("start"), observation.get("val"), observation.get("accn"), observation.get("form")))
     return rows
+
+
+def load_rows(connection: duckdb.DuckDBPyConnection, rows: list[tuple]) -> None:
+    connection.execute("create schema if not exists raw")
+    connection.execute("drop table if exists raw.company_facts")
+    connection.execute("""
+        create table raw.company_facts (
+            fact_id varchar, tag varchar, unit varchar, fy integer, fp varchar,
+            frame varchar, filed date, end_date date, start_date date, value double,
+            accession varchar, form varchar
+        )
+    """)
+    connection.executemany("insert into raw.company_facts values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", rows)
 
 
 def main() -> None:
@@ -37,15 +51,7 @@ def main() -> None:
     database.parent.mkdir(parents=True, exist_ok=True)
     connection = duckdb.connect(str(database))
     try:
-        connection.execute("create schema if not exists raw")
-        connection.execute("drop table if exists raw.company_facts")
-        connection.execute("""
-            create table raw.company_facts (
-                fact_id varchar, tag varchar, unit varchar, fy integer, fp varchar,
-                frame varchar, filed date, end_date date, start_date date, value double
-            )
-        """)
-        connection.executemany("insert into raw.company_facts values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", rows)
+        load_rows(connection, rows)
         print(f"loaded raw.company_facts: {len(rows):,} rows")
     finally:
         connection.close()

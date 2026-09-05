@@ -56,6 +56,10 @@ models:
         tests: [not_null]
       - name: value
         tests: [not_null]
+      - name: accession
+        tests: [not_null]
+      - name: form
+        tests: [not_null]
   - name: mart_financial_metrics
     description: Annual revenue, net income, and reconciled net margin from selected reported facts.
     columns:

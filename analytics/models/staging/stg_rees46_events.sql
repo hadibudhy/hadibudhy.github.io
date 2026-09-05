@@ -1,9 +1,6 @@
 {{ config(materialized='incremental', unique_key='event_id', on_schema_change='fail') }}
 with source_rows as (
-    select
-        *,
-        row_number() over () as source_row_number
-    from {{ source('rees46', 'events') }}
+    select * from {{ source('rees46', 'events') }}
     {% if is_incremental() %}
       where event_time >= (select coalesce(max(event_time), timestamp '1900-01-01') from {{ this }})
     {% endif %}
