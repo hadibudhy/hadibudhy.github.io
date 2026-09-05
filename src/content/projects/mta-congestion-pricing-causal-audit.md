@@ -8,6 +8,7 @@ problem: "Leadership wants to know whether congestion pricing changed traffic, b
 result: "The official MTA panel contains 27,080 facility-day observations from 2019 to May 2026; the displayed pre-policy gap is visibly unstable, so this comparator is not used for causal attribution."
 featured: true
 kind: flagship
+published: false
 evidenceVisuals:
   - /images/growth-mta-event-study.png
   - /images/portfolio-mta-panel-scope.svg

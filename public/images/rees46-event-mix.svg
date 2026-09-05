@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">The event export is mostly product views, so event volume is not a user conversion rate</title>
+  <desc id="desc">A bar chart of observed event rows in the REES46 Electronics export: view 793748, cart 54035, purchase 37346.</desc>
+  <rect width="1200" height="680" fill="#fbfbfa"/>
+  <text x="82" y="96" fill="#171717" font-family="Arial, sans-serif" font-size="31px" font-weight="700">The event export is mostly product views</text>
+  <text x="82" y="138" fill="#737373" font-family="Arial, sans-serif" font-size="18px">Observed rows by event type. These are event counts, not unique-user conversion rates.</text>
+  <line x1="110" y1="520" x2="1110" y2="520" stroke="#c9ced6" stroke-width="2"/>
+  <rect x="180" y="176" width="220" height="344" fill="#155eef"/><rect x="490" y="496" width="220" height="24" fill="#80a8ff"/><rect x="800" y="504" width="220" height="16" fill="#a9c6ff"/>
+  <text x="290" y="156" text-anchor="middle" fill="#171717" font-family="Arial, sans-serif" font-size="25px" font-weight="700">793,748</text>
+  <text x="600" y="476" text-anchor="middle" fill="#171717" font-family="Arial, sans-serif" font-size="22px" font-weight="700">54,035</text>
+  <text x="910" y="484" text-anchor="middle" fill="#171717" font-family="Arial, sans-serif" font-size="22px" font-weight="700">37,346</text>
+  <text x="290" y="560" text-anchor="middle" fill="#171717" font-family="Arial, sans-serif" font-size="19px" font-weight="700">view</text>
+  <text x="600" y="560" text-anchor="middle" fill="#171717" font-family="Arial, sans-serif" font-size="19px" font-weight="700">cart</text>
+  <text x="910" y="560" text-anchor="middle" fill="#171717" font-family="Arial, sans-serif" font-size="19px" font-weight="700">purchase</text>
+  <text x="1110" y="625" text-anchor="end" fill="#737373" font-family="Arial, sans-serif" font-size="15px">Source: REES46 Electronics export • observed event rows</text>
+</svg>

@@ -1,0 +1,18 @@
+version: 1
+owner: product-analytics
+purpose: "Minimum event contract for a product funnel that can support activation and retention decisions."
+events:
+  view:
+    required_properties: [event_time, user_id, user_session, product_id]
+    business_question: "Which products and journeys receive attention?"
+  cart:
+    required_properties: [event_time, user_id, user_session, product_id]
+    business_question: "Which viewed products create purchase intent?"
+  purchase:
+    required_properties: [event_time, user_id, user_session, product_id, price]
+    business_question: "Which sessions complete the value action?"
+rules:
+  - "One source row is one event; do not count event rows as users."
+  - "user_session is required for session funnel metrics and missing values must be reported."
+  - "event_time is UTC unless the producer documents another timezone."
+  - "New event types require an owner, a test fixture, and a metric review before use in a KPI."

@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "caseId": "experiment-metrics",
+  "scope": "full-data",
+  "status": "verified",
+  "sources": ["Criteo AI Lab uplift benchmark v2.1"],
+  "models": ["Python streaming ITT", "SQL assignment summary"],
+  "checks": ["row count", "schema", "binary values", "control exposure", "sample ratio"],
+  "metrics": {"rows": 13979592, "absolute_conversion_lift_pp": 0.1152, "ci95_pp": [0.108, 0.122]},
+  "artifacts": ["/images/growth-criteo-itt.png", "/images/portfolio-campaign-economics.svg", "/images/portfolio-campaign-f0.svg"]
+}

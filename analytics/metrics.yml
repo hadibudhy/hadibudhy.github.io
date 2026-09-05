@@ -1,0 +1,19 @@
+version: 1
+owner: analytics-engineering
+metrics:
+  event_count:
+    definition: "Number of valid source event rows in the selected period."
+    grain: event
+    caveat: "Not a user count and not a conversion rate."
+  identified_sessions:
+    definition: "Distinct non-null user_session values in the selected period."
+    grain: session
+    caveat: "Sessions without user_session are excluded and reported separately."
+  purchase_session_rate:
+    definition: "Sessions containing at least one purchase divided by identified sessions."
+    grain: session
+    caveat: "Requires a defined session window and does not measure revenue or margin."
+  source_session_coverage:
+    definition: "Event rows with a non-null user_session divided by all event rows."
+    grain: event
+    caveat: "Coverage is a data-quality signal, not a product performance KPI."

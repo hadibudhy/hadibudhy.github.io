@@ -10,8 +10,14 @@ tags:
 excerpt: "A transaction analysis showing where repeat revenue comes from and which markets deserve closer growth attention."
 problem: "The retailer had many transactions, but it was not clear which customers and markets created repeat revenue."
 result: "After cleaning 541,909 transactions, the analysis found 4,338 identifiable customers and a strong concentration of revenue among the highest-value customers."
-featured: false
-kind: completed
+featured: true
+kind: flagship
+published: true
+caseId: customer-retention
+primaryTrack: product-analytics
+secondaryTracks: [analytics-engineering]
+displayOrder: 30
+evidenceManifest: /data/evidence/customer-retention.json
 evidenceVisuals:
   - /images/retail-growth-patterns.png
   - /images/retail-market-opportunity.png

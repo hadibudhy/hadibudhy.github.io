@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Quality checks keep missing session identity visible</title>
+  <desc id="desc">Quality checks for the event model: deterministic event key, timestamps, accepted event types, and session coverage.</desc>
+  <rect width="1200" height="680" fill="#fbfbfa"/>
+  <text x="82" y="96" fill="#171717" font-family="Arial, sans-serif" font-size="31px" font-weight="700">Quality checks sit beside the metric</text>
+  <text x="82" y="138" fill="#737373" font-family="Arial, sans-serif" font-size="18px">Rows without a session remain visible instead of entering a session funnel silently.</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="90" y="205" width="1020" height="70" fill="#e6f4ea" stroke="#abd5b5"/><text x="122" y="249" fill="#1b5e20" font-size="20px" font-weight="700">PASS</text><text x="248" y="249" fill="#171717" font-size="20px">event_id is deterministic and unique at the source event grain</text>
+    <rect x="90" y="305" width="1020" height="70" fill="#e6f4ea" stroke="#abd5b5"/><text x="122" y="349" fill="#1b5e20" font-size="20px" font-weight="700">PASS</text><text x="248" y="349" fill="#171717" font-size="20px">event_type uses the released view, cart, and purchase values</text>
+    <rect x="90" y="405" width="1020" height="70" fill="#fff4e5" stroke="#e7c38a"/><text x="122" y="449" fill="#8a4b00" font-size="20px" font-weight="700">CHECK</text><text x="248" y="449" fill="#171717" font-size="20px">165 rows have no user_session and stay out of session conversion</text>
+  </g>
+  <text x="1110" y="625" text-anchor="end" fill="#737373" font-family="Arial, sans-serif" font-size="15px">Source: REES46 Electronics export • quality mart rules</text>
+</svg>

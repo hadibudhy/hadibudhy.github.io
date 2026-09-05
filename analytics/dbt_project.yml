@@ -1,0 +1,22 @@
+name: ae_product_analytics
+version: '1.0.0'
+config-version: 2
+profile: ae_product_analytics
+model-paths: [models]
+seed-paths: [seeds]
+test-paths: [tests]
+analysis-paths: [analyses]
+target-path: target
+clean-targets: [target, dbt_packages]
+models:
+  ae_product_analytics:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: table
+    marts:
+      +materialized: table
+seeds:
+  ae_product_analytics:
+    +schema: raw
+    +quote_columns: false

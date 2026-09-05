@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">The model preserves event grain before creating session and funnel metrics</title>
+  <desc id="desc">A three-step analytics engineering model from raw events to typed staging to ordered sessions and daily funnel metrics.</desc>
+  <rect width="1200" height="680" fill="#fbfbfa"/>
+  <text x="82" y="96" fill="#171717" font-family="Arial, sans-serif" font-size="31px" font-weight="700">Protect the grain before asking product questions</text>
+  <text x="82" y="138" fill="#737373" font-family="Arial, sans-serif" font-size="18px">Each layer has one job, so joins do not multiply events or users.</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="90" y="255" width="250" height="170" fill="#f0f4ff" stroke="#9cb7f7"/><text x="120" y="302" fill="#155eef" font-size="18px" font-weight="700">01</text><text x="120" y="348" fill="#171717" font-size="22px" font-weight="700">Raw events</text><text x="120" y="388" fill="#737373" font-size="16px">source rows, unchanged</text>
+    <rect x="475" y="255" width="250" height="170" fill="#f0f4ff" stroke="#9cb7f7"/><text x="505" y="302" fill="#155eef" font-size="18px" font-weight="700">02</text><text x="505" y="348" fill="#171717" font-size="22px" font-weight="700">Typed staging</text><text x="505" y="388" fill="#737373" font-size="16px">keys, time, identity</text>
+    <rect x="860" y="255" width="250" height="170" fill="#f0f4ff" stroke="#9cb7f7"/><text x="890" y="302" fill="#155eef" font-size="18px" font-weight="700">03</text><text x="890" y="348" fill="#171717" font-size="22px" font-weight="700">Product marts</text><text x="890" y="388" fill="#737373" font-size="16px">sessions, funnel, quality</text>
+    <line x1="340" y1="340" x2="475" y2="340" stroke="#155eef" stroke-width="3"/><path d="M 460 328 L 475 340 L 460 352" fill="none" stroke="#155eef" stroke-width="3"/><line x1="725" y1="340" x2="860" y2="340" stroke="#155eef" stroke-width="3"/><path d="M 845 328 L 860 340 L 845 352" fill="none" stroke="#155eef" stroke-width="3"/>
+  </g>
+  <text x="1110" y="625" text-anchor="end" fill="#737373" font-family="Arial, sans-serif" font-size="15px">Source: local dbt project • model grain and lineage</text>
+</svg>

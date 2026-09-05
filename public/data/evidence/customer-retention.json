@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "caseId": "customer-retention",
+  "scope": "full-data",
+  "status": "verified",
+  "sources": ["UCI Online Retail"],
+  "models": ["Transaction cleaning", "Order customer aggregation"],
+  "checks": ["source hash", "cancellation handling", "customer identity", "revenue grain"],
+  "metrics": {"raw_rows": 541909, "identifiable_customers": 4338, "recorded_revenue_gbp": 8911407.904},
+  "artifacts": ["/images/retail-growth-patterns.png", "/images/retail-market-opportunity.png", "/images/portfolio-retail-cleaning.svg"]
+}

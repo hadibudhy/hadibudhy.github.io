@@ -15,13 +15,13 @@ export default function AboutPage() {
       <section className="border-b border-border">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
           <p className="section-kicker">About the work</p>
-          <h1 className="mt-5 max-w-4xl break-words text-[2.7rem] font-bold tracking-[-0.05em] text-foreground sm:text-5xl md:text-7xl">From messy data toward a clearer decision.</h1>
+          <h1 className="mt-5 max-w-4xl break-words text-[2.7rem] font-bold tracking-[-0.05em] text-foreground sm:text-5xl md:text-7xl">From event data toward a clearer product decision.</h1>
           <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
             <div className="space-y-5 text-lg leading-8 text-muted-foreground">
-              <p>Data Analyst based in Jakarta, Indonesia, with 5+ years of experience across business intelligence, customer analytics, data automation, and applied AI. Focus areas include growth and experimentation, product analytics, marketplace and operations analytics, business and decision analytics, analytics engineering, and applied AI where relevant.</p>
-              <p>Work turns scattered information into evidence that can be trusted, decisions that can be explained, and workflows that can be operated.</p>
+              <p>Analytics Engineer and Product Analyst based in Jakarta, Indonesia. The work connects event tracking, warehouse models, metric definitions, product behavior, and business decisions.</p>
+              <p>The aim is simple: give teams data they can trust, questions they can answer, and a clear way to measure what happens next.</p>
             </div>
-            <div className="border-l border-primary/50 pl-6 text-sm leading-7 text-muted-foreground">Experience spans reliable data pipelines, forecasting and classification models, and dashboards that make activity and next steps easier to understand.<p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-primary">{education}</p></div>
+            <div className="border-l border-primary/50 pl-6 text-sm leading-7 text-muted-foreground">Work spans instrumentation, SQL modeling, metric governance, product funnels, retention, experimentation, and operational analytics.<p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-primary">{education}</p></div>
           </div>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <Button size="lg" asChild><a href="mailto:hadi.budhy@gmail.com">Get in Touch</a></Button>
@@ -33,7 +33,7 @@ export default function AboutPage() {
 
       <section className="border-b border-border">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.75fr_1.25fr] lg:gap-12 md:py-28">
-          <div><p className="section-kicker">Career arc</p><h2 className="section-title mt-4">From reporting questions to data systems.</h2></div>
+          <div><p className="section-kicker">Career arc</p><h2 className="section-title mt-4">From reporting questions to product and data systems.</h2></div>
           <div>{careerArc.map((item) => <div key={item.index} className="grid grid-cols-[3rem_1fr] gap-5 border-t border-border py-6 first:border-t-0 first:pt-0"><span className="font-mono text-sm text-primary">{item.index}</span><div><h3 className="text-xl font-bold text-foreground">{item.title}</h3><p className="mt-2 leading-7 text-muted-foreground">{item.description}</p></div></div>)}</div>
         </div>
       </section>
@@ -41,7 +41,7 @@ export default function AboutPage() {
       <section className="border-b border-border bg-muted/40">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
           <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-12">
-            <div><p className="section-kicker">Selected experience</p><h2 className="section-title mt-4">A progression from reporting to decision systems.</h2><p className="mt-5 leading-7 text-muted-foreground">A concise view of work across four analytics roles, the teams supported, and the decisions made clearer.</p></div>
+            <div><p className="section-kicker">Selected experience</p><h2 className="section-title mt-4">A progression from reporting to reliable decision systems.</h2><p className="mt-5 leading-7 text-muted-foreground">A concise view of work across four analytics roles, the data foundations built, and the decisions made clearer.</p></div>
             <div className="space-y-0">{experience.map((item) => <div key={`${item.period}-${item.role}`} className="border-t border-border py-6 first:border-t-0 first:pt-0"><div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-baseline"><h3 className="text-xl font-bold text-foreground">{item.role}</h3><span className="text-sm text-primary">{item.period}</span></div><p className="mt-1 text-sm font-semibold text-foreground/70">{item.setting}</p><p className="mt-3 max-w-2xl leading-7 text-muted-foreground">{item.description}</p></div>)}</div>
           </div>
         </div>

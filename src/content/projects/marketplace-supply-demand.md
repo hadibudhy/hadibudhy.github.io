@@ -8,6 +8,12 @@ problem: "A citywide incentive can be expensive when the real problem is concent
 result: "Official TLC data shows when recorded trips and observed driver coverage move, but it cannot directly show all ride requests or unserved customers."
 featured: true
 kind: flagship
+published: true
+caseId: marketplace-experience
+primaryTrack: product-analytics
+secondaryTracks: [analytics-engineering]
+displayOrder: 40
+evidenceManifest: /data/evidence/marketplace-experience.json
 evidenceVisuals:
   - /images/growth-hvf-hourly.png
   - /images/growth-hvf-monthly-supply.png

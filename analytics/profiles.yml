@@ -1,0 +1,7 @@
+ae_product_analytics:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: target/ae_product.duckdb
+      threads: 4

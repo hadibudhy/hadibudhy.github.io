@@ -6,8 +6,8 @@ tags: [activation, conversion, leakage, UCI]
 excerpt: "A session-level conversion study that separates useful early intent signals from fields that only appear after a shopper has already shown value."
 problem: "The product team wants to improve conversion, but a targeting rule can look excellent simply because it uses information created after the shopper has already progressed."
 result: "After removing 125 exact duplicates, all 12,205 sessions are accounted for: new visitors converted at 24.9%, Other at 19.8%, and returning visitors at 14.1%."
-published: true
 kind: completed
+published: false
 evidenceVisuals:
   - /images/portfolio-online-shoppers-visitor.svg
   - /images/portfolio-online-shoppers-pagevalue.svg

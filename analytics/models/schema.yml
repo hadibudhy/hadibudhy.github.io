@@ -1,0 +1,32 @@
+version: 2
+models:
+  - name: stg_rees46_events
+    description: Typed event-grain model with one row per deterministic source event key.
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: event_id
+        data_type: varchar
+        tests: [not_null, unique]
+      - name: event_time
+        data_type: timestamp
+        tests: [not_null]
+      - name: event_type
+        data_type: varchar
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['view', 'cart', 'purchase']
+      - name: user_id
+        data_type: varchar
+        tests: [not_null]
+  - name: fct_product_funnel
+    description: Daily event and session metrics for product journey diagnosis.
+    columns:
+      - name: event_date
+        tests: [not_null]
+      - name: event_type
+        tests: [not_null]
+      - name: event_count
+        tests: [not_null]

@@ -8,6 +8,11 @@ import { capabilities, careerArc } from "@/lib/profile";
 export default function Home() {
   const projects = getAllProjects();
   const featuredProjects = projects.filter((project) => project.meta.featured);
+  const trackLabels = [
+    ["analytics-engineering", "Analytics Engineering"],
+    ["product-analytics", "Product Analytics"],
+    ["experimentation-growth", "Experimentation & Growth"],
+  ] as const;
 
   return (
     <div>
@@ -17,7 +22,7 @@ export default function Home() {
             <Image src="/images/profile-illustration.jpg" alt="Illustrated profile portrait of Hadi Budhy" width={160} height={160} className="h-24 w-24 shrink-0 rounded-full border border-border object-cover object-top sm:h-32 sm:w-32" priority />
             <div className="flex flex-col gap-2">
               <p className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">Hadi Budhy</p>
-            <p className="text-sm text-muted-foreground">Data Analyst</p>
+            <p className="text-sm text-muted-foreground">Analytics Engineer &amp; Product Analyst</p>
               <div className="flex gap-4 text-sm text-muted-foreground">
                 <a href="https://github.com/hadibudhy" target="_blank" rel="noreferrer" className="hover:text-foreground">GitHub</a>
                 <a href="https://linkedin.com/in/hadibudhy" target="_blank" rel="noreferrer" className="hover:text-foreground">LinkedIn</a>
@@ -25,8 +30,8 @@ export default function Home() {
             </div>
           </div>
           <div className="space-y-5 sm:space-y-6">
-            <h1 className="max-w-full text-[1.8rem] font-normal leading-tight tracking-tight text-foreground sm:text-[2.3rem]">Decision-ready analysis for growth, marketplace, and operations teams.</h1>
-            <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">Messy data becomes evidence for what to invest in, what to test, and what to stop, with uncertainty kept visible.</p>
+            <h1 className="max-w-full text-[1.8rem] font-normal leading-tight tracking-tight text-foreground sm:text-[2.3rem]">Reliable analytics foundations for better product decisions.</h1>
+            <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">I build trustworthy models and use product data to understand customer behavior, define useful metrics, and guide what teams should improve next.</p>
             <div className="flex flex-wrap gap-3 pt-2">
               <Button size="lg" asChild><Link href="#work">View the work <span className="ml-3" aria-hidden="true">→</span></Link></Button>
               <Button size="lg" variant="outline" asChild><a href="mailto:hadi.budhy@gmail.com">Get in touch</a></Button>
@@ -64,13 +69,15 @@ export default function Home() {
             <div>
               <p className="section-kicker">Selected work</p>
               <h2 className="section-title mt-4">Selected case studies and analysis.</h2>
-              <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">{featuredProjects.length} flagship case studies put the questions, evidence, and trade-offs first. The full library publishes completed analyses with project-specific results.</p>
+              <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">{featuredProjects.length} flagship case studies show how data moves from reliable foundations to product and growth decisions.</p>
             </div>
             <Link href="/projects" className="focus-ring inline-flex items-center text-sm font-bold text-primary transition-colors hover:text-foreground">View all projects <span className="ml-2 text-lg" aria-hidden="true">→</span></Link>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2">
-            {featuredProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} featured />)}
-          </div>
+          {trackLabels.map(([track, label]) => {
+            const trackProjects = featuredProjects.filter((project) => project.meta.primaryTrack === track);
+            if (!trackProjects.length) return null;
+            return <div key={track} className="mb-10 last:mb-0"><p className="section-kicker mb-4">{label}</p><div className="grid gap-5 sm:grid-cols-2">{trackProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} featured />)}</div></div>;
+          })}
         </div>
       </section>
 
@@ -92,8 +99,8 @@ export default function Home() {
           <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
               <div>
                 <p className="section-kicker">Next conversation</p>
-                <h2 className="mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground md:text-5xl">Have a messy data problem worth making clear?</h2>
-                <p className="mt-5 max-w-xl leading-7 text-muted-foreground">Hiring for a Data Analyst role? Get in touch to discuss the decisions, evidence, and analytical work involved.</p>
+                <h2 className="mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground md:text-5xl">Need metrics the product team can trust?</h2>
+                <p className="mt-5 max-w-xl leading-7 text-muted-foreground">Get in touch to discuss event data, analytical models, product questions, and the decisions they support.</p>
               </div>
               <Button size="lg" asChild className="w-full sm:w-auto"><a href="mailto:hadi.budhy@gmail.com">Discuss a role <span className="ml-3 text-lg" aria-hidden="true">→</span></a></Button>
             </div>

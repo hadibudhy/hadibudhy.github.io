@@ -1,0 +1,24 @@
+{
+  "caseId": "service-metric-reliability",
+  "status": "published",
+  "source": {
+    "name": "NYC 311 Service Requests",
+    "url": "https://catalog.data.gov/dataset/311-service-requests-from-2010-to-present",
+    "publisher": "City of New York",
+    "accessed": "2026-09-05",
+    "grain": "one service request",
+    "publicDataOnly": true,
+    "mutableSource": true
+  },
+  "validation": {
+    "checks": ["request-key uniqueness", "timestamp order", "open work retained at cutoff", "negative durations excluded and counted", "missing close-date share reported"],
+    "observedFields": ["request id", "created time", "closed time", "status", "agency", "complaint type", "location"],
+    "unavailableOutcomes": ["first response", "staff hours", "reopen history", "resolution quality"]
+  },
+  "artifacts": [
+    "/images/portfolio-nyc311-scale.svg",
+    "/images/portfolio-nyc311-boundary.svg",
+    "/images/portfolio-nyc311-metrics.svg"
+  ],
+  "evidenceBoundary": "The case supports queue workload and lifecycle measurement. It does not claim that administrative closure equals resident resolution or that low volume equals low need."
+}

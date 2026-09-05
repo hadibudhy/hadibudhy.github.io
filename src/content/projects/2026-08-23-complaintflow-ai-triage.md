@@ -13,6 +13,7 @@ problem: "Support teams need to route complaints quickly, but an unreliable AI r
 result: "Portfolio reference implementation: ComplaintFlow combines a transparent baseline, approved-playbook retrieval, provider retries, PII redaction, schema checks, human escalation, and an auditable SQLite decision log."
 featured: true
 kind: flagship
+published: false
 artifactLabel: "Flagship system prototype"
 evidenceVisuals:
   - /images/complaintflow-architecture.svg
