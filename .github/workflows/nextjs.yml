@@ -40,6 +40,7 @@ jobs:
         run: python -m pytest analytics/tests/test_contracts.py -q
       - name: Build CI analytics marts
         run: |
+          mkdir -p target
           dbt seed --project-dir analytics --profiles-dir analytics --target ci
           dbt build --project-dir analytics --profiles-dir analytics --target ci
       - name: Verify published evidence
