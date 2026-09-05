@@ -5,6 +5,9 @@ with annual_facts as (
     where fiscal_period = 'FY'
       and unit = 'USD'
       and form in ('10-K', '10-K/A')
+      and period_start is not null
+      and period_end is not null
+      and date_diff('day', period_start, period_end) between 300 and 380
 ), filing_candidates as (
     select distinct fiscal_year, accession, filed_date
     from annual_facts
