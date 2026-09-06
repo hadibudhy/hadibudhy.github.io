@@ -119,7 +119,7 @@ This makes the rollout recommendation operational.
 
 **Decision status:** Completed benchmark analysis; current-campaign holdout and commercial outcome not measured.
 
-## What internal data would improve the decision
+## Limitations and internal data needed
 
 A complete decision needs ad spend, contribution margin, conversion value, customer identity, channel, frequency, and later retention. Incremental CPA and incremental return can then be calculated by a business-defined audience. Scale remains conditional on incremental CPA staying below contribution value and customer-experience guardrails remaining healthy.
 

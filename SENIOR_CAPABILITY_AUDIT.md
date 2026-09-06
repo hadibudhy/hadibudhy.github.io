@@ -19,6 +19,12 @@ Audit date: 6 September 2026. Scope: all 35 project articles, their available SQ
 
 A flagship must score at least 80 and show a meaningful problem, analytical reasoning, trustworthy metrics, evidence-backed findings, an actionable decision, and honest limitations.
 
+Scores are weighted review judgments rather than observed facts. The score anchors are documented in [SENIOR_REST_AUDIT.md](SENIOR_REST_AUDIT.md), and the publication gate is enforced by `scripts/verify_portfolio_seniority.py`.
+
+## Final publication gate
+
+The six flagship cases are the only published case studies. The remaining 29 articles are archived with `published: false`; they are documented in [SENIOR_REST_AUDIT.md](SENIOR_REST_AUDIT.md) with the supporting work inspected, score gap, and reason they were not promoted. Earlier “REMOVE” or “REPLACE” labels below mean “do not publish this article as a case study”; no source work was deleted.
+
 ## Project-by-project audit
 
 | Project | Target role | Baseline | Final | Seniority | Strongest evidence | Main gap at baseline | Action |
