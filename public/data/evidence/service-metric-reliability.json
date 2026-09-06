@@ -1,26 +1,14 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "caseId": "service-metric-reliability",
-  "status": "published",
-  "source": {
-    "name": "NYC 311 Service Requests",
-    "url": "https://catalog.data.gov/dataset/311-service-requests-from-2010-to-present",
-    "publisher": "City of New York",
-    "accessed": "2026-09-05",
-    "grain": "one service request",
-    "publicDataOnly": true,
-    "mutableSource": true
-  },
-  "validation": {
-    "checks": ["request-key uniqueness", "timestamp order", "open work retained at cutoff", "negative durations excluded and counted", "missing close-date share reported"],
-    "observedFields": ["request id", "created time", "closed time", "status", "agency", "complaint type", "location"],
-    "unavailableOutcomes": ["first response", "staff hours", "reopen history", "resolution quality"]
-  },
-  "artifacts": [
-    "/images/portfolio-nyc311-scale.svg",
-    "/images/portfolio-nyc311-boundary.svg",
-    "/images/portfolio-nyc311-metrics.svg"
-  ],
-  "artifactHashes": {"/images/portfolio-nyc311-scale.svg": "6d4f361a4f431eff972075c9659b7b65aa38f829a3826395b73ff0b227ca5d1d", "/images/portfolio-nyc311-boundary.svg": "b5191020124a74aa7b5be7a5286de9fcb28c25f59871783fd6114bdeb946a248", "/images/portfolio-nyc311-metrics.svg": "c06180c746e4419d35dc1aa53937862ee862ac337acd15cb0968ccc2e7ea9cb7"},
-  "evidenceBoundary": "The case supports queue workload and lifecycle measurement. It does not claim that administrative closure equals resident resolution or that low volume equals low need."
+  "status": "verified",
+  "scope": "full-data",
+  "source": {"name": "NYC 311 Service Requests", "url": "https://data.cityofnewyork.us/resource/erm2-nwe9", "sha256": "3a9322d7bd2ea5519b035f414f6314561ffcdb81dab5768128832c4d4cc446db", "grain": "service request", "window": "2025-01-01 through 2025-01-31"},
+  "result": "/data/senior/service-queues.json",
+  "resultHash": "a17d1eeec8abc840844491dc1c3448abb7b871cf41ec93988f08cfc75074abc8",
+  "checks": ["unique request", "creation coverage", "negative duration", "fixed cutoff", "open backlog", "close-time tail", "minimum queue volume"],
+  "metrics": {"requests": 348180, "missing_closed_at_snapshot": 2609, "negative_duration": 97, "fhv_complaint_p90_close_hours": 3350.7742778},
+  "artifacts": ["/images/senior-311-pressure.png", "/images/senior-311-volume-time.png", "/images/portfolio-nyc311-boundary.svg"],
+  "artifactHashes": {"/images/senior-311-pressure.png": "3021cdfc6c6c71423aa8eaa0c1252056009b691072f3f554fbf94d1021c20171", "/images/senior-311-volume-time.png": "bdd97cc0dbc23cc40354c327d02ff6b5d31923a08958aa703cf034e028a72c0c", "/images/portfolio-nyc311-boundary.svg": "b5191020124a74aa7b5be7a5286de9fcb28c25f59871783fd6114bdeb946a248"},
+  "evidenceBoundary": "The snapshot supports lifecycle workload analysis. Administrative closure is not verified resolution or resident satisfaction."
 }

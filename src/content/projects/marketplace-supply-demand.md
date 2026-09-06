@@ -1,130 +1,101 @@
 ---
-title: "Marketplace Supply and Demand: What Can the Public Data Tell Us?"
-date: 2026-08-29
-categories: [growth analytics]
-tags: [marketplace, supply and demand, experimentation, SQL]
-excerpt: "A limited-data marketplace diagnosis that separates recorded trips from the requests and driver hours needed to measure imbalance."
-problem: "A citywide incentive can be expensive when the real problem is concentrated in a few time and location windows."
-result: "Official TLC data shows when recorded trips and observed driver coverage move, but it cannot directly show all ride requests or unserved customers."
+title: "Ride-Hailing Marketplace: Where Pickup Friction Is Concentrated"
+date: 2026-09-06
+categories: [product analytics]
+tags: [marketplace, pickup experience, segmentation, experimentation]
+excerpt: "A 20.4-million-trip diagnosis of completed-ride pickup delay by provider, zone, and hour, with clear limits on what public data can prove."
+problem: "A country manager is considering driver incentives, but citywide trip volume cannot show where completed riders wait longest or whether incentives would create supply rather than move it."
+result: "Pickup friction is concentrated in provider-zone-hour windows. JFK-linked zone 132 appears repeatedly in the longest pickup-delay tail, while the busiest citywide hours are not always the slowest."
 featured: true
 kind: flagship
 published: true
 caseId: marketplace-experience
 primaryTrack: product-analytics
-secondaryTracks: [analytics-engineering]
+secondaryTracks: [analytics-engineering, experimentation-growth]
 displayOrder: 40
 evidenceManifest: /data/evidence/marketplace-experience.json
 evidenceVisuals:
-  - /images/growth-hvf-hourly.png
-  - /images/growth-hvf-monthly-supply.png
+  - /images/senior-marketplace-hourly.png
+  - /images/senior-marketplace-priority.png
   - /images/portfolio-marketplace-measurement.svg
+header:
+  teaser: /images/senior-marketplace-hourly.png
 ---
 
-## Business question
+## The decision
 
-The Country Manager says riders are waiting longer and rides are being lost in some areas. The team wants to know whether to pay drivers more.
+The marketplace lead must decide whether to test more driver supply and, if so, where and when. The public file cannot observe total ride requests, unmatched demand, cancellations, or driver online hours. The decision therefore starts with completed-ride pickup friction and uses it to select an internal experiment.
 
-The first question is more basic: where is the marketplace under pressure, and what can the public data actually prove?
+## Data and metric boundary
 
-## Why it matters
+The [NYC TLC January 2025 HVFHV file](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) contains **20,405,666 completed trips** from two licensed high-volume providers. The analysis uses **20,404,497 rows** whose `request_datetime` falls inside January 2025; this excludes 1,169 spillover rows at the file boundary. Every analyzed row has a request and pickup time.
 
-A low number of recorded trips can mean low demand or poor supply. A busy hour can still have many unserved riders. If the business gives incentives without knowing which problem it has, it may spend money without improving the customer experience.
+I define **completed-trip pickup delay** as `pickup_datetime - request_datetime`. This is a valid operational interval for recorded trips. It is not total passenger wait because the source excludes rides that never completed.
 
-## Decision brief
+The quality review found **199,788 negative intervals** and **21 intervals above 120 minutes**. Those rows stay visible in quality reporting and are excluded from delay summaries. Request timestamps also cross the file boundary for trips picked up near the start or end of January, so the analysis records the observed timestamp range explicitly.
 
-- **Recommendation:** measure the request funnel first, then pilot incentives only in repeated shortage windows.
-- **Evidence:** recorded trips peak at **18:00**; reported 2025 trips rose while unique drivers stayed broadly flat.
-- **Potential value:** not estimated; requests, contribution, and incentive cost are missing.
-- **Evidence strength:** Medium for timing and activity signals; low for unmet demand or causal supply claims.
-- **Cost / resource requirement:** Request, match, wait, online-driver, incentive, and contribution instrumentation is required; spend cannot be estimated from this dataset.
-- **Main risk:** the hourly slice is from **February 2019**, while the monthly comparison is **2024–2025**; spillover and cannibalization are unknown.
-- **Cost of inaction:** Cannot be estimated from this dataset; a broad incentive could waste spend without improving fulfillment.
-- **Success / stop rule:** Continue only if request fulfillment and contribution improve without shifting harm to nearby zones; stop if incentives only cannibalize supply or raise cost per incremental trip.
-- **Next action:** add request, match, wait, online-driver, cancellation, incentive, and contribution fields.
+![NYC TLC public data: completed trips and pickup timestamps are observed, while unmatched requests, cancellations, online supply, and incentive ROI are unavailable](/images/portfolio-marketplace-measurement.svg)
 
-## Role
+## Metric framework
 
-Role: public-data analysis, proxy classification, limitation framing, and proposed zone-time pilot. No incentive program operation or platform fulfillment outcome is included. Decision-owner handoff: a measurement specification and a randomized zone-time pilot design. [SQL, Python, and source notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/02-marketplace-supply-demand) document the analysis.
+The decision owner is the marketplace lead. The north-star outcome is fulfilled requests per eligible supply block or driver-hour once internal request and online-time data are available. Public completed trips and pickup delay are diagnostic measures; driver pay and passenger fare are context, not unit economics. Matching quality and driver availability are the main drivers to test, with cost, cancellations, neighbouring-zone wait, and total marketplace rides as guardrails.
 
-## Data used
-
-The analysis uses two official TLC sources:
-
-- A High Volume FHV trip table for **1–7 February 2019**, with one submitted trip per row.
-- TLC's monthly report for High Volume FHV activity, including reported trips per day, unique drivers, unique vehicles, and average hours.
-
-The trip table contains **4,965,012 recorded rows**. It shows activity that was submitted by licensed high-volume services. It does not show every request, rejected match, cancellation, true wait time, or driver who was online but did not receive a trip.
-
-These sources cover different periods: the hourly slice is **1–7 February 2019**, while the monthly report compares **2024 with 2025**. They are complementary descriptions, not a single continuous time series, so the 2019 peak cannot be treated as the cause of the later monthly pattern.
-
-## Approach
-
-1. Find the hours with the most recorded trip activity.
-2. Compare activity with the number of drivers and vehicles reported by TLC.
-3. Separate direct observations from supply proxies.
-4. Decide what can be targeted now and what needs internal marketplace data.
-5. Design an incentive test that protects customers, drivers, and nearby zones.
-
-## Key findings
-
-### Recorded trip activity was highest in the early evening
-
-The observed week had **59,285 recorded trips at 04:00** and **334,713 at 18:00**.
-
-![Official NYC HVFHV Open Data slice: recorded trips peaked at 18:00, but the public file does not show unserved requests](/images/growth-hvf-hourly.png)
-
-**Business meaning:** 18:00 is a sensible period for a supply investigation. It is not proof that riders were waiting longer or that the city needed more drivers.
-
-### More activity did not come with more reported drivers
-
-TLC's monthly report gives a broader view. Average reported trips per day rose from **654,410 in 2024 to 667,537 in 2025**. Average unique drivers stayed almost flat, from **83,399 to 83,299**. Average hours per driver changed from **6.35 to 6.38 hours per day**.
-
-![TLC monthly High Volume FHV reports: reported trips rose in 2025 while average unique drivers stayed broadly flat](/images/growth-hvf-monthly-supply.png)
-
-**Business meaning:** the system recorded more activity without a comparable increase in reported driver coverage in the separate 2024–2025 monthly comparison. This is a useful pressure signal, but it is not an hourly supply count and cannot show whether the extra trips were profitable or fulfilled all demand.
-
-### The data supports a measurement plan, not a citywide subsidy
-
-| Metric | What it means here | Status |
+| Layer | Metric | Meaning |
 |---|---|---|
-| Recorded trips | Trips submitted by licensed services | Directly observed |
-| Unique drivers | Drivers appearing in a monthly report | Observed monthly proxy |
-| Driver hours | Average reported hours per driver | Observed monthly proxy |
-| Total requests | All people who tried to request a ride | Not available |
-| Lost requests | Requests that were not matched or were abandoned | Not available |
-| Zone-hour online supply | Drivers available in a specific place and hour | Not available |
+| Demand served | Completed trips | Recorded fulfilled activity |
+| Matching friction | Median and P90 request-to-pickup minutes | Typical and long-tail pickup experience among completed rides |
+| Driver economics | Average recorded driver pay | Context, not hourly earnings |
+| Passenger economics | Average base fare | Context, not contribution margin |
+| Missing internally | Requests, match rate, cancellation, online driver hours | Needed to prove shortage and incremental fulfilment |
 
-## Visual evidence
+## What I investigated
 
-### Decision: recorded trips are only one layer of marketplace measurement
+1. Do the busiest hours also have the longest pickup delays?
+2. Is friction broad across the city or concentrated by provider, pickup zone, and hour?
+3. Which windows are suitable for a targeted supply experiment?
 
-![NYC TLC marketplace evidence boundary: recorded trips, monthly driver proxies, and official aggregations are observed, while requests, lost matches, cancellations, and incentive ROI are not](/images/portfolio-marketplace-measurement.svg)
+## Busy hours are not automatically the slowest
 
-The visual supports collecting the missing demand and supply measures before broad incentives.
+Completed trips peak at **18:00 with 1.25 million trips**. However, the longest citywide P90 pickup delay occurs at **07:00 at 10.3 minutes**. At 18:00, P90 delay is **7.7 minutes**.
+
+![NYC TLC HVFHV completed trips, January 2025: citywide volume peaks in the evening while the longest pickup-delay tail appears in the morning](/images/senior-marketplace-hourly.png)
+
+This rejects a simple “incentivize the busiest hour” rule. Volume and friction answer different questions.
+
+## Pickup friction is concentrated
+
+Provider-zone-hour segmentation ranks groups by completed-trip P90 delay only after requiring at least **500 monthly trips** and **20 observed daily windows** inside the January request-time window. Airport windows dominate the longest tail. For provider HV0005 at JFK at 00:00, P90 delay is **19.0 minutes** across **3,550 completed trips**; daily P90 exceeded 12 minutes on **17 of 31** observed windows. The same provider and airport at 23:00 shows **18.6 minutes** across **5,157 trips**, with daily P90 above 12 minutes on **25 of 31** observed windows.
+
+![NYC TLC HVFHV completed trips, January 2025: selected provider-zone-hour windows have materially longer P90 pickup delay](/images/senior-marketplace-priority.png)
+
+Airport staging rules, long pickup paths, flight banks, provider operations, and geography are plausible drivers. The public file cannot separate them or show whether riders abandoned before pickup.
 
 ## Recommendation
 
-**What:** Do not increase incentives across the whole city. First add request, match, cancellation, wait, online-driver, and incentive records.
+**P0: do not increase incentives citywide.** The citywide peak is not the citywide delay peak, and the public evidence cannot measure unmet demand.
 
-**Where / who:** Use the 18:00 period as the first investigation window. Choose zones only after the request and wait data shows a repeated local problem.
+**P1: test a focused airport intervention.** Use JFK zone-hour blocks selected by the published delay and observed-window coverage rule. Compare a driver staging or destination-based incentive with business as usual through a switchback design.
 
-**Why:** TLC shows a strong time pattern and broadly flat monthly driver coverage, but it does not show a true shortage.
+**Primary metric:** fulfilled requests per eligible block or driver-hour using internal data. **Secondary metrics:** match rate, P90 passenger wait, completed rides, driver utilization, and driver earnings. **Guardrails:** incentive cost per incremental ride, passenger price, cancellation, neighbouring-zone wait, airport queue compliance, and total marketplace rides.
 
-**Risk:** An incentive may move drivers from a nearby zone instead of adding supply. It may also raise cost without improving fulfillment.
+**P2: diagnose mechanism before scale.** Add request, dispatch, acceptance, cancellation, online time, driver location, incentive, and flight-arrival data. Determine whether the issue is insufficient supply, airport process, or matching quality.
 
-**Next test:** Randomize matched zone-time blocks between normal incentives and a targeted incentive. Use request fulfillment as the primary customer outcome. Track recorded trips per online driver-hour as a supply measure and incremental trips per incentive dollar as the economic measure. Include a washout period, border-zone monitoring, and a sample-size plan before launch.
+## Experiment design
 
-**Decision status:** Completed measurement audit; shortage diagnosis, incentive pilot, and unit economics remain unmeasured.
+Randomize comparable zone-time blocks, not individual drivers, because treated drivers can affect control drivers in the same marketplace. Balance weekday, hour, provider, and flight-volume patterns. Keep nearby zones as displacement monitors. Scale only if the treatment creates net rides or lowers wait at an acceptable incremental cost.
 
-## What internal data would improve the decision
+## Limitations
 
-A complete measurement plan needs a request funnel from request to match to pickup, plus true driver online time, cancellations, estimated wait, passenger price, driver pay, incentive cost, contribution, spillover, and cannibalization measures. These measures separate low demand, low supply, and poor matching instead of treating all three as the same problem.
+- Every marketplace result is conditional on completed trips.
+- Unique active drivers and true supply hours are unavailable at the required grain.
+- Provider codes are public identifiers, but operating policies are not observed.
+- One month cannot establish seasonality or intervention response.
+- Higher delay is consistent with friction; it does not prove a supply shortage.
 
 ## Key takeaway
 
-The public data shows when recorded marketplace activity is high and how reported driver coverage changes over time. It does not prove where riders are being lost. The responsible decision is to collect the missing request and availability measures, then test incentives only in confirmed shortage windows.
-
+The public data supports a targeted experiment, not a citywide subsidy. The strongest signal is concentrated pickup friction around airport windows, and internal request and supply data must determine whether more incentives create value.
 
 ## Technical appendix
 
-The trip chart is generated from the official Open Data query. The monthly chart uses separate panels because trips per day and unique drivers are different measures. [SQL, Python, source manifest, and validation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/02-marketplace-supply-demand) document the analysis.
+DuckDB scans the official 491MB Parquet file, validates timestamps, and builds provider × zone × hour segments without loading the full table into memory. Aggregate evidence is published at `/data/senior/marketplace.json`; trip-level records remain private to the analysis workspace.

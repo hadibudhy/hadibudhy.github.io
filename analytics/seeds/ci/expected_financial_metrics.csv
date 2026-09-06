@@ -1,0 +1,6 @@
+fiscal_year,revenue,net_income,source_accession,source_document_url,source_document_sha256,source_table
+2022,198270000000,72738000000,0000950170-24-087843,https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm,43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95,Consolidated Statements of Income
+2023,211915000000,72361000000,0000950170-25-100235,https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm,99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe,Consolidated Statements of Income
+2024,245122000000,88136000000,0001193125-26-323660,https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm,4bcf2da2871acc19e32c5a62f36f6d83d6aae03cdc4aaa9a86a9a21ee8223f02,Consolidated Statements of Income
+2025,281724000000,101832000000,0001193125-26-323660,https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm,4bcf2da2871acc19e32c5a62f36f6d83d6aae03cdc4aaa9a86a9a21ee8223f02,Consolidated Statements of Income
+2026,331839000000,133749000000,0001193125-26-323660,https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm,4bcf2da2871acc19e32c5a62f36f6d83d6aae03cdc4aaa9a86a9a21ee8223f02,Consolidated Statements of Income

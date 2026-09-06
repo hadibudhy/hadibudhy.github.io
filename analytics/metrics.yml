@@ -10,9 +10,9 @@ metrics:
     grain: session
     caveat: "Sessions without user_session are excluded and reported separately."
   purchase_session_rate:
-    definition: "Sessions containing at least one purchase divided by identified sessions."
+    definition: "Single-user sessions completing view, then cart, then purchase within 24 hours in source order divided by valid identified sessions."
     grain: session
-    caveat: "Requires a defined session window and does not measure revenue or margin."
+    caveat: "Exact duplicate rows and multi-user session identifiers are excluded. Long sessions remain in the denominator, while qualifying funnel steps must occur within 24 hours. Purchase is an event label, not a reconciled order or payment."
   source_session_coverage:
     definition: "Event rows with a non-null user_session divided by all event rows."
     grain: event

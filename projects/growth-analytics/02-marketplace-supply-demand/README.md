@@ -1,5 +1,7 @@
 # Marketplace supply and demand with incomplete data
 
+> This technical notebook is retained as a historical methods record. The published case study and current aggregate evidence use the validated January 2025 TLC Parquet snapshot in `src/content/projects/marketplace-supply-demand.md` and `public/data/senior/marketplace.json`. The 2019 API slice below is not used for the public headline findings.
+
 ## Executive summary
 
 **Decision owner:** Country Manager and Marketplace Operations Lead. **Decision:** where and when should the team test driver incentives? **Primary metric:** request fulfillment rate. **Supply diagnostic:** recorded trips per eligible online driver-hour. **Economic metric:** incremental fulfilled trips per incentive dollar. **Guardrails:** wait time, cancellations, driver earnings, and neighboring-zone displacement.

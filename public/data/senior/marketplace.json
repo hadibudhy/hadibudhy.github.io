@@ -1,0 +1,460 @@
+{
+  "source": {
+    "url": "https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page",
+    "retrieved_at": "2026-08-29T12:24:06Z",
+    "sha256": "fcdef276f4e9887f2beab30590165cdea74caef50a1313d71fa01ff6afacca3a"
+  },
+  "quality": {
+    "rows": 20405666,
+    "analysis_rows": 20404497,
+    "missing_request": 0,
+    "missing_pickup": 0,
+    "negative_delay": 199788,
+    "delay_over_120_minutes": 21,
+    "first_request": "2024-12-31 22:31:09",
+    "last_request": "2025-02-01 00:10:00"
+  },
+  "analysis_window": {
+    "start": "2025-01-01T00:00:00",
+    "end": "2025-02-01T00:00:00",
+    "timestamp_field": "request_datetime"
+  },
+  "selection_rule": "Within the January request-time window, require at least 500 completed trips in the month and at least 20 observed daily windows, then rank by completed-trip P90 pickup delay.",
+  "hourly": [
+    {
+      "request_hour": 0,
+      "completed_trips": 664549,
+      "median_delay": 4.166667,
+      "p90_delay": 9.3
+    },
+    {
+      "request_hour": 1,
+      "completed_trips": 464422,
+      "median_delay": 4.233333,
+      "p90_delay": 9.55
+    },
+    {
+      "request_hour": 2,
+      "completed_trips": 342314,
+      "median_delay": 4.416667,
+      "p90_delay": 9.466667
+    },
+    {
+      "request_hour": 3,
+      "completed_trips": 283614,
+      "median_delay": 4.6,
+      "p90_delay": 9.35
+    },
+    {
+      "request_hour": 4,
+      "completed_trips": 285225,
+      "median_delay": 4.75,
+      "p90_delay": 9.366667
+    },
+    {
+      "request_hour": 5,
+      "completed_trips": 356064,
+      "median_delay": 4.416667,
+      "p90_delay": 8.633333
+    },
+    {
+      "request_hour": 6,
+      "completed_trips": 588488,
+      "median_delay": 4.616667,
+      "p90_delay": 9.133333
+    },
+    {
+      "request_hour": 7,
+      "completed_trips": 911979,
+      "median_delay": 4.983333,
+      "p90_delay": 10.266667
+    },
+    {
+      "request_hour": 8,
+      "completed_trips": 1052496,
+      "median_delay": 4.216667,
+      "p90_delay": 8.3
+    },
+    {
+      "request_hour": 9,
+      "completed_trips": 941504,
+      "median_delay": 3.483333,
+      "p90_delay": 6.633333
+    },
+    {
+      "request_hour": 10,
+      "completed_trips": 864279,
+      "median_delay": 3.35,
+      "p90_delay": 6.533333
+    },
+    {
+      "request_hour": 11,
+      "completed_trips": 850578,
+      "median_delay": 3.383333,
+      "p90_delay": 6.683333
+    },
+    {
+      "request_hour": 12,
+      "completed_trips": 869690,
+      "median_delay": 3.516667,
+      "p90_delay": 7.05
+    },
+    {
+      "request_hour": 13,
+      "completed_trips": 919035,
+      "median_delay": 3.566667,
+      "p90_delay": 7.133333
+    },
+    {
+      "request_hour": 14,
+      "completed_trips": 1016881,
+      "median_delay": 3.783333,
+      "p90_delay": 7.75
+    },
+    {
+      "request_hour": 15,
+      "completed_trips": 1029957,
+      "median_delay": 3.683333,
+      "p90_delay": 7.5
+    },
+    {
+      "request_hour": 16,
+      "completed_trips": 1080393,
+      "median_delay": 3.583333,
+      "p90_delay": 7.2
+    },
+    {
+      "request_hour": 17,
+      "completed_trips": 1229000,
+      "median_delay": 3.966667,
+      "p90_delay": 7.916667
+    },
+    {
+      "request_hour": 18,
+      "completed_trips": 1248808,
+      "median_delay": 3.933333,
+      "p90_delay": 7.733333
+    },
+    {
+      "request_hour": 19,
+      "completed_trips": 1180300,
+      "median_delay": 3.633333,
+      "p90_delay": 7.3
+    },
+    {
+      "request_hour": 20,
+      "completed_trips": 1088024,
+      "median_delay": 3.533333,
+      "p90_delay": 7.416667
+    },
+    {
+      "request_hour": 21,
+      "completed_trips": 1057783,
+      "median_delay": 3.783333,
+      "p90_delay": 8.333333
+    },
+    {
+      "request_hour": 22,
+      "completed_trips": 1006701,
+      "median_delay": 4.066667,
+      "p90_delay": 8.75
+    },
+    {
+      "request_hour": 23,
+      "completed_trips": 872609,
+      "median_delay": 4.183333,
+      "p90_delay": 8.816667
+    }
+  ],
+  "priority_zone_hours": [
+    {
+      "provider": "HV0005",
+      "pickup_zone": 132,
+      "request_hour": 0,
+      "completed_trips": 3550,
+      "median_delay": 8.316667,
+      "p90_delay": 18.951667,
+      "avg_driver_pay": 50.253555,
+      "avg_fare": 61.742713,
+      "zone_name": "JFK Airport",
+      "observed_daily_windows": 31,
+      "days_p90_at_least_12": 17.0,
+      "median_daily_p90_delay": 12.503333
+    },
+    {
+      "provider": "HV0005",
+      "pickup_zone": 132,
+      "request_hour": 23,
+      "completed_trips": 5157,
+      "median_delay": 8.366667,
+      "p90_delay": 18.556667,
+      "avg_driver_pay": 53.928767,
+      "avg_fare": 63.329969,
+      "zone_name": "JFK Airport",
+      "observed_daily_windows": 31,
+      "days_p90_at_least_12": 25.0,
+      "median_daily_p90_delay": 15.056667
+    },
+    {
+      "provider": "HV0003",
+      "pickup_zone": 117,
+      "request_hour": 6,
+      "completed_trips": 988,
+      "median_delay": 8.966667,
+      "p90_delay": 18.455,
+      "avg_driver_pay": 24.905496,
+      "avg_fare": 26.441447,
+      "zone_name": "Hammels/Arverne",
+      "observed_daily_windows": 28,
+      "days_p90_at_least_12": 27.0,
+      "median_daily_p90_delay": 17.195
+    },
+    {
+      "provider": "HV0003",
+      "pickup_zone": 132,
+      "request_hour": 0,
+      "completed_trips": 12621,
+      "median_delay": 9.3,
+      "p90_delay": 18.066667,
+      "avg_driver_pay": 49.934043,
+      "avg_fare": 58.445241,
+      "zone_name": "JFK Airport",
+      "observed_daily_windows": 31,
+      "days_p90_at_least_12": 26.0,
+      "median_daily_p90_delay": 13.266667
+    },
+    {
+      "provider": "HV0003",
+      "pickup_zone": 86,
+      "request_hour": 5,
+      "completed_trips": 832,
+      "median_delay": 7.708333,
+      "p90_delay": 17.746667,
+      "avg_driver_pay": 27.455216,
+      "avg_fare": 30.358005,
+      "zone_name": "Far Rockaway",
+      "observed_daily_windows": 28,
+      "days_p90_at_least_12": 26.0,
+      "median_daily_p90_delay": 16.430833
+    },
+    {
+      "provider": "HV0003",
+      "pickup_zone": 132,
+      "request_hour": 23,
+      "completed_trips": 18276,
+      "median_delay": 9.3,
+      "p90_delay": 17.616667,
+      "avg_driver_pay": 52.536504,
+      "avg_fare": 62.770698,
+      "zone_name": "JFK Airport",
+      "observed_daily_windows": 31,
+      "days_p90_at_least_12": 29.0,
+      "median_daily_p90_delay": 15.176667
+    },
+    {
+      "provider": "HV0003",
+      "pickup_zone": 117,
+      "request_hour": 7,
+      "completed_trips": 1518,
+      "median_delay": 8.341667,
+      "p90_delay": 17.003333,
+      "avg_driver_pay": 26.076456,
+      "avg_fare": 28.378801,
+      "zone_name": "Hammels/Arverne",
+      "observed_daily_windows": 31,
+      "days_p90_at_least_12": 23.0,
+      "median_daily_p90_delay": 16.55
+    },
+    {
+      "provider": "HV0005",
+      "pickup_zone": 86,
+      "request_hour": 7,
+      "completed_trips": 787,
+      "median_delay": 8.65,
+      "p90_delay": 16.306667,
+      "avg_driver_pay": 15.674587,
+      "avg_fare": 20.465743,
+      "zone_name": "Far Rockaway",
+      "observed_daily_windows": 20,
+      "days_p90_at_least_12": 18.0,
+      "median_daily_p90_delay": 15.866667
+    },
+    {
+      "provider": "HV0003",
+      "pickup_zone": 86,
+      "request_hour": 6,
+      "completed_trips": 1459,
+      "median_delay": 7.5,
+      "p90_delay": 16.266667,
+      "avg_driver_pay": 23.397409,
+      "avg_fare": 25.475243,
+      "zone_name": "Far Rockaway",
+      "observed_daily_windows": 31,
+      "days_p90_at_least_12": 27.0,
+      "median_daily_p90_delay": 15.566667
+    },
+    {
+      "provider": "HV0005",
+      "pickup_zone": 138,
+      "request_hour": 0,
+      "completed_trips": 3367,
+      "median_delay": 7.316667,
+      "p90_delay": 16.146667,
+      "avg_driver_pay": 31.912474,
+      "avg_fare": 45.333341,
+      "zone_name": "LaGuardia Airport",
+      "observed_daily_windows": 28,
+      "days_p90_at_least_12": 7.0,
+      "median_daily_p90_delay": 9.3425
+    },
+    {
+      "provider": "HV0003",
+      "pickup_zone": 138,
+      "request_hour": 21,
+      "completed_trips": 19195,
+      "median_delay": 8.05,
+      "p90_delay": 15.683333,
+      "avg_driver_pay": 34.799204,
+      "avg_fare": 51.131208,
+      "zone_name": "LaGuardia Airport",
+      "observed_daily_windows": 31,
+      "days_p90_at_least_12": 21.0,
+      "median_daily_p90_delay": 12.783333
+    },
+    {
+      "provider": "HV0005",
+      "pickup_zone": 132,
+      "request_hour": 1,
+      "completed_trips": 1619,
+      "median_delay": 7.133333,
+      "p90_delay": 15.57,
+      "avg_driver_pay": 44.921662,
+      "avg_fare": 55.387097,
+      "zone_name": "JFK Airport",
+      "observed_daily_windows": 28,
+      "days_p90_at_least_12": 5.0,
+      "median_daily_p90_delay": 10.973333
+    },
+    {
+      "provider": "HV0003",
+      "pickup_zone": 132,
+      "request_hour": 22,
+      "completed_trips": 20335,
+      "median_delay": 9.016667,
+      "p90_delay": 15.526667,
+      "avg_driver_pay": 54.081711,
+      "avg_fare": 65.007025,
+      "zone_name": "JFK Airport",
+      "observed_daily_windows": 31,
+      "days_p90_at_least_12": 31.0,
+      "median_daily_p90_delay": 14.311667
+    },
+    {
+      "provider": "HV0005",
+      "pickup_zone": 132,
+      "request_hour": 22,
+      "completed_trips": 5595,
+      "median_delay": 7.45,
+      "p90_delay": 15.4,
+      "avg_driver_pay": 54.527072,
+      "avg_fare": 63.391948,
+      "zone_name": "JFK Airport",
+      "observed_daily_windows": 31,
+      "days_p90_at_least_12": 22.0,
+      "median_daily_p90_delay": 12.736667
+    },
+    {
+      "provider": "HV0003",
+      "pickup_zone": 117,
+      "request_hour": 22,
+      "completed_trips": 1193,
+      "median_delay": 7.133333,
+      "p90_delay": 15.193333,
+      "avg_driver_pay": 21.736178,
+      "avg_fare": 22.280997,
+      "zone_name": "Hammels/Arverne",
+      "observed_daily_windows": 31,
+      "days_p90_at_least_12": 22.0,
+      "median_daily_p90_delay": 13.333333
+    },
+    {
+      "provider": "HV0003",
+      "pickup_zone": 23,
+      "request_hour": 23,
+      "completed_trips": 840,
+      "median_delay": 7.316667,
+      "p90_delay": 15.023333,
+      "avg_driver_pay": 17.285131,
+      "avg_fare": 19.403952,
+      "zone_name": "Bloomfield/Emerson Hill",
+      "observed_daily_windows": 27,
+      "days_p90_at_least_12": 18.0,
+      "median_daily_p90_delay": 12.81
+    },
+    {
+      "provider": "HV0003",
+      "pickup_zone": 115,
+      "request_hour": 7,
+      "completed_trips": 862,
+      "median_delay": 8.216667,
+      "p90_delay": 14.94,
+      "avg_driver_pay": 16.863028,
+      "avg_fare": 19.527262,
+      "zone_name": "Grymes Hill/Clifton",
+      "observed_daily_windows": 21,
+      "days_p90_at_least_12": 19.0,
+      "median_daily_p90_delay": 14.943333
+    },
+    {
+      "provider": "HV0003",
+      "pickup_zone": 132,
+      "request_hour": 21,
+      "completed_trips": 20369,
+      "median_delay": 8.633333,
+      "p90_delay": 14.766667,
+      "avg_driver_pay": 51.879341,
+      "avg_fare": 62.790969,
+      "zone_name": "JFK Airport",
+      "observed_daily_windows": 31,
+      "days_p90_at_least_12": 31.0,
+      "median_daily_p90_delay": 13.816667
+    },
+    {
+      "provider": "HV0005",
+      "pickup_zone": 17,
+      "request_hour": 7,
+      "completed_trips": 1660,
+      "median_delay": 7.533333,
+      "p90_delay": 14.755,
+      "avg_driver_pay": 16.847283,
+      "avg_fare": 24.12994,
+      "zone_name": "Bedford",
+      "observed_daily_windows": 31,
+      "days_p90_at_least_12": 18.0,
+      "median_daily_p90_delay": 14.568333
+    },
+    {
+      "provider": "HV0005",
+      "pickup_zone": 213,
+      "request_hour": 7,
+      "completed_trips": 1436,
+      "median_delay": 8.025,
+      "p90_delay": 14.75,
+      "avg_driver_pay": 15.866184,
+      "avg_fare": 22.180696,
+      "zone_name": "Soundview/Castle Hill",
+      "observed_daily_windows": 28,
+      "days_p90_at_least_12": 18.0,
+      "median_daily_p90_delay": 13.720833
+    }
+  ],
+  "limits": [
+    "Pickup delay is conditional on completed trips.",
+    "The file does not contain unmatched requests, cancellations, or online driver hours."
+  ],
+  "evidence_metadata": {
+    "generator": "scripts/build_senior_evidence.py",
+    "version": "2026-09-06",
+    "aggregate_only": true
+  }
+}

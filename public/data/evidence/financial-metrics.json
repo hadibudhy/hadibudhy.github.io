@@ -1,27 +1,14 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "caseId": "financial-metrics",
-  "status": "published",
-  "source": {
-    "name": "SEC Company Facts API",
-    "url": "https://www.sec.gov/edgar/sec-api-documentation",
-    "publisher": "U.S. Securities and Exchange Commission",
-    "accessed": "2026-09-05",
-    "issuerScope": "Microsoft Corporation",
-    "grain": "reported fact with tag, unit, fiscal period, frame, filing date, and value",
-    "sha256": "f8aae2965b20ad0df44bdf7ccbedf797d275b6b8dc030154a7a311361bb7246f",
-    "publicDataOnly": true
-  },
-  "validation": {
-    "checks": ["unit compatibility", "annual period selection", "duplicate fact context", "revenue/net income margin reconciliation", "source lineage retained"],
-    "metrics": ["revenue", "net income", "net margin"],
-    "periodRule": "Use documented annual facts from the selected issuer context; do not mix quarterly and annual frames."
-  },
-  "artifacts": [
-    "/images/sec-revenue-net-income.png",
-    "/images/sec-net-margin.png",
-    "/images/portfolio-sec-fact-grain.svg"
-  ],
-  "artifactHashes": {"/images/sec-revenue-net-income.png": "7cb1921a410c92568ff071f37095c5408f60b4329c43221cf71ac72bc322f35a", "/images/sec-net-margin.png": "0a932489a5814740e16e1a235c5dbd7bf138a1a9186a85e64b36a73597468b9c", "/images/portfolio-sec-fact-grain.svg": "7a589416a6a30f8c5c8a82bdc2ba54863e77b67f4b59ae7e33437db5f6994fb5"},
-  "evidenceBoundary": "The case supports reported company-level trend metrics. It does not support product, customer, or causal operating conclusions."
+  "status": "verified",
+  "scope": "full-data",
+  "source": {"name": "SEC Company Facts: Microsoft", "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json", "sha256": "f8aae2965b20ad0df44bdf7ccbedf797d275b6b8dc030154a7a311361bb7246f", "grain": "reported fact and filing context"},
+  "result": "/data/senior/financial-metrics.json",
+  "resultHash": "e0b3c81f8747a0f4a90cdfb92aa0938f1f313886fb7c027e32c8b6089bccf82c",
+  "checks": ["unit", "annual duration", "form", "period end", "coherent accession", "tag priority", "pinned 10-K extract hash", "filing-document literal value presence"],
+  "metrics": {"selected_periods": 5, "fy2026_revenue_usd": 331839000000, "fy2026_net_income_usd": 133749000000, "fy2026_net_margin": 0.4030538906},
+  "artifacts": ["/images/senior-sec-performance.png", "/images/senior-sec-margin.png", "/images/portfolio-sec-fact-grain.svg"],
+  "artifactHashes": {"/images/senior-sec-performance.png": "848f8891bd822c9912c3be52c5b08d4753b88cb6371a28705c58a447ac3d0c32", "/images/senior-sec-margin.png": "87ab3bfbc66384ebcb4016b20a95b8e4f8a0149299fbcfa59124b2e60203ab6c", "/images/portfolio-sec-fact-grain.svg": "7a589416a6a30f8c5c8a82bdc2ba54863e77b67f4b59ae7e33437db5f6994fb5"},
+  "evidenceBoundary": "The source supports issuer-level reported performance. It cannot explain product, customer, or management causes."
 }

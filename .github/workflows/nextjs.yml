@@ -44,7 +44,10 @@ jobs:
           dbt seed --project-dir analytics --profiles-dir analytics --target ci
           dbt build --project-dir analytics --profiles-dir analytics --target ci
       - name: Verify published evidence
-        run: python scripts/verify_published_evidence.py
+        run: |
+          python scripts/verify_published_evidence.py
+          python scripts/verify_senior_claims.py
+          python scripts/verify_portfolio_seniority.py
       - name: Lint
         run: npm run lint
       - name: Build with Next.js

@@ -1,11 +1,11 @@
 ---
-title: "Service Metrics: Separating Queue Pressure from Resolution Quality"
-date: 2026-09-05
+title: "NYC 311: Finding Queue Pressure Without Mislabeling Resolution"
+date: 2026-09-06
 categories: [analytics engineering]
 tags: [data reliability, service operations, metric definitions, public data]
-excerpt: "A service-operations metric layer that keeps arrivals, backlog age, administrative closure, and resolution quality from being treated as the same outcome."
-problem: "A service team sees large request queues and wants to move capacity, but complaint count alone cannot show which work is old, which queues are slow, or whether a closed request was actually resolved."
-result: "The model treats one NYC 311 request as the source grain, keeps open work at the analysis cutoff, and separates observed lifecycle metrics from outcomes the public source does not contain."
+excerpt: "A mature-cohort analysis of 348,180 real service requests that separates arrivals, administrative closure tails, open cases, and resolution evidence."
+problem: "An operations lead needs to decide which workflows need investigation, but request volume alone hides long-lived cases and administrative closure does not prove that the issue was resolved."
+result: "Following January 2025 requests through a September 2026 snapshot found long administrative closure times in a small set of queues, including a 155-day P90 among valid closed Taxi complaints."
 featured: true
 kind: flagship
 published: true
@@ -15,87 +15,103 @@ secondaryTracks: [product-analytics]
 displayOrder: 25
 evidenceManifest: /data/evidence/service-metric-reliability.json
 evidenceVisuals:
-  - /images/portfolio-nyc311-scale.svg
+  - /images/senior-311-pressure.png
+  - /images/senior-311-volume-time.png
   - /images/portfolio-nyc311-boundary.svg
-  - /images/portfolio-nyc311-metrics.svg
 header:
-  teaser: /images/portfolio-nyc311-scale.svg
+  teaser: /images/senior-311-pressure.png
 ---
 
-## Business question
+## The decision
 
-Where should response capacity move when a queue has many requests but the public data cannot directly measure resident outcomes?
+An operations director needs to choose which service queue should receive a routing or capacity pilot. The decision must consider incoming work, open backlog, and long close times together. It must also avoid presenting administrative closure as proof of resident satisfaction.
 
-## Why it matters
+## Decision framework
 
-Counting requests alone can send staff to the busiest queue while older work remains elsewhere. Treating a closed record as a resolved issue can also make a faster administrative process look like better service.
+| Layer | Definition |
+|---|---|
+| Decision owner | Operations director and queue owner |
+| Outcome metric | Age-adjusted open backlog and time to first response |
+| Drivers to investigate | Arrival volume, workflow type, transfers, staffing, and closure rules |
+| Guardrails | Reopen or repeat contact, transfer rate, verified resolution, cost, and neighbouring-queue backlog |
 
-## Decision brief
+The public snapshot can prioritize a workflow review. It cannot identify staff capacity or prove that a closed request was resolved.
 
-- **Recommendation:** use a queue-level metric layer with arrivals, open backlog, age, close-time distribution, and workflow mix before changing staffing or routing.
-- **Evidence:** NYC 311 provides request IDs, creation and closure timestamps, status, agency, type, and location. The source does not provide consistent first-response time, staff hours, or resolution quality.
-- **Business value:** decision-makers can see which workload signal is observed and which outcome still needs instrumentation.
-- **Main risk:** reporting behavior and agency closure rules vary, so volume is not a complete measure of resident need.
-- **Next action:** pilot a capacity or routing change in one queue and measure backlog age, first response, reopen/follow-up, and resident outcome guardrails where available.
+## Data and cutoff
 
-## What the data represents
+I downloaded **348,180 NYC 311 requests** created during January 2025 from the [official Open Data API](https://data.cityofnewyork.us/resource/erm2-nwe9) and used the recorded snapshot available on 5 September 2026. This creates a mature intake cohort: each January request has at least 19 months of follow-up.
 
-The source is the [NYC 311 Service Requests dataset](https://catalog.data.gov/dataset/311-service-requests-from-2010-to-present). The source grain is one service request. The current case uses the request lifecycle as an operational record, not as proof that the underlying issue was fixed.
+The request identifier is unique in the snapshot. Creation time is complete. **2,609 requests** have no closure time and **97 records** have a closure before creation; those invalid durations remain counted in quality reporting and stay out of close-time statistics.
+
+## Metric contract
+
+| Metric | Definition | Boundary |
+|---|---|---|
+| Arrivals | Requests created during January | Reported demand, not total service need |
+| Open backlog | No valid closure by the September 2026 snapshot | Administrative open state |
+| Median close time | Median hours for valid closures by the snapshot | Typical completed lifecycle |
+| P90 close time | 90th percentile hours among valid closed requests by the snapshot | Long-tail administrative delay, not eventual resolution time |
+| Closure coverage | Valid closures / non-invalid requests | Whether the queue has enough mature outcomes for timing analysis |
+
+![NYC 311 records contain lifecycle fields but not first response, staff effort, reopen history, or verified resolution](/images/portfolio-nyc311-boundary.svg)
 
 ## Analytics architecture
 
-`311 request source → typed request staging → queue metrics → capacity decision view`
+`API snapshot → request-grain staging → cutoff-safe queue mart → pressure comparison → capacity pilot`
 
-The model retains requests without a close date as open work at the cutoff. It does not silently replace missing dates with an average or remove long-running requests because they look unusual.
+The dbt mart never uses a closure after the recorded snapshot. It excludes negative durations from timing and open-backlog metrics, reports them as quality issues, requires at least 80% closure coverage for P90 comparison, and groups at agency × complaint type. P90 is explicitly a closed-request measure; open requests are right-censored and shown separately. Source and result hashes make the published snapshot reproducible.
 
-## What I checked first
+## What I investigated
 
-1. Are request IDs unique?
-2. Are close dates before creation dates?
-3. How much work is still open at the cutoff?
-4. Do service times differ by complaint type and agency?
-5. Which outcome fields are not present and therefore need a separate product or service measurement plan?
+I tested whether the largest queues also had the longest closed-request administrative closure tail. The comparison includes agency–complaint groups with at least 500 arrivals and at least 80% valid closure coverage. It ranks by observed P90 closure time, then uses open cases as a separate monitoring signal.
 
-## What the evidence shows
+## Volume and pressure point to different decisions
 
-### A large source needs queue-level metrics, not only totals
+High request volume does not always mean a long closure tail. The comparison shows that some smaller queues have a much longer closed-request tail, while some larger queues close most recorded work sooner.
 
-![NYC 311 source scale and one-request grain](/images/portfolio-nyc311-scale.svg)
+![NYC 311 requests created in January 2025: high arrival volume and closed-request closure time identify different workflow investigations](/images/senior-311-volume-time.png)
 
-The dataset is large and mutable. A reliable analysis therefore needs a fixed cutoff, a recorded retrieval date, and a clear request grain.
+This matters because a volume-only staffing rule can send resources to the wrong queue.
 
-### Administrative closure is not the same as resolution
+## Long administrative closure tails are concentrated
 
-![NYC 311 observed lifecycle fields and unavailable service outcomes](/images/portfolio-nyc311-boundary.svg)
+Among queues with at least 500 arrivals and 80% closure coverage:
 
-Close time is a process measure. It can support queue monitoring, but it should not be labeled as resident satisfaction or issue resolution without another source.
+- **Building/Use:** 1,460 arrivals; 100% valid closure coverage; P90 administrative closure **330.6 days**.
+- **Elevator:** 1,605 arrivals; 100% coverage; P90 **189.0 days**.
+- **Taxi Complaint:** 584 arrivals; **96.6%** coverage; P90 **155.2 days**.
+- **For Hire Vehicle Complaint:** 1,425 arrivals; **96.6%** coverage; P90 **139.6 days**.
 
-### The metric contract makes the evidence boundary visible
+![NYC 311 January 2025 intake cohort: selected queues have the longest closed-request administrative closure times](/images/senior-311-pressure.png)
 
-![NYC 311 metric contract separating observed lifecycle measures from unavailable outcomes](/images/portfolio-nyc311-metrics.svg)
-
-This separation helps a team act on what it knows while creating a clear request for better instrumentation.
+These figures show lifecycle timing, not failure by an agency. Complaint type, legal workflow, severity, reporting channel, and closure rules are plausible explanations that need operational review.
 
 ## Recommendation
 
-**What:** publish arrivals, open-work count, backlog age, median and tail close time, and workflow mix as separate metrics.
+**P0: review workflow definitions before moving staff.** Confirm what “open” and “closed” mean for Building/Use, Elevator, Taxi Complaint, and For Hire Vehicle Complaint. Add first-response, transfer, reopen, effort, and resident-outcome events.
 
-**Where / who:** start with the queue that has the oldest actionable work, not automatically the borough with the largest count.
+**P1: test capacity only after workflow review.** Select one queue where the bottleneck is operationally controllable. Randomize routing or staffing by eligible queue-time blocks. Use age-adjusted backlog clearance and time to first response as primary metrics.
 
-**Why:** workload pressure depends on age and service-time shape as well as volume.
+**Guardrails:** reopen or repeat-contact rate, transfer rate, issue-resolution confirmation, cost per completed request, and backlog displacement into neighbouring queues.
 
-**Risk:** faster closure may move work downstream or reduce resolution quality.
+**P2: investigate access bias.** Compare request rates with population and service-inspection data before using geography to allocate service value.
 
-**Next test:** compare a pilot queue with a matched queue using first response, backlog age, reopen/follow-up, and resident-outcome guardrails.
+## Success rule
 
-## Measurement plan
+The pilot succeeds only if it reduces age-adjusted backlog and first-response time without increasing reopen, transfer, repeat-contact, or cost beyond agreed limits. A faster closure timestamp alone is not success.
 
-Monitor source freshness, request-key uniqueness, missing close-date share, negative durations, age percentiles, and metric reconciliation. With internal service data, add first response, staff hours, transfer history, reopen events, and a consistent resolution outcome.
+## Limitations
+
+- The source captures reported requests, not all resident need.
+- Administrative closure does not establish resolution.
+- The intake month is fixed, but closure workflows may still vary by season and policy.
+- Closed-request P90 does not estimate eventual full-cohort resolution time because open cases are right-censored.
+- Long administrative closure time does not identify the bottleneck or staff performance.
 
 ## Key takeaway
 
-Reliable operational analytics starts by separating workload from outcome. A queue can be measured honestly today while the missing service signals become an explicit instrumentation plan.
+The senior decision is to follow a mature intake cohort, find long closed-request administrative tails with adequate coverage, verify the workflow, then test capacity only where the bottleneck is controllable.
 
 ## Technical appendix
 
-The case keeps the public source and its mutable-data boundary explicit. No request-level records are copied into the website. The evidence manifest records the source, grain, checks, and decision boundary.
+The repository includes the fixed-cutoff loader, staging model, queue mart, negative-duration test, CI fixture, evidence builder, and aggregate result at `/data/senior/service-queues.json`.

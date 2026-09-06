@@ -1,13 +1,14 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "caseId": "marketplace-experience",
-  "scope": "full-data",
   "status": "verified",
-  "source": {"name": "NYC TLC HVFHV Open Data and monthly reports", "url": "https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page", "publisher": "NYC Taxi and Limousine Commission", "grain": "completed trip plus monthly aggregation", "sha256": {"hvfhv_january_2025": "fcdef276f4e9887f2beab30590165cdea74caef50a1313d71fa01ff6afacca3", "monthly_reports": "727d69a1716553b9ccd3282a6cfc8b58c5e4dadd4623404b7a455330a2bfbd05"}},
-  "models": ["Official API hourly aggregation", "Monthly supply context"],
-  "checks": ["24 hourly buckets", "source total", "monthly period", "proxy labels"],
-  "metrics": {"recorded_rows": 4965012, "peak_hour": 18, "peak_recorded_trips": 334713},
-  "artifacts": ["/images/growth-hvf-hourly.png", "/images/growth-hvf-monthly-supply.png", "/images/portfolio-marketplace-measurement.svg"],
-  "artifactHashes": {"/images/growth-hvf-hourly.png": "d7b5fc6cf0453254736be607e019014f05aec5873424bda90c70ef596877825a", "/images/growth-hvf-monthly-supply.png": "99e2d017edc0c8de16e01b2d59db91cc237a76d3f7a7b3afeebcbd9d26ef8cd0", "/images/portfolio-marketplace-measurement.svg": "41e6b861e6728d0f1b6ced7b992b6c6dc9411059bdec81282ccf2859f285857e"},
-  "evidenceBoundary": "Completed-trip activity and official monthly proxies are supported. Total requests, lost matches, and incentive ROI are not observed."
+  "scope": "full-data",
+  "source": {"name": "NYC TLC HVFHV January 2025", "url": "https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page", "sha256": "fcdef276f4e9887f2beab30590165cdea74caef50a1313d71fa01ff6afacca3a", "grain": "completed trip"},
+  "result": "/data/senior/marketplace.json",
+  "resultHash": "73102aebbec05d465bcb448ea446b4675c3d7388b775f18befbbc33f9ac3ed80",
+  "checks": ["request timestamp", "pickup timestamp", "negative delay", "extreme delay", "January request-time boundary", "provider-zone-hour minimum volume", "observed daily-window coverage", "completed-trip boundary"],
+  "metrics": {"trips": 20405666, "analysis_rows": 20404497, "negative_delay": 199788, "delay_over_120_minutes": 21, "citywide_peak_hour": 18, "citywide_longest_p90_hour": 7},
+  "artifacts": ["/images/senior-marketplace-hourly.png", "/images/senior-marketplace-priority.png", "/images/portfolio-marketplace-measurement.svg"],
+  "artifactHashes": {"/images/senior-marketplace-hourly.png": "85bddc6ff32d2382f831d61d4be20f72bb8e58c547f9204c40a364741279d5be", "/images/senior-marketplace-priority.png": "838878336dc4d9b206b3507c15b26de809c81f271bf99083a4f199551fbd7de2", "/images/portfolio-marketplace-measurement.svg": "41e6b861e6728d0f1b6ced7b992b6c6dc9411059bdec81282ccf2859f285857e"},
+  "evidenceBoundary": "The source measures completed-trip pickup delay. It does not observe all requests, unmatched demand, cancellations, or online driver hours."
 }

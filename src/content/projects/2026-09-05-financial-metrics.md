@@ -1,11 +1,11 @@
 ---
-title: "Financial Metrics: Building a Reconciled Company Performance Mart"
-date: 2026-09-05
+title: "Financial Metrics: Fixing the Period Logic Before Reporting Growth"
+date: 2026-09-06
 categories: [analytics engineering]
-tags: [financial metrics, SEC data, dimensional modeling, data quality]
-excerpt: "A filing-aware metric model that keeps reported periods, units, and restatements visible before financial trends reach a dashboard."
-problem: "Finance and product leaders need a consistent view of revenue, net income, and margin, but public filing data contains multiple facts, units, periods, and restated values."
-result: "The model treats each reported fact as evidence with source context, then selects a documented annual view instead of assuming that the latest value is automatically comparable."
+tags: [SEC data, metric governance, dbt, reconciliation]
+excerpt: "A filing-aware finance mart that prevents comparative SEC facts from being assigned to the wrong year and reconciles revenue, earnings, and margin."
+problem: "Finance leaders need one trusted annual performance view, but SEC Company Facts repeats values across filings and its filing-year field can differ from the fact's reporting period."
+result: "Using period end, annual duration, form, and one coherent accession corrected the year assignment and produced five reconciled annual periods from FY2022 to FY2026."
 featured: true
 kind: flagship
 published: true
@@ -15,87 +15,90 @@ secondaryTracks: [product-analytics]
 displayOrder: 20
 evidenceManifest: /data/evidence/financial-metrics.json
 evidenceVisuals:
-  - /images/sec-revenue-net-income.png
-  - /images/sec-net-margin.png
+  - /images/senior-sec-performance.png
+  - /images/senior-sec-margin.png
   - /images/portfolio-sec-fact-grain.svg
 header:
-  teaser: /images/sec-revenue-net-income.png
+  teaser: /images/senior-sec-performance.png
 ---
 
-## Business question
+## The decision
 
-How can a team use public financial data without turning inconsistent filing facts into false precision?
+The finance lead needs a consistent annual view of revenue, net income, and margin. The analytics decision is which reported fact belongs to each period when the source contains repeated filings, comparative values, several tags, and mixed durations.
 
-## Why it matters
+## Decision framework
 
-Revenue growth can look healthy while profitability weakens. A metric mart should make that trade-off visible and preserve enough source context for a reviewer to understand how each number was chosen.
+| Layer | Definition |
+|---|---|
+| Decision owner | Finance reporting owner and analytics engineering owner |
+| Outcome metric | Reconciled annual revenue, net income, and net margin |
+| Drivers to investigate | Period end, duration, filing form, reporting tag, accession, and amendment status |
+| Guardrails | Reconciliation variance, duplicate contexts, source freshness, and reproducible backfills |
 
-## Decision brief
+The first decision is metric trust. Product or cost explanations are deliberately out of scope until the annual facts are assigned to the correct reporting periods.
 
-- **Recommendation:** use a narrow, reconciled annual metric layer for executive trend questions, and keep the raw fact history available for deeper review.
-- **Evidence:** SEC Company Facts provides issuer facts with tags, units, filing dates, fiscal periods, and reported values. The evidence manifest records the source and selection rules.
-- **Business value:** consistent metric definitions reduce disagreements over which filing value belongs in a trend chart.
-- **Main risk:** public filings are not a company’s internal operating model. They do not provide product-level drivers, customer cohorts, or live performance.
-- **Next action:** add source freshness and reconciliation checks before connecting the mart to a dashboard or planning model.
+## Why the first result was wrong
 
-## What the data represents
+The [SEC Company Facts API](https://www.sec.gov/edgar/sec-api-documentation) provides structured facts with tags, units, filing dates, forms, accessions, and reporting periods. A first-pass model grouped facts by the source `fy` field. Reconciliation showed that this shifted comparative values into the filing year. For example, a prior-year figure repeated in a newer 10-K could be labelled with the newer filing context.
 
-The source is the [SEC Company Facts API](https://www.sec.gov/edgar/sec-api-documentation). The case uses reported issuer facts rather than a market-price feed. The relevant grain is a reported fact and its context: tag, unit, fiscal period, frame, filing date, and value.
+That is a senior analytics engineering problem: the SQL ran, but the metric meaning was wrong.
 
-## Analytics architecture
+## Corrected metric contract
 
-`SEC JSON → normalized fact staging → period selection → finance metric mart → trend chart`
+| Rule | Implementation |
+|---|---|
+| Annual period | 300–380 days between `start` and `end` |
+| Fiscal year | Year of the reported `period_end`, not filing context `fy` |
+| Filing form | `10-K` or `10-K/A` |
+| Coherent context | Revenue and net income come from one selected accession per period |
+| Revenue tag | Prefer `Revenues`; use the approved contract-revenue tag when needed |
+| Net margin | Selected net income / selected revenue |
 
-The raw source keeps filing context. The normalized layer makes periods and units explicit. The final mart contains only metrics whose selection rule is documented. This prevents a dashboard query from silently choosing between quarterly, annual, and restated facts.
+The model retains raw filing context in staging, ranks eligible filings deterministically, and publishes only periods with both approved metrics.
 
-## What I checked first
+![SEC Company Facts: every metric keeps tag, unit, period, form, accession, and filing lineage](/images/portfolio-sec-fact-grain.svg)
 
-1. Are revenue and net income using compatible units?
-2. Is each annual value tied to the right fiscal period?
-3. Are duplicate facts caused by multiple filings or tags?
-4. Are margins calculated from the selected numerator and denominator?
-5. Can a reviewer trace the chart value back to the source fact?
+## Data quality and reconciliation
 
-## What the evidence shows
+The source snapshot contains **81 eligible annual revenue or net-income facts** after unit, form, period, and duration checks. The mart selects five periods, FY2022–FY2026, and confirms one accession per period. Tests require unique fiscal years, non-null metrics, positive revenue, and a calculable margin.
 
-### Revenue and net income need to be read together
+The corrected result was compared with pinned official 10-K documents. The reference file stores the accession, document URL, document hash, and the intended `Consolidated Statements of Income` source table for every period. The verifier confirms the document hash and that the reported values are present in the cited filing. It does not claim to parse the filing table automatically, so the source-table reference remains an explicit audit trail rather than a stronger automated assertion.
 
-![Reported revenue and net income over the selected fiscal periods](/images/sec-revenue-net-income.png)
+## What the corrected mart shows
 
-Revenue is a scale measure. Net income shows what remains after costs. Showing both prevents growth from being interpreted as improving business performance by default.
+Revenue increased from **$198.3B in FY2022** to **$331.8B in FY2026**. Net income increased from **$72.7B** to **$133.7B** over the same periods.
 
-### Margin turns the growth story into a performance question
+![Microsoft reported annual facts, FY2022–FY2026: revenue and net income both increased after filing-aware period selection](/images/senior-sec-performance.png)
 
-![Reported net margin over the selected fiscal periods](/images/sec-net-margin.png)
+Growth was not uniform. Revenue growth slowed to **6.9% in FY2023**, while net income declined **0.5%** and net margin fell from **36.7% to 34.1%**. By FY2026, revenue growth reached **17.8%**, net-income growth **31.3%**, and net margin **40.3%**.
 
-Net margin is calculated as selected net income divided by selected revenue. It is a useful summary, but it does not explain which product, cost, or market drove the change.
+![Microsoft reported annual facts, FY2022–FY2026: net margin recovered from 34.1% to 40.3%](/images/senior-sec-margin.png)
 
-### A financial metric is only as trustworthy as its lineage
-
-![The fact grain and lineage needed for a filing-aware finance metric mart](/images/portfolio-sec-fact-grain.svg)
-
-The chart is built from a metric definition, not from a convenient spreadsheet cell. The source context remains available for audit and later expansion.
+This is a performance signal, not a root-cause claim. Company Facts does not identify which products, prices, customer segments, or cost programmes drove the change.
 
 ## Recommendation
 
-**What:** publish a small finance mart with explicit metric definitions, period rules, units, and source links.
+**P0: adopt the corrected period contract.** Use period end, duration, form, unit, and accession as required fields for annual metrics. Block publication when reconciliation to the filing exceeds an agreed tolerance.
 
-**Where / who:** finance, analytics engineering, and business teams should agree on the annual reporting view before extending it to quarterly or product-level measures.
+**P1: add metric ownership.** Finance owns the definition and approved tags; analytics engineering owns lineage, tests, freshness, and backfills. Changes require versioned review.
 
-**Why:** reported financial facts can be valid individually and still become misleading when mixed across periods or units.
+**P2: connect operating drivers.** Add product revenue, gross margin, headcount, and customer metrics only after their grains and reporting calendars are aligned. Do not infer those drivers from company-level facts.
 
-**Risk:** a reconciled metric layer can describe performance without explaining its operational drivers.
+## Operational plan
 
-**Next test:** reconcile the selected annual metrics to the issuer’s filings, add freshness checks, and then join approved operating metrics only after the grain is documented.
+Run the source daily, but rebuild the annual mart only when a relevant filing or amendment arrives. Store accession and filing time so restatements are visible. Monitor source freshness, eligible-fact count, duplicate contexts, selected-period count, and reconciliation variance. A backfill must reproduce prior results or record the filing that changed them.
 
-## Measurement plan
+## Limitations
 
-Monitor source freshness, fact-to-mart row counts, unit consistency, annual period coverage, and reconciliation variance. For a company’s internal data, add gross margin, customer retention, acquisition cost, and product-level contribution only when their definitions are approved.
+- This is a single-issuer public filing case, not a cross-company benchmark.
+- Company Facts is authoritative reporting data but can contain several valid contexts.
+- Annual performance does not establish product or management causality.
+- FY2026 reflects the source snapshot available at the recorded retrieval date.
 
 ## Key takeaway
 
-Financial analytics is not only about calculating a ratio. It is about preserving the reporting context so a decision-maker can trust what the ratio means.
+The most important result was not the growth chart. It was finding and correcting a period-definition error that could have given leaders a confident but wrong trend.
 
 ## Technical appendix
 
-The evidence manifest records the SEC source, expected metric fields, period boundary, and validation notes. The public site intentionally exposes the model decision and charts, not raw filing payloads or private business data.
+The repository includes the Company Facts loader, typed staging model, accession-aware annual mart, dbt tests, CI seed, and aggregate evidence at `/data/senior/financial-metrics.json`.

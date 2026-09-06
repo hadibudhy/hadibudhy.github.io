@@ -1,0 +1,101 @@
+{
+  "source": {
+    "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+    "retrieved_at": "2026-08-20T07:42:40Z",
+    "sha256": "f8aae2965b20ad0df44bdf7ccbedf797d275b6b8dc030154a7a311361bb7246f",
+    "issuer": "MICROSOFT CORPORATION"
+  },
+  "quality": {
+    "eligible_annual_facts": 81,
+    "selected_periods": 5,
+    "selected_accessions": {
+      "2022": 1,
+      "2023": 1,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1
+    }
+  },
+  "annual_metrics": [
+    {
+      "fiscal_year": 2022,
+      "net_income": 72738000000.0,
+      "revenue": 198270000000.0,
+      "source_accession": "0000950170-24-087843",
+      "net_margin": 0.3668633681343622,
+      "revenue_growth": 0.17956070629670173,
+      "net_income_growth": 0.1871521600757291
+    },
+    {
+      "fiscal_year": 2023,
+      "net_income": 72361000000.0,
+      "revenue": 211915000000.0,
+      "source_accession": "0000950170-25-100235",
+      "net_margin": 0.3414623787839464,
+      "revenue_growth": 0.06882029555656421,
+      "net_income_growth": -0.005182985509637361
+    },
+    {
+      "fiscal_year": 2024,
+      "net_income": 88136000000.0,
+      "revenue": 245122000000.0,
+      "source_accession": "0001193125-26-323660",
+      "net_margin": 0.35955972944084985,
+      "revenue_growth": 0.1566996201307127,
+      "net_income_growth": 0.21800417351888446
+    },
+    {
+      "fiscal_year": 2025,
+      "net_income": 101832000000.0,
+      "revenue": 281724000000.0,
+      "source_accession": "0001193125-26-323660",
+      "net_margin": 0.3614601524896707,
+      "revenue_growth": 0.14932156232406713,
+      "net_income_growth": 0.15539620586366532
+    },
+    {
+      "fiscal_year": 2026,
+      "net_income": 133749000000.0,
+      "revenue": 331839000000.0,
+      "source_accession": "0001193125-26-323660",
+      "net_margin": 0.4030538905915218,
+      "revenue_growth": 0.17788686799846665,
+      "net_income_growth": 0.3134279990572708
+    }
+  ],
+  "reconciliation": {
+    "reference": "analytics/seeds/ci/expected_financial_metrics.csv",
+    "matched_periods": 5,
+    "variance_tolerance_usd": 1
+  },
+  "filing_documents": [
+    {
+      "source_accession": "0000950170-24-087843",
+      "source_document_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm",
+      "source_document_sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+      "source_table": "Consolidated Statements of Income"
+    },
+    {
+      "source_accession": "0000950170-25-100235",
+      "source_document_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+      "source_document_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "source_table": "Consolidated Statements of Income"
+    },
+    {
+      "source_accession": "0001193125-26-323660",
+      "source_document_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+      "source_document_sha256": "4bcf2da2871acc19e32c5a62f36f6d83d6aae03cdc4aaa9a86a9a21ee8223f02",
+      "source_table": "Consolidated Statements of Income"
+    }
+  ],
+  "selection_rule": "Latest filed 10-K/10-K-A context per fiscal year, 300-380 day duration, one coherent accession, deterministic revenue-tag priority.",
+  "limits": [
+    "Company-level filings do not identify product or customer drivers.",
+    "The latest comparative filing context is used consistently within each fiscal year."
+  ],
+  "evidence_metadata": {
+    "generator": "scripts/build_senior_evidence.py",
+    "version": "2026-09-06",
+    "aggregate_only": true
+  }
+}

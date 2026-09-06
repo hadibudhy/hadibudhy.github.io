@@ -1,29 +1,14 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "caseId": "product-event-foundation",
-  "status": "published",
-  "source": {
-    "name": "REES46 Electronics behaviour events",
-    "url": "https://data.rees46.com/datasets/electronics-events/electronics-events.csv.gz",
-    "publisher": "REES46",
-    "accessed": "2026-09-05",
-    "grain": "one recorded event",
-    "publicDataOnly": true,
-    "fileRangeObserved": "2020-09-24 through 2021-02-28",
-    "publisherDescription": "The publisher describes a five-month electronics behaviour export; the loaded file range is retained as the controlling evidence."
-  },
-  "validation": {
-    "eventTypes": ["view", "cart", "purchase"],
-    "eventRows": 885129,
-    "eventCounts": {"view": 793748, "cart": 54035, "purchase": 37346},
-    "missingSessionRows": 165,
-    "checks": ["deterministic event key", "event type accepted values", "timestamp parsing", "session coverage visible", "CI fixture expected rows"]
-  },
-  "artifacts": [
-    "/images/rees46-event-mix.svg",
-    "/images/rees46-quality-checks.svg",
-    "/images/rees46-model-grain.svg"
-  ],
-  "artifactHashes": {"/images/rees46-event-mix.svg": "bef9953a5faf42989a90344999e344e590a77ce0eca1ec4669340973f31d1245", "/images/rees46-quality-checks.svg": "9bc51461721515415b74145bf8a98348a4ab7ad181e3e5c38a805056fc30db77", "/images/rees46-model-grain.svg": "18a27d03491bb9fb6ee744ba28e59d19c6ad1387a67aea4ec99d0783d7494be5"},
-  "evidenceBoundary": "Event counts and identified-session metrics are supported. A live product activation or retention claim requires internal telemetry and an approved tracking plan."
+  "status": "verified",
+  "scope": "full-data",
+  "source": {"name": "REES46 Electronics events", "url": "https://data.rees46.com/datasets/electronics-events/electronics-events.csv.gz", "sha256": "cbcbedc28c39a6b2add493bbbd9f71c061ad9d84087b85e64c442e4d47f418e7", "grain": "recorded event"},
+  "result": "/data/senior/product-events.json",
+  "resultHash": "5a3e6627b05fbf336a596e6b38564b8d88a0436ac5dca1a0f61ed1f6935bbf7f",
+  "checks": ["event grain", "accepted event types", "identity coverage", "exact duplicates", "session duration", "ordered stages", "funnel monotonicity", "static full refresh"],
+  "metrics": {"event_rows": 885129, "valid_identified_sessions": 490184, "ordered_purchase_sessions": 19977, "ordered_purchase_rate": 0.0407540842},
+  "artifacts": ["/images/senior-product-funnel.png", "/images/senior-product-categories.png", "/images/rees46-model-grain.svg"],
+  "artifactHashes": {"/images/senior-product-funnel.png": "b105eecbbbe92f62bbfd4ae37b04867843ea3b2ea17c6a78977a9f4187d3bdb9", "/images/senior-product-categories.png": "7b6e031de6f7c02493692a359cd2124a18dc6b859e9cba521cd80f2cb3b8da0c", "/images/rees46-model-grain.svg": "18a27d03491bb9fb6ee744ba28e59d19c6ad1387a67aea4ec99d0783d7494be5"},
+  "evidenceBoundary": "The source supports an ordered shopping-event funnel. It does not contain registration, acquisition, stock, experiment assignment, or reconciled orders."
 }

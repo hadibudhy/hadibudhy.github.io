@@ -1,6 +1,6 @@
 ---
-title: "Campaign Incrementality: Did Advertising Create New Customers?"
-date: 2026-08-29
+title: "Campaign Incrementality: Did Advertising Create Extra Conversions?"
+date: 2026-09-06
 categories: [growth analytics]
 tags: [experimentation, causal inference, incrementality, Python]
 excerpt: "A randomized advertising analysis that separates additional conversions from customers who would have converted anyway."
@@ -17,12 +17,12 @@ evidenceManifest: /data/evidence/experiment-metrics.json
 evidenceVisuals:
   - /images/growth-criteo-itt.png
   - /images/portfolio-campaign-economics.svg
-  - /images/portfolio-campaign-f0.svg
+  - /images/senior-campaign-segments.png
 ---
 
 ## Business question
 
-The growth team needs to know whether paid advertising creates new customers. Reported conversions alone cannot answer that question. Some people would have converted even without seeing the campaign.
+The growth team needs to know whether paid advertising creates extra conversions. Reported conversions alone cannot answer that question. Some people would have converted even without seeing the campaign.
 
 ## Why it matters
 
@@ -58,6 +58,17 @@ The validated release contains **13,979,592 rows**. The user features are anonym
 4. Explore whether response differs across anonymized user features.
 5. Define the information a real campaign needs before the business spends more.
 
+## Metric contract
+
+| Metric | Numerator | Denominator | Decision use |
+|---|---|---|---|
+| Conversion rate | Converted assigned users | All users assigned to the group | Primary outcome |
+| Absolute uplift | Treatment conversion rate − control conversion rate | Percentage points | Incremental effect |
+| Incremental conversions per 100k | Absolute uplift × 100,000 | Assigned users | Scale scenario |
+| Incremental CPA | Campaign cost | Incremental conversions from the holdout | Commercial gate |
+
+The assignment group remains the primary comparison even when an assigned user was not exposed. Exposure happens after assignment and can introduce selection bias if it replaces the experiment group.
+
 ## Key findings
 
 ### The advertising group converted more often
@@ -76,7 +87,9 @@ The benchmark difference is about **115 extra conversions per 100,000 assigned u
 
 **Business meaning:** statistical confidence tells us that the benchmark difference is unlikely to be random noise. It does not tell us whether the campaign earns more than it costs.
 
-The practical launch threshold is explicit: scale only when incremental CPA is below contribution value after ad cost, with the holdout result stable across the pre-specified audience and frequency guardrails.
+The practical launch threshold is explicit: scale only when incremental CPA is below contribution value after ad cost, with the holdout result stable across the agreed audience and frequency guardrails.
+
+The economics can be expressed without inventing a campaign value. At this benchmark lift, the break-even spend per 100,000 assigned users would be about **$2,880** at $25 contribution per conversion, **$5,759** at $50, **$11,519** at $100, and **$23,037** at $200. These are transparent scenarios, not observed campaign economics.
 
 ## Visual evidence
 
@@ -106,23 +119,25 @@ This makes the rollout recommendation operational.
 
 **Decision status:** Completed benchmark analysis; current-campaign holdout and commercial outcome not measured.
 
-## What internal data would improve the decision
+## Limitations and internal data needed
 
 A complete decision needs ad spend, contribution margin, conversion value, customer identity, channel, frequency, and later retention. Incremental CPA and incremental return can then be calculated by a business-defined audience. Scale remains conditional on incremental CPA staying below contribution value and customer-experience guardrails remaining healthy.
 
 ## Key takeaway
 
-More reported conversions do not automatically mean profitable advertising. The important decision is to measure the conversions created by the campaign, then spend more only where a current holdout shows that the extra customers are worth the cost.
+More reported conversions do not automatically mean profitable advertising. The important decision is to measure the conversions created by the campaign, then spend more only where a current holdout shows that the extra conversions are worth the cost.
 
 ## Technical appendix
 
-The primary analysis uses intention-to-treat. In plain language, each user stays in the group they were assigned to, even if the ad was not actually shown. This protects the fairness of the randomized comparison. [Analysis code, SQL, and validation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/01-campaign-incrementality) are available for review.
+The primary analysis uses intention-to-treat. In plain language, each user stays in the group they were assigned to, even if the ad was not actually shown. This protects the fairness of the randomized comparison. Independent DuckDB SQL and streaming Python aggregations reconcile to the same **0.1152 percentage-point** lift. [Analysis code, SQL, and validation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/01-campaign-incrementality) are available for review, with aggregate evidence at `/data/senior/campaign.json`.
 
 ### Exploratory subgroup check
 
-![Criteo exploratory f0 quartiles: absolute conversion lift was 0.038, 0.386, 0.019, and 0.010 percentage points across the four bands](/images/portfolio-campaign-f0.svg)
+![Criteo benchmark: conversion lift differs across anonymized f0 quartiles, so any targeting rule needs a fresh randomized holdout](/images/senior-campaign-segments.png)
 
-An exploratory check divided the complete `f0` feature into four equal-sized bands. The second band had the largest difference, **0.386 percentage points**; the other bands were **0.038**, **0.019**, and **0.010 percentage points**. These are not real customer personas. The feature has no business label and the split was chosen for exploration, so a new campaign should retest any targeting hypothesis in a holdout.
+An exploratory check divided the complete `f0` feature into four quantile-cut bands. Ties mean the bands are not exactly equal in size. The second band had the largest difference, **0.386 percentage points**; the other bands were **0.038**, **0.019**, and **0.010 percentage points**. These are not real customer personas. The feature has no business label and the split was chosen for exploration, so a new campaign should retest any targeting hypothesis in a holdout.
+
+All four Bonferroni-adjusted p-values remain below 0.05, and the chart uses familywise 95% intervals across the four displayed comparisons. This correction only covers these four exploratory bands; it does not make `f0` a pre-registered targeting rule or each band commercially useful. The second band is the only one with a large enough absolute effect to change the immediate test priority.
 
 | Exploratory group | Extra conversion rate | Interpretation |
 |---|---:|---|

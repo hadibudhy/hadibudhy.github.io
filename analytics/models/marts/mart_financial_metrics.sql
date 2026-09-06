@@ -9,7 +9,7 @@ with annual_facts as (
       and period_end is not null
       and date_diff('day', period_start, period_end) between 300 and 380
 ), filing_candidates as (
-    select distinct fiscal_year, accession, filed_date
+    select distinct year(period_end) as fiscal_year, accession, filed_date
     from annual_facts
 ), chosen_filing as (
     select fiscal_year, accession
@@ -22,7 +22,7 @@ with annual_facts as (
     where filing_rank = 1
 ), normalized as (
     select
-        facts.fiscal_year,
+        year(facts.period_end) as fiscal_year,
         facts.period_end,
         facts.accession,
         case
@@ -32,7 +32,7 @@ with annual_facts as (
         case when facts.tag = 'Revenues' then 1 else 2 end as tag_priority,
         facts.value
     from annual_facts as facts
-    inner join chosen_filing using (fiscal_year, accession)
+    inner join chosen_filing on chosen_filing.fiscal_year = year(facts.period_end) and chosen_filing.accession = facts.accession
     where facts.tag in ('Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax', 'NetIncomeLoss')
 ), ranked as (
     select
@@ -42,6 +42,7 @@ with annual_facts as (
 ), selected as (
     select
         fiscal_year,
+        max(accession) as source_accession,
         max(case when metric_name = 'revenue' then value end) as revenue,
         max(case when metric_name = 'net_income' then value end) as net_income
     from ranked
@@ -50,6 +51,7 @@ with annual_facts as (
 )
 select
     fiscal_year,
+    source_accession,
     revenue,
     net_income,
     case when revenue is null or revenue = 0 then null else net_income / revenue end as net_margin

@@ -23,6 +23,7 @@ with event_counts as (
     inner join first_view using (user_session)
     where ordered.event_type = 'cart'
       and ordered.event_number > first_view.view_event_number
+      and ordered.event_time <= first_view.viewed_at + interval 24 hour
     group by 1
 ), first_purchase as (
     select
@@ -31,8 +32,10 @@ with event_counts as (
         min(ordered.event_time) as purchased_at
     from {{ ref('int_rees46_ordered_events') }} as ordered
     inner join first_cart using (user_session)
+    inner join first_view using (user_session)
     where ordered.event_type = 'purchase'
       and ordered.event_number > first_cart.cart_event_number
+      and ordered.event_time <= first_view.viewed_at + interval 24 hour
     group by 1
 ), session_rollup as (
     select
