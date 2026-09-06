@@ -1,11 +1,11 @@
 ---
-title: "Product Event Data: From Raw Clicks to Trustworthy Funnel Metrics"
-date: 2026-09-05
+title: "Product Events: Building a Funnel the Product Team Can Trust"
+date: 2026-09-06
 categories: [analytics engineering]
 tags: [event tracking, dbt, DuckDB, product analytics]
-excerpt: "A small event warehouse that makes product-journey metrics reproducible, testable, and clear about what the source can actually measure."
-problem: "Product teams cannot improve a funnel when event names, user identity, and session grain are unclear. The first decision is whether the data is safe to use before anyone ranks conversion opportunities."
-result: "The published REES46 Electronics export supports event-level and identified-session metrics, while missing session identifiers on a small set of rows remain visible in the quality mart instead of being silently dropped."
+excerpt: "An event warehouse and ordered product funnel built from 885,129 real browsing events, with duplicate, identity, and session-window controls."
+problem: "The product team needs to choose where to improve the shopping journey, but raw event counts can overstate conversion when identity, order, and metric grain are unclear."
+result: "After duplicate and identity controls, 40,234 sessions reached cart after a view and 19,977 then reached purchase within a 24-hour step window. The largest measured loss occurs before cart."
 featured: true
 kind: flagship
 published: true
@@ -15,96 +15,90 @@ secondaryTracks: [product-analytics]
 displayOrder: 10
 evidenceManifest: /data/evidence/product-event-foundation.json
 evidenceVisuals:
-  - /images/rees46-event-mix.svg
-  - /images/rees46-quality-checks.svg
+  - /images/senior-product-funnel.png
+  - /images/senior-product-categories.png
   - /images/rees46-model-grain.svg
 header:
-  teaser: /images/rees46-event-mix.svg
+  teaser: /images/senior-product-funnel.png
 ---
 
-## Business question
+## The decision
 
-Can a product team trust the event data enough to decide where to improve the customer journey?
+The product lead must decide which part of the shopping journey deserves the next discovery and experiment cycle. The analysis first tests whether the event data can support that decision, then identifies where observed sessions leave the ordered journey.
 
-## Why it matters
+## What the data can measure
 
-Funnels look precise even when their definitions are not. If a view, cart, or purchase is counted at the wrong grain, the team can prioritize a problem that the product did not actually have.
+The [REES46 Electronics export](https://data.rees46.com/datasets/electronics-events/electronics-events.csv.gz) contains **885,129 events**, **407,283 users**, and **490,398 raw identified sessions** from 24 September 2020 to 28 February 2021. Each row is a recorded view, cart, or purchase event. Only **165 rows** lack a session identifier.
 
-## Decision brief
+The source does not contain registration, acquisition channel, experiment assignment, stock availability, or a confirmed order identifier. I therefore describe an ordered shopping funnel, not activation, marketing attribution, or completed revenue.
 
-- **Recommendation:** use the event model as a foundation for product questions, but keep event-level volume separate from session-level conversion until identity coverage is reviewed.
-- **Evidence:** the public export contains `view`, `cart`, and `purchase` events. The model keeps one row per event, creates a deterministic event key, and records missing session identifiers in a quality mart.
-- **Business value:** a shared event grain makes funnel changes reproducible and gives product teams one place to agree on definitions.
-- **Main risk:** this is a public electronics browsing sample, not a current product telemetry feed. It does not prove what a live product funnel would do.
-- **Next action:** agree on an internal tracking plan, then add freshness, accepted-value, uniqueness, and session-coverage checks before publishing activation metrics.
+## Metric contract
 
-## What the data represents
+| Metric | Definition | Decision use |
+|---|---|---|
+| Valid identified session | Distinct non-null `user_session` linked to one user; sessions may span more than 24 hours | Funnel denominator |
+| View session | Session with at least one view | Entry to the measured journey |
+| Ordered cart session | First cart occurs after the first view | Product-interest progression |
+| Ordered purchase session | First purchase occurs after a qualifying cart | Measured funnel completion |
+| Session purchase rate | Ordered purchase sessions / all identified sessions | Overall journey health |
 
-The source is the [REES46 Electronics behaviour export](https://data.rees46.com/datasets/electronics-events/electronics-events.csv.gz). It records customer events across a five-month public release. The source file is treated as the event grain: one row represents one recorded event, not one customer or one order.
-
-The source profile is committed in the evidence manifest. It records the publisher description separately from the observed file range because a data contract should describe what was actually loaded.
+Rows without a session remain in event-volume reporting but do not enter the funnel denominator. The quality review also found **655 exact duplicate rows**, **214 session IDs linked to more than one user**, and **10,362 sessions spanning more than 24 hours**. Exact duplicates and multi-user sessions are excluded. Long sessions remain in the denominator, but ordered funnel steps must occur within 24 hours of the first view. Events with the same timestamp use source row order as a deterministic tie-breaker.
 
 ## Analytics architecture
 
-The pipeline is intentionally small:
+`raw events → typed staging → ordered session events → funnel and quality marts → evidence JSON → article`
 
-`raw.events → stg_rees46_events → int_rees46_ordered_events → fct_product_funnel / mart_event_quality`
-
-- **Raw:** source rows are loaded without business reinterpretation.
-- **Staging:** timestamps, identifiers, categories, and prices are typed. A deterministic `event_id` protects the event grain.
-- **Intermediate:** identified sessions are ordered with window functions so the next analysis can ask what happened before and after an event.
-- **Marts:** daily event counts and session coverage are published separately from quality checks.
-
-The project is runnable with local DuckDB and dbt. The CI seed is small enough to run in a pull request; the source manifest records the full-data evidence boundary.
-
-## What I checked first
-
-1. Are event types limited to the published values?
-2. Is the event key unique?
-3. Are timestamps and user identifiers present?
-4. How much of the source can be tied to a session?
-5. Are event counts being mistaken for users or conversions?
-
-## What the evidence shows
-
-### The source is event-rich, but event volume is not a funnel conversion rate
-
-![Observed event mix from the REES46 electronics export](/images/rees46-event-mix.svg)
-
-The export contains many product views and fewer cart and purchase events. That is useful for journey analysis, but the counts are event counts. They should not be presented as a user conversion rate without session-level denominators.
-
-### Data quality belongs beside the metric, not in a hidden notebook
-
-![Event quality checks for identifiers, timestamps, and session coverage](/images/rees46-quality-checks.svg)
-
-The quality mart exposes duplicate-key checks and missing-session rows. This keeps an important boundary visible: rows without a session can still support event-volume reporting, but they should not enter a session funnel silently.
-
-### The model protects the grain that downstream metrics depend on
+The source is a static export, so staging is a full refresh. A source-file hash plus row number identifies the loaded extract; a separate logical-event key finds exact duplicates. CI tests accepted event types, keys, timestamps, purchase prices, and monotonic funnel counts.
 
 ![Analytics engineering model grain from source event to product funnel mart](/images/rees46-model-grain.svg)
 
-Each layer has one job. This avoids joining event rows to user or session summaries too early, which is a common way to multiply counts.
+## What I investigated
+
+I tested three hypotheses:
+
+1. The largest loss happens before customers show cart intent.
+2. Customers who reach cart usually continue to purchase.
+3. Category mix can hide different journey patterns.
+
+## The largest measured loss happens before cart
+
+Of **490,184 valid identified sessions**, **488,150** contain a view. Only **40,234** reach cart after a view within 24 hours, an **8.2% view-to-cart rate**. **19,977** then reach purchase after cart, a **49.7% cart-to-purchase rate**. The full ordered path appears in **4.1% of valid identified sessions**.
+
+![REES46 Electronics, September 2020 to February 2021: 490,184 valid sessions narrow to 19,977 ordered view-cart-purchase journeys within 24 hours](/images/senior-product-funnel.png)
+
+The evidence points product discovery toward the view-to-cart step. It does not explain the cause. Price presentation, product fit, stock, shipping information, and browsing intent are competing explanations that require additional properties or experiments.
+
+## Category mix changes the benchmark
+
+Among categories with at least 1,000 view sessions, purchase-event presence varies materially. Camera peripheral sessions show **13.9%**, video-card sessions **10.7%**, and printer sessions **7.4%**. These rates are descriptive because a session can contain several categories and the source does not identify intent or availability.
+
+![REES46 Electronics categories with at least 1,000 view sessions: purchase-event presence differs across large categories](/images/senior-product-categories.png)
+
+This result prevents one company-wide target from becoming an automatic category target. The product team should compare similar categories and add stock, price, and delivery context before assigning causes.
 
 ## Recommendation
 
-**What:** publish a shared event model and metric contract before launching product funnel reporting.
+**P0: improve measurement.** Require product availability, displayed price, delivery promise, page surface, and experiment assignment on view and cart events. Monitor session coverage and event freshness.
 
-**Where / who:** product, engineering, and analytics teams should agree on event names, required properties, session identity, and the meaning of an activated user.
+**P1: test the main opportunity.** Run a page-level experiment in high-volume categories that simplifies the decision to add an item to cart. Randomize eligible sessions, use ordered view-to-cart conversion as the primary metric, and monitor purchase completion, revenue per eligible session, returns, and page latency.
 
-**Why:** the public evidence shows that event volume and session conversion answer different questions.
-
-**Risk:** a clean model can still encode a weak tracking plan. Good SQL does not repair missing instrumentation.
-
-**Next test:** replay a small known event fixture in CI, compare the resulting marts with expected rows, and monitor source freshness and session coverage in production.
+**P2: investigate category differences.** Review camera, video-card, printer, and cartridge journeys with merchandising and inventory teams. Treat the observed rates as prioritization evidence, not causal effects.
 
 ## Measurement plan
 
-For an internal product, I would track event delivery rate, session coverage, funnel step conversion, activation within a defined window, and downstream retention. The primary product metric should be chosen after the team agrees on the user action that represents real value.
+Set the test duration and sample size from current eligible-session volume and the smallest useful view-to-cart improvement. Keep assignment at session level, pre-register exclusions, and stop only on the agreed decision rule. A successful change must improve ordered view-to-cart conversion without reducing purchase completion or revenue per eligible session.
+
+## Limitations
+
+- The source is historical public data and does not represent a current product.
+- Purchase is an event label, not a reconciled order or payment record.
+- Category comparisons may reflect customer and product mix.
+- The static source is full-refreshed; an append-only production feed would need a stable producer event ID before incremental loading.
 
 ## Key takeaway
 
-The first product analytics decision is often a data-model decision. A trustworthy funnel starts by protecting event grain, defining identity, and showing what the source cannot measure.
+The product decision became clear only after the warehouse protected event grain and sequence. The measured opportunity is before cart, while the reason for that loss remains a hypothesis to test.
 
 ## Technical appendix
 
-The executable project lives in [`analytics/`](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/analytics). It includes a dbt source, incremental staging model, ordered-session model, funnel mart, quality mart, contracts, and a CI fixture. The public source is not copied into the website or committed to the repository.
+The executable dbt project, event contract, loader, funnel mart, tests, and evidence builder are available in the repository. The aggregate result is published at `/data/senior/product-events.json`; raw user-level events remain outside the website.

@@ -1,13 +1,14 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "caseId": "experiment-metrics",
-  "scope": "full-data",
   "status": "verified",
-  "source": {"name": "Criteo AI Lab uplift benchmark v2.1", "url": "https://ailab.criteo.com/criteo-uplift-prediction-dataset/", "publisher": "Criteo AI Lab", "grain": "assigned user record", "sha256": "2716e1bf0fd157a93b5bf86924d9088419dfbac2022c6cd90030220634f616dc"},
-  "models": ["Python streaming ITT", "SQL assignment summary"],
-  "checks": ["row count", "schema", "binary values", "control exposure", "sample ratio"],
-  "metrics": {"rows": 13979592, "absolute_conversion_lift_pp": 0.1152, "ci95_pp": [0.108, 0.122]},
-  "artifacts": ["/images/growth-criteo-itt.png", "/images/portfolio-campaign-economics.svg", "/images/portfolio-campaign-f0.svg"],
-  "artifactHashes": {"/images/growth-criteo-itt.png": "5a9701995138db6a31c6135480c52d390c07d70d92cd9891155e7160da55d068", "/images/portfolio-campaign-economics.svg": "377522a16af96affbc197232dfb1a1a07d7af5c01def131fe0a3ddaa08fa9f09", "/images/portfolio-campaign-f0.svg": "5d6e9a61b2b3211f9682b18f36bf4701534efebe9863ee0e3103df63f94190bc"},
-  "evidenceBoundary": "The randomized benchmark supports intention-to-treat lift. Current campaign economics and transportability are not observed."
+  "scope": "full-data",
+  "source": {"name": "Criteo Uplift Prediction v2.1", "url": "https://ailab.criteo.com/criteo-uplift-prediction-dataset/", "sha256": "2716e1bf0fd157a93b5bf86924d9088419dfbac2022c6cd90030220634f616dc", "grain": "assigned user"},
+  "result": "/data/senior/campaign.json",
+  "resultHash": "7fd0180a7e27fd73fd574dea675d527096d21b1ebf1944bef157f05326d33a34",
+  "checks": ["assignment balance", "SRM", "binary outcomes", "nulls", "control exposure", "confidence interval", "segment multiplicity", "economics boundary"],
+  "metrics": {"users": 13979592, "absolute_conversion_lift": 0.0011518731, "ci95": [0.0010845046, 0.0012192416], "incremental_conversions_per_100k": 115.1873052},
+  "artifacts": ["/images/growth-criteo-itt.png", "/images/portfolio-campaign-economics.svg", "/images/senior-campaign-segments.png"],
+  "artifactHashes": {"/images/growth-criteo-itt.png": "5a9701995138db6a31c6135480c52d390c07d70d92cd9891155e7160da55d068", "/images/portfolio-campaign-economics.svg": "377522a16af96affbc197232dfb1a1a07d7af5c01def131fe0a3ddaa08fa9f09", "/images/senior-campaign-segments.png": "1bd425809b5b28cba2287ecd036ac774dbd8e65e47358e8b9c6e19ff450da5cb"},
+  "evidenceBoundary": "Assignment supports an ITT estimate in the released benchmark. The data does not establish current campaign lift, cost, margin, or transportable customer segments."
 }

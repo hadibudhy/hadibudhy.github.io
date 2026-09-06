@@ -1,13 +1,14 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "caseId": "customer-retention",
-  "scope": "full-data",
   "status": "verified",
-  "source": {"name": "UCI Online Retail", "url": "https://archive.ics.uci.edu/dataset/352/online%2Bretail", "publisher": "UCI", "grain": "transaction row", "sha256": "43465a06f2ccf7c8b5bd2892bc7defb52f97487934fe93b16ae4c3936424676d"},
-  "models": ["Transaction cleaning", "Order customer aggregation"],
-  "checks": ["source hash", "cancellation handling", "customer identity", "revenue grain"],
-  "metrics": {"raw_rows": 541909, "identifiable_customers": 4338, "recorded_revenue_gbp": 8911407.904},
-  "artifacts": ["/images/retail-growth-patterns.png", "/images/retail-market-opportunity.png", "/images/portfolio-retail-cleaning.svg"],
-  "artifactHashes": {"/images/retail-growth-patterns.png": "eb74413876ac617675376f50781165ac875595a3c84422de95f6f2d4942b5993", "/images/retail-market-opportunity.png": "dd5f05a531f9c872a1fdf5c3dfd9ded3373b9346015bd40e18972f7d01c29c33", "/images/portfolio-retail-cleaning.svg": "b003d857924ca9b5c6eb28a6b681793295d4506d90e1872bd637006a0e4c1996"},
-  "evidenceBoundary": "Revenue concentration is supported. Profitability and causal retention impact are not observed."
+  "scope": "full-data",
+  "source": {"name": "UCI Online Retail", "url": "https://archive.ics.uci.edu/dataset/352/online%2Bretail", "sha256": "43465a06f2ccf7c8b5bd2892bc7defb52f97487934fe93b16ae4c3936424676d", "grain": "transaction line"},
+  "result": "/data/senior/retention.json",
+  "resultHash": "184600aae31847e6ec141c628397f7686fdf1fc3de627fa49294a5d324c5d030",
+  "checks": ["cancellations", "positive quantity and price", "customer identity", "order grain", "cohort eligibility", "day-zero exclusion", "partial-period boundary"],
+  "metrics": {"customers": 4338, "common_90d_eligible_customers": 3370, "repeat_30d": 0.2219584570, "repeat_60d": 0.3750741840, "repeat_90d": 0.4750741840},
+  "artifacts": ["/images/senior-retail-retention.png", "/images/senior-retail-segments.png", "/images/senior-retail-cohorts.png", "/images/portfolio-retail-cleaning.svg"],
+  "artifactHashes": {"/images/senior-retail-retention.png": "d16bd26993965f37e2a69e7d85c797131c1531d05a34c89400989ba0c1a96a03", "/images/senior-retail-segments.png": "d21968172c497b26812aff158aad3c17ea2aa0f68641d061ab274753604af13f", "/images/senior-retail-cohorts.png": "0dd5cd344e8c99e253edc9d274f0ef6dc7a223e56e0838439d43d9c40ad6d1d5", "/images/portfolio-retail-cleaning.svg": "b003d857924ca9b5c6eb28a6b681793295d4506d90e1872bd637006a0e4c1996"},
+  "evidenceBoundary": "The source supports first-observed-purchase cohorts and revenue. It does not contain margin, campaign assignment, or guaranteed customer history before the dataset."
 }

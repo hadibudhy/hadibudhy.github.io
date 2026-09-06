@@ -1,0 +1,225 @@
+{
+  "source": {
+    "url": "https://archive.ics.uci.edu/dataset/352/online%2Bretail",
+    "retrieved_at": "2026-08-20T07:43:19Z",
+    "sha256": "43465a06f2ccf7c8b5bd2892bc7defb52f97487934fe93b16ae4c3936424676d"
+  },
+  "quality": {
+    "raw_rows": 541909,
+    "cancelled_rows": 9288,
+    "missing_customer_rows": 135080,
+    "clean_orders": 18532,
+    "customers": 4338,
+    "end_date": "2011-12-09 12:50:00"
+  },
+  "cohort_repeat": [
+    {
+      "window_days": 30,
+      "eligible_customers": 3370,
+      "repeat_customers": 748,
+      "repeat_rate": 0.22195845697329378
+    },
+    {
+      "window_days": 60,
+      "eligible_customers": 3370,
+      "repeat_customers": 1264,
+      "repeat_rate": 0.37507418397626113
+    },
+    {
+      "window_days": 90,
+      "eligible_customers": 3370,
+      "repeat_customers": 1601,
+      "repeat_rate": 0.4750741839762611
+    }
+  ],
+  "cohort_30d": [
+    {
+      "cohort_month": "2010-12",
+      "eligible_customers": 885,
+      "repeat_rate": 0.34915254237288135
+    },
+    {
+      "cohort_month": "2011-01",
+      "eligible_customers": 417,
+      "repeat_rate": 0.2014388489208633
+    },
+    {
+      "cohort_month": "2011-02",
+      "eligible_customers": 380,
+      "repeat_rate": 0.15789473684210525
+    },
+    {
+      "cohort_month": "2011-03",
+      "eligible_customers": 452,
+      "repeat_rate": 0.16592920353982302
+    },
+    {
+      "cohort_month": "2011-04",
+      "eligible_customers": 300,
+      "repeat_rate": 0.16
+    },
+    {
+      "cohort_month": "2011-05",
+      "eligible_customers": 284,
+      "repeat_rate": 0.1795774647887324
+    },
+    {
+      "cohort_month": "2011-06",
+      "eligible_customers": 242,
+      "repeat_rate": 0.16942148760330578
+    },
+    {
+      "cohort_month": "2011-07",
+      "eligible_customers": 188,
+      "repeat_rate": 0.2127659574468085
+    },
+    {
+      "cohort_month": "2011-08",
+      "eligible_customers": 169,
+      "repeat_rate": 0.14792899408284024
+    },
+    {
+      "cohort_month": "2011-09",
+      "eligible_customers": 299,
+      "repeat_rate": 0.17725752508361203
+    },
+    {
+      "cohort_month": "2011-10",
+      "eligible_customers": 358,
+      "repeat_rate": 0.24022346368715083
+    },
+    {
+      "cohort_month": "2011-11",
+      "eligible_customers": 96,
+      "repeat_rate": 0.3020833333333333
+    }
+  ],
+  "first_order_value_segments": [
+    {
+      "first_value_band": "Q1 low",
+      "customers": 843,
+      "repeat_rate": 0.39501779359430605,
+      "median_first_order": 115.08000000000001
+    },
+    {
+      "first_value_band": "Q2",
+      "customers": 842,
+      "repeat_rate": 0.42874109263657956,
+      "median_first_order": 223.8
+    },
+    {
+      "first_value_band": "Q3",
+      "customers": 842,
+      "repeat_rate": 0.5071258907363421,
+      "median_first_order": 341.1
+    },
+    {
+      "first_value_band": "Q4 high",
+      "customers": 843,
+      "repeat_rate": 0.5693950177935944,
+      "median_first_order": 683.98
+    }
+  ],
+  "monthly_decomposition": [
+    {
+      "month": "2010-12",
+      "customers": 885,
+      "orders": 1400,
+      "revenue": 572713.89,
+      "average_order_value": 409.08135
+    },
+    {
+      "month": "2011-01",
+      "customers": 741,
+      "orders": 987,
+      "revenue": 569445.04,
+      "average_order_value": 576.9453292806485
+    },
+    {
+      "month": "2011-02",
+      "customers": 758,
+      "orders": 997,
+      "revenue": 447137.35,
+      "average_order_value": 448.4827983951855
+    },
+    {
+      "month": "2011-03",
+      "customers": 974,
+      "orders": 1321,
+      "revenue": 595500.76,
+      "average_order_value": 450.79542770628314
+    },
+    {
+      "month": "2011-04",
+      "customers": 856,
+      "orders": 1149,
+      "revenue": 469200.361,
+      "average_order_value": 408.3554055700609
+    },
+    {
+      "month": "2011-05",
+      "customers": 1056,
+      "orders": 1555,
+      "revenue": 678594.56,
+      "average_order_value": 436.39521543408364
+    },
+    {
+      "month": "2011-06",
+      "customers": 991,
+      "orders": 1393,
+      "revenue": 661213.6900000001,
+      "average_order_value": 474.66883704235465
+    },
+    {
+      "month": "2011-07",
+      "customers": 949,
+      "orders": 1331,
+      "revenue": 600091.011,
+      "average_order_value": 450.85725845229155
+    },
+    {
+      "month": "2011-08",
+      "customers": 935,
+      "orders": 1280,
+      "revenue": 645343.9,
+      "average_order_value": 504.174921875
+    },
+    {
+      "month": "2011-09",
+      "customers": 1266,
+      "orders": 1755,
+      "revenue": 952838.382,
+      "average_order_value": 542.9278529914529
+    },
+    {
+      "month": "2011-10",
+      "customers": 1364,
+      "orders": 1929,
+      "revenue": 1039318.79,
+      "average_order_value": 538.7863089683774
+    },
+    {
+      "month": "2011-11",
+      "customers": 1664,
+      "orders": 2657,
+      "revenue": 1161817.3800000001,
+      "average_order_value": 437.26660895747085
+    },
+    {
+      "month": "2011-12",
+      "customers": 615,
+      "orders": 778,
+      "revenue": 518192.79000000004,
+      "average_order_value": 666.0575706940874
+    }
+  ],
+  "limits": [
+    "First observed purchase is not guaranteed to be the customer's true first purchase.",
+    "The source contains revenue but no cost, margin, or campaign exposure."
+  ],
+  "evidence_metadata": {
+    "generator": "scripts/build_senior_evidence.py",
+    "version": "2026-09-06",
+    "aggregate_only": true
+  }
+}

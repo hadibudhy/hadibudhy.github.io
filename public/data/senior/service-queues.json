@@ -1,0 +1,172 @@
+{
+  "source": {
+    "url": "https://data.cityofnewyork.us/resource/erm2-nwe9",
+    "retrieved_at": "2026-09-05",
+    "query_window": "2025-01-01 through 2025-01-31",
+    "snapshot_at": "2026-09-05 23:59:59",
+    "sha256": "3a9322d7bd2ea5519b035f414f6314561ffcdb81dab5768128832c4d4cc446db"
+  },
+  "quality": {
+    "rows": 348180,
+    "duplicate_request_ids": 0,
+    "missing_created": 0,
+    "missing_closed_at_snapshot": 2609,
+    "invalid_negative_duration": 97
+  },
+  "priority_queues": [
+    {
+      "agency": "DOB",
+      "complaint_type": "Building/Use",
+      "arrivals": 1460,
+      "open_backlog": 0,
+      "invalid_negative_durations": 0,
+      "valid_closed_requests": 1460,
+      "median_close_hours": 1520.3931944444444,
+      "p90_close_hours": 7934.835972222224,
+      "median_open_age_hours": null,
+      "closure_coverage": 1.0
+    },
+    {
+      "agency": "DOB",
+      "complaint_type": "Elevator",
+      "arrivals": 1605,
+      "open_backlog": 0,
+      "invalid_negative_durations": 0,
+      "valid_closed_requests": 1605,
+      "median_close_hours": 298.8333333333333,
+      "p90_close_hours": 4535.503833333336,
+      "median_open_age_hours": null,
+      "closure_coverage": 1.0
+    },
+    {
+      "agency": "EDC",
+      "complaint_type": "Noise - Helicopter",
+      "arrivals": 1815,
+      "open_backlog": 0,
+      "invalid_negative_durations": 0,
+      "valid_closed_requests": 1815,
+      "median_close_hours": 3410.94,
+      "p90_close_hours": 3761.465277777778,
+      "median_open_age_hours": null,
+      "closure_coverage": 1.0
+    },
+    {
+      "agency": "TLC",
+      "complaint_type": "Taxi Complaint",
+      "arrivals": 584,
+      "open_backlog": 20,
+      "invalid_negative_durations": 0,
+      "valid_closed_requests": 564,
+      "median_close_hours": 1794.7933333333333,
+      "p90_close_hours": 3724.481555555555,
+      "median_open_age_hours": 14236.305972222222,
+      "closure_coverage": 0.9657534246575342
+    },
+    {
+      "agency": "DPR",
+      "complaint_type": "Maintenance or Facility",
+      "arrivals": 935,
+      "open_backlog": 28,
+      "invalid_negative_durations": 0,
+      "valid_closed_requests": 907,
+      "median_close_hours": 214.56694444444443,
+      "p90_close_hours": 3468.7925,
+      "median_open_age_hours": 14388.488472222223,
+      "closure_coverage": 0.9700534759358289
+    },
+    {
+      "agency": "TLC",
+      "complaint_type": "For Hire Vehicle Complaint",
+      "arrivals": 1425,
+      "open_backlog": 48,
+      "invalid_negative_durations": 0,
+      "valid_closed_requests": 1377,
+      "median_close_hours": 1851.8961111111112,
+      "p90_close_hours": 3350.774277777778,
+      "median_open_age_hours": 14196.084583333333,
+      "closure_coverage": 0.9663157894736842
+    },
+    {
+      "agency": "HPD",
+      "complaint_type": "GENERAL",
+      "arrivals": 3044,
+      "open_backlog": 18,
+      "invalid_negative_durations": 0,
+      "valid_closed_requests": 3026,
+      "median_close_hours": 484.87819444444443,
+      "p90_close_hours": 3294.34375,
+      "median_open_age_hours": 14502.50111111111,
+      "closure_coverage": 0.9940867279894875
+    },
+    {
+      "agency": "HPD",
+      "complaint_type": "APPLIANCE",
+      "arrivals": 2129,
+      "open_backlog": 5,
+      "invalid_negative_durations": 0,
+      "valid_closed_requests": 2124,
+      "median_close_hours": 487.43819444444443,
+      "p90_close_hours": 3127.957861111111,
+      "median_open_age_hours": 14574.15138888889,
+      "closure_coverage": 0.9976514795678723
+    },
+    {
+      "agency": "HPD",
+      "complaint_type": "ELECTRIC",
+      "arrivals": 2893,
+      "open_backlog": 22,
+      "invalid_negative_durations": 0,
+      "valid_closed_requests": 2871,
+      "median_close_hours": 266.2025,
+      "p90_close_hours": 2826.086388888889,
+      "median_open_age_hours": 14536.350138888889,
+      "closure_coverage": 0.9923954372623575
+    },
+    {
+      "agency": "HPD",
+      "complaint_type": "DOOR/WINDOW",
+      "arrivals": 4925,
+      "open_backlog": 23,
+      "invalid_negative_durations": 0,
+      "valid_closed_requests": 4902,
+      "median_close_hours": 415.8233333333334,
+      "p90_close_hours": 2783.8819444444443,
+      "median_open_age_hours": 14505.307222222222,
+      "closure_coverage": 0.9953299492385786
+    },
+    {
+      "agency": "HPD",
+      "complaint_type": "WATER LEAK",
+      "arrivals": 3600,
+      "open_backlog": 10,
+      "invalid_negative_durations": 0,
+      "valid_closed_requests": 3590,
+      "median_close_hours": 363.8461111111111,
+      "p90_close_hours": 2714.0705833333327,
+      "median_open_age_hours": 14522.8525,
+      "closure_coverage": 0.9972222222222222
+    },
+    {
+      "agency": "DOB",
+      "complaint_type": "General Construction/Plumbing",
+      "arrivals": 2497,
+      "open_backlog": 0,
+      "invalid_negative_durations": 0,
+      "valid_closed_requests": 2497,
+      "median_close_hours": 38.86944444444445,
+      "p90_close_hours": 2696.3769444444447,
+      "median_open_age_hours": null,
+      "closure_coverage": 1.0
+    }
+  ],
+  "estimand": "Administrative closure time among valid closed requests observed by the snapshot; open requests are right-censored and excluded from closure quantiles.",
+  "limits": [
+    "Administrative closure is not verified resolution.",
+    "Closed-request quantiles are not eventual full-cohort resolution times because open cases are right-censored."
+  ],
+  "evidence_metadata": {
+    "generator": "scripts/build_senior_evidence.py",
+    "version": "2026-09-06",
+    "aggregate_only": true
+  }
+}

@@ -9,7 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from ingest import validate_records
 from load_sec_company_facts import rows_from_facts
 from load_sec_company_facts import load_rows as load_sec_rows
-from load_nyc311 import load_rows as load_311_rows
+from load_nyc311 import load_rows as load_311_rows, read_rows as read_311_rows
 from load_rees46 import load_source as load_rees46_source
 
 def test_missing_key_cannot_be_loaded_as_a_valid_request():
@@ -47,6 +47,13 @@ def test_311_loader_writes_a_queryable_raw_relation():
         load_311_rows(connection, rows)
         assert connection.execute("select count(*) from raw.requests").fetchone()[0] == 1
 
+def test_311_loader_accepts_official_source_field_names():
+    with TemporaryDirectory() as directory:
+        source = Path(directory) / "requests.csv"
+        source.write_text("unique_key,created_date,closed_date,status,agency,complaint_type,borough\n1,2025-01-01 00:00:00,,Open,DEP,Water,QUEENS\n", encoding="utf-8")
+        rows = read_311_rows(source)
+        assert rows == [("1", "2025-01-01 00:00:00", None, "Open", "DEP", "Water", "QUEENS")]
+
 def test_rees46_loader_persists_a_stable_source_row_number():
     with TemporaryDirectory() as directory:
         source = Path(directory) / "events.csv.gz"
@@ -56,3 +63,4 @@ def test_rees46_loader_persists_a_stable_source_row_number():
         with duckdb.connect(":memory:") as connection:
             assert load_rees46_source(connection, source) == 1
             assert connection.execute("select source_row_number from raw.events").fetchone()[0] == 1
+            assert len(connection.execute("select source_batch_id from raw.events").fetchone()[0]) == 16

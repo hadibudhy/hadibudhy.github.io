@@ -87,8 +87,8 @@ def main() -> None:
             errors.append(f"{manifest}: caseId does not match {case_id}")
         if data.get("status") not in {"verified", "published"}:
             errors.append(f"{manifest}: status is not verified or published")
-        if data.get("schemaVersion") != 2:
-            errors.append(f"{manifest}: schemaVersion must be 2")
+        if data.get("schemaVersion") != 3:
+            errors.append(f"{manifest}: schemaVersion must be 3")
         if not data.get("source"):
             errors.append(f"{manifest}: source provenance is missing")
         checks = data.get("checks") or data.get("validation", {}).get("checks")
@@ -112,6 +112,11 @@ def main() -> None:
                     errors.append(f"{manifest}: artifact hash mismatch for {artifact}")
         if not data.get("evidenceBoundary"):
             errors.append(f"{manifest}: evidence boundary is missing")
+        result_path = PUBLIC / str(data.get("result", "")).lstrip("/")
+        if not result_path.is_file():
+            errors.append(f"{manifest}: result artifact is missing")
+        elif data.get("resultHash") != artifact_digest(result_path):
+            errors.append(f"{manifest}: result hash mismatch")
 
     metrics_path = PUBLIC / "data" / "online-shoppers-metrics.json"
     if metrics_path.exists():

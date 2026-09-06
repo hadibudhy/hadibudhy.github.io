@@ -28,5 +28,15 @@ seeds:
         +column_types:
           fy: integer
           value: double
+      expected_financial_metrics:
+        +alias: expected_financial_metrics
+        +column_types:
+          fiscal_year: integer
+          revenue: bigint
+          net_income: bigint
+          source_accession: varchar
+          source_document_url: varchar
+          source_document_sha256: varchar
+          source_table: varchar
       nyc311_requests:
         +alias: requests

@@ -9,11 +9,17 @@ models:
       - name: event_id
         data_type: varchar
         tests: [not_null, unique]
+      - name: logical_event_id
+        data_type: varchar
+        tests: [not_null]
       - name: event_time
         data_type: timestamp
         tests: [not_null]
       - name: source_row_number
         data_type: bigint
+        tests: [not_null]
+      - name: source_batch_id
+        data_type: varchar
         tests: [not_null]
       - name: event_type
         data_type: varchar
@@ -53,7 +59,7 @@ models:
       - name: fact_id
         tests: [not_null, unique]
       - name: fiscal_year
-        tests: [not_null]
+        description: Filing-context fiscal year; may be null for facts without a reported fiscal-year label.
       - name: value
         tests: [not_null]
       - name: accession
@@ -68,6 +74,8 @@ models:
       - name: revenue
         tests: [not_null]
       - name: net_income
+        tests: [not_null]
+      - name: source_accession
         tests: [not_null]
   - name: stg_nyc311_requests
     description: Typed request-grain lifecycle records for service workload metrics.

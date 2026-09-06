@@ -10,6 +10,8 @@ sources:
             tests: [not_null]
           - name: source_row_number
             tests: [not_null]
+          - name: source_batch_id
+            tests: [not_null]
           - name: event_type
             tests:
               - not_null

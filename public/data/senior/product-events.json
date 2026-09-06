@@ -1,0 +1,96 @@
+{
+  "source": {
+    "url": "https://data.rees46.com/datasets/electronics-events/electronics-events.csv.gz",
+    "retrieved_at": "2026-09-05T17:17:32Z",
+    "sha256": "cbcbedc28c39a6b2add493bbbd9f71c061ad9d84087b85e64c442e4d47f418e7"
+  },
+  "quality": {
+    "rows": 885129,
+    "users": 407283,
+    "raw_identified_sessions": 490398,
+    "missing_session_rows": 165,
+    "exact_duplicate_rows": 655,
+    "multi_user_sessions": 214,
+    "sessions_over_24_hours": 10362,
+    "first_event": "2020-09-24 11:57:06",
+    "last_event": "2021-02-28 23:59:09"
+  },
+  "funnel": {
+    "identified_sessions": 490184,
+    "view_sessions": 488150,
+    "ordered_cart_sessions": 40234,
+    "ordered_purchase_sessions": 19977,
+    "view_to_cart_rate": 0.08242138686879033,
+    "cart_to_purchase_rate": 0.4965203559178804,
+    "session_purchase_rate": 0.04075408418063421,
+    "median_view_to_cart_minutes": 1.1833333333333333,
+    "median_cart_to_purchase_minutes": 1.5833333333333333
+  },
+  "top_categories": [
+    {
+      "category_code": "computers.peripherals.camera",
+      "view_sessions": 2530.0,
+      "cart_sessions": 514.0,
+      "purchase_sessions": 351.0,
+      "purchase_presence_rate": 0.13873517786561265
+    },
+    {
+      "category_code": "computers.components.videocards",
+      "view_sessions": 44062.0,
+      "cart_sessions": 9323.0,
+      "purchase_sessions": 4729.0,
+      "purchase_presence_rate": 0.10732604057918388
+    },
+    {
+      "category_code": "computers.peripherals.scanner",
+      "view_sessions": 1068.0,
+      "cart_sessions": 180.0,
+      "purchase_sessions": 106.0,
+      "purchase_presence_rate": 0.09925093632958802
+    },
+    {
+      "category_code": "computers.ebooks",
+      "view_sessions": 1848.0,
+      "cart_sessions": 238.0,
+      "purchase_sessions": 149.0,
+      "purchase_presence_rate": 0.08062770562770563
+    },
+    {
+      "category_code": "computers.components.power_supply",
+      "view_sessions": 4433.0,
+      "cart_sessions": 653.0,
+      "purchase_sessions": 342.0,
+      "purchase_presence_rate": 0.07714865779381909
+    },
+    {
+      "category_code": "computers.peripherals.printer",
+      "view_sessions": 23454.0,
+      "cart_sessions": 2623.0,
+      "purchase_sessions": 1731.0,
+      "purchase_presence_rate": 0.07380404195446406
+    },
+    {
+      "category_code": "computers.components.motherboard",
+      "view_sessions": 12465.0,
+      "cart_sessions": 1726.0,
+      "purchase_sessions": 890.0,
+      "purchase_presence_rate": 0.07139991977537104
+    },
+    {
+      "category_code": "stationery.cartrige",
+      "view_sessions": 24253.0,
+      "cart_sessions": 2344.0,
+      "purchase_sessions": 1655.0,
+      "purchase_presence_rate": 0.06823898074465015
+    }
+  ],
+  "limits": [
+    "The export has no registration event or experiment assignment.",
+    "Category rates are descriptive session event-presence rates."
+  ],
+  "evidence_metadata": {
+    "generator": "scripts/build_senior_evidence.py",
+    "version": "2026-09-06",
+    "aggregate_only": true
+  }
+}
