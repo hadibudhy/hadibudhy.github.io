@@ -26,6 +26,17 @@ header:
 
 The product lead must decide which part of the shopping journey deserves the next discovery and experiment cycle. The analysis first tests whether the event data can support that decision, then identifies where observed sessions leave the ordered journey.
 
+## Decision framework
+
+| Layer | Definition |
+|---|---|
+| Decision owner | Product lead and instrumentation owner |
+| Outcome metric | Ordered view-to-cart conversion within 24 hours of the first view |
+| Drivers to investigate | Product information, displayed price, availability, delivery promise, and browsing intent |
+| Guardrails | Ordered purchase completion, revenue per eligible session, returns, and page latency |
+
+The public data can locate the largest measured step, but it cannot identify which driver caused the loss. That boundary determines the next measurement and experiment plan.
+
 ## What the data can measure
 
 The [REES46 Electronics export](https://data.rees46.com/datasets/electronics-events/electronics-events.csv.gz) contains **885,129 events**, **407,283 users**, and **490,398 raw identified sessions** from 24 September 2020 to 28 February 2021. Each row is a recorded view, cart, or purchase event. Only **165 rows** lack a session identifier.

@@ -27,6 +27,17 @@ header:
 
 The retention lead needs to decide when to intervene after a customer’s first observed purchase and which customers should enter the first test. The analysis must compare customers with equal time to return.
 
+## Decision framework
+
+| Layer | Definition |
+|---|---|
+| Decision owner | Retention or lifecycle product lead |
+| Outcome metric | 30-day repeat purchase among customers with a valid first order |
+| Drivers to investigate | Time since first order, customer mix, first-order value, product need, and offer timing |
+| Guardrails | 90-day repeat, order value, discount cost, returns, cancellations, margin, and unsubscribes |
+
+The historical file can set a fair baseline and identify test segments. It cannot show which offer causes repeat or whether the result is profitable.
+
 ## Data and customer boundary
 
 The [UCI Online Retail dataset](https://archive.ics.uci.edu/dataset/352/online%2Bretail) contains **541,909 transaction rows** from 1 December 2010 to 9 December 2011. After removing cancellations, non-positive quantity or price, and rows without `CustomerID`, the analysis contains **18,532 orders** from **4,338 identifiable customers**.

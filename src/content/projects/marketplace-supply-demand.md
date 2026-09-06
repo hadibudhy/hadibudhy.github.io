@@ -38,6 +38,8 @@ The quality review found **199,788 negative intervals** and **21 intervals above
 
 ## Metric framework
 
+The decision owner is the marketplace lead. The north-star outcome is fulfilled requests per eligible supply block or driver-hour once internal request and online-time data are available. Public completed trips and pickup delay are diagnostic measures; driver pay and passenger fare are context, not unit economics. Matching quality and driver availability are the main drivers to test, with cost, cancellations, neighbouring-zone wait, and total marketplace rides as guardrails.
+
 | Layer | Metric | Meaning |
 |---|---|---|
 | Demand served | Completed trips | Recorded fulfilled activity |
@@ -72,7 +74,7 @@ Airport staging rules, long pickup paths, flight banks, provider operations, and
 
 **P0: do not increase incentives citywide.** The citywide peak is not the citywide delay peak, and the public evidence cannot measure unmet demand.
 
-**P1: test a focused airport intervention.** Use JFK zone-hour blocks selected by the published delay and stability rule. Compare a driver staging or destination-based incentive with business as usual through a switchback design.
+**P1: test a focused airport intervention.** Use JFK zone-hour blocks selected by the published delay and observed-window coverage rule. Compare a driver staging or destination-based incentive with business as usual through a switchback design.
 
 **Primary metric:** fulfilled requests per eligible block or driver-hour using internal data. **Secondary metrics:** match rate, P90 passenger wait, completed rides, driver utilization, and driver earnings. **Guardrails:** incentive cost per incremental ride, passenger price, cancellation, neighbouring-zone wait, airport queue compliance, and total marketplace rides.
 

@@ -26,6 +26,17 @@ header:
 
 An operations director needs to choose which service queue should receive a routing or capacity pilot. The decision must consider incoming work, open backlog, and long close times together. It must also avoid presenting administrative closure as proof of resident satisfaction.
 
+## Decision framework
+
+| Layer | Definition |
+|---|---|
+| Decision owner | Operations director and queue owner |
+| Outcome metric | Age-adjusted open backlog and time to first response |
+| Drivers to investigate | Arrival volume, workflow type, transfers, staffing, and closure rules |
+| Guardrails | Reopen or repeat contact, transfer rate, verified resolution, cost, and neighbouring-queue backlog |
+
+The public snapshot can prioritize a workflow review. It cannot identify staff capacity or prove that a closed request was resolved.
+
 ## Data and cutoff
 
 I downloaded **348,180 NYC 311 requests** created during January 2025 from the [official Open Data API](https://data.cityofnewyork.us/resource/erm2-nwe9) and used the recorded snapshot available on 5 September 2026. This creates a mature intake cohort: each January request has at least 19 months of follow-up.
@@ -52,11 +63,11 @@ The dbt mart never uses a closure after the recorded snapshot. It excludes negat
 
 ## What I investigated
 
-I tested whether the largest queues also had the longest mature administrative closure tail. The comparison includes agency–complaint groups with at least 500 arrivals and at least 80% valid closure coverage. It ranks by observed P90 closure time, then uses open cases as a separate monitoring signal.
+I tested whether the largest queues also had the longest closed-request administrative closure tail. The comparison includes agency–complaint groups with at least 500 arrivals and at least 80% valid closure coverage. It ranks by observed P90 closure time, then uses open cases as a separate monitoring signal.
 
 ## Volume and pressure point to different decisions
 
-High request volume does not always mean a long closure tail. The comparison shows that some smaller queues have a much longer mature tail, while some larger queues close most recorded work sooner.
+High request volume does not always mean a long closure tail. The comparison shows that some smaller queues have a much longer closed-request tail, while some larger queues close most recorded work sooner.
 
 ![NYC 311 requests created in January 2025: high arrival volume and closed-request closure time identify different workflow investigations](/images/senior-311-volume-time.png)
 
@@ -64,7 +75,7 @@ This matters because a volume-only staffing rule can send resources to the wrong
 
 ## Long administrative closure tails are concentrated
 
-Among mature queues with at least 500 arrivals and 80% closure coverage:
+Among queues with at least 500 arrivals and 80% closure coverage:
 
 - **Building/Use:** 1,460 arrivals; 100% valid closure coverage; P90 administrative closure **330.6 days**.
 - **Elevator:** 1,605 arrivals; 100% coverage; P90 **189.0 days**.
@@ -99,7 +110,7 @@ The pilot succeeds only if it reduces age-adjusted backlog and first-response ti
 
 ## Key takeaway
 
-The senior decision is to follow a mature intake cohort, find long administrative closure tails with adequate coverage, verify the workflow, then test capacity only where the bottleneck is controllable.
+The senior decision is to follow a mature intake cohort, find long closed-request administrative tails with adequate coverage, verify the workflow, then test capacity only where the bottleneck is controllable.
 
 ## Technical appendix
 

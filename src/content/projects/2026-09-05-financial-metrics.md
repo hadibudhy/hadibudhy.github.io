@@ -26,6 +26,17 @@ header:
 
 The finance lead needs a consistent annual view of revenue, net income, and margin. The analytics decision is which reported fact belongs to each period when the source contains repeated filings, comparative values, several tags, and mixed durations.
 
+## Decision framework
+
+| Layer | Definition |
+|---|---|
+| Decision owner | Finance reporting owner and analytics engineering owner |
+| Outcome metric | Reconciled annual revenue, net income, and net margin |
+| Drivers to investigate | Period end, duration, filing form, reporting tag, accession, and amendment status |
+| Guardrails | Reconciliation variance, duplicate contexts, source freshness, and reproducible backfills |
+
+The first decision is metric trust. Product or cost explanations are deliberately out of scope until the annual facts are assigned to the correct reporting periods.
+
 ## Why the first result was wrong
 
 The [SEC Company Facts API](https://www.sec.gov/edgar/sec-api-documentation) provides structured facts with tags, units, filing dates, forms, accessions, and reporting periods. A first-pass model grouped facts by the source `fy` field. Reconciliation showed that this shifted comparative values into the filing year. For example, a prior-year figure repeated in a newer 10-K could be labelled with the newer filing context.
