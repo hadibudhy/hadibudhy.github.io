@@ -7,8 +7,13 @@ excerpt: "A descriptive audit of NYC bridge and tunnel traffic that shows why a 
 problem: "Leadership wants to know whether congestion pricing changed traffic, but affected and comparison crossings may already have been on different paths."
 result: "The official MTA panel contains 27,080 facility-day observations from 2019 to May 2026; the displayed pre-policy gap is visibly unstable, so this comparator is not used for causal attribution."
 featured: true
-kind: flagship
-published: false
+kind: completed
+published: true
+caseId: mta-comparator-audit
+primaryTrack: experimentation-growth
+secondaryTracks: [product-analytics, analytics-engineering]
+displayOrder: 60
+evidenceManifest: /data/evidence/mta-congestion-audit.json
 evidenceVisuals:
   - /images/growth-mta-event-study.png
   - /images/portfolio-mta-panel-scope.svg
@@ -16,113 +21,62 @@ evidenceVisuals:
 header:
   teaser: /images/growth-mta-event-study.png
 ---
+## Problem — Did congestion pricing change traffic beyond its normal variation?
 
-## Business question
+Congestion pricing began in New York on **5 January 2025**. A mobility business may want to change rider pricing, driver incentives, or its city strategy in response. A simple before-and-after comparison cannot tell whether the policy caused a change or whether affected roads were already moving differently.
 
-Congestion pricing began in New York on **5 January 2025**. A mobility business may want to change rider pricing, driver incentives, or its city strategy after the policy.
+The decision is whether this comparison group is reliable enough to support a causal claim.
 
-The question is not simply whether traffic was different afterward. It is whether the policy changed traffic more than it would have changed without the policy.
+## Hypotheses — What could explain a post-policy difference?
 
-## Why it matters
+- **The affected and comparison crossings may have different pre-policy trends.** Compare their weekly gap before the policy date.
+- **A post-policy shift may come from another change.** Weather, construction, holidays, commuting patterns, or facility disruptions can affect traffic.
+- **Crossing traffic may not track ride-hailing outcomes.** Check what the MTA source measures before applying it to pricing or driver-supply decisions.
 
-Traffic changes naturally. Weather, holidays, construction, commuting patterns, and facility problems can all move the numbers. Comparing only before and after can attribute a natural or unrelated change to the policy.
+The first check can show whether this comparison is plausible. It cannot by itself establish why traffic moved.
 
-## Decision brief
+## Analysis — What does the MTA traffic panel show?
 
-- **Recommendation:** do not use this comparison group to claim a congestion-pricing effect or change rider pricing.
-- **Evidence:** the affected-comparison gap changed materially in both directions before the policy date; this is a descriptive instability flag, not a formal test.
-- **Potential value:** none estimated; this study is a decision-quality audit.
-- **Evidence strength:** Moderate for flagging comparator instability; insufficient for formally rejecting parallel trends or estimating the policy effect.
-- **Cost / resource requirement:** A credible estimate requires a new comparator, route-exposure data, and internal ride outcomes; cost cannot be estimated from this study.
-- **Main risk:** pre-existing trends, spillovers, facility shocks, and the gap between traffic counts and ride-hailing outcomes.
-- **Cost of inaction:** Cannot be estimated from this dataset; acting on a false causal claim could misprice rides or misallocate supply.
-- **Success / stop rule:** Proceed only if pre-trends and placebo checks pass; stop the causal claim if the replacement comparator fails them.
-- **Next action:** rebuild the comparator and validate it with pre-trends, placebos, route exposure, and internal ride outcomes.
+The source is the official [MTA Bridges and Tunnels Hourly Crossings dataset](https://catalog.data.gov/dataset/mta-bridges-and-tunnels-hourly-crossings-beginning-2019). The checked panel contains **27,080 facility-day observations**, grouped into **3,880 facility-week rows** across **10 facilities**, from 2019 through May 2026. Three affected crossings are compared with seven other facilities, with each facility weighted equally.
 
-## Role
+### The comparison gap was already unstable before the policy
 
-Role: event-time diagnostic, comparator audit, and recommendation to pause the causal claim. The analysis does not control policy, facility operations, or ride-hailing data. Decision-owner handoff: a rejected comparator, a pre-registered replacement rule, and the evidence required before pricing action. [Reproducible analysis and validation notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/03-congestion-pricing-causal-impact) show the design and limits.
+![MTA crossing audit: the affected-minus-comparison traffic gap moved in both directions before 5 January 2025, so this group is not a reliable causal baseline](/images/growth-mta-event-study.png)
 
-## Data used
+The plotted weekly gap changes direction and size before the policy date. That is a visible warning about this comparison, not a formal statistical test. Each point is one weekly group difference, so no pointwise confidence interval or p-value is reported.
 
-The analysis uses the official [MTA Bridges and Tunnels Hourly Crossings dataset](https://catalog.data.gov/dataset/mta-bridges-and-tunnels-hourly-crossings-beginning-2019). It provides traffic counts by facility and vehicle class. Car counts form **27,080 facility-day observations** across 10 facilities from 2019 to May 2026.
+### The panel supports a traffic audit, not a ride-hailing outcome
 
-Three facilities provide access toward the central business district: RFK Bridge Manhattan, Queens-Midtown Tunnel, and Hugh L. Carey Tunnel. Seven other facilities act as comparison crossings. This is a traffic study, not a ride-hailing study. It does not measure platform requests, driver supply, or revenue.
+![MTA audit scope: 27,080 daily observations become 3,880 facility-week rows across 10 crossings, within a 26-week diagnostic window](/images/portfolio-mta-panel-scope.svg)
 
-## Approach
+The panel gives broad facility and time coverage for checking the comparison. A large panel does not make an unsuitable control group valid.
 
-1. Compare affected and comparison facilities before the policy.
-2. Check whether they were moving in a similar way.
-3. Compare their changes around the policy date.
-4. Inspect whether apparent breaks also occur before the policy.
-5. Stop the causal conclusion if the comparison group is not credible.
+### Important exposure and outcome data are missing
 
-The method is a descriptive event-time diagnostic. In plain language, it compares the gap between the two groups week by week around the policy instead of relying on one before-and-after average. Each event week is only one weekly group difference, so the chart does not report pointwise confidence intervals or p-values.
+![MTA evidence boundary: facility-level car counts and the policy date are observed, but route-level toll exposure, ride-hailing requests, and a parallel counterfactual are not](/images/portfolio-mta-causal-boundary.svg)
 
-## Key findings
+The traffic records cannot show which trips incurred a fee or how riders, drivers, or platform economics changed. Those questions require route exposure and internal trip outcomes.
 
-### The comparison group was already moving differently
+## Result — Do not attribute the traffic difference to the policy
 
-Before congestion pricing began, the affected-comparison gap changed materially in both directions rather than staying near a stable baseline.
+**Measured result:** the plotted affected-comparison gap varied before the policy, so this audit does not use the selected group to estimate a policy effect.
 
-In plain English: the comparison was already moving around before the policy, so its later movement cannot be cleanly attributed to congestion pricing.
+**Not established:** the diagnostic is descriptive. It does not formally reject parallel trends, estimate a causal effect, or measure ride-hailing demand, supply, revenue, or customer behavior.
 
-![MTA bridge and tunnel event study: affected crossings were already moving differently before congestion pricing, so the comparison is not reliable](/images/growth-mta-event-study.png)
+**Recommendation:** do not change rider prices or driver incentives based on this comparison. First pre-register a comparator rule, test pre-policy fit and placebo dates, and account for weather, construction, transit, and facility disruptions. If the comparison passes, add route-level toll exposure and internal measures such as requests, rides, cancellations, pickup delay, passenger price, and driver pay.
 
-**Business meaning:** the chosen comparison group does not provide a stable descriptive baseline for the affected crossings. The later differences cannot be assigned to congestion pricing with confidence.
-
-### The most useful result is a decision to pause the claim
-
-The chart can still show a post-policy difference, but that difference may reflect the pre-existing gap or another shock. A precise number is not useful if the comparison is biased.
-
-**Business meaning:** a Country Manager should not change rider prices or driver incentives based on this result. The better next step is to build a comparison that matches the affected facilities before the policy.
-
-## Visual evidence
-
-### Context: the audited panel has broad facility and week coverage
-
-![MTA congestion-pricing audit scope: 27,080 facility-day observations, 3,880 facility-week observations, 10 facilities, and a plus-or-minus 26-week diagnostic window](/images/portfolio-mta-panel-scope.svg)
-
-The panel is large enough for a diagnostic; size alone does not make the comparator valid.
-
-### Decision: stop the causal claim when the pre-trend fails
-
-![MTA causal evidence boundary: facility crossings and a policy date are observed, but ride-hailing fee exposure and a parallel untreated counterfactual are not](/images/portfolio-mta-causal-boundary.svg)
-
-This is the decision-relevant result: improve identification before attributing an effect.
-
-## Recommendation
-
-**What:** Do not make a causal claim from this control group.
-
-**Where / who:** Rebuild the comparison using facilities with similar pre-policy traffic patterns. Treat nearby crossings as possible spillover areas, not automatically as clean controls.
-
-**Why:** The displayed pre-policy gap is visibly unstable, and this descriptive audit does not formally test the parallel-trends assumption.
-
-**Risk:** A new control may also be affected by the policy or by a facility-specific event.
-
-**Next test:** Pre-register the control-selection rule, add weather, construction, transit, and facility-disruption data, and require acceptable pre-policy trends and placebo results before estimating a policy effect.
-
-**Decision status:** Comparator rejected after validation; no causal policy effect or operational outcome is claimed.
-
-## What internal data would improve the decision
-
-For a ride-hailing business, the missing decision inputs are requests, completed and cancelled rides, pickup delay, driver online time, passenger price, driver pay, and routes. Effects should then be estimated separately for affected trips, border areas, peak periods, and airport flows. The public MTA study is useful external context, not a substitute for platform data.
-
-## Key takeaway
-
-A useful analysis can refuse a weak answer. This study found an unstable pre-policy gap, so the business should improve and formally validate the comparison before changing pricing or supply policy.
+**Limitations:** nearby crossings may be affected by spillovers, facility-specific shocks, or broader travel changes. The public MTA panel is useful traffic context, not a substitute for platform data.
 
 ## Technical appendix
 
-### Validation record
+The outcome is the weekly facility-level log of one plus car crossings. The chart shows the treated-minus-comparison difference relative to event week −1 within a ±26-week window.
 
-| Check | Current evidence | Decision |
+| Check | Evidence | Decision |
 |---|---|---|
-| Control selection | 3 affected facilities versus 7 comparison facilities; selected before interpreting post-policy movement | Keep as an audit, not a final estimate |
-| Panel and diagnostic | 3,880 facility-week rows across 388 weeks and 10 facilities; equal-weight group means of log(1 + weekly car crossings), centered on event week −1 and shown within ±26 weeks | Reproducible descriptive comparison |
-| Pre-policy pattern | Weekly affected-comparison differences change direction and magnitude before policy | Do not use this comparator for causal attribution without formal design validation |
-| Inference audit | Each displayed event week is one weekly group difference; pointwise residual-based p-values and confidence intervals are not reported | Avoids false precision from singleton event bins |
-| Outcome scope | All-car crossing traffic, not ride-hailing requests, supply, trips, or revenue | Use as external context only |
+| Groups | 3 affected facilities and 7 comparison facilities | Keep as a descriptive audit |
+| Panel | 3,880 facility-week rows across 388 weeks and 10 facilities | Reproducible weekly comparison |
+| Pre-policy pattern | The weekly gap changes direction and magnitude | Do not use this group for causal attribution without further validation |
+| Inference | One group difference per event week; no pointwise intervals or p-values | Avoid false precision |
+| Outcome scope | All-car crossings, not ride-hailing requests, supply, trips, or revenue | Use as external context only |
 
-The event-time script describes the difference between affected and comparison facilities by week around 5 January 2025. The unstable pre-policy gap is the reason the causal claim is blocked; the script deliberately does not attach pointwise inference to singleton weekly event bins. [Reproducible code, validation output, and zone-exposure notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/03-congestion-pricing-causal-impact) are available for review.
+The [analysis code and validation notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/03-congestion-pricing-causal-impact) document the weekly aggregation and decision boundary. Unexecuted future-design scaffolds in that folder are not evidence for this result.

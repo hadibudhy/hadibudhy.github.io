@@ -21,90 +21,48 @@ evidenceVisuals:
 header:
   teaser: /images/rees46-event-mix.svg
 ---
+## Problem — Can the team trust its funnel data?
 
-## Business question
+Product teams cannot improve a customer journey if event names, identity, and session grain are unclear. A funnel can look precise while counting repeated events as people or silently excluding activity that cannot be tied to a session.
 
-Can a product team trust the event data enough to decide where to improve the customer journey?
+The decision is whether this public event model is reliable enough to demonstrate a safe measurement foundation. It is not a claim about a live product’s conversion.
 
-## Why it matters
+## Hypotheses — What could make funnel counts unreliable?
 
-Funnels look precise even when their definitions are not. If a view, cart, or purchase is counted at the wrong grain, the team can prioritize a problem that the product did not actually have.
+- **Event volume may be mistaken for people or conversion.** Compare event-level counts with identified-session coverage.
+- **Missing session IDs may hide part of the journey.** Count those rows explicitly and keep them out of session metrics.
+- **Early joins may multiply events.** Preserve one recorded event per row until the session-level model is built.
 
-## Decision brief
+## Analysis — What did the data checks show?
 
-- **Recommendation:** use the event model as a foundation for product questions, but keep event-level volume separate from session-level conversion until identity coverage is reviewed.
-- **Evidence:** the public export contains `view`, `cart`, and `purchase` events. The model keeps one row per event, creates a deterministic event key, and records missing session identifiers in a quality mart.
-- **Business value:** a shared event grain makes funnel changes reproducible and gives product teams one place to agree on definitions.
-- **Main risk:** this is a public electronics browsing sample, not a current product telemetry feed. It does not prove what a live product funnel would do.
-- **Next action:** agree on an internal tracking plan, then add freshness, accepted-value, uniqueness, and session-coverage checks before publishing activation metrics.
+The source is the [REES46 Electronics behaviour export](https://data.rees46.com/datasets/electronics-events/electronics-events.csv.gz), covering 24 September 2020 through 28 February 2021 in the loaded file. The model separates raw events, typed staging, ordered identified sessions, and event-quality and funnel marts.
 
-## What the data represents
+### The export contains 885,129 recorded events
 
-The source is the [REES46 Electronics behaviour export](https://data.rees46.com/datasets/electronics-events/electronics-events.csv.gz). It records customer events across a five-month public release. The source file is treated as the event grain: one row represents one recorded event, not one customer or one order.
+![REES46 electronics export: 793,748 views, 54,035 cart events, and 37,346 purchase events; counts are events, not people](/images/rees46-event-mix.svg)
 
-The source profile is committed in the evidence manifest. It records the publisher description separately from the observed file range because a data contract should describe what was actually loaded.
+Views dominate the recorded activity, with fewer cart and purchase events. These counts describe events only; a user conversion rate needs a session or user denominator.
 
-## Analytics architecture
+### Session coverage is a visible quality check
 
-The pipeline is intentionally small:
+![REES46 event-quality checks: 165 of 885,129 events have no session identifier and stay outside session-level metrics](/images/rees46-quality-checks.svg)
 
-`raw.events → stg_rees46_events → int_rees46_ordered_events → fct_product_funnel / mart_event_quality`
+The 165 rows without session IDs can still support event-volume reporting, but should not be silently included in a session funnel. Keeping them visible shows the size of that boundary.
 
-- **Raw:** source rows are loaded without business reinterpretation.
-- **Staging:** timestamps, identifiers, categories, and prices are typed. A deterministic `event_id` protects the event grain.
-- **Intermediate:** identified sessions are ordered with window functions so the next analysis can ask what happened before and after an event.
-- **Marts:** daily event counts and session coverage are published separately from quality checks.
+### The model keeps each measure at its proper grain
 
-The project is runnable with local DuckDB and dbt. The CI seed is small enough to run in a pull request; the source manifest records the full-data evidence boundary.
+![Event-model flow: recorded events are typed and ordered before separate funnel and quality marts are created](/images/rees46-model-grain.svg)
 
-## What I checked first
+This separation reduces the risk of duplicating events when a downstream analysis joins event, user, or session summaries.
 
-1. Are event types limited to the published values?
-2. Is the event key unique?
-3. Are timestamps and user identifiers present?
-4. How much of the source can be tied to a session?
-5. Are event counts being mistaken for users or conversions?
+## Result — Approve the measurement foundation, not a product conclusion
 
-## What the evidence shows
+The checks support event-level counts and identified-session measures: the source has 885,129 events across view, cart, and purchase, with 165 missing session identifiers. The model makes those rows and the event grain explicit. No live activation or retention effect was measured.
 
-### The source is event-rich, but event volume is not a funnel conversion rate
+**Recommendation:** agree on an internal tracking plan before publishing funnel metrics. Product, engineering, and analytics should define event names, required properties, session identity, and what counts as an activated user. Add source-freshness, accepted-value, uniqueness, and session-coverage checks.
 
-![Observed event mix from the REES46 electronics export](/images/rees46-event-mix.svg)
-
-The export contains many product views and fewer cart and purchase events. That is useful for journey analysis, but the counts are event counts. They should not be presented as a user conversion rate without session-level denominators.
-
-### Data quality belongs beside the metric, not in a hidden notebook
-
-![Event quality checks for identifiers, timestamps, and session coverage](/images/rees46-quality-checks.svg)
-
-The quality mart exposes duplicate-key checks and missing-session rows. This keeps an important boundary visible: rows without a session can still support event-volume reporting, but they should not enter a session funnel silently.
-
-### The model protects the grain that downstream metrics depend on
-
-![Analytics engineering model grain from source event to product funnel mart](/images/rees46-model-grain.svg)
-
-Each layer has one job. This avoids joining event rows to user or session summaries too early, which is a common way to multiply counts.
-
-## Recommendation
-
-**What:** publish a shared event model and metric contract before launching product funnel reporting.
-
-**Where / who:** product, engineering, and analytics teams should agree on event names, required properties, session identity, and the meaning of an activated user.
-
-**Why:** the public evidence shows that event volume and session conversion answer different questions.
-
-**Risk:** a clean model can still encode a weak tracking plan. Good SQL does not repair missing instrumentation.
-
-**Next test:** replay a small known event fixture in CI, compare the resulting marts with expected rows, and monitor source freshness and session coverage in production.
-
-## Measurement plan
-
-For an internal product, I would track event delivery rate, session coverage, funnel step conversion, activation within a defined window, and downstream retention. The primary product metric should be chosen after the team agrees on the user action that represents real value.
-
-## Key takeaway
-
-The first product analytics decision is often a data-model decision. A trustworthy funnel starts by protecting event grain, defining identity, and showing what the source cannot measure.
+**Limitations:** this is a public electronics browsing sample, not current product telemetry. It cannot establish what a live product funnel would do. A small CI seed checks model contracts while the evidence manifest records the full-data source boundary.
 
 ## Technical appendix
 
-The executable project lives in [`analytics/`](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/analytics). It includes a dbt source, incremental staging model, ordered-session model, funnel mart, quality mart, contracts, and a CI fixture. The public source is not copied into the website or committed to the repository.
+The pipeline keeps each layer focused: raw events → typed staging → ordered identified sessions → separate funnel and event-quality marts. The evidence manifest records the observed file range, event totals, quality checks, and chart hashes.

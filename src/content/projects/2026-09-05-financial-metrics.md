@@ -21,81 +21,48 @@ evidenceVisuals:
 header:
   teaser: /images/sec-revenue-net-income.png
 ---
+## Problem — Which financial trend can leaders safely compare?
 
-## Business question
+Finance and product leaders need a consistent view of revenue, net income, and margin. SEC filings contain multiple facts, periods, units, and amendments, so a dashboard can show a precise trend built from values that are not comparable.
 
-How can a team use public financial data without turning inconsistent filing facts into false precision?
+The decision is whether the annual figures are consistent enough to support an executive trend view. This analysis uses Microsoft’s public filings; it does not represent an internal finance system.
 
-## Why it matters
+## Hypotheses — What could make a trend misleading?
 
-Revenue growth can look healthy while profitability weakens. A metric mart should make that trade-off visible and preserve enough source context for a reviewer to understand how each number was chosen.
+- **Mixed periods or units could distort growth.** Check that each annual value uses the same fiscal-period rule and compatible units.
+- **Revenue growth could hide weaker profitability.** Compare net income and margin alongside revenue.
+- **A correct number could still be hard to audit.** Preserve the tag, filing date, and accession context used to select it.
 
-## Decision brief
+## Analysis — What do the selected facts show?
 
-- **Recommendation:** use a narrow, reconciled annual metric layer for executive trend questions, and keep the raw fact history available for deeper review.
-- **Evidence:** SEC Company Facts provides issuer facts with tags, units, filing dates, fiscal periods, and reported values. The evidence manifest records the source and selection rules.
-- **Business value:** consistent metric definitions reduce disagreements over which filing value belongs in a trend chart.
-- **Main risk:** public filings are not a company’s internal operating model. They do not provide product-level drivers, customer cohorts, or live performance.
-- **Next action:** add source freshness and reconciliation checks before connecting the mart to a dashboard or planning model.
+The source is the [SEC Company Facts API](https://www.sec.gov/edgar/sec-api-documentation). Each record is a reported fact with a tag, unit, fiscal period, filing date, and value. The model keeps this context while selecting an annual view; it does not mix quarterly and annual facts.
 
-## What the data represents
+### Revenue and net income both rose
 
-The source is the [SEC Company Facts API](https://www.sec.gov/edgar/sec-api-documentation). The case uses reported issuer facts rather than a market-price feed. The relevant grain is a reported fact and its context: tag, unit, fiscal period, frame, filing date, and value.
+![Microsoft reported results, FY2023–FY2025: revenue rose from $211.9 billion to $281.7 billion while net income rose from $72.4 billion to $101.8 billion](/images/sec-revenue-net-income.png)
 
-## Analytics architecture
+Both measures increased across the selected fiscal years. Revenue shows scale; net income shows what remained after reported costs. Together they give a fuller performance picture than revenue alone.
 
-`SEC JSON → normalized fact staging → period selection → finance metric mart → trend chart`
+### Reported net margin improved slightly
 
-The raw source keeps filing context. The normalized layer makes periods and units explicit. The final mart contains only metrics whose selection rule is documented. This prevents a dashboard query from silently choosing between quarterly, annual, and restated facts.
+![Microsoft reported net margin rose from 34.1% in FY2023 to 36.1% in FY2025; the vertical scale starts at zero](/images/sec-net-margin.png)
 
-## What I checked first
+Selected net income divided by selected revenue rose from 34.1% to 36.1%. The full zero-based scale keeps that change in proportion. This company-level result does not explain which products or costs drove it.
 
-1. Are revenue and net income using compatible units?
-2. Is each annual value tied to the right fiscal period?
-3. Are duplicate facts caused by multiple filings or tags?
-4. Are margins calculated from the selected numerator and denominator?
-5. Can a reviewer trace the chart value back to the source fact?
+### Filing context is part of the metric
 
-## What the evidence shows
+![SEC Company Facts grain: each reported value retains its tag, unit, fiscal period, and filing identity for audit](/images/portfolio-sec-fact-grain.svg)
 
-### Revenue and net income need to be read together
+Keeping the source context makes it possible to review why each value was selected instead of relying on an undocumented spreadsheet cell.
 
-![Reported revenue and net income over the selected fiscal periods](/images/sec-revenue-net-income.png)
+## Result — Use a narrow, traceable annual view
 
-Revenue is a scale measure. Net income shows what remains after costs. Showing both prevents growth from being interpreted as improving business performance by default.
+The selected annual metrics show revenue rising from $211.9 billion to $281.7 billion and net income from $72.4 billion to $101.8 billion between FY2023 and FY2025; net margin rose from 34.1% to 36.1%. The evidence supports reported company-level trends, not product, customer, or causal operating conclusions.
 
-### Margin turns the growth story into a performance question
+**Recommendation:** publish a small finance mart with approved metric definitions, period rules, units, and source links. Finance and analytics engineering should reconcile the selected annual values to filings before connecting the mart to planning or dashboards. Add source freshness and reconciliation checks, then extend to quarterly or operating measures only after their definitions are agreed.
 
-![Reported net margin over the selected fiscal periods](/images/sec-net-margin.png)
-
-Net margin is calculated as selected net income divided by selected revenue. It is a useful summary, but it does not explain which product, cost, or market drove the change.
-
-### A financial metric is only as trustworthy as its lineage
-
-![The fact grain and lineage needed for a filing-aware finance metric mart](/images/portfolio-sec-fact-grain.svg)
-
-The chart is built from a metric definition, not from a convenient spreadsheet cell. The source context remains available for audit and later expansion.
-
-## Recommendation
-
-**What:** publish a small finance mart with explicit metric definitions, period rules, units, and source links.
-
-**Where / who:** finance, analytics engineering, and business teams should agree on the annual reporting view before extending it to quarterly or product-level measures.
-
-**Why:** reported financial facts can be valid individually and still become misleading when mixed across periods or units.
-
-**Risk:** a reconciled metric layer can describe performance without explaining its operational drivers.
-
-**Next test:** reconcile the selected annual metrics to the issuer’s filings, add freshness checks, and then join approved operating metrics only after the grain is documented.
-
-## Measurement plan
-
-Monitor source freshness, fact-to-mart row counts, unit consistency, annual period coverage, and reconciliation variance. For a company’s internal data, add gross margin, customer retention, acquisition cost, and product-level contribution only when their definitions are approved.
-
-## Key takeaway
-
-Financial analytics is not only about calculating a ratio. It is about preserving the reporting context so a decision-maker can trust what the ratio means.
+**Limitations:** SEC filings do not provide product-level drivers, customer cohorts, live performance, or the company’s internal operating model. Monitor source freshness, unit consistency, period coverage, and reconciliation variance.
 
 ## Technical appendix
 
-The evidence manifest records the SEC source, expected metric fields, period boundary, and validation notes. The public site intentionally exposes the model decision and charts, not raw filing payloads or private business data.
+The evidence manifest records the SEC source, annual period rule, validation checks, and chart hashes. No raw filing payloads or private business data are published.

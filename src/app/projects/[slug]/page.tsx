@@ -55,10 +55,13 @@ const components = {
   li: (props: ComponentProps<"li">) => <li className="leading-7" {...props} />,
   blockquote: (props: ComponentProps<"blockquote">) => <blockquote className="mt-6 border-l-2 border-primary pl-5 italic text-foreground/80" {...props} />,
   img: ({ alt = "", ...props }: MDXImageProps) => (
-    <span role="figure" aria-label={alt || undefined} className="my-10 block overflow-hidden border border-border bg-muted">
-      {/* MDX images have author-provided dimensions and are served from the static export. */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="w-full h-auto object-cover" loading="lazy" decoding="async" alt={alt} {...props} />
+    <span className="my-10 block min-w-0 border border-border bg-muted">
+      <span role="group" aria-label="Scrollable chart; scroll horizontally to inspect labels" tabIndex={0} className="block min-w-0 max-w-full overflow-x-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary">
+        {/* MDX images have author-provided dimensions and are served from the static export. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="block h-auto min-w-[672px] max-w-none w-full md:min-w-0 object-cover" loading="lazy" decoding="async" alt={alt} {...props} />
+      </span>
+      <span className="block px-4 pt-2 text-xs text-muted-foreground md:hidden">Scroll horizontally to inspect chart labels.</span>
       {alt && <span className="block border-t border-border px-4 py-3 text-sm leading-6 text-muted-foreground sm:px-5"><span className="font-semibold text-foreground">Chart takeaway:</span> {alt}</span>}
     </span>
   ),

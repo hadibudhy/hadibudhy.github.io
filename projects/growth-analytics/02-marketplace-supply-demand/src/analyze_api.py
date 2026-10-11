@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import sys
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -25,7 +26,66 @@ PARAMS = {
 }
 
 
+def render_monthly_summary(monthly: pd.DataFrame) -> None:
+    monthly = monthly.copy()
+    monthly["year"] = pd.to_datetime(monthly["month"]).dt.year
+    averages = monthly.groupby("year")[["Trips Per Day", "Unique Drivers", "Avg Hours Per Day Per Driver"]].mean()
+    rows = [
+        ["Average trips per day", f"{int(averages.loc[2024, 'Trips Per Day'] + 0.5):,}", f"{int(averages.loc[2025, 'Trips Per Day'] + 0.5):,}"],
+        ["Unique drivers per month", f"{int(averages.loc[2024, 'Unique Drivers'] + 0.5):,}", f"{int(averages.loc[2025, 'Unique Drivers'] + 0.5):,}"],
+        ["Hours per driver per day", f"{averages.loc[2024, 'Avg Hours Per Day Per Driver']:.2f}", f"{averages.loc[2025, 'Avg Hours Per Day Per Driver']:.2f}"],
+    ]
+    changes = [
+        (averages.loc[2025, metric] / averages.loc[2024, metric] - 1) * 100
+        for metric in ("Trips Per Day", "Unique Drivers", "Avg Hours Per Day Per Driver")
+    ]
+    rows = [row + [f"{change:+.1f}%"] for row, change in zip(rows, changes)]
+
+    figure, axis = plt.subplots(figsize=(10, 4.8), facecolor="#07111f")
+    axis.set_facecolor("#07111f")
+    axis.axis("off")
+    figure.suptitle(
+        "Trips rose 2%; reported driver totals stayed flat",
+        color="#f3f6fb", fontsize=18, fontweight="bold", y=0.94,
+    )
+    figure.text(
+        0.5, 0.84, "TLC High Volume FHV monthly reports | average of 12 monthly values in each year",
+        ha="center", color="#9fb0c6", fontsize=11,
+    )
+    table = axis.table(
+        cellText=rows,
+        colLabels=["Measure", "2024 average", "2025 average", "Change"],
+        cellLoc="center",
+        colLoc="center",
+        colWidths=[0.40, 0.20, 0.20, 0.16],
+        bbox=[0.02, 0.22, 0.96, 0.52],
+    )
+    table.auto_set_font_size(False)
+    table.set_fontsize(12)
+    for (row, _), cell in table.get_celld().items():
+        cell.set_edgecolor("#334155")
+        cell.set_linewidth(0.8)
+        cell.set_facecolor("#132238" if row == 0 else "#0b1728")
+        cell.get_text().set_color("#f3f6fb" if row == 0 else "#d5dfed")
+        if row == 0:
+            cell.get_text().set_fontweight("bold")
+    figure.text(
+        0.5, 0.08,
+        "Reported driver counts are monthly totals, not hourly online supply. Changes compare annual averages.",
+        ha="center", color="#9fb0c6", fontsize=10,
+    )
+    figure.text(0.5, 0.035, "Source: NYC Taxi and Limousine Commission", ha="center", color="#9fb0c6", fontsize=9)
+    output = ROOT / "public" / "images" / "growth-hvf-monthly-supply.png"
+    figure.savefig(output, dpi=160, facecolor=figure.get_facecolor(), bbox_inches="tight")
+    plt.close(figure)
+
+
 def main() -> None:
+    monthly_json = ROOT / "analysis_data" / "growth_sources" / "tlc_hvfhv_monthly_2024_2025.json"
+    if sys.argv[1:] == ["--monthly-chart-only"]:
+        render_monthly_summary(pd.read_json(monthly_json))
+        return
+
     url = f"{API}?{urllib.parse.urlencode(PARAMS)}"
     request = urllib.request.Request(url, headers={"User-Agent": "Hadi Budhy marketplace analysis"})
     with urllib.request.urlopen(request, timeout=120) as response:
@@ -58,22 +118,9 @@ def main() -> None:
     monthly = monthly.sort_values("month")
     monthly_2024_25 = monthly[monthly.month.dt.year.isin([2024, 2025])]
     MONTHLY.parent.mkdir(parents=True, exist_ok=True)
-    monthly_2024_25.to_json(ROOT / "analysis_data" / "growth_sources" / "tlc_hvfhv_monthly_2024_2025.json", orient="records", date_format="iso", indent=2)
-    figure, axes = plt.subplots(2, 1, figsize=(7, 5.6), sharex=True)
-    axes[0].plot(monthly_2024_25.month, monthly_2024_25["Trips Per Day"], color="#171717", linewidth=2)
-    axes[0].set_ylabel("Trips / day")
-    axes[0].set_title("Reported HVFHV activity and driver coverage moved on different scales")
-    axes[1].plot(monthly_2024_25.month, monthly_2024_25["Unique Drivers"], color="#737373", linewidth=2)
-    axes[1].set_ylabel("Unique drivers")
-    axes[1].set_xlabel("Month")
-    for axis in axes:
-        axis.axvline(pd.Timestamp("2025-01-05"), color="#a3a3a3", linestyle="--", linewidth=1)
-        axis.spines[["top", "right"]].set_visible(False)
-    axes[0].text(0.5, 1.08, "Dashed line marks 5 January 2025; monthly proxies are not hourly online supply", ha="center", transform=axes[0].transAxes, fontsize=8, color="#737373")
-    figure.tight_layout()
+    monthly_2024_25.to_json(monthly_json, orient="records", date_format="iso", indent=2)
+    render_monthly_summary(monthly_2024_25)
     monthly_chart = ROOT / "public" / "images" / "growth-hvf-monthly-supply.png"
-    figure.savefig(monthly_chart, dpi=160, bbox_inches="tight")
-    plt.close(figure)
     print(json.dumps({"rows": sum(trips), "peak_hour": hours[trips.index(max(trips))], "peak_trips": max(trips), "output": str(OUTPUT), "chart": str(CHART), "monthly_rows": len(monthly_2024_25), "monthly_chart": str(monthly_chart)}, indent=2))
 
 

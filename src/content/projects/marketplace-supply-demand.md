@@ -19,112 +19,52 @@ evidenceVisuals:
   - /images/growth-hvf-monthly-supply.png
   - /images/portfolio-marketplace-measurement.svg
 ---
+## Problem — Where is the marketplace under pressure?
 
-## Business question
+Leadership hears that riders wait longer and rides are lost in some areas, and wants to know whether driver incentives should increase. Recorded trips alone cannot tell whether a quiet period had low demand or weak supply, or whether a busy period still left riders unserved.
 
-The Country Manager says riders are waiting longer and rides are being lost in some areas. The team wants to know whether to pay drivers more.
+The decision is where and when to investigate before committing to a citywide incentive.
 
-The first question is more basic: where is the marketplace under pressure, and what can the public data actually prove?
+## Hypotheses — What could explain the activity pattern?
 
-## Why it matters
+- **Demand may be concentrated by hour.** Compare recorded trips across hours to find investigation windows.
+- **Recorded activity may rise without similar growth in driver coverage.** Compare official monthly trip and driver measures.
+- **A peak may still be fully served.** Check requests, matches, cancellations, wait, and online driver-hours before calling it a shortage; those measures are not in the public trip file.
 
-A low number of recorded trips can mean low demand or poor supply. A busy hour can still have many unserved riders. If the business gives incentives without knowing which problem it has, it may spend money without improving the customer experience.
+## Analysis — What do official TLC records show?
 
-## Decision brief
+The analysis combines two different official sources: a one-week trip table for **1–7 February 2019** and monthly High Volume FHV reports for **2024 and 2025**. They are separate descriptive views, not one continuous time series. The trip table records submitted dispatched trips; it does not show every request, rejected match, cancellation, wait, or online driver-hour.
 
-- **Recommendation:** measure the request funnel first, then pilot incentives only in repeated shortage windows.
-- **Evidence:** recorded trips peak at **18:00**; reported 2025 trips rose while unique drivers stayed broadly flat.
-- **Potential value:** not estimated; requests, contribution, and incentive cost are missing.
-- **Evidence strength:** Medium for timing and activity signals; low for unmet demand or causal supply claims.
-- **Cost / resource requirement:** Request, match, wait, online-driver, incentive, and contribution instrumentation is required; spend cannot be estimated from this dataset.
-- **Main risk:** the hourly slice is from **February 2019**, while the monthly comparison is **2024–2025**; spillover and cannibalization are unknown.
-- **Cost of inaction:** Cannot be estimated from this dataset; a broad incentive could waste spend without improving fulfillment.
-- **Success / stop rule:** Continue only if request fulfillment and contribution improve without shifting harm to nearby zones; stop if incentives only cannibalize supply or raise cost per incremental trip.
-- **Next action:** add request, match, wait, online-driver, cancellation, incentive, and contribution fields.
+### Recorded trips peaked at 18:00 in the observed week
 
-## Role
+The bounded week contains **4,965,012 recorded trip rows**. Counts ranged from **59,285 at 04:00** to **334,713 at 18:00**.
 
-Role: public-data analysis, proxy classification, limitation framing, and proposed zone-time pilot. No incentive program operation or platform fulfillment outcome is included. Decision-owner handoff: a measurement specification and a randomized zone-time pilot design. [SQL, Python, and source notes](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/02-marketplace-supply-demand) document the analysis.
+![Official NYC TLC HVFHV data, 1–7 February 2019: recorded trips peaked at 334,713 at 18:00; trip records do not show unserved requests](/images/growth-hvf-hourly.png)
 
-## Data used
+This makes early evening a reasonable time to inspect with internal request and wait data. It is not evidence that 18:00 had unmet demand.
 
-The analysis uses two official TLC sources:
+### Trips rose 2% while driver totals stayed nearly flat
 
-- A High Volume FHV trip table for **1–7 February 2019**, with one submitted trip per row.
-- TLC's monthly report for High Volume FHV activity, including reported trips per day, unique drivers, unique vehicles, and average hours.
+In the monthly reports, average trips per day rose from **654,410 in 2024** to **667,537 in 2025** (**+2.0%**). Average unique drivers changed from **83,399** to **83,299**, while reported average hours per driver changed from **6.35** to **6.38** per day.
 
-The trip table contains **4,965,012 recorded rows**. It shows activity that was submitted by licensed high-volume services. It does not show every request, rejected match, cancellation, true wait time, or driver who was online but did not receive a trip.
+![TLC monthly High Volume FHV reports: average trips per day rose 2.0%, while unique-driver counts were nearly flat; reported driver hours rose 0.4%](/images/growth-hvf-monthly-supply.png)
 
-These sources cover different periods: the hourly slice is **1–7 February 2019**, while the monthly report compares **2024 with 2025**. They are complementary descriptions, not a single continuous time series, so the 2019 peak cannot be treated as the cause of the later monthly pattern.
+The two measures do not move by the same amount, but monthly driver counts are not hourly online supply. The 2019 trip peak and the 2024–2025 averages also describe different periods and should not be combined into a single trend.
 
-## Approach
+### The public sources leave key parts of the funnel unknown
 
-1. Find the hours with the most recorded trip activity.
-2. Compare activity with the number of drivers and vehicles reported by TLC.
-3. Separate direct observations from supply proxies.
-4. Decide what can be targeted now and what needs internal marketplace data.
-5. Design an incentive test that protects customers, drivers, and nearby zones.
+![NYC TLC marketplace evidence boundary: recorded trips and monthly driver proxies are observed; requests, lost matches, cancellations, true wait, and incentive return are not](/images/portfolio-marketplace-measurement.svg)
 
-## Key findings
+Without these missing measures, the data cannot distinguish low demand, low availability, and poor matching.
 
-### Recorded trip activity was highest in the early evening
+## Result — Instrument the request funnel before paying for more supply
 
-The observed week had **59,285 recorded trips at 04:00** and **334,713 at 18:00**.
+The public data supports a time-of-day activity pattern and separate monthly supply proxies. It does not confirm a shortage or estimate incentive ROI.
 
-![Official NYC HVFHV Open Data slice: recorded trips peaked at 18:00, but the public file does not show unserved requests](/images/growth-hvf-hourly.png)
+**Recommendation:** do not raise incentives across the city based on trip counts. Add request, match, cancellation, wait, driver-online, incentive, and contribution records at the same zone-time grain. If those records show a repeated local shortage, run a powered zone-time or switchback test. Measure request fulfillment as the customer outcome, trips per online driver-hour as a supply diagnostic, and incremental fulfilled trips per incentive dollar as the economic measure. Monitor wait, cancellations, driver earnings, and neighboring-zone displacement.
 
-**Business meaning:** 18:00 is a sensible period for a supply investigation. It is not proof that riders were waiting longer or that the city needed more drivers.
-
-### More activity did not come with more reported drivers
-
-TLC's monthly report gives a broader view. Average reported trips per day rose from **654,410 in 2024 to 667,537 in 2025**. Average unique drivers stayed almost flat, from **83,399 to 83,299**. Average hours per driver changed from **6.35 to 6.38 hours per day**.
-
-![TLC monthly High Volume FHV reports: reported trips rose in 2025 while average unique drivers stayed broadly flat](/images/growth-hvf-monthly-supply.png)
-
-**Business meaning:** the system recorded more activity without a comparable increase in reported driver coverage in the separate 2024–2025 monthly comparison. This is a useful pressure signal, but it is not an hourly supply count and cannot show whether the extra trips were profitable or fulfilled all demand.
-
-### The data supports a measurement plan, not a citywide subsidy
-
-| Metric | What it means here | Status |
-|---|---|---|
-| Recorded trips | Trips submitted by licensed services | Directly observed |
-| Unique drivers | Drivers appearing in a monthly report | Observed monthly proxy |
-| Driver hours | Average reported hours per driver | Observed monthly proxy |
-| Total requests | All people who tried to request a ride | Not available |
-| Lost requests | Requests that were not matched or were abandoned | Not available |
-| Zone-hour online supply | Drivers available in a specific place and hour | Not available |
-
-## Visual evidence
-
-### Decision: recorded trips are only one layer of marketplace measurement
-
-![NYC TLC marketplace evidence boundary: recorded trips, monthly driver proxies, and official aggregations are observed, while requests, lost matches, cancellations, and incentive ROI are not](/images/portfolio-marketplace-measurement.svg)
-
-The visual supports collecting the missing demand and supply measures before broad incentives.
-
-## Recommendation
-
-**What:** Do not increase incentives across the whole city. First add request, match, cancellation, wait, online-driver, and incentive records.
-
-**Where / who:** Use the 18:00 period as the first investigation window. Choose zones only after the request and wait data shows a repeated local problem.
-
-**Why:** TLC shows a strong time pattern and broadly flat monthly driver coverage, but it does not show a true shortage.
-
-**Risk:** An incentive may move drivers from a nearby zone instead of adding supply. It may also raise cost without improving fulfillment.
-
-**Next test:** Randomize matched zone-time blocks between normal incentives and a targeted incentive. Use request fulfillment as the primary customer outcome. Track recorded trips per online driver-hour as a supply measure and incremental trips per incentive dollar as the economic measure. Include a washout period, border-zone monitoring, and a sample-size plan before launch.
-
-**Decision status:** Completed measurement audit; shortage diagnosis, incentive pilot, and unit economics remain unmeasured.
-
-## What internal data would improve the decision
-
-A complete measurement plan needs a request funnel from request to match to pickup, plus true driver online time, cancellations, estimated wait, passenger price, driver pay, incentive cost, contribution, spillover, and cannibalization measures. These measures separate low demand, low supply, and poor matching instead of treating all three as the same problem.
-
-## Key takeaway
-
-The public data shows when recorded marketplace activity is high and how reported driver coverage changes over time. It does not prove where riders are being lost. The responsible decision is to collect the missing request and availability measures, then test incentives only in confirmed shortage windows.
-
+**Limitations:** the trip slice is from 2019 while the monthly comparison covers 2024–2025. Neither public source shows every request, lost match, or zone-hour online driver. No incentive pilot or marketplace outcome is measured here.
 
 ## Technical appendix
 
-The trip chart is generated from the official Open Data query. The monthly chart uses separate panels because trips per day and unique drivers are different measures. [SQL, Python, source manifest, and validation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/02-marketplace-supply-demand) document the analysis.
+The hourly aggregation is checked for 24 hour buckets and a total of 4,965,012 rows. The monthly report is summarized separately by year. The source and chart generation notes are in the [marketplace analysis files](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/02-marketplace-supply-demand).

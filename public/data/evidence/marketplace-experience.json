@@ -3,11 +3,58 @@
   "caseId": "marketplace-experience",
   "scope": "full-data",
   "status": "verified",
-  "source": {"name": "NYC TLC HVFHV Open Data and monthly reports", "url": "https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page", "publisher": "NYC Taxi and Limousine Commission", "grain": "completed trip plus monthly aggregation", "sha256": {"hvfhv_january_2025": "fcdef276f4e9887f2beab30590165cdea74caef50a1313d71fa01ff6afacca3", "monthly_reports": "727d69a1716553b9ccd3282a6cfc8b58c5e4dadd4623404b7a455330a2bfbd05"}},
-  "models": ["Official API hourly aggregation", "Monthly supply context"],
-  "checks": ["24 hourly buckets", "source total", "monthly period", "proxy labels"],
-  "metrics": {"recorded_rows": 4965012, "peak_hour": 18, "peak_recorded_trips": 334713},
-  "artifacts": ["/images/growth-hvf-hourly.png", "/images/growth-hvf-monthly-supply.png", "/images/portfolio-marketplace-measurement.svg"],
-  "artifactHashes": {"/images/growth-hvf-hourly.png": "d7b5fc6cf0453254736be607e019014f05aec5873424bda90c70ef596877825a", "/images/growth-hvf-monthly-supply.png": "99e2d017edc0c8de16e01b2d59db91cc237a76d3f7a7b3afeebcbd9d26ef8cd0", "/images/portfolio-marketplace-measurement.svg": "41e6b861e6728d0f1b6ced7b992b6c6dc9411059bdec81282ccf2859f285857e"},
+  "source": {
+    "name": "NYC TLC HVFHV Open Data and monthly reports",
+    "url": "https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page",
+    "publisher": "NYC Taxi and Limousine Commission",
+    "grain": "completed trip plus monthly aggregation",
+    "sha256": {
+      "february_2019_hourly_aggregation": "37db5f0d2546921e2b878fcb0376031060e95d526c3488491f0d7d9c2b1d6f79",
+      "monthly_reports_2024_2025": "727d69a1716553b9ccd3282a6cfc8b58c5e4dadd4623404b7a455330a2bfbd05"
+    }
+  },
+  "models": [
+    "Official API hourly aggregation",
+    "Monthly supply context"
+  ],
+  "checks": [
+    "24 hourly buckets",
+    "source total",
+    "monthly period",
+    "proxy labels"
+  ],
+  "metrics": {
+    "recorded_rows": 4965012,
+    "peak_hour": 18,
+    "peak_recorded_trips": 334713,
+    "monthly_report_annual_means": {
+      "years": [
+        2024,
+        2025
+      ],
+      "trips_per_day": [
+        654410.1667,
+        667536.5
+      ],
+      "unique_drivers_per_month": [
+        83399.4167,
+        83298.5
+      ],
+      "hours_per_driver_per_day": [
+        6.35,
+        6.375
+      ]
+    }
+  },
+  "artifacts": [
+    "/images/growth-hvf-hourly.png",
+    "/images/growth-hvf-monthly-supply.png",
+    "/images/portfolio-marketplace-measurement.svg"
+  ],
+  "artifactHashes": {
+    "/images/growth-hvf-hourly.png": "d7b5fc6cf0453254736be607e019014f05aec5873424bda90c70ef596877825a",
+    "/images/growth-hvf-monthly-supply.png": "fb994bcfa3c7f8c7c6b2f80e89e2bfd9ce4dd788dcd53fb57c37f7e4ffa24033",
+    "/images/portfolio-marketplace-measurement.svg": "41e6b861e6728d0f1b6ced7b992b6c6dc9411059bdec81282ccf2859f285857e"
+  },
   "evidenceBoundary": "Completed-trip activity and official monthly proxies are supported. Total requests, lost matches, and incentive ROI are not observed."
 }

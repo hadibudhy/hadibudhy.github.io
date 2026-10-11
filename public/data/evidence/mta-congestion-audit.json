@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 2,
+  "caseId": "mta-comparator-audit",
+  "scope": "full-data",
+  "status": "verified",
+  "source": {
+    "name": "MTA Bridges and Tunnels Hourly Crossings",
+    "url": "https://catalog.data.gov/dataset/mta-bridges-and-tunnels-hourly-crossings-beginning-2019",
+    "publisher": "Metropolitan Transportation Authority",
+    "grain": "facility-day car count",
+    "period": [
+      "2019-01-01",
+      "2026-05-31"
+    ],
+    "sha256": "b9e448feb6e459ab1d201a732827c097702bd98a7ca26fa54deec437ccc09fcb"
+  },
+  "models": [
+    "Facility-day validation",
+    "Equal-weight weekly comparator diagnostic"
+  ],
+  "checks": [
+    "facility-day uniqueness",
+    "10 facilities present",
+    "event week -1 reference uniqueness",
+    "3,880 facility-week output",
+    "±26-week window"
+  ],
+  "metrics": {
+    "facility_day_observations": 27080,
+    "facility_week_observations": 3880,
+    "facilities": 10,
+    "affected_facilities": 3,
+    "comparison_facilities": 7,
+    "weeks": 388,
+    "diagnostic_window_weeks": [
+      -26,
+      26
+    ],
+    "pre_policy_gap_range": [
+      -0.04693174881039219,
+      0.10135473930768946
+    ]
+  },
+  "artifacts": [
+    "/images/growth-mta-event-study.png",
+    "/images/portfolio-mta-panel-scope.svg",
+    "/images/portfolio-mta-causal-boundary.svg"
+  ],
+  "artifactHashes": {
+    "/images/growth-mta-event-study.png": "8235a6e6728afb1edbcc6778101e08b3ab8b51df7a2d8ff170951c6f8aecc308",
+    "/images/portfolio-mta-panel-scope.svg": "068b5ed5f80cd48407fb62425c84289e9b1fda64c4decbc93203d3d2ae5ed5ae",
+    "/images/portfolio-mta-causal-boundary.svg": "625f1d9d971a862ea03f8419ade9ef44e98aa0bc048ea6b6292ec516a0ae0a21"
+  },
+  "evidenceBoundary": "This is a descriptive all-car crossing audit. The unstable pre-policy gap is a warning, not a formal parallel-trends rejection or policy-effect estimate; ride-hailing outcomes and route-level fee exposure are not observed."
+}
