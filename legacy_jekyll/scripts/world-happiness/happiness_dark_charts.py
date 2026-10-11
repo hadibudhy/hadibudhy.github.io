@@ -157,9 +157,9 @@ legend_elements = [
     Line2D([0],[0], marker="o", color="w", markerfacecolor=PLOT_BG,
            markeredgecolor=GRAY, markersize=7, label="2011 score (open dot)"),
     Line2D([0],[0], marker="o", color="w", markerfacecolor=GREEN,
-           markersize=7, label="2025 score — riser"),
+           markersize=7, label="2025 score - riser"),
     Line2D([0],[0], marker="o", color="w", markerfacecolor=RED,
-           markersize=7, label="2025 score — faller"),
+           markersize=7, label="2025 score - faller"),
 ]
 legend = ax.legend(handles=legend_elements, loc="lower right",
                    fontsize=8, frameon=True, facecolor=PLOT_BG,

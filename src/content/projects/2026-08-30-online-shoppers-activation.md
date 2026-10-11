@@ -56,7 +56,7 @@ After removing **125 exact duplicate rows**, the analysis retained **12,205 sess
 
 ![Among 12,205 deduplicated sessions, new visitors converted at 24.9%, Other at 19.8%, and returning visitors at 14.1%](/images/portfolio-online-shoppers-visitor.svg)
 
-The finding changes the test design: do not assume returning traffic is the easiest activation audience, and report the randomized result separately by visitor type. Month, traffic source, device, region, browsing depth, and campaign mix may differ across these groups, so the unadjusted comparison is a hypothesis—not an activation effect estimate.
+The finding changes the test design: do not assume returning traffic is the easiest activation audience, and report the randomized result separately by visitor type. Month, traffic source, device, region, browsing depth, and campaign mix may differ across these groups, so the unadjusted comparison is a hypothesis-not an activation effect estimate.
 
 ### Leakage check: PageValues is unsafe until its timing is verified
 
@@ -68,7 +68,7 @@ Converted sessions averaged **27.3 PageValues**, versus **2.0** for non-converte
 
 ![New-visitor conversion was 24.9% before and after exact-row deduplication, while returning-visitor conversion moved from 13.9% to 14.1%](/images/portfolio-online-shoppers-sensitivity.svg)
 
-The conclusion is not an artifact of treating exact-identical rows as duplicates. New-visitor conversion remains **24.9%** in both the raw and deduplicated files; returning-visitor conversion moves from **13.9% to 14.1%**. Because the source has no session identifier, the page reports this as a sensitivity decision—not proof that the 125 identical rows are erroneous.
+The conclusion is not an artifact of treating exact-identical rows as duplicates. New-visitor conversion remains **24.9%** in both the raw and deduplicated files; returning-visitor conversion moves from **13.9% to 14.1%**. Because the source has no session identifier, the page reports this as a sensitivity decision-not proof that the 125 identical rows are erroneous.
 
 ## Experiment design
 

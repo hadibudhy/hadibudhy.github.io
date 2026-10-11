@@ -1,4 +1,4 @@
-# Portfolio completion gate — 2026-08-30
+# Portfolio completion gate - 2026-08-30
 
 This record supersedes the publication decisions in `portfolio-expansion-2026-08.md` and `project-quality-matrix-2026-08.md`. A source description, proposed method, or conceptual workflow is not a completed project-specific result.
 

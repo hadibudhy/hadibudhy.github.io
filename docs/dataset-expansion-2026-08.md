@@ -34,13 +34,13 @@ Scores are 1–10. “Incremental portfolio value” measures what the candidate
 
 ## Selected seven
 
-1. **Clickstream for Online Shopping** — product funnel and user behavior.
-2. **Bank Marketing** — campaign response and channel efficiency. It is less unique than Criteo, but the complete file is easy to validate and explain without hiding the evidence behind a black-box model.
-3. **BTS National Average Fare Series** — pricing and revenue context using a clean official time series. It is intentionally narrower than DB1B and avoids making unsupported route-level pricing claims.
-4. **SEC Company Facts** — financial performance and management questions using reported revenue and profit measures.
-5. **Inside Airbnb New York City** — two-sided marketplace supply, price, availability, and concentration.
-6. **BLS JOLTS** — workforce planning through openings, hires, quits, and separations.
-7. **UCI Default of Credit Card Clients** — risk prioritization. The target is a portfolio-monitoring use case, not a claim that a model can make lending decisions without further validation.
+1. **Clickstream for Online Shopping** - product funnel and user behavior.
+2. **Bank Marketing** - campaign response and channel efficiency. It is less unique than Criteo, but the complete file is easy to validate and explain without hiding the evidence behind a black-box model.
+3. **BTS National Average Fare Series** - pricing and revenue context using a clean official time series. It is intentionally narrower than DB1B and avoids making unsupported route-level pricing claims.
+4. **SEC Company Facts** - financial performance and management questions using reported revenue and profit measures.
+5. **Inside Airbnb New York City** - two-sided marketplace supply, price, availability, and concentration.
+6. **BLS JOLTS** - workforce planning through openings, hires, quits, and separations.
+7. **UCI Default of Credit Card Clients** - risk prioritization. The target is a portfolio-monitoring use case, not a claim that a model can make lending decisions without further validation.
 
 The Criteo, DB1B, QCEW, CFPB, and Olist candidates remain strong alternatives. They require either much larger downloads, more complex table joins, or stronger sampling and representativeness controls before publication.
 

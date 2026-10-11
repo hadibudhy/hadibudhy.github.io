@@ -12,15 +12,38 @@
     "mutableSource": true
   },
   "validation": {
-    "checks": ["request-key uniqueness", "timestamp order", "open work retained at cutoff", "negative durations excluded and counted", "missing close-date share reported"],
-    "observedFields": ["request id", "created time", "closed time", "status", "agency", "complaint type", "location"],
-    "unavailableOutcomes": ["first response", "staff hours", "reopen history", "resolution quality"]
+    "checks": [
+      "request-key uniqueness",
+      "timestamp order",
+      "open work retained at cutoff",
+      "negative durations excluded and counted",
+      "missing close-date share reported"
+    ],
+    "observedFields": [
+      "request id",
+      "created time",
+      "closed time",
+      "status",
+      "agency",
+      "complaint type",
+      "location"
+    ],
+    "unavailableOutcomes": [
+      "first response",
+      "staff hours",
+      "reopen history",
+      "resolution quality"
+    ]
   },
   "artifacts": [
     "/images/portfolio-nyc311-scale.svg",
     "/images/portfolio-nyc311-boundary.svg",
     "/images/portfolio-nyc311-metrics.svg"
   ],
-  "artifactHashes": {"/images/portfolio-nyc311-scale.svg": "6d4f361a4f431eff972075c9659b7b65aa38f829a3826395b73ff0b227ca5d1d", "/images/portfolio-nyc311-boundary.svg": "b5191020124a74aa7b5be7a5286de9fcb28c25f59871783fd6114bdeb946a248", "/images/portfolio-nyc311-metrics.svg": "c06180c746e4419d35dc1aa53937862ee862ac337acd15cb0968ccc2e7ea9cb7"},
+  "artifactHashes": {
+    "/images/portfolio-nyc311-scale.svg": "6d4f361a4f431eff972075c9659b7b65aa38f829a3826395b73ff0b227ca5d1d",
+    "/images/portfolio-nyc311-boundary.svg": "77bc98c57d43d4cc8abb496104fd5ae7de289b90d3e3da4d2e2e1d77bdb62640",
+    "/images/portfolio-nyc311-metrics.svg": "c06180c746e4419d35dc1aa53937862ee862ac337acd15cb0968ccc2e7ea9cb7"
+  },
   "evidenceBoundary": "The case supports queue workload and lifecycle measurement. It does not claim that administrative closure equals resident resolution or that low volume equals low need."
 }

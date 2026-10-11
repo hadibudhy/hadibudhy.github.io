@@ -21,13 +21,13 @@ evidenceVisuals:
 header:
   teaser: /images/growth-mta-event-study.png
 ---
-## Problem — Did congestion pricing change traffic beyond its normal variation?
+## Problem - Did congestion pricing change traffic beyond its normal variation?
 
 Congestion pricing began in New York on **5 January 2025**. A mobility business may want to change rider pricing, driver incentives, or its city strategy in response. A simple before-and-after comparison cannot tell whether the policy caused a change or whether affected roads were already moving differently.
 
 The decision is whether this comparison group is reliable enough to support a causal claim.
 
-## Hypotheses — What could explain a post-policy difference?
+## Hypotheses - What could explain a post-policy difference?
 
 - **The affected and comparison crossings may have different pre-policy trends.** Compare their weekly gap before the policy date.
 - **A post-policy shift may come from another change.** Weather, construction, holidays, commuting patterns, or facility disruptions can affect traffic.
@@ -35,7 +35,7 @@ The decision is whether this comparison group is reliable enough to support a ca
 
 The first check can show whether this comparison is plausible. It cannot by itself establish why traffic moved.
 
-## Analysis — What does the MTA traffic panel show?
+## Analysis - What does the MTA traffic panel show?
 
 The source is the official [MTA Bridges and Tunnels Hourly Crossings dataset](https://catalog.data.gov/dataset/mta-bridges-and-tunnels-hourly-crossings-beginning-2019). The checked panel contains **27,080 facility-day observations**, grouped into **3,880 facility-week rows** across **10 facilities**, from 2019 through May 2026. Three affected crossings are compared with seven other facilities, with each facility weighted equally.
 
@@ -57,7 +57,7 @@ The panel gives broad facility and time coverage for checking the comparison. A 
 
 The traffic records cannot show which trips incurred a fee or how riders, drivers, or platform economics changed. Those questions require route exposure and internal trip outcomes.
 
-## Result — Do not attribute the traffic difference to the policy
+## Result - Do not attribute the traffic difference to the policy
 
 **Measured result:** the plotted affected-comparison gap varied before the policy, so this audit does not use the selected group to estimate a policy effect.
 

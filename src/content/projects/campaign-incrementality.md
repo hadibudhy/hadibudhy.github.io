@@ -19,17 +19,17 @@ evidenceVisuals:
   - /images/portfolio-campaign-economics.svg
   - /images/portfolio-campaign-f0.svg
 ---
-## Problem — Did the advertising create additional conversions?
+## Problem - Did the advertising create additional conversions?
 
 A campaign can receive credit for conversions from people who would have acted anyway. The growth team needs to know whether assigning users to advertising changed conversion, then whether any added conversions were worth their cost.
 
-## Hypotheses — What could explain the campaign result?
+## Hypotheses - What could explain the campaign result?
 
 - **Advertising may increase conversion over a holdout.** Compare all users by randomized assignment, regardless of whether an ad was actually shown.
 - **Response may differ across audiences.** Explore the anonymized features, but treat any segment pattern as a hypothesis to retest.
 - **A measurable lift may still be unprofitable.** Compare incremental acquisition cost with contribution before scaling.
 
-## Analysis — What did the randomized benchmark show?
+## Analysis - What did the randomized benchmark show?
 
 The source is the [Criteo AI Lab uplift dataset](https://ailab.criteo.com/criteo-uplift-prediction-dataset/), a released benchmark combining randomized advertising tests. It contains **13,979,592 user records**. Its anonymized features cannot be translated into business-defined customer groups, and Criteo warns that the combined, sampled release does not recover an original campaign effect.
 
@@ -57,7 +57,7 @@ A post-hoc check divided feature f0 into four equal-sized bands. The observed ab
 
 Treat the largest difference as a hypothesis only. A fresh, pre-registered holdout is needed before targeting from it.
 
-## Result — Keep the holdout and make profitability the scale gate
+## Result - Keep the holdout and make profitability the scale gate
 
 The released benchmark supports a positive assignment-level conversion difference. It does not establish the current campaign’s lift, economics, or a segment-level targeting policy.
 

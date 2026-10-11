@@ -29,28 +29,28 @@ export const careerArc = [
 
 export const experience = [
   {
-    period: "Oct 2024 — present",
+    period: "Oct 2024 - present",
     role: "Data Analyst",
     setting: "Consumer commerce platform",
     description: "Event-driven alerting, warehouse pipelines, and live dashboards support customer-activity monitoring for support and product teams.",
     highlights: ["Event-driven alerting and warehouse pipelines for customer-activity monitoring.", "Live dashboards for support and product teams to detect and respond to change."],
   },
   {
-    period: "Mar 2023 — Oct 2024",
+    period: "Mar 2023 - Oct 2024",
     role: "Data & Automation Consultant",
     setting: "Independent consulting",
     description: "Survey and campaign data becomes reusable analytical models, automated warehouse workflows, and leadership-ready reporting.",
     highlights: ["Reusable analytical models for complex survey and campaign data.", "Automated warehouse workflows and leadership-ready reporting."],
   },
   {
-    period: "Jul 2022 — Mar 2023",
+    period: "Jul 2022 - Mar 2023",
     role: "Senior Business Intelligence Analyst",
     setting: "E-commerce platform",
     description: "Churn analysis, customer segmentation, cohort analysis, and KPI governance connect retention and marketing teams to consistent customer signals.",
     highlights: ["Consistent customer view across churn, segmentation, and cohort analysis.", "KPI definitions for retention and marketing teams."],
   },
   {
-    period: "Apr 2021 — Jun 2022",
+    period: "Apr 2021 - Jun 2022",
     role: "Business Intelligence Analyst",
     setting: "E-commerce platform",
     description: "Product, customer, and commercial reporting surfaces engagement patterns for roadmap decisions.",

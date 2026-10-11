@@ -48,7 +48,7 @@ This is evidence of reported improvement, not causal proof. Fiscal periods, amen
 
 ## Approach
 
-The reported margin improvement is modest—about **2.0 percentage points** over two years—so it is a reason to investigate, not proof of a broad operating transformation. The conservative case is to preserve the FY2025 margin while growth slows; the expected case tests whether the current margin can hold as mix changes; the ambitious case identifies controllable cost or mix drivers that improve contribution without reducing product investment. No incremental profit is claimed because segment costs and intervention effects are not established.
+The reported margin improvement is modest-about **2.0 percentage points** over two years-so it is a reason to investigate, not proof of a broad operating transformation. The conservative case is to preserve the FY2025 margin while growth slows; the expected case tests whether the current margin can hold as mix changes; the ambitious case identifies controllable cost or mix drivers that improve contribution without reducing product investment. No incremental profit is claimed because segment costs and intervention effects are not established.
 
 ## Key findings
 

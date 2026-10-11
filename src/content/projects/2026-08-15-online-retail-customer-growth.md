@@ -25,17 +25,17 @@ evidenceVisuals:
 header:
   teaser: /images/retail-growth-patterns.png
 ---
-## Problem — Where can the retailer grow repeat revenue?
+## Problem - Where can the retailer grow repeat revenue?
 
 The retailer recorded more than half a million transaction rows, but raw sales volume does not show whether growth came from loyal customers, one-time orders, or a small group of high-value buyers. The business question is which customers and markets merit closer attention without mistaking revenue for profit.
 
-## Hypotheses — What patterns could shape the growth decision?
+## Hypotheses - What patterns could shape the growth decision?
 
 - **Revenue may depend heavily on a small customer group.** Compare customer-level value and repeat ordering.
 - **Returning orders may contribute more as the customer base matures.** Compare monthly order mix, while treating the partial December as incomplete.
 - **Nearby markets may be candidates for research.** Compare recorded sales by country, but do not infer local demand or profitability from historical revenue alone.
 
-## Analysis — What does the cleaned transaction history show?
+## Analysis - What does the cleaned transaction history show?
 
 The source is the [UCI Online Retail dataset](https://archive.ics.uci.edu/dataset/352/online%2Bretail), covering 1 December 2010 through 9 December 2011. The analysis removes cancelled invoices, non-positive quantities and prices, and rows without a customer ID. It groups line items into orders and orders into customers.
 
@@ -61,7 +61,7 @@ Historical sales identify where the retailer already sold products. They do not 
 
 The raw file also contains **9,288 cancellation rows**. Removing cancellations and unidentifiable transactions keeps the revenue and repeat-customer calculations aligned, but means the analysis covers only identifiable customers.
 
-## Result — Protect retention value and research markets before investing
+## Result - Protect retention value and research markets before investing
 
 The historical data supports revenue concentration, repeat-order, and country-mix findings. It does not measure profit or prove a causal retention effect. December is only observed through 9 December, so it should not be compared with a complete holiday month.
 

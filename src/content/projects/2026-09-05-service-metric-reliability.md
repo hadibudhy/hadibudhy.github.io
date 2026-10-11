@@ -21,13 +21,13 @@ evidenceVisuals:
 header:
   teaser: /images/portfolio-nyc311-scale.svg
 ---
-## Problem — Where should service capacity go?
+## Problem - Where should service capacity go?
 
 A service team sees large request queues and wants to move capacity. Complaint counts alone cannot show which work is old, which queues are slow, or whether a closed request was resolved for the resident.
 
 The decision is how to define a useful workload view from public service records before changing staffing or routing.
 
-## Hypotheses — What could make a high-volume queue look healthier than it is?
+## Hypotheses - What could make a high-volume queue look healthier than it is?
 
 - **Volume alone may miss aging work.** Compare arrivals with open backlog and request age.
 - **A quick administrative close may not mean a problem was fixed.** Treat closure time as a process measure, not service quality.
@@ -35,7 +35,7 @@ The decision is how to define a useful workload view from public service records
 
 These are checks to guide a measurement design; the public dataset does not confirm the causes of queue pressure.
 
-## Analysis — What can the public records measure?
+## Analysis - What can the public records measure?
 
 The source is the [NYC 311 Service Requests dataset](https://catalog.data.gov/dataset/311-service-requests-from-2010-to-present). One row represents one service request, with request ID, created and closed times, status, agency, complaint type, and location. The source is mutable, so a live operational view needs a fixed cutoff and retrieval record.
 
@@ -57,7 +57,7 @@ A closed record is observable, but it does not prove resident satisfaction or th
 
 This contract makes it clear which measures can guide a queue review and which still need instrumentation.
 
-## Result — Build a workload view before moving capacity
+## Result - Build a workload view before moving capacity
 
 The public source supports request arrivals, open-work counts, backlog age, close-time distributions, and workflow mix. It does not contain consistent first-response time, staff hours, reopen history, or resolution quality. This project defines a reliable workload measurement layer; it does not report a measured staffing improvement.
 

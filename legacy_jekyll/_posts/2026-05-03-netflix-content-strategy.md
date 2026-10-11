@@ -9,9 +9,9 @@ header:
 mathjax: "true"
 ---
 
-The leadership team at Netflix had a concern: the content in the US catalog seemed to be getting "older." Between 2015 and 2021, the amount of brand-new content fell from 72% to just 28%. At first glance, this looked like a failure to keep the platform fresh. 
+The leadership team at Netflix had a concern: the content in the US catalog seemed to be getting "older." Between 2015 and 2021, the amount of brand-new content fell from 72% to just 28%. At first glance, this looked like a failure to keep the platform fresh.
 
-However, after looking closer at the data, we discovered that this wasn't a mistake—it was a deliberate business move. 
+However, after looking closer at the data, we discovered that this wasn't a mistake-it was a deliberate business move.
 
 ---
 
@@ -73,7 +73,7 @@ To keep growing successfully, Netflix should focus on these three business goals
 
 ### Final Thought
 
-Netflix isn't "getting old" by accident. It is building a powerful library of movies while keeping its TV shows fresh. The real risk isn't the strategy—it’s how we measure it and how we manage the details like data quality and partner relationships.
+Netflix isn't "getting old" by accident. It is building a powerful library of movies while keeping its TV shows fresh. The real risk isn't the strategy-it’s how we measure it and how we manage the details like data quality and partner relationships.
 
 ---
 

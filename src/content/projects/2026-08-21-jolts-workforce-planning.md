@@ -50,9 +50,9 @@ The conservative scenario is to improve vacancy visibility and recruiting throug
 
 ## Recommendation
 
-- **P0 — Act now:** build one scorecard for openings, hires, time-to-fill, quits, and regretted exits.
-- **P1 — Test:** pilot a retention or recruiting intervention in one role family with a comparable control group.
-- **P2 — Investigate:** join internal HR data to pay, tenure, manager, location, and workload measures.
+- **P0 - Act now:** build one scorecard for openings, hires, time-to-fill, quits, and regretted exits.
+- **P1 - Test:** pilot a retention or recruiting intervention in one role family with a comparable control group.
+- **P2 - Investigate:** join internal HR data to pay, tenure, manager, location, and workload measures.
 
 Primary metric is critical-role coverage; guardrails are quality, overtime, labor cost, employee experience, and regretted attrition. Repeat with revised BLS data and alternative time windows.
 

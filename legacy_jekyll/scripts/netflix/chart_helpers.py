@@ -1,5 +1,5 @@
 """
-Analytics Chart Helpers — Storytelling with Data utilities.
+Analytics Chart Helpers - Storytelling with Data utilities.
 
 Reusable functions for creating SWD-style charts in the
 AI Analyst project.
@@ -37,7 +37,7 @@ import matplotlib.ticker as mticker
 import numpy as np
 
 # ---------------------------------------------------------------------------
-# Color palette — source of truth: themes/analytics-dark.css
+# Color palette - source of truth: themes/analytics-dark.css
 # ---------------------------------------------------------------------------
 
 COLORS = {
@@ -55,8 +55,8 @@ COLORS = {
     "white":    "#FFFFFF",
     "bg":       "#F7F6F2",
     # Semantic aliases for analytical chart builders
-    "primary":  "#D97706",   # same as action — main data series
-    "muted":    "#9CA3AF",   # same as gray400 — supporting elements
+    "primary":  "#D97706",   # same as action - main data series
+    "muted":    "#9CA3AF",   # same as gray400 - supporting elements
 }
 
 # ---------------------------------------------------------------------------
@@ -145,7 +145,7 @@ def swd_style(theme: dict | None = None):
         theme: Optional theme dict (as returned by :func:`load_theme` or
             :func:`load_theme_colors`).  When provided, overrides background
             and text colors from the theme after loading the mplstyle file.
-            When ``None`` (the default), behavior is unchanged — fully
+            When ``None`` (the default), behavior is unchanged - fully
             backward compatible.
 
     Returns:
@@ -375,7 +375,7 @@ def format_date_axis(ax, fmt="%b", axis="x"):
         fmt: strftime format string. Default: ``"%b"`` (abbreviated month).
             Common alternatives: ``"%b %Y"`` (month + year), ``"%Y-%m"``
             (ISO month), ``"%b '%y"`` (Jan '24).
-        axis: Which axis to format — ``"x"`` (default) or ``"y"``.
+        axis: Which axis to format - ``"x"`` (default) or ``"y"``.
     """
     import pandas as pd
 
@@ -448,10 +448,10 @@ def save_chart(fig, path, dpi=150, close=True):
 
 
 # ---------------------------------------------------------------------------
-# Standard chart dimensions — used directly on slides (CSS handles containment)
+# Standard chart dimensions - used directly on slides (CSS handles containment)
 # ---------------------------------------------------------------------------
 
-CHART_FIGSIZE = (10, 6)  # ~1500x900 @ 150 DPI — natural proportions for slide embedding
+CHART_FIGSIZE = (10, 6)  # ~1500x900 @ 150 DPI - natural proportions for slide embedding
 
 
 # ---------------------------------------------------------------------------
@@ -586,7 +586,7 @@ def retention_heatmap(ax, cohort_labels, period_labels, retention_matrix,
             continuous colormap. Default: None (use cmap_high/cmap_low).
 
     Returns:
-        (fig, ax) tuple — fig is ax's parent figure.
+        (fig, ax) tuple - fig is ax's parent figure.
     """
     cmap_high = cmap_high or COLORS["success"]
     cmap_low = cmap_low or COLORS["negative"]
@@ -787,7 +787,7 @@ def fill_between_lines(ax, x, y1, y2, label1=None, label2=None,
 
 def big_number_layout(ax, metrics, findings=None, recommendation=None,
                       title=None, subtitle=None):
-    """Render a big-number summary card — no data axes, just KPIs and text.
+    """Render a big-number summary card - no data axes, just KPIs and text.
 
     Args:
         ax: Matplotlib Axes (will be turned off).
@@ -817,7 +817,7 @@ def big_number_layout(ax, metrics, findings=None, recommendation=None,
             linewidth=1, transform=ax.transAxes, clip_on=False)
     y_cursor -= 0.05
 
-    # Big numbers row — scale font for 4+ metrics to avoid crowding
+    # Big numbers row - scale font for 4+ metrics to avoid crowding
     n = len(metrics)
     if n >= 4:
         num_fontsize = 28
@@ -985,9 +985,9 @@ def check_label_collisions(fig, ax, fix=False, pad_px=5, max_attempts=3,
     Uses matplotlib's renderer to get actual text bounding boxes and checks
     for intersection. When ``fix=True``, applies three strategies in order:
 
-    1. **Offset** — shift the second label vertically away from the overlap.
-    2. **Font-size reduce** — shrink the smaller text by 2pt (down to 7pt min).
-    3. **Drop** — hide the less-important label (tick labels before annotations,
+    1. **Offset** - shift the second label vertically away from the overlap.
+    2. **Font-size reduce** - shrink the smaller text by 2pt (down to 7pt min).
+    3. **Drop** - hide the less-important label (tick labels before annotations,
        annotations before titles).
 
     After each strategy, the collision pair is re-checked. If all three fail
@@ -1452,8 +1452,8 @@ def forecast_plot(historical, forecast, title=None, confidence_band=None,
     actuals end and the forecast begins.
 
     Args:
-        historical: pd.Series with DatetimeIndex — actual observed values.
-        forecast: pd.Series with DatetimeIndex — forecasted values. Dates
+        historical: pd.Series with DatetimeIndex - actual observed values.
+        forecast: pd.Series with DatetimeIndex - forecasted values. Dates
             should start after the last historical date.
         title: Chart title in action-title format. Default: "Forecast: {name}"
             where name is the Series name attribute.
@@ -1516,11 +1516,11 @@ def control_chart_plot(series, center_line, ucl, lcl, violations=None,
     in-control band, and optional violation markers.
 
     Args:
-        series: pd.Series with DatetimeIndex — the metric values.
-        center_line: float or pd.Series — center line value(s). A float
+        series: pd.Series with DatetimeIndex - the metric values.
+        center_line: float or pd.Series - center line value(s). A float
             draws a horizontal line; a Series draws a rolling center.
-        ucl: float or pd.Series — upper control limit.
-        lcl: float or pd.Series — lower control limit.
+        ucl: float or pd.Series - upper control limit.
+        lcl: float or pd.Series - lower control limit.
         violations: Optional list of dicts, each with keys:
             - index: datetime or positional index of the violation point.
             - value: numeric value at that point.
@@ -1577,7 +1577,7 @@ def control_chart_plot(series, center_line, ucl, lcl, violations=None,
         ax.axhspan(lcl_vals, ucl_vals, color=COLORS["muted"], alpha=0.08,
                     zorder=0)
     else:
-        # At least one limit is a Series — use fill_between over the index
+        # At least one limit is a Series - use fill_between over the index
         _ucl = ucl_vals if not isinstance(ucl_vals, (int, float)) else np.full(len(series), ucl_vals)
         _lcl = lcl_vals if not isinstance(lcl_vals, (int, float)) else np.full(len(series), lcl_vals)
         ax.fill_between(series.index, _lcl, _ucl, color=COLORS["muted"],

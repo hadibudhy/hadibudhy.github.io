@@ -13,7 +13,7 @@ mathjax: "true"
 
 Like many analysts, I started by running SQL queries manually and saving them on my desktop. That approach works for ad-hoc analysis, but it quickly breaks down when queries grow larger, logic becomes shared, or results need to be trusted over time.
 
-To move beyond this, I built a small project to learn the Modern Data Stack (MDS). The goal was simple: create an automated pipeline to calculate Customer Lifetime Value (CLV) while treating data logic like software—versioned, tested, and modular.
+To move beyond this, I built a small project to learn the Modern Data Stack (MDS). The goal was simple: create an automated pipeline to calculate Customer Lifetime Value (CLV) while treating data logic like software-versioned, tested, and modular.
 
 This post walks through how I set it up using only free tools.
 

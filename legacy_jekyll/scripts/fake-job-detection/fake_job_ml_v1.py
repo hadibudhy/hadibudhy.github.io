@@ -1,5 +1,5 @@
 """
-Fake Job Postings — ML Pipeline
+Fake Job Postings - ML Pipeline
 Target: fraudulent (0/1), ~4.8% positive (imbalanced)
 Models: Logistic Regression (TF-IDF), Random Forest, LightGBM
 """
@@ -101,7 +101,7 @@ print(f"Train fraud rate: {y_tr.mean():.1%} | Test: {y_te.mean():.1%}")
 scale_pos = (y_tr == 0).sum() / (y_tr == 1).sum()
 print(f"Class imbalance ratio: {scale_pos:.1f}:1")
 
-# ── 4. Model 1 — Logistic Regression (TF-IDF text only) ─────────────────────
+# ── 4. Model 1 - Logistic Regression (TF-IDF text only) ─────────────────────
 
 print("\n── Model 1: Logistic Regression (TF-IDF) ──")
 lr_pipe = Pipeline([
@@ -118,7 +118,7 @@ print(classification_report(y_te, y_pred_lr, target_names=["real", "fake"]))
 print(f"ROC-AUC:  {roc_auc_score(y_te, y_prob_lr):.4f}")
 print(f"PR-AUC:   {average_precision_score(y_te, y_prob_lr):.4f}")
 
-# ── 5. Model 2 — LightGBM (tabular features only) ───────────────────────────
+# ── 5. Model 2 - LightGBM (tabular features only) ───────────────────────────
 
 print("\n── Model 2: LightGBM (tabular features) ──")
 lgb_model = lgb.LGBMClassifier(
@@ -137,7 +137,7 @@ print(classification_report(y_te, y_pred_lgb, target_names=["real", "fake"]))
 print(f"ROC-AUC:  {roc_auc_score(y_te, y_prob_lgb):.4f}")
 print(f"PR-AUC:   {average_precision_score(y_te, y_prob_lgb):.4f}")
 
-# ── 6. Model 3 — LightGBM (TF-IDF + tabular, combined) ───────────────────────
+# ── 6. Model 3 - LightGBM (TF-IDF + tabular, combined) ───────────────────────
 
 print("\n── Model 3: LightGBM (TF-IDF SVD + tabular, combined) ──")
 from sklearn.decomposition import TruncatedSVD
@@ -198,7 +198,7 @@ print(results_df.round(4).to_string())
 # ── 8. Charts ────────────────────────────────────────────────────────────────
 
 fig, axes = plt.subplots(1, 3, figsize=(16, 5))
-fig.suptitle("Fake Job Posting Detection — Model Comparison", fontsize=13, fontweight="bold")
+fig.suptitle("Fake Job Posting Detection - Model Comparison", fontsize=13, fontweight="bold")
 
 # 8a. PR curves
 ax = axes[0]

@@ -54,7 +54,7 @@
   "artifactHashes": {
     "/images/growth-hvf-hourly.png": "d7b5fc6cf0453254736be607e019014f05aec5873424bda90c70ef596877825a",
     "/images/growth-hvf-monthly-supply.png": "fb994bcfa3c7f8c7c6b2f80e89e2bfd9ce4dd788dcd53fb57c37f7e4ffa24033",
-    "/images/portfolio-marketplace-measurement.svg": "41e6b861e6728d0f1b6ced7b992b6c6dc9411059bdec81282ccf2859f285857e"
+    "/images/portfolio-marketplace-measurement.svg": "41f1cee7a1f9b0f73fecb6e6c14ff62c583d8c2e9e2b4feda478dac99525e295"
   },
   "evidenceBoundary": "Completed-trip activity and official monthly proxies are supported. Total requests, lost matches, and incentive ROI are not observed."
 }

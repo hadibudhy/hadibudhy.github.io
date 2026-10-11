@@ -21,19 +21,19 @@ evidenceVisuals:
 header:
   teaser: /images/rees46-event-mix.svg
 ---
-## Problem — Can the team trust its funnel data?
+## Problem - Can the team trust its funnel data?
 
 Product teams cannot improve a customer journey if event names, identity, and session grain are unclear. A funnel can look precise while counting repeated events as people or silently excluding activity that cannot be tied to a session.
 
 The decision is whether this public event model is reliable enough to demonstrate a safe measurement foundation. It is not a claim about a live product’s conversion.
 
-## Hypotheses — What could make funnel counts unreliable?
+## Hypotheses - What could make funnel counts unreliable?
 
 - **Event volume may be mistaken for people or conversion.** Compare event-level counts with identified-session coverage.
 - **Missing session IDs may hide part of the journey.** Count those rows explicitly and keep them out of session metrics.
 - **Early joins may multiply events.** Preserve one recorded event per row until the session-level model is built.
 
-## Analysis — What did the data checks show?
+## Analysis - What did the data checks show?
 
 The source is the [REES46 Electronics behaviour export](https://data.rees46.com/datasets/electronics-events/electronics-events.csv.gz), covering 24 September 2020 through 28 February 2021 in the loaded file. The model separates raw events, typed staging, ordered identified sessions, and event-quality and funnel marts.
 
@@ -55,7 +55,7 @@ The 165 rows without session IDs can still support event-volume reporting, but s
 
 This separation reduces the risk of duplicating events when a downstream analysis joins event, user, or session summaries.
 
-## Result — Approve the measurement foundation, not a product conclusion
+## Result - Approve the measurement foundation, not a product conclusion
 
 The checks support event-level counts and identified-session measures: the source has 885,129 events across view, cart, and purchase, with 165 missing session identifiers. The model makes those rows and the event grain explicit. No live activation or retention effect was measured.
 

@@ -19,19 +19,19 @@ evidenceVisuals:
   - /images/growth-hvf-monthly-supply.png
   - /images/portfolio-marketplace-measurement.svg
 ---
-## Problem — Where is the marketplace under pressure?
+## Problem - Where is the marketplace under pressure?
 
 Leadership hears that riders wait longer and rides are lost in some areas, and wants to know whether driver incentives should increase. Recorded trips alone cannot tell whether a quiet period had low demand or weak supply, or whether a busy period still left riders unserved.
 
 The decision is where and when to investigate before committing to a citywide incentive.
 
-## Hypotheses — What could explain the activity pattern?
+## Hypotheses - What could explain the activity pattern?
 
 - **Demand may be concentrated by hour.** Compare recorded trips across hours to find investigation windows.
 - **Recorded activity may rise without similar growth in driver coverage.** Compare official monthly trip and driver measures.
 - **A peak may still be fully served.** Check requests, matches, cancellations, wait, and online driver-hours before calling it a shortage; those measures are not in the public trip file.
 
-## Analysis — What do official TLC records show?
+## Analysis - What do official TLC records show?
 
 The analysis combines two different official sources: a one-week trip table for **1–7 February 2019** and monthly High Volume FHV reports for **2024 and 2025**. They are separate descriptive views, not one continuous time series. The trip table records submitted dispatched trips; it does not show every request, rejected match, cancellation, wait, or online driver-hour.
 
@@ -57,7 +57,7 @@ The two measures do not move by the same amount, but monthly driver counts are n
 
 Without these missing measures, the data cannot distinguish low demand, low availability, and poor matching.
 
-## Result — Instrument the request funnel before paying for more supply
+## Result - Instrument the request funnel before paying for more supply
 
 The public data supports a time-of-day activity pattern and separate monthly supply proxies. It does not confirm a shortage or estimate incentive ROI.
 

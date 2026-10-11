@@ -225,7 +225,7 @@ genre_df = df[df["genre_count"] >= 2].dropna(subset=["year_added"])
 pre_n = (genre_df["year_added"] < 2018).sum()
 post_n = (genre_df["year_added"] >= 2018).sum()
 print(f"\nC11: Genre co-occurrence sample sizes: pre-2018={pre_n:,}, post-2018={post_n:,}")
-# Cannot re-derive entropy without rerunning the full build_cond_prob — mark as VERIFIED BY ORIGINAL SCRIPT
+# Cannot re-derive entropy without rerunning the full build_cond_prob - mark as VERIFIED BY ORIGINAL SCRIPT
 
 # CLAIM C12: Director cluster concentration (re-derive from scratch)
 cluster_path = r"D:\Agent\ai-analyst\working\netflix\cluster_data.csv"
@@ -259,7 +259,7 @@ print("\n" + "=" * 70)
 print("LAYER 4: SIMPSON'S PARADOX CHECK")
 print("=" * 70)
 
-print("\nSimpson's Paradox — US lag trend by content type:")
+print("\nSimpson's Paradox - US lag trend by content type:")
 us_all = df[(df["country_bucket"]=="US") & df["year_added"].notna() & df["lag_band_cat"].notna()]
 for ctype in ["Movie", "TV Show"]:
     sub = us_all[us_all["type"]==ctype]
@@ -273,8 +273,8 @@ for ctype in ["Movie", "TV Show"]:
 
 print(f"\nSIMPSON'S PARADOX: CONFIRMED")
 print(f"  Aggregate: fresh% decreasing (slope=-0.058/yr)")
-print(f"  Movie subset: fresh% decreasing (slope=-0.103/yr) — SAME direction, amplified")
-print(f"  TV Show subset: fresh% INCREASING (slope=+0.048/yr) — OPPOSITE direction")
+print(f"  Movie subset: fresh% decreasing (slope=-0.103/yr) - SAME direction, amplified")
+print(f"  TV Show subset: fresh% INCREASING (slope=+0.048/yr) - OPPOSITE direction")
 print(f"  The aggregate trend is dominated by Movies (~75% of US catalog)")
 print(f"  Aggregate conclusion IS technically correct but analytically misleading without the split")
 
@@ -320,12 +320,12 @@ print("=" * 70)
 print("""
 Claims validated: 12 (C1-C12)
   PASS: C1, C2, C3, C4, C8 (runtime MWU), C10 (UK sparse decades), C12 (director base rate)
-  WARN: C5 (slope rounding), C6 (slope rounding), C7 (ratio approximation), C9 (short% tolerance), C11 (entropy — requires full rerun)
+  WARN: C5 (slope rounding), C6 (slope rounding), C7 (ratio approximation), C9 (short% tolerance), C11 (entropy - requires full rerun)
   FAIL: none
 
 Key validation findings:
-1. Simpson's Paradox CONFIRMED for Finding 11 — TV Show fresh trend is OPPOSITE to Movie trend
-2. Director concentration (Finding 13) — base rate artifact confirmed (1.08x lift, not strong concentration)
+1. Simpson's Paradox CONFIRMED for Finding 11 - TV Show fresh trend is OPPOSITE to Movie trend
+2. Director concentration (Finding 13) - base rate artifact confirmed (1.08x lift, not strong concentration)
 3. Multiple testing correction: all 5 testable p-values survive BH correction (no false discoveries)
 4. Lag band shares sum to 1.0 per year (PASS)
 5. No PK duplicates, no lag null rates

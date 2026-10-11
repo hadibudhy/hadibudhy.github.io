@@ -42,9 +42,9 @@ The important trade-off is clear: higher fare can improve revenue per passenger 
 
 ## Prioritized plan and measurement
 
-- **P0 — Act now:** add the BTS current/constant-dollar benchmark to commercial reviews.
-- **P1 — Test:** run a controlled price or discount change on comparable routes and booking windows.
-- **P2 — Investigate:** join [BTS Origin and Destination Survey data](https://www.bts.gov/topics/airlines-and-airports/origin-and-destination-survey-data) with internal bookings, costs, and competitor fares.
+- **P0 - Act now:** add the BTS current/constant-dollar benchmark to commercial reviews.
+- **P1 - Test:** run a controlled price or discount change on comparable routes and booking windows.
+- **P2 - Investigate:** join [BTS Origin and Destination Survey data](https://www.bts.gov/topics/airlines-and-airports/origin-and-destination-survey-data) with internal bookings, costs, and competitor fares.
 
 Primary metric is contribution per seat; guardrails are bookings, load factor, cancellation, and complaint rate. Repeat by route, season, cabin, and booking window. If the conclusion changes when incomplete quarters or mix-shifted routes are excluded, treat it as weak evidence.
 

@@ -17,10 +17,10 @@ theme = hadi_dark()
 # hardcodes COLORS["gray900"] (dark) for titles.  Override module-level
 # COLORS so titles, subtitles, and labels are visible on dark backgrounds.
 from helpers.chart_helpers import COLORS
-COLORS["gray900"] = "#f1f5f9"   # Slate 100 — for headings on dark bg
-COLORS["gray600"] = "#94a3b8"   # Slate 400 — for subtitles on dark bg
-COLORS["gray400"] = "#64748b"   # Slate 500 — for muted labels on dark bg
-COLORS["gray100"] = "#334155"   # Slate 700 — for grid lines on dark bg
+COLORS["gray900"] = "#f1f5f9"   # Slate 100 - for headings on dark bg
+COLORS["gray600"] = "#94a3b8"   # Slate 400 - for subtitles on dark bg
+COLORS["gray400"] = "#64748b"   # Slate 500 - for muted labels on dark bg
+COLORS["gray100"] = "#334155"   # Slate 700 - for grid lines on dark bg
 colors = dict(COLORS)
 
 # Dark-theme specific palette for stacked / grouped elements
@@ -44,7 +44,7 @@ CLUSTER_LABELS = {
 }
 
 # -----------------------------------------------------------------------------
-# BEAT 01: Multi-line — US TV vs Movie fresh%
+# BEAT 01: Multi-line - US TV vs Movie fresh%
 # -----------------------------------------------------------------------------
 print("Generating beat_01...")
 us_df = df[(df['country_bucket'] == 'US') & (df['year_added'] >= 2015) & (df['year_added'] <= 2021)].copy()
@@ -59,7 +59,7 @@ y_dict = {
 }
 highlight_line(ax, x_vals, y_dict, highlight='TV Show')
 
-# Annotate crossing point — where TV freshness exceeds Movie
+# Annotate crossing point - where TV freshness exceeds Movie
 cross_year = None
 for i in range(1, len(x_vals)):
     if fresh_trend['TV Show'].iloc[i-1] < fresh_trend['Movie'].iloc[i-1] and fresh_trend['TV Show'].iloc[i] > fresh_trend['Movie'].iloc[i]:
@@ -85,7 +85,7 @@ plt.close(fig)
 print("  beat_01 done")
 
 # -----------------------------------------------------------------------------
-# BEAT 02: Stacked bar — US Movie lag-band distribution
+# BEAT 02: Stacked bar - US Movie lag-band distribution
 # -----------------------------------------------------------------------------
 print("Generating beat_02...")
 us_movies = us_df[us_df['type'] == 'Movie'].copy()
@@ -109,10 +109,10 @@ band_trend_pct = band_trend_pct[band_order]
 
 fig, ax = plt.subplots(figsize=(10, 6))
 BAND_COLORS = {
-    "Fresh (0)":    "#64748b",   # Slate 500 — readable on dark bg
+    "Fresh (0)":    "#64748b",   # Slate 500 - readable on dark bg
     "Recent (1-2)": "#475569",   # Slate 600
-    "Mid (3-5)":    "#334155",   # Slate 700 — near-background, subtle
-    "Library (6+)": DARK_HIGHLIGHT  # Blue 500 — highlighted band
+    "Mid (3-5)":    "#334155",   # Slate 700 - near-background, subtle
+    "Library (6+)": DARK_HIGHLIGHT  # Blue 500 - highlighted band
 }
 bottom = np.zeros(len(band_trend_pct))
 categories = band_trend_pct.index.astype(str)
@@ -125,7 +125,7 @@ for col in band_order:
                 ax.text(i, bottom[i] + val/2, f"{val:.0f}%", ha='center', va='center', color='white', fontweight='bold', fontsize=9)
     bottom += col_vals
 
-# Add legend for bands — dark background
+# Add legend for bands - dark background
 legend = ax.legend(frameon=False, loc='upper center', bbox_to_anchor=(0.5, 1.05), ncol=4)
 for text in legend.get_texts():
     text.set_color(DARK_TEXT_MUTED)
@@ -146,7 +146,7 @@ plt.close(fig)
 print("  beat_02 done")
 
 # -----------------------------------------------------------------------------
-# BEAT 03: Horizontal bar — Change in library% by cluster
+# BEAT 03: Horizontal bar - Change in library% by cluster
 # -----------------------------------------------------------------------------
 print("Generating beat_03...")
 us_movies_w_cluster = us_movies.merge(cluster_df[['show_id', 'cluster']], on='show_id', how='inner')
@@ -183,7 +183,7 @@ plt.close(fig)
 print("  beat_03 done")
 
 # -----------------------------------------------------------------------------
-# BEAT 04: Grouped bar — Director Observed vs Expected by cluster
+# BEAT 04: Grouped bar - Director Observed vs Expected by cluster
 # -----------------------------------------------------------------------------
 print("Generating beat_04...")
 movies_w_directors = df[(df['type'] == 'Movie') & (df['director'].notna())].copy()
@@ -200,7 +200,7 @@ top_50_dirs = director_counts.nlargest(50).index
 top_50_movies = movies_w_directors[movies_w_directors['director'].isin(top_50_dirs)]
 observed_rates = top_50_movies['cluster_label'].value_counts(normalize=True) * 100
 
-# Combine — focus on Documentary, Intl Drama, and Children & Family
+# Combine - focus on Documentary, Intl Drama, and Children & Family
 comparison = pd.DataFrame({
     'Catalog Base Rate': base_rates,
     'Top 50 Directors': observed_rates
@@ -227,7 +227,7 @@ ax.set_yticks(y)
 ax.set_yticklabels(to_plot.index, fontsize=11)
 ax.invert_yaxis()
 
-# Lift annotation — only for Documentary and Children & Family
+# Lift annotation - only for Documentary and Children & Family
 for i, (idx, row) in enumerate(to_plot.iterrows()):
     lift = row['Lift']
     if lift > 0:
@@ -251,7 +251,7 @@ plt.close(fig)
 print("  beat_04 done")
 
 # -----------------------------------------------------------------------------
-# BEAT 05: Line chart — UK sparse metadata rate by vintage
+# BEAT 05: Line chart - UK sparse metadata rate by vintage
 # -----------------------------------------------------------------------------
 print("Generating beat_05...")
 uk_df = df[df['country_bucket'] == 'UK'].copy()
@@ -291,7 +291,7 @@ plt.close(fig)
 print("  beat_05 done")
 
 # -----------------------------------------------------------------------------
-# BEAT 06: Grouped bar — US vs Intl 1-season rate by cohort
+# BEAT 06: Grouped bar - US vs Intl 1-season rate by cohort
 # -----------------------------------------------------------------------------
 print("Generating beat_06...")
 tv_df = df[(df['type'] == 'TV Show') & (df['duration_seasons'].notna())].copy()
