@@ -13,17 +13,35 @@
     "publisherDescription": "The publisher describes a five-month electronics behaviour export; the loaded file range is retained as the controlling evidence."
   },
   "validation": {
-    "eventTypes": ["view", "cart", "purchase"],
+    "eventTypes": [
+      "view",
+      "cart",
+      "purchase"
+    ],
     "eventRows": 885129,
-    "eventCounts": {"view": 793748, "cart": 54035, "purchase": 37346},
+    "eventCounts": {
+      "view": 793748,
+      "cart": 54035,
+      "purchase": 37346
+    },
     "missingSessionRows": 165,
-    "checks": ["deterministic event key", "event type accepted values", "timestamp parsing", "session coverage visible", "CI fixture expected rows"]
+    "checks": [
+      "deterministic event key",
+      "event type accepted values",
+      "timestamp parsing",
+      "session coverage visible",
+      "CI fixture expected rows"
+    ]
   },
   "artifacts": [
     "/images/rees46-event-mix.svg",
     "/images/rees46-quality-checks.svg",
     "/images/rees46-model-grain.svg"
   ],
-  "artifactHashes": {"/images/rees46-event-mix.svg": "bef9953a5faf42989a90344999e344e590a77ce0eca1ec4669340973f31d1245", "/images/rees46-quality-checks.svg": "9bc51461721515415b74145bf8a98348a4ab7ad181e3e5c38a805056fc30db77", "/images/rees46-model-grain.svg": "18a27d03491bb9fb6ee744ba28e59d19c6ad1387a67aea4ec99d0783d7494be5"},
+  "artifactHashes": {
+    "/images/rees46-event-mix.svg": "5eb22755de3e02ccb67108b035665ee5c4d9078b56443ceec90efb924119d2c6",
+    "/images/rees46-quality-checks.svg": "bc3a72868274cb761e2d4d67a30c6f90fb33c6192897fa28a64279a56de6731e",
+    "/images/rees46-model-grain.svg": "640acfbac56d16f2c905a23b4fbe84dd6e505299c9f2d40edae18b0eef597d55"
+  },
   "evidenceBoundary": "Event counts and identified-session metrics are supported. A live product activation or retention claim requires internal telemetry and an approved tracking plan."
 }

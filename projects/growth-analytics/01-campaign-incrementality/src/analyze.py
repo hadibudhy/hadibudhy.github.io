@@ -6,9 +6,16 @@ import argparse
 import json
 import math
 from pathlib import Path
+import sys
 
 import pandas as pd
 import matplotlib.pyplot as plt
+
+ROOT = Path(__file__).resolve().parents[4]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from scripts.chart_theme import ACCENT, CANVAS, DPI, HIGHLIGHT, INK, WIDE_SIZE, add_header, add_source, style_axis, style_figure
 
 
 def proportions(a_success: int, a_total: int, b_success: int, b_total: int) -> dict:
@@ -87,19 +94,24 @@ def save_chart(result: dict, destination: Path) -> None:
     value = metric["absolute_difference"] * 100
     low = metric["ci95"][0] * 100
     high = metric["ci95"][1] * 100
-    figure, axis = plt.subplots(figsize=(7, 4.2))
-    axis.errorbar([value], [0], xerr=[[value - low], [high - value]], fmt="o", color="#171717", capsize=6, markersize=7)
-    axis.axvline(0, color="#a3a3a3", linewidth=1)
+    figure, axis = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
+    style_figure(figure)
+    style_axis(axis, grid_axis="x")
+    figure.subplots_adjust(left=0.10, right=0.96, top=0.80, bottom=0.16)
+    axis.errorbar([value], [0], xerr=[[value - low], [high - value]], fmt="o", color=ACCENT,
+                  ecolor=ACCENT, capsize=5, markersize=7, linewidth=2)
+    axis.axvline(0, color=HIGHLIGHT, linewidth=1.2, linestyle=(0, (3, 3)))
     axis.set_xlim(-0.2, 0.2)
-    axis.set_yticks([0])
-    axis.set_yticklabels(["Conversion lift"])
-    axis.set_xlabel("Absolute lift in percentage points")
-    axis.set_title("Advertising increased conversion in the released Criteo benchmark")
-    axis.text(0.5, -0.25, "Intention-to-treat estimate | 13.98M user rows | 95% CI: 0.108–0.122pp", ha="center", transform=axis.transAxes, fontsize=8, color="#737373")
-    axis.spines[["top", "right"]].set_visible(False)
-    figure.tight_layout()
+    axis.set_ylim(-0.65, 0.65)
+    axis.set_yticks([])
+    axis.set_xlabel("Difference in conversion rate (percentage points)")
+    axis.annotate(f"+{value:.3f} pp", (value, 0), xytext=(0, 22), textcoords="offset points",
+                  ha="center", color=INK, fontsize=11, fontweight="bold")
+    add_header(figure, "Ad assignment increased conversion by 0.115 percentage points",
+               f"Criteo randomized benchmark, 13.98M user records; 95% CI +{low:.3f} to +{high:.3f} pp")
+    add_source(figure, "Criteo AI Lab uplift dataset; intention-to-treat estimate, benchmark only")
     destination.parent.mkdir(parents=True, exist_ok=True)
-    figure.savefig(destination, dpi=160, bbox_inches="tight")
+    figure.savefig(destination, dpi=DPI, facecolor=figure.get_facecolor())
     plt.close(figure)
 
 
@@ -107,7 +119,12 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("source", type=Path, nargs="?", default=Path("analysis_data/growth_sources/criteo-uplift-v2.1.csv.gz"))
     parser.add_argument("--output", type=Path, default=Path("analysis_data/growth_sources/criteo-itt-results.json"))
+    parser.add_argument("--chart-only", action="store_true", help="Regenerate the chart from the checked result JSON without rereading the source data")
     args = parser.parse_args()
+    if args.chart_only:
+        result = json.loads(args.output.read_text(encoding="utf-8"))
+        save_chart(result, Path("public/images/growth-criteo-itt.png"))
+        return
     result = analyze(args.source)
     args.output.write_text(json.dumps(result, indent=2), encoding="utf-8")
     save_chart(result, Path("public/images/growth-criteo-itt.png"))

@@ -88,7 +88,7 @@ In 2025, the top 10 countries averaged **7.33**, while the bottom 10 averaged **
 The largest gaps between the groups were:
 
 - **GDP per person:** 0.83 points.
-- **Social support:** 0.82 points.
+- **Social support:** 0.83 points.
 - **Life expectancy:** 0.62 points.
 
 ![Top 10 versus bottom 10 countries in 2025: The largest happiness-score differences include income, social support, and health](/images/happiness-beat03.png)
@@ -99,15 +99,15 @@ The largest gaps between the groups were:
 
 Using factor data from 2019 to 2025, the strongest relationships with the final happiness score were:
 
-- Social support: **r = 0.71**
+- Social support: **r = 0.70**
 - GDP per person: **r = 0.68**
 - Life expectancy: **r = 0.66**
 
 These factors are also related to each other. Wealthier countries often have better healthcare and stronger safety nets, so this analysis cannot separate the individual effect of each factor.
 
-Generosity had almost no relationship with the national happiness score (**r = 0.03**). This does not mean generosity has no value for individuals. It means charitable giving alone did not explain differences between countries in this dataset.
+Generosity had almost no relationship with the national happiness score (**r = 0.04**). This does not mean generosity has no value for individuals. It means charitable giving alone did not explain differences between countries in this dataset.
 
-![Countries measured from 2019–2025: Social support, income, and health showed the strongest associations with happiness](/images/happiness-beat04.png)
+![Countries measured from 2019 to 2025: Social support, income, and health showed the strongest associations with happiness](/images/happiness-beat04.png)
 
 ### Finding 5: The gap between countries widened
 

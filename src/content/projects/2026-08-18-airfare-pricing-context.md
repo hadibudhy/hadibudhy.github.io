@@ -28,11 +28,11 @@ header:
 
 ## Baseline and diagnostic logic
 
-The [BTS national fare series](https://www.bts.gov/content/national-level-domestic-average-fare-series) publishes current-dollar and inflation-adjusted fare measures, with annual history from 1995 and quarterly releases. Current dollars describe what passengers paid; constant dollars provide a more comparable purchasing-power view.
+The [BTS national fare series](https://www.bts.gov/content/annual-us-domestic-average-itinerary-fare-current-and-constant-dollars) publishes current-dollar and inflation-adjusted fare measures. The 2025 annual release reports a **$387** average fare, up **0.9%** from **$384** in 2024 current dollars, but down **1.8%** from the 2024 inflation-adjusted comparison of **$394**. The two measures answer different questions: current dollars describe what passengers paid; adjusted dollars compare purchasing power. The annual 2025 result combines the old 10% ticket sample through June with a 40% sample beginning in July, so the sampling change is an additional comparability limit. [BTS 2025 annual fare release](https://www.bts.gov/newsroom/2025-annual-average-domestic-air-fare-decreases-2024)
 
 The national series cannot explain a route-level change. It combines carriers, markets, itinerary lengths, and fare types. A shift in the average may therefore be mix, not a price decision.
 
-![BTS national average domestic fare, 2024 versus 2025: Nominal fare rose slightly while the inflation-adjusted comparison fell](/images/airfare-current-adjusted.png)
+![BTS national average domestic fare, 2024 versus 2025: Current-dollar fare rose 0.9% while the inflation-adjusted comparison fell 1.8%](/images/airfare-current-adjusted.png)
 
 ## Driver decomposition and scenario analysis
 

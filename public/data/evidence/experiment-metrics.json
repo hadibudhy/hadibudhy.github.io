@@ -3,11 +3,41 @@
   "caseId": "experiment-metrics",
   "scope": "full-data",
   "status": "verified",
-  "source": {"name": "Criteo AI Lab uplift benchmark v2.1", "url": "https://ailab.criteo.com/criteo-uplift-prediction-dataset/", "publisher": "Criteo AI Lab", "grain": "assigned user record", "sha256": "2716e1bf0fd157a93b5bf86924d9088419dfbac2022c6cd90030220634f616dc"},
-  "models": ["Python streaming ITT", "SQL assignment summary"],
-  "checks": ["row count", "schema", "binary values", "control exposure", "sample ratio"],
-  "metrics": {"rows": 13979592, "absolute_conversion_lift_pp": 0.1152, "ci95_pp": [0.108, 0.122]},
-  "artifacts": ["/images/growth-criteo-itt.png", "/images/portfolio-campaign-economics.svg", "/images/portfolio-campaign-f0.svg"],
-  "artifactHashes": {"/images/growth-criteo-itt.png": "5a9701995138db6a31c6135480c52d390c07d70d92cd9891155e7160da55d068", "/images/portfolio-campaign-economics.svg": "377522a16af96affbc197232dfb1a1a07d7af5c01def131fe0a3ddaa08fa9f09", "/images/portfolio-campaign-f0.svg": "5d6e9a61b2b3211f9682b18f36bf4701534efebe9863ee0e3103df63f94190bc"},
+  "source": {
+    "name": "Criteo AI Lab uplift benchmark v2.1",
+    "url": "https://ailab.criteo.com/criteo-uplift-prediction-dataset/",
+    "publisher": "Criteo AI Lab",
+    "grain": "assigned user record",
+    "sha256": "2716e1bf0fd157a93b5bf86924d9088419dfbac2022c6cd90030220634f616dc"
+  },
+  "models": [
+    "Python streaming ITT",
+    "SQL assignment summary"
+  ],
+  "checks": [
+    "row count",
+    "schema",
+    "binary values",
+    "control exposure",
+    "sample ratio"
+  ],
+  "metrics": {
+    "rows": 13979592,
+    "absolute_conversion_lift_pp": 0.1152,
+    "ci95_pp": [
+      0.108,
+      0.122
+    ]
+  },
+  "artifacts": [
+    "/images/growth-criteo-itt.png",
+    "/images/portfolio-campaign-economics.svg",
+    "/images/portfolio-campaign-f0.svg"
+  ],
+  "artifactHashes": {
+    "/images/growth-criteo-itt.png": "35251843ee1a3af06dd87f457a42a8c9d96952bf671ee0db2a1cf35de16f8604",
+    "/images/portfolio-campaign-economics.svg": "78d8dd63676978da736a9ec1725a09642dd2e2776ebfa16df71de476709c9f98",
+    "/images/portfolio-campaign-f0.svg": "a4a250c6e32c5dc2a7fa31caefaa585cffe0c01996940435dde40b4005ccd6fb"
+  },
   "evidenceBoundary": "The randomized benchmark supports intention-to-treat lift. Current campaign economics and transportability are not observed."
 }

@@ -10,12 +10,18 @@ from __future__ import annotations
 import json
 import math
 from pathlib import Path
+import sys
 
 import matplotlib.pyplot as plt
 import pandas as pd
 
-
 ROOT = Path(__file__).resolve().parents[4]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from scripts.chart_theme import ACCENT, BORDER, CANVAS, DPI, HIGHLIGHT, INK, MUTED, WIDE_SIZE, add_header, add_source, style_axis, style_figure
+
+
 SOURCE = ROOT / "analysis_data/growth_sources/mta_bridge_daily_car_counts.json"
 OUTPUT = ROOT / "analysis_data/growth_sources/mta_comparator_audit.json"
 CHART = ROOT / "public/images/growth-mta-event-study.png"
@@ -39,7 +45,33 @@ def describe(frame: pd.DataFrame, policy_date: pd.Timestamp) -> tuple[dict, pd.D
     return {"effects": effects, "n_week_facility": len(frame), "weeks": int(sample["week"].nunique()), "pre_policy_effect_range": [float(pre_policy.min()), float(pre_policy.max())]}, sample
 
 
+def render_chart(result: dict) -> None:
+    effects = pd.DataFrame(result["effects"])
+    figure, axis = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
+    style_figure(figure)
+    style_axis(axis, grid_axis="y")
+    figure.subplots_adjust(left=0.12, right=0.97, top=0.80, bottom=0.15)
+    axis.axhline(0, color=BORDER, linewidth=1.2)
+    axis.axvline(-0.5, color=HIGHLIGHT, linestyle=(0, (4, 3)), linewidth=1.4)
+    axis.plot(effects.event_week, effects.effect, marker="o", color=ACCENT, linewidth=1.8, markersize=4.5)
+    axis.text(-0.5, axis.get_ylim()[1], "Policy starts", ha="center", va="top", color=HIGHLIGHT,
+              fontsize=9, fontweight="bold")
+    axis.set_xlim(-27, 27)
+    axis.set_xticks(range(-24, 25, 6))
+    axis.set_xlabel("Event week relative to 5 January 2025")
+    axis.set_ylabel("Change in affected-minus-comparison log gap vs week -1")
+    add_header(figure, "The comparison gap varied before the policy date",
+               "Weekly affected-minus-comparison log traffic change, relative to event week -1; ±26-week window")
+    add_source(figure, "MTA Bridges and Tunnels, 2019 to May 2026; descriptive audit, no causal estimate or pointwise interval")
+    figure.savefig(CHART, dpi=DPI, facecolor=figure.get_facecolor())
+    plt.close(figure)
+
+
 def main() -> None:
+    if sys.argv[1:] == ["--chart-only"]:
+        render_chart(json.loads(OUTPUT.read_text(encoding="utf-8")))
+        return
+
     raw = pd.read_json(SOURCE)
     raw["date"] = pd.to_datetime(raw["date"])
     raw["traffic_count"] = pd.to_numeric(raw["traffic_count"], errors="raise")
@@ -55,19 +87,7 @@ def main() -> None:
     result.update({"policy_date": policy.strftime("%Y-%m-%d"), "source_period": [raw.date.min().strftime("%Y-%m-%d"), raw.date.max().strftime("%Y-%m-%d")], "treated_facilities": sorted(TREATED_FACILITIES), "control_facilities": sorted(set(raw.facility_id) - TREATED_FACILITIES), "grain": "facility-week", "estimand": "descriptive treated-minus-control change in log(1 + weekly car crossings), relative to event week -1", "limitations": ["Each event week is one treated-control weekly difference, so no pointwise inference is reported", "This is all-car bridge/tunnel traffic, not HVFHV demand", "No route-level toll exposure or rider outcomes", "Spillovers, seasonality, and facility-specific shocks remain possible"]})
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(result, indent=2), encoding="utf-8")
-    effects = pd.DataFrame(result["effects"])
-    figure, axis = plt.subplots(figsize=(7, 4.2))
-    axis.axhline(0, color="#a3a3a3", linewidth=1)
-    axis.axvline(-0.5, color="#737373", linestyle="--", linewidth=1)
-    axis.plot(effects.event_week, effects.effect, marker="o", color="#171717", linewidth=1.5, markersize=4)
-    axis.set_title("The affected-comparison gap was unstable before policy")
-    axis.set_xlabel("Weeks from 5 January 2025; reference week = -1")
-    axis.set_ylabel("Change in treated-control log gap vs week -1")
-    axis.spines[["top", "right"]].set_visible(False)
-    axis.text(0.5, -0.24, "MTA Bridges & Tunnels | 2019–May 2026 | descriptive weekly differences; no causal estimate or pointwise CI", ha="center", transform=axis.transAxes, fontsize=8, color="#737373")
-    figure.tight_layout()
-    figure.savefig(CHART, dpi=160, bbox_inches="tight")
-    plt.close(figure)
+    render_chart(result)
     print(json.dumps(result, indent=2))
 
 

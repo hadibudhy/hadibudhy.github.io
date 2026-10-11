@@ -47,9 +47,9 @@
     "/images/portfolio-mta-causal-boundary.svg"
   ],
   "artifactHashes": {
-    "/images/growth-mta-event-study.png": "8235a6e6728afb1edbcc6778101e08b3ab8b51df7a2d8ff170951c6f8aecc308",
-    "/images/portfolio-mta-panel-scope.svg": "068b5ed5f80cd48407fb62425c84289e9b1fda64c4decbc93203d3d2ae5ed5ae",
-    "/images/portfolio-mta-causal-boundary.svg": "8af62ba7baa7852499788bb5b6548a0935eb83411899777042991f1e94bedc44"
+    "/images/growth-mta-event-study.png": "15e45a4175138c75b31c485b9edf23d26a70275149051c58f88418281da4ef76",
+    "/images/portfolio-mta-panel-scope.svg": "dcbf5e5007cc082d689c1e4a7ca2c94cc77d6d4b4c89cdbd497347535cdf6d45",
+    "/images/portfolio-mta-causal-boundary.svg": "9a5b8edd723f6578ae8a631d558b2b9faa8062b218ac39e6dc9dff693b57eaab"
   },
   "evidenceBoundary": "This is a descriptive all-car crossing audit. The unstable pre-policy gap is a warning, not a formal parallel-trends rejection or policy-effect estimate; ride-hailing outcomes and route-level fee exposure are not observed."
 }

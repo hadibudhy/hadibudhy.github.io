@@ -10,9 +10,15 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import pandas as pd
-
+from matplotlib.ticker import FuncFormatter
 
 ROOT = Path(__file__).resolve().parents[4]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from scripts.chart_theme import ACCENT, BORDER, CANVAS, DPI, HIGHLIGHT, INK, MUTED, WIDE_SIZE, add_header, add_source, style_axis, style_figure
+
+
 OUTPUT = ROOT / "analysis_data" / "growth_sources" / "hvf_hourly_2019.json"
 CHART = ROOT / "public" / "images" / "growth-hvf-hourly.png"
 MONTHLY = ROOT / "analysis_data" / "growth_sources" / "data_reports_monthly.csv"
@@ -41,47 +47,70 @@ def render_monthly_summary(monthly: pd.DataFrame) -> None:
     ]
     rows = [row + [f"{change:+.1f}%"] for row, change in zip(rows, changes)]
 
-    figure, axis = plt.subplots(figsize=(10, 4.8), facecolor="#07111f")
-    axis.set_facecolor("#07111f")
+    figure, axis = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
+    style_figure(figure)
     axis.axis("off")
-    figure.suptitle(
-        "Trips rose 2%; reported driver totals stayed flat",
-        color="#f3f6fb", fontsize=18, fontweight="bold", y=0.94,
-    )
-    figure.text(
-        0.5, 0.84, "TLC High Volume FHV monthly reports | average of 12 monthly values in each year",
-        ha="center", color="#9fb0c6", fontsize=11,
-    )
+    add_header(figure, "Trips rose 2%; reported driver totals were almost unchanged",
+               "Annual average of 12 monthly TLC High Volume FHV values, 2024 vs 2025")
     table = axis.table(
         cellText=rows,
         colLabels=["Measure", "2024 average", "2025 average", "Change"],
         cellLoc="center",
         colLoc="center",
         colWidths=[0.40, 0.20, 0.20, 0.16],
-        bbox=[0.02, 0.22, 0.96, 0.52],
+        bbox=[0.02, 0.20, 0.96, 0.54],
     )
     table.auto_set_font_size(False)
-    table.set_fontsize(12)
+    table.set_fontsize(11)
     for (row, _), cell in table.get_celld().items():
-        cell.set_edgecolor("#334155")
-        cell.set_linewidth(0.8)
-        cell.set_facecolor("#132238" if row == 0 else "#0b1728")
-        cell.get_text().set_color("#f3f6fb" if row == 0 else "#d5dfed")
+        cell.set_edgecolor(BORDER)
+        cell.set_linewidth(0.6)
+        cell.set_facecolor("#EAF0F2" if row == 0 else CANVAS)
+        cell.get_text().set_color(INK if row == 0 else MUTED)
+        cell.get_text().set_fontfamily("Arial")
         if row == 0:
             cell.get_text().set_fontweight("bold")
-    figure.text(
-        0.5, 0.08,
-        "Reported driver counts are monthly totals, not hourly online supply. Changes compare annual averages.",
-        ha="center", color="#9fb0c6", fontsize=10,
-    )
-    figure.text(0.5, 0.035, "Source: NYC Taxi and Limousine Commission", ha="center", color="#9fb0c6", fontsize=9)
+    figure.text(0.065, 0.105,
+                "Driver counts are monthly totals, not hourly online supply. Changes compare unrounded annual means.",
+                ha="left", color=MUTED, fontsize=9, fontfamily="Arial")
+    add_source(figure, "NYC Taxi and Limousine Commission")
     output = ROOT / "public" / "images" / "growth-hvf-monthly-supply.png"
-    figure.savefig(output, dpi=160, facecolor=figure.get_facecolor(), bbox_inches="tight")
+    figure.savefig(output, dpi=DPI, facecolor=figure.get_facecolor())
+    plt.close(figure)
+
+
+def render_hourly_chart(rows: list[dict]) -> None:
+    hours = [int(row["hour"]) for row in rows]
+    trips = [int(row["trips"]) for row in rows]
+    if hours != list(range(24)) or sum(trips) != 4_965_012:
+        raise ValueError(f"Unexpected hourly source: hours={hours}, total={sum(trips)}")
+    peak_index = trips.index(max(trips))
+    figure, axis = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
+    style_figure(figure)
+    style_axis(axis)
+    figure.subplots_adjust(left=0.09, right=0.97, top=0.80, bottom=0.15)
+    axis.plot(hours, trips, marker="o", color=ACCENT, linewidth=2.2, markersize=4.5)
+    axis.fill_between(hours, trips, color=ACCENT, alpha=0.08)
+    axis.scatter([hours[peak_index]], [trips[peak_index]], color=HIGHLIGHT, s=46, zorder=3)
+    axis.annotate(f"18:00  {trips[peak_index]:,}", (hours[peak_index], trips[peak_index]),
+                  xytext=(-8, -24), textcoords="offset points", ha="right", color=INK,
+                  fontsize=10, fontweight="bold")
+    add_header(figure, "Recorded HVFHV trips peaked at 18:00",
+               "Pickup hour, 1 to 7 February 2019; dispatched trip records are not total demand")
+    axis.set_xlabel("Pickup hour")
+    axis.set_ylabel("Recorded trips")
+    axis.set_xticks(range(0, 24, 2))
+    axis.yaxis.set_major_formatter(FuncFormatter(lambda value, _: f"{value / 1000:.0f}k"))
+    add_source(figure, "NYC TLC High Volume FHV Open Data, bounded Open Data API query")
+    figure.savefig(CHART, dpi=DPI, facecolor=figure.get_facecolor())
     plt.close(figure)
 
 
 def main() -> None:
     monthly_json = ROOT / "analysis_data" / "growth_sources" / "tlc_hvfhv_monthly_2024_2025.json"
+    if sys.argv[1:] == ["--hourly-chart-only"]:
+        render_hourly_chart(json.loads(OUTPUT.read_text(encoding="utf-8")))
+        return
     if sys.argv[1:] == ["--monthly-chart-only"]:
         render_monthly_summary(pd.read_json(monthly_json))
         return
@@ -92,23 +121,8 @@ def main() -> None:
         rows = json.load(response)
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(rows, indent=2), encoding="utf-8")
-    hours = [int(row["hour"]) for row in rows]
-    trips = [int(row["trips"]) for row in rows]
-    if hours != list(range(24)) or sum(trips) != 4_965_012:
-        raise ValueError(f"Unexpected API result: hours={hours}, total={sum(trips)}")
-    figure, axis = plt.subplots(figsize=(7, 4.2))
-    axis.plot(hours, trips, marker="o", color="#171717", linewidth=2)
-    axis.fill_between(hours, trips, color="#e5e7eb")
-    axis.set_title("Recorded HVFHV trips were highest at 18:00 in the observed week")
-    axis.set_xlabel("Pickup hour")
-    axis.set_ylabel("Dispatched trips")
-    axis.set_xticks(range(0, 24, 3))
-    axis.spines[["top", "right"]].set_visible(False)
-    axis.text(0.5, -0.23, "Official NYC Open Data | 1–7 February 2019 | recorded trips are not total demand", ha="center", transform=axis.transAxes, fontsize=8, color="#737373")
-    figure.tight_layout()
+    render_hourly_chart(rows)
     CHART.parent.mkdir(parents=True, exist_ok=True)
-    figure.savefig(CHART, dpi=160, bbox_inches="tight")
-    plt.close(figure)
     monthly = pd.read_csv(MONTHLY)
     monthly = monthly[monthly["License Class"].eq("FHV - High Volume")].copy()
     numeric = ["Trips Per Day", "Unique Drivers", "Unique Vehicles", "Vehicles Per Day", "Avg Hours Per Day Per Vehicle", "Avg Hours Per Day Per Driver", "Avg Minutes Per Trip"]

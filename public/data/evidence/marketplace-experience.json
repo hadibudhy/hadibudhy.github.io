@@ -52,9 +52,9 @@
     "/images/portfolio-marketplace-measurement.svg"
   ],
   "artifactHashes": {
-    "/images/growth-hvf-hourly.png": "d7b5fc6cf0453254736be607e019014f05aec5873424bda90c70ef596877825a",
-    "/images/growth-hvf-monthly-supply.png": "fb994bcfa3c7f8c7c6b2f80e89e2bfd9ce4dd788dcd53fb57c37f7e4ffa24033",
-    "/images/portfolio-marketplace-measurement.svg": "41f1cee7a1f9b0f73fecb6e6c14ff62c583d8c2e9e2b4feda478dac99525e295"
+    "/images/growth-hvf-hourly.png": "aeafb71b885046f34767453fca01e411f6d796ab8371b04bbb5df639697ea15e",
+    "/images/growth-hvf-monthly-supply.png": "d37addc19bfa0908dbcf4b9f4d9adce1771ab96cc5699367c5768aa9163fe1d9",
+    "/images/portfolio-marketplace-measurement.svg": "ab3688d5cce4fb8ba30aacbb3e32d8b034b48d14633d9a0d0d1f42e3b112f7fd"
   },
   "evidenceBoundary": "Completed-trip activity and official monthly proxies are supported. Total requests, lost matches, and incentive ROI are not observed."
 }

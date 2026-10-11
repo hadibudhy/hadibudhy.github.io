@@ -13,8 +13,18 @@
     "publicDataOnly": true
   },
   "validation": {
-    "checks": ["unit compatibility", "annual period selection", "duplicate fact context", "revenue/net income margin reconciliation", "source lineage retained"],
-    "metrics": ["revenue", "net income", "net margin"],
+    "checks": [
+      "unit compatibility",
+      "annual period selection",
+      "duplicate fact context",
+      "revenue/net income margin reconciliation",
+      "source lineage retained"
+    ],
+    "metrics": [
+      "revenue",
+      "net income",
+      "net margin"
+    ],
     "periodRule": "Use documented annual facts from the selected issuer context; do not mix quarterly and annual frames."
   },
   "artifacts": [
@@ -22,6 +32,10 @@
     "/images/sec-net-margin.png",
     "/images/portfolio-sec-fact-grain.svg"
   ],
-  "artifactHashes": {"/images/sec-revenue-net-income.png": "7cb1921a410c92568ff071f37095c5408f60b4329c43221cf71ac72bc322f35a", "/images/sec-net-margin.png": "0a932489a5814740e16e1a235c5dbd7bf138a1a9186a85e64b36a73597468b9c", "/images/portfolio-sec-fact-grain.svg": "7a589416a6a30f8c5c8a82bdc2ba54863e77b67f4b59ae7e33437db5f6994fb5"},
+  "artifactHashes": {
+    "/images/sec-revenue-net-income.png": "28b970464a592203c56fa9650a232dd7629b49699c69b5b721f7619171cba767",
+    "/images/sec-net-margin.png": "3b9e2f1de4a40a70faf8e8eafcd1454e5022b4c734d8ba91c6deba97af6a695e",
+    "/images/portfolio-sec-fact-grain.svg": "65767c2b8e4ac5269dd3e09b919539f2a122ca653b70298f5fd6835509255b3e"
+  },
   "evidenceBoundary": "The case supports reported company-level trend metrics. It does not support product, customer, or causal operating conclusions."
 }
