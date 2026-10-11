@@ -36,11 +36,11 @@ cluster_df = pd.read_csv("working/netflix/cluster_data.csv")
 profiles = pd.read_csv("working/netflix/cluster_profiles.csv")
 
 CLUSTER_LABELS = {
-    0: "Documentary Movies",
-    1: "International Drama Movies",
-    2: "US Kids TV",
-    3: "International TV",
-    4: "Children & Family Movies"
+    0: "International Drama Movies",
+    1: "US Kids TV",
+    2: "Documentary Movies",
+    3: "Children & Family Movies",
+    4: "International TV"
 }
 
 # -----------------------------------------------------------------------------

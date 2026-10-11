@@ -1,6 +1,7 @@
 import hashlib
 import io
 import json
+import shutil
 import sys
 import zipfile
 from pathlib import Path
@@ -14,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts.chart_theme import ACCENT, BORDER, CANVAS, DPI, FONT, GRID, HIGHLIGHT, INK, MUTED, SECONDARY, WARNING, WARNING_FILL, WIDE_SIZE, add_header, add_source, style_axis, style_figure
+from scripts.chart_theme import ACCENT, BORDER, CANVAS, DPI, FONT, GRID, HIGHLIGHT, INK, MUTED, PAPER, SECONDARY, WARNING, WARNING_FILL, WIDE_SIZE, add_header, add_source, style_axis, style_figure
 
 
 OUT = ROOT / "public" / "images"
@@ -30,6 +31,7 @@ SOURCE_SNAPSHOTS = {
     "world_happiness_2026.xlsx": "576e382655cec3ae704a0b41cd2c04465b87cd84b7f131a0c4fa26d41f6d8028",
     "nyc_taxi_january_2025.parquet": "9af277e4c0d3f9deb30644da822981e1e7df6af58313170fd3aa8a474485488a",
     "bls_jolts_2025.json": "8045da8715b2ebca3f44d02810a9dc116c60cb6240ed66147aef26408886ee15",
+    "netflix_titles.csv": "df1f4ad2027a5a14c3a33932ef0d4054565ff88adf92b7f263601b70fdc6f3f3",
 }
 
 
@@ -156,6 +158,24 @@ def save_jolts_signals() -> None:
     add_source(fig, "U.S. Bureau of Labor Statistics, JOLTS, December 2025")
     fig.savefig(OUT / "jolts-december-signals.png", dpi=DPI, facecolor=fig.get_facecolor())
     plt.close(fig)
+
+    figure, axis = plt.subplots(figsize=(8, 5), facecolor=CANVAS)
+    style_figure(figure)
+    style_axis(axis)
+    figure.subplots_adjust(left=0.14, right=0.95, top=0.80, bottom=0.18)
+    labels = ["Open positions", "Total separations"]
+    values = counts
+    bars = axis.bar(labels, values, color=[ACCENT, SECONDARY], width=0.58)
+    axis.set_ylabel("People (millions)")
+    axis.set_ylim(0, 7.2)
+    for bar, value in zip(bars, values):
+        axis.text(bar.get_x() + bar.get_width() / 2, value + 0.12, f"{value:.3f}M",
+                  ha="center", color=INK, fontsize=10, fontweight="bold")
+    add_header(figure, "Openings exceeded monthly separations in December",
+               "Openings are a point-in-time stock; separations are a monthly flow")
+    add_source(figure, "U.S. Bureau of Labor Statistics, JOLTS, December 2025")
+    figure.savefig(OUT / "jolts-openings-separations.png", dpi=DPI, facecolor=figure.get_facecolor())
+    plt.close(figure)
 
 
 def save_sec_revenue_net_income(metrics: dict[str, dict[str, float]]) -> None:
@@ -646,6 +666,29 @@ def save_credit_default_chart() -> None:
     fig.savefig(OUT / "credit-default-balance.png", dpi=DPI, facecolor=fig.get_facecolor())
     plt.close(fig)
 
+    clients["limit_quartile"] = pd.qcut(
+        clients["LIMIT_BAL"], 4, labels=["Q1 lowest", "Q2", "Q3", "Q4 highest"]
+    )
+    exposure = clients.groupby("limit_quartile", observed=True)["default payment next month"].agg(["mean", "size"])
+    assert [round(value * 100, 1) for value in exposure["mean"]] == [31.8, 24.7, 17.3, 14.0]
+    fig, ax = plt.subplots(figsize=(8, 5), facecolor=CANVAS)
+    style_figure(fig)
+    style_axis(ax)
+    fig.subplots_adjust(left=0.13, right=0.96, top=0.80, bottom=0.18)
+    rates = exposure["mean"].to_numpy() * 100
+    ax.plot(range(4), rates, color=HIGHLIGHT, marker="o", linewidth=2.5, markersize=7)
+    for index, (rate, count) in enumerate(zip(rates, exposure["size"])):
+        ax.annotate(f"{rate:.1f}%  | n={count:,}", (index, rate), xytext=(0, 9),
+                    textcoords="offset points", ha="center", color=INK, fontsize=8.5)
+    ax.set_xticks(range(4), exposure.index.astype(str))
+    ax.set_ylabel("Next-month default rate (%)")
+    ax.set_ylim(0, max(rates) + 8)
+    add_header(fig, "Observed default rates declined across credit-limit quartiles",
+               "Historical Taiwan sample; descriptive group rates, not an automatic lending score")
+    add_source(fig, "UCI Default of Credit Card Clients; credit-limit quartiles")
+    fig.savefig(OUT / "credit-default-by-exposure.png", dpi=DPI, facecolor=fig.get_facecolor())
+    plt.close(fig)
+
 
 def save_airfare_chart() -> None:
     years = ["2024", "2025"]
@@ -715,6 +758,7 @@ def save_happiness_charts() -> None:
     add_source(fig, "World Happiness Report 2026, Figure 2.1; country life evaluations")
     fig.savefig(OUT / "happiness-beat01.png", dpi=DPI, facecolor=fig.get_facecolor())
     plt.close(fig)
+    shutil.copyfile(OUT / "happiness-beat01.png", OUT / "happiness-drivers-trend.png")
 
     change = balanced[2025] - balanced[2011]
     top_gains = change.nlargest(8).sort_values()
@@ -739,6 +783,7 @@ def save_happiness_charts() -> None:
     add_source(fig, "World Happiness Report 2026, Figure 2.1; change is descriptive, not a policy effect")
     fig.savefig(OUT / "happiness-beat02.png", dpi=DPI, facecolor=fig.get_facecolor())
     plt.close(fig)
+    shutil.copyfile(OUT / "happiness-beat02.png", OUT / "happiness-drivers-movers.png")
 
     year_data = data[data["Year"].eq(2025)].copy()
     top = year_data.nlargest(10, score)
@@ -796,6 +841,10 @@ def save_happiness_charts() -> None:
     add_source(fig, "World Happiness Report 2026, Figure 2.1; Pearson correlation")
     fig.savefig(OUT / "happiness-beat04.png", dpi=DPI, facecolor=fig.get_facecolor())
     plt.close(fig)
+    shutil.copyfile(OUT / "happiness-beat04.png", OUT / "happiness-drivers-correlations.png")
+    teaser = OUT / "world-happiness-drivers-2005-2025" / "teaser.png"
+    teaser.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(OUT / "happiness-beat04.png", teaser)
 
     ranges = balanced.max(axis=0) - balanced.min(axis=0)
     assert round(ranges.loc[2011], 1) == 4.8 and round(ranges.loc[2025], 1) == 6.3
@@ -816,6 +865,282 @@ def save_happiness_charts() -> None:
     plt.close(fig)
 
 
+def load_netflix_data() -> pd.DataFrame:
+    source = ROOT / "analysis_data" / "raw" / "netflix_titles.csv"
+    require_source_snapshot(source)
+    data = pd.read_csv(source)
+    assert len(data) == 8_807 and data["show_id"].is_unique
+    assert data.duplicated(["title", "type"]).sum() == 0
+    data["date_added_parsed"] = pd.to_datetime(data["date_added"].str.strip(), format="%B %d, %Y", errors="coerce")
+    data["year_added"] = data["date_added_parsed"].dt.year
+    data["acquisition_lag"] = data["year_added"] - data["release_year"]
+    data.loc[data["acquisition_lag"] < 0, "acquisition_lag"] = np.nan
+    data["primary_country"] = data["country"].str.split(",").str[0].str.strip()
+    countries = {"United States": "US", "United Kingdom": "UK", "India": "India", "South Korea": "South Korea",
+                 "Japan": "Japan", "France": "France", "Canada": "Canada", "Spain": "Spain"}
+    data["country_bucket"] = data["primary_country"].map(countries)
+    data.loc[data["primary_country"].isna(), "country_bucket"] = "Unknown"
+    data["country_bucket"] = data["country_bucket"].fillna("Other")
+
+    def rating_tier(value: str | float) -> str:
+        if pd.isna(value):
+            return "Unknown"
+        if value in {"TV-Y", "TV-Y7", "TV-Y7-FV", "TV-G", "G"}:
+            return "Kids"
+        if value in {"TV-14", "PG-13", "PG"}:
+            return "Teen"
+        if value in {"TV-MA", "R", "NC-17", "NR", "UR"}:
+            return "Adult"
+        return "Unknown"
+
+    def lag_bucket(value: float) -> str:
+        if pd.isna(value):
+            return "Unknown"
+        if value == 0:
+            return "Fresh (0)"
+        if value <= 2:
+            return "Recent (1-2)"
+        if value <= 5:
+            return "Mid (3-5)"
+        return "Library (6+)"
+
+    data["rating_tier"] = data["rating"].map(rating_tier)
+    data["lag_bucket"] = data["acquisition_lag"].map(lag_bucket)
+    return data
+
+
+def save_netflix_charts() -> None:
+    from sklearn.cluster import KMeans
+    from sklearn.preprocessing import LabelEncoder, StandardScaler
+
+    data = load_netflix_data()
+    us = data[(data["country_bucket"] == "US") & data["year_added"].between(2015, 2021)].copy()
+    us["is_fresh"] = us["acquisition_lag"].eq(0.0)
+    fresh = us.groupby(["year_added", "type"])["is_fresh"].mean().unstack() * 100
+    overall = us.groupby("year_added")["is_fresh"].mean() * 100
+    assert round(fresh.loc[2015, "TV Show"]) == 40
+    assert round(fresh.loc[2021, "TV Show"]) == 61
+    assert round(overall.loc[2015]) == 72 and round(overall.loc[2021]) == 28
+    fig, ax = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
+    style_figure(fig)
+    fig.subplots_adjust(left=0.08, right=0.90, top=0.80, bottom=0.16)
+    style_axis(ax)
+    ax.plot(fresh.index, fresh["TV Show"], color=ACCENT, marker="o", linewidth=2.4, label="TV shows")
+    ax.plot(fresh.index, fresh["Movie"], color=SECONDARY, marker="o", linewidth=2.1, label="Movies")
+    ax.set_xlim(2015, 2021.8)
+    ax.set_ylim(0, 100)
+    ax.set_xticks(range(2015, 2022))
+    ax.set_ylabel("Same-year acquisitions (%)")
+    for content_type, color in [("TV Show", ACCENT), ("Movie", SECONDARY)]:
+        ax.annotate(f"{fresh.loc[2021, content_type]:.0f}%", (2021, fresh.loc[2021, content_type]),
+                    xytext=(8, 0), textcoords="offset points", va="center", color=color, fontweight="bold")
+    add_header(fig, "US TV additions grew fresher as movies shifted to the library",
+               "Share of US titles added in their release year, 2015 to 2021; freshness is not content quality")
+    add_source(fig, "Netflix Movies and TV Shows dataset by Shivam Bansal; Kaggle snapshot preserved via Zenodo")
+    fig.savefig(OUT / "netflix-beat01.png", dpi=DPI, facecolor=fig.get_facecolor())
+    plt.close(fig)
+
+    clustered = data.dropna(subset=["year_added", "acquisition_lag"]).copy().reset_index(drop=True)
+    top_genres = clustered["listed_in"].str.split(", ").explode().value_counts().head(15).index.tolist()
+    genre_columns = []
+    for genre in top_genres:
+        safe = genre.replace(" ", "_").replace("&", "and").replace("'", "")
+        column = f"g_{safe}"
+        clustered[column] = clustered["listed_in"].str.contains(genre, regex=False).fillna(False).astype(int)
+        genre_columns.append(column)
+    for column, encoded in [("type", "type_enc"), ("rating_tier", "rating_enc"), ("lag_bucket", "lag_enc")]:
+        clustered[encoded] = LabelEncoder().fit_transform(clustered[column])
+    features = genre_columns + ["type_enc", "rating_enc", "lag_enc"]
+    scaled = StandardScaler().fit_transform(clustered[features].values.astype(float))
+    clustered["cluster"] = KMeans(n_clusters=5, random_state=42, n_init=10).fit_predict(scaled)
+    dominant_genres = {}
+    for cluster_id in range(5):
+        block = clustered[clustered["cluster"] == cluster_id]
+        counts = pd.Series({g: block["listed_in"].str.contains(g, regex=False).sum() for g in top_genres})
+        dominant_genres[cluster_id] = counts.sort_values(ascending=False).index.tolist()[:2]
+    assert set(dominant_genres[0]) == {"International Movies", "Dramas"}
+    assert dominant_genres[2][0] == "Documentaries"
+    assert dominant_genres[3][0] == "Children & Family Movies"
+    labels = {0: "International drama", 2: "Documentaries", 3: "Children and family"}
+    us_movies = clustered[(clustered["country_bucket"] == "US")
+                          & clustered["year_added"].between(2015, 2021)
+                          & clustered["type"].eq("Movie")].copy()
+    us_movies["deep_library"] = us_movies["acquisition_lag"] > 5
+    us_movies["period"] = np.where(us_movies["year_added"] <= 2017, "2015 to 2017", "2018 to 2021")
+    us_movies["group"] = us_movies["cluster"].map(labels)
+    library = us_movies[us_movies["group"].notna()].groupby(["group", "period"])["deep_library"].mean().unstack() * 100
+    changes = library["2018 to 2021"] - library["2015 to 2017"]
+    assert round(library.loc["International drama", "2015 to 2017"], 1) == 5.5
+    assert round(library.loc["International drama", "2018 to 2021"], 1) == 47.4
+    assert round(library.loc["Children and family", "2015 to 2017"], 1) == 16.4
+    assert round(library.loc["Children and family", "2018 to 2021"], 1) == 48.0
+    plot_labels = ["International drama", "Children and family", "Documentaries"]
+    plot_values = [changes[label] for label in plot_labels]
+    fig, ax = plt.subplots(figsize=(9, 5.5), facecolor=CANVAS)
+    style_figure(fig)
+    style_axis(ax, grid_axis="x")
+    fig.subplots_adjust(left=0.27, right=0.91, top=0.80, bottom=0.16)
+    colors = [ACCENT if value >= 0 else MUTED for value in plot_values]
+    bars = ax.barh(plot_labels, plot_values, color=colors, height=0.58)
+    ax.axvline(0, color=BORDER, linewidth=1)
+    for bar, value in zip(bars, plot_values):
+        offset = 0.6 if value >= 0 else -0.6
+        ax.text(value + offset, bar.get_y() + bar.get_height() / 2, f"{value:+.1f} pp",
+                va="center", ha="left" if value >= 0 else "right", color=INK, fontsize=9)
+    ax.set_xlim(-10, 50)
+    ax.set_xlabel("Change in deep-library share (percentage points)")
+    ax.invert_yaxis()
+    add_header(fig, "Deep-library share rose most in drama and family films",
+               "US movie additions; acquisition lag over 5 years, comparing 2015 to 2017 with 2018 to 2021")
+    add_source(fig, "Netflix Movies and TV Shows dataset by Shivam Bansal; KMeans segment labels use dominant genre")
+    fig.savefig(OUT / "netflix-beat03.png", dpi=DPI, facecolor=fig.get_facecolor())
+    plt.close(fig)
+
+    uk = data[data["country_bucket"].eq("UK")].copy()
+    uk["completeness"] = uk[["director", "cast", "country"]].notna().sum(axis=1) / 3
+    uk["is_sparse"] = uk["completeness"] < 0.34
+    vintage_order = ["Pre-2000s", "2000s", "2010s", "2020s"]
+    uk["vintage_label"] = pd.cut(
+        uk["release_year"], bins=[0, 1999, 2009, 2019, 2030], labels=vintage_order
+    )
+    sparse = uk.groupby("vintage_label")["is_sparse"].agg(["mean", "size"]).reindex(vintage_order)
+    assert int(sparse.loc["2020s", "size"]) == 86 and round(sparse.loc["2020s", "mean"] * 100, 1) == 12.8
+    assert round(sparse.loc["2010s", "mean"] * 100, 1) == 6.3
+    fig, ax = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
+    style_figure(fig)
+    fig.subplots_adjust(left=0.08, right=0.96, top=0.80, bottom=0.16)
+    style_axis(ax)
+    x = np.arange(len(vintage_order))
+    values = sparse["mean"].to_numpy() * 100
+    ax.plot(x, values, color=HIGHLIGHT, marker="o", markersize=7, linewidth=2.5)
+    for index, value in enumerate(values):
+        ax.annotate(f"{value:.1f}%", (index, value), xytext=(0, 10), textcoords="offset points",
+                    ha="center", color=INK, fontweight="bold")
+    ax.set_xticks(x, vintage_order)
+    ax.set_ylim(0, max(values) + 5)
+    ax.set_ylabel("Titles with sparse core metadata (%)")
+    add_header(fig, "Sparse metadata rose for newer UK releases",
+               "Release vintage; sparse means at least 2 of director, cast, and country are missing")
+    add_source(fig, "Netflix Movies and TV Shows dataset by Shivam Bansal; 86 UK titles released in the 2020s")
+    fig.savefig(OUT / "netflix-beat05.png", dpi=DPI, facecolor=fig.get_facecolor())
+    plt.close(fig)
+
+    movies_us = us[us["type"].eq("Movie")].copy()
+    def lag_band(value: float) -> str:
+        if pd.isna(value):
+            return "Unknown"
+        if value == 0:
+            return "Fresh (0)"
+        if value <= 2:
+            return "Recent (1 to 2)"
+        if value <= 5:
+            return "Mid (3 to 5)"
+        return "Library (6+)"
+    movies_us["lag_band"] = movies_us["acquisition_lag"].map(lag_band)
+    bands = ["Fresh (0)", "Recent (1 to 2)", "Mid (3 to 5)", "Library (6+)", "Unknown"]
+    lag_mix = movies_us.groupby(["year_added", "lag_band"]).size().unstack(fill_value=0).reindex(columns=bands, fill_value=0)
+    lag_share = lag_mix.div(lag_mix.sum(axis=1), axis=0) * 100
+    assert round(lag_share.loc[2015, "Library (6+)"]) == 0
+    assert round(lag_share.loc[2021, "Library (6+)"]) == 65
+    fig, ax = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
+    style_figure(fig)
+    fig.subplots_adjust(left=0.08, right=0.97, top=0.80, bottom=0.16)
+    style_axis(ax)
+    palette = {"Fresh (0)": BORDER, "Recent (1 to 2)": SECONDARY, "Mid (3 to 5)": MUTED,
+               "Library (6+)": ACCENT, "Unknown": WARNING}
+    bottom = np.zeros(len(lag_share))
+    for band in bands:
+        values = lag_share[band].to_numpy()
+        ax.bar(lag_share.index, values, bottom=bottom, width=0.72, color=palette[band], label=band)
+        if band == "Library (6+)":
+            for index, value in enumerate(values):
+                if value >= 8:
+                    ax.text(lag_share.index[index], bottom[index] + value / 2, f"{value:.0f}%",
+                            ha="center", va="center", color=PAPER, fontsize=8, fontweight="bold")
+        bottom += values
+    ax.set_ylim(0, 100)
+    ax.set_xticks(lag_share.index)
+    ax.set_ylabel("Share of US movie additions (%)")
+    ax.legend(frameon=False, ncols=5, loc="upper center", bbox_to_anchor=(0.5, -0.13), fontsize=8, labelcolor=INK)
+    add_header(fig, "Deep-library movies made up a growing share of US additions",
+               "Acquisition lag by year added, 2015 to 2021; deep library means more than five years")
+    add_source(fig, "Netflix Movies and TV Shows dataset by Shivam Bansal")
+    fig.savefig(OUT / "netflix-beat02.png", dpi=DPI, facecolor=fig.get_facecolor())
+    plt.close(fig)
+
+    movie_directors = data[(data["type"].eq("Movie")) & data["director"].notna()].merge(
+        clustered[["show_id", "cluster"]], on="show_id", how="inner"
+    )
+    movie_directors["group"] = movie_directors["cluster"].map(labels)
+    base_share = movie_directors["group"].value_counts(normalize=True) * 100
+    director_counts = movie_directors.groupby("director").size()
+    top_directors = director_counts.nlargest(50).index
+    top_share = movie_directors[movie_directors["director"].isin(top_directors)]["group"].value_counts(normalize=True) * 100
+    compare = pd.DataFrame({"All attributed movies": base_share, "Top 50 directors": top_share}).fillna(0)
+    groups = ["International drama", "Documentaries", "Children and family"]
+    compare = compare.reindex(groups)
+    assert len(movie_directors) == 5_941 and int(movie_directors["director"].nunique()) > 50
+    assert round(compare.loc["Documentaries", "All attributed movies"], 1) == 13.4
+    assert round(compare.loc["Documentaries", "Top 50 directors"], 1) == 1.4
+    y = np.arange(len(groups))
+    height = 0.34
+    fig, ax = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
+    style_figure(fig)
+    style_axis(ax, grid_axis="x")
+    fig.subplots_adjust(left=0.22, right=0.95, top=0.80, bottom=0.16)
+    bars_a = ax.barh(y - height / 2, compare["All attributed movies"], height, color=ACCENT, label="All attributed movies")
+    bars_b = ax.barh(y + height / 2, compare["Top 50 directors"], height, color=SECONDARY, label="Top 50 directors")
+    for bars in (bars_a, bars_b):
+        for bar in bars:
+            ax.text(bar.get_width() + 1, bar.get_y() + bar.get_height() / 2, f"{bar.get_width():.1f}%",
+                    va="center", color=INK, fontsize=8)
+    ax.set_yticks(y, groups)
+    ax.invert_yaxis()
+    ax.set_xlim(0, 100)
+    ax.set_xlabel("Share of movie titles with a recorded director (%)")
+    ax.legend(frameon=False, loc="lower right", labelcolor=INK, fontsize=9)
+    add_header(fig, "Top directors contributed fewer documentaries than the catalog mix",
+               "5,941 movies have a recorded director; the top 50 directors account for 421 titles")
+    add_source(fig, "Netflix Movies and TV Shows dataset; director concentration is descriptive")
+    fig.savefig(OUT / "netflix-beat04.png", dpi=DPI, facecolor=fig.get_facecolor())
+    plt.close(fig)
+
+    tv = data[(data["type"].eq("TV Show")) & data["duration"].notna()].copy()
+    tv["seasons"] = pd.to_numeric(tv["duration"].str.extract(r"(\d+)")[0], errors="coerce")
+    tv["one_season"] = tv["seasons"].eq(1)
+    tv["cohort"] = np.where(tv["year_added"].between(2015, 2018), "2015 to 2018",
+                            np.where(tv["year_added"].eq(2021), "2021", "Exclude"))
+    tv["region"] = np.where(tv["country_bucket"].eq("US"), "US",
+                           np.where(tv["country_bucket"].isin(["Unknown", "Multiple"]), "Exclude", "International"))
+    tv = tv[(tv["cohort"] != "Exclude") & (tv["region"] != "Exclude")]
+    season_share = tv.groupby(["cohort", "region"])["one_season"].agg(["mean", "size"]).unstack("region")
+    assert round(season_share.loc["2015 to 2018", ("mean", "International")] * 100, 1) == 76.6
+    assert round(season_share.loc["2021", ("mean", "International")] * 100, 1) == 49.5
+    fig, ax = plt.subplots(figsize=(8, 5), facecolor=CANVAS)
+    style_figure(fig)
+    style_axis(ax)
+    fig.subplots_adjust(left=0.13, right=0.96, top=0.80, bottom=0.18)
+    x = np.arange(2)
+    width = 0.32
+    regions = ["US", "International"]
+    for offset, region, color in [(-width / 2, "US", ACCENT), (width / 2, "International", SECONDARY)]:
+        values = season_share.loc[["2015 to 2018", "2021"], ("mean", region)].to_numpy() * 100
+        counts = season_share.loc[["2015 to 2018", "2021"], ("size", region)].to_numpy()
+        bars = ax.bar(x + offset, values, width, label=region, color=color)
+        for bar, value in zip(bars, values):
+            ax.text(bar.get_x() + bar.get_width() / 2, value + 2, f"{value:.1f}%",
+                    ha="center", color=INK, fontsize=8)
+    ax.set_xticks(x, ["2015 to 2018", "2021"])
+    ax.set_ylim(0, 100)
+    ax.set_ylabel("One-season share of TV shows (%)")
+    ax.legend(frameon=False, ncols=2, loc="upper right", labelcolor=INK, fontsize=9)
+    add_header(fig, "One-season TV share fell in both regions",
+               "Share of TV additions with one season in two cohorts; catalog length is not completion or viewing")
+    add_source(fig, "Netflix Movies and TV Shows dataset by Shivam Bansal")
+    fig.savefig(OUT / "netflix-beat06.png", dpi=DPI, facecolor=fig.get_facecolor())
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     tasks = {
         "airbnb": save_airbnb_charts,
@@ -826,6 +1151,7 @@ if __name__ == "__main__":
         "fake-job": save_fake_job_model_comparison,
         "happiness": save_happiness_charts,
         "jolts": save_jolts_signals,
+        "netflix": save_netflix_charts,
         "sec": save_sec_charts,
         "taxi": save_taxi_completed_trips,
         "retail": save_retail_charts,

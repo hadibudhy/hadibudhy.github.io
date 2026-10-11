@@ -1,13 +1,13 @@
 # Portfolio case study inventory and review
 
-The repository has 35 current Next.js project articles and four archived Jekyll posts. Across all 39 content files there are 91 unique referenced visual assets; the legacy posts duplicate current assets. Published state and routes were preserved.
+The repository has 35 current Next.js project articles and four archived Jekyll posts. Across all 39 content files, 92 unique image assets are referenced. One is the decorative MDS teaser; the other 91 are chart or diagram assets. The legacy posts duplicate current chart assets. Published state and routes were preserved.
 
 ## Case study inventory
 
 | Record | State | Business problem in source | Visuals | Text change | Visual review |
 |---|---|---|---:|---|---|
-| Making Customer Value Metrics Easier to Trust (2026-01-25-mds-project.md) | Draft | A manual customer value calculation was difficult to review, test, and reuse. | 1 | No story-text edit in this revision | Reviewed; assets shared with other records |
-| Netflix: Why Older Movies Can Support Growth (2026-05-03-netflix-content-strategy.md) | Draft | A falling overall freshness measure made it unclear whether Netflix was weakening the catalog or building different roles for shows and movies. | 3 | No story-text edit in this revision | Reviewed; source-missing retained: netflix-beat01.png, netflix-beat03.png, netflix-beat05.png |
+| Making Customer Value Metrics Easier to Trust (2026-01-25-mds-project.md) | Draft | A manual customer value calculation was difficult to review, test, and reuse. | 1 | No story-text edit in this revision | Decorative legacy teaser reviewed and retained |
+| Netflix: Why Older Movies Can Support Growth (2026-05-03-netflix-content-strategy.md) | Draft | A falling overall freshness measure made it unclear whether Netflix was weakening the catalog or building different roles for shows and movies. | 3 | Recomputed freshness, cluster labels, and UK release-vintage metadata from source | 3 visual asset(s) regenerated/restyled |
 | Detecting Fake Job Posts Before They Reach Job Seekers (2026-05-10-fake-job-detection.md) | Draft | Fake job posts were rare, so a system could appear accurate while missing every scam. | 4 | No story-text edit in this revision | Reviewed; source-missing retained: fake-job-keywords.png, fake-job-shap.png, fake-job-threshold-cv.png |
 | What 14 Years of Happiness Data Really Shows (2026-05-10-world-happiness-report.md) | Draft | Single-year rankings obscure how happiness changes across countries and over time. | 5 | Corrected group-gap and correlation rounding to the workbook | 5 visual asset(s) regenerated/restyled |
 | NYC Restaurant Inspections: Where Quality Risk Needs Attention (2026-08-13-restaurant-quality-strategy.md) | Draft | Restaurant inspection records were detailed but repeated across violations, making it difficult to compare quality risk fairly. | 3 | No story-text edit in this revision | 3 visual asset(s) regenerated/restyled |
@@ -52,18 +52,20 @@ The repository has 35 current Next.js project articles and four archived Jekyll 
 - **World happiness:** verified the balanced 129-country panel against the 2026 workbook. Corrected the social-support group gap to 0.83 points, social-support correlation to 0.70, and generosity correlation to 0.04.
 - **NYC taxi operations:** corrected the chart filter to January 2025 pickups with positive trip distance and total amount and durations from 1 to 120 minutes. The checks reproduce 3,312,701 trips, 241,585 at 18:00, 2,962,526 Manhattan pickups, and 133,337 JFK pickups. Corrected JFK total amount from $81.11 to $81.10 and clarified that the amount is not driver profit.
 - **Airfare pricing:** updated the comparison to official 2024 and 2025 BTS annual releases: current-dollar fares of $384 and $387, and the 2024 inflation-adjusted comparison of $394. The article notes the sampling change in the 2025 annual result.
-- Story text changes were limited to these four articles. Other article copy was not changed in this chart revision.
+- **Netflix content strategy:** restored the 8,807-row source snapshot locally from Zenodo, checked its MD5 against the preserved record, and re-derived the same-year acquisition trend, movie-cluster changes, and UK release-vintage metadata rates. Corrected the article to describe the cluster labels and sparse fields actually measured.
+- Story text changes were limited to these five articles. Other article copy was not changed in this chart revision.
 
 ## Visual system and validation
 
 - Shared palette, typography, layout, source line, and evidence-boundary rules are in `CHART_STYLE_GUIDE.md`.
-- 84 visuals were regenerated from available source files or restyled from existing analysis outputs. Data assertions cover available source files.
-- `/images/portfolio-nyc311-metrics.svg` was visually reviewed and retained because it already follows the light palette and separates observed, derived, and unavailable measures.
-- Six draft images remain unchanged because the target repository lacks the underlying data or saved model outputs: three Fake Job model diagnostics and three Netflix catalog charts. The Netflix script README confirms its raw catalog dataset is not included. They were visually reviewed and are recorded as unresolved; their values were not inferred from pixels.
+- 87 referenced charts and diagrams were regenerated from available sources or restyled from existing analysis outputs. Eleven additional unreferenced chart assets were refreshed. Data assertions cover available source files.
+- `/images/portfolio-nyc311-metrics.svg` was reviewed and retained because its light palette and observed, derived, and unavailable metric groups already fit the shared system. The MDS image is a decorative legacy teaser, not a data chart.
+- The public image directory contains 109 files. All 92 image references across the 39 content files were included in the atlas, and the remaining 17 unreferenced assets were also reviewed. Unreferenced charts refreshed include the credit-exposure, monthly HVFHV, JOLTS, alternate happiness, Netflix, and campaign-holdout visuals.
+- Five Fake Job charts remain unchanged because their exact model outputs are not present in this repository: `fake-job-keywords.png`, `fake-job-shap.png`, `fake-job-threshold-cv.png`, `fake-job-model-comparison.png`, and `fake-job-confusion-matrices.png`. They were visually reviewed and are recorded as unresolved; their values were not inferred from pixels. Four other unreferenced files are portraits, a waterfront image, or a formula illustration.
 - Published evidence manifests were updated and `python scripts/verify_published_evidence.py` reports 7 verified projects. `npm run lint`, `npm run build`, and Python generator syntax checks pass.
-- Browser QA loaded all seven public detail routes at 1440px and 375px. Each route had three loaded charts with alt text, no page-level horizontal overflow, and keyboard-focusable mobile scroll regions. Internal links on those pages returned no errors. Full-page screenshots and an atlas for all 91 referenced assets are in `visual-tests/actual/`.
-- No em dash characters remain in the repository text files scanned for this task. No raw files under `analysis_data/raw` were modified.
+- Browser QA loaded all seven public detail routes at 1440px and 375px. Each route had three loaded charts with alt text, no page-level horizontal overflow, and keyboard-focusable mobile scroll regions. Internal links on those pages returned no errors. Full-page screenshots and a 10-sheet atlas for all 109 public image files are in `visual-tests/actual/`.
+- No em dash characters remain in the repository text files scanned for this task. No original source files under `analysis_data/raw` were overwritten; the Netflix snapshot was added locally and hash-checked.
 
 ## Remaining source gaps
 
-The six source-missing draft images should only be regenerated after the corresponding raw data and model output artifacts are restored. The active website does not publish these drafts.
+The five source-missing Fake Job model charts should only be regenerated after the exact model outputs and required model dependency are restored. The three referenced charts are on an unpublished draft; the other two are unused legacy outputs.

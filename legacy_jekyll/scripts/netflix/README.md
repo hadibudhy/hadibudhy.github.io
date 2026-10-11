@@ -1,34 +1,11 @@
-# Netflix Content Strategy - Analysis Scripts
+# Netflix Content Strategy analysis scripts
 
-Python scripts for the [Netflix Content Strategy case study](https://hadibudhy.github.io/product%20analytics/netflix-content-strategy/).
+The current article uses the 8,807-title Netflix Movies and TV Shows dataset by Shivam Bansal. Download the source file from the [Zenodo snapshot](https://zenodo.org/records/13925131) or the [original Kaggle dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows) and save it as `analysis_data/raw/netflix_titles.csv`. The expected MD5 is `0bc7e8d9621caab0a32f46d054faca7f`. Raw data is excluded from Git by the repository ignore rules.
 
-## Data
-
-Source: `netflix_titles.csv` (public Kaggle dataset - 8,807 titles, 2008–2021).
-
-The raw CSV is not included. Download it from [Kaggle](https://www.kaggle.com/datasets/shivamb/netflix-shows) and place it at `data/netflix_titles.csv`.
-
-## Scripts
-
-| Script | Description |
-|--------|-------------|
-| `phase0_clean.py` | Data cleaning - acquisition lag engineering, country bucketing, metadata completeness tiers |
-| `phase2b_cluster.py` | K-Means clustering - 5 content clusters by type, language, and genre features |
-| `validation_script.py` | 4-layer validation - structural, logical, business rules, Simpson's Paradox checks |
-| `generate_charts.py` | Chart generation - all 6 presentation-ready charts (dark theme, SWD style) |
-| `chart_helpers.py` | Chart style helpers - `hadi_dark()`, `highlight_bar()`, `highlight_line()`, `action_title()` |
-
-## Setup
+Regenerate the three chart assets referenced by the current article with:
 
 ```bash
-pip install pandas numpy matplotlib scikit-learn pyarrow
+python scripts/generate_chart_replacements.py netflix
 ```
 
-## Run order
-
-```bash
-python phase0_clean.py          # outputs: working/netflix/clean_df.parquet
-python phase2b_cluster.py       # outputs: working/netflix/cluster_data.csv
-python validation_script.py     # outputs: validation report
-python generate_charts.py       # outputs: outputs/charts/beat_01-06.png
-```
+The chart generator verifies the source hash and asserts the article's key same-year acquisition, movie-cluster, and UK metadata figures. The older scripts in this folder document the historical pipeline; they expect intermediate files from that archived workflow.
