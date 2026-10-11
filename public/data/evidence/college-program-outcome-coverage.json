@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 2,
+  "caseId": "college-program-outcome-coverage",
+  "status": "verified",
+  "source": {
+    "name": "College Scorecard Most Recent Cohorts: Field of Study",
+    "url": "https://collegescorecard.ed.gov/data/",
+    "publisher": "U.S. Department of Education",
+    "accessed": "2026-10-12",
+    "releaseDate": "2026-06-10",
+    "grain": "institution system, four-digit CIP field, and credential level",
+    "rows": 227980,
+    "sha256": "9c4339d65f0699a60d6078fe54fc3bf03fded30a65079222d9221952b8578165",
+    "publicDataOnly": true,
+    "mutableSource": true
+  },
+  "validation": {
+    "checks": [
+      "source ZIP SHA-256 verified against the checked June 10, 2026 snapshot",
+      "227,980 source rows reduced to 217,369 OPEID6, field, and credential records",
+      "repeated branch rows have matching earnings and debt values before deduplication",
+      "domestic bachelor's coverage is 25,283 reported of 67,212 distinct program records",
+      "earnings reporting rates recomputed separately for public, nonprofit, and for-profit programs",
+      "every unreported domestic bachelor's earnings cell is source-coded PS",
+      "privacy-suppressed cells remain missing and are not imputed",
+      "all three charts regenerate from the hash-checked local snapshot"
+    ]
+  },
+  "artifacts": [
+    "/images/college-scorecard-earnings-coverage-credential.png",
+    "/images/college-scorecard-earnings-coverage-control.png",
+    "/images/college-scorecard-branch-deduplication.png"
+  ],
+  "artifactHashes": {
+    "/images/college-scorecard-earnings-coverage-credential.png": "a7b2fc88a8aa58c95425ba02246a63c0c49cb5c0116526beb920461d305b5b40",
+    "/images/college-scorecard-earnings-coverage-control.png": "1552fe1c2a92acf5276e1ec77900f5a752f0430b57ad8d30c88b24551e30af27",
+    "/images/college-scorecard-branch-deduplication.png": "d20f93b25a8f40e60934e67903b4fc985a8493f53d8bde355f973a9aa832c5b5"
+  },
+  "evidenceBoundary": "College Scorecard earnings cover Title IV aid recipients who worked and were not enrolled in the measurement year. Program-level medians are descriptive, privacy-suppressed cells are not zero, and different coverage rates make unqualified rankings unsafe."
+}

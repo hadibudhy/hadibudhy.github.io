@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "caseId": "commercial-electricity-costs",
+  "status": "verified",
+  "source": {
+    "name": "Electric power sales and revenue by state and sector, monthly",
+    "url": "https://www.eia.gov/electricity/data/eia861m/index.php",
+    "publisher": "U.S. Energy Information Administration",
+    "accessed": "2026-10-12",
+    "grain": "state-month-sector record",
+    "period": "2019-01 through 2025-12",
+    "rows": 5208,
+    "sha256": "a4214c6405861c1fee3f7eaa074c14354374a8d64ce4e5a415c52a59f4c356f0",
+    "publicDataOnly": true,
+    "mutableSource": true
+  },
+  "validation": {
+    "checks": [
+      "complete 2019-2025 EIA snapshot has 5,208 unique state-month records",
+      "51 state and DC series each contain all 84 months",
+      "annual prices recomputed as 100 times summed revenue divided by summed sales",
+      "the U.S. aggregate rose from 10.68 to 13.41 cents per kWh, a 25.6% nominal increase",
+      "state comparisons exclude EIA census regions and the U.S. aggregate row",
+      "all three charts regenerate from the hash-checked local snapshot"
+    ]
+  },
+  "artifacts": [
+    "/images/commercial-electricity-price-trend.png",
+    "/images/commercial-electricity-state-priorities.png",
+    "/images/commercial-electricity-top-state-rates.png"
+  ],
+  "artifactHashes": {
+    "/images/commercial-electricity-price-trend.png": "f0651c78fbd9843fae19e55063ff22e25e8cc7c12c7ebb06c4802619f6c7682d",
+    "/images/commercial-electricity-state-priorities.png": "fc7639173421eac446dcdcc234a5deb698f134995d9d51a64a6c2513e6008d78",
+    "/images/commercial-electricity-top-state-rates.png": "a3580c09b91c1ebefe7b6a984e081b22d92a2bf6da9b7575937182188af4e6a5"
+  },
+  "evidenceBoundary": "EIA average retail prices include utility revenue from delivered electricity, but do not show an individual site's tariff, load profile, contract price, itemized charges, or realized cost savings."
+}
