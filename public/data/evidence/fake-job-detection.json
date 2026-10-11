@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 2,
+  "caseId": "fake-job-detection",
+  "status": "verified",
+  "source": {
+    "name": "Employment Scam Aegean Dataset (EMSCAD)",
+    "url": "https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobposting-prediction",
+    "publisher": "University of the Aegean dataset, distributed through Kaggle",
+    "accessed": "2026-10-12",
+    "grain": "one job posting",
+    "publicDataOnly": true,
+    "rows": 17880,
+    "fraudulentRows": 866,
+    "period": "2012 to 2014",
+    "sha256": "59253295129d8b6a27607f9904f7d4ddf4dbb0ee35e079c7eb51b58b5e62bf60",
+    "md5": "10d9f3cf4faa78f8ce0932c5ec333c39"
+  },
+  "validation": {
+    "checks": [
+      "source SHA-256 and MD5 match the checked EMSCAD snapshot",
+      "17,880 postings and 866 fraudulent labels",
+      "stratified random 80/20 split yields 3,576 test posts, including 173 fake posts",
+      "tuned sentence model threshold 0.10: F1 0.850, recall 0.751, precision 0.98",
+      "five-fold mean F1 0.8251 and standard deviation 0.0208",
+      "five-fold mean ROC-AUC 0.9859 and standard deviation 0.0030",
+      "precision-recall, threshold, keyword, and SHAP charts regenerated from the fixed-seed run"
+    ],
+    "evaluation": "random stratified split, not a time-based holdout"
+  },
+  "artifacts": [
+    "/images/fake-job-all-models.png",
+    "/images/fake-job-threshold-cv.png",
+    "/images/fake-job-keywords.png",
+    "/images/fake-job-shap.png"
+  ],
+  "artifactHashes": {
+    "/images/fake-job-all-models.png": "28d4534b3886c3ade96a1a108c8e71acd431604a5f1767aec666c992ad29ead0",
+    "/images/fake-job-threshold-cv.png": "71bddb6f5f1a318541f8a37c3d2e3cd0826b9c62a0441b497d3b3d4bc1d611b6",
+    "/images/fake-job-keywords.png": "576c0f857ef9aa4c1630495b4d7d420be75e0ec56b165f47f8e048432a3cc612",
+    "/images/fake-job-shap.png": "59e86d4edb6340fd62473ed91dd203fcc1dea61d56b021d5e191f9ab0b3339fd"
+  },
+  "evidenceBoundary": "Historical labeled postings support offline model comparison only. They do not establish current scam prevalence, production precision/recall, fairness, job seeker outcomes, or performance on future scam language."
+}

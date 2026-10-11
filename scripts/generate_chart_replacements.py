@@ -87,39 +87,6 @@ def annual_microsoft_metrics() -> dict[str, dict[str, float]]:
     return output
 
 
-def save_fake_job_model_comparison() -> None:
-    labels = ["Text model\n(Logistic regression)", "Profile details\n(LightGBM)", "Combined model\n(default)", "Combined model\n(tuned threshold)"]
-    f1 = [0.819, 0.828, 0.831, 0.850]
-    recall = [0.913, 0.723, 0.711, 0.751]
-    pr_auc = [0.927, 0.915, 0.901, 0.901]
-    x = np.arange(len(labels))
-    width = 0.24
-
-    fig, ax = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
-    style_figure(fig)
-    fig.subplots_adjust(top=0.80, bottom=0.19, left=0.09, right=0.97)
-    style_axis(ax)
-    bars = [
-        ax.bar(x - width, f1, width, label="F1", color=ACCENT),
-        ax.bar(x, recall, width, label="Recall", color=SECONDARY),
-        ax.bar(x + width, pr_auc, width, label="PR-AUC", color=HIGHLIGHT),
-    ]
-    for group in bars:
-        for bar in group:
-            ax.annotate(f"{bar.get_height():.3f}", (bar.get_x() + bar.get_width() / 2, bar.get_height()),
-                        xytext=(0, 5), textcoords="offset points", ha="center", va="bottom",
-                        color=INK, fontsize=9, fontweight="bold")
-    add_header(fig, "Text features catch more scams; the tuned model has the highest F1",
-               "Employment Scam Aegean held-out test set, 17,880 labeled posts; higher scores are better")
-    ax.set_ylabel("Model score")
-    ax.set_ylim(0, 1.05)
-    ax.set_xticks(x, labels)
-    ax.legend(frameon=False, ncols=3, loc="upper left", labelcolor=INK, fontsize=9)
-    add_source(fig, "Employment Scam Aegean Dataset; held-out test metrics")
-    fig.savefig(OUT / "fake-job-all-models.png", dpi=DPI, facecolor=fig.get_facecolor())
-    plt.close(fig)
-
-
 def save_jolts_signals() -> None:
     source = ROOT / "analysis_data" / "raw" / "bls_jolts_2025.json"
     require_source_snapshot(source)
@@ -1148,7 +1115,6 @@ if __name__ == "__main__":
         "bank": save_bank_marketing_charts,
         "clickstream": save_clickstream_charts,
         "credit": save_credit_default_chart,
-        "fake-job": save_fake_job_model_comparison,
         "happiness": save_happiness_charts,
         "jolts": save_jolts_signals,
         "netflix": save_netflix_charts,

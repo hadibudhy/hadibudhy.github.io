@@ -2,7 +2,7 @@
 
 ## Published pages
 
-The seven published case studies were opened from the local static export at desktop (1440px) and mobile (375px) widths. The 14 full-page screenshots are in `visual-tests/actual/`.
+The portfolio has 10 published case-study routes. The seven established pages were previously captured at desktop (1440px) and mobile (375px) widths; their full-page screenshots remain in `visual-tests/actual/`. The three newly published legacy analyses were opened from the local static export at desktop and mobile widths during this revision.
 
 | Published route | Desktop | Mobile | Charts |
 |---|---|---|---:|
@@ -13,26 +13,30 @@ The seven published case studies were opened from the local static export at des
 | `/projects/marketplace-supply-demand` | Pass | Pass | 3 |
 | `/projects/campaign-incrementality` | Pass | Pass | 3 |
 | `/projects/mta-congestion-pricing-causal-audit` | Pass | Pass | 3 |
+| `/projects/2026-05-03-netflix-content-strategy` | Pass | Pass | 4 |
+| `/projects/2026-05-10-world-happiness-report` | Pass | Pass | 5 |
+| `/projects/2026-05-10-fake-job-detection` | Pass | Pass | 4 |
 
-All renders returned HTTP 200. Each page loaded its three chart images with non-empty alt text. No page-level horizontal overflow was detected. At mobile width, charts remain reachable in focusable horizontal scroll regions with an accessible scroll hint.
+All 10 routes are generated in the static export. Browser inspection confirmed the three newly published pages render their Problem, Hypotheses, Analysis, and Result sections, with chart images carrying descriptive alt text. Their mobile headers and tag groups wrap without clipping, and their charts use focusable horizontal scroll regions with an accessible scroll hint. The project listing exposes all three new links under Completed Analyses.
 
 ## Repository-wide chart inventory
 
-The repository has 35 current Next.js project articles and four legacy Jekyll posts. Across all 39 content files there are 92 unique image references, including one decorative MDS teaser. The public image directory contains 109 image files total; the remaining 17 are unreferenced legacy or support assets. All 109 were visually reviewed in the atlas screenshots under `visual-tests/actual/`.
+The repository has 35 current Next.js project articles and four archived Jekyll posts. Across all 39 content files there are 92 unique image references, including one decorative MDS teaser. The public image directory contains 109 image files total; 17 are unreferenced legacy or support assets. The 109 files were included in the previous atlas review. The four regenerated Fake Job V2 charts were inspected individually after this revision.
 
 - 87 chart and diagram assets were regenerated from available source files or restyled from existing analysis outputs. Data assertions cover available source files.
 - Eleven unreferenced chart or diagram assets were also restyled or refreshed to keep the public image directory coherent.
-- `/images/portfolio-nyc311-metrics.svg` was reviewed and retained because its light palette and observed, derived, and unavailable metric groups already fit the shared system. The legacy MDS teaser was retained as a decorative illustration, not a data chart.
-- The Fake Job overview was restyled from the stored metric values, but the model was not rerun. Five supporting charts remain in their previous visual form because the exact source model outputs are not present in this repository: `fake-job-keywords.png`, `fake-job-shap.png`, `fake-job-threshold-cv.png`, `fake-job-model-comparison.png`, and `fake-job-confusion-matrices.png`. The first three are referenced by a draft article. All five were reviewed but not redrawn, so their original values were not altered. Four other unreferenced images are portraits, a waterfront photo, or a formula illustration.
+- `/images/portfolio-nyc311-metrics.svg` was reviewed and retained because its light palette and observed, derived, and unavailable metric groups already fit the shared system. The MDS teaser is a decorative illustration, not a data chart.
+- The published Fake Job article now uses four regenerated V2 charts, based on a rerun of the model from the recovered source snapshot. Two unused V1 charts remain as unreferenced legacy assets: `fake-job-model-comparison.png` and `fake-job-confusion-matrices.png`.
 
-Airfare, Airbnb host concentration, happiness, clickstream, bank response, credit default, taxi, restaurant, JOLTS, Netflix, REES46, and the generated evidence diagrams were regenerated from available source files or official reported values. Chart source checks include the original input hashes and assertions for key reported figures. The Airbnb, happiness, taxi, Netflix, and airfare article values were corrected to match their source calculations.
+Airfare, Airbnb host concentration, happiness, clickstream, bank response, credit default, taxi, restaurant, JOLTS, Netflix, REES46, Fake Job, and the generated evidence diagrams were regenerated from available source files or official reported values. Chart source checks include original input hashes and assertions for key reported figures. The Airbnb, happiness, taxi, Netflix, Fake Job, and airfare article values were checked against their source calculations.
 
 ## Validation
 
-- `python scripts/verify_published_evidence.py`: 7 published projects verified.
+- `python scripts/verify_published_evidence.py`: 10 published projects verified.
 - `npm run lint`: passed.
-- `npm run build`: passed.
-- Python generator syntax check: passed.
-- No original source data files were overwritten. A local Netflix snapshot was added for regeneration and hash-checked; raw data remains excluded from Git.
+- `npm run build`: passed and generated all 10 published case-study routes.
+- Python syntax checks for the updated chart and Fake Job scripts: passed.
+- No U+2014 em dash characters were found in active checkout text files. Ignored nested worktrees contain their own historical copies and were left unchanged.
+- No original source data files under `analysis_data/raw` were overwritten. The Netflix, Happiness, and Fake Job source snapshots were checksum-checked locally and remain excluded from Git.
 
-See `CHART_STYLE_GUIDE.md` for the shared palette, layout rules, and evidence boundaries.
+See `CHART_STYLE_GUIDE.md` for the shared palette, layout rules, and evidence boundaries. See `PORTFOLIO_REVIEW.md` for the case-study inventory and source limitations.

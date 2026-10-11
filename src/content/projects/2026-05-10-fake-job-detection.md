@@ -6,147 +6,89 @@ tags:
   - nlp
   - classification
   - lightgbm
-  - sentence-transformers
   - imbalanced-data
-excerpt: "A fraud-detection study showing why the language in a job post is more useful than surface-level profile details."
+excerpt: "A fraud-screening study that compares text and profile signals and makes the detection versus review trade-off explicit."
 problem: "Fake job posts were rare, so a system could appear accurate while missing every scam."
-result: "The best balance caught 75% of fake posts and was correct 98% of the time when it raised an alert."
+result: "On a stratified holdout, the tuned combined model reached 75% recall and 98% precision at a 0.10 threshold; the text-only model reached 91.3% recall."
 featured: true
-published: false
+published: true
+caseId: fake-job-detection
+kind: completed
+primaryTrack: product-analytics
+displayOrder: 90
+evidenceManifest: /data/evidence/fake-job-detection.json
+evidenceVisuals:
+  - /images/fake-job-all-models.png
+  - /images/fake-job-threshold-cv.png
+  - /images/fake-job-keywords.png
+  - /images/fake-job-shap.png
 header:
   teaser: /images/fake-job-all-models.png
 ---
 
 ## Executive summary
 
-**Business problem:** rare fake job posts could be missed by an apparently accurate classifier. **Decision:** how should a platform balance scam detection against manual review? **Key finding:** text signals were strongest; a tuned threshold reached 75% recall and 98% precision in the test. **Recommended action:** use text-first screening with human review and monitor drift.
+**Decision:** how should a hiring platform balance scam detection against human review capacity? **Finding:** text signals caught more fake posts than profile-only signals, and a 0.10 threshold raised the combined model's recall to 75% while keeping precision at 98% on the holdout. **Recommendation:** use text-first screening in shadow mode, keep a human review step, and monitor missed scams and false alerts.
 
-## Business context
+## Problem - high accuracy can still miss nearly every scam
 
-Fake job posts can harm both job seekers and employment platforms. Scammers may use attractive job titles to collect personal information, request fees, or impersonate real companies.
+The Employment Scam Aegean Dataset contains **17,880** postings, of which **866** are fraudulent. A classifier that always predicts “legitimate” would be about 95% accurate while catching no scams.
 
-This project uses 17,880 job postings from the Employment Scam Aegean Dataset. Only 866 posts were fraudulent, so fake posts made up about 1 in 20 records.
+The business question is: **can a platform identify suspicious posts early enough to protect job seekers without sending too many legitimate employers to review?**
 
-## Business question
+## Hypotheses - what could improve screening?
 
-Can a platform identify suspicious job posts early enough to protect users, while avoiding too many false alarms for legitimate employers?
+- **The wording may carry more signal than profile fields.** Compare a text-only model with profile-only and combined models.
+- **A 0.50 cutoff may be too conservative for a rare positive class.** Test lower cutoffs and compare recall, precision, and F1.
+- **A strong holdout result may vary across splits.** Repeat evaluation with stratified folds before recommending an operating threshold.
 
-## How I approached it
+## Analysis - what did the model comparisons show?
 
-I compared three ways to identify fraud:
+The source is the public [Employment Scam Aegean Dataset (EMSCAD)](https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobposting-prediction). The analysis uses a fixed 17,880-row source snapshot, then creates a stratified 80/20 split with **3,576** held-out posts, including **173** fake posts. I compared TF-IDF logistic regression, profile-feature LightGBM, and a sentence-embedding plus LightGBM model. These results describe this historical dataset, not a current platform.
 
-1. Read the words and phrases in the posting.
-2. Use profile details such as industry, education, or whether the company had a logo.
-3. Combine the posting's meaning with those profile details.
+### Text signals caught the most scams
 
-The goal was to compare the signals, not to choose a complex model for its own sake.
+The text-only logistic regression model had **91.3% recall** and **0.927 PR-AUC**. The tuned combined model had the highest F1 at **0.850**, while the profile-only model had weaker recall. This supports including posting text in a review process; it does not prove that these features will generalize to new scam patterns.
 
-## Why accuracy was not enough
+![Held-out EMSCAD results: the text model caught more scams, while the tuned combined model had the highest F1](/images/fake-job-all-models.png)
 
-There were about 19.6 real job posts for every fake post. A system that marked every post as real would be about 95% accurate while missing every scam.
+### Lowering the threshold increased the share of scams caught
 
-For this problem, two questions matter more:
+At the default 0.50 threshold, the combined model reached **0.831 F1** and **71.1% recall**. At **0.10**, it reached **0.850 F1**, **75.1% recall**, and **98% precision**. In this test, it caught about 130 of 173 fake posts and missed about 43. These counts are approximate because the published rates are rounded.
 
-- **Recall:** How many of the fake posts did the system catch?
-- **Precision:** When the system flagged a post, how often was it actually fake?
+![Threshold and five-fold validation: a 0.10 cutoff balances scam capture with review volume](/images/fake-job-threshold-cv.png)
 
-The F1 score combines those two measures. It helps show whether the system catches enough fraud without creating too many unnecessary reviews.
+The cutoff is an operating decision. Higher recall can protect more job seekers but may increase the review queue. The platform must decide how it values missed scams, review time, and employer friction.
 
-## Finding 1: The words in the post mattered most
+### Posting language differed between the two classes
 
-The model that used profile details without reading the post had the weakest overall F1 score. Adding the text improved performance significantly.
+Terms such as “work from home,” “data entry,” and “tax free” were more common in fake posts in this dataset. Terms associated with specific organizations, qualifications, or roles appeared more often in legitimate posts. These are associations, not proof that a phrase identifies a scam in another period.
 
-![Employment Scam Aegean Dataset, 17,880 job posts: Text-based signals outperformed profile details when identifying fake posts](/images/fake-job-all-models.png)
+![EMSCAD keyword comparison: terms associated with fake and legitimate postings differ in the labeled dataset](/images/fake-job-keywords.png)
 
-Scammers can easily add a logo, choose a credible industry, or select “full-time” as the employment type. Their wording is harder to disguise. Phrases such as “earn money from home,” “no experience needed,” and “tax free income” appeared more often in fake posts.
+### Profile and text features both influenced the combined model
 
-**Business meaning:** Content review should be part of a fraud-screening process. Surface-level profile checks alone can create a false sense of security.
+For a LightGBM model using profile and engineered text features, the largest mean absolute SHAP values were for industry, company-profile availability, required education, word count, and text length. SHAP describes model behavior; it does not show that changing a feature would change whether a job is fraudulent.
 
-## Finding 2: The decision threshold needed to be lower
+![SHAP summary for the tabular LightGBM model: profile and text-derived features both influenced predictions](/images/fake-job-shap.png)
 
-The model normally labels a post as fake when its score is above 0.50. That setting was too cautious for a problem where fake posts were rare.
+### Cross-validation showed variation across folds
 
-Testing different thresholds showed that 0.10 gave the best balance for the sentence-based model:
+Across five stratified folds, mean F1 was **0.8251** with a standard deviation of **0.0208**; mean ROC-AUC was **0.9859** with a standard deviation of **0.0030**. F1 varies more because each test fold contains relatively few fraudulent posts.
 
-- F1 increased from 0.831 to **0.850**.
-- Recall increased from 71% to **75%**.
-- Precision stayed high at **98%**.
+## Result - use the model as a review aid, not an automatic decision
 
-In plain terms, the tuned system caught about 75 of every 100 fake posts. When it flagged a post, it was correct about 98 times out of 100 in this test.
+The text-signal hypothesis was supported in this dataset. Lowering the combined model's threshold improved recall while precision stayed high on the holdout. Cross-validation showed some variation, and no live platform outcome was measured.
 
-![Held-out test set of fake job posts: The best F1 balance appeared at a 0.10 threshold, while a simpler text model caught more scams](/images/fake-job-threshold-cv.png)
+- Start with shadow scoring and human review, not automatic rejection.
+- Choose the cutoff using review capacity and the cost of missed scams.
+- Monitor recall, false alerts, review time, appeals, and performance by industry and language.
+- Recheck the model on a time-based sample because scam language and prevalence can change.
 
-The right threshold is a product decision. A platform that wants to catch more scams may accept more human reviews. A platform that wants fewer reviews may choose a stricter threshold and miss more cases.
+As a sensitivity scenario, if **100,000 future posts** had the dataset's 4.8% fraud rate, the tuned model's recall would identify roughly **3,600** fraudulent posts; the text model's recall would identify roughly **4,400**. This is not a forecast. Scam prevalence can change, and a production system needs a time-based test.
 
-## Finding 3: Fake posts used recognizable language
+## Technical notes
 
-Fake posts often used emotional or aspirational phrases such as “work from home,” “earn,” “tax free,” “typing,” and “data entry.” Some groups appeared to imitate energy companies or promise international opportunities.
+The model compares TF-IDF logistic regression, profile-feature LightGBM, and a sentence-embedding plus LightGBM model using `all-MiniLM-L6-v2`. The train/test split is random and stratified, not chronological. The dataset covers 2012 to 2014, so the reported metrics do not establish current fraud detection, fairness across groups, or production performance.
 
-Real posts were more specific about location, qualifications, and job structure. This difference gives reviewers and future models useful signals to investigate.
-
-![Employment Scam Aegean Dataset: Phrases such as work-from-home and tax-free income appeared more often in fake posts](/images/fake-job-keywords.png)
-
-## Finding 4: Profile details still added useful context
-
-Feature contribution analysis showed that industry, the presence of a company profile, required education, text length, capitalization, and exclamation marks all influenced the prediction.
-
-Having a company logo was not the strongest signal. It ranked 11th, which supports the earlier finding: a logo alone is not a reliable sign that a posting is legitimate.
-
-![Fake-job model features: Post language and profile details influenced fraud predictions, with content signals providing the strongest context](/images/fake-job-shap.png)
-
-## How stable were the results?
-
-I tested the tuned model across five different data splits. The average F1 score was **0.825 +/- 0.021**, and the average ROC-AUC was **0.986 +/- 0.003**. The results were consistent enough to support the main findings, although the F1 score varied more because each test split contained only about 173 fake posts.
-
-| Model | F1 | Recall | PR-AUC |
-|-------|----|--------|--------|
-| Logistic regression using text | 0.819 | **0.913** | **0.927** |
-| LightGBM using profile details | 0.828 | 0.723 | 0.915 |
-| Sentence model + LightGBM, default threshold | 0.831 | 0.711 | 0.901 |
-| **Sentence model + LightGBM, tuned threshold** | **0.850** | 0.751 | 0.901 |
-
-The simple text model caught the most fake posts, with 91.3% recall. The tuned combined model had the highest F1 score and very high precision. The best choice depends on whether the platform values maximum fraud detection or fewer false alarms.
-
-### What the threshold means for a review team
-
-The test split contained about **3,576 posts**, including about **173 fake posts**. Using the rounded test metrics, the tuned threshold would catch roughly **130 fake posts**, miss about **43**, and create about **3 false alerts**. These are approximate counts because the published percentages are rounded, but they make the operating trade-off easier to see:
-
-| Decision view | Tuned combined model | Simple text model |
-| --- | ---: | ---: |
-| Fake posts caught | About 130 of 173 | About 158 of 173 |
-| Fake posts missed | About 43 | About 15 |
-| Precision when flagging | About 98% | Not the selected operating point |
-| Best fit | Fewer unnecessary reviews | Maximum scam capture |
-
-**Business meaning:** the highest-F1 model is not automatically the right production choice. If protecting job seekers is the priority, the higher-recall text model may be preferable even if it sends more legitimate posts to review. The platform should choose the threshold with an explicit cost for missed scams, review capacity, and employer friction.
-
-### Opportunity scenarios and measurement
-
-As an illustration, if **100,000 future posts** had the same fraud rate as this dataset, about **4,800** would be fraudulent. Applying the tuned model's test recall would identify roughly **3,600** of them; applying the text model's recall would identify roughly **4,400**. This is a sensitivity scenario, not a forecast. Scam prevalence and language can change after launch.
-
-The rollout scorecard should include:
-
-- fake-post recall on a time-based, manually reviewed sample;
-- false-alert rate by employer and posting category;
-- review minutes per 1,000 posts;
-- appeals or removals for legitimate employers;
-- recall by language, industry, and new scam pattern; and
-- drift in the most common fraud phrases.
-
-The first release should use shadow scoring and human review. A lower threshold should be tested only when the review team can absorb the additional queue and the false-alert guardrail remains acceptable.
-
-## Recommendation
-
-Use text as the first line of screening, combine it with profile details, and set the threshold according to the cost of missed scams and manual reviews. Any production system should also keep human review in the loop and monitor how performance changes as scam language evolves.
-
-## Takeaway
-
-The strongest fraud signal was not whether a company had a logo. It was the language and structure of the job post. A practical screening system should read the content, tune its decision threshold, and make the trade-off between protection and review effort explicit.
-
-## Supporting technical detail
-
-The study compared logistic regression using TF-IDF word and phrase counts, LightGBM using 19 profile features, and a sentence-embedding model combined with LightGBM. The embedding model represented the meaning of each post in 384 dimensions. Feature contribution values were calculated on a 200-sample stratified test subset.
-
-**Dataset:** 17,880 job postings, including 866 fraudulent records. The train/test split was 80/20 and stratified by the target label.
-
-**Code and data:** [View the analysis scripts](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/legacy_jekyll/scripts/fake-job-detection)
+The source file is available from [Kaggle](https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobposting-prediction). A checksum, download path, dependencies, and run command are in [`legacy_jekyll/scripts/fake-job-detection/README.md`](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/legacy_jekyll/scripts/fake-job-detection/README.md).

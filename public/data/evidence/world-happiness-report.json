@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 2,
+  "caseId": "world-happiness-report",
+  "status": "verified",
+  "source": {
+    "name": "World Happiness Report 2026, Data for Figure 2.1",
+    "url": "https://files.worldhappiness.report/WHR26_Data_Figure_2.1.xlsx",
+    "publisher": "Wellbeing Research Centre, University of Oxford; World Happiness Report",
+    "accessed": "2026-10-11",
+    "grain": "country-year; three-year-average life evaluation and six explanatory factors",
+    "publicDataOnly": true,
+    "sha256": "576e382655cec3ae704a0b41cd2c04465b87cd84b7f131a0c4fa26d41f6d8028",
+    "period": "2011 to 2025, with 2013 unmeasured"
+  },
+  "validation": {
+    "checks": [
+      "2,116 workbook records across 168 countries and 14 measured years",
+      "129 countries present in all 14 measured years",
+      "unweighted balanced-panel mean rounds to 5.47 in 2011 and 5.74 in 2025",
+      "2011 and 2025 score ranges round to 4.8 and 6.3",
+      "2025 top 10 and bottom 10 average 7.33 and 3.36",
+      "2019 to 2025 correlations round to 0.70, 0.68, 0.66, and 0.04 for social support, GDP, health, and generosity",
+      "group gaps round to 0.83, 0.83, and 0.62 for GDP, social support, and health"
+    ]
+  },
+  "artifacts": [
+    "/images/happiness-beat01.png",
+    "/images/happiness-beat02.png",
+    "/images/happiness-beat03.png",
+    "/images/happiness-beat04.png",
+    "/images/happiness-drivers-inequality.png"
+  ],
+  "artifactHashes": {
+    "/images/happiness-beat01.png": "8e5e051704eaa8417b93a6f1627a9a48b6d58833d8d3aaa937579b3f81a3c7b3",
+    "/images/happiness-beat02.png": "512c86b4df29d2fca251dd891ca55357ff87ea27717de5563cb5ab56091a27a9",
+    "/images/happiness-beat03.png": "67b1d21a940fc29a90b2463dc087fd24efc965721e101fdf2688d7f2b762f17f",
+    "/images/happiness-beat04.png": "df2f9630c6c5e59db203e4843e2458acd147f261bbff41b64b05df195671a82a",
+    "/images/happiness-drivers-inequality.png": "04ff2cdd0770d761bace9d8f7f546cc5171f367bc02de312ba827e441b7e0c12"
+  },
+  "evidenceBoundary": "Descriptive country-level comparisons only. The balanced-panel mean is not population-weighted. Correlations and explanatory components do not identify policy effects."
+}

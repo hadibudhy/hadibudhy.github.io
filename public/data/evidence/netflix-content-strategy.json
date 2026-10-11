@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 2,
+  "caseId": "netflix-content-strategy",
+  "status": "verified",
+  "source": {
+    "name": "Netflix Movies and TV Shows dataset by Shivam Bansal",
+    "url": "https://zenodo.org/records/13925131",
+    "originalUrl": "https://www.kaggle.com/datasets/shivamb/netflix-shows",
+    "publisher": "Kaggle dataset author; Zenodo preservation snapshot",
+    "accessed": "2026-10-11",
+    "grain": "one catalog title",
+    "publicDataOnly": true,
+    "sha256": "df1f4ad2027a5a14c3a33932ef0d4054565ff88adf92b7f263601b70fdc6f3f3",
+    "md5": "0bc7e8d9621caab0a32f46d054faca7f",
+    "period": "Catalog additions through 2021"
+  },
+  "validation": {
+    "checks": [
+      "8,807 title rows and unique show_id",
+      "no duplicate title and type rows",
+      "same-year share among US additions rounds to 72.2% in 2015 and 28.1% in 2021",
+      "same-year TV share among US additions rounds to 40.0% in 2015 and 61.1% in 2021",
+      "US movie deep-library share (acquisition lag over five years) in interpreted drama and children/family clusters rounds to 5.5% and 16.4% before 2018, then 47.4% and 48.0% in 2018 to 2021",
+      "top 50 directors include 421 of 5,941 movies with recorded director; documentary share is 13.4% of all attributed movies and 1.4% in top-50 titles",
+      "UK release-vintage metadata check has 86 titles from the 2020s, with 12.8% sparse by the stated three-field rule"
+    ]
+  },
+  "artifacts": [
+    "/images/netflix-beat01.png",
+    "/images/netflix-beat03.png",
+    "/images/netflix-beat04.png",
+    "/images/netflix-beat05.png"
+  ],
+  "artifactHashes": {
+    "/images/netflix-beat01.png": "4d76d4e92f27dd47002f63dabf05a3248f671b7aeb7d78f55725ce758ec0cfd5",
+    "/images/netflix-beat03.png": "b23a6e3a6a03ebbd1f313107947dd5c1fc424b980755c3df9a269bf4c8014b55",
+    "/images/netflix-beat04.png": "86cc982d4e4e22a58359b57c46338fe2008d1f0edac4be206b1eed7d1e0bc518",
+    "/images/netflix-beat05.png": "9cf93e5a4bc919b007978a83f2481c02782ba2d96810119a90d13fcbbb3fc2d6"
+  },
+  "evidenceBoundary": "Catalog metadata and acquisition timing are not viewing, retention, title quality, licensing intent, or financial performance. Cluster names are analyst interpretations of dominant genre features. The sparse metadata indicator covers director, cast, and country only."
+}

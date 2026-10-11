@@ -3,80 +3,88 @@ title: "Netflix: Why Older Movies Can Support Growth"
 date: 2026-05-03
 categories: [product analytics]
 tags: [business-strategy, data-analysis, netflix, content-growth]
-excerpt: "A catalog analysis showing why one freshness score can hide different strategies for shows and movies."
-problem: "A falling overall freshness measure made it unclear whether Netflix was weakening the catalog or building different roles for shows and movies."
-result: "In US catalog additions from 2015 to 2021, same-year TV acquisitions rose from 40% to 61% while movies fell to 14%. Sparse core metadata was highest for UK titles released in the 2020s, at 12.8%."
-published: false
+excerpt: "A catalog analysis that separates TV and movie freshness, genre mix, director concentration, and UK metadata coverage."
+problem: "A falling freshness measure made it unclear whether Netflix was weakening the catalog or using different roles for shows and movies."
+result: "US additions became less same-year fresh overall, while TV freshness rose and movie library depth increased in selected genre clusters. The catalog data does not show viewing or customer outcomes."
+featured: false
+published: true
+caseId: netflix-content-strategy
+kind: completed
+primaryTrack: product-analytics
+displayOrder: 70
+evidenceManifest: /data/evidence/netflix-content-strategy.json
+evidenceVisuals:
+  - /images/netflix-beat01.png
+  - /images/netflix-beat03.png
+  - /images/netflix-beat04.png
+  - /images/netflix-beat05.png
 header:
-  teaser: "/images/netflix-beat01.png"
+  teaser: /images/netflix-beat01.png
 ---
 
 ## Executive summary
 
-**Business problem:** a falling freshness measure could be mistaken for a weaker catalog. **Decision:** should content investment be judged by one freshness target? **Key finding:** among US additions, same-year TV acquisitions rose while the movie share fell; UK titles in the 2020s release vintage had more sparse core metadata. **Recommended action:** use separate freshness goals and audit core metadata before launch.
+**Decision:** should Netflix use one freshness target for both TV shows and movies? **Finding:** among US additions from 2015 to 2021, same-year TV acquisitions rose while the movie share fell. Deep-library share also rose in two movie clusters. **Recommendation:** track content types separately and check metadata completeness. The catalog file does not measure viewing, retention, or licensing economics.
 
-## Business context
+## Problem - one freshness score can hide different catalog roles
 
-Netflix's US catalog additions appeared to be getting older. From 2015 to 2021, the share acquired in its release year fell from 72.2% to 28.1%. If freshness is treated as the only goal, that looks like a warning sign.
+From 2015 to 2021, the share of US catalog additions released in the same year fell from **72.2% to 28.1%**. If a team reads that single trend as a decline in catalog quality, it may miss different patterns for TV shows and movies.
 
-But a catalog is not one product. New TV shows and older movies can serve different customer needs. I reviewed the data to understand whether the overall decline in freshness represented a real problem or a change in strategy.
+The business question is: **should catalog investment be judged by one freshness target, or do TV and movies need separate goals?**
 
-## Business question
+## Hypotheses - what could explain the freshness decline?
 
-Is Netflix becoming less attractive because its catalog is older, or is the company using new shows and older movies for different purposes?
+- **The content mix may be changing.** If TV becomes fresher while movies become older, one combined measure can hide both patterns.
+- **The shift may be concentrated in selected movie groups.** Compare deep-library shares by genre cluster rather than assuming the whole movie catalog changed equally.
+- **Recent titles may have weaker metadata.** Check core catalog fields by release vintage before treating discoverability as the cause.
 
-The source is the 8,807-title [Netflix Movies and TV Shows dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows), preserved as a [Zenodo snapshot](https://zenodo.org/records/13925131). It records catalog details such as release year, date added, type, country, and listed genres. It does not contain viewing, licensing cost, or customer retention data.
+## Analysis - what did the catalog snapshot show?
 
-## How I approached it
+The analysis uses 8,807 Netflix titles from the [Movies and TV Shows dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows), with a [Zenodo preservation copy](https://zenodo.org/records/13925131). It calculates acquisition lag as year added minus release year. The freshness and genre-cluster comparisons below use US additions; the metadata check uses UK titles grouped by release decade. These are descriptive catalog measures, not business outcomes.
 
-I separated the catalog into TV shows and movies, then compared freshness by content category. I also reviewed repeat director partnerships and the completeness of content information in the UK catalog. This made it possible to look beyond one headline number and find the business decisions behind the trend.
+I owned the data checks, acquisition-lag analysis, cluster interpretation, metadata review, and decision framing. The source does not include viewing, retention, or licensing-cost outcomes.
 
-## Finding 1: TV shows became fresher while movies became older
+### TV additions became fresher while movies shifted toward older titles
 
-The two content types moved in opposite directions among US additions:
+The share of US TV additions released in the same year increased from **40.0% in 2015 to 61.1% in 2021**. The same-year share for movies fell from **84.6% to 14.0%**. The combined result therefore hides opposite movements between the two content types.
 
-- The share of TV shows added in their release year increased by 21 percentage points, from 40.0% to 61.1%.
-- Movies became older overall, which increased the depth of the library.
+![US Netflix additions from 2015 to 2021: same-year TV acquisitions rose to 61% while movies fell to 14%](/images/netflix-beat01.png)
 
-Because the analyzed US additions contain many more movies than TV shows, the combined trend can hide the difference between the two content types. The data describes catalog timing; it does not establish that movies keep attracting viewers or that Netflix intended a specific strategy.
+This supports separate freshness measures. It does not show that either trend improved viewing or retention.
 
-![US Netflix additions, 2015 to 2021: Same-year TV acquisitions rose to 61% while movies fell to 14%](/images/netflix-beat01.png)
+### Deep-library share grew most in international-drama and family clusters
 
-**Why it matters:** A single freshness target could encourage the wrong decision. Shows and movies need separate goals because they play different roles in the product.
+The analysis defines deep-library titles as having an acquisition lag over five years. From 2015 to 2017 versus 2018 to 2021, that share rose from **5.5% to 47.4%** in the international-drama cluster and from **16.4% to 48.0%** in the children-and-family cluster. The unsupervised groups are named from their strongest genre signals; they do not prove Netflix's intent.
 
-## Finding 2: The library strategy was focused
+![US movie additions from 2015 to 2021: deep-library share rose 42.0 points in international dramas and 31.6 points in children and family movies](/images/netflix-beat03.png)
 
-The deep-library share, defined here as an acquisition lag of more than five years, did not move equally across the movie groups. From the 2015 to 2017 period to 2018 to 2021:
+### The 50 most prolific directors had a different genre mix
 
-- **International-drama cluster:** deep-library titles rose from 5.5% to 47.4%, a 42.0 point increase.
-- **Children and family cluster:** deep-library titles rose from 16.4% to 48.0%, a 31.6 point increase.
+Among 5,941 movies with a recorded director, the 50 most prolific directors accounted for 421 titles. Documentaries made up **13.4%** of all attributed movies but **1.4%** of the top-50 group. Children-and-family movies made up **10.2%** of the full group and **18.1%** of the top-50 group.
 
-The cluster names are interpretations of the groups' dominant genre signals. The pattern shows older additions in those groups, but it does not prove that Netflix intentionally shifted licensing strategy or that the added titles performed well.
+![Among movies with recorded directors, the top 50 directors had fewer documentary titles than the catalog mix](/images/netflix-beat04.png)
 
-![US movie additions, 2015 to 2021: Deep-library share rose 42.0 points in international dramas and 31.6 points in children and family movies](/images/netflix-beat03.png)
+This describes the mix of titles from prolific directors. It does not measure repeat partnerships, negotiation effort, or whether a different mix performs better.
 
-## Finding 3: Documentary partnerships may be less efficient
+### Sparse core metadata was more common for recent UK release vintages
 
-Family content showed strong repeat partnerships with directors. Documentaries, however, were usually made with a new director each time.
+For titles with a UK primary country, **12.8%** of titles released in the 2020s had at least two missing values among director, cast, and country. The rate was **6.3%** for the 2010s. This uses release year, not the year a title was added. It does not measure description or genre-tag completeness.
 
-The data does not prove that repeat partnerships would improve documentary performance. It does show a possible efficiency opportunity: every new partnership requires fresh negotiations, contracts, and relationship-building.
+![UK Netflix titles by release vintage: 12.8% of 2020s releases had sparse director, cast, or country metadata](/images/netflix-beat05.png)
 
-## Finding 4: Missing information creates a customer experience risk
+The gap supports a metadata coverage check. It does not establish why fields are missing or how the gaps affect discovery.
 
-In the UK catalog, 12.8% of titles in the 2020s release vintage had sparse core metadata. Here, sparse means at least two of director, cast, and country are missing. This analysis does not measure description or genre-tag completeness, and the release vintage is not the year a title was added to Netflix.
+## Result - separate the targets and verify customer outcomes
 
-This is a reason to audit metadata coverage for recent releases. It does not establish why those fields are missing or how the gaps affect discovery.
+The evidence supports two hypotheses: TV and movie freshness moved in opposite directions, and selected movie groups shifted toward deeper catalog content. The metadata check also found more missing core fields in newer UK release vintages. None of these observations proves customer impact or intentional licensing strategy.
 
-![UK Netflix titles by release vintage: 12.8% of titles from the 2020s had sparse director, cast, or country metadata](/images/netflix-beat05.png)
+- Set separate freshness goals for TV and movies.
+- Track deep-library share by genre group, while keeping the cluster labels descriptive.
+- Check director, cast, and country coverage for recent releases. Measure description and tag completeness separately before using those fields in a discovery claim.
+- Validate any content strategy against viewing, retention, licensing cost, and customer search outcomes.
 
-## Recommendations
+## Technical notes
 
-1. **Use separate freshness goals.** Track new TV shows and the depth of the movie library separately so one trend does not hide the other.
-2. **Check core metadata before launch.** Track director, cast, and country field coverage for new releases; run a separate description and tag audit before making discovery claims.
-3. **Test repeat partnerships in documentaries.** Explore longer-term relationships where they could reduce negotiation effort without limiting creative choice.
+The source snapshot contains 8,807 unique title IDs. Acquisition lag is year added minus release year; negative lags are excluded. Five KMeans groups were built from the 15 most common genres, content type, rating tier, and lag band. Group labels use dominant genre signals and should not be read as Netflix-defined segments. The UK metadata score uses director, cast, and country fields only.
 
-## Takeaway
-
-The US catalog additions showed two different freshness patterns for TV shows and movies. The UK metadata gap is a separate signal based on release vintage and three core fields. Neither pattern measures viewing or proves a customer outcome, so freshness and metadata should be treated as operating checks rather than success measures.
-
-**Code and data:** [View the analysis scripts](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/legacy_jekyll/scripts/netflix)
+Regeneration instructions and source hashes are in [`legacy_jekyll/scripts/netflix/README.md`](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/legacy_jekyll/scripts/netflix/README.md). The workbook is downloadable from [Zenodo](https://zenodo.org/records/13925131) and linked to the original [Kaggle dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows).

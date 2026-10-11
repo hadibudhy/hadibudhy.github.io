@@ -8,7 +8,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import warnings
+import hashlib
+import sys
+from pathlib import Path
 warnings.filterwarnings("ignore")
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score
 from sklearn.pipeline import Pipeline
@@ -26,22 +31,26 @@ import lightgbm as lgb
 import shap
 from sentence_transformers import SentenceTransformer
 
-PROJ = "D:/Agent/ai-analyst"
-
-plt.rcParams.update({
-    "font.family": "sans-serif",
-    "axes.spines.top": False,
-    "axes.spines.right": False,
-    "axes.grid": True,
-    "grid.alpha": 0.3,
-    "figure.dpi": 120,
-})
+ROOT = Path(__file__).resolve().parents[3]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from scripts.chart_theme import (
+    ACCENT, BORDER, CANVAS, DPI, GRID, HIGHLIGHT, INK, MUTED, PAPER,
+    SECONDARY, WIDE_SIZE, add_header, add_source, style_axis, style_figure,
+)
+SOURCE = ROOT / "analysis_data" / "raw" / "fake_job_postings.csv"
+OUT = ROOT / "public" / "images"
+EXPECTED_SOURCE_SHA256 = "59253295129d8b6a27607f9904f7d4ddf4dbb0ee35e079c7eb51b58b5e62bf60"
 
 # =============================================================================
 # 1. LOAD + FEATURE ENGINEERING (same as v1)
 # =============================================================================
 
-df = pd.read_csv(f"{PROJ}/data/fake_job_postings.csv")
+actual_source_sha256 = hashlib.sha256(SOURCE.read_bytes()).hexdigest()
+if actual_source_sha256 != EXPECTED_SOURCE_SHA256:
+    raise ValueError(f"Fake job source snapshot drift: {actual_source_sha256}")
+df = pd.read_csv(SOURCE)
+assert len(df) == 17_880 and int(df["fraudulent"].sum()) == 866
 print(f"Loaded: {df.shape[0]:,} rows | fraud rate: {df.fraudulent.mean():.1%}")
 
 TEXT_COLS = ["title", "company_profile", "description", "requirements", "benefits"]
@@ -78,9 +87,12 @@ X_text = df["text_all"]
 X_tab  = df[TABULAR_FEATURES]
 y      = df["fraudulent"]
 
-X_text_tr, X_text_te, X_tab_tr, X_tab_te, y_tr, y_te = train_test_split(
-    X_text, X_tab, y, test_size=0.2, random_state=42, stratify=y
+train_idx, test_idx = train_test_split(
+    np.arange(len(y)), test_size=0.2, random_state=42, stratify=y
 )
+X_text_tr, X_text_te = X_text.iloc[train_idx], X_text.iloc[test_idx]
+X_tab_tr, X_tab_te = X_tab.iloc[train_idx], X_tab.iloc[test_idx]
+y_tr, y_te = y.iloc[train_idx], y.iloc[test_idx]
 
 scale_pos = (y_tr == 0).sum() / (y_tr == 1).sum()
 print(f"Train: {len(y_tr):,} | Test: {len(y_te):,} | imbalance: {scale_pos:.1f}:1")
@@ -124,7 +136,8 @@ print("\n-- Model 4: Sentence Transformers + LightGBM --")
 print("Encoding text with all-MiniLM-L6-v2 ...")
 encoder = SentenceTransformer("all-MiniLM-L6-v2")
 
-# Encode -- returns 384-dim vectors
+# Keep the original train and test encoding batches so its stored metrics are
+# reproducible, then encode the full set separately for the five-fold check.
 X_emb_tr = encoder.encode(X_text_tr.tolist(), batch_size=128, show_progress_bar=True)
 X_emb_te = encoder.encode(X_text_te.tolist(), batch_size=128, show_progress_bar=True)
 
@@ -164,7 +177,6 @@ print(classification_report(y_te, y_pred_tuned, target_names=["real", "fake"]))
 # =============================================================================
 
 print("\n-- 5-Fold Cross-Validation (Sentence Transformer model) --")
-# Re-build full dataset embeddings for CV
 print("Encoding full dataset for CV ...")
 X_emb_all = encoder.encode(X_text.tolist(), batch_size=128, show_progress_bar=True)
 X_cv_all   = np.hstack([X_emb_all, X_tab.values])
@@ -189,6 +201,10 @@ for fold, (tr_idx, te_idx) in enumerate(cv.split(X_cv_all, y_all)):
 
 print(f"\nCV F1:      {np.mean(cv_f1):.4f} +/- {np.std(cv_f1):.4f}")
 print(f"CV ROC-AUC: {np.mean(cv_auc):.4f} +/- {np.std(cv_auc):.4f}")
+assert round(float(np.mean(cv_f1)), 4) == 0.8251
+assert round(float(np.std(cv_f1)), 4) == 0.0208
+assert round(float(np.mean(cv_auc)), 4) == 0.9859
+assert round(float(np.std(cv_auc)), 4) == 0.0030
 
 # =============================================================================
 # 6. SUSPICIOUS KEYWORD EXTRACTION
@@ -258,75 +274,98 @@ print(shap_df.to_string(index=False))
 # 8. CHARTS
 # =============================================================================
 
-# --- Fig 1: Threshold Tuning ---
-fig, axes = plt.subplots(1, 2, figsize=(13, 5))
-fig.suptitle("Threshold Tuning -- Sentence Transformer Model", fontsize=12, fontweight="bold")
+# --- Fig 1: Threshold tuning and cross-validation ---
+fig, axes = plt.subplots(1, 2, figsize=WIDE_SIZE, facecolor=CANVAS)
+style_figure(fig)
+fig.subplots_adjust(left=0.08, right=0.97, top=0.79, bottom=0.17, wspace=0.28)
+for axis in axes:
+    style_axis(axis)
 
 ax = axes[0]
-ax.plot(thresholds, f1_scores,   label="F1",        color="#4C72B0", linewidth=2)
-ax.plot(thresholds, prec_scores, label="Precision",  color="#DD8452", linestyle="--")
-ax.plot(thresholds, rec_scores,  label="Recall",     color="#55A868", linestyle="--")
-ax.axvline(best_thresh, color="red", linestyle=":", linewidth=1.5, label=f"Best thresh={best_thresh:.2f}")
-ax.set_xlabel("Decision Threshold")
-ax.set_title("F1, Precision, Recall vs Threshold")
-ax.legend()
+ax.plot(thresholds, f1_scores, label="F1", color=ACCENT, linewidth=2.1)
+ax.plot(thresholds, prec_scores, label="Precision", color=HIGHLIGHT, linewidth=1.7)
+ax.plot(thresholds, rec_scores, label="Recall", color=SECONDARY, linewidth=1.7)
+ax.axvline(best_thresh, color=MUTED, linestyle="--", linewidth=1.2)
+ax.set_xlabel("Decision threshold")
+ax.set_ylabel("Held-out test score")
+ax.set_ylim(0, 1.02)
+ax.legend(frameon=False, labelcolor=INK, fontsize=8)
+ax.set_title("Threshold trade-off", loc="left", color=INK, fontsize=11, fontweight="bold")
 
 ax = axes[1]
-cv_data = pd.DataFrame({"Fold": [f"Fold {i+1}" for i in range(5)],
-                          "F1": cv_f1, "ROC-AUC": cv_auc})
+folds = [f"Fold {i + 1}" for i in range(5)]
 x = np.arange(5)
-w = 0.35
-bars1 = ax.bar(x - w/2, cv_f1,  w, label="F1",       color="#4C72B0")
-bars2 = ax.bar(x + w/2, cv_auc, w, label="ROC-AUC",  color="#55A868")
-ax.set_xticks(x)
-ax.set_xticklabels(cv_data["Fold"])
-ax.set_ylim(0.7, 1.0)
-ax.set_title(f"5-Fold CV  |  F1={np.mean(cv_f1):.3f}+/-{np.std(cv_f1):.3f}")
-ax.legend()
-for bar, val in zip(list(bars1) + list(bars2), cv_f1 + cv_auc):
-    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.003,
-            f"{val:.3f}", ha="center", va="bottom", fontsize=7)
+w = 0.36
+bars1 = ax.bar(x - w / 2, cv_f1, w, label="F1", color=ACCENT)
+bars2 = ax.bar(x + w / 2, cv_auc, w, label="ROC-AUC", color=SECONDARY)
+ax.set_xticks(x, folds)
+ax.set_ylim(0.7, 1.03)
+ax.set_ylabel("Cross-validation score")
+ax.set_title(f"Five-fold check: F1 {np.mean(cv_f1):.3f} ± {np.std(cv_f1):.3f}",
+             loc="left", color=INK, fontsize=10.5, fontweight="bold")
+ax.legend(frameon=False, labelcolor=INK, fontsize=8)
+for bars in (bars1, bars2):
+    for bar in bars:
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.004,
+                f"{bar.get_height():.3f}", ha="center", va="bottom", fontsize=7.5, color=INK)
 
-plt.tight_layout()
-plt.savefig(f"{PROJ}/outputs/fake_job_threshold_cv.png", bbox_inches="tight")
-print("Chart saved --> outputs/fake_job_threshold_cv.png")
+test_pred = (y_prob_st >= best_thresh).astype(int)
+assert len(y_te) == 3_576 and int(y_te.sum()) == 173
+assert round(best_thresh, 2) == 0.10
+assert round(best_f1, 3) == 0.850
+assert round(recall_score(y_te, test_pred), 3) == 0.751
+assert round(precision_score(y_te, test_pred), 2) == 0.98
+assert round(np.mean(cv_f1), 3) == 0.825 and round(np.std(cv_f1), 3) == 0.021
+add_header(fig, "A 0.10 threshold balanced scam capture and review volume",
+           "Held-out stratified test and five-fold validation; a threshold is a review-policy choice")
+add_source(fig, "Employment Scam Aegean Dataset; 17,880 labeled job posts")
+fig.savefig(OUT / "fake-job-threshold-cv.png", dpi=DPI, facecolor=fig.get_facecolor())
+plt.close(fig)
+print("Validated and saved fake-job-threshold-cv.png")
 
-# --- Fig 2: Keyword Analysis ---
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-fig.suptitle("Keyword Log-Odds: Fake vs Real Job Postings", fontsize=12, fontweight="bold")
-
-ax = axes[0]
-top_fake.sort_values("log_odds").plot(
-    kind="barh", x="term", y="log_odds", ax=ax, color="#DD8452", legend=False)
-ax.set_title("Terms more common in FAKE postings")
-ax.set_xlabel("Log-Odds (higher = more fake)")
-ax.axvline(0, color="black", linewidth=0.8)
-
-ax = axes[1]
-top_real.sort_values("log_odds", ascending=False).plot(
-    kind="barh", x="term", y="log_odds", ax=ax, color="#4C72B0", legend=False)
-ax.set_title("Terms more common in REAL postings")
-ax.set_xlabel("Log-Odds (lower = more real)")
-ax.axvline(0, color="black", linewidth=0.8)
-
-plt.tight_layout()
-plt.savefig(f"{PROJ}/outputs/fake_job_keywords.png", bbox_inches="tight")
-print("Chart saved --> outputs/fake_job_keywords.png")
+# --- Fig 2: Keyword signals ---
+fig, axes = plt.subplots(1, 2, figsize=WIDE_SIZE, facecolor=CANVAS)
+style_figure(fig)
+fig.subplots_adjust(left=0.15, right=0.97, top=0.79, bottom=0.17, wspace=0.30)
+for axis in axes:
+    style_axis(axis, grid_axis="x")
+fake_sorted = top_fake.sort_values("log_odds")
+real_sorted = top_real.sort_values("log_odds", ascending=False)
+axes[0].barh(fake_sorted["term"], fake_sorted["log_odds"], color=HIGHLIGHT, height=0.72)
+axes[0].set_title("More common in fake posts", loc="left", color=INK, fontsize=11, fontweight="bold")
+axes[0].set_xlabel("Log-odds (higher means more common)")
+axes[0].axvline(0, color=BORDER, linewidth=0.9)
+axes[1].barh(real_sorted["term"], real_sorted["log_odds"], color=ACCENT, height=0.72)
+axes[1].set_title("More common in legitimate posts", loc="left", color=INK, fontsize=11, fontweight="bold")
+axes[1].set_xlabel("Log-odds (negative means more common in legitimate posts)")
+axes[1].axvline(0, color=BORDER, linewidth=0.9)
+for axis in axes:
+    axis.tick_params(axis="y", labelsize=7.5)
+add_header(fig, "Posting language differs between fake and legitimate jobs",
+           "Relative keyword frequency in the full labeled dataset; association does not prove intent")
+add_source(fig, "Employment Scam Aegean Dataset; text fields combined by posting")
+fig.savefig(OUT / "fake-job-keywords.png", dpi=DPI, facecolor=fig.get_facecolor())
+plt.close(fig)
+print("Validated and saved fake-job-keywords.png")
 
 # --- Fig 3: SHAP Summary ---
-fig, ax = plt.subplots(figsize=(8, 6))
+fig, ax = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
+style_figure(fig)
+fig.subplots_adjust(left=0.22, right=0.96, top=0.80, bottom=0.16)
+style_axis(ax, grid_axis="x")
 top_shap = shap_df.head(14)
-colors = ["#DD8452" if f in ["has_company_logo", "has_questions", "telecommuting",
+feature_colors = [HIGHLIGHT if f in ["has_company_logo", "has_questions", "telecommuting",
                                "has_salary", "has_profile", "missing_count",
                                "exclamation_ct", "caps_ratio", "has_url"]
-          else "#4C72B0" for f in top_shap["feature"]]
-ax.barh(top_shap["feature"][::-1], top_shap["mean_abs_shap"][::-1], color=colors[::-1])
-ax.set_title("SHAP Feature Importance (Tabular LightGBM)\nMean |SHAP| for fake job prediction",
-             fontsize=11, fontweight="bold")
-ax.set_xlabel("Mean |SHAP value|")
-plt.tight_layout()
-plt.savefig(f"{PROJ}/outputs/fake_job_shap.png", bbox_inches="tight")
-print("Chart saved --> outputs/fake_job_shap.png")
+                 else ACCENT for f in top_shap["feature"]]
+ax.barh(top_shap["feature"][::-1], top_shap["mean_abs_shap"][::-1], color=feature_colors[::-1])
+ax.set_xlabel("Mean absolute SHAP value")
+add_header(fig, "Text and profile details both contribute to the model score",
+           "Mean absolute SHAP values for a LightGBM model using profile and engineered text features")
+add_source(fig, "Employment Scam Aegean Dataset; SHAP on a 200-post stratified test subset")
+fig.savefig(OUT / "fake-job-shap.png", dpi=DPI, facecolor=fig.get_facecolor())
+plt.close(fig)
+print("Validated and saved fake-job-shap.png")
 
 # --- Fig 4: Model comparison (all 4 models) ---
 all_models = [
@@ -336,21 +375,6 @@ all_models = [
     ("ST + LightGBM tuned",y_prob_st,  best_thresh),
 ]
 
-fig, axes = plt.subplots(1, 2, figsize=(13, 5))
-fig.suptitle("All Models -- PR Curve & Final Metrics", fontsize=12, fontweight="bold")
-
-ax = axes[0]
-colors_m = ["#4C72B0", "#DD8452", "#55A868", "#C44E52"]
-for (name, prob, _), c in zip(all_models, colors_m):
-    from sklearn.metrics import precision_recall_curve
-    prec, rec, _ = precision_recall_curve(y_te, prob)
-    ap = average_precision_score(y_te, prob)
-    ax.plot(rec, prec, label=f"{name} (AP={ap:.3f})", color=c)
-ax.set_xlabel("Recall"); ax.set_ylabel("Precision")
-ax.set_title("Precision-Recall Curves")
-ax.legend(fontsize=8)
-
-ax = axes[1]
 summary_rows = []
 for name, prob, thresh in all_models:
     t = thresh if thresh is not None else 0.5
@@ -362,19 +386,38 @@ for name, prob, thresh in all_models:
         "PR-AUC":  average_precision_score(y_te, prob),
     })
 sum_df = pd.DataFrame(summary_rows)
-x = np.arange(len(sum_df))
-w = 0.25
-for i, (col, c) in enumerate([("F1","#4C72B0"),("Recall","#55A868"),("PR-AUC","#DD8452")]):
-    bars = ax.bar(x + i*w, sum_df[col], w, label=col, color=c)
-ax.set_xticks(x + w)
-ax.set_xticklabels([r["Model"].replace(" ","\n") for r in summary_rows], fontsize=7)
-ax.set_ylim(0.6, 1.0)
-ax.set_title("F1 / Recall / PR-AUC by Model")
-ax.legend(fontsize=9)
+expected = {
+    "F1": [0.819, 0.828, 0.831, 0.850],
+    "Recall": [0.913, 0.723, 0.711, 0.751],
+    "PR-AUC": [0.927, 0.915, 0.901, 0.901],
+}
+for metric, values in expected.items():
+    assert [round(value, 3) for value in sum_df[metric].tolist()] == values, (metric, sum_df[metric].tolist())
 
-plt.tight_layout()
-plt.savefig(f"{PROJ}/outputs/fake_job_all_models.png", bbox_inches="tight")
-print("Chart saved --> outputs/fake_job_all_models.png")
+fig, ax = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
+style_figure(fig)
+style_axis(ax)
+fig.subplots_adjust(left=0.08, right=0.97, top=0.80, bottom=0.21)
+labels = ["Text model\nLogistic regression", "Profile\nLightGBM", "Combined\ndefault", "Combined\ntuned"]
+x = np.arange(len(sum_df))
+w = 0.23
+metric_colors = [("F1", ACCENT), ("Recall", SECONDARY), ("PR-AUC", HIGHLIGHT)]
+for offset, (metric, color) in enumerate(metric_colors):
+    bars = ax.bar(x + (offset - 1) * w, sum_df[metric], w, label=metric, color=color)
+    for bar in bars:
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.012,
+                f"{bar.get_height():.3f}", ha="center", va="bottom", color=INK, fontsize=7.5)
+ax.set_xticks(x, labels)
+ax.tick_params(axis="x", labelsize=8)
+ax.set_ylim(0.65, 1.02)
+ax.set_ylabel("Held-out test score")
+ax.legend(frameon=False, ncols=3, loc="upper left", labelcolor=INK, fontsize=9)
+add_header(fig, "Text signals caught more scams; threshold tuning raised combined F1",
+           "Stratified held-out test; recall and precision describe different review trade-offs")
+add_source(fig, "Employment Scam Aegean Dataset; 3,576 held-out posts")
+fig.savefig(OUT / "fake-job-all-models.png", dpi=DPI, facecolor=fig.get_facecolor())
+plt.close(fig)
+print("Validated and saved fake-job-all-models.png")
 
 # =============================================================================
 # 9. FINAL SUMMARY
