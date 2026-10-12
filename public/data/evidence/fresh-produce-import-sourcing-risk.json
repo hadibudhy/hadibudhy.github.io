@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 2,
+  "caseId": "fresh-produce-import-sourcing-risk",
+  "status": "verified",
+  "source": {
+    "name": "Foreign Agricultural Trade of the United States, top fresh-produce import origins",
+    "url": "https://www.ers.usda.gov/data-products/foreign-agricultural-trade-of-the-united-states-fatus/us-agricultural-trade-data-update",
+    "publisher": "U.S. Department of Agriculture, Economic Research Service",
+    "accessed": "2026-10-12",
+    "grain": "month \u00d7 FATUS produce category \u00d7 reported source",
+    "period": "January-August 2025 and January-August 2026",
+    "rows": 32,
+    "sha256": "a22959fa9357de564f1503c7300a7e3d8d567041d350eb5a344a9970eaa93ca9",
+    "publicDataOnly": true,
+    "mutableSource": true
+  },
+  "validation": {
+    "checks": [
+      "two fresh-produce categories each include eight monthly comparisons for 2025 and 2026",
+      "each category-month has ten reported origins and one World total row",
+      "monthly top-10 origin shares are divided by the corresponding World total",
+      "monthly HHI results are bounded for the unreported residual origin share",
+      "all three charts regenerate from the local USDA CSV snapshot"
+    ]
+  },
+  "artifacts": [
+    "/images/produce-source-concentration.png",
+    "/images/produce-mexico-share.png",
+    "/images/produce-import-value-yoy.png"
+  ],
+  "artifactHashes": {
+    "/images/produce-source-concentration.png": "fccdef5760c453d0e4d069629be1cca4d939201a6f75b120eba448db5e867c4e",
+    "/images/produce-mexico-share.png": "addda635d017bc35a0f263ec0ad0abf8a4b80a728c8cafa8c3db54590facdd1e",
+    "/images/produce-import-value-yoy.png": "dad7999628eb4f58c1db3233c564762a021e381482c4f85eec17e52411427f54"
+  },
+  "evidenceBoundary": "FATUS reports origin markets by aggregated fresh-produce group and customs value. It does not identify importer-specific suppliers, contracts, quantities, product-level substitutions, or disruption outcomes.",
+  "findings": {
+    "source_rows": 12146,
+    "comparison_period": "January-August 2025 versus January-August 2026",
+    "monthly_rows": 32,
+    "categories": [
+      {
+        "category": "Fresh fruit",
+        "year": 2025,
+        "months": 8,
+        "jan_aug_imports_million_usd": 14977.554,
+        "mean_monthly_top10_coverage_pct": 94.42221840857266,
+        "mean_monthly_hhi_lower": 0.27624016170363896,
+        "mean_monthly_hhi_upper": 0.27953109913440366,
+        "mean_top_partner_share_pct": 47.636082128761224,
+        "top_partner": "Mexico",
+        "mexico_share_mean_pct": 47.636082128761224,
+        "mexico_share_min_pct": 35.33445370770462,
+        "mexico_share_max_pct": 60.987882551741066,
+        "jan_aug_import_value_change_pct_yoy": null
+      },
+      {
+        "category": "Fresh fruit",
+        "year": 2026,
+        "months": 8,
+        "jan_aug_imports_million_usd": 13818.611,
+        "mean_monthly_top10_coverage_pct": 94.64794350869393,
+        "mean_monthly_hhi_lower": 0.2638157719415587,
+        "mean_monthly_hhi_upper": 0.2670207495687122,
+        "mean_top_partner_share_pct": 45.942503268053116,
+        "top_partner": "Mexico",
+        "mexico_share_mean_pct": 45.942503268053116,
+        "mexico_share_min_pct": 31.31194724694254,
+        "mexico_share_max_pct": 61.75028173896129,
+        "jan_aug_import_value_change_pct_yoy": -7.737865608763617
+      },
+      {
+        "category": "Fresh vegetables",
+        "year": 2025,
+        "months": 8,
+        "jan_aug_imports_million_usd": 10343.635,
+        "mean_monthly_top10_coverage_pct": 97.25089635429728,
+        "mean_monthly_hhi_lower": 0.3986865357378728,
+        "mean_monthly_hhi_upper": 0.3994522891385261,
+        "mean_top_partner_share_pct": 53.7361026084359,
+        "top_partner": "Mexico",
+        "mexico_share_mean_pct": 53.7361026084359,
+        "mexico_share_min_pct": 42.184831933626796,
+        "mexico_share_max_pct": 64.92605401302536,
+        "jan_aug_import_value_change_pct_yoy": null
+      },
+      {
+        "category": "Fresh vegetables",
+        "year": 2026,
+        "months": 8,
+        "jan_aug_imports_million_usd": 10608.302,
+        "mean_monthly_top10_coverage_pct": 97.93199256154213,
+        "mean_monthly_hhi_lower": 0.4188168128502236,
+        "mean_monthly_hhi_upper": 0.4192492739463022,
+        "mean_top_partner_share_pct": 55.26389287414667,
+        "top_partner": "Mexico",
+        "mexico_share_mean_pct": 55.26389287414667,
+        "mexico_share_min_pct": 42.74534337555508,
+        "mexico_share_max_pct": 65.3530026269304,
+        "jan_aug_import_value_change_pct_yoy": 2.5587426470481622
+      }
+    ],
+    "concentration_method": "Monthly HHI lower bound sums squared top-10 source shares; upper bound assigns the residual share to one unobserved source.",
+    "interpretation": "Origin-market screening, not supplier-level exposure or a forecast of procurement disruption."
+  }
+}
