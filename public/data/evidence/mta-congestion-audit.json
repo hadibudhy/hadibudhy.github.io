@@ -16,14 +16,17 @@
   },
   "models": [
     "Facility-day validation",
-    "Equal-weight weekly comparator diagnostic"
+    "Equal-weight weekly comparator diagnostic",
+    "HAC pre-policy linear slope diagnostic"
   ],
   "checks": [
     "facility-day uniqueness",
     "10 facilities present",
     "event week -1 reference uniqueness",
     "3,880 facility-week output",
-    "±26-week window"
+    "±26-week event window",
+    "314 pre-policy weekly gaps used for linear slope diagnostic",
+    "HAC standard errors use 26 weekly lags; slope interval includes zero"
   ],
   "metrics": {
     "facility_day_observations": 27080,
@@ -39,15 +42,25 @@
     "pre_policy_gap_range": [
       -0.04693174881039219,
       0.10135473930768946
-    ]
+    ],
+    "pretrend_slope_test": {
+      "pre_policy_weeks": 314,
+      "slope_log_points_per_year": 0.0155100594,
+      "ci95_log_points_per_year": [-0.0047441749, 0.0357642937],
+      "p_value": 0.1333868241,
+      "hac_lags": 26,
+      "interpretation": "The test does not reject a zero linear pre-policy slope; this does not establish parallel trends or identify a policy effect."
+    }
   },
   "artifacts": [
     "/images/growth-mta-event-study.png",
+    "/images/growth-mta-pretrend-test.png",
     "/images/portfolio-mta-panel-scope.svg",
     "/images/portfolio-mta-causal-boundary.svg"
   ],
   "artifactHashes": {
     "/images/growth-mta-event-study.png": "15e45a4175138c75b31c485b9edf23d26a70275149051c58f88418281da4ef76",
+    "/images/growth-mta-pretrend-test.png": "d1c52508c1fc7d7bdfc91e0c61d645205c340fad675d7ef22cbe07fcdf81e758",
     "/images/portfolio-mta-panel-scope.svg": "dcbf5e5007cc082d689c1e4a7ca2c94cc77d6d4b4c89cdbd497347535cdf6d45",
     "/images/portfolio-mta-causal-boundary.svg": "9a5b8edd723f6578ae8a631d558b2b9faa8062b218ac39e6dc9dff693b57eaab"
   },

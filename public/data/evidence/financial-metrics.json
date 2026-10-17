@@ -18,7 +18,8 @@
       "annual period selection",
       "duplicate fact context",
       "revenue/net income margin reconciliation",
-      "source lineage retained"
+      "source lineage retained",
+      "FY2024 revenue and net income tie out across FY2024, FY2025, and FY2026 10-K filings"
     ],
     "metrics": [
       "revenue",
@@ -26,6 +27,16 @@
       "net margin"
     ],
     "periodRule": "Use documented annual facts from the selected issuer context; do not mix quarterly and annual frames."
+  },
+  "workedExample": {
+    "period": "FY2024",
+    "revenueTag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "revenueUsd": 245122000000,
+    "netIncomeTag": "NetIncomeLoss",
+    "netIncomeUsd": 88136000000,
+    "netMarginPercent": 35.96,
+    "filings": ["FY2024 10-K filed 2024-07-30", "FY2025 10-K filed 2025-07-30", "FY2026 10-K filed 2026-07-29"],
+    "finding": "The repeated comparative values match; retain filing lineage but count one fiscal period."
   },
   "artifacts": [
     "/images/sec-revenue-net-income.png",

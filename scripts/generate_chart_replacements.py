@@ -285,7 +285,7 @@ def save_taxi_completed_trips() -> None:
     plt.close(fig)
 
 
-def load_retail_data() -> tuple[pd.DataFrame, pd.Series, pd.Series, pd.Series]:
+def load_retail_data() -> tuple[pd.Series, pd.Series, pd.DataFrame, pd.Series, float]:
     source = ROOT / "analysis_data" / "extracted" / "Online Retail.xlsx"
     require_source_snapshot(source)
     raw = pd.read_excel(source)
@@ -299,51 +299,73 @@ def load_retail_data() -> tuple[pd.DataFrame, pd.Series, pd.Series, pd.Series]:
     assert raw["InvoiceNo"].astype(str).str.startswith("C").sum() == 9_288
     assert raw["CustomerID"].isna().sum() == 135_080
     assert len(customer_revenue) == 4_338 and sales["InvoiceNo"].nunique() == 18_532
+    assert int(customer_orders.ge(2).sum()) == 2_845
     assert np.isclose(sales["revenue"].sum(), 8_911_407.904)
     assert np.isclose(customer_orders.ge(2).mean(), 0.6558321807)
-    assert np.isclose(customer_revenue.iloc[:top_decile].sum() / customer_revenue.sum(), 0.6137506575)
+    top_shares = pd.Series({
+        pct: customer_revenue.iloc[:int(np.ceil(len(customer_revenue) * pct / 100))].sum()
+        / customer_revenue.sum() * 100
+        for pct in (1, 5, 10, 20)
+    })
+    assert [round(top_shares[pct], 1) for pct in (1, 5, 10, 20)] == [32.0, 50.4, 61.4, 74.6]
+    repeat_customer_share = sales.loc[sales["CustomerID"].isin(customer_orders[customer_orders.ge(2)].index), "revenue"].sum() / sales["revenue"].sum()
+    assert np.isclose(repeat_customer_share, 0.9308401391)
     monthly_revenue = sales.set_index("InvoiceDate").resample("ME")["revenue"].sum()
     assert round(monthly_revenue.loc["2011-11-30"] / 1_000_000, 2) == 1.16
-    orders = sales[["InvoiceNo", "CustomerID", "InvoiceDate"]].drop_duplicates("InvoiceNo")
-    orders = orders.sort_values(["CustomerID", "InvoiceDate", "InvoiceNo"]).copy()
-    orders["returning"] = orders.groupby("CustomerID").cumcount().gt(0)
-    returning_share = orders.set_index("InvoiceDate").resample("ME")["returning"].mean()
-    assert [round(value * 100, 1) for value in returning_share] == [36.8, 57.8, 61.9, 65.8, 73.9, 81.7, 82.6, 85.9, 86.8, 83.0, 81.4, 87.8, 94.7]
     country = sales.groupby("Country")["revenue"].sum().sort_values(ascending=False).head(8) / 1_000_000
     assert np.isclose(country["United Kingdom"] * 1_000_000 / customer_revenue.sum(), 0.8201163759)
-    return monthly_revenue, returning_share, country, sales
+    assert top_decile == 434 and np.isclose(top_shares[10], 61.37506575)
+    return monthly_revenue, country, sales, top_shares, repeat_customer_share
 
 
-def save_retail_growth_patterns(monthly_revenue: pd.Series, returning_share: pd.Series) -> None:
-    figure, axes = plt.subplots(2, 1, figsize=WIDE_SIZE, sharex=True, facecolor=CANVAS)
+def save_retail_customer_concentration(top_shares: pd.Series) -> None:
+    figure, axis = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
     style_figure(figure)
-    figure.subplots_adjust(left=0.10, right=0.97, top=0.80, bottom=0.17, hspace=0.34)
-    for axis in axes:
-        style_axis(axis)
+    style_axis(axis)
+    figure.subplots_adjust(left=0.10, right=0.96, top=0.80, bottom=0.16)
+    x = top_shares.index.to_numpy(dtype=float)
+    y = top_shares.to_numpy(dtype=float)
+    axis.plot([0, 20], [0, 20], color=MUTED, linestyle="--", linewidth=1.4, label="Equal-share reference")
+    axis.plot(x, y, color=HIGHLIGHT, marker="o", markersize=7, linewidth=2.5, label="Observed sales share")
+    for pct, share in zip(x, y):
+        axis.annotate(f"{share:.1f}%", (pct, share), xytext=(0, 9), textcoords="offset points",
+                      ha="center", color=INK, fontsize=9, fontweight="bold")
+    axis.set_xlim(0, 20)
+    axis.set_ylim(0, 80)
+    axis.set_xticks([0, 1, 5, 10, 15, 20], ["0", "1", "5", "10", "15", "20"])
+    axis.set_xlabel("Top share of identifiable customers, ranked by eligible sales value (%)")
+    axis.set_ylabel("Cumulative share of eligible sales value (%)")
+    axis.legend(frameon=False, loc="upper left", labelcolor=INK, fontsize=9)
+    add_header(figure, "The top 20% of customers generated 74.6% of eligible sales value",
+               "Top 10% generated 61.4%; customer-level sales values use all 4,338 identifiable customers")
+    add_source(figure, "UCI Online Retail; positive, non-cancelled lines with CustomerID")
+    figure.savefig(OUT / "retail-customer-concentration.png", dpi=DPI, facecolor=figure.get_facecolor())
+    plt.close(figure)
+
+
+def save_retail_growth_patterns(monthly_revenue: pd.Series) -> None:
+    figure, axis = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
+    style_figure(figure)
+    style_axis(axis)
+    figure.subplots_adjust(left=0.10, right=0.97, top=0.80, bottom=0.17)
 
     dates = monthly_revenue.index
     revenue_millions = monthly_revenue / 1_000_000
-    axes[0].plot(dates, revenue_millions, color=ACCENT, marker="o", linewidth=2.2, markersize=5)
-    axes[0].set_title("Recorded revenue (£ millions)", loc="left", color=INK, fontsize=11, fontweight="bold", pad=8)
-    axes[0].set_ylim(0, 1.3)
-    axes[0].yaxis.set_major_formatter(FuncFormatter(lambda value, _: f"£{value:.1f}"))
+    axis.plot(dates, revenue_millions, color=ACCENT, marker="o", linewidth=2.2, markersize=5)
+    axis.set_ylabel("Eligible sales value (£ millions)")
+    axis.set_ylim(0, 1.3)
+    axis.yaxis.set_major_formatter(FuncFormatter(lambda value, _: f"£{value:.1f}"))
     november = pd.Timestamp("2011-11-30")
     november_value = revenue_millions.loc[november]
-    axes[0].annotate("£1.16m", (november, november_value), xytext=(0, 10),
-                     textcoords="offset points", ha="center", color=INK,
-                     fontsize=10, fontweight="bold")
-
-    axes[1].plot(dates, returning_share * 100, color=SECONDARY, marker="o", linewidth=2.2, markersize=5)
-    axes[1].set_title("Share of monthly orders from returning customers", loc="left", color=INK,
-                      fontsize=11, fontweight="bold", pad=8)
-    axes[1].set_ylim(0, 100)
-    axes[1].yaxis.set_major_formatter(FuncFormatter(lambda value, _: f"{value:.0f}%"))
+    axis.annotate("£1.16m", (november, november_value), xytext=(0, 10),
+                  textcoords="offset points", ha="center", color=INK,
+                  fontsize=10, fontweight="bold")
     tick_indices = range(0, len(dates), 2)
-    axes[1].set_xticks([dates[index] for index in tick_indices])
-    axes[1].set_xticklabels([dates[index].strftime("%b '%y") for index in tick_indices])
+    axis.set_xticks([dates[index] for index in tick_indices])
+    axis.set_xticklabels([dates[index].strftime("%b '%y") for index in tick_indices])
 
-    add_header(figure, "Revenue peaked in November as repeat orders grew",
-               "Cleaned customer-identified orders, 1 Dec 2010 to 9 Dec 2011; December is partial")
+    add_header(figure, "Eligible sales value peaked in November 2011",
+               "Positive, identified invoice lines; December contains only nine days")
     add_source(figure, "UCI Online Retail; positive, non-cancelled lines with CustomerID")
     figure.savefig(OUT / "retail-growth-patterns.png", dpi=DPI, facecolor=figure.get_facecolor())
     plt.close(figure)
@@ -361,24 +383,25 @@ def save_retail_market_opportunity(country: pd.Series) -> None:
     axis.invert_yaxis()
     axis.set_xlim(0, 8.5)
     axis.set_xticks(range(0, 9, 2))
-    axis.set_xlabel("Recorded revenue (£ millions)")
+    axis.set_xlabel("Eligible sales value (£ millions)")
     for bar, label, value in zip(bars, labels, values):
         note = f"£{value:.2f}m"
         if label == "United Kingdom":
             note += "  |  82% of total"
         axis.text(value + 0.08, bar.get_y() + bar.get_height() / 2, note,
                   va="center", color=INK, fontsize=10, fontweight="bold" if label == "United Kingdom" else "normal")
-    add_header(figure, "The UK generated 82% of recorded revenue",
-               "Top eight countries, 1 Dec 2010 to 9 Dec 2011; recorded sales are not market demand or profit")
+    add_header(figure, "The UK generated 82% of eligible sales value",
+               "Top eight countries, 1 Dec 2010 to 9 Dec 2011; sales value is not market demand or profit")
     add_source(figure, "UCI Online Retail; positive, non-cancelled lines with CustomerID")
     figure.savefig(OUT / "retail-market-opportunity.png", dpi=DPI, facecolor=figure.get_facecolor())
     plt.close(figure)
 
 
 def save_retail_charts() -> None:
-    monthly_revenue, returning_share, country, _ = load_retail_data()
-    save_retail_growth_patterns(monthly_revenue, returning_share)
+    monthly_revenue, country, _, concentration, _ = load_retail_data()
+    save_retail_growth_patterns(monthly_revenue)
     save_retail_market_opportunity(country)
+    save_retail_customer_concentration(concentration)
 
 
 def save_restaurant_risk_by_borough() -> None:
@@ -831,6 +854,34 @@ def save_happiness_charts() -> None:
     fig.savefig(OUT / "happiness-drivers-inequality.png", dpi=DPI, facecolor=fig.get_facecolor())
     plt.close(fig)
 
+    baseline_bottom = balanced[2011].nsmallest(13).index
+    bottom_mean = balanced.loc[baseline_bottom].mean(axis=0)
+    other_mean = balanced.drop(index=baseline_bottom).mean(axis=0)
+    assert round(bottom_mean.loc[2011], 2) == 3.80 and round(bottom_mean.loc[2025], 2) == 4.35
+    assert round(other_mean.loc[2011], 2) == 5.66 and round(other_mean.loc[2025], 2) == 5.89
+    fig, ax = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
+    style_figure(fig)
+    fig.subplots_adjust(left=0.08, right=0.97, top=0.80, bottom=0.16)
+    style_axis(ax)
+    ax.plot(years, bottom_mean, color=HIGHLIGHT, marker="o", markersize=4, linewidth=2.3,
+            label="13 countries in bottom decile in 2011")
+    ax.plot(years, other_mean, color=ACCENT, marker="o", markersize=4, linewidth=2.3,
+            label="Remaining 116 countries")
+    ax.set_xlim(2010.7, 2025.3)
+    ax.set_ylim(0, 10)
+    ax.set_xticks(years, [str(y) for y in years], rotation=45, ha="right")
+    ax.set_ylabel("Unweighted mean life evaluation (0 to 10)")
+    for values, color in ((bottom_mean, HIGHLIGHT), (other_mean, ACCENT)):
+        for year in (2011, 2025):
+            ax.annotate(f"{values.loc[year]:.2f}", (year, values.loc[year]), xytext=(0, 8),
+                        textcoords="offset points", ha="center", color=color, fontsize=9, fontweight="bold")
+    ax.legend(frameon=False, loc="upper left", fontsize=8)
+    add_header(fig, "The baseline bottom 13 average rose by 0.55 points",
+               "The 2011 bottom decile is fixed and tracked through 2025; country means are unweighted and 2013 is absent")
+    add_source(fig, "World Happiness Report 2026, Figure 2.1; fixed 129-country panel")
+    fig.savefig(OUT / "happiness-beat05-bottom-cohort.png", dpi=DPI, facecolor=fig.get_facecolor())
+    plt.close(fig)
+
 
 def load_netflix_data() -> pd.DataFrame:
     source = ROOT / "analysis_data" / "raw" / "netflix_titles.csv"
@@ -877,9 +928,6 @@ def load_netflix_data() -> pd.DataFrame:
 
 
 def save_netflix_charts() -> None:
-    from sklearn.cluster import KMeans
-    from sklearn.preprocessing import LabelEncoder, StandardScaler
-
     data = load_netflix_data()
     us = data[(data["country_bucket"] == "US") & data["year_added"].between(2015, 2021)].copy()
     us["is_fresh"] = us["acquisition_lag"].eq(0.0)
@@ -907,88 +955,99 @@ def save_netflix_charts() -> None:
     fig.savefig(OUT / "netflix-beat01.png", dpi=DPI, facecolor=fig.get_facecolor())
     plt.close(fig)
 
-    clustered = data.dropna(subset=["year_added", "acquisition_lag"]).copy().reset_index(drop=True)
-    top_genres = clustered["listed_in"].str.split(", ").explode().value_counts().head(15).index.tolist()
-    genre_columns = []
-    for genre in top_genres:
-        safe = genre.replace(" ", "_").replace("&", "and").replace("'", "")
-        column = f"g_{safe}"
-        clustered[column] = clustered["listed_in"].str.contains(genre, regex=False).fillna(False).astype(int)
-        genre_columns.append(column)
-    for column, encoded in [("type", "type_enc"), ("rating_tier", "rating_enc"), ("lag_bucket", "lag_enc")]:
-        clustered[encoded] = LabelEncoder().fit_transform(clustered[column])
-    features = genre_columns + ["type_enc", "rating_enc", "lag_enc"]
-    scaled = StandardScaler().fit_transform(clustered[features].values.astype(float))
-    clustered["cluster"] = KMeans(n_clusters=5, random_state=42, n_init=10).fit_predict(scaled)
-    dominant_genres = {}
-    for cluster_id in range(5):
-        block = clustered[clustered["cluster"] == cluster_id]
-        counts = pd.Series({g: block["listed_in"].str.contains(g, regex=False).sum() for g in top_genres})
-        dominant_genres[cluster_id] = counts.sort_values(ascending=False).index.tolist()[:2]
-    assert set(dominant_genres[0]) == {"International Movies", "Dramas"}
-    assert dominant_genres[2][0] == "Documentaries"
-    assert dominant_genres[3][0] == "Children & Family Movies"
-    labels = {0: "International drama", 2: "Documentaries", 3: "Children and family"}
-    us_movies = clustered[(clustered["country_bucket"] == "US")
-                          & clustered["year_added"].between(2015, 2021)
-                          & clustered["type"].eq("Movie")].copy()
+    us_movies = data[(data["country_bucket"] == "US")
+                     & data["year_added"].between(2015, 2021)
+                     & data["type"].eq("Movie")].copy()
     us_movies["deep_library"] = us_movies["acquisition_lag"] > 5
     us_movies["period"] = np.where(us_movies["year_added"] <= 2017, "2015 to 2017", "2018 to 2021")
-    us_movies["group"] = us_movies["cluster"].map(labels)
-    library = us_movies[us_movies["group"].notna()].groupby(["group", "period"])["deep_library"].mean().unstack() * 100
-    changes = library["2018 to 2021"] - library["2015 to 2017"]
-    assert round(library.loc["International drama", "2015 to 2017"], 1) == 5.5
-    assert round(library.loc["International drama", "2018 to 2021"], 1) == 47.4
-    assert round(library.loc["Children and family", "2015 to 2017"], 1) == 16.4
-    assert round(library.loc["Children and family", "2018 to 2021"], 1) == 48.0
-    plot_labels = ["International drama", "Children and family", "Documentaries"]
-    plot_values = [changes[label] for label in plot_labels]
+    listed = us_movies["listed_in"].fillna("")
+    groups = {
+        "Drama or international tags": listed.str.contains("International Movies|Dramas", regex=True),
+        "Children and family tag": listed.str.contains("Children & Family Movies", regex=False),
+    }
+    library = {
+        label: us_movies[mask].groupby("period")["deep_library"].agg(["sum", "count", "mean"])
+        for label, mask in groups.items()
+    }
+    assert int(library["Drama or international tags"].loc["2015 to 2017", "count"]) == 108
+    assert int(library["Drama or international tags"].loc["2018 to 2021", "count"]) == 584
+    assert int(library["Children and family tag"].loc["2015 to 2017", "count"]) == 61
+    assert int(library["Children and family tag"].loc["2018 to 2021", "count"]) == 269
+    assert round(library["Drama or international tags"].loc["2015 to 2017", "mean"] * 100, 1) == 3.7
+    assert round(library["Drama or international tags"].loc["2018 to 2021", "mean"] * 100, 1) == 41.1
+    assert round(library["Children and family tag"].loc["2015 to 2017", "mean"] * 100, 1) == 16.4
+    assert round(library["Children and family tag"].loc["2018 to 2021", "mean"] * 100, 1) == 48.0
+    plot_labels = ["Drama or international tags", "Children and family tag"]
+    plot_values = [
+        (library[label].loc["2018 to 2021", "mean"] - library[label].loc["2015 to 2017", "mean"]) * 100
+        for label in plot_labels
+    ]
     fig, ax = plt.subplots(figsize=(9, 5.5), facecolor=CANVAS)
     style_figure(fig)
     style_axis(ax, grid_axis="x")
-    fig.subplots_adjust(left=0.27, right=0.91, top=0.80, bottom=0.16)
+    fig.subplots_adjust(left=0.30, right=0.91, top=0.80, bottom=0.16)
     colors = [ACCENT if value >= 0 else MUTED for value in plot_values]
-    bars = ax.barh(plot_labels, plot_values, color=colors, height=0.58)
+    display_labels = [
+        f"Drama or international (n=108→584)",
+        f"Children and family (n=61→269)",
+    ]
+    bars = ax.barh(display_labels, plot_values, color=colors, height=0.58)
     ax.axvline(0, color=BORDER, linewidth=1)
     for bar, value in zip(bars, plot_values):
         offset = 0.6 if value >= 0 else -0.6
         ax.text(value + offset, bar.get_y() + bar.get_height() / 2, f"{value:+.1f} pp",
                 va="center", ha="left" if value >= 0 else "right", color=INK, fontsize=9)
-    ax.set_xlim(-10, 50)
-    ax.set_xlabel("Change in deep-library share (percentage points)")
+    ax.set_xlim(0, 50)
+    ax.set_xlabel("Change in titles with acquisition lag over 5 years (percentage points)")
     ax.invert_yaxis()
-    add_header(fig, "Deep-library share rose most in drama and family films",
-               "US movie additions; acquisition lag over 5 years, comparing 2015 to 2017 with 2018 to 2021")
-    add_source(fig, "Netflix Movies and TV Shows dataset by Shivam Bansal; KMeans segment labels use dominant genre")
+    add_header(fig, "Deep-library share rose in both prespecified genre groups",
+               "US movie additions; explicit listed_in tags, comparing 2015 to 2017 with 2018 to 2021")
+    add_source(fig, "Netflix Movies and TV Shows dataset by Shivam Bansal")
     fig.savefig(OUT / "netflix-beat03.png", dpi=DPI, facecolor=fig.get_facecolor())
     plt.close(fig)
 
     uk = data[data["country_bucket"].eq("UK")].copy()
-    uk["completeness"] = uk[["director", "cast", "country"]].notna().sum(axis=1) / 3
-    uk["is_sparse"] = uk["completeness"] < 0.34
+    # The UK primary-country filter requires `country` to be present. Measure
+    # missing director and cast fields only for this selected subset.
+    uk["is_sparse"] = uk[["director", "cast"]].isna().all(axis=1)
     vintage_order = ["Pre-2000s", "2000s", "2010s", "2020s"]
     uk["vintage_label"] = pd.cut(
         uk["release_year"], bins=[0, 1999, 2009, 2019, 2030], labels=vintage_order
     )
-    sparse = uk.groupby("vintage_label")["is_sparse"].agg(["mean", "size"]).reindex(vintage_order)
+    sparse = uk.groupby("vintage_label")["is_sparse"].agg(["sum", "mean", "size"]).reindex(vintage_order)
     assert int(sparse.loc["2020s", "size"]) == 86 and round(sparse.loc["2020s", "mean"] * 100, 1) == 12.8
     assert round(sparse.loc["2010s", "mean"] * 100, 1) == 6.3
+
+    def wilson_interval(successes: int, sample_size: int) -> tuple[float, float]:
+        proportion = successes / sample_size
+        z = 1.96
+        denominator = 1 + z * z / sample_size
+        center = (proportion + z * z / (2 * sample_size)) / denominator
+        radius = z * np.sqrt(proportion * (1 - proportion) / sample_size + z * z / (4 * sample_size**2)) / denominator
+        return center - radius, center + radius
+
     fig, ax = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
     style_figure(fig)
-    fig.subplots_adjust(left=0.08, right=0.96, top=0.80, bottom=0.16)
+    fig.subplots_adjust(left=0.12, right=0.96, top=0.80, bottom=0.16)
     style_axis(ax)
     x = np.arange(len(vintage_order))
     values = sparse["mean"].to_numpy() * 100
-    ax.plot(x, values, color=HIGHLIGHT, marker="o", markersize=7, linewidth=2.5)
+    intervals = np.array([wilson_interval(int(row["sum"]), int(row["size"])) for _, row in sparse.iterrows()]) * 100
+    lower_error = values - intervals[:, 0]
+    upper_error = intervals[:, 1] - values
+    ax.errorbar(x, values, yerr=[lower_error, upper_error], color=HIGHLIGHT, marker="o",
+                markersize=7, linewidth=2, capsize=5, linestyle="none")
     for index, value in enumerate(values):
-        ax.annotate(f"{value:.1f}%", (index, value), xytext=(0, 10), textcoords="offset points",
-                    ha="center", color=INK, fontweight="bold")
+        row = sparse.iloc[index]
+        ax.annotate(f"{int(row['sum'])}/{int(row['size'])}  ({value:.1f}%)",
+                    (index, intervals[index, 1]), xytext=(0, 8), textcoords="offset points",
+                    ha="center", color=INK, fontweight="bold", fontsize=9)
     ax.set_xticks(x, vintage_order)
-    ax.set_ylim(0, max(values) + 5)
-    ax.set_ylabel("Titles with sparse core metadata (%)")
-    add_header(fig, "Sparse metadata rose for newer UK releases",
-               "Release vintage; sparse means at least 2 of director, cast, and country are missing")
-    add_source(fig, "Netflix Movies and TV Shows dataset by Shivam Bansal; 86 UK titles released in the 2020s")
+    ax.set_ylim(0, 32)
+    ax.set_ylabel("UK titles missing both director and cast (%)")
+    add_header(fig, "The metadata gap is uncertain for recent UK titles",
+               "Missing both director and cast by release vintage; points show 95% Wilson intervals")
+    add_source(fig, "Netflix Movies and TV Shows dataset by Shivam Bansal; UK-primary titles")
     fig.savefig(OUT / "netflix-beat05.png", dpi=DPI, facecolor=fig.get_facecolor())
     plt.close(fig)
 
@@ -1034,6 +1093,34 @@ def save_netflix_charts() -> None:
     add_source(fig, "Netflix Movies and TV Shows dataset by Shivam Bansal")
     fig.savefig(OUT / "netflix-beat02.png", dpi=DPI, facecolor=fig.get_facecolor())
     plt.close(fig)
+
+    # The remaining legacy, unlinked charts use an exploratory catalog grouping.
+    # The published beat03 comparison above uses explicit genre tags instead.
+    from sklearn.cluster import KMeans
+    from sklearn.preprocessing import LabelEncoder, StandardScaler
+
+    clustered = data.dropna(subset=["year_added", "acquisition_lag"]).copy().reset_index(drop=True)
+    top_genres = clustered["listed_in"].str.split(", ").explode().value_counts().head(15).index.tolist()
+    genre_columns = []
+    for genre in top_genres:
+        safe = genre.replace(" ", "_").replace("&", "and").replace("'", "")
+        column = f"g_{safe}"
+        clustered[column] = clustered["listed_in"].str.contains(genre, regex=False).fillna(False).astype(int)
+        genre_columns.append(column)
+    for column, encoded in [("type", "type_enc"), ("rating_tier", "rating_enc"), ("lag_bucket", "lag_enc")]:
+        clustered[encoded] = LabelEncoder().fit_transform(clustered[column])
+    features = genre_columns + ["type_enc", "rating_enc", "lag_enc"]
+    scaled = StandardScaler().fit_transform(clustered[features].values.astype(float))
+    clustered["cluster"] = KMeans(n_clusters=5, random_state=42, n_init=10).fit_predict(scaled)
+    dominant_genres = {}
+    for cluster_id in range(5):
+        block = clustered[clustered["cluster"] == cluster_id]
+        counts = pd.Series({g: block["listed_in"].str.contains(g, regex=False).sum() for g in top_genres})
+        dominant_genres[cluster_id] = counts.sort_values(ascending=False).index.tolist()[:2]
+    assert set(dominant_genres[0]) == {"International Movies", "Dramas"}
+    assert dominant_genres[2][0] == "Documentaries"
+    assert dominant_genres[3][0] == "Children & Family Movies"
+    labels = {0: "International drama", 2: "Documentaries", 3: "Children and family"}
 
     movie_directors = data[(data["type"].eq("Movie")) & data["director"].notna()].merge(
         clustered[["show_id", "cluster"]], on="show_id", how="inner"

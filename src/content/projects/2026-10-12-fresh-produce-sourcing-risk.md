@@ -21,6 +21,13 @@ header:
   teaser: /images/produce-source-concentration.png
 ---
 
+## Project brief
+
+- **Project:** Compare reported import-origin concentration for fresh fruit and vegetables.
+- **Question:** Which category should buyers review first for alternate origins?
+- **Built:** A matched January-to-August comparison of top-ten origin shares and bounded HHI.
+- **Result:** Fresh vegetables had a 2026 mean monthly HHI of 0.419, compared with 0.264 to 0.267 for fruit. These are origin-market measures, not buyer exposure.
+
 ## Business question
 
 Which fresh-produce categories should a grocery or food-service buyer review first for alternative origin coverage?
@@ -37,13 +44,21 @@ An import category can have several countries in its top ten and still depend he
 - **Main risk:** USDA reports aggregated categories and the ten largest origins. Country of origin does not identify vendors, contracts, logistics alternatives, or substitutable products.
 - **Next test:** map affected SKUs and supplier contracts to alternate origins, then assess capacity, lead time, seasonal availability, product specification, and landed cost.
 
-## Data used
+## Data and preparation
 
 The source is USDA Economic Research Service's [Foreign Agricultural Trade of the United States](https://www.ers.usda.gov/data-products/foreign-agricultural-trade-of-the-united-states-fatus/us-agricultural-trade-data-update). I used its monthly table of the top ten import sources for fresh or frozen fruit and vegetables by customs value. The source page was updated October 8, 2026. The comparison covers January through August in 2025 and 2026.
 
 Each selected category-month includes ten reported origins and a World total. The source records customs value in millions of U.S. dollars. It does not report each buyer's suppliers, physical quantities for this table, or individual products within the aggregated categories.
 
-## Analysis
+For each month, I divide the reported origin values by the matching World total. I calculate a lower HHI bound from the ten listed origins. The upper bound assigns the unreported share to one additional origin.
+
+## Stakeholder questions
+
+- **Which category has the higher reported-origin concentration?** Fresh vegetables. Its 2026 HHI bound is 0.4188 to 0.4192. The fruit bound is 0.2638 to 0.2670.
+- **Which origin leads both categories?** Mexico led each reported month. Its average share was 55.3% for vegetables and 45.9% for fruit.
+- **Did import value move in the same direction?** No. January-to-August vegetable value rose 2.6% year over year. Fruit value fell 7.7%.
+
+## Findings
 
 ### Fresh vegetable origins are more concentrated
 
@@ -67,7 +82,11 @@ January through August customs value for fresh vegetables totaled **$10.61 billi
 
 ![Monthly customs values for fresh fruit and vegetables, January to August in 2025 and 2026](/images/produce-import-value-yoy.png)
 
-## Result - test alternate origins for fresh vegetables first
+## Built
+
+The analysis checks 32 category-month records, computes top-ten coverage and bounded concentration, and compares year-over-year customs values. It does not infer physical volume or supplier capacity.
+
+## Result
 
 The concentration screen places fresh vegetables first for deeper origin-diversification work. Fresh fruit also relies heavily on Mexico, although its ten-origin mix is more distributed in the current data. Neither finding proves that the market would be disrupted or that another source can replace current imports.
 

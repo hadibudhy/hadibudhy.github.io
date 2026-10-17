@@ -2,9 +2,9 @@
 
 ## Shipped result
 
-This project ships a **descriptive comparator audit**, not a difference-in-differences estimate. It compares equal-weight weekly means of `log(1 + car crossings)` for three affected facilities and seven comparison facilities within 26 weeks of NYC congestion pricing's 5 January 2025 start.
+This project ships a **descriptive comparator audit**, not a difference-in-differences estimate. It compares equal-weight weekly means of `log(1 + car crossings)` for three affected facilities and seven comparison facilities within 26 weeks of NYC congestion pricing's 5 January 2025 start. It also fits a simple linear trend to 314 pre-policy weekly gaps with HAC standard errors using 26 lags.
 
-The displayed pre-policy gap changes direction and magnitude. That is enough to pause causal attribution, but it is not a formal parallel-trends test, statistical rejection rule, or policy-effect estimate.
+The displayed pre-policy gap changes direction and magnitude. The estimated slope is +0.0155 log points per year (95% HAC interval −0.0047 to +0.0358; p=0.133). The interval includes zero and is also consistent with some positive slope. This simple test does not establish parallel trends, validate the comparator, or estimate a policy effect.
 
 Run the shipped analysis from the repository root:
 
@@ -12,11 +12,13 @@ Run the shipped analysis from the repository root:
 python projects/growth-analytics/03-congestion-pricing-causal-impact/src/analyze_mta_comparator.py
 ```
 
+The analysis uses Python, pandas, matplotlib, and statsmodels.
+
 ## Decision boundary
 
 **Decision owner:** Marketplace and Commercial leadership. **Decision:** whether pricing, incentives, or geographic strategy should change after congestion pricing.
 
-This audit does not support changing pricing or supply. A decision-ready study needs a pre-registered comparator rule, formal pre-trend and placebo checks, route-level policy exposure, and internal outcomes such as requests, completed rides, cancellations, pickup delay, passenger price, and driver pay.
+This audit does not support changing pricing or supply. A decision-ready study needs a pre-registered comparator rule, additional placebo checks, route-level policy exposure, and internal outcomes such as requests, completed rides, cancellations, pickup delay, passenger price, and driver pay.
 
 ## Data and scope
 

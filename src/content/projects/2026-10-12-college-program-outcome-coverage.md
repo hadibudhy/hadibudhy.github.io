@@ -21,27 +21,32 @@ header:
   teaser: /images/college-scorecard-earnings-coverage-credential.png
 ---
 
-## Executive summary
+## Project brief
 
-**Decision:** can a college use public program earnings to decide where to invest or what to promote? **Finding:** after removing repeated branch-campus records, only **37.6% of domestic bachelor's program records** in the June 2026 College Scorecard file had a reportable four-year earnings median. Coverage was **54.2% for public programs** and **24.8% for private nonprofit programs**. **Recommendation:** show coverage beside every comparison and use reported outcomes as a review signal, not a ranking. The data does not represent every graduate or explain why outcomes differ.
+- **Project:** Audit coverage of College Scorecard program earnings.
+- **Question:** Are public earnings complete enough to guide program reviews?
+- **Built:** A branch-deduplicated program table and coverage comparisons by credential and institution control.
+- **Result:** 37.6% of domestic bachelor's program records reported a four-year earnings median. Coverage was 54.2% for public programs and 24.8% for private nonprofits.
 
-## Problem - a clean ranking can hide missing outcomes
+## Business question
 
 College leaders may compare majors or institutions using public earnings figures. If some programs have no reportable value, a ranking can describe only the visible part of the portfolio and make the coverage gap hard to see.
 
 The business question is: **is the College Scorecard field-of-study file complete and comparable enough to guide a program review, and what should leaders check before acting on it?**
 
-## Hypotheses - what could make comparisons misleading?
-
-- **Suppression may leave many programs out of view.** Count reportable earnings and privacy-suppressed cells separately.
-- **Coverage may differ by credential or institution type.** Compare like-for-like program records before interpreting the visible values.
-- **Branch campuses may repeat the same outcome value.** Check the source's institution key before counting programs or comparing coverage.
-
-## Analysis - how much of the program picture is visible?
+## Data and preparation
 
 The source is the U.S. Department of Education's College Scorecard **Most Recent Cohorts: Field of Study** file, released on June 10, 2026. It contains 227,980 rows with earnings, debt, institution, field-of-study, and credential data. The unit for these outcome measures is the institution system, four-digit Classification of Instructional Programs field, and credential level.
 
 The Department calculates some outcome measures at the six-digit OPEID institution-system level and repeats them across branch campuses. I verified that repeated earnings and debt values matched, then kept one row per OPEID6, field, and credential. For the comparison below, I excluded foreign institutions and non-credential coursework. I treat a numeric median as reportable and keep the source's `PS` privacy-suppression value separate. In the domestic bachelor's rows, every nonnumeric earnings cell is marked `PS`.
+
+## Stakeholder questions
+
+- **How many domestic bachelor's records have reportable earnings?** 25,283 of 67,212 distinct program records, or 37.6%.
+- **Does coverage differ by institution control?** Yes. Coverage was 54.2% for public, 24.8% for private nonprofit, and 44.5% for for-profit programs.
+- **Can a missing value be treated as zero?** No. Every nonnumeric domestic bachelor's earnings cell is marked `PS` for privacy suppression.
+
+## Findings
 
 ### Earnings coverage changes by credential
 
@@ -67,7 +72,11 @@ The raw file contains **70,557** U.S. bachelor's rows for the three domestic con
 
 The deduplication changes the count, not the reported outcome values. It prevents the same institution-system result from appearing as multiple independent programs just because the institution has multiple campuses.
 
-## Result - use program outcomes as a review signal, not a ranking
+## Built
+
+The analysis verifies the source snapshot, checks repeated branch values, deduplicates to institution-system, field, and credential, and measures reportable-value coverage. It does not impute suppressed values.
+
+## Result
 
 The coverage and branch-record hypotheses were supported. Most domestic bachelor's program records did not have a reportable four-year earnings median, and coverage varied by institution control. The dataset can support a first-pass review, but it cannot support an unqualified league table across institutions.
 

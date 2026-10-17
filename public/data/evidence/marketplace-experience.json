@@ -10,23 +10,37 @@
     "grain": "completed trip plus monthly aggregation",
     "sha256": {
       "february_2019_hourly_aggregation": "37db5f0d2546921e2b878fcb0376031060e95d526c3488491f0d7d9c2b1d6f79",
+      "february_2019_weekday_aggregation": "38660e390e106c0ff547d222b76ea9e99e92f03433db69ab8be6de15fb5d40eb",
       "monthly_reports_2024_2025": "727d69a1716553b9ccd3282a6cfc8b58c5e4dadd4623404b7a455330a2bfbd05"
     }
   },
   "models": [
     "Official API hourly aggregation",
-    "Monthly supply context"
+    "Official API weekday aggregation",
+    "Annual and matched-month report comparison"
   ],
   "checks": [
     "24 hourly buckets",
+    "7 weekday buckets sum to the same 4,965,012 rows as the bounded trip slice",
     "source total",
     "monthly period",
+    "12 same-month pairs for 2024 and 2025",
+    "matched-month driver means: -4.2% in January–June and +4.0% in July–December",
     "proxy labels"
   ],
   "metrics": {
     "recorded_rows": 4965012,
     "peak_hour": 18,
     "peak_recorded_trips": 334713,
+    "weekday_trip_counts": {
+      "sunday": 756721,
+      "monday": 592170,
+      "tuesday": 576476,
+      "wednesday": 663516,
+      "thursday": 649575,
+      "friday": 860161,
+      "saturday": 866393
+    },
     "monthly_report_annual_means": {
       "years": [
         2024,
@@ -44,16 +58,35 @@
         6.35,
         6.375
       ]
+    },
+    "monthly_matched_change": {
+      "comparison": "2025 versus the same month in 2024",
+      "months": 12,
+      "trips_per_day": {
+        "mean_paired_change_pct": 2.0248,
+        "jan_jun_mean_change_pct": 0.7409,
+        "jul_dec_mean_change_pct": 3.3086
+      },
+      "unique_drivers": {
+        "mean_paired_change_pct": -0.0749,
+        "jan_jun_mean_change_pct": -4.1516,
+        "jul_dec_mean_change_pct": 4.0019
+      },
+      "interpretation": "Descriptive citywide monthly comparison; not a measure of hourly online supply or unmet demand"
     }
   },
   "artifacts": [
     "/images/growth-hvf-hourly.png",
+    "/images/growth-hvf-weekday.png",
     "/images/growth-hvf-monthly-supply.png",
+    "/images/growth-hvf-monthly-matched.png",
     "/images/portfolio-marketplace-measurement.svg"
   ],
   "artifactHashes": {
     "/images/growth-hvf-hourly.png": "aeafb71b885046f34767453fca01e411f6d796ab8371b04bbb5df639697ea15e",
+    "/images/growth-hvf-weekday.png": "481adeacbdf9bb0df990b048c5fc2db4c778ec774ace57507a3f7f37f9574d3d",
     "/images/growth-hvf-monthly-supply.png": "d37addc19bfa0908dbcf4b9f4d9adce1771ab96cc5699367c5768aa9163fe1d9",
+    "/images/growth-hvf-monthly-matched.png": "9e2c183be774d2b551b8974b24b8d0e010f339153f4d42ca1208f0a1c4b13649",
     "/images/portfolio-marketplace-measurement.svg": "ab3688d5cce4fb8ba30aacbb3e32d8b034b48d14633d9a0d0d1f42e3b112f7fd"
   },
   "evidenceBoundary": "Completed-trip activity and official monthly proxies are supported. Total requests, lost matches, and incentive ROI are not observed."

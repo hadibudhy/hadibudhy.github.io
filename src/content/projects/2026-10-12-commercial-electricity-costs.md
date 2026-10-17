@@ -21,27 +21,32 @@ header:
   teaser: /images/commercial-electricity-price-trend.png
 ---
 
-## Executive summary
+## Project brief
 
-**Decision:** where should a multi-site business start reviewing electricity costs? **Finding:** the EIA's sales-weighted average commercial retail price rose from **10.68 cents per kilowatt-hour in 2019 to 13.41 cents in 2025**, a **25.6% nominal increase**. State prices and changes differed widely. **Recommendation:** use state averages to set review priorities, then check actual site bills, utility tariffs, and load patterns before choosing an action. The public data does not measure a company's costs or savings.
+- **Project:** Screen commercial electricity price levels and changes across states.
+- **Question:** Where should a multi-site business review energy cost exposure first?
+- **Built:** A sales-weighted EIA price series and state comparison from 2019 to 2025.
+- **Result:** The U.S. average rose 25.6% in nominal terms. State prices and changes varied. Public averages do not estimate company bills or savings.
 
-## Problem - one national assumption can hide local cost exposure
+## Business question
 
 A finance team may set one electricity cost assumption for every location. That can miss markets where prices are already high or where the published average has risen quickly. The business question is: **which locations should a multi-site operator review first, and what can public data support before a site-level audit?**
 
 The analysis is a market screen. It does not estimate a particular company's energy bill, operating margin, or savings opportunity.
 
-## Hypotheses - what could explain cost pressure?
-
-- **The national commercial average price may be rising.** Compare a consistent annual price across the same period.
-- **High-cost states may also have faster increases.** Compare 2025 state prices with their 2019 to 2025 changes.
-- **State prices may be enough to select investments.** Check whether the public figures include the tariffs and load details required for a company decision.
-
-## Analysis - what do EIA data show?
+## Data and preparation
 
 The source is the U.S. Energy Information Administration's monthly Form EIA-861M electricity sales and revenue data. The checked snapshot covers January 2019 through December 2025. Each row is a state, month, and sector. I kept the commercial sector, analyzed the 50 states and District of Columbia separately, and used the EIA U.S. aggregate for the national trend. Regional aggregates were excluded from the state comparisons. EIA makes state-level adjustments for non-sampled entities; the monthly figures cover bundled service.
 
 For each year, I calculated the sales-weighted price as 100 times total commercial revenue divided by total commercial sales. The published units convert to cents per kilowatt-hour. Prices are nominal and are not adjusted for general inflation.
+
+## Stakeholder questions
+
+- **How did the U.S. commercial average change?** It rose from 10.68 cents per kilowatt-hour in 2019 to 13.41 cents in 2025.
+- **Which states had both high prices and fast growth?** The state chart marks states above the 75th percentile on both measures.
+- **Can a state average estimate one company's bill?** No. Site tariffs, load, contracts, and demand charges are missing.
+
+## Findings
 
 ### The national commercial average price rose, but it is not a company bill
 
@@ -67,7 +72,11 @@ Hawaii and California led the 2025 state averages, but their changes since 2019 
 
 The distinction matters for planning: a high level may call for a tariff and load review, while a fast increase may call for a budget and contract review. Neither signal replaces actual bills.
 
-## Result - use the state screen to prioritize site reviews
+## Built
+
+The analysis calculates annual sales-weighted prices and compares 51 state and District of Columbia series. It excludes regional and national rows from state comparisons and retains the nominal-price boundary.
+
+## Result
 
 The evidence supports the first two hypotheses: the national commercial average retail price rose, and both 2025 price levels and 2019 to 2025 changes vary by state. The third hypothesis is not supported. A state average is not detailed enough to choose a procurement or efficiency investment.
 

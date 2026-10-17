@@ -8,7 +8,7 @@ with event_counts as (
     group by 1
 ), first_view as (
     select
-        user_session,
+        user_session_key,
         min(event_number) as view_event_number,
         min(event_time) as viewed_at
     from {{ ref('int_rees46_ordered_events') }}
@@ -16,39 +16,39 @@ with event_counts as (
     group by 1
 ), first_cart as (
     select
-        ordered.user_session,
+        ordered.user_session_key,
         min(ordered.event_number) as cart_event_number,
         min(ordered.event_time) as carted_at
     from {{ ref('int_rees46_ordered_events') }} as ordered
-    inner join first_view using (user_session)
+    inner join first_view using (user_session_key)
     where ordered.event_type = 'cart'
       and ordered.event_number > first_view.view_event_number
     group by 1
 ), first_purchase as (
     select
-        ordered.user_session,
+        ordered.user_session_key,
         min(ordered.event_number) as purchase_event_number,
         min(ordered.event_time) as purchased_at
     from {{ ref('int_rees46_ordered_events') }} as ordered
-    inner join first_cart using (user_session)
+    inner join first_cart using (user_session_key)
     where ordered.event_type = 'purchase'
       and ordered.event_number > first_cart.cart_event_number
     group by 1
 ), session_rollup as (
     select
         date_trunc('day', coalesce(first_view.viewed_at, base.session_start_at)) as event_date,
-        base.user_session,
+        base.user_session_key,
         first_view.view_event_number,
         first_cart.cart_event_number,
         first_purchase.purchase_event_number
     from (
-        select user_session, min(event_time) as session_start_at
+        select user_session_key, min(event_time) as session_start_at
         from {{ ref('int_rees46_ordered_events') }}
         group by 1
     ) as base
-    left join first_view using (user_session)
-    left join first_cart using (user_session)
-    left join first_purchase using (user_session)
+    left join first_view using (user_session_key)
+    left join first_cart using (user_session_key)
+    left join first_purchase using (user_session_key)
 ), session_counts as (
     select
         event_date,

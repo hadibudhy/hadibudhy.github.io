@@ -169,8 +169,17 @@ def generate():
     event_counts = event_manifest["validation"]["eventCounts"]
     event_rows = event_manifest["validation"]["eventRows"]
     missing_session_rows = event_manifest["validation"]["missingSessionRows"]
+    funnel = event_manifest["validation"]["sessionFunnel"]
     assert sum(event_counts.values()) == event_rows == 885_129
     assert missing_session_rows == 165
+    assert {key: funnel[key] for key in (
+        "user_session_pairs", "view_sessions", "view_then_cart_sessions", "view_cart_purchase_sessions"
+    )} == {
+        "user_session_pairs": 490_633,
+        "view_sessions": 488_586,
+        "view_then_cart_sessions": 41_232,
+        "view_cart_purchase_sessions": 20_699,
+    }
     horizontal_bars(
         "rees46-event-mix.svg",
         "Product views make up most recorded events",
@@ -198,6 +207,16 @@ def generate():
         "REES46 Electronics behaviour export and local dbt project",
         "Implemented data model",
         conceptual=False,
+    )
+    horizontal_bars(
+        "rees46-session-funnel.svg",
+        "Only 4.2% of user-session pairs contain a full event sequence",
+        "20,699 of 490,633 user-session pairs contain view, then cart, then purchase events; events are not verified transactions.",
+        ["Identified sessions", "Sessions with view", "View then cart", "View, cart, purchase"],
+        [funnel["user_session_pairs"], funnel["view_sessions"], funnel["view_then_cart_sessions"], funnel["view_cart_purchase_sessions"]],
+        "User-session pairs in the 24 Sep 2020 to 28 Feb 2021 file",
+        "REES46 Electronics behaviour export; local DuckDB sequence by event time and source row",
+        "Session grain combines user_id and user_session; event sequence is not verified order conversion",
     )
 
     shopper_metrics = json.loads((OUT.parent / "data" / "online-shoppers-metrics.json").read_text(encoding="utf-8"))
@@ -277,7 +296,9 @@ def generate():
     flow("complaintflow-architecture.svg", "ComplaintFlow routes uncertain cases to a human before release", "The conceptual workflow validates and redacts input, retrieves approved guidance, checks output, escalates uncertainty, and records each decision.", [("Validate", "Complaint API and PII"), ("Retrieve", "Approved playbook or baseline"), ("Check", "Provider response and evidence"), ("Decide", "Answer or human escalation"), ("Log", "Audit trail and outcome")], "ComplaintFlow reference architecture")
     observability("portfolio-complaintflow-boundary.svg", "A synthetic fixture validates software behavior, not real-world model quality", "The system contract is testable; production performance needs privacy-reviewed labeled complaints.", ["routing schema and fallbacks", "provider retries and audit log", "evaluation slices in fixture"], ["representative complaint prevalence", "hosted-model production accuracy", "real customer resolution impact"], "ComplaintFlow project documentation", observed_label="Implemented / tested in the repository")
     facts("portfolio-complaintflow-fixture.svg", "The 20-case fixture passes the routing contract-not a production benchmark", "Checked local evaluation output on hand-written standard, unknown, PII, paraphrase, and short cases.", [("20", "fixture cases", "Small synthetic contract test"), ("1.00", "macro-F1", "Baseline and service"), ("100%", "routed citation coverage", "17 of 17 routed cases"), ("3", "human escalations", "All unknown cases")], "ComplaintFlow checked evaluation fixture", "Synthetic validation evidence")
-    facts("portfolio-campaign-economics.svg", "The randomized benchmark shows lift, but economics still set the rollout gate", "Criteo ITT conversion effect from the released benchmark; current ad cost and contribution are unavailable.", [("0.194%", "control conversion", "Assigned control"), ("0.309%", "treatment conversion", "Assigned advertising"), ("+0.115pp", "absolute lift", "95% CI +0.108 to +0.122pp"), ("115", "extra conversions / 100k", "Benchmark scenario")], "Criteo Uplift Modeling Dataset", "Scale only when incremental CPA clears contribution")
+    campaign_metrics = json.loads((OUT.parent / "data" / "evidence" / "experiment-metrics.json").read_text(encoding="utf-8"))["metrics"]["visit_itt"]
+    visit_lift = campaign_metrics["absolute_lift_pp"]
+    bars("portfolio-campaign-economics.svg", f"Advertising assignment increased visits by {visit_lift:.3f} percentage points", f"Intention-to-treat visit rates: control n={campaign_metrics['control_users']:,} and assigned advertising n={campaign_metrics['treatment_users']:,}. 95% CI for lift: +{campaign_metrics['ci95_pp'][0]:.3f} to +{campaign_metrics['ci95_pp'][1]:.3f}pp.", ["Assigned control", "Assigned advertising"], [100 * campaign_metrics["control_rate"], 100 * campaign_metrics["treatment_rate"]], "Users with a visit (%)", "Criteo Uplift Modeling Dataset", "Visits are not purchases or profit")
     bars("portfolio-campaign-f0.svg", "One anonymized feature band contains most of the exploratory lift", "Intention-to-treat conversion difference across complete f0 quartiles; n=13,979,592 benchmark rows. Bands are not customer personas.", ["f0 Q1", "f0 Q2", "f0 Q3", "f0 Q4"], [0.038, 0.386, 0.019, 0.010], "Absolute conversion lift (percentage points)", "Criteo Uplift Modeling Dataset", "Exploratory; retest before targeting", highlight_index=1)
     flow("portfolio-campaign-holdout.svg", "The next campaign decision is a randomized holdout with an economic stop rule", "Assignment remains the treatment definition; exposure, CPA, and contribution are measured after launch.", [("Assign", "Treatment or holdout"), ("Measure", "Incremental conversion"), ("Scale", "CPA below contribution")], "Criteo Uplift Modeling Dataset")
     observability("portfolio-marketplace-measurement.svg", "Recorded trips show activity, not the complete marketplace demand funnel", "The public TLC data is useful context for a pilot, not evidence for a citywide incentive rollout.", ["recorded trips by hour and zone", "monthly driver and vehicle proxies", "official source aggregation"], ["all requests and lost matches", "true wait and cancellations", "incentive ROI and contribution"], "NYC TLC public data")

@@ -17,6 +17,10 @@ with source_rows as (
         cast(price as double) as price,
         cast(user_id as varchar) as user_id,
         nullif(cast(user_session as varchar), '') as user_session,
+        case
+            when nullif(cast(user_session as varchar), '') is null then null
+            else md5(concat_ws('|', cast(user_id as varchar), cast(user_session as varchar)))
+        end as user_session_key,
         cast(current_timestamp as timestamp) as loaded_at
     from source_rows
 )

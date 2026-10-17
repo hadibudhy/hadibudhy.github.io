@@ -1,12 +1,11 @@
 """
 Fake Job Postings -- ML Pipeline v2
-Adds: threshold tuning, SHAP, keyword extraction, CV, sentence-transformers
+Adds: validation threshold selection, feature importance, and keyword analysis
 """
 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.gridspec as gridspec
 import warnings
 import hashlib
 import sys
@@ -15,21 +14,18 @@ warnings.filterwarnings("ignore")
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score
+from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OrdinalEncoder
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.decomposition import TruncatedSVD
 from sklearn.metrics import (
     classification_report, confusion_matrix,
-    roc_auc_score, average_precision_score,
-    precision_recall_curve, f1_score,
+    average_precision_score, f1_score,
     precision_score, recall_score,
 )
 import lightgbm as lgb
-import shap
-from sentence_transformers import SentenceTransformer
 
 ROOT = Path(__file__).resolve().parents[3]
 if str(ROOT) not in sys.path:
@@ -73,8 +69,7 @@ df["caps_ratio"]       = df["text_all"].apply(
 CAT_COLS = ["employment_type", "required_experience", "required_education",
             "industry", "function"]
 for col in CAT_COLS:
-    df[col] = df[col].fillna("missing")
-    df[col] = LabelEncoder().fit_transform(df[col])
+    df[col] = df[col].fillna("missing").astype(str)
 
 TABULAR_FEATURES = [
     "telecommuting", "has_company_logo", "has_questions",
@@ -87,15 +82,29 @@ X_text = df["text_all"]
 X_tab  = df[TABULAR_FEATURES]
 y      = df["fraudulent"]
 
-train_idx, test_idx = train_test_split(
+development_idx, test_idx = train_test_split(
     np.arange(len(y)), test_size=0.2, random_state=42, stratify=y
 )
-X_text_tr, X_text_te = X_text.iloc[train_idx], X_text.iloc[test_idx]
-X_tab_tr, X_tab_te = X_tab.iloc[train_idx], X_tab.iloc[test_idx]
-y_tr, y_te = y.iloc[train_idx], y.iloc[test_idx]
+train_idx, validation_idx = train_test_split(
+    development_idx, test_size=0.25, random_state=43, stratify=y.iloc[development_idx]
+)
+X_text_tr = X_text.iloc[train_idx]
+X_text_val = X_text.iloc[validation_idx]
+X_text_te = X_text.iloc[test_idx]
+X_tab_tr = X_tab.iloc[train_idx].copy()
+X_tab_val = X_tab.iloc[validation_idx].copy()
+X_tab_te = X_tab.iloc[test_idx].copy()
+y_tr = y.iloc[train_idx]
+y_val = y.iloc[validation_idx]
+y_te = y.iloc[test_idx]
+
+category_encoder = OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1)
+X_tab_tr[CAT_COLS] = category_encoder.fit_transform(X_tab_tr[CAT_COLS]).astype(float)
+X_tab_val[CAT_COLS] = category_encoder.transform(X_tab_val[CAT_COLS]).astype(float)
+X_tab_te[CAT_COLS] = category_encoder.transform(X_tab_te[CAT_COLS]).astype(float)
 
 scale_pos = (y_tr == 0).sum() / (y_tr == 1).sum()
-print(f"Train: {len(y_tr):,} | Test: {len(y_te):,} | imbalance: {scale_pos:.1f}:1")
+print(f"Train: {len(y_tr):,} | Validation: {len(y_val):,} | Test: {len(y_te):,} | imbalance: {scale_pos:.1f}:1")
 
 # =============================================================================
 # 2. BASELINE MODELS (LR + LightGBM combined) -- replicated from v1
@@ -113,111 +122,57 @@ y_prob_lr = lr_pipe.predict_proba(X_text_te)[:, 1]
 # LightGBM combined (TF-IDF LSA + tabular)
 tfidf = TfidfVectorizer(max_features=20000, ngram_range=(1,2), sublinear_tf=True, min_df=2)
 X_tfidf_tr = tfidf.fit_transform(X_text_tr)
+X_tfidf_val = tfidf.transform(X_text_val)
 X_tfidf_te = tfidf.transform(X_text_te)
 svd = TruncatedSVD(n_components=100, random_state=42)
 X_lsa_tr = svd.fit_transform(X_tfidf_tr)
+X_lsa_val = svd.transform(X_tfidf_val)
 X_lsa_te = svd.transform(X_tfidf_te)
 
 X_comb_tr = np.hstack([X_lsa_tr, X_tab_tr.values])
+X_comb_val = np.hstack([X_lsa_val, X_tab_val.values])
 X_comb_te = np.hstack([X_lsa_te, X_tab_te.values])
 
 lgb_comb = lgb.LGBMClassifier(n_estimators=500, learning_rate=0.05, num_leaves=63,
                                 scale_pos_weight=scale_pos, random_state=42, verbose=-1)
 lgb_comb.fit(X_comb_tr, y_tr)
+y_prob_comb_val = lgb_comb.predict_proba(X_comb_val)[:, 1]
 y_prob_comb = lgb_comb.predict_proba(X_comb_te)[:, 1]
 
 print("Baseline models trained.")
 
 # =============================================================================
-# 3. SENTENCE TRANSFORMERS (all-MiniLM-L6-v2)
+# 4. THRESHOLD SELECTION (validation set only)
 # =============================================================================
 
-print("\n-- Model 4: Sentence Transformers + LightGBM --")
-print("Encoding text with all-MiniLM-L6-v2 ...")
-encoder = SentenceTransformer("all-MiniLM-L6-v2")
-
-# Keep the original train and test encoding batches so its stored metrics are
-# reproducible, then encode the full set separately for the five-fold check.
-X_emb_tr = encoder.encode(X_text_tr.tolist(), batch_size=128, show_progress_bar=True)
-X_emb_te = encoder.encode(X_text_te.tolist(), batch_size=128, show_progress_bar=True)
-
-# Combine embeddings with tabular
-X_st_tr = np.hstack([X_emb_tr, X_tab_tr.values])
-X_st_te = np.hstack([X_emb_te, X_tab_te.values])
-
-lgb_st = lgb.LGBMClassifier(n_estimators=500, learning_rate=0.05, num_leaves=63,
-                              scale_pos_weight=scale_pos, random_state=42, verbose=-1)
-lgb_st.fit(X_st_tr, y_tr)
-y_prob_st = lgb_st.predict_proba(X_st_te)[:, 1]
-y_pred_st_def = (y_prob_st >= 0.5).astype(int)
-
-print(classification_report(y_te, y_pred_st_def, target_names=["real", "fake"]))
-print(f"ROC-AUC: {roc_auc_score(y_te, y_prob_st):.4f}")
-print(f"PR-AUC:  {average_precision_score(y_te, y_prob_st):.4f}")
-
-# =============================================================================
-# 4. THRESHOLD TUNING (on best model = ST+tab LightGBM)
-# =============================================================================
-
-print("\n-- Threshold Tuning (Sentence Transformer model) --")
+print("\n-- Threshold Selection (combined LightGBM model) --")
 thresholds = np.arange(0.1, 0.9, 0.01)
-f1_scores    = [f1_score(y_te, (y_prob_st >= t).astype(int)) for t in thresholds]
-prec_scores  = [precision_score(y_te, (y_prob_st >= t).astype(int), zero_division=0) for t in thresholds]
-rec_scores   = [recall_score(y_te, (y_prob_st >= t).astype(int)) for t in thresholds]
+f1_scores = [f1_score(y_val, (y_prob_comb_val >= t).astype(int)) for t in thresholds]
+prec_scores = [precision_score(y_val, (y_prob_comb_val >= t).astype(int), zero_division=0) for t in thresholds]
+rec_scores = [recall_score(y_val, (y_prob_comb_val >= t).astype(int)) for t in thresholds]
 
 best_thresh = thresholds[np.argmax(f1_scores)]
-best_f1     = max(f1_scores)
-y_pred_tuned = (y_prob_st >= best_thresh).astype(int)
+best_val_f1 = max(f1_scores)
+test_pred_tuned = (y_prob_comb >= best_thresh).astype(int)
 
-print(f"Best threshold: {best_thresh:.2f}  -->  F1={best_f1:.4f}")
-print(classification_report(y_te, y_pred_tuned, target_names=["real", "fake"]))
-
-# =============================================================================
-# 5. CROSS-VALIDATION (5-fold, on ST+tab LightGBM)
-# =============================================================================
-
-print("\n-- 5-Fold Cross-Validation (Sentence Transformer model) --")
-print("Encoding full dataset for CV ...")
-X_emb_all = encoder.encode(X_text.tolist(), batch_size=128, show_progress_bar=True)
-X_cv_all   = np.hstack([X_emb_all, X_tab.values])
-y_all      = y.values
-
-cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
-cv_f1  = []
-cv_auc = []
-
-for fold, (tr_idx, te_idx) in enumerate(cv.split(X_cv_all, y_all)):
-    X_cv_tr, X_cv_te = X_cv_all[tr_idx], X_cv_all[te_idx]
-    y_cv_tr, y_cv_te = y_all[tr_idx], y_all[te_idx]
-    sp = (y_cv_tr == 0).sum() / (y_cv_tr == 1).sum()
-    m = lgb.LGBMClassifier(n_estimators=300, learning_rate=0.05, num_leaves=63,
-                             scale_pos_weight=sp, random_state=42, verbose=-1)
-    m.fit(X_cv_tr, y_cv_tr)
-    prob = m.predict_proba(X_cv_te)[:, 1]
-    pred = (prob >= best_thresh).astype(int)
-    cv_f1.append(f1_score(y_cv_te, pred))
-    cv_auc.append(roc_auc_score(y_cv_te, prob))
-    print(f"  Fold {fold+1}: F1={cv_f1[-1]:.4f}  ROC-AUC={cv_auc[-1]:.4f}")
-
-print(f"\nCV F1:      {np.mean(cv_f1):.4f} +/- {np.std(cv_f1):.4f}")
-print(f"CV ROC-AUC: {np.mean(cv_auc):.4f} +/- {np.std(cv_auc):.4f}")
-assert round(float(np.mean(cv_f1)), 4) == 0.8251
-assert round(float(np.std(cv_f1)), 4) == 0.0208
-assert round(float(np.mean(cv_auc)), 4) == 0.9859
-assert round(float(np.std(cv_auc)), 4) == 0.0030
+print(f"Validation threshold: {best_thresh:.2f}  -->  validation F1={best_val_f1:.4f}")
+print("Untouched test result at the selected threshold:")
+print(classification_report(y_te, test_pred_tuned, target_names=["real", "fake"]))
+print(f"Test F1: {f1_score(y_te, test_pred_tuned):.4f}")
 
 # =============================================================================
-# 6. SUSPICIOUS KEYWORD EXTRACTION
+# 5. SUSPICIOUS KEYWORD EXTRACTION
 # =============================================================================
 
 print("\n-- Suspicious Keyword Extraction --")
 
-fake_text = " ".join(df.loc[df.fraudulent == 1, "text_all"].tolist())
-real_text = " ".join(df.loc[df.fraudulent == 0, "text_all"].tolist())
+development_df = df.iloc[development_idx]
+fake_text = " ".join(development_df.loc[development_df.fraudulent == 1, "text_all"].tolist())
+real_text = " ".join(development_df.loc[development_df.fraudulent == 0, "text_all"].tolist())
 
 cv_kw = CountVectorizer(max_features=5000, ngram_range=(1,2),
                          stop_words="english", min_df=3)
-cv_kw.fit(df["text_all"])
+cv_kw.fit(development_df["text_all"])
 vocab = cv_kw.get_feature_names_out()
 
 fake_counts = np.asarray(cv_kw.transform([fake_text]).todense()).flatten()
@@ -242,39 +197,24 @@ print("\nTop 20 terms more common in REAL postings:")
 print(top_real[["term", "log_odds"]].to_string(index=False))
 
 # =============================================================================
-# 7. SHAP EXPLANATION (LightGBM combined model, tabular features only)
+# 7. TABULAR FEATURE IMPORTANCE (LightGBM model)
 # =============================================================================
 
-print("\n-- SHAP Values (LightGBM tabular model) --")
+print("\n-- Tabular Feature Importance (LightGBM) --")
 
 lgb_tab = lgb.LGBMClassifier(n_estimators=300, learning_rate=0.05, num_leaves=31,
                                scale_pos_weight=scale_pos, random_state=42, verbose=-1)
 lgb_tab.fit(X_tab_tr, y_tr)
 
-explainer   = shap.TreeExplainer(lgb_tab)
-# Use 200-sample subset for speed (SHAP on full test set is slow)
-idx_sample  = np.random.RandomState(42).choice(len(X_tab_te), 200, replace=False)
-X_shap      = X_tab_te.iloc[idx_sample]
-shap_values = explainer.shap_values(X_shap)
-
-# For binary classification, shap_values is list [class0, class1] or 3D array
-if isinstance(shap_values, list):
-    sv = shap_values[1]   # class 1 = fake
-elif shap_values.ndim == 3:
-    sv = shap_values[:, :, 1]
-else:
-    sv = shap_values
-
-mean_abs_shap = np.abs(sv).mean(axis=0)
-shap_df = pd.DataFrame({"feature": TABULAR_FEATURES, "mean_abs_shap": mean_abs_shap})
-shap_df = shap_df.sort_values("mean_abs_shap", ascending=False)
-print(shap_df.to_string(index=False))
+importance_df = pd.DataFrame({"feature": TABULAR_FEATURES, "split_count": lgb_tab.feature_importances_})
+importance_df = importance_df.sort_values("split_count", ascending=False)
+print(importance_df.to_string(index=False))
 
 # =============================================================================
 # 8. CHARTS
 # =============================================================================
 
-# --- Fig 1: Threshold tuning and cross-validation ---
+# --- Fig 1: Validation threshold and untouched test results ---
 fig, axes = plt.subplots(1, 2, figsize=WIDE_SIZE, facecolor=CANVAS)
 style_figure(fig)
 fig.subplots_adjust(left=0.08, right=0.97, top=0.79, bottom=0.17, wspace=0.28)
@@ -287,37 +227,27 @@ ax.plot(thresholds, prec_scores, label="Precision", color=HIGHLIGHT, linewidth=1
 ax.plot(thresholds, rec_scores, label="Recall", color=SECONDARY, linewidth=1.7)
 ax.axvline(best_thresh, color=MUTED, linestyle="--", linewidth=1.2)
 ax.set_xlabel("Decision threshold")
-ax.set_ylabel("Held-out test score")
+ax.set_ylabel("Validation score")
 ax.set_ylim(0, 1.02)
 ax.legend(frameon=False, labelcolor=INK, fontsize=8)
-ax.set_title("Threshold trade-off", loc="left", color=INK, fontsize=11, fontweight="bold")
+ax.set_title("Select threshold on validation data", loc="left", color=INK, fontsize=11, fontweight="bold")
 
 ax = axes[1]
-folds = [f"Fold {i + 1}" for i in range(5)]
-x = np.arange(5)
-w = 0.36
-bars1 = ax.bar(x - w / 2, cv_f1, w, label="F1", color=ACCENT)
-bars2 = ax.bar(x + w / 2, cv_auc, w, label="ROC-AUC", color=SECONDARY)
-ax.set_xticks(x, folds)
-ax.set_ylim(0.7, 1.03)
-ax.set_ylabel("Cross-validation score")
-ax.set_title(f"Five-fold check: F1 {np.mean(cv_f1):.3f} ± {np.std(cv_f1):.3f}",
-             loc="left", color=INK, fontsize=10.5, fontweight="bold")
-ax.legend(frameon=False, labelcolor=INK, fontsize=8)
-for bars in (bars1, bars2):
-    for bar in bars:
-        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.004,
-                f"{bar.get_height():.3f}", ha="center", va="bottom", fontsize=7.5, color=INK)
+test_cm = confusion_matrix(y_te, test_pred_tuned, labels=[0, 1])
+ax.imshow(test_cm, cmap="Blues")
+ax.set_xticks([0, 1], ["Predicted real", "Predicted fake"])
+ax.set_yticks([0, 1], ["Actual real", "Actual fake"])
+ax.set_title(f"Untouched test set (n={len(y_te):,})", loc="left", color=INK, fontsize=10.5, fontweight="bold")
+for row in range(2):
+    for column in range(2):
+        color = "white" if row == 0 and column == 0 else INK
+        ax.text(column, row, f"{test_cm[row, column]:,}", ha="center", va="center", color=color, fontsize=12, fontweight="bold")
 
-test_pred = (y_prob_st >= best_thresh).astype(int)
 assert len(y_te) == 3_576 and int(y_te.sum()) == 173
-assert round(best_thresh, 2) == 0.10
-assert round(best_f1, 3) == 0.850
-assert round(recall_score(y_te, test_pred), 3) == 0.751
-assert round(precision_score(y_te, test_pred), 2) == 0.98
-assert round(np.mean(cv_f1), 3) == 0.825 and round(np.std(cv_f1), 3) == 0.021
-add_header(fig, "A 0.10 threshold balanced scam capture and review volume",
-           "Held-out stratified test and five-fold validation; a threshold is a review-policy choice")
+assert len(y_val) == 3_576 and int(y_val.sum()) == 173
+assert 0.1 <= best_thresh <= 0.89
+add_header(fig, f"A {best_thresh:.2f} threshold was selected on validation data",
+           "The untouched test set estimates performance at this review-policy threshold")
 add_source(fig, "Employment Scam Aegean Dataset; 17,880 labeled job posts")
 fig.savefig(OUT / "fake-job-threshold-cv.png", dpi=DPI, facecolor=fig.get_facecolor())
 plt.close(fig)
@@ -341,43 +271,42 @@ axes[1].set_xlabel("Log-odds (negative means more common in legitimate posts)")
 axes[1].axvline(0, color=BORDER, linewidth=0.9)
 for axis in axes:
     axis.tick_params(axis="y", labelsize=7.5)
-add_header(fig, "Posting language differs between fake and legitimate jobs",
-           "Relative keyword frequency in the full labeled dataset; association does not prove intent")
-add_source(fig, "Employment Scam Aegean Dataset; text fields combined by posting")
+add_header(fig, "Posting language differs in the development sample",
+           "Relative keyword frequency; association does not prove intent or predict future scams")
+add_source(fig, "Employment Scam Aegean Dataset; train and validation posts only")
 fig.savefig(OUT / "fake-job-keywords.png", dpi=DPI, facecolor=fig.get_facecolor())
 plt.close(fig)
 print("Validated and saved fake-job-keywords.png")
 
-# --- Fig 3: SHAP Summary ---
+# --- Fig 3: Tabular feature importance ---
 fig, ax = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
 style_figure(fig)
 fig.subplots_adjust(left=0.22, right=0.96, top=0.80, bottom=0.16)
 style_axis(ax, grid_axis="x")
-top_shap = shap_df.head(14)
+top_importance = importance_df.head(14)
 feature_colors = [HIGHLIGHT if f in ["has_company_logo", "has_questions", "telecommuting",
                                "has_salary", "has_profile", "missing_count",
                                "exclamation_ct", "caps_ratio", "has_url"]
-                 else ACCENT for f in top_shap["feature"]]
-ax.barh(top_shap["feature"][::-1], top_shap["mean_abs_shap"][::-1], color=feature_colors[::-1])
-ax.set_xlabel("Mean absolute SHAP value")
-add_header(fig, "Text and profile details both contribute to the model score",
-           "Mean absolute SHAP values for a LightGBM model using profile and engineered text features")
-add_source(fig, "Employment Scam Aegean Dataset; SHAP on a 200-post stratified test subset")
-fig.savefig(OUT / "fake-job-shap.png", dpi=DPI, facecolor=fig.get_facecolor())
+                 else ACCENT for f in top_importance["feature"]]
+ax.barh(top_importance["feature"][::-1], top_importance["split_count"][::-1], color=feature_colors[::-1])
+ax.set_xlabel("LightGBM split count")
+add_header(fig, "Text length, capitalization, and industry dominate split counts",
+           "Split-count importance shows model structure, not causal influence")
+add_source(fig, "Employment Scam Aegean Dataset; profile-feature LightGBM, fit on training data")
+fig.savefig(OUT / "fake-job-feature-importance.png", dpi=DPI, facecolor=fig.get_facecolor())
 plt.close(fig)
-print("Validated and saved fake-job-shap.png")
+print("Saved fake-job-feature-importance.png")
 
 # --- Fig 4: Model comparison (all 4 models) ---
 all_models = [
-    ("LR (TF-IDF)",       y_prob_lr,   None),
-    ("LightGBM (LSA+tab)",y_prob_comb, None),
-    ("ST + LightGBM @0.5",y_prob_st,   0.5),
-    ("ST + LightGBM tuned",y_prob_st,  best_thresh),
+    ("Text LR (TF-IDF)", y_prob_lr, 0.5),
+    ("Combined default", y_prob_comb, 0.5),
+    ("Combined tuned", y_prob_comb, best_thresh),
 ]
 
 summary_rows = []
 for name, prob, thresh in all_models:
-    t = thresh if thresh is not None else 0.5
+    t = thresh
     pred = (prob >= t).astype(int)
     summary_rows.append({
         "Model": name,
@@ -386,19 +315,13 @@ for name, prob, thresh in all_models:
         "PR-AUC":  average_precision_score(y_te, prob),
     })
 sum_df = pd.DataFrame(summary_rows)
-expected = {
-    "F1": [0.819, 0.828, 0.831, 0.850],
-    "Recall": [0.913, 0.723, 0.711, 0.751],
-    "PR-AUC": [0.927, 0.915, 0.901, 0.901],
-}
-for metric, values in expected.items():
-    assert [round(value, 3) for value in sum_df[metric].tolist()] == values, (metric, sum_df[metric].tolist())
+assert len(sum_df) == 3 and np.isfinite(sum_df[["F1", "Recall", "PR-AUC"]].to_numpy()).all()
 
 fig, ax = plt.subplots(figsize=WIDE_SIZE, facecolor=CANVAS)
 style_figure(fig)
 style_axis(ax)
 fig.subplots_adjust(left=0.08, right=0.97, top=0.80, bottom=0.21)
-labels = ["Text model\nLogistic regression", "Profile\nLightGBM", "Combined\ndefault", "Combined\ntuned"]
+labels = ["Text model\nLogistic regression", "Combined\ndefault", "Combined\nvalidation tuned"]
 x = np.arange(len(sum_df))
 w = 0.23
 metric_colors = [("F1", ACCENT), ("Recall", SECONDARY), ("PR-AUC", HIGHLIGHT)]
@@ -412,8 +335,8 @@ ax.tick_params(axis="x", labelsize=8)
 ax.set_ylim(0.65, 1.02)
 ax.set_ylabel("Held-out test score")
 ax.legend(frameon=False, ncols=3, loc="upper left", labelcolor=INK, fontsize=9)
-add_header(fig, "Text signals caught more scams; threshold tuning raised combined F1",
-           "Stratified held-out test; recall and precision describe different review trade-offs")
+add_header(fig, "Text-only and combined models show different test trade-offs",
+           f"Combined threshold {best_thresh:.2f} selected on validation data; all bars use the untouched test set")
 add_source(fig, "Employment Scam Aegean Dataset; 3,576 held-out posts")
 fig.savefig(OUT / "fake-job-all-models.png", dpi=DPI, facecolor=fig.get_facecolor())
 plt.close(fig)
@@ -429,7 +352,5 @@ print("="*60)
 for row in summary_rows:
     print(f"  {row['Model']:30s}  F1={row['F1']:.4f}  Recall={row['Recall']:.4f}  PR-AUC={row['PR-AUC']:.4f}")
 
-print(f"\nBest threshold (F1-optimized): {best_thresh:.2f}")
-print(f"CV F1 (5-fold):  {np.mean(cv_f1):.4f} +/- {np.std(cv_f1):.4f}")
-print(f"CV AUC (5-fold): {np.mean(cv_auc):.4f} +/- {np.std(cv_auc):.4f}")
-print("\nDone. All charts in outputs/")
+print(f"\nValidation-selected threshold (F1-optimized): {best_thresh:.2f}")
+print("\nDone. Fake Job charts saved to public/images/")

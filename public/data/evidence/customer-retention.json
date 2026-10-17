@@ -18,22 +18,40 @@
     "source hash",
     "cancellation handling",
     "customer identity",
-    "revenue grain"
+    "positive identified sales-value grain",
+    "repeat-order customer means at least two distinct eligible invoice numbers"
   ],
   "metrics": {
     "raw_rows": 541909,
     "identifiable_customers": 4338,
-    "recorded_revenue_gbp": 8911407.904
+    "eligible_sales_value_gbp": 8911407.904,
+    "customers_with_two_or_more_orders_share": 0.6558321807,
+    "customers_with_two_or_more_orders": 2845,
+    "repeat_order_customer_definition": "Identifiable customer with at least two distinct invoice numbers after cancelled, non-positive, and missing-customer rows are excluded",
+    "repeat_order_customers_share_of_eligible_sales_value": 0.9308401391,
+    "top_decile_eligible_sales_value_share": 0.6137506575,
+    "top_customer_shares": {
+      "top_1_percent": 0.3199885586,
+      "top_5_percent": 0.5037812496,
+      "top_10_percent": 0.6137506575,
+      "top_20_percent": 0.7461713719
+    },
+    "top_decile_customers": 434,
+    "remaining_customers": 3904,
+    "remaining_eligible_sales_value_share": 0.3862493425,
+    "uk_eligible_sales_value_share": 0.8201163759
   },
   "artifacts": [
     "/images/retail-growth-patterns.png",
+    "/images/retail-customer-concentration.png",
     "/images/retail-market-opportunity.png",
     "/images/portfolio-retail-cleaning.svg"
   ],
   "artifactHashes": {
-    "/images/retail-growth-patterns.png": "c571d4d493e5379011e458a9bed7494498bfac957ec49f4aa9e07fc504d99829",
-    "/images/retail-market-opportunity.png": "aa46f7c86c27673b64e373e54e76552b94c379fa2c7b23a1784444a2db3be532",
+    "/images/retail-growth-patterns.png": "e06576abc924a3f263e5b2e80816627f7c25cbc03350841f70a48b497f394c76",
+    "/images/retail-customer-concentration.png": "85db0bd207161c8cc1e9f1e70b4803595e4a63a7272e73f85c8823a59c65c7bf",
+    "/images/retail-market-opportunity.png": "ae095a97931ece8b6d7f7aefe95963a2e23717d01ab3f57ba5d2b78c93d07696",
     "/images/portfolio-retail-cleaning.svg": "acda5109372753be63f5057587bb0f55bbb76772fcfc80bdb242f8ef3d35edfa"
   },
-  "evidenceBoundary": "Revenue concentration is supported. Profitability and causal retention impact are not observed."
+  "evidenceBoundary": "Eligible sales value is quantity times unit price after excluding cancelled, non-positive, and unidentified invoice lines. It is not net realized sales or profit. Repeat-order status is descriptive and does not establish customer retention or causal effects."
 }

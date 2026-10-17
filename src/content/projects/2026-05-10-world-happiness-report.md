@@ -22,33 +22,36 @@ evidenceVisuals:
   - /images/happiness-beat03.png
   - /images/happiness-beat04.png
   - /images/happiness-drivers-inequality.png
+  - /images/happiness-beat05-bottom-cohort.png
 header:
   teaser: /images/happiness-beat01.png
 ---
 
-## Executive summary
+## Project brief
 
-**Decision:** where should a development or policy team focus attention? **Finding:** the average country score rose, but the gap between the highest- and lowest-scoring countries widened. **Evidence:** a descriptive comparison of the same 129 countries across 14 measured years. **Recommendation:** track both average progress and the bottom of the distribution; do not treat country-level correlations as policy effects.
+- **Project:** Compare reported life evaluations across a balanced country panel.
+- **Question:** How did scores change, and did the gap between countries narrow?
+- **Built:** A 129-country panel, trend and range measures, country comparisons, and factor correlations.
+- **Result:** The average rose from 5.47 to 5.74. The lowest 13 countries in 2011 rose from 3.80 to 4.35 by 2025, while the overall range widened.
 
-## Problem - yearly rankings do not show a consistent trend
+## Business question
 
 Annual rankings can change because countries enter or leave the comparison. A policy team needs to know whether the same countries improved, whether gaps narrowed, and which factors moved with life evaluations.
 
 The question is: **how did national life evaluations change from 2011 to 2025, which countries moved most, and which reported factors were most closely associated with the scores?**
 
-I selected the country panel, checked the trend and associations, and framed the decision. I did not evaluate or implement a national policy intervention.
+## Data and preparation
 
-## Hypotheses - what could explain the pattern?
+The [World Happiness Report 2026 Figure 2.1 workbook](https://www.worldhappiness.report/data-sharing/) covers 168 countries in 14 measured years from 2011 through 2025. The source has no 2013 observation. I use the 129 countries with data in all measured years. Scores are self-reported three-year-average life evaluations on a 0 to 10 scale. Country averages are unweighted. Factor correlations use observations from 2019 to 2025.
 
-- **The average may look different when the country set changes.** A fixed panel can separate within-panel movement from changes in annual coverage.
-- **A rising average may hide a wider gap.** Compare the highest and lowest scores as well as the average.
-- **Income, social support, and health may move with reported life evaluation.** These associations can guide questions, but they cannot identify the effect of a policy.
+## Stakeholder questions
 
-## Analysis - what did the same-country panel show?
+- **Did the same countries improve on average?** The 129-country unweighted average increased by 0.26 points from 2011 to 2025.
+- **Did the gap narrow?** No. The highest-to-lowest range grew from 4.8 to 6.3 points.
+- **Did the 2011 bottom group improve?** Yes. Its average rose by 0.55 points, and its gap from the remaining 116 countries narrowed from 1.86 to 1.54 points.
+- **Which reported factors had the strongest associations?** Social support, GDP per person, and healthy life expectancy had correlations of 0.70, 0.68, and 0.66.
 
-The [World Happiness Report 2026 Figure 2.1 workbook](https://www.worldhappiness.report/data-sharing/) covers 168 countries in 14 measured years from 2011 through 2025; 2013 is absent. I compared the 129 countries with data in every measured year. Scores are self-reported three-year-average life evaluations on a 0 to 10 scale. Country averages are unweighted, not population-weighted.
-
-I selected the balanced panel, checked the country trends and factor associations, and framed the follow-up questions. I did not evaluate or implement a national policy intervention.
+## Findings
 
 ### The average rose, including after the 2021 to 2022 dip
 
@@ -80,13 +83,23 @@ The range grew from **4.8 points in 2011 to 6.3 points in 2025**, an increase of
 
 ![Balanced panel of 129 countries from 2011 to 2025: the highest-to-lowest score range widened](/images/happiness-drivers-inequality.png)
 
-## Result - track average progress and distribution together
+### The 2011 bottom group improved, but remained below other countries
 
-The fixed-panel average increased, and the score range widened. The evidence supports tracking both measures and monitoring the bottom of the distribution. It does not identify which policy caused a country's change.
+The 13 countries in the bottom decile in 2011 had an average score of **3.80** that year and **4.35** in 2025. The remaining 116 countries averaged **5.66** in 2011 and **5.89** in 2025. The gap between these fixed groups narrowed from **1.86 to 1.54 points**. These are unweighted country averages.
+
+![Life evaluation trend for the 13 countries in the bottom decile in 2011 compared with the remaining 116 countries in the same balanced panel](/images/happiness-beat05-bottom-cohort.png)
+
+## Built
+
+The work selects a balanced country panel, checks country-year uniqueness and period coverage, and calculates average scores, ranges, country changes, factor correlations, and a fixed baseline bottom-decile trend.
+
+## Result
+
+The fixed-panel average increased. The highest-to-lowest range widened, while the baseline bottom-decile gap to the remaining countries narrowed. This supports tracking averages, extremes, and a fixed lower-scoring group together. It does not identify which policy caused a country's change.
 
 - Track country trends over time alongside rankings.
 - Review social support, income, and health as connected conditions, not independent causal levers.
-- Focus follow-up research on countries and groups at the bottom of the distribution.
+- Use the fixed 2011 bottom group to guide follow-up research. Use within-country data before choosing an intervention.
 
 Public country data cannot show which programs changed living conditions or how outcomes differ within a country. A policy team would need local administrative outcomes, program reach, health access, household income, and survey microdata before choosing an intervention.
 

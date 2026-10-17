@@ -1,7 +1,7 @@
 version: 2
 models:
   - name: stg_rees46_events
-    description: Typed event-grain model with one row per deterministic source event key.
+    description: Typed event-grain model with one row per deterministic source event key; session identity combines user_id and user_session.
     config:
       contract:
         enforced: true
@@ -35,6 +35,8 @@ models:
         data_type: varchar
         tests: [not_null]
       - name: user_session
+        data_type: varchar
+      - name: user_session_key
         data_type: varchar
       - name: loaded_at
         data_type: timestamp

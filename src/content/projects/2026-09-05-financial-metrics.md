@@ -21,21 +21,32 @@ evidenceVisuals:
 header:
   teaser: /images/sec-revenue-net-income.png
 ---
-## Problem - Which financial trend can leaders safely compare?
+## Project brief
+
+- **Project:** Build a filing-aware annual performance view for Microsoft.
+- **Question:** Which financial trend can leaders compare safely?
+- **Built:** A narrow metric model that preserves tags, units, fiscal periods, and filing identity.
+- **Result:** From FY2023 to FY2025, revenue rose from $211.9 billion to $281.7 billion. Net margin rose from 34.1% to 36.1%. These are reported company-level trends.
+
+## Business question
 
 Finance and product leaders need a consistent view of revenue, net income, and margin. SEC filings contain multiple facts, periods, units, and amendments, so a dashboard can show a precise trend built from values that are not comparable.
 
 The decision is whether the annual figures are consistent enough to support an executive trend view. This analysis uses Microsoft’s public filings; it does not represent an internal finance system.
 
-## Hypotheses - What could make a trend misleading?
+## Data and preparation
 
-- **Mixed periods or units could distort growth.** Check that each annual value uses the same fiscal-period rule and compatible units.
-- **Revenue growth could hide weaker profitability.** Compare net income and margin alongside revenue.
-- **A correct number could still be hard to audit.** Preserve the tag, filing date, and accession context used to select it.
+The source is the [SEC Company Facts API](https://www.sec.gov/edgar/sec-api-documentation). Each fact includes a tag, unit, period, filing date, and value. The selected view uses documented annual facts for Microsoft and keeps quarterly and annual facts separate.
 
-## Analysis - What do the selected facts show?
+The checks cover unit compatibility, annual period selection, duplicate fact context, margin reconciliation, and source lineage. The evidence manifest records the source hash and period rule.
 
-The source is the [SEC Company Facts API](https://www.sec.gov/edgar/sec-api-documentation). Each record is a reported fact with a tag, unit, fiscal period, filing date, and value. The model keeps this context while selecting an annual view; it does not mix quarterly and annual facts.
+## Stakeholder questions
+
+- **Did revenue and net income rise together?** Yes. Revenue rose from $211.9 billion to $281.7 billion. Net income rose from $72.4 billion to $101.8 billion.
+- **Did reported net margin change?** It rose from 34.1% in FY2023 to 36.1% in FY2025.
+- **Can these values explain product performance?** No. The source supports reported company-level trends, not product or customer drivers.
+
+## Findings
 
 ### Revenue and net income both rose
 
@@ -55,11 +66,25 @@ Selected net income divided by selected revenue rose from 34.1% to 36.1%. The fu
 
 Keeping the source context makes it possible to review why each value was selected instead of relying on an undocumented spreadsheet cell.
 
-## Result - Use a narrow, traceable annual view
+### A worked tie-out shows why filing identity stays attached
+
+For FY2024, the selected revenue fact is **$245.122 billion** under `RevenueFromContractWithCustomerExcludingAssessedTax`, for 1 July 2023 through 30 June 2024. The same period and value appear in the FY2024, FY2025, and FY2026 10-K filings (filed 30 July 2024, 30 July 2025, and 29 July 2026). Net income is **$88.136 billion** in those filings, so the reconciled net margin is **35.96%**. The tie-out found no value change; it confirms that repeated comparative facts should not be counted as separate periods.
+
+| Fiscal period | Selected tag | Value | Filing context | Treatment |
+|---|---|---:|---|---|
+| FY2024 revenue | `RevenueFromContractWithCustomerExcludingAssessedTax` | $245.122B | FY2024, FY2025, and FY2026 10-Ks | Keep one FY2024 period; retain all filing references |
+| FY2024 net income | `NetIncomeLoss` | $88.136B | FY2024, FY2025, and FY2026 10-Ks | Reconcile on the same period and unit |
+| FY2024 net margin | Derived | 35.96% | $88.136B ÷ $245.122B | Calculate only after period and unit alignment |
+
+## Built
+
+The model preserves each reported fact and its filing context. It selects annual revenue and net income, calculates net margin, and reconciles the ratio to the selected facts.
+
+## Result
 
 The selected annual metrics show revenue rising from $211.9 billion to $281.7 billion and net income from $72.4 billion to $101.8 billion between FY2023 and FY2025; net margin rose from 34.1% to 36.1%. The evidence supports reported company-level trends, not product, customer, or causal operating conclusions.
 
-**Recommendation:** publish a small finance mart with approved metric definitions, period rules, units, and source links. Finance and analytics engineering should reconcile the selected annual values to filings before connecting the mart to planning or dashboards. Add source freshness and reconciliation checks, then extend to quarterly or operating measures only after their definitions are agreed.
+**Recommendation:** publish a small finance mart with approved metric definitions, period rules, units, and source links. Store filing identity with each fact, deduplicate repeated comparative periods, and reconcile the selected annual values before connecting the mart to planning or dashboards. Alert when a later filing changes a selected historical value; extend to quarterly or operating measures only after definitions are agreed.
 
 **Limitations:** SEC filings do not provide product-level drivers, customer cohorts, live performance, or the company’s internal operating model. Monitor source freshness, unit consistency, period coverage, and reconciliation variance.
 

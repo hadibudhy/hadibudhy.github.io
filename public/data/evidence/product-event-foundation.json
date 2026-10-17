@@ -6,11 +6,12 @@
     "name": "REES46 Electronics behaviour events",
     "url": "https://data.rees46.com/datasets/electronics-events/electronics-events.csv.gz",
     "publisher": "REES46",
-    "accessed": "2026-09-05",
+    "accessed": "2026-10-16",
     "grain": "one recorded event",
     "publicDataOnly": true,
     "fileRangeObserved": "2020-09-24 through 2021-02-28",
-    "publisherDescription": "The publisher describes a five-month electronics behaviour export; the loaded file range is retained as the controlling evidence."
+    "publisherDescription": "The publisher describes a five-month electronics behaviour export; the loaded file range is retained as the controlling evidence.",
+    "sha256": "cbcbedc28c39a6b2add493bbbd9f71c061ad9d84087b85e64c442e4d47f418e7"
   },
   "validation": {
     "eventTypes": [
@@ -25,23 +26,38 @@
       "purchase": 37346
     },
     "missingSessionRows": 165,
+    "sessionFunnel": {
+      "raw_session_ids": 490398,
+      "user_session_pairs": 490633,
+      "raw_session_ids_linked_to_multiple_users": 214,
+      "view_sessions": 488586,
+      "view_then_cart_sessions": 41232,
+      "view_cart_purchase_sessions": 20699,
+      "full_sequence_share_of_user_session_pairs": 0.0422,
+      "purchase_event_share_of_view_then_cart_pairs": 0.5020,
+      "sequence_rule": "session grain is user_id plus user_session; purchase event follows cart event, which follows view event; event time then source row breaks timestamp ties"
+    },
     "checks": [
       "deterministic event key",
       "event type accepted values",
       "timestamp parsing",
       "session coverage visible",
+      "ordered user-session pair funnel counts computed from the full source",
+      "composite session key prevents raw session IDs shared across users from being merged",
       "CI fixture expected rows"
     ]
   },
   "artifacts": [
     "/images/rees46-event-mix.svg",
     "/images/rees46-quality-checks.svg",
+    "/images/rees46-session-funnel.svg",
     "/images/rees46-model-grain.svg"
   ],
   "artifactHashes": {
     "/images/rees46-event-mix.svg": "5eb22755de3e02ccb67108b035665ee5c4d9078b56443ceec90efb924119d2c6",
     "/images/rees46-quality-checks.svg": "bc3a72868274cb761e2d4d67a30c6f90fb33c6192897fa28a64279a56de6731e",
-    "/images/rees46-model-grain.svg": "640acfbac56d16f2c905a23b4fbe84dd6e505299c9f2d40edae18b0eef597d55"
+    "/images/rees46-model-grain.svg": "640acfbac56d16f2c905a23b4fbe84dd6e505299c9f2d40edae18b0eef597d55",
+    "/images/rees46-session-funnel.svg": "f69ae37e8a88562b148d4aca9f6d760ce76c6e828c9ff836c89b4a76dfeb6f34"
   },
-  "evidenceBoundary": "Event counts and identified-session metrics are supported. A live product activation or retention claim requires internal telemetry and an approved tracking plan."
+  "evidenceBoundary": "The ordered public event sequence is not verified purchase conversion. Event counts, identified-session measures, and missing-session rows are supported. Live activation or retention claims require internal telemetry and an approved tracking plan."
 }

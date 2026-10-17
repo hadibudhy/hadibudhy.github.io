@@ -21,6 +21,13 @@ header:
   teaser: /images/business-risk-rating-establishment-share.png
 ---
 
+## Project brief
+
+- **Project:** Screen county business footprints against FEMA hazard ratings.
+- **Question:** Which counties should multi-site operators investigate first for continuity planning?
+- **Built:** A county-sector model that joins 2023 establishment counts to FEMA's 2025 risk layer.
+- **Result:** High or Very High composite-risk counties held 46.2% to 52.4% of tracked sector establishments. This is a review screen, not a site-loss estimate.
+
 ## Business question
 
 Which U.S. counties should multi-site operators investigate first when a large local business footprint overlaps with higher natural-hazard risk?
@@ -37,13 +44,21 @@ A continuity team may need to choose where to test alternate suppliers, backup p
 - **Main risk:** County Business Patterns counts industry establishments, not a named chain's locations. FEMA's county score is a relative community measure, not a site-level risk estimate.
 - **Next test:** join exact facility coordinates to hazard layers, insurance terms, supplier links, and business-continuity dependencies.
 
-## Data used
+## Data and preparation
 
 The Census Bureau's [2023 County Business Patterns](https://www.census.gov/data/datasets/2023/econ/cbp/2023-cbp.html) provides establishment counts by county and industry. I grouped retail trade from NAICS 44 and 45, accommodation and food services from NAICS 72, and manufacturing from NAICS 31, 32, and 33.
 
 I joined these counts to FEMA's [National Risk Index county layer](https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/National_Risk_Index_Counties/FeatureServer/0), version 1.20, released in December 2025. FEMA provides composite ratings and hazard-specific ratings, including hurricanes, inland flooding, and wildfire. The two sources describe different periods: 2023 business counts and 2025 risk data.
 
-## Analysis
+I aggregate non-overlapping NAICS groups. I exclude unknown county FIPS records and keep the county-sector join one-to-one. Establishment counts are the denominator for exposure shares. I keep FEMA's unrated and not-applicable categories separate.
+
+## Stakeholder questions
+
+- **How much of each tracked sector sits in High or Very High counties?** The shares range from 46.2% for manufacturing to 52.4% for accommodation and food services.
+- **Which hazard has the largest rated establishment share?** Inland flooding leads in all three sectors, at 51.8% to 57.4%.
+- **Can this screen estimate a chain's loss or downtime?** No. It uses county sector counts, not company sites or loss data.
+
+## Findings
 
 ### Composite high-risk counties contain a large share of establishments
 
@@ -69,7 +84,11 @@ These places are candidates for detailed continuity reviews, not automatic reloc
 
 ![Largest retail, accommodation and food-service, and manufacturing footprints in counties with high or very-high FEMA composite risk](/images/business-risk-priority-counties.png)
 
-## Result - use the screen to queue facility reviews
+## Built
+
+The analysis joins and validates Census and FEMA records, calculates composite and hazard-specific establishment shares, and checks a top-quartile sensitivity screen. Three charts regenerate from the local source snapshots.
+
+## Result
 
 The evidence supports prioritizing county-level continuity reviews, with inland flooding first in this broad sector screen. The result does not estimate a particular operator's expected loss, insurance premium, downtime, or mitigation return.
 

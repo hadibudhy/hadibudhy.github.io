@@ -20,22 +20,27 @@
       "no duplicate title and type rows",
       "same-year share among US additions rounds to 72.2% in 2015 and 28.1% in 2021",
       "same-year TV share among US additions rounds to 40.0% in 2015 and 61.1% in 2021",
-      "US movie deep-library share (acquisition lag over five years) in interpreted drama and children/family clusters rounds to 5.5% and 16.4% before 2018, then 47.4% and 48.0% in 2018 to 2021",
-      "top 50 directors include 421 of 5,941 movies with recorded director; documentary share is 13.4% of all attributed movies and 1.4% in top-50 titles",
-      "UK release-vintage metadata check has 86 titles from the 2020s, with 12.8% sparse by the stated three-field rule"
-    ]
+      "Published genre comparison uses explicit listed_in tags: drama or international group is 4/108 (3.7%) in 2015–2017 and 240/584 (41.1%) in 2018–2021; children and family group is 10/61 (16.4%) and 129/269 (48.0%)",
+      "The explicit genre groups can overlap; clustering is not used to define the published comparison",
+      "UK release-vintage metadata check compares 11 of 86 titles in the 2020s with 29 of 463 in the 2010s; country is present because it defines the UK subset",
+      "2020s-minus-2010s difference is 6.5 percentage points; approximate 95% Newcombe interval is -1.6 to 17.1 points"
+    ],
+    "uk_metadata_comparison": {
+      "2010s": {"missing_both_director_and_cast": 29, "titles": 463, "rate": 0.0626, "wilson_95_ci": [0.0440, 0.0885]},
+      "2020s": {"missing_both_director_and_cast": 11, "titles": 86, "rate": 0.1279, "wilson_95_ci": [0.0729, 0.2147]},
+      "difference_pp": 6.5272,
+      "difference_newcombe_95_ci_pp": [-1.5562, 17.0729]
+    }
   },
   "artifacts": [
     "/images/netflix-beat01.png",
     "/images/netflix-beat03.png",
-    "/images/netflix-beat04.png",
     "/images/netflix-beat05.png"
   ],
   "artifactHashes": {
     "/images/netflix-beat01.png": "4d76d4e92f27dd47002f63dabf05a3248f671b7aeb7d78f55725ce758ec0cfd5",
-    "/images/netflix-beat03.png": "b23a6e3a6a03ebbd1f313107947dd5c1fc424b980755c3df9a269bf4c8014b55",
-    "/images/netflix-beat04.png": "86cc982d4e4e22a58359b57c46338fe2008d1f0edac4be206b1eed7d1e0bc518",
-    "/images/netflix-beat05.png": "9cf93e5a4bc919b007978a83f2481c02782ba2d96810119a90d13fcbbb3fc2d6"
+    "/images/netflix-beat03.png": "057743d0c7f01afdaf00deeba1556a8172ae7780d592aaf13768d58be7bce3f9",
+    "/images/netflix-beat05.png": "384d40bbb89ffa4a386db3e0c84a3af6641f4ab5921103666796e02165773d62"
   },
-  "evidenceBoundary": "Catalog metadata and acquisition timing are not viewing, retention, title quality, licensing intent, or financial performance. Cluster names are analyst interpretations of dominant genre features. The sparse metadata indicator covers director, cast, and country only."
+  "evidenceBoundary": "Catalog metadata and acquisition timing are not viewing, retention, title quality, licensing intent, or financial performance. The published genre comparisons use explicit, potentially overlapping tags. The UK metadata check measures director and cast because country data defines the UK subset."
 }

@@ -19,7 +19,8 @@
     "schema",
     "binary values",
     "control exposure",
-    "sample ratio"
+    "sample ratio",
+    "visit intention-to-treat rates and confidence interval"
   ],
   "metrics": {
     "rows": 13979592,
@@ -27,7 +28,17 @@
     "ci95_pp": [
       0.108,
       0.122
-    ]
+    ],
+    "visit_itt": {
+      "control_users": 2096937,
+      "control_visits": 80105,
+      "treatment_users": 11882655,
+      "treatment_visits": 576824,
+      "control_rate": 0.0382009569,
+      "treatment_rate": 0.0485433600,
+      "absolute_lift_pp": 1.0342403,
+      "ci95_pp": [1.0055623, 1.0629183]
+    }
   },
   "artifacts": [
     "/images/growth-criteo-itt.png",
@@ -36,7 +47,7 @@
   ],
   "artifactHashes": {
     "/images/growth-criteo-itt.png": "35251843ee1a3af06dd87f457a42a8c9d96952bf671ee0db2a1cf35de16f8604",
-    "/images/portfolio-campaign-economics.svg": "78d8dd63676978da736a9ec1725a09642dd2e2776ebfa16df71de476709c9f98",
+    "/images/portfolio-campaign-economics.svg": "86d4a50ee793a7e2532db5d8c059e35ea47e1c295f52787bf4af5d23d94f89b3",
     "/images/portfolio-campaign-f0.svg": "a4a250c6e32c5dc2a7fa31caefaa585cffe0c01996940435dde40b4005ccd6fb"
   },
   "evidenceBoundary": "The randomized benchmark supports intention-to-treat lift. Current campaign economics and transportability are not observed."

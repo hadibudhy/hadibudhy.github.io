@@ -8,7 +8,7 @@ problem: "A service team sees large request queues and wants to move capacity, b
 result: "The model treats one NYC 311 request as the source grain, keeps open work at the analysis cutoff, and separates observed lifecycle metrics from outcomes the public source does not contain."
 featured: true
 kind: flagship
-published: true
+published: false
 caseId: service-metric-reliability
 primaryTrack: analytics-engineering
 secondaryTracks: [product-analytics]
