@@ -1,11 +1,12 @@
 export const capabilities = [
-  { title: "Analytics engineering", evidence: "Layered SQL models, metric definitions, event-grain thinking, data-quality checks, and reproducible pipelines." },
-  { title: "Product analytics", evidence: "Funnels, activation signals, cohorts, retention, segmentation, and product measurement plans." },
+  { title: "Data engineering & analytics engineering", evidence: "Data pipelines, layered SQL models, metric definitions, event-grain design, data-quality checks, and reproducible workflows." },
+  { title: "Analytics & product insights", evidence: "Business and product questions, funnels, activation, cohorts, retention, segmentation, and decision-ready recommendations." },
+  { title: "Applied data science", evidence: "Classification and recommendation problems, model comparisons, threshold trade-offs, and clear limits on what model performance can establish." },
   { title: "Experimentation", evidence: "Incrementality, holdouts, guardrails, treatment integrity, and decisions grounded in business value." },
   { title: "Data reliability", evidence: "Source validation, freshness boundaries, reconciliation, lineage, and visible evidence limits." },
 ];
 
-export const skills = ["SQL", "Python", "DuckDB", "dbt", "BigQuery", "Dimensional modeling", "Metric definitions", "Event tracking", "Funnels", "Cohorts", "A/B testing", "Git"];
+export const skills = ["SQL", "Python", "DuckDB", "dbt", "BigQuery", "Dimensional modeling", "Metric definitions", "Event tracking", "Funnels", "Cohorts", "A/B testing", "Classification", "Model evaluation", "Git"];
 
 export const education = "Bachelor of Public Health (Biostatistics), Universitas Indonesia";
 

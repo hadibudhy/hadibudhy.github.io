@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/Button";
 import { capabilities, careerArc, education, experience, skills } from "@/lib/profile";
 
 export const metadata = {
-  title: "About",
-  description: "Data analysis experience across growth, product, marketplace, operations, business, and decision analytics.",
+  title: "About | Data Engineering, Analytics & Data Science",
+  description: "Data professional in Jakarta with BI and data analyst experience, plus public work in analytics engineering, product analytics, experimentation, and applied data science.",
   alternates: { canonical: "/about" },
 };
 
@@ -15,19 +15,19 @@ export default function AboutPage() {
       <section className="border-b border-border">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20 md:py-28">
           <p className="section-kicker">About the work</p>
-          <h1 className="mt-5 max-w-4xl break-words text-[2.7rem] font-bold tracking-[-0.05em] text-foreground sm:text-5xl md:text-7xl">From event data toward a clearer product decision.</h1>
+          <h1 className="mt-5 max-w-4xl break-words text-[2.7rem] font-bold tracking-[-0.05em] text-foreground sm:text-5xl md:text-7xl">End-to-end data work, from reliable foundations to evidence-based decisions.</h1>
           <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
             <div className="space-y-5 text-lg leading-8 text-muted-foreground">
-              <p>Analytics Engineer and Product Analyst based in Jakarta, Indonesia. The work connects event tracking, warehouse models, metric definitions, product behavior, and business decisions.</p>
-              <p>The aim is simple: give teams data they can trust, questions they can answer, and a clear way to measure what happens next.</p>
+              <p>Data professional based in Jakarta, Indonesia. Professional experience is grounded in BI and data analysis; public case studies demonstrate work across data engineering, product analytics, experimentation, and applied data science.</p>
+              <p>I build pipelines and models, analyze product and business questions, and communicate what the evidence can and cannot support.</p>
             </div>
-            <div className="border-l border-primary/50 pl-6 text-sm leading-7 text-muted-foreground">Work spans instrumentation, SQL modeling, metric governance, product funnels, retention, experimentation, and operational analytics.<p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-primary">{education}</p></div>
+            <div className="border-l border-primary/50 pl-6 text-sm leading-7 text-muted-foreground">Work spans source validation, data pipelines, SQL modeling, metric governance, product funnels, retention, experimentation, and applied modeling.<p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-primary">{education}</p></div>
           </div>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <Button size="lg" asChild><a href="mailto:hadi.budhy@gmail.com">Get in Touch</a></Button>
             <Button size="lg" variant="outline" asChild><Link href="/projects">Explore the Work <span className="ml-3 text-lg" aria-hidden="true">→</span></Link></Button>
           </div>
-          <div className="mt-10 border-l-2 border-primary/50 pl-5 text-sm leading-7 text-muted-foreground"><p className="font-bold uppercase tracking-[0.16em] text-primary">Real-world evidence boundary</p><p className="mt-2">Professional experience covers alerting, warehouse pipelines, live dashboards, campaign and survey models, and KPI work. Employer names, scale, adoption, and outcome metrics are kept private or are not verifiable in this public repository. The case studies below demonstrate independent analytical and engineering work, not employer results.</p></div>
+          <div className="mt-10 border-l-2 border-primary/50 pl-5 text-sm leading-7 text-muted-foreground"><p className="font-bold uppercase tracking-[0.16em] text-primary">Real-world evidence boundary</p><p className="mt-2">Professional experience covers alerting, warehouse pipelines, live dashboards, campaign and survey models, and KPI work. Employer names, scale, adoption, and outcome metrics are kept private or are not verifiable in this public repository. The public case studies separately demonstrate independent engineering, analytical, and data science work; they are not employer results.</p></div>
         </div>
       </section>
 

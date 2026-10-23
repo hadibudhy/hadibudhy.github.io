@@ -34,11 +34,16 @@ export async function generateMetadata({ params }: Props) {
       title: project.meta.title,
       description: project.meta.excerpt,
       siteName: "Hadi Budhy",
+      images: [{
+        url: project.meta.teaser ?? "/images/profile-illustration.jpg",
+        alt: project.meta.title,
+      }],
     },
     twitter: {
       card: "summary",
       title: project.meta.title,
       description: project.meta.excerpt,
+      images: [project.meta.teaser ?? "/images/profile-illustration.jpg"],
     },
   };
 }
@@ -138,7 +143,7 @@ export default async function ProjectPage({ params }: Props) {
         {/* Short summary for readers who are scanning the case study */}
         {project.meta.excerpt && (
           <div className="mb-12 border border-primary/40 bg-primary/10 p-5 sm:mb-16 sm:p-6 md:p-8">
-            <h3 className="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-primary">In brief</h3>
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-primary">In brief</p>
             <p className="text-lg font-medium leading-relaxed text-foreground">
               {project.meta.excerpt}
             </p>

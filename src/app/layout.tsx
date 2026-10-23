@@ -7,11 +7,11 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   metadataBase: new URL("https://hadibudhy.github.io"),
     title: {
-    default: "Hadi Budhy | Analytics Engineer & Product Analyst",
+    default: "Hadi Budhy | Data Engineering, Analytics & Data Science",
     template: "%s | Hadi Budhy"
   },
-  description: "Analytics Engineer and Product Analyst building trustworthy metrics and using product data to guide decisions.",
-  keywords: ["Analytics Engineer", "Product Analyst", "Product analytics", "Analytics engineering", "dbt", "SQL", "Python"],
+  description: "Data professional working across data engineering, analytics, and applied data science to build reliable foundations and decision-ready evidence.",
+  keywords: ["Data engineering", "Data analytics", "Data science", "Analytics engineering", "Product analytics", "SQL", "Python", "dbt"],
   authors: [{ name: "Hadi Budhy" }],
   creator: "Hadi Budhy",
   alternates: {
@@ -20,15 +20,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://hadibudhy.github.io",
-    title: "Hadi Budhy | Analytics Engineer & Product Analyst",
-    description: "Analytics Engineer and Product Analyst building trustworthy metrics and using product data to guide decisions.",
+    title: "Hadi Budhy | Data Engineering, Analytics & Data Science",
+    description: "Data professional working across data engineering, analytics, and applied data science to build reliable foundations and decision-ready evidence.",
     siteName: "Hadi Budhy",
     locale: "en_US",
+    images: [{ url: "/images/profile-illustration.jpg", alt: "Illustrated profile portrait of Hadi Budhy" }],
   },
   twitter: {
     card: "summary",
-    title: "Hadi Budhy | Analytics Engineer & Product Analyst",
-    description: "Analytics Engineer and Product Analyst building trustworthy metrics and using product data to guide decisions.",
+    title: "Hadi Budhy | Data Engineering, Analytics & Data Science",
+    description: "Data professional working across data engineering, analytics, and applied data science to build reliable foundations and decision-ready evidence.",
+    images: ["/images/profile-illustration.jpg"],
   },
 };
 
@@ -56,8 +58,8 @@ export default function RootLayout({
               "@type": "Person",
               name: "Hadi Budhy",
               url: "https://hadibudhy.github.io",
-              jobTitle: "Data Analyst",
-              knowsAbout: ["Analytics engineering", "Product analytics", "Experimentation"],
+              jobTitle: "Data professional across engineering, analytics, and data science",
+              knowsAbout: ["Data engineering", "Analytics engineering", "Product analytics", "Applied data science", "Experimentation", "Data reliability"],
               address: { "@type": "PostalAddress", addressLocality: "Jakarta", addressCountry: "ID" },
               sameAs: ["https://github.com/hadibudhy", "https://linkedin.com/in/hadibudhy"],
             })}
