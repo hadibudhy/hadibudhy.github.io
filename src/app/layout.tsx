@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: "%s | Hadi Budhy"
   },
   description: "Data professional working across data engineering, analytics, and applied data science to build reliable foundations and decision-ready evidence.",
-  keywords: ["Data engineering", "Data analytics", "Data science", "Analytics engineering", "Product analytics", "SQL", "Python", "dbt"],
+  keywords: ["Data engineering", "Data analytics", "Data science", "Analytics engineering", "Product analytics", "SQL", "Python"],
   authors: [{ name: "Hadi Budhy" }],
   creator: "Hadi Budhy",
   alternates: {
