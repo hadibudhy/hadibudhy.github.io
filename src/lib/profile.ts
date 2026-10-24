@@ -6,7 +6,7 @@ export const capabilities = [
   { title: "Data reliability", evidence: "Source validation, freshness boundaries, reconciliation, lineage, and visible evidence limits." },
 ];
 
-export const skills = ["SQL", "Python", "DuckDB", "dbt", "BigQuery", "Dimensional modeling", "Metric definitions", "Event tracking", "Funnels", "Cohorts", "A/B testing", "Classification", "Model evaluation", "Git"];
+export const skills = ["SQL", "Python", "BigQuery", "Dimensional modeling", "Metric definitions", "Event tracking", "Funnels", "Cohorts", "A/B testing", "Classification", "Model evaluation", "Git"];
 
 export const education = "Bachelor of Public Health (Biostatistics), Universitas Indonesia";
 
