@@ -41,12 +41,6 @@ The source is the official [MTA Bridges and Tunnels Hourly Crossings dataset](ht
 
 The outcome is the weekly facility-level log of one plus car crossings. The event-study chart uses a ±26-week window and sets event week −1 as the reference. A separate linear slope diagnostic covers 314 pre-policy weeks and uses HAC standard errors with 26 weekly lags. This is a trend diagnostic, not a causal estimate.
 
-## Stakeholder questions
-
-- **Did the comparison gap stay stable before the policy?** No. It changed direction and magnitude.
-- **Does the pre-policy trend test establish that parallel trends hold or fail?** No. The slope estimate is uncertain, and a non-significant result does not prove the comparator is valid.
-- **Can MTA crossing counts measure ride-hailing outcomes?** No. The source does not include route toll exposure, platform requests, rides, or revenue.
-
 ## Findings
 
 ### The comparison gap was already unstable before the policy
@@ -70,10 +64,6 @@ The panel gives broad facility and time coverage for checking the comparison. A 
 ![MTA evidence boundary: facility-level car counts and the policy date are observed, but route-level toll exposure, ride-hailing requests, and a parallel counterfactual are not](/images/portfolio-mta-causal-boundary.svg)
 
 The traffic records cannot show which trips incurred a fee or how riders, drivers, or platform economics changed. Those questions require route exposure and internal trip outcomes.
-
-## Built
-
-The project aggregates crossings to facility-week rows, compares three affected facilities with seven other facilities, checks the pre-policy trend with a HAC interval, and documents scope and inference limits. It does not estimate a policy effect.
 
 ## Result
 

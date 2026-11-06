@@ -43,13 +43,6 @@ The [UCI Online Retail dataset](https://archive.ics.uci.edu/dataset/352/online%2
 
 The analysis removes cancelled invoices, non-positive quantities and prices, and rows without customer IDs. It groups line items by invoice number, then invoices by customer. A **repeat-order customer** has at least two distinct eligible invoice numbers. The 65.6% customer share and 93.1% sales-value share use that definition; neither is a cohort-retention measure. The measures describe positive sales lines from identifiable customers, not net realized sales or profit. The source snapshot and checks are recorded in the evidence manifest.
 
-## Stakeholder questions
-
-- **How concentrated is eligible sales value?** The top 1%, 5%, 10%, and 20% generated 32.0%, 50.4%, 61.4%, and 74.6%.
-- **How much value came from repeat-order customers?** Customers with at least two distinct eligible invoice numbers were 65.6% of identifiable customers and generated 93.1% of eligible sales value. This does not measure cohort retention or retention lift.
-- **Which market accounts for most eligible sales value?** The UK generated £7.31 million, about 82% of the cleaned total.
-- **How large is the identifiable customer base?** The cleaned analysis includes 4,338 customers and 18,532 orders.
-
 ## Findings
 
 ### The top 20% of customers generated 74.6% of eligible sales value
@@ -79,10 +72,6 @@ Historical sales identify where the retailer already sold products. They do not 
 ![UCI Online Retail cleaning boundary: 541,909 raw rows include 135,080 rows without a customer ID; 4,338 customers remain identifiable after cleaning](/images/portfolio-retail-cleaning.svg)
 
 The raw file also contains **9,288 cancellation rows**. The filters keep the sales-value and repeat-order calculations on positive, identifiable transactions. The analysis does not include customers without an ID.
-
-## Built
-
-The analysis validates the invoice-line grain, removes records that cannot support the chosen customer measures, and aggregates eligible sales value by order, customer, and country. It includes four evidence visuals.
 
 ## Result
 

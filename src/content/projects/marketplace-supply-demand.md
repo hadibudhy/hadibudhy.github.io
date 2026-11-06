@@ -40,13 +40,6 @@ The analysis combines two different official sources: a one-week trip table for 
 
 The hourly aggregation checks all 24 hour buckets and the total of 4,965,012 trip rows. A separate query groups the same seven days by weekday and reconciles to the same total. The monthly reports are summarized by year. I do not join these periods as one continuous trend.
 
-## Stakeholder questions
-
-- **When did recorded trips peak in the sample week?** At 18:00, with 334,713 records.
-- **Which day had the most trips in the sample week?** Saturday, with 866,393 records. This is a seven-day descriptive slice.
-- **What did annual averages hide?** Trips per day averaged 2.0% higher in 2025, while driver totals averaged 0.1% lower. Matched-month driver counts averaged 4.2% lower in January–June, then 4.0% higher in July–December.
-- **Do these records prove that riders were underserved?** No. Requests, lost matches, cancellations, and true wait are missing.
-
 ## Findings
 
 ### Recorded trips peaked at 18:00 in the observed week
@@ -80,10 +73,6 @@ The month-matched comparison sharpens the retrospective picture but still cannot
 ![NYC TLC marketplace evidence boundary: recorded trips and monthly driver proxies are observed; requests, lost matches, cancellations, true wait, and incentive return are not](/images/portfolio-marketplace-measurement.svg)
 
 Without these missing measures, the data cannot distinguish low demand, low availability, and poor matching.
-
-## Built
-
-The project uses official TLC trip and monthly report data, SQL and Python analysis files, and five visuals. They separate observed historical patterns from missing marketplace measures.
 
 ## Result
 

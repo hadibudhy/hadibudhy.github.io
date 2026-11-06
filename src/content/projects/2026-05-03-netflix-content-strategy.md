@@ -1,9 +1,9 @@
 ---
-title: "Netflix: Catalog Freshness Moved Differently for TV and Movies"
+title: "Netflix Catalog Trends (2015–2021): TV and Movie Freshness Diverged"
 date: 2026-05-03
 categories: [product analytics]
 tags: [business-strategy, data-analysis, netflix, content-growth]
-excerpt: "A catalog analysis that separates TV and movie freshness, movie depth, and metadata coverage."
+excerpt: "A 2015–2021 catalog analysis separates TV and movie freshness, movie depth, and metadata coverage."
 problem: "A falling freshness measure made it unclear whether Netflix was weakening the catalog or using different roles for shows and movies."
 result: "US additions became less same-year fresh overall, while TV freshness rose and movie titles with explicit drama/international or family tags shifted toward older release vintages. These catalog measures do not show viewing or customer outcomes."
 featured: false
@@ -40,12 +40,6 @@ The analysis uses 8,807 Netflix titles from the [Movies and TV Shows dataset](ht
 
 The analysis excludes titles with negative acquisition lag. It compares titles with explicit genre tags and release vintage; genre groups can overlap. The UK metadata check selects titles with UK as the primary country, then counts missing director and cast fields.
 
-## Stakeholder questions
-
-- **Did freshness change in the same way for TV and movies?** No. The same-year share rose for TV and fell for movies.
-- **Did the share of older additions change in prespecified genre groups?** Yes. It rose for both explicit drama/international and children-and-family tags.
-- **Was the point estimate for UK titles missing director and cast higher in the 2020s?** Yes, but the interval is wide and includes no difference; the data does not confirm a higher rate.
-
 ## Findings
 
 ### TV additions became fresher while movies shifted toward older titles
@@ -70,10 +64,6 @@ Among UK-primary titles, **11 of 86** 2020s releases (12.8%) and **29 of 463** 2
 
 The point estimate is higher for 2020s releases, but the interval includes no difference. Treat this as a reason to monitor metadata coverage, not a confirmed deterioration. It does not establish why fields are missing or how the gaps affect discovery.
 
-## Built
-
-The work includes source checks, acquisition-lag measures, two explicit and potentially overlapping genre-tag comparisons, and a UK metadata check with uncertainty intervals. The linked workbook and scripts reproduce the analysis.
-
 ## Result
 
 The evidence shows opposite freshness trends for TV and movies and higher older-release shares in two explicit movie genre groups. The UK metadata point estimate was higher for 2020s titles, but the uncertainty interval includes no difference. None of these observations proves customer impact or intentional licensing strategy.
@@ -87,4 +77,4 @@ The evidence shows opposite freshness trends for TV and movies and higher older-
 
 The source snapshot contains 8,807 unique title IDs. Acquisition lag is year added minus release year; negative lags are excluded. The published genre comparison uses explicit `listed_in` tags and can overlap; clustering does not define those groups. The UK metadata measure counts missing director and cast fields among UK-primary titles. Wilson intervals describe each proportion, and a Newcombe interval describes the 2020s-minus-2010s difference.
 
-Regeneration instructions and source hashes are in [`legacy_jekyll/scripts/netflix/README.md`](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/legacy_jekyll/scripts/netflix/README.md). The workbook is downloadable from [Zenodo](https://zenodo.org/records/13925131) and linked to the original [Kaggle dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows).
+The source snapshot and validation record are in the [evidence manifest](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/public/data/evidence/netflix-content-strategy.json). The workbook is downloadable from [Zenodo](https://zenodo.org/records/13925131) and linked to the original [Kaggle dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows).

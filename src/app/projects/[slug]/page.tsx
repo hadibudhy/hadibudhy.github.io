@@ -97,7 +97,7 @@ export default async function ProjectPage({ params }: Props) {
     "experimentation-growth": "Experimentation & growth",
   }[project.meta.primaryTrack];
   const categoryLabel = project.meta.categories.join(", ");
-  const technicalStart = project.content.search(/\n(?=## Technical (?:appendix|design)\b)/i);
+  const technicalStart = project.content.search(/\n(?=## Technical (?:appendix|design|notes)\b)/i);
   const summaryContent = technicalStart === -1 ? project.content : project.content.slice(0, technicalStart);
   const technicalContent = technicalStart === -1 ? "" : project.content.slice(technicalStart + 1);
 
@@ -141,6 +141,10 @@ export default async function ProjectPage({ params }: Props) {
               </div>
             </details>
           )}
+          <div className="mt-12 border-t border-border pt-6">
+            <p className="leading-7 text-muted-foreground">Interested in this kind of data work?</p>
+            <Link href="/#contact" className="mt-2 inline-flex font-semibold text-primary underline underline-offset-4 hover:text-foreground">Talk about a role or data problem <span className="ml-2" aria-hidden="true">→</span></Link>
+          </div>
         </div>
       </div>
     </article>

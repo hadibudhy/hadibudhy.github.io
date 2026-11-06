@@ -41,14 +41,6 @@ The [REES46 Electronics behaviour export](https://data.rees46.com/datasets/elect
 
 The model checks event keys, event types, timestamps, and session coverage. It preserves the 165 rows with missing session IDs in the quality output and excludes them from session metrics.
 
-## Stakeholder questions
-
-- **How many events appear in each funnel stage?** The file has 793,748 views, 54,035 cart events, and 37,346 purchase events.
-- **How many events lack session IDs?** 165 of 885,129 rows lack a session ID.
-- **How is a session identified?** By the user ID and session ID pair; 214 raw session IDs are associated with more than one user ID.
-- **How many user-session pairs contain the ordered view → cart → purchase sequence?** 20,699 of 490,633 (4.2%).
-- **Can that be read as a verified purchase conversion rate?** No. It is a sequence of recorded event types, not a confirmed order or live product funnel.
-
 ## Findings
 
 ### Only 4.2% of user-session pairs contain a full recorded event sequence
@@ -74,10 +66,6 @@ The 165 rows without session IDs can still support event-volume reporting, but s
 ![Event-model flow: recorded events are typed and ordered before separate funnel and quality marts are created](/images/rees46-model-grain.svg)
 
 This separation reduces the risk of duplicating events when a downstream analysis joins event, user, or session summaries.
-
-## Built
-
-The pipeline has raw events, typed staging, ordered identified sessions, and separate funnel and quality outputs. A small CI fixture checks model contracts. The evidence manifest records checks on the full source file.
 
 ## Result
 

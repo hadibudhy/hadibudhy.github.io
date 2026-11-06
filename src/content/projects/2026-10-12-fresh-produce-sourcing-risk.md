@@ -52,12 +52,6 @@ Each selected category-month includes ten reported origins and a World total. Th
 
 For each month, I divide the reported origin values by the matching World total. I calculate a lower HHI bound from the ten listed origins. The upper bound assigns the unreported share to one additional origin.
 
-## Stakeholder questions
-
-- **Which category has the higher reported-origin concentration?** Fresh vegetables. Its 2026 HHI bound is 0.4188 to 0.4192. The fruit bound is 0.2638 to 0.2670.
-- **Which origin leads both categories?** Mexico led each reported month. Its average share was 55.3% for vegetables and 45.9% for fruit.
-- **Did import value move in the same direction?** No. January-to-August vegetable value rose 2.6% year over year. Fruit value fell 7.7%.
-
 ## Findings
 
 ### Fresh vegetable origins are more concentrated
@@ -70,7 +64,7 @@ The ten reported origins covered an average of **97.9%** of fresh-vegetable impo
 
 ### Mexico led both categories, with seasonal changes
 
-Mexico remained the leading reported origin in all eight monthly observations for both categories. Its average share was **55.3%** for fresh vegetables, ranging from **42.7% to 65.4%**. For fresh fruit, the average was **45.9%**, ranging from **31.3% to 61.8%**.
+From January through August 2026, Mexico was the leading reported origin in each month for both categories. Its average share was **55.3%** for fresh vegetables, ranging from **42.7% to 65.4%**. For fresh fruit, the average was **45.9%**, ranging from **31.3% to 61.8%**.
 
 The shares change across months. A procurement review should therefore map product seasonality and growing regions, rather than rely on one annual average.
 
@@ -81,10 +75,6 @@ The shares change across months. A procurement review should therefore map produ
 January through August customs value for fresh vegetables totaled **$10.61 billion**, up **2.6%** from the same months in 2025. Fresh-fruit value totaled **$13.82 billion**, down **7.7%**. These are nominal dollar values, not physical volumes or unit prices. Changes can reflect price and product mix as well as quantity.
 
 ![Monthly customs values for fresh fruit and vegetables, January to August in 2025 and 2026](/images/produce-import-value-yoy.png)
-
-## Built
-
-The analysis checks 32 category-month records, computes top-ten coverage and bounded concentration, and compares year-over-year customs values. It does not infer physical volume or supplier capacity.
 
 ## Result
 

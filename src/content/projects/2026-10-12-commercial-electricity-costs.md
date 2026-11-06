@@ -1,5 +1,5 @@
 ---
-title: "Commercial Electricity: Where Should a Multi-Site Business Review Cost Risk?"
+title: "Commercial Electricity: Where Should Multi-Site Businesses Review Costs?"
 date: 2026-10-12
 categories: [business analytics, operations]
 tags: [energy, cost-analysis, electricity, EIA]
@@ -40,12 +40,6 @@ The source is the U.S. Energy Information Administration's monthly Form EIA-861M
 
 For each year, I calculated the sales-weighted price as 100 times total commercial revenue divided by total commercial sales. The published units convert to cents per kilowatt-hour. Prices are nominal and are not adjusted for general inflation.
 
-## Stakeholder questions
-
-- **How did the U.S. commercial average change?** It rose from 10.68 cents per kilowatt-hour in 2019 to 13.41 cents in 2025.
-- **Which states had both high prices and fast growth?** The state chart marks states above the 75th percentile on both measures.
-- **Can a state average estimate one company's bill?** No. Site tariffs, load, contracts, and demand charges are missing.
-
 ## Findings
 
 ### The national commercial average price rose, but it is not a company bill
@@ -71,10 +65,6 @@ Hawaii and California led the 2025 state averages, but their changes since 2019 
 ![Ten highest state and District of Columbia commercial electricity prices in 2025, compared with their 2019 prices](/images/commercial-electricity-top-state-rates.png)
 
 The distinction matters for planning: a high level may call for a tariff and load review, while a fast increase may call for a budget and contract review. Neither signal replaces actual bills.
-
-## Built
-
-The analysis calculates annual sales-weighted prices and compares 51 state and District of Columbia series. It excludes regional and national rows from state comparisons and retains the nominal-price boundary.
 
 ## Result
 

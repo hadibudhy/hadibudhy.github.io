@@ -1,5 +1,5 @@
 ---
-title: "Multi-Site Operations: Prioritize Continuity Planning by Hazard and Footprint"
+title: "County-Level Business Risk: Prioritize Continuity Reviews by Hazard"
 date: 2026-10-12
 categories: [business decision analytics, operations]
 tags: [business continuity, FEMA, Census, location risk, resilience]
@@ -52,12 +52,6 @@ I joined these counts to FEMA's [National Risk Index county layer](https://servi
 
 I aggregate non-overlapping NAICS groups. I exclude unknown county FIPS records and keep the county-sector join one-to-one. Establishment counts are the denominator for exposure shares. I keep FEMA's unrated and not-applicable categories separate.
 
-## Stakeholder questions
-
-- **How much of each tracked sector sits in High or Very High counties?** The shares range from 46.2% for manufacturing to 52.4% for accommodation and food services.
-- **Which hazard has the largest rated establishment share?** Inland flooding leads in all three sectors, at 51.8% to 57.4%.
-- **Can this screen estimate a chain's loss or downtime?** No. It uses county sector counts, not company sites or loss data.
-
 ## Findings
 
 ### Composite high-risk counties contain a large share of establishments
@@ -83,10 +77,6 @@ Los Angeles County had 28,998 retail establishments, 25,110 accommodation and fo
 These places are candidates for detailed continuity reviews, not automatic relocation decisions. A national ranking can obscure facility-level variation within each county.
 
 ![Largest retail, accommodation and food-service, and manufacturing footprints in counties with high or very-high FEMA composite risk](/images/business-risk-priority-counties.png)
-
-## Built
-
-The analysis joins and validates Census and FEMA records, calculates composite and hazard-specific establishment shares, and checks a top-quartile sensitivity screen. Three charts regenerate from the local source snapshots.
 
 ## Result
 

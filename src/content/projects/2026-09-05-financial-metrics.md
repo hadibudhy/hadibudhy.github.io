@@ -40,12 +40,6 @@ The source is the [SEC Company Facts API](https://www.sec.gov/edgar/sec-api-docu
 
 The checks cover unit compatibility, annual period selection, duplicate fact context, margin reconciliation, and source lineage. The evidence manifest records the source hash and period rule.
 
-## Stakeholder questions
-
-- **Did revenue and net income rise together?** Yes. Revenue rose from $211.9 billion to $281.7 billion. Net income rose from $72.4 billion to $101.8 billion.
-- **Did reported net margin change?** It rose from 34.1% in FY2023 to 36.1% in FY2025.
-- **Can these values explain product performance?** No. The source supports reported company-level trends, not product or customer drivers.
-
 ## Findings
 
 ### Revenue and net income both rose
@@ -75,10 +69,6 @@ For FY2024, the selected revenue fact is **$245.122 billion** under `RevenueFrom
 | FY2024 revenue | `RevenueFromContractWithCustomerExcludingAssessedTax` | $245.122B | FY2024, FY2025, and FY2026 10-Ks | Keep one FY2024 period; retain all filing references |
 | FY2024 net income | `NetIncomeLoss` | $88.136B | FY2024, FY2025, and FY2026 10-Ks | Reconcile on the same period and unit |
 | FY2024 net margin | Derived | 35.96% | $88.136B ÷ $245.122B | Calculate only after period and unit alignment |
-
-## Built
-
-The model preserves each reported fact and its filing context. It selects annual revenue and net income, calculates net margin, and reconciles the ratio to the selected facts.
 
 ## Result
 

@@ -1,5 +1,5 @@
 ---
-title: "What 14 Years of Happiness Data Really Shows"
+title: "World Happiness: 14 Measured Years of Change, 2011–2025"
 date: 2026-05-10
 categories: product analytics
 tags:
@@ -44,13 +44,6 @@ The question is: **how did national life evaluations change from 2011 to 2025, w
 
 The [World Happiness Report 2026 Figure 2.1 workbook](https://www.worldhappiness.report/data-sharing/) covers 168 countries in 14 measured years from 2011 through 2025. The source has no 2013 observation. I use the 129 countries with data in all measured years. Scores are self-reported three-year-average life evaluations on a 0 to 10 scale. Country averages are unweighted. Factor correlations use observations from 2019 to 2025.
 
-## Stakeholder questions
-
-- **Did the same countries improve on average?** The 129-country unweighted average increased by 0.26 points from 2011 to 2025.
-- **Did the gap narrow?** No. The highest-to-lowest range grew from 4.8 to 6.3 points.
-- **Did the 2011 bottom group improve?** Yes. Its average rose by 0.55 points, and its gap from the remaining 116 countries narrowed from 1.86 to 1.54 points.
-- **Which reported factors had the strongest associations?** Social support, GDP per person, and healthy life expectancy had correlations of 0.70, 0.68, and 0.66.
-
 ## Findings
 
 ### The average rose, including after the 2021 to 2022 dip
@@ -89,10 +82,6 @@ The 13 countries in the bottom decile in 2011 had an average score of **3.80** t
 
 ![Life evaluation trend for the 13 countries in the bottom decile in 2011 compared with the remaining 116 countries in the same balanced panel](/images/happiness-beat05-bottom-cohort.png)
 
-## Built
-
-The work selects a balanced country panel, checks country-year uniqueness and period coverage, and calculates average scores, ranges, country changes, factor correlations, and a fixed baseline bottom-decile trend.
-
 ## Result
 
 The fixed-panel average increased. The highest-to-lowest range widened, while the baseline bottom-decile gap to the remaining countries narrowed. This supports tracking averages, extremes, and a fixed lower-scoring group together. It does not identify which policy caused a country's change.
@@ -105,4 +94,4 @@ Public country data cannot show which programs changed living conditions or how 
 
 ## Technical notes
 
-The analysis uses the World Happiness Report 2026 data for Figure 2.1. It checks source rows, country-year uniqueness, the 14 measured years, the 129-country balanced panel, and the reported averages, ranges, and factor correlations. The workbook is available from the [official Data Sharing page](https://www.worldhappiness.report/data-sharing/). Code: [World Happiness analysis scripts](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/legacy_jekyll/scripts/world-happiness).
+The analysis uses the World Happiness Report 2026 data for Figure 2.1. It checks source rows, country-year uniqueness, the 14 measured years, the 129-country balanced panel, and the reported averages, ranges, and factor correlations. The workbook is available from the [official Data Sharing page](https://www.worldhappiness.report/data-sharing/). The source hash and validation record are in the [evidence manifest](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/public/data/evidence/world-happiness-report.json).

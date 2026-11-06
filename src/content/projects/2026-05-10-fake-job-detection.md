@@ -1,13 +1,13 @@
 ---
-title: "Screening Historical Job Posts for Fraud Signals"
+title: "Job-Platform Fraud Screening: Balancing Detection and Review Load"
 date: 2026-05-10
-categories: machine learning
+categories: [product analytics, trust and safety]
 tags:
   - nlp
   - classification
   - lightgbm
   - imbalanced-data
-excerpt: "A fraud-screening study that compares text and profile signals and makes the detection versus review trade-off explicit."
+excerpt: "A 2012–2014 job-post benchmark compares fraud signals and makes the detection-versus-review trade-off explicit."
 problem: "Fake job posts were rare, so a system could appear accurate while missing every scam."
 result: "On an untouched stratified test set, the combined TF-IDF/SVD and profile LightGBM model reached 72.8% recall and 96.9% precision at a 0.30 threshold selected on validation data."
 featured: true
@@ -43,13 +43,6 @@ The business question is: **can a platform identify suspicious posts early enoug
 
 The source is the public [Employment Scam Aegean Dataset (EMSCAD)](https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobposting-prediction). It has 17,880 posts and 866 fake labels. I use a stratified 60/20/20 split: 10,728 training posts, 3,576 validation posts, and 3,576 test posts. The validation and test sets each contain 173 fake posts. The dataset covers 2012 to 2014.
 
-## Stakeholder questions
-
-- **Which model caught the most fake posts on test data?** The text-only logistic regression reached 87.9% recall.
-- **What happened at the selected threshold?** A 0.30 threshold selected on validation data gave the combined model 72.8% recall and 96.9% precision on test data.
-- **What review volume did that create?** 130 of 3,576 test posts (3.6%) were flagged; 4 of those were labeled legitimate.
-- **How many fake posts did the combined model catch?** It caught 126 of 173 fake posts and missed 47. It falsely flagged 4 legitimate posts.
-
 ## Findings
 
 ### Text signals caught the most scams
@@ -82,10 +75,6 @@ For the profile-feature LightGBM, split counts were highest for capitalization r
 
 The validation and test sets are random samples from the same 2012–2014 source period. They do not test performance on later scam patterns or changes in fraud prevalence.
 
-## Built
-
-The analysis compares TF-IDF logistic regression with combined TF-IDF/SVD and profile-feature LightGBM. It selects the combined-model threshold on validation data. It calculates keyword frequencies on development data and split-count importance on training data.
-
 ## Result
 
 The text-only model had the highest test recall at 87.9%. The combined model at its validation-selected threshold flagged 3.6% of test posts, with 96.9% precision and 72.8% recall. The validation-selected threshold exposes a measurable review-versus-miss trade-off, but no live platform outcome was measured.
@@ -101,4 +90,4 @@ As a scale illustration, if **100,000 posts** had the dataset's 4.8% fraud rate,
 
 The split is stratified and random. It assigns 60% of posts to training, 20% to threshold selection, and 20% to the final test. The dataset covers 2012 to 2014. It does not establish current fraud detection, fairness across groups, or production performance.
 
-The source file is available from [Kaggle](https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobposting-prediction). A checksum, download path, dependencies, and run command are in [`legacy_jekyll/scripts/fake-job-detection/README.md`](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/legacy_jekyll/scripts/fake-job-detection/README.md).
+The source file is available from [Kaggle](https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobposting-prediction). The source hash and validation checks are recorded in the [evidence manifest](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/public/data/evidence/fake-job-detection.json).

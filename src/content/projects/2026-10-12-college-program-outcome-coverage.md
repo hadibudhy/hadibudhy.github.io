@@ -1,12 +1,12 @@
 ---
-title: "College Program Outcomes: Check Coverage Before Comparing Earnings"
+title: "College Program Earnings: Check Coverage Before Comparing"
 date: 2026-10-12
 categories: [business analytics, education]
 tags: [college-scorecard, data-quality, student-outcomes, portfolio-review]
 excerpt: "A coverage audit of federal program outcomes finds that reportable earnings vary sharply by credential and institution type, making unqualified program rankings unsafe."
 problem: "Education leaders may use public program earnings to guide portfolio reviews, but privacy suppression and repeated branch records can distort comparisons."
 result: "After deduplicating branch records, 37.6% of domestic bachelor's program rows reported a four-year earnings median. Coverage was 54.2% for public programs and 24.8% for private nonprofits."
-featured: false
+featured: true
 published: true
 caseId: college-program-outcome-coverage
 kind: completed
@@ -40,12 +40,6 @@ The source is the U.S. Department of Education's College Scorecard **Most Recent
 
 The Department calculates some outcome measures at the six-digit OPEID institution-system level and repeats them across branch campuses. I verified that repeated earnings and debt values matched, then kept one row per OPEID6, field, and credential. For the comparison below, I excluded foreign institutions and non-credential coursework. I treat a numeric median as reportable and keep the source's `PS` privacy-suppression value separate. In the domestic bachelor's rows, every nonnumeric earnings cell is marked `PS`.
 
-## Stakeholder questions
-
-- **How many domestic bachelor's records have reportable earnings?** 25,283 of 67,212 distinct program records, or 37.6%.
-- **Does coverage differ by institution control?** Yes. Coverage was 54.2% for public, 24.8% for private nonprofit, and 44.5% for for-profit programs.
-- **Can a missing value be treated as zero?** No. Every nonnumeric domestic bachelor's earnings cell is marked `PS` for privacy suppression.
-
 ## Findings
 
 ### Earnings coverage changes by credential
@@ -71,10 +65,6 @@ The raw file contains **70,557** U.S. bachelor's rows for the three domestic con
 ![Raw U.S. bachelor's rows and distinct College Scorecard program records after branch-campus deduplication](/images/college-scorecard-branch-deduplication.png)
 
 The deduplication changes the count, not the reported outcome values. It prevents the same institution-system result from appearing as multiple independent programs just because the institution has multiple campuses.
-
-## Built
-
-The analysis verifies the source snapshot, checks repeated branch values, deduplicates to institution-system, field, and credential, and measures reportable-value coverage. It does not impute suppressed values.
 
 ## Result
 

@@ -36,12 +36,6 @@ The source is the [Criteo AI Lab uplift dataset](https://ailab.criteo.com/criteo
 
 The checks cover row count, schema, binary outcomes, control exposure, and sample ratio. The analysis compares assigned groups, even when a treatment user was not exposed to an ad.
 
-## Stakeholder questions
-
-- **What changed after ad assignment?** Conversion rose by 0.115 percentage points. Visits rose by 1.034 points. Both use assigned users as the denominator.
-- **How many additional conversions does that represent in the benchmark?** About 115 per 100,000 assigned users.
-- **Does the result show the campaign was profitable?** No. The data has no ad cost, margin, conversion value, or later customer value.
-
 ## Findings
 
 ### Assigned advertising increased conversion in this benchmark
@@ -71,10 +65,6 @@ A post-hoc check divided feature f0 into four equal-sized bands. The observed ab
 ![Exploratory Criteo f0 quartiles: observed lifts were 0.038, 0.386, 0.019, and 0.010 percentage points; the largest band is a retest hypothesis, not a targeting rule](/images/portfolio-campaign-f0.svg)
 
 Treat the largest difference as a hypothesis only. A fresh, pre-registered holdout is needed before targeting from it.
-
-## Built
-
-The project includes a streaming analysis, an intention-to-treat calculation, a confidence interval, SQL, and source checks. The subgroup analysis is labeled exploratory.
 
 ## Result
 
