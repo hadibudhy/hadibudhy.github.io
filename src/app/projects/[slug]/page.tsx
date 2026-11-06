@@ -1,7 +1,6 @@
 import { getProjectBySlug, getAllProjects } from "@/lib/mdx";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { format } from "date-fns";
@@ -52,7 +51,7 @@ type MDXImageProps = ComponentProps<"img">;
 
 // Custom components for MDX
 const components = {
-  h2: (props: ComponentProps<"h2">) => <h2 className="mt-12 mb-5 break-words border-b border-border pb-3 text-xl font-bold tracking-tight text-foreground sm:mt-16 sm:text-2xl" {...props} />,
+  h2: (props: ComponentProps<"h2">) => <h2 className="mt-12 mb-4 break-words text-xl font-semibold tracking-normal text-foreground sm:mt-14 sm:text-2xl" {...props} />,
   h3: (props: ComponentProps<"h3">) => <h3 className="mt-8 mb-4 break-words text-lg font-bold tracking-tight text-foreground sm:text-xl" {...props} />,
   p: (props: ComponentProps<"p">) => <p className="leading-7 [&:not(:first-child)]:mt-6 text-muted-foreground" {...props} />,
   ul: (props: ComponentProps<"ul">) => <ul className="my-6 ml-6 list-disc [&>li]:mt-2 text-muted-foreground" {...props} />,
@@ -97,6 +96,7 @@ export default async function ProjectPage({ params }: Props) {
     "product-analytics": "Product analytics",
     "experimentation-growth": "Experimentation & growth",
   }[project.meta.primaryTrack];
+  const categoryLabel = project.meta.categories.join(", ");
   const technicalStart = project.content.search(/\n(?=## Technical (?:appendix|design)\b)/i);
   const summaryContent = technicalStart === -1 ? project.content : project.content.slice(0, technicalStart);
   const technicalContent = technicalStart === -1 ? "" : project.content.slice(technicalStart + 1);
@@ -109,46 +109,23 @@ export default async function ProjectPage({ params }: Props) {
         </Button>
 
         <header className="mb-12 sm:mb-16">
-          <h1 className="break-words text-3xl font-extrabold tracking-tight leading-tight sm:text-4xl md:text-5xl">
+          <h1 className="break-words text-3xl font-bold tracking-normal leading-tight sm:text-4xl md:text-5xl">
             {project.meta.title}
           </h1>
           
-          <div className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
+          <div className="mb-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
             {formattedDate && (
               <div className="flex items-center">
-                <span className="mr-2 text-primary" aria-hidden="true">Last updated</span>
-                {formattedDate}
+                Published {formattedDate}
               </div>
             )}
-            {project.meta.categories && (
-              <div className="flex items-center capitalize">
-                <span className="mr-2 text-primary" aria-hidden="true">Area</span>
-                {project.meta.categories.join(', ')}
-              </div>
-            )}
-            <Badge variant="secondary">{kindLabel}</Badge>
+            {categoryLabel ? <span className="capitalize">{categoryLabel}</span> : <span>{kindLabel}</span>}
           </div>
 
-          {project.meta.tags && (
-            <div className="flex flex-wrap gap-2">
-              {project.meta.tags.map((tag: string) => (
-                <Badge key={tag} variant="secondary" className="uppercase tracking-wider text-[10px]">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
+          {project.meta.tags.length > 0 && (
+            <p className="mb-8 text-sm leading-6 text-muted-foreground">{project.meta.tags.join(" · ")}</p>
           )}
         </header>
-
-        {/* Short summary for readers who are scanning the case study */}
-        {project.meta.excerpt && (
-          <div className="mb-12 border border-primary/40 bg-primary/10 p-5 sm:mb-16 sm:p-6 md:p-8">
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-primary">In brief</p>
-            <p className="text-lg font-medium leading-relaxed text-foreground">
-              {project.meta.excerpt}
-            </p>
-          </div>
-        )}
 
         <div className="prose prose-invert max-w-none">
           <MDXRemote

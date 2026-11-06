@@ -64,6 +64,10 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
 html,
 body {
   max-width: 100%;
@@ -77,11 +81,11 @@ body {
 
 @layer components {
   .section-kicker {
-    @apply font-mono text-[0.68rem] font-medium uppercase tracking-[0.18em] text-primary;
+    @apply text-sm font-medium text-muted-foreground;
   }
 
   .section-title {
-    @apply max-w-xl text-3xl font-bold tracking-[-0.02em] text-foreground md:text-4xl;
+    @apply max-w-xl text-3xl font-semibold tracking-normal text-foreground md:text-4xl;
   }
 
   .surface {
