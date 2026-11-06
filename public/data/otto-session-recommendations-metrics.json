@@ -1,0 +1,209 @@
+{
+  "caseId": "otto-session-recommendations",
+  "source": {
+    "name": "OTTO Recommender Systems Dataset, training file",
+    "url": "https://www.kaggle.com/datasets/otto/recsys-dataset",
+    "publisher": "OTTO (GmbH & Co KG)",
+    "accessed": "2026-11-06",
+    "license": "CC BY 4.0",
+    "sha256": "06716132f1ab1d500f1515ba2c16187d7b0e98066ca66d33b95f022f8c3a340d",
+    "source_file": "otto-recsys-train.jsonl",
+    "archive_file": "otto-recsys-train.jsonl.zip"
+  },
+  "data": {
+    "sessions": 12899779,
+    "min_ts": 1659304800025,
+    "max_ts": 1661723999984,
+    "source_sha256": "06716132f1ab1d500f1515ba2c16187d7b0e98066ca66d33b95f022f8c3a340d",
+    "events": 216716096,
+    "event_counts": {
+      "clicks": 194720954,
+      "carts": 16896191,
+      "orders": 5098951
+    },
+    "max_aid": 1855602
+  },
+  "validation": {
+    "holdout_days": 2,
+    "seed": 42,
+    "cutoff_utc": "2022-08-26T21:59:59.984000+00:00",
+    "train_sessions": 12194409,
+    "train_sessions_dropped_short": 189024,
+    "train_events": 199006030,
+    "raw_validation_sessions": 516346,
+    "validation_sessions_dropped_after_filter": 644,
+    "validation_sessions": 515702,
+    "models": {
+      "Popularity only": {
+        "by_type": {
+          "clicks": 0.00832556719423197,
+          "carts": 0.005075219845441992,
+          "orders": 0.005509670033119352
+        },
+        "weighted_recall_at_20": 0.005660924692927406,
+        "sessions": 515702,
+        "hits": {
+          "clicks": 4172,
+          "carts": 838,
+          "orders": 539
+        },
+        "denominator": {
+          "clicks": 501107,
+          "carts": 165116,
+          "orders": 97828
+        }
+      },
+      "Recent session items + popularity": {
+        "by_type": {
+          "clicks": 0.3179979525330917,
+          "carts": 0.30799559097846363,
+          "orders": 0.5809175287238827
+        },
+        "weighted_recall_at_20": 0.47274898978117785,
+        "sessions": 515702,
+        "hits": {
+          "clicks": 159351,
+          "carts": 50855,
+          "orders": 56830
+        },
+        "denominator": {
+          "clicks": 501107,
+          "carts": 165116,
+          "orders": 97828
+        }
+      }
+    },
+    "prefix_length_groups": {
+      "short (1\u20133 prefix events)": {
+        "Popularity only": {
+          "by_type": {
+            "clicks": 0.00909429823964646,
+            "carts": 0.00732104534177562,
+            "orders": 0.006210443037974684
+          },
+          "weighted_recall_at_20": 0.006832009249282142,
+          "sessions": 373031,
+          "hits": {
+            "clicks": 3342,
+            "carts": 481,
+            "orders": 157
+          },
+          "denominator": {
+            "clicks": 367483,
+            "carts": 65701,
+            "orders": 25280
+          }
+        },
+        "Recent session items + popularity": {
+          "by_type": {
+            "clicks": 0.29539597750100005,
+            "carts": 0.3546977975982101,
+            "orders": 0.46617879746835444
+          },
+          "weighted_recall_at_20": 0.4156562155105757,
+          "sessions": 373031,
+          "hits": {
+            "clicks": 108553,
+            "carts": 23304,
+            "orders": 11785
+          },
+          "denominator": {
+            "clicks": 367483,
+            "carts": 65701,
+            "orders": 25280
+          }
+        }
+      },
+      "medium (4\u20138 prefix events)": {
+        "Popularity only": {
+          "by_type": {
+            "clicks": 0.006924255401281108,
+            "carts": 0.004493387967964239,
+            "orders": 0.005478685115572262
+          },
+          "weighted_recall_at_20": 0.00532765299986074,
+          "sessions": 88075,
+          "hits": {
+            "clicks": 574,
+            "carts": 193,
+            "orders": 137
+          },
+          "denominator": {
+            "clicks": 82897,
+            "carts": 42952,
+            "orders": 25006
+          }
+        },
+        "Recent session items + popularity": {
+          "by_type": {
+            "clicks": 0.3711835168944594,
+            "carts": 0.3060625814863103,
+            "orders": 0.5888186835159561
+          },
+          "weighted_recall_at_20": 0.4822283362449127,
+          "sessions": 88075,
+          "hits": {
+            "clicks": 30770,
+            "carts": 13146,
+            "orders": 14724
+          },
+          "denominator": {
+            "clicks": 82897,
+            "carts": 42952,
+            "orders": 25006
+          }
+        }
+      },
+      "long (9+ prefix events)": {
+        "Popularity only": {
+          "by_type": {
+            "clicks": 0.005046622114455813,
+            "carts": 0.002904556966509041,
+            "orders": 0.0051533381010474945
+          },
+          "weighted_recall_at_20": 0.004468032162026791,
+          "sessions": 54596,
+          "hits": {
+            "clicks": 256,
+            "carts": 164,
+            "orders": 245
+          },
+          "denominator": {
+            "clicks": 50727,
+            "carts": 56463,
+            "orders": 47542
+          }
+        },
+        "Recent session items + popularity": {
+          "by_type": {
+            "clicks": 0.39481932698562894,
+            "carts": 0.2551228237961143,
+            "orders": 0.6377729165790249
+          },
+          "weighted_recall_at_20": 0.4986825297848121,
+          "sessions": 54596,
+          "hits": {
+            "clicks": 20028,
+            "carts": 14405,
+            "orders": 30321
+          },
+          "denominator": {
+            "clicks": 50727,
+            "carts": 56463,
+            "orders": 47542
+          }
+        }
+      }
+    }
+  },
+  "method": {
+    "popularity": "Top training-period item interaction counts by event type.",
+    "recent_session_items_plus_popularity": "Up to 20 most recent distinct item IDs in the visible session prefix, filled with event-type popularity.",
+    "metric": "OTTO weighted Recall@20: 0.10 clicks + 0.30 carts + 0.60 orders."
+  },
+  "artifacts": [
+    "/images/otto-session-event-mix.png",
+    "/images/otto-baseline-recall.png",
+    "/images/otto-prefix-context-recall.png"
+  ]
+}

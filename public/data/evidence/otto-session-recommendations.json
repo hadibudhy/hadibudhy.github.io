@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 2,
+  "caseId": "otto-session-recommendations",
+  "status": "verified",
+  "source": {
+    "name": "OTTO Recommender Systems Dataset, training file",
+    "url": "https://www.kaggle.com/datasets/otto/recsys-dataset",
+    "publisher": "OTTO (GmbH & Co KG)",
+    "accessed": "2026-11-06",
+    "grain": "one anonymized session with timestamped click, cart, and order events",
+    "period": "2022-07-31 through 2022-08-28",
+    "rows": 12899779,
+    "sha256": "06716132f1ab1d500f1515ba2c16187d7b0e98066ca66d33b95f022f8c3a340d",
+    "file": "otto-recsys-train.jsonl",
+    "archiveFile": "otto-recsys-train.jsonl.zip",
+    "license": "CC BY 4.0",
+    "publicDataOnly": true,
+    "mutableSource": true
+  },
+  "validation": {
+    "holdout": {
+      "train_sessions": 12194409,
+      "train_sessions_dropped_short": 189024,
+      "raw_validation_sessions": 516346,
+      "validation_sessions_scored": 515702,
+      "validation_sessions_dropped_after_filter": 644
+    },
+    "checks": [
+      "all 12,899,779 sessions and 216,716,096 events in the pinned training file were parsed",
+      "a 2-day validation horizon was created from the latest training timestamps using seed 42",
+      "189,024 training sessions with fewer than two pre-cutoff events were excluded, matching OTTO's split helper",
+      "644 holdout sessions were removed after filtering unknown items or sessions shorter than two events",
+      "item popularity counts use only sessions and events before the temporal cutoff",
+      "validation predictions use only the visible prefix of each session",
+      "click ground truth is the next click; cart and order ground truth are distinct future item IDs",
+      "Recall@20 uses pooled hits and denominators with official 0.10, 0.30, and 0.60 action weights"
+    ],
+    "results": {
+      "Popularity only": {
+        "by_type": {
+          "clicks": 0.00832556719423197,
+          "carts": 0.005075219845441992,
+          "orders": 0.005509670033119352
+        },
+        "weighted_recall_at_20": 0.005660924692927406,
+        "sessions": 515702,
+        "hits": {
+          "clicks": 4172,
+          "carts": 838,
+          "orders": 539
+        },
+        "denominator": {
+          "clicks": 501107,
+          "carts": 165116,
+          "orders": 97828
+        }
+      },
+      "Recent session items + popularity": {
+        "by_type": {
+          "clicks": 0.3179979525330917,
+          "carts": 0.30799559097846363,
+          "orders": 0.5809175287238827
+        },
+        "weighted_recall_at_20": 0.47274898978117785,
+        "sessions": 515702,
+        "hits": {
+          "clicks": 159351,
+          "carts": 50855,
+          "orders": 56830
+        },
+        "denominator": {
+          "clicks": 501107,
+          "carts": 165116,
+          "orders": 97828
+        }
+      }
+    }
+  },
+  "artifacts": [
+    "/images/otto-session-event-mix.png",
+    "/images/otto-baseline-recall.png",
+    "/images/otto-prefix-context-recall.png"
+  ],
+  "artifactHashes": {
+    "/images/otto-session-event-mix.png": "db7cb6623534c98086fc7a678b2623532390bac813fa5899f8f09eb4ef616028",
+    "/images/otto-baseline-recall.png": "bf01708325ff984f52f3ed11887fb26c32725b9f28acdddd755b167be28fe5b4",
+    "/images/otto-prefix-context-recall.png": "b475f85c2315e2cc9b2504285d89855420e1670041192661fd8a21ba675ef9c0"
+  },
+  "evidenceBoundary": "Offline ranking metrics on a historical public release do not measure impressions, assignment, CTR or purchase lift, revenue, margin, or current OTTO production performance."
+}

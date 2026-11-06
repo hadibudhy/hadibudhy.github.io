@@ -16,3 +16,4 @@ The Criteo file is the unbiased 13,979,592-row release. The TLC work uses the of
 1. Campaign incrementality: decide whether a randomized ad campaign creates additional visits and conversions.
 2. Marketplace supply and demand: diagnose where recorded HVFHV trips concentrate and what the public data cannot observe about unmet demand.
 3. Congestion-pricing causal audit: test whether an official mobility panel supports a causal policy conclusion.
+4. OTTO session recommendations: compare popularity with recent-session candidate retrieval for clicks, carts, and orders using the official offline metric.
