@@ -1,6 +1,6 @@
 # Growth analytics portfolio
 
-These three projects are decision studies for growth and marketplace analytics. They use official or company-released data, keep raw files outside Git, and separate observed evidence from assumptions and hypotheses.
+These projects are decision studies for growth and marketplace analytics. They use official or company-released data, keep raw files outside Git, and separate observed evidence from assumptions and hypotheses.
 
 ## Reproducibility
 
@@ -17,3 +17,4 @@ The Criteo file is the unbiased 13,979,592-row release. The TLC work uses the of
 2. Marketplace supply and demand: diagnose where recorded HVFHV trips concentrate and what the public data cannot observe about unmet demand.
 3. Congestion-pricing causal audit: test whether an official mobility panel supports a causal policy conclusion.
 4. OTTO session recommendations: compare popularity with recent-session candidate retrieval for clicks, carts, and orders using the official offline metric.
+5. Amazon search relevance: compare title-only and train-tuned lexical reranking on query-held-out ESCI judgments.

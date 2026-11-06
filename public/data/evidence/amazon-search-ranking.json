@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 2,
+  "caseId": "amazon-search-relevance",
+  "status": "verified",
+  "source": {
+    "name": "Amazon Shopping Queries Dataset, Task 1 small version, US locale",
+    "url": "https://github.com/amazon-science/esci-data",
+    "publisher": "Amazon Science",
+    "accessed": "2026-11-07",
+    "period": "2022 public benchmark; no per-query timestamp field",
+    "grain": "query ID \u00d7 preselected product candidate \u00d7 human relevance judgment",
+    "rows": 601354,
+    "examplesSha256": "4a735b693b4a424a6fc67f5be6e4c811495c488bbf66d02a602d308b2744263a",
+    "productsSha256": "25124442d064d64b26f74082d6fa09438d679efc0c183cf28d19064a2b65a265",
+    "license": "Apache-2.0",
+    "publicDataOnly": true,
+    "mutableSource": true
+  },
+  "validation": {
+    "checks": [
+      "the US small-version slice contains 601,354 query-product judgments",
+      "the provided query split contains 8,956 held-out test queries and no query IDs overlap train",
+      "field weights were selected using 4,178 training queries after IDF calibration on 16,710 separate training queries",
+      "product metadata is matched using product_locale and product_id",
+      "test labels were not used to select tokenization, field weights, or tie-breaking",
+      "official full nDCG uses Amazon's TREC gain mapping and query-level macro averaging",
+      "nDCG@10 is reported only as a custom local top-10 view"
+    ],
+    "testResults": {
+      "Title-only token coverage": {
+        "official_full_ndcg": 0.7964957013676652,
+        "local_ndcg_at_10": 0.6670410715051996,
+        "queries": 8956,
+        "zero_ideal_queries": 0
+      },
+      "Train-tuned field-weighted lexical": {
+        "official_full_ndcg": 0.7982240266881004,
+        "local_ndcg_at_10": 0.6708840225756629,
+        "queries": 8956,
+        "zero_ideal_queries": 0
+      }
+    },
+    "pairedQueryBootstrapDelta": {
+      "official_full_ndcg": {
+        "mean_delta": 0.0017283253204352614,
+        "confidence_interval_95": [
+          0.0005934025021747301,
+          0.0029505645648893655
+        ],
+        "queries": 8956,
+        "replicates": 2000,
+        "seed": 42
+      },
+      "local_ndcg_at_10": {
+        "mean_delta": 0.0038429510704633737,
+        "confidence_interval_95": [
+          0.0023839995178403495,
+          0.005497019491756888
+        ],
+        "queries": 8956,
+        "replicates": 2000,
+        "seed": 42
+      }
+    },
+    "selectedFieldWeights": {
+      "product_title": 1.0,
+      "product_bullet_point": 0.0,
+      "product_description": 0.0,
+      "product_brand": 0.5,
+      "product_color": 0.5
+    },
+    "productMetadataCoverage": {
+      "candidate_products": 482105,
+      "matched_products": 482105,
+      "missing_products": 0,
+      "pairs_without_product_metadata": 0,
+      "empty_product_fields": {
+        "product_description": 230346,
+        "product_color": 155144,
+        "product_bullet_point": 63627,
+        "product_brand": 27191
+      }
+    }
+  },
+  "artifacts": [
+    "/images/amazon-esci-label-distribution.png",
+    "/images/amazon-search-ranking-ndcg.png",
+    "/images/amazon-search-top10-labels.png"
+  ],
+  "artifactHashes": {
+    "/images/amazon-esci-label-distribution.png": "ff5164a3a186da765669f3b2f474aab0b183082a682d1b689f637c2df9767f67",
+    "/images/amazon-search-ranking-ndcg.png": "3905a96bf8e9107aab11d7864766eff1281c38b8e823e89ce12b071bebec0050",
+    "/images/amazon-search-top10-labels.png": "7d1bdd5586aa80a8058a9b815ff00ba08909e7e92abedc37feeacdb8473fccaf"
+  },
+  "evidenceBoundary": "Offline reranking of preselected, human-judged candidates does not evaluate full-catalog retrieval, user exposure, CTR, purchases, or sales impact."
+}

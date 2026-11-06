@@ -1,0 +1,388 @@
+{
+  "caseId": "amazon-search-relevance",
+  "source": {
+    "publisher": "Amazon Science",
+    "dataset": "Shopping Queries Dataset (ESCI), Task 1 small version",
+    "release_year": 2022,
+    "license": "Apache-2.0",
+    "accessed": "2026-11-07",
+    "examples_sha256": "4a735b693b4a424a6fc67f5be6e4c811495c488bbf66d02a602d308b2744263a",
+    "products_sha256": "25124442d064d64b26f74082d6fa09438d679efc0c183cf28d19064a2b65a265"
+  },
+  "scope": {
+    "locale": "us",
+    "query_product_pairs": 601354,
+    "train_queries": 20888,
+    "test_queries": 8956,
+    "calibration_queries": 16710,
+    "tuning_queries": 4178,
+    "product_metadata": {
+      "candidate_products": 482105,
+      "matched_products": 482105,
+      "missing_products": 0,
+      "pairs_without_product_metadata": 0,
+      "empty_product_fields": {
+        "product_description": 230346,
+        "product_color": 155144,
+        "product_bullet_point": 63627,
+        "product_brand": 27191
+      }
+    },
+    "label_distribution": {
+      "train": {
+        "E": 181819,
+        "S": 147628,
+        "C": 19090,
+        "I": 71116
+      },
+      "test": {
+        "E": 79708,
+        "S": 63563,
+        "C": 8099,
+        "I": 30331
+      }
+    }
+  },
+  "model_selection": {
+    "seed": 42,
+    "selected_field_weights": {
+      "product_title": 1.0,
+      "product_bullet_point": 0.0,
+      "product_description": 0.0,
+      "product_brand": 0.5,
+      "product_color": 0.5
+    },
+    "tuning_ndcg": 0.7936549024973064,
+    "grid": [
+      {
+        "weights": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "tuning_ndcg": 0.7911540150660158
+      },
+      {
+        "weights": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.5
+        ],
+        "tuning_ndcg": 0.7918340968915378
+      },
+      {
+        "weights": [
+          1.0,
+          0.0,
+          0.0,
+          0.5,
+          0.0
+        ],
+        "tuning_ndcg": 0.7933483757395433
+      },
+      {
+        "weights": [
+          1.0,
+          0.0,
+          0.0,
+          0.5,
+          0.5
+        ],
+        "tuning_ndcg": 0.7936549024973064
+      },
+      {
+        "weights": [
+          1.0,
+          0.0,
+          0.5,
+          0.0,
+          0.0
+        ],
+        "tuning_ndcg": 0.7887136383866293
+      },
+      {
+        "weights": [
+          1.0,
+          0.0,
+          0.5,
+          0.0,
+          0.5
+        ],
+        "tuning_ndcg": 0.7892683100060932
+      },
+      {
+        "weights": [
+          1.0,
+          0.0,
+          0.5,
+          0.5,
+          0.0
+        ],
+        "tuning_ndcg": 0.7907914224802983
+      },
+      {
+        "weights": [
+          1.0,
+          0.0,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "tuning_ndcg": 0.791632286666637
+      },
+      {
+        "weights": [
+          1.0,
+          0.5,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "tuning_ndcg": 0.7885785586447513
+      },
+      {
+        "weights": [
+          1.0,
+          0.5,
+          0.0,
+          0.0,
+          0.5
+        ],
+        "tuning_ndcg": 0.7892117976227414
+      },
+      {
+        "weights": [
+          1.0,
+          0.5,
+          0.0,
+          0.5,
+          0.0
+        ],
+        "tuning_ndcg": 0.7901247637397939
+      },
+      {
+        "weights": [
+          1.0,
+          0.5,
+          0.0,
+          0.5,
+          0.5
+        ],
+        "tuning_ndcg": 0.7911552164095224
+      },
+      {
+        "weights": [
+          1.0,
+          0.5,
+          0.5,
+          0.0,
+          0.0
+        ],
+        "tuning_ndcg": 0.786906696469355
+      },
+      {
+        "weights": [
+          1.0,
+          0.5,
+          0.5,
+          0.0,
+          0.5
+        ],
+        "tuning_ndcg": 0.7877526408333909
+      },
+      {
+        "weights": [
+          1.0,
+          0.5,
+          0.5,
+          0.5,
+          0.0
+        ],
+        "tuning_ndcg": 0.7887635847922416
+      },
+      {
+        "weights": [
+          1.0,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "tuning_ndcg": 0.7892967338429817
+      },
+      {
+        "weights": [
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "tuning_ndcg": 0.7813087340571296
+      },
+      {
+        "weights": [
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          0.5
+        ],
+        "tuning_ndcg": 0.7824464478255216
+      },
+      {
+        "weights": [
+          1.0,
+          1.0,
+          0.0,
+          0.5,
+          0.0
+        ],
+        "tuning_ndcg": 0.7829103735568684
+      },
+      {
+        "weights": [
+          1.0,
+          1.0,
+          0.0,
+          0.5,
+          0.5
+        ],
+        "tuning_ndcg": 0.7838353545942363
+      },
+      {
+        "weights": [
+          1.0,
+          1.0,
+          0.5,
+          0.0,
+          0.0
+        ],
+        "tuning_ndcg": 0.7812269513323437
+      },
+      {
+        "weights": [
+          1.0,
+          1.0,
+          0.5,
+          0.0,
+          0.5
+        ],
+        "tuning_ndcg": 0.7818760495694005
+      },
+      {
+        "weights": [
+          1.0,
+          1.0,
+          0.5,
+          0.5,
+          0.0
+        ],
+        "tuning_ndcg": 0.7829853631582776
+      },
+      {
+        "weights": [
+          1.0,
+          1.0,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "tuning_ndcg": 0.7836896853210042
+      }
+    ]
+  },
+  "test_results": {
+    "Title-only token coverage": {
+      "official_full_ndcg": 0.7964957013676652,
+      "local_ndcg_at_10": 0.6670410715051996,
+      "queries": 8956,
+      "zero_ideal_queries": 0
+    },
+    "Train-tuned field-weighted lexical": {
+      "official_full_ndcg": 0.7982240266881004,
+      "local_ndcg_at_10": 0.6708840225756629,
+      "queries": 8956,
+      "zero_ideal_queries": 0
+    }
+  },
+  "paired_query_bootstrap_delta": {
+    "official_full_ndcg": {
+      "mean_delta": 0.0017283253204352614,
+      "confidence_interval_95": [
+        0.0005934025021747301,
+        0.0029505645648893655
+      ],
+      "queries": 8956,
+      "replicates": 2000,
+      "seed": 42
+    },
+    "local_ndcg_at_10": {
+      "mean_delta": 0.0038429510704633737,
+      "confidence_interval_95": [
+        0.0023839995178403495,
+        0.005497019491756888
+      ],
+      "queries": 8956,
+      "replicates": 2000,
+      "seed": 42
+    }
+  },
+  "test_top10_label_counts": {
+    "Title-only token coverage": {
+      "E": {
+        "count": 43604,
+        "share": 0.4873697858452184
+      },
+      "S": {
+        "count": 29281,
+        "share": 0.3272790271381947
+      },
+      "C": {
+        "count": 4291,
+        "share": 0.04796128224616623
+      },
+      "I": {
+        "count": 12292,
+        "share": 0.1373899047704207
+      }
+    },
+    "Train-tuned field-weighted lexical": {
+      "E": {
+        "count": 43868,
+        "share": 0.49032056154155673
+      },
+      "S": {
+        "count": 29028,
+        "share": 0.3244512004292037
+      },
+      "C": {
+        "count": 4266,
+        "share": 0.04768185272946752
+      },
+      "I": {
+        "count": 12306,
+        "share": 0.13754638529977198
+      }
+    }
+  },
+  "metric": {
+    "official_gain_map": {
+      "E": 1.0,
+      "C": 0.1,
+      "S": 0.01,
+      "I": 0.0
+    },
+    "official_full_ndcg": "Per-query nDCG averaged over provided test queries with Amazon's TREC gain mapping.",
+    "local_ndcg_at_10": "Top-10 nDCG with the same gain mapping; a custom local view."
+  },
+  "artifacts": [
+    "/images/amazon-esci-label-distribution.png",
+    "/images/amazon-search-ranking-ndcg.png",
+    "/images/amazon-search-top10-labels.png"
+  ]
+}
