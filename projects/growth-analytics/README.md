@@ -18,3 +18,4 @@ The Criteo file is the unbiased 13,979,592-row release. The TLC work uses the of
 3. Congestion-pricing causal audit: test whether an official mobility panel supports a causal policy conclusion.
 4. OTTO session recommendations: compare popularity with recent-session candidate retrieval for clicks, carts, and orders using the official offline metric.
 5. Amazon search relevance: compare title-only and train-tuned lexical reranking on query-held-out ESCI judgments.
+6. CFPB complaint monitoring: track issue mix and company-coded response changes in current public credit-reporting complaints.
