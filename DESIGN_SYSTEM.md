@@ -1,47 +1,42 @@
 # Portfolio design system
 
-This system adapts the observed structure of `renlenon.vercel.app` to Hadi Budhy's own content. It uses a compact editorial portfolio layout: identity first, a short plain-language positioning statement, then selected work and supporting detail.
+## Direction
+
+An editorial data portfolio: clear type, restrained forest-green accents, and real charts and workflow diagrams. The evidence carries the visual interest. Layout stays compact and readable on phones.
 
 ## Tokens
 
 | Token | Value | Use |
 |---|---|---|
-| Background | `#fafafa` | Page canvas |
-| Surface | `#ffffff` | Cards and readable content blocks |
-| Foreground | `#171717` | Headings and primary actions |
-| Muted text | `#737373` | Explanations and metadata |
-| Border | `#e5e7eb` | Dividers and card boundaries |
-| Accent | `#171717` | Links, buttons, and focus |
-| Small radius | `0.5rem` | Controls |
-| Card radius | `0.75rem` | Surfaces |
+| Background | `#f6f8f4` | Page canvas |
+| Surface | `#fffefa` | Cards and readable content blocks |
+| Foreground | `#17251e` | Headings and primary text |
+| Muted text | `#52635a` | Explanations and metadata |
+| Border | `#d8e2da` | Dividers and card boundaries |
+| Accent | `#155b49` | Links, buttons, and focus |
+| Accent wash | `#e5efe8` | Small evidence and process panels |
+| Card radius | `0.75rem` | Cards and image frames |
+| Control radius | `0.375rem` | Buttons, menus, and inputs |
 
-Typography uses the system sans stack: `system-ui`, `-apple-system`, and `Segoe UI`. Headings are light or regular with tight tracking. Body text is 16–18px with 1.75–2 line-height. Labels use 11px uppercase text with expanded tracking.
+Typography uses self-hosted IBM Plex Sans. Body copy is 16px with 1.5–1.75 line-height. Headings use medium or semibold weight, balanced wrapping, and tight tracking. Labels stay at 14px or larger.
 
 ## Layout
 
-- Primary shell: `max-width: 48rem` (`max-w-3xl`), centered.
-- Gutters: 1rem on narrow screens, 1.5rem from 640px upward.
-- Sections use 3.5–5rem vertical padding, reduced on phones.
-- Project grids are one column below 640px and two columns from 640px upward.
-- Grid children use `min-width: 0`; media uses intrinsic width limits and `object-fit`.
-- Project detail pages use the same shell so the reading width does not jump between routes.
+- The homepage and project index use a centered shell up to `72rem` wide.
+- Case studies stay at a centered reading width of `48rem`.
+- Gutters are 1rem on narrow screens and 1.5rem from 640px upward.
+- Project grids use one column on phones and two or three columns on larger screens.
+- Content height follows the text. Nothing is clipped to force a screen-sized section.
+- Charts have a readable text takeaway and a full-chart link on narrow screens.
 
 ## Components
 
-- `Navbar`: sticky, translucent, compact, keyboard-focusable navigation.
-- `ProjectCard`: image, category, title, plain-language summary, business question, decision signal, and a clear text CTA.
-- `Button`: solid primary action, bordered secondary action, and visible focus ring.
-- `Badge`: small metadata labels that wrap instead of forcing horizontal overflow.
+- `Navbar`: sticky, opaque, compact, and keyboard-focusable.
+- `ProjectCard`: evidence image, work area, title, short summary, finding, and text link.
+- `Button`: forest-green primary action, bordered secondary action, and visible focus ring.
+- Diagrams: real project and portfolio workflows with accessible names and descriptions.
 - `Footer`: short identity statement, external links, privacy, and terms.
 
 ## Motion and states
 
-Motion is limited to color, border, and small text-link feedback. Loading and error routes use skeleton blocks and recovery actions. No animation is required for understanding a chart or case study.
-
-## Accessibility rules
-
-- Every image has meaningful alternative text or an intentionally empty alt when decorative.
-- Links and buttons retain visible keyboard focus.
-- Text stays readable at narrow widths and does not rely on hover.
-- Tables scroll inside their own container rather than widening the page.
-- Content grows with text; fixed card heights are avoided.
+Motion is limited to a small card lift, image zoom, and link or button feedback. Reduced-motion preferences remove movement. Focus remains visible, and content does not rely on hover.

@@ -51,30 +51,30 @@ type MDXImageProps = ComponentProps<"img">;
 
 // Custom components for MDX
 const components = {
-  h2: (props: ComponentProps<"h2">) => <h2 className="mt-12 mb-4 break-words text-xl font-semibold tracking-normal text-foreground sm:mt-14 sm:text-2xl" {...props} />,
-  h3: (props: ComponentProps<"h3">) => <h3 className="mt-8 mb-4 break-words text-lg font-bold tracking-tight text-foreground sm:text-xl" {...props} />,
-  p: (props: ComponentProps<"p">) => <p className="leading-7 [&:not(:first-child)]:mt-6 text-muted-foreground" {...props} />,
+  h2: (props: ComponentProps<"h2">) => <h2 className="mt-12 mb-4 break-words text-2xl font-semibold tracking-[-0.025em] text-foreground sm:mt-14 sm:text-3xl" {...props} />,
+  h3: (props: ComponentProps<"h3">) => <h3 className="mt-8 mb-4 break-words text-xl font-semibold tracking-[-0.02em] text-foreground sm:text-2xl" {...props} />,
+  p: (props: ComponentProps<"p">) => <p className="text-base leading-7 text-muted-foreground [&:not(:first-child)]:mt-6" {...props} />,
   ul: (props: ComponentProps<"ul">) => <ul className="my-6 ml-6 list-disc [&>li]:mt-2 text-muted-foreground" {...props} />,
   ol: (props: ComponentProps<"ol">) => <ol className="my-6 ml-6 list-decimal [&>li]:mt-2 text-muted-foreground" {...props} />,
   li: (props: ComponentProps<"li">) => <li className="leading-7" {...props} />,
   blockquote: (props: ComponentProps<"blockquote">) => <blockquote className="mt-6 border-l-2 border-primary pl-5 italic text-foreground/80" {...props} />,
   img: ({ alt = "", ...props }: MDXImageProps) => (
-    <span className="my-10 block min-w-0 border border-border bg-muted">
-      <span role="group" aria-label="Scrollable chart; scroll horizontally to inspect labels" tabIndex={0} className="block min-w-0 max-w-full overflow-x-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary">
+    <figure className="my-10 min-w-0 overflow-hidden rounded-xl border border-border bg-card">
+      <div className="hidden min-w-0 max-w-full bg-muted md:block">
         {/* MDX images have author-provided dimensions and are served from the static export. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="block h-auto min-w-[672px] max-w-none w-full md:min-w-0 object-cover" loading="lazy" decoding="async" alt={alt} {...props} />
-      </span>
-      <span className="block px-4 pt-2 text-xs text-muted-foreground md:hidden">Scroll horizontally to inspect chart labels.</span>
-      {alt && <span className="block border-t border-border px-4 py-3 text-sm leading-6 text-muted-foreground sm:px-5"><span className="font-semibold text-foreground">Chart takeaway:</span> {alt}</span>}
-    </span>
+        <img className="block h-auto w-full object-contain" loading="lazy" decoding="async" alt={alt} {...props} />
+      </div>
+      {alt && <figcaption className="border-t border-border bg-brand-wash/50 px-4 py-3 text-sm leading-6 text-muted-foreground sm:px-5 md:hidden"><span className="font-semibold text-foreground">Chart takeaway:</span> {alt}</figcaption>}
+      <a href={typeof props.src === "string" ? props.src : undefined} aria-label={alt ? `View full chart: ${alt}` : "View full chart"} className="focus-ring mx-4 mb-4 inline-flex text-sm font-semibold text-primary underline underline-offset-4 md:hidden">View full chart</a>
+    </figure>
   ),
   a: (props: ComponentProps<"a">) => <a className="font-medium text-primary underline underline-offset-4 hover:text-primary/80" {...props} />,
   pre: (props: ComponentProps<"pre">) => (
-    <pre className="my-6 max-w-full overflow-x-auto border border-border bg-foreground p-4 text-sm leading-6 text-background" {...props} />
+    <pre className="my-6 max-w-full overflow-x-auto rounded-lg border border-border bg-foreground p-4 text-sm leading-6 text-background" {...props} />
   ),
   table: (props: ComponentProps<"table">) => (
-    <div className="my-8 w-full max-w-full overflow-x-auto border border-border">
+    <div className="my-8 w-full max-w-full overflow-x-auto rounded-lg border border-border bg-card">
       <table className="min-w-full text-sm" {...props} />
     </div>
   ),
@@ -102,14 +102,14 @@ export default async function ProjectPage({ params }: Props) {
   const technicalContent = technicalStart === -1 ? "" : project.content.slice(technicalStart + 1);
 
   return (
-    <article className="py-12 sm:py-16 md:py-24">
+    <article className="py-8 sm:py-12 md:py-16">
       <div className="container mx-auto min-w-0 max-w-3xl px-4 sm:px-6 md:px-8">
         <Button variant="ghost" asChild className="mb-8 -ml-4 text-muted-foreground hover:text-foreground sm:mb-10">
           <Link href="/projects"><span className="mr-2 text-lg" aria-hidden="true">←</span> Back to projects</Link>
         </Button>
 
         <header className="mb-12 sm:mb-16">
-          <h1 className="break-words text-3xl font-bold tracking-normal leading-tight sm:text-4xl md:text-5xl">
+          <h1 className="break-words text-balance text-3xl font-semibold tracking-[-0.035em] leading-tight sm:text-4xl md:text-5xl">
             {project.meta.title}
           </h1>
           
@@ -119,7 +119,8 @@ export default async function ProjectPage({ params }: Props) {
                 Published {formattedDate}
               </div>
             )}
-            {categoryLabel ? <span className="capitalize">{categoryLabel}</span> : <span>{kindLabel}</span>}
+            <span className="inline-flex items-center rounded-full border border-primary/20 bg-brand-wash px-3 py-1 font-medium text-primary">{kindLabel}</span>
+            {categoryLabel && <span className="capitalize">{categoryLabel}</span>}
           </div>
 
           {project.meta.tags.length > 0 && (

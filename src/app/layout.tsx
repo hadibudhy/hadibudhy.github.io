@@ -1,17 +1,25 @@
 import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { cn } from "@/lib/utils";
 
+const ibmPlexSans = localFont({
+  src: "../../public/fonts/IBM-Plex-Sans-Latin.woff2",
+  weight: "400 700",
+  display: "swap",
+  variable: "--font-ibm-plex-sans",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://hadibudhy.github.io"),
     title: {
-    default: "Hadi Budhy | Data Engineering, Analytics & Data Science",
+    default: "Hadi Budhy | End-to-End Data: Engineering, Analytics, Science and Automation",
     template: "%s | Hadi Budhy"
   },
-  description: "Data professional working across data engineering, analytics, and applied data science to build reliable foundations and decision-ready evidence.",
-  keywords: ["Data engineering", "Data analytics", "Data science", "Analytics engineering", "Product analytics", "SQL", "Python", "dbt"],
+  description: "I build the path from raw data to decisions with tested pipelines, useful analysis, evaluated models, and automated checks.",
+  keywords: ["Data engineering", "Data analytics", "Data science", "Data automation", "Analytics engineering", "Product analytics", "SQL", "Python", "dbt", "DuckDB"],
   authors: [{ name: "Hadi Budhy" }],
   creator: "Hadi Budhy",
   alternates: {
@@ -20,16 +28,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://hadibudhy.github.io",
-    title: "Hadi Budhy | Data Engineering, Analytics & Data Science",
-    description: "Data professional working across data engineering, analytics, and applied data science to build reliable foundations and decision-ready evidence.",
+    title: "Hadi Budhy | End-to-End Data: Engineering, Analytics, Science and Automation",
+    description: "I build the path from raw data to decisions with tested pipelines, useful analysis, evaluated models, and automated checks.",
     siteName: "Hadi Budhy",
     locale: "en_US",
     images: [{ url: "/images/profile-illustration.jpg", alt: "Illustrated profile portrait of Hadi Budhy" }],
   },
   twitter: {
     card: "summary",
-    title: "Hadi Budhy | Data Engineering, Analytics & Data Science",
-    description: "Data professional working across data engineering, analytics, and applied data science to build reliable foundations and decision-ready evidence.",
+    title: "Hadi Budhy | End-to-End Data: Engineering, Analytics, Science and Automation",
+    description: "I build the path from raw data to decisions with tested pipelines, useful analysis, evaluated models, and automated checks.",
     images: ["/images/profile-illustration.jpg"],
   },
 };
@@ -45,10 +53,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("h-full antialiased")}>
+    <html lang="en" className={cn("h-full antialiased", ibmPlexSans.variable)}>
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <Navbar />
-        <main className="flex-1">
+        <main id="main-content" tabIndex={-1} className="flex-1 scroll-mt-20">
           {children}
         </main>
         <Footer />
@@ -58,10 +67,9 @@ export default function RootLayout({
               "@type": "Person",
               name: "Hadi Budhy",
               url: "https://hadibudhy.github.io",
-              jobTitle: "Data professional across engineering, analytics, and data science",
-              knowsAbout: ["Data engineering", "Analytics engineering", "Product analytics", "Applied data science", "Experimentation", "Data reliability"],
-              address: { "@type": "PostalAddress", addressLocality: "Jakarta", addressCountry: "ID" },
-              sameAs: ["https://github.com/hadibudhy", "https://linkedin.com/in/hadibudhy"],
+              jobTitle: "End-to-end data professional across engineering, analytics, science, and automation",
+              knowsAbout: ["Data engineering", "Analytics engineering", "Product analytics", "Applied data science", "Data automation", "Experimentation", "Data reliability"],
+              sameAs: ["https://github.com/hadibudhy"],
             })}
         </script>
       </body>
