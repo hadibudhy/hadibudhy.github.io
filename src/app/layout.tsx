@@ -1,16 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { cn } from "@/lib/utils";
-
-const ibmPlexSans = localFont({
-  src: "../../public/fonts/IBM-Plex-Sans-Latin.woff2",
-  weight: "400 700",
-  display: "swap",
-  variable: "--font-ibm-plex-sans",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hadibudhy.github.io"),
@@ -53,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("h-full antialiased", ibmPlexSans.variable)}>
+    <html lang="en" className={cn("h-full antialiased")}>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <a href="#main-content" className="skip-link">Skip to content</a>
         <Navbar />

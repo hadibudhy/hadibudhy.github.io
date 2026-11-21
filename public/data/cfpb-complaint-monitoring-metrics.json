@@ -1,0 +1,534 @@
+{
+  "schemaVersion": 1,
+  "caseId": "cfpb-complaint-monitoring",
+  "source": {
+    "name": "CFPB Consumer Complaint Database",
+    "url": "https://www.consumerfinance.gov/data-research/consumer-complaints/",
+    "apiUrl": "https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/",
+    "publisher": "Consumer Financial Protection Bureau",
+    "accessed": "2026-11-07",
+    "apiLastUpdated": "2026-11-06T12:00:00-05:00",
+    "apiLastIndexed": "2026-11-06T12:00:00-05:00",
+    "apiTotalRecordCount": 18965764,
+    "period": "2025-01 through 2026-09; complaint receipt date",
+    "company": "TRANSUNION INTERMEDIATE HOLDINGS, INC.",
+    "product": "Credit reporting or other personal consumer reports",
+    "grain": "month × CFPB issue/response facet for a filtered company-product cohort",
+    "license": "CFPB states published complaint data are freely available for anyone to use, analyze, and build on",
+    "publicDataOnly": true,
+    "rawComplaintRecordsStored": false,
+    "mutableSource": true,
+    "apiSnapshotSha256": "8e9e7e5b07d13dc86cef874ed394e143786f3f7d21714ba22374433d435b9341"
+  },
+  "totals": {
+    "complaints": 3440308,
+    "firstMonth": "2025-01",
+    "firstMonthComplaints": 115860,
+    "lastMonth": "2026-09",
+    "lastMonthComplaints": 219349,
+    "firstToLastMonthChangePct": 89.32245813913345,
+    "topIssues": [
+      {
+        "issue": "Incorrect information on your report",
+        "complaints": 2031198,
+        "share": 0.5904116724432812
+      },
+      {
+        "issue": "Improper use of your report",
+        "complaints": 772534,
+        "share": 0.22455373181703497
+      },
+      {
+        "issue": "Problem with a company's investigation into an existing problem",
+        "complaints": 622808,
+        "share": 0.1810326284739622
+      }
+    ],
+    "topThreeIssueShare": 0.9959980327342784,
+    "timelyResponses": {
+      "Yes": 3440308
+    },
+    "companyResponses": {
+      "Closed with non-monetary relief": 1785855,
+      "Closed with explanation": 1646698,
+      "Closed with monetary relief": 4,
+      "In progress": 7751
+    },
+    "responseMixByPeriod": {
+      "Jan-Jun 2025": {
+        "Closed with non-monetary relief": 0.8319933790494206,
+        "Closed with explanation": 0.16800377200454691,
+        "Closed with monetary relief": 2.848946032415308e-06
+      },
+      "Jul-Dec 2025": {
+        "Closed with non-monetary relief": 0.49727703731184497,
+        "Closed with explanation": 0.5027229626881551
+      },
+      "Jan-Sep 2026": {
+        "Closed with non-monetary relief": 0.4095044046395134,
+        "Closed with explanation": 0.5862399819082911,
+        "In progress": 0.004254515654323211,
+        "Closed with monetary relief": 1.0977978723579436e-06
+      }
+    }
+  },
+  "monthly": [
+    {
+      "month": "2025-01",
+      "complaints": 115860,
+      "issues": {
+        "Incorrect information on your report": 63552,
+        "Improper use of your report": 29328,
+        "Problem with a company's investigation into an existing problem": 22292,
+        "Unable to get your credit report or credit score": 279,
+        "Credit monitoring or identity theft protection services": 218,
+        "Problem with fraud alerts or security freezes": 143,
+        "Problem with a company's investigation into an existing issue": 44,
+        "Identity theft protection or other monitoring services": 3,
+        "Problems at the end of the loan or lease": 1
+      },
+      "timely_responses": {
+        "Yes": 115860
+      },
+      "company_responses": {
+        "Closed with non-monetary relief": 97738,
+        "Closed with explanation": 18122
+      }
+    },
+    {
+      "month": "2025-02",
+      "complaints": 98710,
+      "issues": {
+        "Incorrect information on your report": 55920,
+        "Improper use of your report": 25124,
+        "Problem with a company's investigation into an existing problem": 17159,
+        "Unable to get your credit report or credit score": 163,
+        "Credit monitoring or identity theft protection services": 153,
+        "Problem with fraud alerts or security freezes": 152,
+        "Problem with a company's investigation into an existing issue": 30,
+        "Identity theft protection or other monitoring services": 7,
+        "Dealing with your lender or servicer": 1,
+        "Problem with a purchase shown on your statement": 1
+      },
+      "timely_responses": {
+        "Yes": 98710
+      },
+      "company_responses": {
+        "Closed with non-monetary relief": 83531,
+        "Closed with explanation": 15177,
+        "Closed with monetary relief": 2
+      }
+    },
+    {
+      "month": "2025-03",
+      "complaints": 123830,
+      "issues": {
+        "Incorrect information on your report": 74914,
+        "Improper use of your report": 29464,
+        "Problem with a company's investigation into an existing problem": 18852,
+        "Problem with fraud alerts or security freezes": 214,
+        "Credit monitoring or identity theft protection services": 196,
+        "Unable to get your credit report or credit score": 165,
+        "Problem with a company's investigation into an existing issue": 19,
+        "Identity theft protection or other monitoring services": 5,
+        "Dealing with your lender or servicer": 1
+      },
+      "timely_responses": {
+        "Yes": 123830
+      },
+      "company_responses": {
+        "Closed with non-monetary relief": 103288,
+        "Closed with explanation": 20542
+      }
+    },
+    {
+      "month": "2025-04",
+      "complaints": 128818,
+      "issues": {
+        "Incorrect information on your report": 78583,
+        "Improper use of your report": 30033,
+        "Problem with a company's investigation into an existing problem": 19630,
+        "Problem with fraud alerts or security freezes": 209,
+        "Credit monitoring or identity theft protection services": 175,
+        "Unable to get your credit report or credit score": 160,
+        "Problem with a company's investigation into an existing issue": 24,
+        "Identity theft protection or other monitoring services": 4
+      },
+      "timely_responses": {
+        "Yes": 128818
+      },
+      "company_responses": {
+        "Closed with non-monetary relief": 106278,
+        "Closed with explanation": 22540
+      }
+    },
+    {
+      "month": "2025-05",
+      "complaints": 116274,
+      "issues": {
+        "Incorrect information on your report": 67175,
+        "Improper use of your report": 29796,
+        "Problem with a company's investigation into an existing problem": 18823,
+        "Unable to get your credit report or credit score": 156,
+        "Credit monitoring or identity theft protection services": 154,
+        "Problem with fraud alerts or security freezes": 151,
+        "Problem with a company's investigation into an existing issue": 16,
+        "Identity theft protection or other monitoring services": 3
+      },
+      "timely_responses": {
+        "Yes": 116274
+      },
+      "company_responses": {
+        "Closed with non-monetary relief": 95501,
+        "Closed with explanation": 20773
+      }
+    },
+    {
+      "month": "2025-06",
+      "complaints": 118522,
+      "issues": {
+        "Incorrect information on your report": 66484,
+        "Improper use of your report": 32206,
+        "Problem with a company's investigation into an existing problem": 19292,
+        "Problem with fraud alerts or security freezes": 200,
+        "Unable to get your credit report or credit score": 155,
+        "Credit monitoring or identity theft protection services": 139,
+        "Problem with a company's investigation into an existing issue": 39,
+        "Identity theft protection or other monitoring services": 7
+      },
+      "timely_responses": {
+        "Yes": 118522
+      },
+      "company_responses": {
+        "Closed with non-monetary relief": 97735,
+        "Closed with explanation": 20787
+      }
+    },
+    {
+      "month": "2025-07",
+      "complaints": 135615,
+      "issues": {
+        "Incorrect information on your report": 79910,
+        "Improper use of your report": 33179,
+        "Problem with a company's investigation into an existing problem": 21975,
+        "Unable to get your credit report or credit score": 183,
+        "Problem with fraud alerts or security freezes": 170,
+        "Credit monitoring or identity theft protection services": 165,
+        "Problem with a company's investigation into an existing issue": 26,
+        "Identity theft protection or other monitoring services": 7
+      },
+      "timely_responses": {
+        "Yes": 135615
+      },
+      "company_responses": {
+        "Closed with non-monetary relief": 99291,
+        "Closed with explanation": 36324
+      }
+    },
+    {
+      "month": "2025-08",
+      "complaints": 155924,
+      "issues": {
+        "Incorrect information on your report": 92984,
+        "Improper use of your report": 36815,
+        "Problem with a company's investigation into an existing problem": 25572,
+        "Problem with fraud alerts or security freezes": 196,
+        "Credit monitoring or identity theft protection services": 182,
+        "Unable to get your credit report or credit score": 143,
+        "Problem with a company's investigation into an existing issue": 26,
+        "Identity theft protection or other monitoring services": 6
+      },
+      "timely_responses": {
+        "Yes": 155924
+      },
+      "company_responses": {
+        "Closed with explanation": 105004,
+        "Closed with non-monetary relief": 50920
+      }
+    },
+    {
+      "month": "2025-09",
+      "complaints": 159276,
+      "issues": {
+        "Incorrect information on your report": 93435,
+        "Improper use of your report": 38034,
+        "Problem with a company's investigation into an existing problem": 26737,
+        "Problem with fraud alerts or security freezes": 629,
+        "Credit monitoring or identity theft protection services": 246,
+        "Unable to get your credit report or credit score": 150,
+        "Problem with a company's investigation into an existing issue": 34,
+        "Identity theft protection or other monitoring services": 11
+      },
+      "timely_responses": {
+        "Yes": 159276
+      },
+      "company_responses": {
+        "Closed with explanation": 89112,
+        "Closed with non-monetary relief": 70164
+      }
+    },
+    {
+      "month": "2025-10",
+      "complaints": 159363,
+      "issues": {
+        "Incorrect information on your report": 93563,
+        "Improper use of your report": 36673,
+        "Problem with a company's investigation into an existing problem": 28422,
+        "Problem with fraud alerts or security freezes": 427,
+        "Unable to get your credit report or credit score": 127,
+        "Credit monitoring or identity theft protection services": 117,
+        "Problem with a company's investigation into an existing issue": 22,
+        "Identity theft protection or other monitoring services": 12
+      },
+      "timely_responses": {
+        "Yes": 159363
+      },
+      "company_responses": {
+        "Closed with explanation": 85690,
+        "Closed with non-monetary relief": 73673
+      }
+    },
+    {
+      "month": "2025-11",
+      "complaints": 153957,
+      "issues": {
+        "Incorrect information on your report": 92897,
+        "Improper use of your report": 32398,
+        "Problem with a company's investigation into an existing problem": 28180,
+        "Problem with fraud alerts or security freezes": 233,
+        "Credit monitoring or identity theft protection services": 120,
+        "Unable to get your credit report or credit score": 94,
+        "Problem with a company's investigation into an existing issue": 27,
+        "Identity theft protection or other monitoring services": 8
+      },
+      "timely_responses": {
+        "Yes": 153957
+      },
+      "company_responses": {
+        "Closed with non-monetary relief": 81465,
+        "Closed with explanation": 72492
+      }
+    },
+    {
+      "month": "2025-12",
+      "complaints": 152330,
+      "issues": {
+        "Incorrect information on your report": 93687,
+        "Improper use of your report": 30549,
+        "Problem with a company's investigation into an existing problem": 27510,
+        "Problem with fraud alerts or security freezes": 225,
+        "Credit monitoring or identity theft protection services": 175,
+        "Unable to get your credit report or credit score": 155,
+        "Problem with a company's investigation into an existing issue": 22,
+        "Identity theft protection or other monitoring services": 7
+      },
+      "timely_responses": {
+        "Yes": 152330
+      },
+      "company_responses": {
+        "Closed with non-monetary relief": 80224,
+        "Closed with explanation": 72106
+      }
+    },
+    {
+      "month": "2026-01",
+      "complaints": 163786,
+      "issues": {
+        "Incorrect information on your report": 97143,
+        "Improper use of your report": 37476,
+        "Problem with a company's investigation into an existing problem": 28550,
+        "Problem with fraud alerts or security freezes": 256,
+        "Credit monitoring or identity theft protection services": 166,
+        "Unable to get your credit report or credit score": 158,
+        "Problem with a company's investigation into an existing issue": 30,
+        "Identity theft protection or other monitoring services": 7
+      },
+      "timely_responses": {
+        "Yes": 163786
+      },
+      "company_responses": {
+        "Closed with non-monetary relief": 90817,
+        "Closed with explanation": 72969
+      }
+    },
+    {
+      "month": "2026-02",
+      "complaints": 155043,
+      "issues": {
+        "Incorrect information on your report": 89138,
+        "Improper use of your report": 38275,
+        "Problem with a company's investigation into an existing problem": 26938,
+        "Problem with fraud alerts or security freezes": 352,
+        "Unable to get your credit report or credit score": 166,
+        "Credit monitoring or identity theft protection services": 133,
+        "Problem with a company's investigation into an existing issue": 39,
+        "Identity theft protection or other monitoring services": 2
+      },
+      "timely_responses": {
+        "Yes": 155043
+      },
+      "company_responses": {
+        "Closed with explanation": 92919,
+        "Closed with non-monetary relief": 62124
+      }
+    },
+    {
+      "month": "2026-03",
+      "complaints": 203512,
+      "issues": {
+        "Incorrect information on your report": 118945,
+        "Improper use of your report": 50253,
+        "Problem with a company's investigation into an existing problem": 33617,
+        "Problem with fraud alerts or security freezes": 277,
+        "Unable to get your credit report or credit score": 158,
+        "Credit monitoring or identity theft protection services": 153,
+        "Problem with a company's investigation into an existing issue": 108,
+        "Identity theft protection or other monitoring services": 1
+      },
+      "timely_responses": {
+        "Yes": 203512
+      },
+      "company_responses": {
+        "Closed with explanation": 123355,
+        "Closed with non-monetary relief": 80157
+      }
+    },
+    {
+      "month": "2026-04",
+      "complaints": 213403,
+      "issues": {
+        "Incorrect information on your report": 124877,
+        "Improper use of your report": 48619,
+        "Problem with a company's investigation into an existing problem": 39216,
+        "Problem with fraud alerts or security freezes": 303,
+        "Unable to get your credit report or credit score": 144,
+        "Problem with a company's investigation into an existing issue": 142,
+        "Credit monitoring or identity theft protection services": 99,
+        "Identity theft protection or other monitoring services": 3
+      },
+      "timely_responses": {
+        "Yes": 213403
+      },
+      "company_responses": {
+        "Closed with explanation": 141254,
+        "Closed with non-monetary relief": 72148,
+        "In progress": 1
+      }
+    },
+    {
+      "month": "2026-05",
+      "complaints": 213483,
+      "issues": {
+        "Incorrect information on your report": 125521,
+        "Improper use of your report": 45830,
+        "Problem with a company's investigation into an existing problem": 41292,
+        "Problem with fraud alerts or security freezes": 306,
+        "Problem with a company's investigation into an existing issue": 200,
+        "Credit monitoring or identity theft protection services": 166,
+        "Unable to get your credit report or credit score": 162,
+        "Identity theft protection or other monitoring services": 6
+      },
+      "timely_responses": {
+        "Yes": 213483
+      },
+      "company_responses": {
+        "Closed with explanation": 131114,
+        "Closed with non-monetary relief": 82369
+      }
+    },
+    {
+      "month": "2026-06",
+      "complaints": 213172,
+      "issues": {
+        "Incorrect information on your report": 128763,
+        "Problem with a company's investigation into an existing problem": 42569,
+        "Improper use of your report": 40867,
+        "Problem with fraud alerts or security freezes": 369,
+        "Problem with a company's investigation into an existing issue": 279,
+        "Credit monitoring or identity theft protection services": 166,
+        "Unable to get your credit report or credit score": 154,
+        "Identity theft protection or other monitoring services": 5
+      },
+      "timely_responses": {
+        "Yes": 213172
+      },
+      "company_responses": {
+        "Closed with explanation": 125961,
+        "Closed with non-monetary relief": 87210,
+        "In progress": 1
+      }
+    },
+    {
+      "month": "2026-07",
+      "complaints": 222879,
+      "issues": {
+        "Incorrect information on your report": 130659,
+        "Problem with a company's investigation into an existing problem": 47108,
+        "Improper use of your report": 44366,
+        "Problem with fraud alerts or security freezes": 271,
+        "Unable to get your credit report or credit score": 220,
+        "Credit monitoring or identity theft protection services": 136,
+        "Problem with a company's investigation into an existing issue": 114,
+        "Identity theft protection or other monitoring services": 5
+      },
+      "timely_responses": {
+        "Yes": 222879
+      },
+      "company_responses": {
+        "Closed with explanation": 128991,
+        "Closed with non-monetary relief": 93884,
+        "Closed with monetary relief": 2,
+        "In progress": 2
+      }
+    },
+    {
+      "month": "2026-08",
+      "complaints": 217202,
+      "issues": {
+        "Incorrect information on your report": 131246,
+        "Problem with a company's investigation into an existing problem": 44495,
+        "Improper use of your report": 40831,
+        "Problem with fraud alerts or security freezes": 229,
+        "Credit monitoring or identity theft protection services": 186,
+        "Unable to get your credit report or credit score": 151,
+        "Problem with a company's investigation into an existing issue": 60,
+        "Identity theft protection or other monitoring services": 4
+      },
+      "timely_responses": {
+        "Yes": 217202
+      },
+      "company_responses": {
+        "Closed with explanation": 127557,
+        "Closed with non-monetary relief": 89538,
+        "In progress": 107
+      }
+    },
+    {
+      "month": "2026-09",
+      "complaints": 219349,
+      "issues": {
+        "Incorrect information on your report": 131802,
+        "Problem with a company's investigation into an existing problem": 44579,
+        "Improper use of your report": 42418,
+        "Problem with fraud alerts or security freezes": 184,
+        "Unable to get your credit report or credit score": 145,
+        "Credit monitoring or identity theft protection services": 128,
+        "Problem with a company's investigation into an existing issue": 88,
+        "Identity theft protection or other monitoring services": 5
+      },
+      "timely_responses": {
+        "Yes": 219349
+      },
+      "company_responses": {
+        "Closed with explanation": 123909,
+        "Closed with non-monetary relief": 87800,
+        "In progress": 7640
+      }
+    }
+  ],
+  "artifacts": [
+    "/images/cfpb-transunion-monthly-volume.png",
+    "/images/cfpb-transunion-issue-mix.png",
+    "/images/cfpb-transunion-response-mix.png"
+  ]
+}

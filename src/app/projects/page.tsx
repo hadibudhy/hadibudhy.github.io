@@ -3,20 +3,20 @@ import { getAllProjects } from "@/lib/mdx";
 
 export const metadata = {
   title: "Data Projects & Case Studies",
-  description: "Published case studies across data engineering, analytics, and applied data science, with methods, findings, and evidence limits.",
+  description: "Published case studies across data engineering, analytics, data science and automation, with methods, findings, and evidence limits.",
   alternates: { canonical: "/projects" },
   openGraph: {
     type: "website",
     url: "https://hadibudhy.github.io/projects",
     title: "Data Projects & Case Studies | Hadi Budhy",
-    description: "Published case studies across data engineering, analytics, and applied data science, with methods, findings, and evidence limits.",
+    description: "Published case studies across data engineering, analytics, data science and automation, with methods, findings, and evidence limits.",
     siteName: "Hadi Budhy",
     images: [{ url: "/images/profile-illustration.jpg", alt: "Illustrated profile portrait of Hadi Budhy" }],
   },
   twitter: {
     card: "summary",
     title: "Data Projects & Case Studies | Hadi Budhy",
-    description: "Published case studies across data engineering, analytics, and applied data science, with methods, findings, and evidence limits.",
+    description: "Published case studies across data engineering, analytics, data science and automation, with methods, findings, and evidence limits.",
     images: ["/images/profile-illustration.jpg"],
   },
 };
@@ -37,8 +37,14 @@ export default function ProjectsPage() {
     "2026-10-12-college-program-outcome-coverage",
     "marketplace-supply-demand",
   ]);
+  const morePublishedSlugs = new Set([
+    "2026-11-07-otto-session-recommendations",
+    "2026-11-07-amazon-search-relevance",
+    "2026-11-07-cfpb-complaint-monitoring",
+  ]);
   const featuredProjects = flagshipSlugs.map((slug) => projects.find((project) => project.slug === slug)).filter((project) => project !== undefined);
   const supportingProjects = projects.filter((project) => supportingSlugs.has(project.slug));
+  const morePublishedProjects = projects.filter((project) => morePublishedSlugs.has(project.slug));
 
   return (
     <div>
@@ -46,7 +52,7 @@ export default function ProjectsPage() {
         <div className="mx-auto w-full max-w-6xl px-4 pt-8 pb-6 sm:px-6 sm:py-12 md:py-14">
           <p className="section-kicker">Data portfolio</p>
           <h1 className="mt-3 max-w-4xl break-words text-balance text-4xl font-medium leading-tight tracking-[-0.035em] text-foreground md:text-5xl">Case studies from data to decisions</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">{projects.length} published studies across engineering, analytics and data science. The homepage links each area to its code and evidence.</p>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">{projects.length} published studies across engineering, analytics, data science and automation. The homepage links each area to its code and evidence.</p>
         </div>
       </section>
       <section>
@@ -64,6 +70,10 @@ export default function ProjectsPage() {
               <p className="mb-6 max-w-2xl text-base leading-6 text-muted-foreground">Six more studies, labeled by their main area of work.</p>
               <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">{supportingProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} />)}</div>
             </div>
+            {morePublishedProjects.length > 0 && <details className="mt-14 border-t border-border pt-6">
+              <summary className="focus-ring w-fit cursor-pointer rounded-md text-lg font-semibold text-foreground">More published studies ({morePublishedProjects.length})</summary>
+              <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">{morePublishedProjects.map((project) => <ProjectCard key={project.slug} slug={project.slug} meta={project.meta} />)}</div>
+            </details>}
           </>}
         </div>
       </section>

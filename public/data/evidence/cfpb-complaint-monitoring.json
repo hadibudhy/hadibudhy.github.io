@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 2,
+  "caseId": "cfpb-complaint-monitoring",
+  "status": "verified",
+  "source": {
+    "name": "CFPB Consumer Complaint Database",
+    "url": "https://www.consumerfinance.gov/data-research/consumer-complaints/",
+    "apiUrl": "https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/",
+    "publisher": "Consumer Financial Protection Bureau",
+    "accessed": "2026-11-07",
+    "apiLastUpdated": "2026-11-06T12:00:00-05:00",
+    "apiLastIndexed": "2026-11-06T12:00:00-05:00",
+    "apiTotalRecordCount": 18965764,
+    "period": "2025-01 through 2026-09; complaint receipt date",
+    "company": "TRANSUNION INTERMEDIATE HOLDINGS, INC.",
+    "product": "Credit reporting or other personal consumer reports",
+    "grain": "month × CFPB issue/response facet for a filtered company-product cohort",
+    "license": "CFPB states published complaint data are freely available for anyone to use, analyze, and build on",
+    "publicDataOnly": true,
+    "rawComplaintRecordsStored": false,
+    "mutableSource": true,
+    "apiSnapshotSha256": "8e9e7e5b07d13dc86cef874ed394e143786f3f7d21714ba22374433d435b9341"
+  },
+  "validation": {
+    "checks": [
+      "the official CFPB API returned 21 monthly aggregates for the fixed company-product cohort",
+      "all issue, timeliness, and company-response facets reconcile to the monthly complaint total",
+      "only aggregate facets were retained; complaint records and narratives were not stored",
+      "the cutoff ends before the CFPB form update effective 2026-10-29",
+      "all monthly queries share one CFPB index timestamp and record count",
+      "the data snapshot reports no stale-data or data-quality flags"
+    ],
+    "results": {
+      "complaints": 3440308,
+      "firstMonth": "2025-01",
+      "firstMonthComplaints": 115860,
+      "lastMonth": "2026-09",
+      "lastMonthComplaints": 219349,
+      "firstToLastMonthChangePct": 89.32245813913345,
+      "topIssues": [
+        {
+          "issue": "Incorrect information on your report",
+          "complaints": 2031198,
+          "share": 0.5904116724432812
+        },
+        {
+          "issue": "Improper use of your report",
+          "complaints": 772534,
+          "share": 0.22455373181703497
+        },
+        {
+          "issue": "Problem with a company's investigation into an existing problem",
+          "complaints": 622808,
+          "share": 0.1810326284739622
+        }
+      ],
+      "topThreeIssueShare": 0.9959980327342784,
+      "timelyResponses": {
+        "Yes": 3440308
+      },
+      "companyResponses": {
+        "Closed with non-monetary relief": 1785855,
+        "Closed with explanation": 1646698,
+        "Closed with monetary relief": 4,
+        "In progress": 7751
+      },
+      "responseMixByPeriod": {
+        "Jan-Jun 2025": {
+          "Closed with non-monetary relief": 0.8319933790494206,
+          "Closed with explanation": 0.16800377200454691,
+          "Closed with monetary relief": 2.848946032415308e-06
+        },
+        "Jul-Dec 2025": {
+          "Closed with non-monetary relief": 0.49727703731184497,
+          "Closed with explanation": 0.5027229626881551
+        },
+        "Jan-Sep 2026": {
+          "Closed with non-monetary relief": 0.4095044046395134,
+          "Closed with explanation": 0.5862399819082911,
+          "In progress": 0.004254515654323211,
+          "Closed with monetary relief": 1.0977978723579436e-06
+        }
+      }
+    },
+    "testResults": {
+      "apiMonths": 21,
+      "complaints": 3440308,
+      "timelyResponseCounts": {
+        "Yes": 3440308
+      }
+    }
+  },
+  "artifacts": [
+    "/images/cfpb-transunion-monthly-volume.png",
+    "/images/cfpb-transunion-issue-mix.png",
+    "/images/cfpb-transunion-response-mix.png"
+  ],
+  "artifactHashes": {
+    "/images/cfpb-transunion-monthly-volume.png": "fe231ab0321c2099b6d73445101aac6a887fb5d89cfa48b8a56bf4abb471e95b",
+    "/images/cfpb-transunion-issue-mix.png": "d4baeff0953b8518ae2f32297246b943eaebc3319c190e6fd8cab4815b6bc635",
+    "/images/cfpb-transunion-response-mix.png": "7c3019916d1e287218b1b1a22a413a3e71124e78e2ecf2e9a895f8d44f59c8c7"
+  },
+  "evidenceBoundary": "Complaint counts are not complaint rates because customer denominators are unavailable. CFPB says complaints are not representative of all consumers. Response codes and timely flags do not establish satisfaction, resolution quality, legal violations, or company-wide service performance."
+}

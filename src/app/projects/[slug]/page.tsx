@@ -71,7 +71,7 @@ const components = {
   ),
   a: (props: ComponentProps<"a">) => <a className="font-medium text-primary underline underline-offset-4 hover:text-primary/80" {...props} />,
   pre: (props: ComponentProps<"pre">) => (
-    <pre className="my-6 max-w-full overflow-x-auto rounded-lg border border-border bg-foreground p-4 text-sm leading-6 text-background" {...props} />
+    <pre className="my-6 max-w-full overflow-x-auto rounded-lg border border-border bg-foreground p-4 font-mono text-sm leading-6 text-background" {...props} />
   ),
   table: (props: ComponentProps<"table">) => (
     <div className="my-8 w-full max-w-full overflow-x-auto rounded-lg border border-border bg-card">
@@ -97,7 +97,7 @@ export default async function ProjectPage({ params }: Props) {
     "experimentation-growth": "Experimentation & growth",
   }[project.meta.primaryTrack];
   const categoryLabel = project.meta.categories.join(", ");
-  const technicalStart = project.content.search(/\n(?=## Technical (?:appendix|design)\b)/i);
+  const technicalStart = project.content.search(/\n(?=## Technical (?:appendix|design|notes)\b)/i);
   const summaryContent = technicalStart === -1 ? project.content : project.content.slice(0, technicalStart);
   const technicalContent = technicalStart === -1 ? "" : project.content.slice(technicalStart + 1);
 
