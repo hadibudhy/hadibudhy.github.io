@@ -1,5 +1,5 @@
 ---
-title: "Screening Historical Job Posts for Fraud Signals"
+title: "Fraud Screening: 72.8% Recall at 96.9% Precision on Rare Fake Job Posts"
 date: 2026-05-10
 categories: machine learning
 tags:
@@ -13,7 +13,8 @@ result: "On an untouched stratified test set, the combined TF-IDF/SVD and profil
 featured: true
 published: true
 caseId: fake-job-detection
-kind: completed
+kind: flagship
+artifactLabel: Data science
 primaryTrack: product-analytics
 displayOrder: 90
 evidenceManifest: /data/evidence/fake-job-detection.json
@@ -26,12 +27,13 @@ header:
   teaser: /images/fake-job-all-models.png
 ---
 
-## Project brief
+## Project snapshot
 
-- **Project:** Compare fake-job screening models on the Employment Scam Aegean Dataset.
-- **Question:** How should a platform balance scam detection with manual-review capacity?
-- **Built:** A text-only model, a combined model, separate training, validation, and test sets, and a validation-selected threshold.
-- **Result:** At a 0.30 threshold selected on validation data, the combined model flagged 130 of 3,576 test posts (3.6%); 126 were labeled fake and 4 legitimate. It missed 47 of 173 fake posts. This historical result does not establish current performance.
+- **Built:** Compared text-only logistic regression with a combined TF-IDF/SVD and profile-feature LightGBM model, selecting the combined-model threshold on validation data.
+- **Stack:** Python, pandas, scikit-learn, LightGBM, Matplotlib
+- **Result:** The untouched stratified test set reached 72.8% recall and 96.9% precision at a 0.30 threshold selected on validation data.
+- **Recommendation:** Start with shadow scoring and human review. Choose the cutoff using review capacity and missed-scam cost, then retest on a time-based sample.
+- **Code:** [Model code and run instructions](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/fake-job-detection)
 
 ## Business question
 
@@ -101,4 +103,8 @@ As a scale illustration, if **100,000 posts** had the dataset's 4.8% fraud rate,
 
 The split is stratified and random. It assigns 60% of posts to training, 20% to threshold selection, and 20% to the final test. The dataset covers 2012 to 2014. It does not establish current fraud detection, fairness across groups, or production performance.
 
-The source file is available from [Kaggle](https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobposting-prediction). A checksum, download path, dependencies, and run command are in [`legacy_jekyll/scripts/fake-job-detection/README.md`](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/legacy_jekyll/scripts/fake-job-detection/README.md).
+The source file is available from [Kaggle](https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobposting-prediction). A checksum, download path, dependencies, and run command are in the [analysis README](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/projects/fake-job-detection/README.md), with the [model code](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/projects/fake-job-detection/fake_job_ml_v2.py).
+
+## What this can't tell you
+
+> The random split uses 2012-2014 postings and is not a time-based test. It does not establish later fraud performance, fairness, or production outcomes.

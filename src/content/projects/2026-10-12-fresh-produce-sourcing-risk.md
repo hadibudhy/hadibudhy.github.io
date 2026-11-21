@@ -7,7 +7,7 @@ excerpt: "A top-origin concentration screen compares fresh fruit and vegetable i
 problem: "Procurement teams need to know which imported produce categories depend most on a small number of origin markets before testing alternative supply routes."
 result: "Fresh vegetables had a higher mean monthly origin HHI in Jan-Aug 2026 (0.419) than fresh fruit (0.264-0.267); Mexico remained the top origin for both categories."
 featured: false
-published: true
+published: false
 kind: completed
 primaryTrack: product-analytics
 displayOrder: 120
@@ -21,12 +21,13 @@ header:
   teaser: /images/produce-source-concentration.png
 ---
 
-## Project brief
+## Project snapshot
 
-- **Project:** Compare reported import-origin concentration for fresh fruit and vegetables.
-- **Question:** Which category should buyers review first for alternate origins?
-- **Built:** A matched January-to-August comparison of top-ten origin shares and bounded HHI.
-- **Result:** Fresh vegetables had a 2026 mean monthly HHI of 0.419, compared with 0.264 to 0.267 for fruit. These are origin-market measures, not buyer exposure.
+- **Built:** Compared top-ten import-origin shares and bounded concentration for fresh fruit and vegetables from January through August.
+- **Stack:** Python, pandas, NumPy, Matplotlib, requests
+- **Result:** Mean monthly origin HHI was 0.419 for fresh vegetables and 0.264 to 0.267 for fresh fruit; Mexico was the top reported origin for both.
+- **Recommendation:** Start an item-level alternate-origin review for vegetables, then validate with buyer SKUs, supplier contracts, capacity, lead time, and landed cost.
+- **Code:** [Analysis and chart script](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/scripts/generate_two_new_business_analyses.py)
 
 ## Business question
 
@@ -97,3 +98,7 @@ The next step is to join a buyer's own SKU and supplier data to origin, seasonal
 The analysis uses the FATUS top-ten source table. For each category and month, I divided each origin's customs value by the corresponding World total. The lower HHI bound is the sum of squared shares for the ten listed origins. The upper bound assigns the unreported residual share to one additional origin. These bounds do not assume that the residual is a known supplier.
 
 The source is [USDA ERS FATUS](https://www.ers.usda.gov/data-products/foreign-agricultural-trade-of-the-united-states-fatus/us-agricultural-trade-data-update). Data, source hash, and regeneration command are recorded in the [evidence manifest](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/public/data/evidence/fresh-produce-import-sourcing-risk.json). The source is mutable; the manifest records the snapshot used for these results.
+
+## What this can't tell you
+
+> The source reports top-ten customs values, not buyer suppliers, physical quantities, substitute capacity, or disruption probability. The concentration bounds do not establish a specific buyer's exposure.

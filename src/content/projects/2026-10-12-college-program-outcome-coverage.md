@@ -10,6 +10,7 @@ featured: false
 published: true
 caseId: college-program-outcome-coverage
 kind: completed
+artifactLabel: Analytics
 primaryTrack: analytics-engineering
 displayOrder: 110
 evidenceManifest: /data/evidence/college-program-outcome-coverage.json
@@ -21,12 +22,13 @@ header:
   teaser: /images/college-scorecard-earnings-coverage-credential.png
 ---
 
-## Project brief
+## Project snapshot
 
-- **Project:** Audit coverage of College Scorecard program earnings.
-- **Question:** Are public earnings complete enough to guide program reviews?
-- **Built:** A branch-deduplicated program table and coverage comparisons by credential and institution control.
-- **Result:** 37.6% of domestic bachelor's program records reported a four-year earnings median. Coverage was 54.2% for public programs and 24.8% for private nonprofits.
+- **Built:** Deduplicated branch records to institution-system, field, and credential grain, then measured reportable earnings coverage.
+- **Stack:** Python, pandas, Matplotlib
+- **Result:** 37.6% of domestic bachelor's program records reported a four-year earnings median; coverage was 54.2% for public programs and 24.8% for private nonprofits.
+- **Recommendation:** Show reportable and suppressed counts, compare the same field and credential, and pair public coverage with internal completion, cost, and employment data.
+- **Code:** [Analysis and chart script](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/scripts/generate_commercial_energy_and_college_outcomes.py)
 
 ## Business question
 
@@ -90,3 +92,7 @@ The coverage and branch-record hypotheses were supported. Most domestic bachelor
 The analysis covers the June 10, 2026 field-of-study snapshot. Earnings describe federally aided completers who were working and not enrolled during the measurement year. The values are institution-system, field, and credential medians; they do not include every graduate or provide a causal return on tuition. Privacy-suppressed cells are not imputed. Download instructions, hashes, and regeneration details are in [`docs/new-public-data-case-notes.md`](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/docs/new-public-data-case-notes.md).
 
 Sources: the [College Scorecard data download](https://collegescorecard.ed.gov/data/) and the [Field of Study technical documentation](https://collegescorecard.ed.gov/assets/FieldOfStudyDataDocumentation.pdf). The data does not establish that a particular institution, major, or policy caused a graduate's earnings.
+
+## What this can't tell you
+
+> The outcomes cover federally aided completers who were working and not enrolled. Suppressed values are not zero; the data cannot support an unqualified institution ranking or causal return on tuition.

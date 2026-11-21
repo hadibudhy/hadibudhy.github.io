@@ -14,6 +14,13 @@ evidenceVisuals:
   - /images/portfolio-online-shoppers-sensitivity.svg
 ---
 
+## Project brief
+
+- **Project:** Measure conversion differences by visitor type and check feature leakage risk.
+- **Question:** Which early session signals should enter an activation experiment?
+- **Built:** A deduplicated UCI session analysis, PageValues check, and randomized test design.
+- **Result:** New visitors converted at 24.9%, compared with 14.1% for returning visitors. The descriptive gap is not an intervention effect.
+
 ## Business question
 
 Which session signals should receive the next activation experiment, and which fields must be excluded because they are downstream of the decision?
@@ -30,17 +37,19 @@ A high-performing conversion model can still be useless if it reads the answer f
 - **Main risk:** the sample is historical and session-level. A returning visitor may appear in many rows, and the dataset does not show margin or long-term value.
 - **Next test:** randomize prompt eligibility, pre-register conversion and guardrail metrics, and report results by new/returning visitor without using post-intervention fields.
 
-## Role
-
-Role: data validation, leakage review, session segmentation, metric definition, and experiment design. The analysis does not claim that any segment caused conversion or that a prompt will improve revenue.
-
-## Data used
+## Data and preparation
 
 The [UCI Online Shoppers Purchasing Intention dataset](https://archive.ics.uci.edu/dataset/468/online%2Bshoppers%2Bpurchasing%2Bintention%2Bdataset) contains 12,330 sessions from an online retailer across ten months of 2018. Each row is a session with browsing counts, duration, device and traffic fields, and a `Revenue` outcome. The downloaded CSV has 18 columns, no missing values, and 125 duplicate rows.
 
 The data is real observation-level web traffic, but it is not a current product log. There is no experiment assignment, customer identity, order value, or post-session retention.
 
-## Approach
+## Stakeholder questions
+
+- How do deduplicated session conversion rates differ by visitor type?
+- Does the visitor contrast persist when exact-identical rows are retained?
+- Is each candidate feature available before an activation prompt can appear?
+
+## Analysis steps
 
 1. Validate row grain, missingness, duplicates, and the binary outcome.
 2. Remove exact duplicate sessions before calculating rates.
@@ -48,7 +57,7 @@ The data is real observation-level web traffic, but it is not a current product 
 4. Mark variables that are unavailable or unsafe at intervention time.
 5. Turn the strongest descriptive contrasts into a bounded randomized test.
 
-## Completed result
+## Findings
 
 After removing **125 exact duplicate rows**, the analysis retained **12,205 sessions**. New visitors converted at **24.9%** (422 of 1,693), the source’s **“Other” group converted at 19.8%** (16 of 81), and returning visitors converted at **14.1%** (1,470 of 10,431). The headline new-versus-returning gap is **10.8 percentage points**; the 81 “Other” sessions are shown but are not used in that two-group contrast. These differences are useful for experiment stratification, not proof that visitor status causes conversion.
 
@@ -100,6 +109,14 @@ Visitor type and early browsing behavior are candidate inputs for an activation 
 - **Denominators:** visitor-type rates use all deduplicated rows in each visitor group; counts are printed by the checked analysis script.
 - **Checks completed:** pinned source hash, exact schema, missing cells, allowed `Revenue` and visitor categories, raw row count, exact-identical rows, group counts, and arithmetic assertions.
 - **Guardrail:** `PageValues` is retained for diagnosis but excluded from a pre-intervention feature set.
+
+## Built
+
+The checked Python analysis validates the pinned source, schema, missing cells, categories, duplicate rows, and conversion denominators. It writes the metrics manifest used by the evidence visuals.
+
+## Result
+
+The completed analysis finds a 10.8 percentage-point conversion gap between new and returning visitors. The gap remains after exact-row deduplication. It is descriptive and does not estimate prompt lift.
 
 ## Recommendation
 

@@ -1,5 +1,5 @@
 ---
-title: "Product Event Data: What a Session Funnel Can and Cannot Measure"
+title: "Product Event Model: dbt Funnel and Quality Marts on 885K Events"
 date: 2026-09-05
 categories: [analytics engineering]
 tags: [event tracking, dbt, DuckDB, product analytics]
@@ -8,6 +8,7 @@ problem: "Product teams cannot improve a funnel when event names, user identity,
 result: "The published REES46 Electronics export supports event-level and identified-session metrics, while missing session identifiers on a small set of rows remain visible in the quality mart instead of being silently dropped."
 featured: true
 kind: flagship
+artifactLabel: Engineering
 published: true
 caseId: product-event-foundation
 primaryTrack: analytics-engineering
@@ -22,12 +23,13 @@ evidenceVisuals:
 header:
   teaser: /images/rees46-event-mix.svg
 ---
-## Project brief
+## Project snapshot
 
-- **Project:** Build and check an event model for a public electronics browsing sample.
-- **Question:** Which funnel measures can the team trust at event and session grain?
-- **Built:** A staged event model with separate session, funnel, and quality outputs.
-- **Result:** The file contains 490,633 user-session pairs. Of these, 20,699 (4.2%) contain view, then cart, then purchase events. This is an event sequence, not a verified transaction rate.
+- **Built:** Built staged event models with a composite user-session key, deterministic event ordering, and separate funnel and quality marts.
+- **Stack:** Python, DuckDB, dbt, SQL, pytest
+- **Result:** 20,699 of 490,633 user-session pairs (4.2%) contained view-cart-purchase events; 165 of 885,129 events had no session ID.
+- **Recommendation:** Use the user-session pair as the session grain, keep missing-session rows visible, and agree on event names, identity, and activation definitions before a live funnel.
+- **Code:** [dbt models](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/analytics/models) and [REES46 loader](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/analytics/load_rees46.py)
 
 ## Business question
 
@@ -85,7 +87,60 @@ The checks support event-level counts and an ordered funnel at the user-session 
 
 **Recommendation:** use the user-session pair as the session grain, document the order of view, cart, and purchase events, and keep the 165 unassigned event rows visible. Before publishing a live funnel, product, engineering, and analytics should agree on event names, required properties, session identity, and what counts as an activated user. Add source-freshness, accepted-value, uniqueness, and session-coverage checks.
 
-**Limitations:** this is a public electronics browsing sample, not current product telemetry. It cannot establish what a live product funnel would do. A small CI seed checks model contracts while the evidence manifest records the full-data source boundary.
+
+## Data lineage and model checks
+
+```text
+REES46 CSV
+  ↓ analytics/load_rees46.py
+DuckDB raw.events
+  ↓ dbt staging
+stg_rees46_events
+  ├→ int_rees46_ordered_events → fct_product_funnel
+  └→ mart_event_quality
+```
+
+The intermediate model orders events by event time, source row number, then event ID. The staging model forms the session key from user ID and session ID; the funnel and quality marts keep their outputs separate.
+
+This excerpt from `analytics/models/marts/fct_product_funnel.sql` only counts a cart after a view in the same identified session:
+
+```sql
+with first_view as (
+    select
+        user_session_key,
+        min(event_number) as view_event_number,
+        min(event_time) as viewed_at
+    from {{ ref('int_rees46_ordered_events') }}
+    where event_type = 'view'
+    group by 1
+), first_cart as (
+    select
+        ordered.user_session_key,
+        min(ordered.event_number) as cart_event_number,
+        min(ordered.event_time) as carted_at
+    from {{ ref('int_rees46_ordered_events') }} as ordered
+    inner join first_view using (user_session_key)
+    where ordered.event_type = 'cart'
+      and ordered.event_number > first_view.view_event_number
+    group by 1
+)
+```
+
+| Test | Protection |
+|---|---|
+| `stg_rees46_events.event_id` schema tests | Event IDs are present and unique. |
+| `stg_rees46_events.event_type` schema tests | Values are present and limited to view, cart, or purchase. |
+| `assert_event_dates_are_valid.sql` | Event timestamps stay within the accepted range. |
+| `assert_purchase_events_have_prices.sql` | Purchase events have a nonnegative price. |
+| `assert_rees46_session_key_is_pair_grain.sql` | A composite session key maps to one user and one raw session ID. |
+| `fct_product_funnel` schema tests | Event date, event count, and purchase-session rate are present. |
+| `test_rees46_loader_persists_a_stable_source_row_number` | The loader keeps a stable row number for source ordering. |
+
+[View the dbt models](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/analytics/models).
+
+## What this can't tell you
+
+> This historical public browsing export is not current product telemetry or verified orders. It cannot establish live funnel conversion, activation, or retention effects.
 
 ## Technical appendix
 

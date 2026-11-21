@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 2,
+  "caseId": "complaintflow-ai-triage",
+  "scope": "synthetic evaluation fixture",
+  "status": "verified",
+  "source": {
+    "name": "ComplaintFlow hand-written evaluation fixture",
+    "path": "ai_engineering/complaintflow/evaluation/fixture.json",
+    "url": "https://github.com/hadibudhy/hadibudhy.github.io/tree/master/ai_engineering/complaintflow/evaluation",
+    "grain": "one synthetic complaint case",
+    "rows": 20,
+    "sha256": "0e27b117f093b7729cefcb3fec593d196af3252467a503431bffbabf3244b42b"
+  },
+  "models": [
+    "Transparent keyword baseline",
+    "Structured local triage service",
+    "Approved playbook retrieval"
+  ],
+  "checks": [
+    "8 service contract tests passed",
+    "20 hand-written fixture cases evaluated",
+    "all 3 unknown cases escalated",
+    "all 17 routed cases included an approved-playbook citation",
+    "common email, phone, and account-like patterns were redacted before summaries",
+    "provider retries, fallback routing, invalid output, and audit persistence were tested"
+  ],
+  "metrics": {
+    "cases": 20,
+    "baselineMacroF1": 1.0,
+    "serviceMacroF1": 1.0,
+    "recallByLabel": {
+      "banking": 1.0,
+      "card_payments": 1.0,
+      "credit_reporting": 1.0,
+      "mortgages": 1.0,
+      "other": 1.0
+    },
+    "escalationRecallForOther": 1.0,
+    "routedCases": 17,
+    "citationCoverageRouted": 1.0,
+    "citationCoverageAllCases": 0.85,
+    "escalatedCases": 3,
+    "sliceResults": {
+      "standard": {"cases": 4, "correct": 4},
+      "unknown": {"cases": 3, "correct": 3},
+      "pii": {"cases": 2, "correct": 2},
+      "paraphrase": {"cases": 8, "correct": 8},
+      "short": {"cases": 3, "correct": 3}
+    }
+  },
+  "artifacts": [
+    "/images/portfolio-complaintflow-boundary.svg",
+    "/images/portfolio-complaintflow-fixture.svg",
+    "/images/complaintflow-evaluation-slices.svg"
+  ],
+  "artifactHashes": {
+    "/images/portfolio-complaintflow-boundary.svg": "402afa10fe3e05018e67af08221708941a27beadc099e92002ca0ec167f4dd29",
+    "/images/portfolio-complaintflow-fixture.svg": "79321d4a684371fbc1619b663fd7142ecb8d65331dfe9a4209fe62ed564e2766",
+    "/images/complaintflow-evaluation-slices.svg": "b4de8f9a659c080bdf46cedc2ba4c00fca1e545823c1aa69cc9ef830173c8afe"
+  },
+  "evidenceBoundary": "A small, synthetic, hand-written fixture verifies the reference service contract. It does not establish real-world complaint-routing accuracy, production performance, customer outcomes, latency, or cost."
+}

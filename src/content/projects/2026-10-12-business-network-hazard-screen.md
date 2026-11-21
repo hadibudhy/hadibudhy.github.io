@@ -9,6 +9,7 @@ result: "FEMA High or Very High counties contained 46.2% to 52.4% of tracked sec
 featured: false
 published: true
 kind: completed
+artifactLabel: Analytics
 primaryTrack: product-analytics
 displayOrder: 130
 caseId: business-network-hazard-screen
@@ -21,12 +22,13 @@ header:
   teaser: /images/business-risk-rating-establishment-share.png
 ---
 
-## Project brief
+## Project snapshot
 
-- **Project:** Screen county business footprints against FEMA hazard ratings.
-- **Question:** Which counties should multi-site operators investigate first for continuity planning?
-- **Built:** A county-sector model that joins 2023 establishment counts to FEMA's 2025 risk layer.
-- **Result:** High or Very High composite-risk counties held 46.2% to 52.4% of tracked sector establishments. This is a review screen, not a site-loss estimate.
+- **Built:** Joined Census establishment counts to FEMA county ratings and checked composite and hazard-specific shares.
+- **Stack:** Python, pandas, NumPy, Matplotlib, requests
+- **Result:** High or Very High composite-risk counties contained 46.2% to 52.4% of tracked sector establishments.
+- **Recommendation:** Use county ratings to form a continuity review queue, then map actual sites and assess hazard-specific exposure before changing plans.
+- **Code:** [Analysis and chart script](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/scripts/generate_two_new_business_analyses.py)
 
 ## Business question
 
@@ -101,3 +103,7 @@ I aggregated non-overlapping Census industry group codes to county totals. I rem
 Hazard-specific establishment shares use counties with applicable ratings as denominators. The source labels No Rating, Not Applicable, and Insufficient Data separately. I do not treat those categories as low hazard.
 
 The FEMA [National Risk Index technical documentation](https://www.fema.gov/sites/default/files/documents/fema_national-risk-index_technical-documentation.pdf) describes the county risk methodology. The local source snapshots, hashes, validation checks, and regeneration command are recorded in the [evidence manifest](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/public/data/evidence/business-network-hazard-screen.json). The manifest identifies the public source version used.
+
+## What this can't tell you
+
+> County establishment counts and FEMA ratings are not site-level exposure or loss estimates. This screen cannot estimate a particular operator's downtime, insurance cost, or mitigation return.

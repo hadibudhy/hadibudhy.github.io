@@ -1,5 +1,5 @@
 ---
-title: "ComplaintFlow: An Auditable AI Triage Workflow"
+title: "ComplaintFlow: AI Triage on a 20-Case Synthetic Fixture"
 date: 2026-08-23
 categories: [applied AI]
 tags:
@@ -8,22 +8,40 @@ tags:
   - retrieval
   - reliability
   - FastAPI
-excerpt: "A portfolio reference implementation that routes financial complaints, retrieves approved support playbooks, escalates uncertainty, and records enough evidence to evaluate every decision."
+excerpt: "A human-reviewed AI triage prototype that routes synthetic complaint cases, retrieves approved playbooks, escalates uncertainty, and records each decision."
 problem: "Support teams need to route complaints quickly, but an unreliable AI response can send a customer to the wrong queue or invent guidance."
-result: "Portfolio reference implementation: ComplaintFlow combines a transparent baseline, approved-playbook retrieval, provider retries, PII redaction, schema checks, human escalation, and an auditable SQLite decision log."
+result: "On a 20-case synthetic fixture, the local service reached 1.00 macro-F1, cited guidance on 17 routed cases, and escalated all three unknown cases."
 featured: true
 kind: flagship
-published: false
-artifactLabel: "Flagship system prototype"
+published: true
+artifactLabel: Automation
+caseId: complaintflow-ai-triage
+primaryTrack: analytics-engineering
+secondaryTracks: [product-analytics, experimentation-growth]
+displayOrder: 20
+evidenceManifest: /data/evidence/complaintflow-ai-triage.json
 evidenceVisuals:
-  - /images/complaintflow-architecture.svg
   - /images/portfolio-complaintflow-boundary.svg
   - /images/portfolio-complaintflow-fixture.svg
+  - /images/complaintflow-evaluation-slices.svg
 header:
   teaser: /images/complaintflow-architecture.svg
 ---
 
-## Executive summary
+## Project snapshot
+
+- **Built:** A bounded FastAPI service with PII redaction, a transparent baseline, approved-playbook retrieval, provider retries, human escalation, SQLite logging, and an evaluation harness.
+- **Stack:** Python, FastAPI, SQLite, pytest
+- **Result:** The 20-case synthetic fixture reached 1.00 macro-F1; all 17 routed cases included citations, and all 3 unknown cases escalated.
+- **Recommendation:** Run in shadow mode on privacy-reviewed, labeled complaints before any assisted routing.
+- **Code:** [ComplaintFlow reference implementation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/ai_engineering/complaintflow)
+
+## Project brief
+
+- **Project:** Build a human-reviewed complaint triage reference service.
+- **Question:** Can the service route, cite approved guidance, protect personal information, and escalate uncertainty?
+- **Built:** A local reference implementation with an evaluation harness.
+- **Result:** The 20-case hand-written fixture achieved 1.00 macro-F1 and 100% citation coverage on 17 routed cases. This synthetic contract test does not estimate real-world performance.
 
 **Business problem:** support operations spends time reading and routing complaints, while incorrect or unsupported AI guidance creates customer, compliance, and trust risk.
 
@@ -65,11 +83,17 @@ That limitation shapes the system. ComplaintFlow helps with routing and evidence
 
 Role: design and implementation of the portfolio reference service, including the baseline, retrieval boundary, provider fallback, validation, redaction, persistence, and evaluation harness. No live support deployment or real customer impact is claimed. Support-owner handoff: a shadow-mode rollout plan, evaluation contract, and escalation guardrails. [Reference implementation and tests](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/ai_engineering/complaintflow) are available.
 
-## Data used
+## Data and preparation
 
 The public complaint data is an example source for the workflow, not a representative measure of all consumer support demand. The service's checked-in evaluation fixture is synthetic and small; production quality requires privacy-reviewed, labeled cases.
 
-## Approach
+## Stakeholder questions
+
+- Does the service route each supported queue correctly on the checked fixture?
+- Does every non-escalated route include a playbook citation?
+- Do unknown or sensitive cases reach a human instead of receiving unsupported guidance?
+
+## Analysis steps
 
 ![ComplaintFlow reference architecture: A bounded AI workflow validates input, redacts PII, retrieves approved guidance, escalates uncertainty, and records each decision.](/images/complaintflow-architecture.svg)
 
@@ -82,7 +106,7 @@ The public complaint data is an example source for the workflow, not a represent
 7. **Escalate:** route low-confidence, unknown, or missing-narrative cases to a human.
 8. **Persist:** record the decision, confidence, citations, provider, latency, and escalation reason.
 
-## Key findings
+## Findings
 
 The bounded workflow validates inputs, protects personal data, retrieves approved guidance, makes uncertainty visible, and records enough evidence for review. The local reference fixture achieved perfect routing and 100% citation coverage on routed cases (17/17; 85% across all 20 including escalations), but that result is a contract test, not a production accuracy claim.
 
@@ -106,6 +130,16 @@ This visual keeps the synthetic fixture’s purpose explicit.
 
 The result verifies the checked baseline, routing, citation, and escalation paths on hand-written cases. It does not estimate performance on real complaint traffic.
 
+### Evaluation coverage across fixture slices
+
+![ComplaintFlow evaluation slices: all 20 synthetic standard, unknown, PII, paraphrase, and short cases were routed or escalated correctly; each row shows correct cases over total](/images/complaintflow-evaluation-slices.svg)
+
+The fixture tests five narrow slices. Each is small and hand-written, so perfect results show contract behavior only.
+
+## Built
+
+The reference service includes input checks, PII redaction, a transparent baseline, approved-playbook retrieval, retries, escalation, SQLite logging, and tests. The evaluation fixture is synthetic and hand-written.
+
 ## Recommendation
 
 Start in shadow mode. Roll out only if a privacy-reviewed holdout shows equal or better routing accuracy and escalation recall than the baseline, with acceptable latency, cost, and unsafe-output rates.
@@ -116,7 +150,7 @@ Start in shadow mode. Roll out only if a privacy-reviewed holdout shows equal or
 
 Real reviewer labels, queue outcomes, resolution time, customer satisfaction, language, attachments, privacy incidents, and provider cost would show whether the workflow improves support operations safely.
 
-## Key takeaway
+## Result
 
 The public complaint database is not representative of all consumers, and the checked-in fixture is intentionally small. The next engineering step is a privacy-reviewed sample of real narratives with reviewer labels, followed by a stronger model comparison, calibration, drift monitoring, and managed persistence.
 
@@ -165,8 +199,10 @@ The privacy evidence is also deliberately limited. The tests prove that common e
 
 Start in shadow mode: generate recommendations without changing routing. Measure reviewer agreement, queue accuracy, escalation recall, latency, cost, and unsafe-output rate. Move to a small assisted cohort only if the system matches or beats the baseline on a time-based, privacy-reviewed holdout. Keep a control group and monitor product, state, company, language, and narrative-length slices.
 
+## What this can't tell you
+
+The fixture is small, synthetic, and hand-written. It does not establish real-world routing accuracy, customer outcomes, production latency or cost, or complete protection of complaint data.
+
 ## Technical appendix
 
 Code: [ComplaintFlow reference implementation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/ai_engineering/complaintflow)
-
-Research and design: [Applied AI project research](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/docs/ai-engineer-project-research-2026-08.md) and [ComplaintFlow design](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/docs/ai-engineer-complaintflow-design-2026-08.md).

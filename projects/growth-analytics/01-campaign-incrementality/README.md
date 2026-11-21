@@ -71,9 +71,3 @@ Run a fresh randomized holdout with pre-registered primary conversion, visit-qua
 - Costs, revenue, margin, and retention are absent.
 - Treatment assignment is causal; exposure is not automatically causal.
 - Segment searches need multiplicity control and an independent holdout.
-
-## Interview explanation
-
-**30 seconds:** “I used Criteo’s randomized incrementality benchmark to estimate the difference between assigned treatment and control. The released sample shows a 0.115 percentage-point conversion difference with a tight confidence interval. I would not transport that rate to a current campaign because the benchmark combines and subsamples experiments. I would use it to define a current-campaign holdout and an incremental CPA guardrail.”
-
-**2 minutes:** Explain the ITT design, the control/treatment denominators, the conversion and visit confidence intervals, why exposure is downstream, the difference between statistical and practical significance, and the break-even economics required for a rollout decision.

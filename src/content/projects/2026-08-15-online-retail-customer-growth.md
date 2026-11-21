@@ -11,7 +11,8 @@ excerpt: "A transaction analysis showing how positive, identifiable sales value 
 problem: "The retailer had many invoice lines, but lacked a clear view of how much recorded sales value depended on a small set of identifiable customers or markets."
 result: "After documented transaction filters, the top 10% of identifiable customers generated 61.4% of eligible sales value; the top 20% generated 74.6%. These are sales-value shares, not profit or causal effects."
 featured: true
-kind: flagship
+kind: completed
+artifactLabel: Analytics
 published: true
 caseId: customer-retention
 primaryTrack: product-analytics
@@ -26,12 +27,13 @@ evidenceVisuals:
 header:
   teaser: /images/retail-growth-patterns.png
 ---
-## Project brief
+## Project snapshot
 
-- **Project:** Measure concentration in eligible sales value across identifiable customers and markets.
-- **Question:** How much of recorded sales value sits with a small customer group or one market?
-- **Built:** A cleaned invoice-line analysis with customer concentration, monthly totals, country mix, and explicit data-quality boundaries.
-- **Result:** The top 10% of 4,338 identifiable customers generated 61.4% of eligible sales value; the UK generated 82.0%. The data does not measure profit or causal offer impact.
+- **Built:** Cleaned invoice-line data and measured customer sales concentration, monthly totals, and recorded market mix.
+- **Stack:** Python, pandas, Matplotlib
+- **Result:** The top 10% of 4,338 identifiable customers generated 61.4% of eligible sales value; the top 20% generated 74.6%.
+- **Recommendation:** Prioritize a contribution and service-dependency review for top-value customer groups, then validate the concentration on a later period before changing retention investment.
+- **Code:** [Metric validation and chart script](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/scripts/generate_chart_replacements.py)
 
 ## Business question
 
@@ -88,9 +90,11 @@ The analysis validates the invoice-line grain, removes records that cannot suppo
 
 The historical data supports a customer-concentration, repeat-order-customer, and country-mix assessment. It does not measure profit, current demand, or causal retention effects. December is observed only through 9 December and should not be compared with a complete month.
 
-**Recommendation:** prioritize a contribution and service-dependency review for the top-value customer groups, then validate the concentration on a later period. Require margin, order cadence, support cost, and customer-level exposure before changing retention investment. Treat non-UK markets as historical sales locations—not expansion opportunities—until demand, margin, acquisition and shipping costs, competition, and regulation are assessed.
+**Recommendation:** prioritize a contribution and service-dependency review for the top-value customer groups, then validate the concentration on a later period. Require margin, order cadence, support cost, and customer-level exposure before changing retention investment. Treat non-UK markets as historical sales locations; evaluate any expansion opportunity only after demand, margin, acquisition and shipping costs, competition, and regulation are assessed.
 
-**Limitations:** the source lacks margin, shipping cost, marketing exposure, inventory, and complete customer identity. Better identity coverage and internal contribution data are needed for a commercial decision.
+## What this can't tell you
+
+> The source lacks margin, shipping cost, marketing exposure, inventory, and complete customer identity. It shows historical sales value, not current demand, profit, or causal retention effects; December data ends on the 9th.
 
 ## Technical appendix
 

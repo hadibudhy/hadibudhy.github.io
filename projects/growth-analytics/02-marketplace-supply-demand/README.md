@@ -47,9 +47,3 @@ The main marketplace risk is interference: one driver can affect many riders and
 ## Decision
 
 Do not authorize a citywide incentive from recorded-trip counts alone. **P0:** instrument requests, cancellations, wait, and driver online time. **P1:** run a pre-powered zone-window switchback test with a defined washout and border policy. **P2:** add weather, holidays, and transit disruption controls only when they improve the comparison.
-
-## Interview explanation
-
-**30-second explanation:** “I used official TLC HVFHV trip data to map recorded-trip concentration by hour and zone. The week had 59,285 records at 04:00 and 334,713 at 18:00, but I would not call that a supply shortage because recorded trips are not total demand. My recommendation is to add request, cancellation, wait, and driver-online denominators, then test incentives by zone-window with displacement and cost guardrails.”
-
-**2-minute explanation:** Explain grain, missing denominators, peak diagnosis, provider and airport segmentation, interference, switchback randomization, and why fulfilled trips per driver-hour is more useful than gross trips.

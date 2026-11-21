@@ -1,5 +1,5 @@
 ---
-title: "Congestion Pricing: A Comparator Audit Before Causal Claims"
+title: "Congestion Pricing: Pre-Trend Testing a Policy Comparator"
 date: 2026-08-29
 categories: [growth analytics]
 tags: [causal design, comparator audit, mobility, decision quality]
@@ -8,6 +8,7 @@ problem: "Leadership wants to know whether congestion pricing changed traffic, b
 result: "The official MTA panel contains 27,080 facility-day observations from 2019 to May 2026; the displayed pre-policy gap is visibly unstable, so this comparator is not used for causal attribution."
 featured: true
 kind: completed
+artifactLabel: Analytics
 published: true
 caseId: mta-comparator-audit
 primaryTrack: experimentation-growth
@@ -22,12 +23,13 @@ evidenceVisuals:
 header:
   teaser: /images/growth-mta-event-study.png
 ---
-## Project brief
+## Project snapshot
 
-- **Project:** Audit a proposed comparison group for a congestion-pricing traffic analysis.
-- **Question:** Is the comparison stable enough to support a causal claim?
-- **Built:** A facility-week panel, pre-policy gap chart, and source-scope audit.
-- **Result:** The affected-versus-comparison gap changed before the policy. This audit does not use the group for causal attribution.
+- **Built:** Built a facility-week panel, plotted the pre-policy gap, and audited comparator stability and outcome scope.
+- **Stack:** Python, pandas, statsmodels, Matplotlib
+- **Result:** The 27,080-observation MTA panel shows an unstable pre-policy treated-comparison gap, so it does not support causal attribution.
+- **Recommendation:** Do not change prices or incentives from this comparator. Validate pre-trends and placebo dates, then use platform-level exposure and outcomes for any causal study.
+- **Code:** [Analysis and validation files](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/03-congestion-pricing-causal-impact)
 
 ## Business question
 
@@ -83,7 +85,9 @@ The project aggregates crossings to facility-week rows, compares three affected 
 
 **Recommendation:** do not change rider prices or driver incentives based on this comparison. Before a new study, pre-register the comparator and trend checks, examine placebo dates, and account for weather, construction, transit, and facility disruptions. Add route-level toll exposure and internal measures such as requests, rides, cancellations, pickup delay, passenger price, and driver pay.
 
-**Limitations:** nearby crossings may be affected by spillovers, facility-specific shocks, or broader travel changes. The public MTA panel is useful traffic context, not a substitute for platform data.
+## What this can't tell you
+
+> The panel measures facility-level car crossings, not ride-hailing exposure or outcomes. The pre-policy gap is unstable and does not estimate a causal pricing effect.
 
 ## Technical appendix
 

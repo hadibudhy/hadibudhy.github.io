@@ -1,5 +1,5 @@
 ---
-title: "Ride-Hail Data Audit: Trips Alone Cannot Diagnose a Shortage"
+title: "Ride-Hail Data Audit: Reconciling 5M Trips and Testing What They Can Prove"
 date: 2026-08-29
 categories: [growth analytics]
 tags: [marketplace, supply and demand, experimentation, SQL]
@@ -7,7 +7,8 @@ excerpt: "A retrospective audit of NYC trip and driver summaries that shows why 
 problem: "Leaders had trip counts from one historical week and annual driver summaries, but neither source shows current requests, waits, or zone-time supply."
 result: "The official records describe past completed-trip activity and separate monthly driver proxies; they are not sufficient to target current incentives or identify unserved demand."
 featured: true
-kind: flagship
+kind: completed
+artifactLabel: Analytics
 published: true
 caseId: marketplace-experience
 primaryTrack: product-analytics
@@ -21,12 +22,13 @@ evidenceVisuals:
   - /images/growth-hvf-monthly-matched.png
   - /images/portfolio-marketplace-measurement.svg
 ---
-## Project brief
+## Project snapshot
 
-- **Project:** Audit the time and grain mismatch in public NYC ride-hail measures.
-- **Question:** Can these public summaries identify a current supply shortage or support an incentive change?
-- **Built:** Hourly and weekday views of one 2019 trip week, a separate 2024–25 driver-proxy comparison, and a measurement-boundary map.
-- **Result:** No. The sources describe different periods and omit current requests, waits, and zone-time supply, so they cannot target a current intervention.
+- **Built:** Reconciled one completed-trip week with separate monthly driver proxies and mapped the limits of both sources.
+- **Stack:** Python, pandas, SQL, Matplotlib
+- **Result:** The February 2019 trip slice reconciles to 4,965,012 records; the 2024-2025 driver proxies cover a different period.
+- **Recommendation:** Do not choose incentive zones from past trip counts. Instrument requests, matches, waits, and supply at the same zone-time grain, then test a repeated shortage with a powered switchback.
+- **Code:** [Analysis and SQL files](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/02-marketplace-supply-demand)
 
 ## Business question
 
@@ -93,7 +95,9 @@ The public data supports a time-of-day activity pattern and separate monthly sup
 
 For the next decision review, request a 28-day zone-by-15-minute baseline with request ID, request time, match result, pickup wait, driver online minutes, completed trip, and incentive cost. This gives the team a comparable current baseline; the historic public snapshots cannot substitute for it.
 
-**Limitations:** the trip slice is from 2019 while the monthly comparison covers 2024–2025. Neither public source shows every request, lost match, or zone-hour online driver. No incentive pilot or marketplace outcome is measured here.
+## What this can't tell you
+
+> The sources cover different periods and omit requests, lost matches, wait times, and current zone-hour supply. No incentive pilot or return is measured.
 
 ## Technical appendix
 

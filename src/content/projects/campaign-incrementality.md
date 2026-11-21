@@ -8,6 +8,7 @@ problem: "A campaign can increase reported conversions while adding little incre
 result: "In the official Criteo benchmark, the assigned advertising group converted 0.115 percentage points more often than the control group."
 featured: true
 kind: flagship
+artifactLabel: Analytics
 published: true
 caseId: experiment-metrics
 primaryTrack: experimentation-growth
@@ -19,12 +20,13 @@ evidenceVisuals:
   - /images/portfolio-campaign-economics.svg
   - /images/portfolio-campaign-f0.svg
 ---
-## Project brief
+## Project snapshot
 
-- **Project:** Estimate the assignment-level conversion difference in the Criteo advertising benchmark.
-- **Question:** Did assigning users to advertising change visits and conversions, and what would leaders need before scaling?
-- **Built:** Validated intention-to-treat comparisons for visits and conversions, uncertainty intervals, and an exploratory subgroup check.
-- **Result:** The assigned-advertising group converted 0.115 percentage points more often. The benchmark has no current campaign cost or contribution data.
+- **Built:** Computed assignment-level conversion and visit effects with uncertainty intervals and an exploratory subgroup check.
+- **Stack:** Python, pandas, SQL, Matplotlib
+- **Result:** The Criteo randomized benchmark showed a +0.115 percentage-point conversion lift (95% CI +0.108 to +0.122).
+- **Recommendation:** Run a randomized holdout with pre-registered conversion, sample size, stopping rule, and guardrails; scale only if incremental CPA is below contribution value.
+- **Code:** [Analysis, SQL, and validation](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/projects/growth-analytics/01-campaign-incrementality)
 
 ## Business question
 
@@ -82,7 +84,9 @@ The released benchmark supports a positive assignment-level conversion differenc
 
 **Recommendation:** run a randomized holdout in the current campaign, with a pre-registered primary conversion measure, minimum useful effect, sample size, stopping rule, and guardrails. Scale only if measured incremental CPA is below contribution value and the result remains stable under the agreed audience and frequency rules.
 
-**Limitations:** treatment assignment is the causal comparison; exposure is downstream. The benchmark combines and samples experiments, features are anonymized, and current campaign cost, margin, and retention are unavailable. No live campaign or commercial result is included in this analysis.
+## What this can't tell you
+
+> The combined, sampled benchmark has anonymized features and no current campaign costs, margin, or retention. Its assignment lift is not an expected live-campaign result or evidence of profit.
 
 ## Technical appendix
 

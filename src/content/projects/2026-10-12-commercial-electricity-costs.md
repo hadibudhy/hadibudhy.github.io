@@ -7,7 +7,7 @@ excerpt: "A state-level price review finds where commercial electricity costs ro
 problem: "A national energy budget can hide state-level price differences, leaving multi-site operators unsure where a closer cost review may matter most."
 result: "EIA's nominal U.S. commercial price rose 25.6% from 2019 to 2025, with wide variation across states. The public averages do not estimate a company's bill or the savings from an efficiency project."
 featured: false
-published: true
+published: false
 caseId: commercial-electricity-costs
 kind: completed
 primaryTrack: product-analytics
@@ -21,12 +21,13 @@ header:
   teaser: /images/commercial-electricity-price-trend.png
 ---
 
-## Project brief
+## Project snapshot
 
-- **Project:** Screen commercial electricity price levels and changes across states.
-- **Question:** Where should a multi-site business review energy cost exposure first?
-- **Built:** A sales-weighted EIA price series and state comparison from 2019 to 2025.
-- **Result:** The U.S. average rose 25.6% in nominal terms. State prices and changes varied. Public averages do not estimate company bills or savings.
+- **Built:** Calculated annual sales-weighted EIA prices and compared levels and changes across 50 states and DC.
+- **Stack:** Python, pandas, Matplotlib
+- **Result:** The U.S. commercial average rose 25.6% in nominal terms from 2019 to 2025; state price levels and changes varied.
+- **Recommendation:** Start bill and tariff reviews at sites with high prices or steep increases; evaluate efficiency using site-specific load and realized costs.
+- **Code:** [Analysis and chart script](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/scripts/generate_commercial_energy_and_college_outcomes.py)
 
 ## Business question
 
@@ -90,3 +91,7 @@ The evidence supports the first two hypotheses: the national commercial average 
 The analysis uses 5,208 monthly EIA records, including state, District of Columbia, U.S. aggregate, and regional rows. The state comparison contains 51 complete series with 84 months each. Annual weighted prices use EIA revenue and sales totals; the analysis does not use a simple average of monthly prices. Data, source hashes, and the regeneration command are documented in [`docs/new-public-data-case-notes.md`](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/docs/new-public-data-case-notes.md).
 
 The source is [EIA Form EIA-861M](https://www.eia.gov/electricity/data/eia861m/index.php). EIA derives its average retail price from utility revenue and sales. Utility revenue can include energy, demand, delivery, tax, and other charges, but the average is not a utility tariff and does not separate those components for a specific site. EIA does not publish utility tariffs or itemized demand charges. See [EIA's price definition](https://www.eia.gov/tools/faqs/faq.php?id=507&t=5) and [rate and tariff data boundary](https://www.eia.gov/tools/faqs/faq.php?id=20&t=6). The analysis does not establish the effect of any policy or energy-efficiency change.
+
+## What this can't tell you
+
+> State average retail prices are not a site's tariff or bill. They cannot estimate company-specific savings or policy effects without site-level rates, load, contracts, and operating context.

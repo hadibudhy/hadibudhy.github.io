@@ -7,7 +7,8 @@ excerpt: "A filing-aware metric model that keeps reported periods, units, and re
 problem: "Finance and product leaders need a consistent view of revenue, net income, and margin, but public filing data contains multiple facts, units, periods, and restated values."
 result: "The model treats each reported fact as evidence with source context, then selects a documented annual view instead of assuming that the latest value is automatically comparable."
 featured: true
-kind: flagship
+kind: completed
+artifactLabel: Engineering
 published: true
 caseId: financial-metrics
 primaryTrack: analytics-engineering
@@ -21,12 +22,13 @@ evidenceVisuals:
 header:
   teaser: /images/sec-revenue-net-income.png
 ---
-## Project brief
+## Project snapshot
 
-- **Project:** Build a filing-aware annual performance view for Microsoft.
-- **Question:** Which financial trend can leaders compare safely?
-- **Built:** A narrow metric model that preserves tags, units, fiscal periods, and filing identity.
-- **Result:** From FY2023 to FY2025, revenue rose from $211.9 billion to $281.7 billion. Net margin rose from 34.1% to 36.1%. These are reported company-level trends.
+- **Built:** Built a filing-aware annual metric mart that retains period, unit, tag, and filing context.
+- **Stack:** Python, DuckDB, dbt, SQL, pytest
+- **Result:** From FY2023 to FY2025, reported revenue rose from $211.9B to $281.7B and net margin from 34.1% to 36.1%.
+- **Recommendation:** Use approved metric definitions and period/unit rules, retain filing identity, and reconcile selected annual values before dashboarding.
+- **Code:** [dbt models](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/analytics/models) and [SEC loader](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/analytics/load_sec_company_facts.py)
 
 ## Business question
 
@@ -86,7 +88,61 @@ The selected annual metrics show revenue rising from $211.9 billion to $281.7 bi
 
 **Recommendation:** publish a small finance mart with approved metric definitions, period rules, units, and source links. Store filing identity with each fact, deduplicate repeated comparative periods, and reconcile the selected annual values before connecting the mart to planning or dashboards. Alert when a later filing changes a selected historical value; extend to quarterly or operating measures only after definitions are agreed.
 
-**Limitations:** SEC filings do not provide product-level drivers, customer cohorts, live performance, or the company’s internal operating model. Monitor source freshness, unit consistency, period coverage, and reconciliation variance.
+
+## Data lineage and model checks
+
+```text
+SEC Company Facts JSON
+  ↓ analytics/load_sec_company_facts.py
+DuckDB raw.company_facts
+  ↓ dbt staging
+stg_sec_company_facts
+  ↓ dbt mart
+mart_financial_metrics
+```
+
+This excerpt from `analytics/models/marts/mart_financial_metrics.sql` selects one filing context per fiscal year before choosing reported metrics:
+
+```sql
+with annual_facts as (
+    select *
+    from {{ ref('stg_sec_company_facts') }}
+    where fiscal_period = 'FY'
+      and unit = 'USD'
+      and form in ('10-K', '10-K/A')
+      and period_start is not null
+      and period_end is not null
+      and date_diff('day', period_start, period_end) between 300 and 380
+), filing_candidates as (
+    select distinct fiscal_year, accession, filed_date
+    from annual_facts
+), chosen_filing as (
+    select fiscal_year, accession
+    from (
+        select
+            *,
+            row_number() over (partition by fiscal_year order by filed_date desc nulls last, accession desc) as filing_rank
+        from filing_candidates
+    ) ranked_filings
+    where filing_rank = 1
+)
+```
+
+| Test | Protection |
+|---|---|
+| `stg_sec_company_facts` schema tests | Fact ID is unique and required fields, including fiscal year, value, accession, and form, are present. |
+| `mart_financial_metrics` schema tests | Fiscal year is unique and required; revenue and net income are present. |
+| `assert_financial_metrics_are_reconciled.sql` | Revenue is positive; net income and net margin are not null. |
+| `test_sec_fact_loader_preserves_one_row_per_reported_observation` | The loader preserves each reported fact row and its form. |
+| `test_sec_loader_writes_a_queryable_raw_relation` | Loaded facts are available in the DuckDB raw relation. |
+
+The SQL test checks positive and present values; the filing selection and FY2024 tie-out are documented in the evidence manifest. CI verifies the manifest and chart hashes but does not recalculate this full-source tie-out.
+
+[View the dbt models](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/analytics/models).
+
+## What this can't tell you
+
+> SEC facts support reported company-level trends, not product or customer drivers, causal operating results, or internal operations. Period, unit, tag, and filing choices remain part of each measure.
 
 ## Technical appendix
 

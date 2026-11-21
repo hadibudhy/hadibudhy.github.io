@@ -10,7 +10,7 @@ excerpt: "A consistent country panel separates long-term progress from changing 
 problem: "Single-year rankings obscure how happiness changes across countries and over time."
 result: "Across the same 129 countries, the unweighted average life evaluation rose from 5.47 in 2011 to 5.74 in 2025 while the highest-to-lowest gap widened."
 featured: false
-published: true
+published: false
 caseId: world-happiness-report
 kind: completed
 primaryTrack: product-analytics
@@ -27,12 +27,13 @@ header:
   teaser: /images/happiness-beat01.png
 ---
 
-## Project brief
+## Project snapshot
 
-- **Project:** Compare reported life evaluations across a balanced country panel.
-- **Question:** How did scores change, and did the gap between countries narrow?
-- **Built:** A 129-country panel, trend and range measures, country comparisons, and factor correlations.
-- **Result:** The average rose from 5.47 to 5.74. The lowest 13 countries in 2011 rose from 3.80 to 4.35 by 2025, while the overall range widened.
+- **Built:** Built a 129-country balanced panel with trend, range, country-change, factor-correlation, and fixed bottom-cohort measures.
+- **Stack:** Python, pandas, NumPy, Matplotlib
+- **Result:** Across the balanced panel, average life evaluation rose from 5.47 in 2011 to 5.74 in 2025 while the highest-to-lowest range widened.
+- **Recommendation:** Track country trends alongside rankings, review correlated factors together, and use within-country data before choosing an intervention.
+- **Code:** [Analysis and chart script](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/scripts/generate_chart_replacements.py)
 
 ## Business question
 
@@ -105,4 +106,8 @@ Public country data cannot show which programs changed living conditions or how 
 
 ## Technical notes
 
-The analysis uses the World Happiness Report 2026 data for Figure 2.1. It checks source rows, country-year uniqueness, the 14 measured years, the 129-country balanced panel, and the reported averages, ranges, and factor correlations. The workbook is available from the [official Data Sharing page](https://www.worldhappiness.report/data-sharing/). Code: [World Happiness analysis scripts](https://github.com/hadibudhy/hadibudhy.github.io/tree/master/legacy_jekyll/scripts/world-happiness).
+The analysis uses the World Happiness Report 2026 data for Figure 2.1. It checks source rows, country-year uniqueness, the 14 measured years, the 129-country balanced panel, and the reported averages, ranges, and factor correlations. The workbook is available from the [official Data Sharing page](https://www.worldhappiness.report/data-sharing/). The [chart regeneration script](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/scripts/generate_chart_replacements.py) checks the source hash and published measures.
+
+## What this can't tell you
+
+> Country averages and factor correlations do not identify policy causes or within-country differences. The balanced panel excludes countries without data in all 14 measured years.

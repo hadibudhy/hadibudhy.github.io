@@ -7,7 +7,7 @@ excerpt: "A catalog analysis that separates TV and movie freshness, movie depth,
 problem: "A falling freshness measure made it unclear whether Netflix was weakening the catalog or using different roles for shows and movies."
 result: "US additions became less same-year fresh overall, while TV freshness rose and movie titles with explicit drama/international or family tags shifted toward older release vintages. These catalog measures do not show viewing or customer outcomes."
 featured: false
-published: true
+published: false
 caseId: netflix-content-strategy
 kind: completed
 primaryTrack: product-analytics
@@ -21,12 +21,13 @@ header:
   teaser: /images/netflix-beat01.png
 ---
 
-## Project brief
+## Project snapshot
 
-- **Project:** Review title freshness, movie depth, and metadata coverage in the Netflix catalog snapshot.
-- **Question:** Should leaders use one freshness target for TV shows and movies?
-- **Built:** A cleaned catalog analysis with acquisition-lag, explicit genre-tag, and UK metadata measures.
-- **Result:** From 2015 to 2021, same-year US TV additions rose from 40.0% to 61.1%. The movie share fell from 84.6% to 14.0%. The data does not measure customer outcomes.
+- **Built:** Analyzed acquisition freshness, explicit genre-tag trends, and UK metadata coverage by release decade.
+- **Stack:** Python, pandas, NumPy, Matplotlib
+- **Result:** Same-year U.S. TV additions rose from 40.0% to 61.1% (2015-2021), while the movie share fell from 84.6% to 14.0%.
+- **Recommendation:** Keep separate freshness goals for TV and movies. Compare catalog measures with viewing, retention, search, and licensing cost before shifting acquisition budget.
+- **Code:** [Chart regeneration script](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/scripts/generate_chart_replacements.py)
 
 ## Business question
 
@@ -87,4 +88,8 @@ The evidence shows opposite freshness trends for TV and movies and higher older-
 
 The source snapshot contains 8,807 unique title IDs. Acquisition lag is year added minus release year; negative lags are excluded. The published genre comparison uses explicit `listed_in` tags and can overlap; clustering does not define those groups. The UK metadata measure counts missing director and cast fields among UK-primary titles. Wilson intervals describe each proportion, and a Newcombe interval describes the 2020s-minus-2010s difference.
 
-Regeneration instructions and source hashes are in [`legacy_jekyll/scripts/netflix/README.md`](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/legacy_jekyll/scripts/netflix/README.md). The workbook is downloadable from [Zenodo](https://zenodo.org/records/13925131) and linked to the original [Kaggle dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows).
+The [chart regeneration script](https://github.com/hadibudhy/hadibudhy.github.io/blob/master/scripts/generate_chart_replacements.py) checks the source hash and the published figures. The workbook is downloadable from [Zenodo](https://zenodo.org/records/13925131) and linked to the original [Kaggle dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows).
+
+## What this can't tell you
+
+> The snapshot describes catalog metadata, not viewing, retention, title quality, licensing intent, or customer impact. The UK metadata difference is uncertain and its interval includes no difference.
