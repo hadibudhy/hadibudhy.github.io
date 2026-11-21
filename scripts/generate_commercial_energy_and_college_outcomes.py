@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import os
@@ -517,13 +518,21 @@ def college_charts() -> tuple[list[Path], dict[str, int | float]]:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Rebuild public-data case-study charts and evidence.")
+    parser.add_argument("--case", choices=("all", "electricity", "college"), default="all")
+    case = parser.parse_args().case
     IMAGES.mkdir(parents=True, exist_ok=True)
     RAW.mkdir(parents=True, exist_ok=True)
-    eia_artifacts, eia_metrics = eia_charts()
-    college_artifacts, college_metrics = college_charts()
-    print("Commercial electricity:", {key: round(value, 2) for key, value in eia_metrics.items()})
-    print("College program coverage:", college_metrics)
-    print("Wrote charts:", *(path.relative_to(ROOT) for path in [*eia_artifacts, *college_artifacts]), sep="\n  ")
+    artifacts = []
+    if case in ("all", "electricity"):
+        eia_artifacts, eia_metrics = eia_charts()
+        artifacts.extend(eia_artifacts)
+        print("Commercial electricity:", {key: round(value, 2) for key, value in eia_metrics.items()})
+    if case in ("all", "college"):
+        college_artifacts, college_metrics = college_charts()
+        artifacts.extend(college_artifacts)
+        print("College program coverage:", college_metrics)
+    print("Wrote charts:", *(path.relative_to(ROOT) for path in artifacts), sep="\n  ")
 
 
 if __name__ == "__main__":
